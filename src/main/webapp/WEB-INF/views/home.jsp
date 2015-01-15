@@ -121,6 +121,14 @@
             <!--  End Content Header -->
             <!--  Main Content -->
             <section class="content">
+            <div class="">
+            	<ul class="">
+            		<li class="">
+            		<a href="Shutdown" title="Shutdown">192.168.2.10</a>
+            		</li>
+            		<li class=""></li>
+            	</ul>
+            </div>
             </section>
             <!--  End Main Content -->
          </aside>

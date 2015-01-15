@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import vn.edu.cit.model.Power;
+
 /**
  * Handles requests for the application home page.
  */
@@ -35,5 +37,15 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+	@RequestMapping(value = "/Shutdown", method = RequestMethod.GET)
+	public String shutdown(){
+		Power pw = new Power();
+		pw.Shutdown();
+//		if(){
+//			System.out.print("Shut");
+//		}else{
+//			System.out.print("coloi");
+//		}
+		return "home";
+	}
 }
