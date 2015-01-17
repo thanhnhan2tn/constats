@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+D:\Github\lv-nhan\.metadata\.plugins\org.eclipse.jdt.core
+4067345157.index
