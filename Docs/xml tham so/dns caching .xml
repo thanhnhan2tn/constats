@@ -1,0 +1,18 @@
+<bind9>
+<option>
+ <recursion>yes/no</recursion>
+ <allow-query>
+ 
+	<access-list name = "goodclient">
+         <address></address>
+	</access-list>
+	
+	
+ </allow-query>
+	
+ <forwarders> 192.168.6.9;</forwarders>
+ <forwarders> 10.0.1.5;</forwarders>
+ <forwarders> 10.0.8.6;</forwarders>
+
+ </option>
+</bind9>

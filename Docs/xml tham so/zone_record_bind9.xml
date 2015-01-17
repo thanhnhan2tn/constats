@@ -1,0 +1,24 @@
+<zone-record>
+	<domain-name>localdomain.com</domain-name>
+	<email>admin@localhost</email>
+	<serial>1</serial>
+	<refresh>3600</refresh>
+	<retry>600</retry>
+	<expire>86400</expire>
+	<minTTL>3600</minTTL>
+	
+	<record-parent>
+	 <record>
+		<name-server>@/...</name-server>
+		<in>NS</in>
+		<tenmaychu>may chu QL ten mien</tenmaychu>
+	 </record>
+		
+	 <record>
+		<IP-Address></IP-Address>
+		<in>PTR</in>
+		<ten-mien>elcit.ctu.edu.vn</ten-mien>
+	 </record>
+	</record-parent>
+	
+</zone-record>
