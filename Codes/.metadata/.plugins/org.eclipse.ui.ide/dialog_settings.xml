@@ -65,12 +65,12 @@
 		<item value="org.eclipse.jgit:3.5.2.201411120430-r"/>
 		<item value="org.eclipse.jpt.common.eclipselink.feature:1.3.100.v201405081709-35A78s7359535B77DL"/>
 		<item value="org.eclipse.jpt.common.feature:1.4.0.v201405081709-67E-AkF7BJB8CKDFRZ"/>
-		<item value="org.eclipse.jpt.dbws.eclipselink.feature:1.2.100.v201405081708"/>
+		<item value="org.eclipse.jpt.dbws.eclipselink.feature:1.2.100.v201405081709-797LBiCcNBHQFTGaGVbu3KEF"/>
 		<item value="org.eclipse.jpt.jaxb.eclipselink.feature:1.4.100.v201405081709-777IDFBgJ9EODHEUGrXp19c7"/>
 		<item value="org.eclipse.jpt.jaxb.feature:1.5.0.v201405081709-57D8ZAkF7BJB7BNFFRg"/>
 		<item value="org.eclipse.jpt.jpa.eclipselink.feature:3.4.1.v201409111648"/>
 		<item value="org.eclipse.jpt.jpa.feature:3.4.0.v201405081709-7V7dEpFC7sReAYthMgWBL39c7"/>
-		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.6.0.v201405010300-377F8N8s73573E6H6966"/>
+		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.6.1.v201409111458"/>
 		<item value="org.eclipse.jst.enterprise_ui.feature:3.6.0.v201405070300-7b7OIumFSK2W_CbOM9lcCU_kNlXd"/>
 		<item value="org.eclipse.jst.ws.axis2tools.feature:1.1.300.v201405061940-78-FPZDZRDKYKDReDDRe"/>
 		<item value="org.eclipse.jst.ws.cxf.feature:1.1.200.v201405212141-7H79FX_FAKldjn_7mQk5lE8A8A6E"/>
@@ -112,7 +112,7 @@
 		<item value="org.eclipse.tm.terminal.telnet:2.1.300.201406020016"/>
 		<item value="org.eclipse.tm.terminal.view:2.4.100.201406020016"/>
 		<item value="org.eclipse.tm.terminal:3.2.300.201406060905"/>
-		<item value="org.eclipse.wst.common.fproj:3.6.0.v201405011300-377F8N8s735555393B7B"/>
+		<item value="org.eclipse.wst.common.fproj:3.6.1.v201409111446"/>
 		<item value="org.eclipse.wst.jsdt.feature:1.6.0.v201405071612-7G7FFyXFBBoPc8Pvc8c0wn"/>
 		<item value="org.eclipse.wst.web_ui.feature:3.6.0.v201405062148-7O7XGA-EMjBb6nLaqlPbjbbsokeynV4Qpz-UGZwo"/>
 		<item value="org.eclipse.wst.xml.xpath2.processor.feature:2.0.301.v201409111854"/>
@@ -148,16 +148,16 @@
 			<item value=""/>
 		</list>
 	</section>
-	<section name="CleanDialogSettings">
-		<item value="500" key="DIALOG_WIDTH"/>
-		<item value="112" key="DIALOG_Y_ORIGIN"/>
-		<item value="378" key="DIALOG_HEIGHT"/>
-		<item value="433" key="DIALOG_X_ORIGIN"/>
-		<item value="false" key="TOGGLE_SELECTED"/>
-	</section>
 	<section name="NewWizardAction">
 		<item value="org.eclipse.jdt.ui.wizards.JavaProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item value="500" key="DIALOG_WIDTH"/>
+		<item value="112" key="DIALOG_Y_ORIGIN"/>
+		<item value="433" key="DIALOG_X_ORIGIN"/>
+		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
 	</section>
 </section>

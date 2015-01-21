@@ -56,7 +56,7 @@ public class Server {
             return session;
         }catch(Exception e){
         	System.out.println("Khong the connect den server");
-        	e.printStackTrace();
+        	//e.printStackTrace();
         }
 		return null;
 	}

@@ -102,15 +102,14 @@
                <h1>Dashboard
                    <small>Control panel</small>
                </h1>
-               <ol class="breadcrumb">
-                   <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
-                   <li class="active">Dashboard</li>
-               </ol>
+               <div class="btn-group btn-add">
+               	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add Server</button>
+               </div>
             </section>
             <!--  End Content Header -->
             <!--  Main Content -->
             <section class="content">
-            <div class="">
+            <div class="main-content">
             	<%@include file="include/maincontent.jsp"%>
             </div>
             </section>

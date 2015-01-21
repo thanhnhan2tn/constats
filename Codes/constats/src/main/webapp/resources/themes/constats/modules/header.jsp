@@ -16,6 +16,9 @@
 	rel="stylesheet" media="screen" type="text/css">
 <!-- Morris chart -->
 
+<!-- ContextMenu -->
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/themes/constats/plugins/contextmenu/context.standalone.css'/>">
+
 <!-- Constats Theme Style Sheet file -->
 <link href='<c:url value="/resources/themes/constats/css/style.css"/>'
 	rel="stylesheet" media="screen" type="text/css">
