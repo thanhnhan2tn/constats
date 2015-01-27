@@ -5,7 +5,53 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-20T13:35:00Z</updated>
+  <updated>2015-01-20T19:14:00Z</updated>
+  <entry>
+    <title>This Week in Spring - January 20th, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/20/this-week-in-spring-january-20th-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-21:1941</id>
+    <updated>2015-01-20T19:14:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week&amp;rsquo;s roundup could&amp;rsquo;ve just as easily been titled, &lt;em&gt;This Week in Spring Videos and Webinars&lt;/em&gt;, because we&amp;rsquo;ve got a &lt;em&gt;lot&lt;/em&gt; of them!&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The good Dr. Dave Syer continues his series &lt;a href="https://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii"&gt;introducing Spring Security and Angular.js integration, this time looking at breaking apart the resource server from the authorization server&lt;/a&gt;. This post looks&lt;/li&gt;
+  &lt;li&gt;Our pal Nicoalas Frankel is back at it! Nicolas lives in both the &lt;a href="http://vaadin.com"&gt;Vaadin&lt;/a&gt; and the Spring communities. So, naturally, when Petter Holmström and I started the &lt;a href="https://github.com/peholmst/vaadin4spring"&gt;Vaadin4Spring project&lt;/a&gt; at the beginning of 2014, we weren&amp;rsquo;t surprised when Nicolas started making great contributions. His latest contribution introduces an elegant &lt;a href="http://blog.frankel.ch/improving-the-vaadin-4-spring-project-with-a-simpler-mvp"&gt;implementation of the MVP pattern for Vaadin and he&amp;rsquo;s written a very nice introduction to it&lt;/a&gt; - check it out!&lt;/li&gt;
+  &lt;li&gt;I&amp;rsquo;ll be speaking at the Oakland JUG on the 28th &lt;a href="http://www.meetup.com/eastbayjug/events/219652953/"&gt;on building microservices with Spring Cloud and Cloud Foundry&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Tadaya Tsuyukubo just announced the &lt;a href="https://github.com/ttddyy/spring-social-slideshare"&gt;first 1.0.0 release of the Spring Social Slideshare project&lt;/a&gt;. I haven&amp;rsquo;t had a chance to play with it yet, but it looks like it could scratch a few itches I&amp;rsquo;ve got! Nice work!&lt;/li&gt;
+  &lt;li&gt;I hope you&amp;rsquo;ll join me next month for &lt;a href="https://spring.io/blog/2015/01/20/webinar-introducing-spring-session"&gt;a webinar introducing the Spring Session project&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Speaking of Vaadin and Spring, I&amp;rsquo;ll be co-presenting this week at the GWT.create conference. &lt;a href="http://gwtcreate.com/#agenda-us_room1_event7"&gt;Our talk&lt;/a&gt; will look at controlling a Parrot AR Drone using a Vaadin-based HTML5 frontend and a Spring Boot-powered backend and drone client. Come join us, it&amp;rsquo;s sure to be fun!&lt;/li&gt;
+  &lt;li&gt;InfoQ did an interview with Spring Boot co-founder &lt;a href="http://www.infoq.com/news/2015/01/Spring-Boot-1.2.1-Released"&gt;Phil Webb on all the new features in Spring Boot 1.2.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Alexandre Lourenco put together a post demonstrating how easy it is to get a REST API up and running &lt;a href="http://java.dzone.com/articles/spring-boot-creating"&gt;with Spring Boot in this quick post on DZone&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Be sure to check out Spring XD&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity"&gt;Sabby Anandan in this webinar on Spring XD.next on February 17th&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The incomparable, amazing Andy Wilkinson will &lt;a href="https://spring.io/blog/2015/01/20/webinar-documenting-restful-apis"&gt;be talking about how to document REST APIs&lt;/a&gt; in a February 3rd webinar.&lt;/li&gt;
+  &lt;li&gt;I put together a post that introduces service registries like Consul and Eureka &lt;a href="https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka"&gt;for more resilient service-to-service calls&lt;/a&gt; in a Spring Cloud-based system.&lt;/li&gt;
+  &lt;li&gt;Our pal Jakub Kubrynski has put together a &lt;em&gt;wonderful&lt;/em&gt; &lt;a href="http://www.dzone.com/links/r/including_java_agent_in_standalone_spring_boot_ap.html"&gt;post on including the NewRelic Java agent in a Spring Boot uber-jar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;In putting together the post on service discovery and registration with Spring Cloud, I stumbled upon &lt;a href="http://jasonwilder.com/blog/2014/02/04/service-discovery-in-the-cloud/"&gt;Jason Wilder&amp;rsquo;s fantastic look at service registries&lt;/a&gt; and really liked it, even though it doesn&amp;rsquo;t have anything to do with Spring, per se.&lt;/li&gt;
+  &lt;li&gt;Check out this replay of Rossen Stoyanchev&amp;rsquo;s SpringOne2GX 2014 talk &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-spring-4-web-applications"&gt;introducing Spring 4&amp;rsquo;s support for web applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out this SpringOne2gx 2014 talk from Matthew Adams (SCI Spike) and Michael Nitschinger (Couchbase) on using &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-cassandra-couchbase-and-spring-data-in-the-enterprise"&gt;Spring Data Cassandra and Spring Data Couchbase in the enterprise&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Garrett Wampole&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-applications-of-enterprise-integration-patterns-to-near-real-time-radar-data-processing"&gt;SpringOne2GX 2014 talk on enterprise integration patterns as applied to real-time data processing&lt;/a&gt; is worth a watch!&lt;/li&gt;
+  &lt;li&gt;Check out our pal and the Spanish Spring I/O conference&amp;rsquo;s organizer Sergi Almar&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-deep-dive-into-spring-websockets"&gt;talk deep-diving into websockets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Speaking of super awesome Spaniards, &lt;a href="https://spring.io/blog/2015/01/19/spring-roo-1-3-1-rc2-available-now"&gt;the Disid team just announced Spring Roo 1.3.1 RC2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/19/spring-tool-suite-and-groovy-grails-tool-suite-3-6-3-sr1-released"&gt;Spring Tool Suite and Groovy Tool Suite lead Martin Lippert just announced the latest releases, 3.6.3 SR1&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My pal Luke Shannon did a &lt;a href="https://spring.io/blog/2015/01/19/webinar-replay-building-scalable-data-applications-with-spring-and-gemfire"&gt;fantastic webinar introducing Spring Data Gemfire&lt;/a&gt;, a world-class integration for a world-class data-grid.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/16/spring-batch-and-spring-batch-admin-releases"&gt;Spring Batch and Spring Batch Admin lead Michael Minella has just announced the latest release of both projects&lt;/a&gt;. The new Spring Batch revision includes support for JSR 352 custom infrastructures, polling for partitioned results, and more. The Spring Batch Admin revision integrates the latest and greatest in Spring Batch, including JSR 352 and Java configuration support. Check it out!&lt;/li&gt;
+  &lt;li&gt;Spring IO Platform lead Andy Wilkinson has announced &lt;a href="https://spring.io/blog/2015/01/15/spring-io-platform-1-1-1-released"&gt;Spring IO Platform 1.1.1, which includes the latest cuts of Spring AMQP, Boot, and Integration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Integration lead Gary Russell&amp;rsquo;s SpringOne2GX 2014 talk on Spring Integration&amp;rsquo;s new Java configuration support is &lt;em&gt;not to be missed&lt;/em&gt;!&lt;/li&gt;
+  &lt;li&gt;Check out Spring framework &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-caching-and-messaging-improvements-in-spring-framework-4-1"&gt;lead Juergen Hoeller and Stephane Nicoll&amp;rsquo;s talk on caching and messaging improvements in Spring 4.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The sleepless Spring Security lead Rob Winch&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-from-0-to-spring-security-4-0"&gt;SpringOne2GX 2014 introduction talk on Spring Security is also available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring framework lead Juergen Hoeller&amp;rsquo;s SpringOne2GX 2014 talk on Spring framework and Java 8 is not-to-be-missed primer for those looking at &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-framework-on-java-8"&gt;the next-gen Spring 4 and 4.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Another nice post on using &lt;a href="http://devilspace.org/2015/01/19/data-insertion-in-to-tables-by-using-simplejdbcinsert-class-of-spring-framework/"&gt;&lt;code&gt;SimpleJdbcInsert&lt;/code&gt; to handle JDBC data insertion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Alvin Henrick put together a nice post on using &lt;a href="http://alvinhenrick.com/2015/01/16/spring-boot-app-deployed-with-docker-and-data-only-container-pattern-explained/"&gt;Spring Boot and Docker together&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I found &lt;a href="http://hiteshtwo.org/asley/2015/01/20/spring-boot-with-groovy-and-external-libraries/"&gt;this interesting Q&amp;amp;A post on using Groovy with Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Alex Collins&amp;rsquo; post on using &lt;a href="http://www.alexecollins.com/elastic-search-in-a-box-with-docker/"&gt;Docker, Elastic Search, and Selenium to create a search-in-a-box&lt;/a&gt; is &lt;em&gt;epic&lt;/em&gt;! Check it out!&lt;/li&gt;
+  &lt;li&gt;This Japanese-language post on &lt;a href="http://backpaper0.github.io/2015/01/14/spring_boot_jersey.html"&gt;using the new Spring Boot 1.2.1&amp;rsquo;s Jersey support&lt;/a&gt; looked pretty good (via Google Translate!)&lt;/li&gt;
+  &lt;li&gt;Want to stand up services via Docker? Check out our pal &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;Chris Richardson&amp;rsquo;s post on standing up services via Docker&lt;/a&gt;! You could, for example, consume these services from another Docker-packaged Spring Boot application, or on Cloud Foundry.next (hitherto called &amp;ldquo;Diego&amp;rdquo;). &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Are you following &lt;a href="http://www.thisweekincf.com/blog/2015/01/19/this-week-in-cloud-foundry-19th-january-2015/"&gt;&lt;em&gt;This Week in Cloud Foundry&lt;/em&gt;&lt;/a&gt;? Do! There&amp;rsquo;s so much good stuff there, as usual.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;Webinars make up a lot of this week&amp;rsquo;s roundup. Nice work, &lt;a href="https://twitter.com/pieterhumphrey"&gt;Pieter Humphrey&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Webinar: Spring XD - A Platform for data at scale and developer productivity</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity" />
@@ -689,178 +735,6 @@ class Bookmark {&#xD;
   &lt;li&gt;ETrade&amp;rsquo;s Durai Arasan and Monish Unni &lt;a href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-rest-services-with-rabbitmq-spring-integration-and-node-js"&gt;gave a nice talk on building REST services with Spring Integration and Node.js&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;Speaking of our pal Nicolas Frankel, check out his book,&lt;a href="https://leanpub.com/integrationtest"&gt;&lt;em&gt;Integration Testing from Trenches&lt;/em&gt;, which has a large section on Spring&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>"Configuring It All Out" or "12-Factor App-Style Configuration with Spring"</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-01-10:1929</id>
-    <updated>2015-01-13T11:13:00Z</updated>
-    <content type="html">&lt;p&gt;Let&amp;rsquo;s establish some vocabulary, before we begin. When we talk about &lt;em&gt;configuration&lt;/em&gt; in Spring, we&amp;rsquo;re &lt;em&gt;usually&lt;/em&gt; talking about the inputs into the Spring framework&amp;rsquo;s various &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/ApplicationContext.html"&gt;&lt;code&gt;ApplicationContext&lt;/code&gt;&lt;/a&gt; implementations that help the container understand what it is you want done. This might be an XML file to be fed into a &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/support/ClassPathXmlApplicationContext.html"&gt;&lt;code&gt;ClassPathXmlApplicationContext&lt;/code&gt;&lt;/a&gt;, or Java classes annotated a certain way to be fed into an &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/AnnotationConfigApplicationContext.html"&gt;&lt;code&gt;AnnotationConfigApplicationContext&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Another type of &lt;em&gt;configuration&lt;/em&gt;, as &lt;a href="http://12factor.net/config"&gt;nicely described in the 12-Factor application manifesto&lt;/a&gt;, is any of an application&amp;rsquo;s that is likely to vary between deploys (staging, production, developer environments, etc.), like service credentials and hostnames.&lt;/p&gt;&lt;p&gt;This second type of configuration, which should live external to the deployed application, has been well supported in Spring since the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt; class was introduced. Spring&amp;rsquo;s support for that type of configuration has come a long way since then and in this blog we&amp;rsquo;re going to look at that progression.&lt;/p&gt;&lt;h1&gt;&lt;a href="#the-code-propertyplaceholderconfigurer-code" class="anchor" name="the-code-propertyplaceholderconfigurer-code"&gt;&lt;/a&gt;The &lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/h1&gt;&lt;p&gt;Spring&amp;rsquo;s offered the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/config/PropertyPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt; since 2003. Spring 2.5 introduced XML namespace support and with it XML namespace support for property placeholder resolution. For example &lt;code&gt;&amp;lt;context:property-placeholder location = &amp;quot;simple.properties&amp;quot;/&amp;gt;&lt;/code&gt; would let us substitute bean definition literal values in the XML configuration for values assigned to keys in a (external) property file (in this case &lt;code&gt;simple.properties&lt;/code&gt; which may be on the classpath or external to the application). This property file might look like:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint properties"&gt;# Database Credentials&#xD;
-configuration.projectName = Spring Framework
-&lt;/code&gt;&lt;/pre&gt;&lt;h1&gt;&lt;a href="#the-code-environment-code-abstraction" class="anchor" name="the-code-environment-code-abstraction"&gt;&lt;/a&gt;The &lt;code&gt;Environment&lt;/code&gt; Abstraction&lt;/h1&gt;&lt;p&gt;This solution predates the introduction of Java configuration into Spring Framework proper in 3.0. Spring 3 made it easy to inject configuration values into Java component configuration using &lt;code&gt;@Value&lt;/code&gt;-annotations, like this: &lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java "&gt;@Value(&amp;quot;${configuration.projectName}&amp;quot;) &#xD;
-private String projectName; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring 3.1 introduced the &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/env/Environment.html"&gt;&lt;code&gt;Environment&lt;/code&gt;&lt;/a&gt; abstraction. It provides a bit of runtime indirection between the runnning application and the environment in which it is running. The &lt;code&gt;Environment&lt;/code&gt; acts as a map of keys and values. You can configure where those values are read from by contributing a. Inject an object of type &lt;code&gt;Environment&lt;/code&gt; anywhere you want and ask it questions. By default Spring loads up system environment keys and values, like &lt;code&gt;line.separator&lt;/code&gt;. You can tell Spring to load up configuration keys from a file, specifically, using the &lt;code&gt;@PropertySource&lt;/code&gt; annotation.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package env;&#xD;
-&#xD;
-import org.springframework.beans.factory.annotation.Autowired;&#xD;
-import org.springframework.beans.factory.annotation.Value;&#xD;
-import org.springframework.context.annotation.*;&#xD;
-import org.springframework.context.support.*;&#xD;
-import org.springframework.core.env.Environment;&#xD;
-&#xD;
-@Configuration&#xD;
-@ComponentScan&#xD;
-@PropertySource(&amp;quot;file:/path/to/simple.properties&amp;quot;)&#xD;
-public class Application {&#xD;
-&#xD;
-	@Bean&#xD;
-	static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {&#xD;
-		return new PropertySourcesPlaceholderConfigurer();&#xD;
-	}&#xD;
-&#xD;
-	@Value(&amp;quot;${configuration.projectName}&amp;quot;)&#xD;
-	void setProjectName(String projectName) {&#xD;
-		System.out.println(&amp;quot;setting project name: &amp;quot; + projectName);&#xD;
-	}&#xD;
-&#xD;
-	@Autowired&#xD;
-	void setEnvironment(Environment env) {&#xD;
-		System.out.println(&amp;quot;setting environment: &amp;quot; + &#xD;
-                      env.getProperty(&amp;quot;configuration.projectName&amp;quot;));&#xD;
-	}&#xD;
-&#xD;
-	public static void main(String args[]) throws Throwable {&#xD;
-		new AnnotationConfigApplicationContext(Application.class);&#xD;
-	}&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This example loads up the values from a file, &lt;code&gt;simple.properties&lt;/code&gt;, and then has one value, &lt;code&gt;configuration.projectName&lt;/code&gt;, injected using the &lt;code&gt;@Value&lt;/code&gt; annotation and then read again from Spring&amp;rsquo;s &lt;code&gt;Environment&lt;/code&gt; abstraction. To be able to inject the values with the &lt;code&gt;@Value&lt;/code&gt; annotation, we need to register a &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/support/PropertySourcesPlaceholderConfigurer.html"&gt;&lt;code&gt;PropertySourcesPlaceholderConfigurer&lt;/code&gt;&lt;/a&gt;. In this case, the output is &lt;code&gt;Spring Framework&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;Environment&lt;/code&gt; also brings the idea of &lt;a href="http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/Profile.html"&gt;&lt;em&gt;profiles&lt;/em&gt;&lt;/a&gt;. It lets you ascribe labels (profiles) to groupings of beans. Use profiles to describe beans and bean graphs that change from one environment to another. You can activate one or more profiles at a time. Beans that do not have a profile assigned to them are always activated. Beans that have the profile &lt;code&gt;default&lt;/code&gt; are activated only when there are no other profiles are active.&lt;/p&gt;&lt;p&gt;Profiles let you describe sets of beans that need to be created differently in one environment versus another. You might, for example, use an embedded H2 &lt;code&gt;javax.sql.DataSource&lt;/code&gt; in your local &lt;code&gt;dev&lt;/code&gt; profile, but then switch to a &lt;code&gt;javax.sql.DataSource&lt;/code&gt; for PostgreSQL that&amp;rsquo;s resolved through a JNDI lookup or by reading the properties from an environment variable in &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; when the &lt;code&gt;prod&lt;/code&gt; profile is active. In both cases, your code works: you get a &lt;code&gt;javax.sql.DataSource&lt;/code&gt;, but the decision about &lt;em&gt;which&lt;/em&gt; specialized instance is used is decided by the active profile or profiles.&lt;/p&gt;&lt;p&gt;You should use this feature sparingly. Ideally, the object graph between one environment and another should remain fairly fixed.&lt;/p&gt;&lt;h1&gt;&lt;a href="#em-bootiful-em-configuration" class="anchor" name="em-bootiful-em-configuration"&gt;&lt;/a&gt;&lt;em&gt;Bootiful&lt;/em&gt; Configuration&lt;/h1&gt;&lt;p&gt;&lt;a href="http://spring.io/projects/spring-boot"&gt;Spring Boot&lt;/a&gt; improves things considerably. Spring Boot will read the properties in &lt;code&gt;src/main/resources/application.properties&lt;/code&gt; by default. &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html"&gt;If a profile is active&lt;/a&gt;, it will also automatically reads in the configuration files based on the profile name, like &lt;code&gt;src/main/resources/application-foo.properties&lt;/code&gt; where &lt;code&gt;foo&lt;/code&gt; is the current profile. If the &lt;a href="https://code.google.com/p/snakeyaml/"&gt;Snake YML library&lt;/a&gt; is on the classpath, then it will also automatically load YML files. Yeah, read that part again. YML is so good, and so worth a go! Here&amp;rsquo;s an example YML file:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;configuration:&#xD;
-	projectName : Spring Boot&#xD;
-	someOtherKey : Some Other Value
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Boot also made it much simpler to get the right result in common cases. It makes &lt;code&gt;-D&lt;/code&gt; arguments to the &lt;code&gt;java&lt;/code&gt; process and environment variables available as properties. It even normalizes them, so an environment variable &lt;code&gt;$CONFIGURATION_PROJECTNAME&lt;/code&gt; or a &lt;code&gt;-D&lt;/code&gt; argument of the form &lt;code&gt;-Dconfiguration.projectname&lt;/code&gt; both become accessible with the key &lt;code&gt;configuration.projectName&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Configuration values are strings, and if you have enough configuration values it can be unwieldy trying to make sure those keys don&amp;rsquo;t themselves become magic strings in the code. Spring Boot introduces a &lt;code&gt;@ConfigurationProperties&lt;/code&gt; component type. Annotate a POJO with &lt;code&gt;@ConfigurationProperties&lt;/code&gt; and specify a prefix, and Spring will attempt to map all properties that start with that prefix to the POJO&amp;rsquo;s properties. In the example below the value for &lt;code&gt;configuration.projectName&lt;/code&gt; will be mapped to an instance of the POJO that all code can then inject and dereference to read the (type-safe) values. In this way, you only have the mapping from a key in one place.&lt;/p&gt;&lt;p&gt;In the example below, properties will be resolved automatically from &lt;code&gt;src/main/resources/application.yml&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package boot;&#xD;
-&#xD;
-import org.springframework.beans.factory.annotation.Autowired;&#xD;
-import org.springframework.boot.SpringApplication;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.boot.context.properties.ConfigurationProperties;&#xD;
-import org.springframework.stereotype.Component;&#xD;
-&#xD;
-// reads a value from src/main/resources/application.properties first&#xD;
-// but would also read:&#xD;
-//  java -Dconfiguration.projectName=..&#xD;
-//  export CONFIGURATION_PROJECTNAME=..&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-public class Application {&#xD;
-&#xD;
-	@Autowired&#xD;
-	void setConfigurationProjectProperties(ConfigurationProjectProperties cp) {&#xD;
-		System.out.println(&amp;quot;configurationProjectProperties.projectName = &amp;quot; + cp.getProjectName());&#xD;
-	}&#xD;
-&#xD;
-	public static void main(String[] args) {&#xD;
-		SpringApplication.run(Application.class);&#xD;
-	}&#xD;
-}&#xD;
-&#xD;
-@Component&#xD;
-@ConfigurationProperties(&amp;quot;configuration&amp;quot;)&#xD;
-class ConfigurationProjectProperties {&#xD;
-&#xD;
-	private String projectName;&#xD;
-&#xD;
-	public String getProjectName() {&#xD;
-		return projectName;&#xD;
-	}&#xD;
-&#xD;
-	public void setProjectName(String projectName) {&#xD;
-		this.projectName = projectName;&#xD;
-	}&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Boot uses the &lt;code&gt;@ConfigurationProps&lt;/code&gt; mechanism heavily to let users override bits of the system. You can see what property keys can be used to change things, for example, by adding the &lt;code&gt;org.springframework.boot:spring-boot-starter-actuator&lt;/code&gt; dependency to a Spring Boot-based web application and then visiting &lt;code&gt;http://127.0.0.1:8080/configprops&lt;/code&gt;. This will give you a list of supported configuration properties based on the types present on the classpath at runtime. As you add more Spring Boot types, you&amp;rsquo;ll see more properties.&lt;/p&gt;&lt;h1&gt;&lt;a href="#centralized-journaled-configuration-with-the-spring-cloud-configuration-support" class="anchor" name="centralized-journaled-configuration-with-the-spring-cloud-configuration-support"&gt;&lt;/a&gt;Centralized, Journaled Configuration with the Spring Cloud Configuration Support&lt;/h1&gt;&lt;p&gt;So far so good, but there are gaps in the approach so far:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;changes to an application&amp;rsquo;s configuration require restarts&lt;/li&gt;
-  &lt;li&gt;there is no traceability: how do we determine what changes were introduced into production and, if necessary, roll back?&lt;/li&gt;
-  &lt;li&gt;configuration is de-centralized and it&amp;rsquo;s not immediately apparent where to go to change what.&lt;/li&gt;
-  &lt;li&gt;sometimes configuration values should be encrypted and decrypted for security. There is no out-of-the-box support for this.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-cloud/spring-cloud.html"&gt;Spring Cloud&lt;/a&gt;, which builds upon Spring Boot and integrates various tools and libraries for working with microservices, including &lt;a href="https://github.com/netflix"&gt;the Netflix OSS stack&lt;/a&gt;, offers a &lt;a href="http://cloud.spring.io/spring-cloud-config/"&gt;configuration server&lt;/a&gt; and a client for that configuration server. This support, taken together, address these last three concerns.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s look at a simple example. First, we&amp;rsquo;ll setup a configuration server. The configuration server is something to be shared among a set of applications or microservices based on Spring Cloud. You have to get it running, somewhere, once. Then, all other services need only know where to find the configuration service. The configuration service acts as a sort of proxy for configuration keys and values that it reads from a Git repository online or on a disk.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package cloud.server;&#xD;
-&#xD;
-import org.springframework.boot.SpringApplication;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.cloud.config.server.EnableConfigServer;&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-@EnableConfigServer&#xD;
-public class Application {&#xD;
-&#xD;
-	public static void main(String[] args) {&#xD;
-		SpringApplication.run(Application.class, args);&#xD;
-	}&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you manage things correctly, then the only configuration that lives with any of your services should be the configuration that tells the configuration service where to find the Git repository and the configuration that tells the other client services where to find the configuration service.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s the configuration for the configuration service, &lt;code&gt;src/main/resources/application.yml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;server:&#xD;
-	port: 8888&#xD;
-&#xD;
-spring:&#xD;
-	cloud:&#xD;
-		config:&#xD;
-			server:&#xD;
-				git :&#xD;
-					uri: https://github.com/joshlong/microservices-lab-configuration&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This tells the Spring Cloud configuration service to look for configuration files for individual client services in the Git repository on my GitHub account. The URI could, of course, just as easily have been a Git repository on my local file system. The value used for the URI could also have been a property reference, of the form, &lt;code&gt;${SOME_URI}&lt;/code&gt;, that references - perhaps - an environment variable called &lt;code&gt;SOME_URI&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;Run the application and you&amp;rsquo;ll be able to verify that your configuration service is working by pointing your browser at &lt;code&gt;http://localhost:8888/SERVICE/master&lt;/code&gt; where &lt;code&gt;SERVICE&lt;/code&gt; is the ID taken from your client service&amp;rsquo;s &lt;code&gt;boostrap.yml&lt;/code&gt;. Spring Cloud-based services look for a file called &lt;code&gt;src/main/resources/bootstrap.(properties,yml)&lt;/code&gt; that it expects to find to - you guessed it! - bootstrap the service. One of the things it expects to find in the &lt;code&gt;bootstrap.yml&lt;/code&gt; file is the ID of the service specified as a property, &lt;code&gt;spring.application.name&lt;/code&gt;. Here&amp;rsquo;s our configuration client&amp;rsquo;s &lt;code&gt;bootstrap.yml&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;spring:&#xD;
-	application:&#xD;
-		name: config-client&#xD;
-		cloud:&#xD;
-			config:&#xD;
-				uri: http://localhost:8888
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When the Spring Cloud microservice runs, it&amp;rsquo;ll see that its &lt;code&gt;spring.application.name&lt;/code&gt; is &lt;code&gt;config-client&lt;/code&gt;. It will contact the configuration service (which we&amp;rsquo;ve told Spring Cloud is running at &lt;code&gt;http://localhosst:8080&lt;/code&gt;, though this too could&amp;rsquo;ve been an environment variable) and ask it for any configuration. The configuration service returns back JSON that contains all the configuration values in the &lt;code&gt;application.(properties,yml)&lt;/code&gt; file as well as any service-specific configuration in &lt;code&gt;config-client.(yml,properties)&lt;/code&gt;. It will &lt;em&gt;also&lt;/em&gt; load any configuration for a given service &lt;em&gt;and&lt;/em&gt; a specific profile, e.g., &lt;code&gt;config-client-dev.properties&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;This all just happens automatically. In the following example, the configuration value is read from the configuration service.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package cloud.client;&#xD;
-&#xD;
-import org.springframework.beans.factory.annotation.Autowired;&#xD;
-import org.springframework.beans.factory.annotation.Value;&#xD;
-import org.springframework.boot.SpringApplication;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.cloud.context.config.annotation.RefreshScope;&#xD;
-import org.springframework.core.env.Environment;&#xD;
-import org.springframework.web.bind.annotation.RequestMapping;&#xD;
-import org.springframework.web.bind.annotation.RestController;&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-public class Application {&#xD;
-&#xD;
-	public static void main(String[] args) {&#xD;
-		SpringApplication.run(Application.class, args);&#xD;
-	}&#xD;
-&#xD;
-	@Autowired&#xD;
-	void setEnvironment(Environment e) {&#xD;
-		System.out.println(e.getProperty(&amp;quot;configuration.projectName&amp;quot;));&#xD;
-	}&#xD;
-}&#xD;
-&#xD;
-@RestController&#xD;
-@RefreshScope&#xD;
-class ProjectNameRestController {&#xD;
-&#xD;
-	@Value(&amp;quot;${configuration.projectName}&amp;quot;)&#xD;
-	private String projectName;&#xD;
-&#xD;
-	@RequestMapping(&amp;quot;/project-name&amp;quot;)&#xD;
-	String projectName() {&#xD;
-		return this.projectName;&#xD;
-	}&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;ProjectNameRestController&lt;/code&gt; is annotated with &lt;a href="http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html#_refresh_scope"&gt;&lt;code&gt;@RefreshScope&lt;/code&gt;&lt;/a&gt;, a custom Spring Cloud &lt;em&gt;scope&lt;/em&gt; that lets any bean recreate itself (and re-read configuration values from the configuration service) in-place. There are various ways to trigger the refresh: send a &lt;code&gt;POST&lt;/code&gt; request to &lt;code&gt;http://127.0.0.1:8080/refresh&lt;/code&gt; (e.g.: &lt;code&gt;curl -d{} http://127.0.0.1:8080/refresh&lt;/code&gt;), use the auto-exposed JMX refresh endpoint, or use the Spring Cloud Bus.&lt;/p&gt;&lt;p&gt;The &lt;a href="http://cloud.spring.io/spring-cloud-bus/"&gt;Spring Cloud Bus&lt;/a&gt; links all services through a RabbitMQ powered-bus. This is particularly powerful. You can tell one (or thousands!) of microservices to refresh themselves by sending a single message to a message bus. This prevents downtime and is &lt;em&gt;much&lt;/em&gt; more friendly than having to systematically restart individual services or nodes.&lt;/p&gt;&lt;p&gt;To see all this in action, get the config client and config server running, being sure to point the config server to a Git repository that you can control and make changes to. Hit the REST endpoint and confirm that you see &lt;code&gt;Spring Cloud&lt;/code&gt;. Then make changes to the configuration file in Git, and at the very least &lt;code&gt;git commit&lt;/code&gt; them. Then trigger a refresh against the config client and revisit the REST endpoint again. You should see the updated value reflected!&lt;/p&gt;&lt;p&gt;The Spring Cloud configuration support &lt;em&gt;also&lt;/em&gt; &lt;a href="http://cloud.spring.io/spring-cloud-config/spring-cloud-config.html#_security_2"&gt;includes first-class support for security and encryption&lt;/a&gt;. I&amp;rsquo;ll leave you to explore that last mile on your own, but it&amp;rsquo;s fairly trivial and amounts to configuring a valid key.&lt;/p&gt;&lt;h1&gt;&lt;a href="#next-steps" class="anchor" name="next-steps"&gt;&lt;/a&gt;Next Steps&lt;/h1&gt;&lt;p&gt;We&amp;rsquo;ve covered a &lt;em&gt;lot&lt;/em&gt; here! Armed with all of this, it should be easy to package one artifact and then move that artifact from one environment to another without changes to the artifact itself. If you&amp;rsquo;re going to start an application today, I&amp;rsquo;d recommend starting on Spring Boot and Spring Cloud, especially now that we&amp;rsquo;ve looked at all the good stuff it brings you by default. Don&amp;rsquo;t forget &lt;a href="https://github.com/joshlong/configuring-it-all-out"&gt;to check out the code&lt;/a&gt; behind all of these examples.&lt;/p&gt;</content>
   </entry>
 </feed>
 
