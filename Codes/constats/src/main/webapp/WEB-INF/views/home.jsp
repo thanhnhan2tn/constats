@@ -29,8 +29,18 @@
 					</a>
 						<!-- ul message -->
 						<ul class="dropdown-menu">
-							
-						</ul>
+                            	<li class="header">You have 4 Message</li>
+                                <li>
+                                    <div style="position: relative; overflow: hidden; width: auto; height: 200px;" class="slimScrollDiv">
+                                    <ul style="overflow: hidden; width: 100%; height: 200px;" class="menu">
+                                        
+                                    </ul>
+                                    <div style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 156.863px;" class="slimScrollBar"></div><div style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;" class="slimScrollRail"></div>
+                                    </div>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            
+                            </ul>
 						<!-- end ul message -->
 					</li>
 					<!-- end li message -->
@@ -41,6 +51,17 @@
                                 <span class="label label-warning">10</span>
                             </a>
                             <ul class="dropdown-menu">
+                            	<li class="header">You have 10 notifications</li>
+                                <li>
+                                    <div style="position: relative; overflow: hidden; width: auto; height: 200px;" class="slimScrollDiv">
+                                    <ul style="overflow: hidden; width: 100%; height: 200px;" class="menu">
+                                        
+                                    </ul>
+                                    <div style="background: none repeat scroll 0% 0% rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 156.863px;" class="slimScrollBar"></div><div style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;" class="slimScrollRail"></div>
+                                    </div>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            
                             </ul>
                     </li>
                     <!-- end li notification -->
@@ -103,8 +124,26 @@
                    <small>Control panel</small>
                </h1>
                <div class="btn-group btn-add">
-               	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Add Server</button>
+               	<button class="btn btn-success" data-toggle="modal" data-target="#AddServer"><i class="glyphicon glyphicon-plus"></i> Add Server</button>
                </div>
+               <!-- AddServer Modal -->
+				<div class="modal fade" id="AddServer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				      </div>
+				      <div class="modal-body">
+				        ...
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save changes</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
             </section>
             <!--  End Content Header -->
             <!--  Main Content -->

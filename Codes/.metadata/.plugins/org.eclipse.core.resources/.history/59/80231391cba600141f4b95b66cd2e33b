@@ -1,0 +1,7 @@
+package vn.edu.cit.model;
+
+public class UserLog {
+	private int userlogId;
+	private int userId;
+	private String logContent;
+}

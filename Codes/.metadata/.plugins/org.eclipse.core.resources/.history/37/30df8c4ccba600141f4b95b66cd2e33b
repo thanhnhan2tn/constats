@@ -1,0 +1,12 @@
+package vn.edu.cit.model;
+
+import java.util.Date;
+
+public class ServerStatus {
+	private int serverStatusId;
+	private int serverId;
+	private Date time;
+	private String cpu;
+	private String ram;
+	private String disk;
+}

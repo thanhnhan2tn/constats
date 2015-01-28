@@ -40,7 +40,7 @@ public class HomeController {
 	@RequestMapping(value = "/Shutdown", method = RequestMethod.GET)
 	public String shutDown(){
 		Power pw = new Power();
-		pw.Shutdown();
+//		pw.Shutdown();
 //		if(){
 //			System.out.print("Shut");
 //		}else{
@@ -51,7 +51,7 @@ public class HomeController {
 	@RequestMapping(value = "/Restart", method = RequestMethod.GET)
 	public String reStart(){
 		Power pw = new Power();
-		pw.Restart();
+//		pw.Restart();
 //		if(){
 //			System.out.print("Shut");
 //		}else{

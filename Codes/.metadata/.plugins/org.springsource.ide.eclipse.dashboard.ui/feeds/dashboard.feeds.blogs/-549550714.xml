@@ -5,7 +5,34 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-27T23:00:00Z</updated>
+  <updated>2015-01-28T04:24:00Z</updated>
+  <entry>
+    <title>This Week in Spring - January 27th, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/28/this-week-in-spring-january-27th-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-28:1946</id>
+    <updated>2015-01-28T04:24:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! As usual, we&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Join Andy Wilkinson as he discusses REST API documentation, swagger, and more in a webinar on &lt;a href="https://spring.io/blog/2015/01/20/webinar-documenting-restful-apis"&gt;Tuesday, Feb 3rd - Documenting RESTful APIs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Sabby Anandan is joining us for the Spring XD 1.1 launch webinar on &lt;a href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity"&gt;Tuesday, Feb 17th - Spring XD: A Platform for data at scale and developer productivity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Don&amp;rsquo;t miss Rob Winch as he takes a fresh look at HTTPSession for the cloud. His webinar is on &lt;a href="https://spring.io/blog/2015/01/20/webinar-introducing-spring-session"&gt;Tuesday, Feb 24th, 2015 Webinar: Introducing Spring Session&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I put together a look at 12-factor app-style &lt;a href="https://spring.io/blog/2015/01/27/12-factor-app-style-backing-services-with-spring-and-cloud-foundry"&gt;backing service consumption in Spring, and using Cloud Foundry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out this talk introducing system administration &lt;a href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-groovy-for-system-administrators"&gt;using Groovy from Netflix&amp;rsquo;s Dan Woods&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Apache Tomcat contributors Stuart Williams and Daniel Mikusa&amp;rsquo;s SpringOne2GX 2014 talk - &lt;a href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-fastest-servlets-in-the-west"&gt;&lt;em&gt;Fastest Servlets in the West?&lt;/em&gt;&lt;/a&gt; - is now available online! Check it out!&lt;/li&gt;
+  &lt;li&gt;Check out Spring Social lead Craig Walls&amp;rsquo; SpringOne2GX 2014 talk, &lt;a href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-booting-up-spring-social"&gt;&lt;em&gt;Booting up Spring Social&lt;/em&gt;&lt;/a&gt;, which introduces the various ways that Spring Boot simplifies (even further!) using Spring Social.&lt;/li&gt;
+  &lt;li&gt;Billy Yarosh put together a nice &lt;a href="http://keaplogik.blogspot.com/2015/01/spring-hateoas-embedded-resources-with.html?spref=tw"&gt;blog on using Spring HATEOAS&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Are you following &lt;a href="http://www.thisweekincf.com/blog/2015/01/19/this-week-in-cloud-foundry-19th-january-2015/"&gt;&lt;em&gt;This Week in Cloud Foundry&lt;/em&gt;&lt;/a&gt;?&lt;/li&gt;
+  &lt;li&gt;Check out this nice post &lt;a href="http://g00glen00b.be/spring-boot-rest-assured/"&gt;on integration testing with Spring Boot and RestAssured&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Our pal &lt;em&gt;Mkyong&lt;/em&gt; is back, this time with a &lt;a href="http://www.mkyong.com/spring/spring-profiles-example/"&gt;post on using Spring profiles&lt;/a&gt;!&lt;/li&gt;
+  &lt;li&gt;Florian Hohpf&amp;rsquo;s post introduces logging to Redis &lt;a href="http://www.javacodegeeks.com/2015/01/logging-to-redis-using-spring-boot-and-logback.html"&gt;using Spring Boot and Logback&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Want to use &lt;a href="http://stackoverflow.com/questions/28134883/spring-boot-using-a-service-in-quartz-job-execution"&gt;Quartz in Spring Boot&lt;/a&gt;? This StackOverflow was short and sweet and answers a question I&amp;rsquo;ve seen elsewhere about getting Quartz jobs working that used to work.&lt;/li&gt;
+  &lt;li&gt;Driss Amri put together anice introduction &lt;a href="http://www.drissamri.be/blog/technology/modern-java-web-applications-spring-boot-thymeleaf-angularjs/"&gt;to using Spring Boot and Thymeleaf for modern web application development&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content>
+  </entry>
   <entry>
     <title>12-Factor App-Style Backing Services with Spring and Cloud Foundry</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/27/12-factor-app-style-backing-services-with-spring-and-cloud-foundry" />
@@ -998,23 +1025,6 @@ class Bookmark {&#xD;
 &lt;p&gt;We will also be deprecating the older version of the REST API.  The new API takes a step forward in the REST API maturity model, moving from basic CRUD over HTTP to support for true resources.  While the new REST endpoints are still a work in progress, once they are feature complete, we will deprecate the old ones to focus development efforts on improving and evolving the new set.&lt;/p&gt;
 &lt;h3&gt;Where We Go From Here&lt;/h3&gt;
 &lt;p&gt;We will continue to work on the changes mentioned above and currently plan on another release early in the second quarter of this year.  We are excited about the future of Spring Batch Admin and look forward to your feedback in &lt;a href="https://jira.spring.io/browse/BATCH/"&gt;Jira&lt;/a&gt;, &lt;a href="https://github.com/spring-projects/spring-batch"&gt;Github&lt;/a&gt;, &lt;a href="http://stackoverflow.com/tags/spring-batch/info"&gt;StackOverflow&lt;/a&gt;, and social media!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring IO Platform 1.1.1 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/15/spring-io-platform-1-1-1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Andy Wilkinson</name>
-    </author>
-    <id>tag:spring.io,2015-01-15:1931</id>
-    <updated>2015-01-15T16:51:46Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.1.1.RELEASE is now available from both &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;The main highlight of this release is the addition of &lt;a href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release"&gt;Spring Session 1.0.0.RELEASE&lt;/a&gt; to the Platform.&lt;/p&gt;&lt;p&gt;In addition, this release also upgrades the versions of a number of the projects to pick up their latest maintenance releases:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring AMQP 1.4.2.RELEASE&lt;/li&gt;
-  &lt;li&gt;Spring Boot 1.2.1.RELEASE&lt;/li&gt;
-  &lt;li&gt;Spring Framework 4.1.4.RELEASE&lt;/li&gt;
-  &lt;li&gt;Spring Integration 4.1.2.RELEASE&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.1.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
 

@@ -112,6 +112,10 @@ body > .header {
 	.content .list-server .server-item a:hover .server-off .server-info{
 		display: none;
 	}
+	.navbar-nav > li > a{
+  	padding: 18px 15px;
+  	line-height: 10px;
+  }
 }
 
 @media screen and (max-width: 992px) {

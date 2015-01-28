@@ -9,7 +9,10 @@ context.settings({compress: true});
 		header : 'MENU'
 	}, {
 		text : 'Add Server',
-		href : '#'
+		action : function(e){
+			e.preventDefault();
+			$('#AddServer').modal('show');
+		}
 	}, {
 		text : 'Reload',
 		action: function(e){
