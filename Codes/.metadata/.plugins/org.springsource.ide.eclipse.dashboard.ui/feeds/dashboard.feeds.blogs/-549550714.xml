@@ -5,7 +5,374 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-20T19:14:00Z</updated>
+  <updated>2015-01-27T23:00:00Z</updated>
+  <entry>
+    <title>12-Factor App-Style Backing Services with Spring and Cloud Foundry</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/27/12-factor-app-style-backing-services-with-spring-and-cloud-foundry" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-01-28:1945</id>
+    <updated>2015-01-27T23:00:00Z</updated>
+    <content type="html">&lt;p&gt;The &lt;a href="http://12factor.net/"&gt;12 Factor App Manifesto&lt;/a&gt; talks about &lt;a href="http://12factor.net/backing-services"&gt;backing services&lt;/a&gt; at length. A backing service is, basically, any networked attached service that your application consumes to do its job. This might be a MongoDB instance, PostgreSQL database, a binary store like Amazon&amp;rsquo;s S3, metrics-gathering services like New Relic, a RabbitMQ or ActiveMQ message queue, a Memcached or Redis-based cache, an FTP service, an email service or indeed anything else. The distinction is not so much &lt;em&gt;what&lt;/em&gt; the service is so much as &lt;em&gt;how it&amp;rsquo;s exposed and consumed in an application&lt;/em&gt;. To the app, both are attached resources, accessed via a URL or other locator/credentials stored in the configuration.&lt;/p&gt;&lt;p&gt;We looked at how to use &lt;a href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring"&gt;&lt;em&gt;configuration&lt;/em&gt;&lt;/a&gt; to extricate magic strings like locators and credentials from the application code and externalize it. We also &lt;a href="https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka"&gt;looked at the use of service registries&lt;/a&gt; to keep a sort of living &lt;em&gt;phone book&lt;/em&gt; of microservices in a dynamic (typically cloud) environment.&lt;/p&gt;&lt;p&gt;In this post, we&amp;rsquo;ll look at the way &lt;a href="http://en.wikipedia.org/wiki/Platform_as_a_service"&gt;Platform-as-a-Service (PaaS) environments&lt;/a&gt; like &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; or Heroku typically expose &lt;em&gt;backing services&lt;/em&gt;, and look at ways to consume those services from inside a Spring application. For our examples, we&amp;rsquo;ll use Cloud Foundry because it&amp;rsquo;s open-source and easy to run in any datacenter or hosted, though most of this is pretty straightforward to apply on Heroku.&lt;/p&gt;&lt;p&gt;My friend &lt;a href="https://twitter.com/ab415"&gt;Abby Gregory Kearns&lt;/a&gt; put together a very nice high-level overview of the &lt;a href="http://blog.pivotal.io/cloud-foundry-pivotal/products/why-services-are-essential-to-your-platform-as-a-service"&gt;role and value of Cloud Foundry&amp;rsquo;s backing services portfolio&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;A PaaS like Cloud Foundry exposes backing services as operating system process-local environment variables. Environment variables are convenient because they work for all languages and runtimes, and they&amp;rsquo;re easy to change from one environment to another. This is &lt;em&gt;way&lt;/em&gt; simpler than trying to get JNDI up and running on a local machine, for example, and promotes portable builds. I intend to look at backing services specifically through the lens of current-day Cloud Foundry in this post. Keep in mind though the approach is specifically intended to promote portable builds &lt;em&gt;outside&lt;/em&gt; of a cloud environment. Spring is tailor-made to be portable; dependency injection promotes decoupling the a beans (like, for example, that which comes from a backing service) initialization and acquisition logic from the site of its use. We can use Spring to write code that thinks about &lt;code&gt;javax.sql.DataSources&lt;/code&gt; and then write configuration to source that &lt;code&gt;DataSource&lt;/code&gt; from the right contexts and configuration as the application moves from one environment to another.&lt;/p&gt;&lt;p&gt;The runtime under the next version of Cloud Foundry (hitherto referred to as &lt;em&gt;Diego&lt;/em&gt; in the press) is Docker-first and Docker-native. Docker, of course, makes it easy to containerize applications, and the interface between the containerized application and the outside world is kept intentionally minimal, again, to promote portable applications. One of the key inputs in a Docker image is, you guessed it, environment variables! Our pal Chris Richardson has done a few nice posts on both packaging and building &lt;a href="http://plainoldobjects.com/2014/11/16/deploying-spring-boot-based-microservices-with-docker/?utm_content=bufferc3d35&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer"&gt;Spring Boot-based Docker images&lt;/a&gt; and on &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;standing up backing-services&lt;/a&gt;. We won&amp;rsquo;t look at Docker in this post (though, stay tuned!), but it&amp;rsquo;s important to internalize: environment variables are easy and pliable ways fo externalizing backing service connection information.&lt;/p&gt;&lt;h2&gt;&lt;a href="#a-simple-spring-boot-application-that-talks-to-a-jdbc-code-datasource-code" class="anchor" name="a-simple-spring-boot-application-that-talks-to-a-jdbc-code-datasource-code"&gt;&lt;/a&gt;A Simple Spring Boot Application that talks to a JDBC &lt;code&gt;DataSource&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a simple Spring Boot application that inserts and exposes a few records from a &lt;code&gt;DataSource&lt;/code&gt; bean which Spring Boot will automatically create for us because we have the H2 embedded database driver on the CLASSPATH. If Spring Boot does not detect a bean of type &lt;code&gt;javax.sql.DataSource&lt;/code&gt; and it &lt;em&gt;does&lt;/em&gt; detect an embedded database driver (H2, Derby, HSQL), it will automatically create an embedded &lt;code&gt;javax.sql.DataSource&lt;/code&gt; bean. This example uses JPA to map records to the database. Here are the Maven dependencies:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Group ID &lt;/th&gt;
+      &lt;th&gt;Artifact ID &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;com.h2database&lt;/code&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;h2&lt;/code&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;org.springframework.boot&lt;/code&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;spring-boot-starter-data-jpa&lt;/code&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;org.springframework.boot&lt;/code&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;spring-boot-starter-data-rest&lt;/code&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;org.springframework.boot&lt;/code&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;spring-boot-starter-test&lt;/code&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;org.springframework.boot&lt;/code&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;spring-boot-starter-actuator&lt;/code&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;Here is the sample Java code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package demo;&#xD;
+&#xD;
+import org.springframework.boot.CommandLineRunner;&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.context.annotation.Bean;&#xD;
+import org.springframework.data.jpa.repository.JpaRepository;&#xD;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;&#xD;
+&#xD;
+import javax.persistence.Entity;&#xD;
+import javax.persistence.GeneratedValue;&#xD;
+import javax.persistence.Id;&#xD;
+import java.util.Arrays;&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+public class DemoApplication {&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(DemoApplication.class, args);&#xD;
+	}&#xD;
+&#xD;
+	@Bean&#xD;
+	CommandLineRunner seed(ReservationRepository rr) {&#xD;
+		return args -&amp;gt; Arrays.asList(&amp;quot;Phil,Webb&amp;quot;, &amp;quot;Josh,Long&amp;quot;, &amp;quot;Dave,Syer&amp;quot;, &amp;quot;Spencer,Gibb&amp;quot;).stream()&#xD;
+			.map(s -&amp;gt; s.split(&amp;quot;,&amp;quot;))&#xD;
+			.forEach(namePair -&amp;gt; rr.save(new Reservation(namePair[0], namePair[1])));&#xD;
+	}&#xD;
+}&#xD;
+&#xD;
+@RepositoryRestResource&#xD;
+interface ReservationRepository extends JpaRepository&amp;lt;Reservation, Long&amp;gt; {&#xD;
+}&#xD;
+&#xD;
+@Entity&#xD;
+class Reservation {&#xD;
+&#xD;
+	@Id&#xD;
+	@GeneratedValue&#xD;
+	private Long id;&#xD;
+&#xD;
+	private String firstName, lastName;&#xD;
+&#xD;
+	Reservation() {&#xD;
+	}&#xD;
+&#xD;
+	public Reservation(String firstName, String lastName) {&#xD;
+		this.firstName = firstName;&#xD;
+		this.lastName = lastName;&#xD;
+	}&#xD;
+&#xD;
+	public Long getId() {&#xD;
+		return id;&#xD;
+	}&#xD;
+&#xD;
+	public String getFirstName() {&#xD;
+		return firstName;&#xD;
+	}&#xD;
+&#xD;
+	public String getLastName() {&#xD;
+		return lastName;&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#creating-and-binding-backing-services-in-cloud-foundry" class="anchor" name="creating-and-binding-backing-services-in-cloud-foundry"&gt;&lt;/a&gt;Creating and Binding Backing Services in Cloud Foundry&lt;/h2&gt;&lt;p&gt;The application works locally, but let&amp;rsquo;s turn now to making it run on Cloud Foundry where it&amp;rsquo;ll need to be told how to connect to the backing service (an instance of PostgreSQL) exposed for it.&lt;/p&gt;&lt;p&gt;Cloud Foundry comes in many flavors. Like Heroku, you can run it hosted in an AWS-based flavor that&amp;rsquo;s &lt;a href="http://run.pivotal.io"&gt;available as Pivotal Web Services&lt;/a&gt;. You can get a free trial account. You can use Pivotal&amp;rsquo;s shrink-wrapped variant, &lt;a href="http://www.pivotal.io/platform-as-a-service/pivotal-cf"&gt;Pivotal Cloud Foundry&lt;/a&gt;, and run that in your data center, if you like. Alternatively, you can &lt;a href="http://cloudfoundry.org"&gt;use the open-source bits&lt;/a&gt; and run that, too. Or use any of the numerous other implementations from the likes of &lt;a href="https://console.ng.bluemix.net/"&gt;IBM&lt;/a&gt; and &lt;a href="http://www8.hp.com/us/en/cloud/helion-devplatform-overview.html"&gt;HP&lt;/a&gt;. At any rate, you&amp;rsquo;ll end up with a PaaS that behaves basically the same with respect to backing services.&lt;/p&gt;&lt;p&gt;Adding a backing service is a declarative function: simply &lt;em&gt;create&lt;/em&gt; a service and then bind it. Cloud Foundry features a &lt;em&gt;marketplace&lt;/em&gt; command: &lt;code&gt;cf marketplace&lt;/code&gt;. For the 80% cases, you should be able to pick from among the options in the &lt;code&gt;cf marketplace&lt;/code&gt; output. Once you&amp;rsquo;ve picked a service, create an instance of it, like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint bash"&gt;cf create-service elephantsql turtle postgresql-db
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note specifically that &lt;code&gt;postgresql-db&lt;/code&gt; is the backing service name, &lt;code&gt;elephantsql&lt;/code&gt; is the service provider name, and &lt;code&gt;turtle&lt;/code&gt; is the (free) tier &lt;em&gt;plan&lt;/em&gt; name. With that in hand, you can &lt;em&gt;bind&lt;/em&gt; the service to your deployed application. You can use the &lt;code&gt;cf&lt;/code&gt; CLI, or simply declare a backing service dependency in your application&amp;rsquo;s &lt;code&gt;manifest.yml&lt;/code&gt; file.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s the basic &lt;code&gt;manifest.yml&lt;/code&gt; for all our samples. The &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;host&lt;/code&gt; change from one manifest to another, but the examples for this post use this newly created &lt;code&gt;postgresql-db&lt;/code&gt; service.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;---&#xD;
+applications:&#xD;
+- name: simple-backing-services&#xD;
+	memory: 512M&#xD;
+	instances: 1&#xD;
+	host: simple-backing-services-${random-word}&#xD;
+	domain: cfapps.io&#xD;
+	path: target/simple.jar&#xD;
+	services:&#xD;
+		- postgresql-db&#xD;
+	env:&#xD;
+		SPRING_PROFILES_ACTIVE: cloud&#xD;
+		DEBUG: &amp;quot;true&amp;quot;&#xD;
+		debug: &amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now, let&amp;rsquo;s look at a few different ways to consume the backing service and look at some of their strengths and weaknesses.&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ll use &lt;a href="http://start.spring.io"&gt;Spring Boot&lt;/a&gt;, at a minimum, for all of these examples. Spring Boot offers the Spring Boot Actuator module. It provides very helpful information about the application - metrics, environment dumps, a listing of all the defined beans, etc. We&amp;rsquo;ll use some of these endpoints to get insight into the environment variables and system properties exposed when running a Spring application, and to understand things like the profile under which Spring Boot is running. Add the Spring Boot Actuator in your Maven or Gradle build. The &lt;code&gt;groupId&lt;/code&gt; is &lt;code&gt;org.springframework.boot&lt;/code&gt; and the &lt;code&gt;artifactId&lt;/code&gt; is &lt;code&gt;spring-boot-starter-actuator&lt;/code&gt;. You don&amp;rsquo;t need to specify the version if you&amp;rsquo;re using the a Spring Boot generated from &lt;a href="http://start.spring.io"&gt;&lt;code&gt;start.spring.io&lt;/code&gt;&lt;/a&gt; or the &lt;code&gt;spring init&lt;/code&gt; CLI command.&lt;/p&gt;&lt;h2&gt;&lt;a href="#cloud-foundry-rsquo-s-auto-reconfiguration" class="anchor" name="cloud-foundry-rsquo-s-auto-reconfiguration"&gt;&lt;/a&gt;Cloud Foundry&amp;rsquo;s Auto-Reconfiguration&lt;/h2&gt;&lt;p&gt;The &lt;a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/framework-spring_auto_reconfiguration.md"&gt;Cloud Foundry Java buildpack&lt;/a&gt; does &lt;em&gt;auto reconfiguration&lt;/em&gt; for you. &lt;a href="https://github.com/cloudfoundry/java-buildpack-auto-reconfiguration"&gt;From the docs&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Auto-reconfiguration consists of three parts. First, it adds the &lt;code&gt;cloud&lt;/code&gt; profile to Spring&amp;rsquo;s list of active profiles. Second it exposes all of the properties contributed by Cloud Foundry as a &lt;code&gt;PropertySource&lt;/code&gt; in the &lt;code&gt;ApplicationContext&lt;/code&gt;. Finally it re-writes the bean defintitions of various types to connect automatically with services bound to the application. The types that are rewritten are as follows:&lt;/p&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Bean Type &lt;/th&gt;
+        &lt;th&gt;Service Type &lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;javax.sql.DataSource&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Relational Data Services (e.g. ClearDB, ElephantSQL) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.amqp.rabbit.connection.ConnectionFactory&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;RabbitMQ Service (e.g. CloudAMQP) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.data.mongodb.MongoDbFactory&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Mongo Service (e.g. MongoLab) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.data.redis.connection.RedisConnectionFactory&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Redis Service (e.g. Redis Cloud) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.orm.hibernate3.AbstractSessionFactoryBean&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Relational Data Services (e.g. ClearDB, ElephantSQL) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.orm.hibernate4.LocalSessionFactoryBean&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Relational Data Services (e.g. ClearDB, ElephantSQL) &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;code&gt;org.springframework.orm.jpa.AbstractEntityManagerFactoryBean&lt;/code&gt; &lt;/td&gt;
+        &lt;td&gt;Relational Data Services (e.g. ClearDB, ElephantSQL) &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;&lt;p&gt;The effect is that an application running on H2 locally will automatically run against PostgreSQL on Cloud Foundry, assuming you have a backing-service pointing to a PostgreSQL instance created and bound to the application, as we do above. This is very convenient! If your only two destination targets are localhost and Cloud Foundry, this works perfectly.&lt;/p&gt;&lt;h2&gt;&lt;a href="#useful-code-environment-code-properties-for-your-spring-application" class="anchor" name="useful-code-environment-code-properties-for-your-spring-application"&gt;&lt;/a&gt;Useful &lt;code&gt;Environment&lt;/code&gt; properties for your Spring Application&lt;/h2&gt;&lt;p&gt;The default Java buildpack (which you can ovveride when doing a &lt;code&gt;cf push&lt;/code&gt; or by declaring it in your &lt;code&gt;manifest.yml&lt;/code&gt;) adds a Spring &lt;code&gt;Environment&lt;/code&gt; &lt;code&gt;PropertySource&lt;/code&gt; that registers a slew of properties that start with &lt;code&gt;cloud.&lt;/code&gt;. You can see them if you visit the REST &lt;code&gt;/env&lt;/code&gt; endpoint in the above application once you&amp;rsquo;ve pushed the application to Cloud Foundry. Here&amp;rsquo;s &lt;em&gt;some&lt;/em&gt; of the output for my application:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;&lt;br/&gt;{&#xD;
+	...&#xD;
+	cloud.services.postgresql-db.connection.jdbcurl: &amp;quot;jdbc:postgresql://babar.elephantsql.com:5432/AUSER?user=AUSER&amp;amp;password=WOULDNTYOULIKETOKNOW&amp;quot;,&#xD;
+	...&#xD;
+	cloud.services.postgresql-db.connection.uri: &amp;quot;postgres://AUSER:WOULDNTYOULIKETOKNOW@babar.elephantsql.com:5432/AUSER&amp;quot;,&#xD;
+	cloud.services.postgresql-db.connection.scheme: &amp;quot;postgres&amp;quot;,&#xD;
+	cloud.services.postgresql.connection.jdbcurl: &amp;quot;jdbc:postgresql://babar.elephantsql.com:5432/AUSER?user=AUSER&amp;amp;password=WOULDNTYOULIKETOKNOW&amp;quot;,&#xD;
+	cloud.services.postgresql.connection.port: 5432,&#xD;
+	cloud.services.postgresql.connection.path: &amp;quot;AUSER&amp;quot;,&#xD;
+	cloud.application.host: &amp;quot;0.0.0.0&amp;quot;,&#xD;
+	cloud.services.postgresql-db.connection.password: &amp;quot;******&amp;quot;,&#xD;
+	cloud.services.postgresql-db.connection.username: &amp;quot;AUSER&amp;quot;,&#xD;
+	...&#xD;
+	cloud.application.application_name: &amp;quot;simple-backing-services&amp;quot;,&#xD;
+	cloud.application.limits: {&#xD;
+		mem: 512,&#xD;
+		disk: 1024,&#xD;
+		fds: 16384&#xD;
+	},&#xD;
+	cloud.services.postgresql-db.id: &amp;quot;postgresql-db&amp;quot;,&#xD;
+	cloud.application.application_uris: [&#xD;
+	&amp;quot;simple-backing-services-fattiest-teniafuge.cfapps.io&amp;quot;,&#xD;
+	&amp;quot;simple-backing-services-unmummifying-prehnite.cfapps.io&amp;quot;&#xD;
+],&#xD;
+	cloud.application.instance_index: 0,&#xD;
+	...&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can use these properties in Spring just like you would any other property. They&amp;rsquo;re very convenient, too, as they provide not only a fairly standard Heroku-esque connection URI (&lt;code&gt;cloud.services.postgresql-db.connection.uri&lt;/code&gt;), but also one that can be used in a JDBC context, directly, &lt;code&gt;cloud.services.postgresql.connection.jdbcurl&lt;/code&gt;. As long as you use this (or a fork of this) buildpack, you&amp;rsquo;ll benefit from these properties.&lt;/p&gt;&lt;p&gt;Cloud Foundry exposes all of this information as standard, language and technology netural environment variables (&lt;code&gt;VCAP_SERVICES&lt;/code&gt; and &lt;code&gt;VCAP_APPLICATION&lt;/code&gt;). In theory, you should be able to write an application for any Cloud Foundry implementation and target these variables. Spring Boot also provides an &lt;em&gt;auto-configuration&lt;/em&gt; for those variables, and this approach works whether you use the aforementioned Java buildpack or not.&lt;/p&gt;&lt;p&gt;Spring Boot maps these environment variables into a set of properties accessible from the Spring &lt;code&gt;Environment&lt;/code&gt; abstraction. Here&amp;rsquo;s some sample output from the &lt;code&gt;VCAP_*&lt;/code&gt; properties that Spring Boot exposes, also from &lt;code&gt;/env&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
+	...&#xD;
+	vcap.application.start: &amp;quot;2015-01-27 09:58:13 +0000&amp;quot;,&#xD;
+	vcap.application.application_version: &amp;quot;9e6ba76e-039f-4585-9573-8efa9f7e9b7e&amp;quot;,&#xD;
+	vcap.application.application_uris[2]: &amp;quot;simple-backing-services-detersive-sterigma.cfapps.io&amp;quot;,&#xD;
+	vcap.application.uris: &amp;quot;simple-backing-services-fattiest-teniafuge.cfapps.io,simple-backing-services-grottoed-distillment.cfapps.io,...&amp;quot;,&#xD;
+	vcap.application.space_name: &amp;quot;joshlong&amp;quot;,&#xD;
+	vcap.application.started_at: &amp;quot;2015-01-27 09:58:13 +0000&amp;quot;,&#xD;
+	vcap.services.postgresql-db.tags: &amp;quot;Data Stores,Data Store,postgresql,relational,New Product&amp;quot;,&#xD;
+	vcap.services.postgresql-db.credentials.uri: &amp;quot;postgres://AUSER:WOULDNTYOULIKETOKNOW@babar.elephantsql.com:5432/hqsugvxo&amp;quot;,&#xD;
+	vcap.services.postgresql-db.tags[1]: &amp;quot;Data Store&amp;quot;,&#xD;
+	vcap.services.postgresql-db.tags[4]: &amp;quot;New Product&amp;quot;,&#xD;
+	vcap.application.application_name: &amp;quot;simple-backing-services&amp;quot;,&#xD;
+	vcap.application.name: &amp;quot;simple-backing-services&amp;quot;,&#xD;
+	vcap.application.uris[2]: &amp;quot;simple-backing-services-detersive-sterigma.cfapps.io&amp;quot;,&#xD;
+	...&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I tend to rely a little on each approach. The Spring Boot properties are convenient because they provided indexed properties. &lt;code&gt;vcap.application.application_uris[2]&lt;/code&gt; provides a way to index into the array of possible routes for this application. This is ideal if you want to tell your running application what its externally adressable URI is, for example, if it needs to establish callbacks at startup before any request has come in. It also provides the equivalent technology-agnostic URIs, but not the JDBC-specific connection string. So, I&amp;rsquo;d use both. This apprroach is convenient, particularly in Spring Boot, because I can be explicit in my configuration and set properties (like &lt;code&gt;spring.datasource.*&lt;/code&gt;) to instruct Spring Boot on how to set things up. This is useful in the interest of being explicit, or if I have more than one backing service of the same type (like a JDBC &lt;code&gt;javax.sql.DataSource&lt;/code&gt;) bound to the same application. In this case, the buildpack won&amp;rsquo;t know what to do so you need to be explicit and disambiguate which backing service reference should be injected and where.&lt;/p&gt;&lt;h2&gt;&lt;a href="#using-spring-profiles" class="anchor" name="using-spring-profiles"&gt;&lt;/a&gt;Using Spring Profiles&lt;/h2&gt;&lt;p&gt;Spring Boot, by default, loads &lt;code&gt;src/main/resources/application.(properties,yml)&lt;/code&gt;. It will also load profile specific property files of the form, &lt;code&gt;src/main/resources/application-PROFILE.yml&lt;/code&gt;, where &lt;code&gt;PROFILE&lt;/code&gt; is the name of &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html"&gt;an active Spring profile&lt;/a&gt;. Earlier, we saw that our &lt;code&gt;manifest.yml&lt;/code&gt; specifically activates the &lt;code&gt;cloud&lt;/code&gt; profile by setting an environment variable. So, suppose you wanted to have a configuration that was activated only when running in a &lt;code&gt;cloud&lt;/code&gt; profile, and another that was activated when there was no specific profile activated - this is called the &lt;code&gt;default&lt;/code&gt; profile. You could create three files: &lt;code&gt;src/main/resources/application-cloud.(properties,yml)&lt;/code&gt; which will be activated whenever the &lt;code&gt;cloud&lt;/code&gt; profile is activated, &lt;code&gt;src/main/resources/application-default.(properties,yml)&lt;/code&gt; which will be activated when no other profile is specifically activated, and &lt;code&gt;src/main/resources/application.(properties,yml)&lt;/code&gt; which will be activated for all situations, no matter what.&lt;/p&gt;&lt;p&gt;A sample &lt;code&gt;src/main/resources/application.properties&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;spring.jpa.generate-ddl=true
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;A sample &lt;code&gt;src/main/resources/application-cloud.properties&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;spring.datasource.url=${cloud.services.postgresql-db.connection.jdbcurl}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;A sample &lt;code&gt;src/main/resources/application-default.properties&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;# empty in this case because I rely on the embedded H2 instance being created&#xD;
+# though you could point it to another, local,&#xD;
+# PostgresSQL instancefor dev workstation configuration
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#using-spring-cloud-paas-connectors" class="anchor" name="using-spring-cloud-paas-connectors"&gt;&lt;/a&gt;Using Spring Cloud PaaS connectors&lt;/h2&gt;&lt;p&gt;All of these options thus far take advantage of the &lt;code&gt;Environment&lt;/code&gt; abstraction. No doubt, they&amp;rsquo;re far simpler than manually picking apart the JSON structure in the &lt;code&gt;VCAP_SERVICES&lt;/code&gt; variable, but we can do better. As the docs for the &lt;a href="https://github.com/spring-cloud/spring-cloud-connectors/blob/master/README.md"&gt;Spring Cloud Connectors&lt;/a&gt; project says:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Spring Cloud provides a simple abstraction for JVM-based applications running on cloud platforms to discover bound services and deployment information at runtime and provides support for registering discovered services as Spring beans. It is based on a plugin model so that the identical compiled application can be deployed locally or on multiple clouds, and it supports custom service definitions through Java SPI.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;Let&amp;rsquo;s look at our revised example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package demo;&#xD;
+&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.cloud.config.java.AbstractCloudConfig;&#xD;
+import org.springframework.context.annotation.Bean;&#xD;
+import org.springframework.context.annotation.Configuration;&#xD;
+import org.springframework.context.annotation.Profile;&#xD;
+import org.springframework.data.jpa.repository.JpaRepository;&#xD;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;&#xD;
+&#xD;
+import javax.persistence.Entity;&#xD;
+import javax.persistence.GeneratedValue;&#xD;
+import javax.persistence.Id;&#xD;
+import javax.sql.DataSource;&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+public class DemoApplication {&#xD;
+&#xD;
+    public static void main(String[] args) {&#xD;
+        SpringApplication.run(DemoApplication.class, args);&#xD;
+    }&#xD;
+&#xD;
+    @Configuration&#xD;
+    @Profile(&amp;quot;cloud&amp;quot;)&#xD;
+    public static class DataSourceConfig extends AbstractCloudConfig {&#xD;
+&#xD;
+        @Bean&#xD;
+        DataSource reservationsPostgreSqlDb() {&#xD;
+            return connectionFactory().dataSource(&amp;quot;postgresql-db&amp;quot;);&#xD;
+        }&#xD;
+    }&#xD;
+&#xD;
+}&#xD;
+&#xD;
+@RepositoryRestResource&#xD;
+interface ReservationRepository extends JpaRepository&amp;lt;Reservation, Long&amp;gt; {&#xD;
+}&#xD;
+&#xD;
+@Entity&#xD;
+class Reservation {&#xD;
+    @Id&#xD;
+    @GeneratedValue&#xD;
+    private Long id;&#xD;
+&#xD;
+    public Long getId() {&#xD;
+        return id;&#xD;
+    }&#xD;
+&#xD;
+    private String firstName, lastName;&#xD;
+&#xD;
+    Reservation() {&#xD;
+    }&#xD;
+&#xD;
+    public Reservation(String firstName, String lastName) {&#xD;
+        this.firstName = firstName;&#xD;
+        this.lastName = lastName;&#xD;
+    }&#xD;
+&#xD;
+    public String getFirstName() {&#xD;
+        return firstName;&#xD;
+    }&#xD;
+&#xD;
+    public String getLastName() {&#xD;
+        return lastName;&#xD;
+    }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Instead of configuring a &lt;code&gt;javax.sql.DataSource&lt;/code&gt; using properties and Spring Boot, we explicitly factory an object of the right type. There are other methods for other backing services like &lt;a href="http://www.mongodb.org/"&gt;MongoDB&lt;/a&gt;, &lt;a href="http://redis.io"&gt;Redis&lt;/a&gt;, &lt;a href="https://sendgrid.com/"&gt;SendGrid&lt;/a&gt;, etc., and you can easily provide your own. We&amp;rsquo;re using the Spring Cloud Connectors plugin for Cloud Foundry, though there&amp;rsquo;s no reason you couldn&amp;rsquo;t use the Spring Cloud Connectors plugin for Heroku, or the property-based alternative for local applications. Your application is then identical across environments, and only the external configuration differs.&lt;/p&gt;&lt;h2&gt;&lt;a href="#using-java-configuration-code-bean-code-s" class="anchor" name="using-java-configuration-code-bean-code-s"&gt;&lt;/a&gt;Using Java configuration &lt;code&gt;@Bean&lt;/code&gt;s&lt;/h2&gt;&lt;p&gt;So far, we&amp;rsquo;ve relied on common-sense defaults provided by the platform or the framework, but you don&amp;rsquo;t need to give up any control. You could, for example, explicitly define a bean in XML or Java configuration, using the values from the environment. You might do this if your application wants to use a custom connection pool or in some otherway customize the configuration of the backing service. You might also do this if the platform and framework don&amp;rsquo;t have &lt;em&gt;automagic&lt;/em&gt; support for the backing service you&amp;rsquo;re trying to consume.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;	@Bean&#xD;
+	@Profile(&amp;quot;cloud&amp;quot;)&#xD;
+	DataSource dataSource(&#xD;
+			@Value(&amp;quot;${cloud.services.postgresql-db.connection.jdbcurl}&amp;quot;) String jdbcUrl) {&#xD;
+		try {&#xD;
+			return new SimpleDriverDataSource(&#xD;
+				org.postgresql.Driver.class.newInstance() , jdbcUrl);&#xD;
+		}&#xD;
+		catch (Exception e) {&#xD;
+			throw new RuntimeException(e) ;&#xD;
+		}&#xD;
+	}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#where-to-go-from-here" class="anchor" name="where-to-go-from-here"&gt;&lt;/a&gt;Where to go from Here?&lt;/h2&gt;&lt;p&gt;Thus far we&amp;rsquo;ve looked only at consuming services that Cloud Foundry exposes. If you want to consume a service that you&amp;rsquo;ve got off-PaaS, it&amp;rsquo;s easy enough to treat it like any other backing service using &lt;a href="http://docs.cloudfoundry.org/devguide/services/user-provided.html"&gt;Cloud Foundry&amp;rsquo;s user provided services&lt;/a&gt;. This mechanism is just a fancy way of telling Cloud Foundry about the locator and credential information for a custom service that you want your applications to talk to. Once you&amp;rsquo;ve done that, Cloud Foundry applications and services can bind that service to their applications and consume it just as they normally would. User provided services are ideal or services, like a fixed Oracle instance, that you don&amp;rsquo;t intend for Cloud Foundry to manage. Cloud Foundry won&amp;rsquo;t add new instances, it won&amp;rsquo;t delete them, and it doesn&amp;rsquo;t control authorization.&lt;/p&gt;&lt;p&gt;If you want Cloud Foundry to manage a service, you need to adapt &lt;a href="http://docs.cloudfoundry.org/services/api.html"&gt;it to Cloud Foundry using the service broker API&lt;/a&gt;. This is more important when deploying Cloud Foundry in your own environment, and requires &lt;em&gt;admin&lt;/em&gt; privileges (which you won&amp;rsquo;t have in the hosted Pivotal Cloud Foundry, for example). The service broker API is a set of well-known REST callbacks that Cloud Foundry needs to be made aware of. It&amp;rsquo;s easy enough to implement your own custom service broker, and there&amp;rsquo;s even this convenient &lt;a href="https://github.com/cloudfoundry-community/spring-boot-cf-service-broker"&gt;Spring Boot-based project&lt;/a&gt; and &lt;a href="https://github.com/spgreenberg/spring-boot-cf-service-broker-mongo"&gt;corresponding sample&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;Check &lt;a href="https://github.com/joshlong/12factor-backing-services"&gt;out the examples&lt;/a&gt;, too!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Groovy for System Administrators</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-groovy-for-system-administrators" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1928</id>
+    <updated>2015-01-26T01:21:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Dan Woods, NetFlix &lt;/p&gt;
+&lt;p&gt;More Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/4pieter-springone2gx2014groovysysadmins"&gt;http://www.slideshare.net/SpringCentral/4pieter-springone2gx2014groovysysadmins &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Enterprise Operations is seeing a shift in the management paradigm of infrastructure, from the more-traditional server-centric design, to an approach that leverages the application stack as the custodian for administration. &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/MzUvuQqVm14" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Fastest Servlets in the West?</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-fastest-servlets-in-the-west" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1927</id>
+    <updated>2015-01-26T01:18:00Z</updated>
+    <content type="html">&lt;p&gt;Fastest Servlets in the West?&lt;br/&gt;&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Speakers: Stuart Willliams, Daniel Mikusa &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west"&gt;&lt;a href="http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west"&gt;http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt; Applied Spring Track&lt;/p&gt;&lt;br/&gt;&lt;p&gt; The venerable Servlet Container still has some performance tricks up its sleeve - this talk will demonstrate Apache Tomcat&amp;rsquo;s stability under high load, describe some do&amp;rsquo;s (and some don&amp;rsquo;ts!), explain how to performance test a Servlet-based application, troubleshoot and tune the container and your application and compare the performance characteristics of the different Tomcat connectors. The presenters will share their combined experience supporting real Tomcat applications for over 20 years and show how a few small changes can make a big, big difference. &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;br/&gt; &lt;iframe width="560" height="315" src="//www.youtube.com/embed/uMtYcWB7Z4s" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;br/&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Booting up Spring Social</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-booting-up-spring-social" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1926</id>
+    <updated>2015-01-26T01:16:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Craig Walls &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/booting-up-spring-social"&gt;http://www.slideshare.net/SpringCentral/booting-up-spring-social&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Applied Spring Track &lt;/p&gt;
+&lt;p&gt;In recent years, people are using social networks like Facebook and Twitter to connect, meet, and share experiences and ideas. But it's not just people making connections; modern applications are also leveraging the APIs provided by the social networks to connect with their users and customers. It's hard to find applications these days that aren't somehow connected to their users via social APIs. Spring Social is an extension to the Spring Framework that enables you to create applications that connect with APIs. With it, your application can offer social login, learn about its users' interests, and inject itself into their social graph. In this session, we'll take a look at the latest that Spring Social has to offer, including integration with Spring Security, automatic reconnect, and a dramatically simpler configuration model using Spring Boot. &lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/FGksai2vCvA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Hadoop 201 -- Deeper into the Elephant</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-hadoop-201-deeper-into-the-elephant" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-09:1925</id>
+    <updated>2015-01-26T01:13:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Roman Shaposhnik &lt;/p&gt;
+&lt;p&gt;Big Data Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/hadoop-201-deeper-into-the-elephant"&gt;http://www.slideshare.net/SpringCentral/hadoop-201-deeper-into-the-elephant &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This session expands on the previous year's &amp;quot;Hadoop: Just the Basics for Big Data Rookies&amp;quot;, diving deeper into the details of key Apache Hadoop projects. We will start with a brief recap of HDFS and MapReduce, then discuss more advanced features of HDFS, in addition to how YARN has enabled businesses to massively scale their systems beyond what was previously possible. We will then discuss Apache HBase, the non-relational database modeled after Google's BIg table, review the data model, architecture, and common use cases. By the end of this session, you will learn how these three core Hadoop projects are used to solve even the most challenging Big Data problems.&#xD;
+&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/IcuTdJgUFmo" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - January 20th, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/20/this-week-in-spring-january-20th-2015" />
@@ -96,7 +463,7 @@
       <name>Dave Syer</name>
     </author>
     <id>tag:spring.io,2015-01-05:1905</id>
-    <updated>2015-01-20T09:54:48Z</updated>
+    <updated>2015-01-20T09:54:00Z</updated>
     <content type="html">&lt;p&gt;In this article we continue &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we start by breaking out the &amp;ldquo;greeting&amp;rdquo; resource that we are using as the dynamic content in our application into a separate server, first as an unprotected resource, and then protected by an opaque token. This is the third in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the source code in Github, which is in two parts: one where the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/vanilla"&gt;resource is unprotected&lt;/a&gt;, and one where it is &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/spring-session"&gt;protected by a token&lt;/a&gt;.&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
 &lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#a-separate-resource-server" class="anchor" name="a-separate-resource-server"&gt;&lt;/a&gt;A Separate Resource Server&lt;/h2&gt;&lt;h3&gt;&lt;a href="#client-side-changes" class="anchor" name="client-side-changes"&gt;&lt;/a&gt;Client Side Changes&lt;/h3&gt;&lt;p&gt;On the client side there isn&amp;rsquo;t very much to do to move the resource to a different backend. Here&amp;rsquo;s the &amp;ldquo;home&amp;rdquo; controller in the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/single/src/main/resources/static/js/hello.js"&gt;last article&lt;/a&gt;:&lt;/p&gt;
@@ -140,7 +507,7 @@ class ResourceApplication {&#xD;
 &lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn spring-boot:run --server.port=9000
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and go to a browser at &lt;a href="http://localhost:9000"&gt;http://localhost:9000&lt;/a&gt; and you should see JSON with a greeting. You can bake in the port change in &lt;code&gt;application.properties&lt;/code&gt; (in&amp;ldquo;src/main/resources&amp;rdquo;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint properties"&gt;server.port: 9000
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you try loading that resource from the UI (on port 8080) in a browser, you will find that it doesn&amp;rsquo;t work because the browser won&amp;rsquo;t allow the XHR request.&lt;/p&gt;&lt;h2&gt;&lt;a href="#cors-negotation" class="anchor" name="cors-negotation"&gt;&lt;/a&gt;CORS Negotation&lt;/h2&gt;&lt;p&gt;The browser tries to negotiate with our resource server to find out if it is allowed to access it according to the &lt;a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"&gt;Common Origin Resource Sharing&lt;/a&gt; protocol. It&amp;rsquo;s not an Angular JS responsibility, so just like the cookie contract it will work like this with all JavaScript in the browser. The two servers do not declare that they have a common origin, so the browser declines to send the request and the UI is broken.&lt;/p&gt;&lt;p&gt;To fix that we need to support the CORS protocol which involves a &amp;ldquo;pre-flight&amp;rdquo; OPTIONS request and some headers to list the allowed behaviour of the caller. Spring 4.2 might have some nice &lt;a href="https://jira.spring.io/browse/SPR-9278"&gt;fine-grained CORS support&lt;/a&gt;, but until that is released we can do an adequate job for the purposes of this application by sending the same CORS responses to all requests using a &lt;code&gt;Filter&lt;/code&gt;. We can just create a class in the same directory as the resource server application and make sure it is a &lt;code&gt;@Component&lt;/code&gt; (so it gets scanned into the Spring application context), for example:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you try loading that resource from the UI (on port 8080) in a browser, you will find that it doesn&amp;rsquo;t work because the browser won&amp;rsquo;t allow the XHR request.&lt;/p&gt;&lt;h2&gt;&lt;a href="#cors-negotiation" class="anchor" name="cors-negotiation"&gt;&lt;/a&gt;CORS Negotiation&lt;/h2&gt;&lt;p&gt;The browser tries to negotiate with our resource server to find out if it is allowed to access it according to the &lt;a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"&gt;Common Origin Resource Sharing&lt;/a&gt; protocol. It&amp;rsquo;s not an Angular JS responsibility, so just like the cookie contract it will work like this with all JavaScript in the browser. The two servers do not declare that they have a common origin, so the browser declines to send the request and the UI is broken.&lt;/p&gt;&lt;p&gt;To fix that we need to support the CORS protocol which involves a &amp;ldquo;pre-flight&amp;rdquo; OPTIONS request and some headers to list the allowed behaviour of the caller. Spring 4.2 might have some nice &lt;a href="https://jira.spring.io/browse/SPR-9278"&gt;fine-grained CORS support&lt;/a&gt;, but until that is released we can do an adequate job for the purposes of this application by sending the same CORS responses to all requests using a &lt;code&gt;Filter&lt;/code&gt;. We can just create a class in the same directory as the resource server application and make sure it is a &lt;code&gt;@Component&lt;/code&gt; (so it gets scanned into the Spring application context), for example:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint java"&gt;@Component&#xD;
 @Order(Ordered.HIGHEST_PRECEDENCE)&#xD;
 class CorsFilter implements Filter {&#xD;
@@ -648,93 +1015,6 @@ class Bookmark {&#xD;
   &lt;li&gt;Spring Framework 4.1.4.RELEASE&lt;/li&gt;
   &lt;li&gt;Spring Integration 4.1.2.RELEASE&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.1.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring Integration - Java Configuration and More</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-integration-java-configuration-and-more" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1920</id>
-    <updated>2015-01-14T01:28:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Gary Russell &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014integration-41083190"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014integration-41083190&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;Data / Integration Track &lt;/p&gt;
-&lt;p&gt;There have been 2 major releases of Spring Integration since the last SpringOne 2GX. The 3.0 release added a number of important new components and provided extensive improvements to SpEL support enabling much richer SpEL processing. The 4.0 release added more components and extensive support for annotation-based config, reducing or even eliminating the need for XML configuration. It also laid the groundwork for the Java DSL extension. In this session we will examine many of these new features in detail. It will be mostly hands-on demonstration and code walk throughs. &lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/TSW33RXoJNc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Caching and Messaging Improvements in Spring Framework 4.1</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-caching-and-messaging-improvements-in-spring-framework-4-1" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1917</id>
-    <updated>2015-01-14T01:27:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speakers:Juergen Hoeller, Stéphane Nicoll &lt;/p&gt;
-&lt;p&gt;Core Spring Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/201409-springonecachingmessaging"&gt;http://www.slideshare.net/SpringCentral/201409-springonecachingmessaging&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;This session showcases major new features along the lines of two key themes in Spring Framework 4.1: We’ll start with numerous improvements around the caching abstraction, as requested by the community, including the support for JCache (JSR-107) standard annotations. We’ll then move on to messaging-related features such as annotated JMS listener endpoints with flexible method signatures, using the messaging abstraction introduced in Spring Framework 4.0 and therefore aligning our core JMS support with our STOMP endpoint style.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/zKQrMdB6B08" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: From 0 to Spring Security 4.0</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-from-0-to-spring-security-4-0" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1918</id>
-    <updated>2015-01-14T01:26:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Rob Winch &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-security0to40-41084141"&gt;http://www.slideshare.net/SpringCentral/spring-security0to40-41084141&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;Core Spring Track &lt;/p&gt;
-&lt;p&gt;Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. Like all Spring projects, the real power of Spring Security is found in how easily it can be extended to meet custom requirements. In this presentation Rob will start with an insecure application and incrementally Spring Security 4 to demonstrate how easily you can secure your application. Throughout the presentation, new features found in Spring Security 4 will be highlighted. Whether you are new to Spring Security or are wanting to learn what is new in Spring Security 4, this presentation is a must!&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/TjlDbIIJBi8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring Framework on Java 8</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-framework-on-java-8" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1919</id>
-    <updated>2015-01-14T01:25:00Z</updated>
-    <content type="html">&lt;p&gt;Speakers:Juergen Hoeller &lt;/p&gt;
-&lt;p&gt;Core Spring Track &lt;/p&gt;
-&lt;p&gt;Slides:&lt;a href="http://www.slideshare.net/SpringCentral/spring-on-java-8"&gt; http://www.slideshare.net/SpringCentral/spring-on-java-8 &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Spring has a track record of providing dedicated support for new Java generations in a timely fashion, and now it’s right about time to go Java 8: With Spring Framework 4.0, we're providing in-depth support for all relevant OpenJDK 8 features, including lambda expressions, JSR-310 Date and Time, parameter name discovery, and java.util.concurrent enhancements. This talk will illustrate basic Spring Framework 4.0 concepts, and selected Java 8 features within Spring's programming model, exploring the impact on application architectures. &lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/-_aWK8T_YMI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - January 13th, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/14/this-week-in-spring-january-13th-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-01-14:1930</id>
-    <updated>2015-01-14T01:24:22Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;. We&amp;rsquo;ve got a lot to talk about. Our own &lt;a href="https://twitter.com/pieterhumphrey"&gt;Pieter Humphrey&lt;/a&gt; has been tirelessly working to get the replays of the SpringOne2GX 2014 show available online and there are a &lt;em&gt;slew&lt;/em&gt; of them this week! What a win!&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;The good Dr. Syer, former lead of Spring Batch, co-lead of Spring Boot, Spring Cloud and Spring Security OAuth, and a rockstar to various Spring projects including Spring itself, over the years, has kicked off a series of posts on very practical matters related to securing Angular.js applications with Spring. The first one, &lt;a href="https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application"&gt;Spring and Angular JS: A Secure Single Page Application&lt;/a&gt;, introduces the basics of connecting an Angular.js-based client to a backend API. The second, &lt;a href="https://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii"&gt;&lt;em&gt;The Login Page: Angular JS and Spring Security Part II&lt;/em&gt;&lt;/a&gt;, introduces the login form. Bookmark this series!&lt;/li&gt;
-  &lt;li&gt;The amazing, sleep-intolerant, &lt;a href="https://spring.io/blog/2015/01/08/spring-session-1-0-0-release"&gt;Rob Winch has just announced Spring Session 1.0&lt;/a&gt;. Spring Session, for those who&amp;rsquo;ve not been paying attention, is a drop in proxy API for the standard Servlet HTTP Session API. Install it, and then delegate HTTP session persistence to other backend implementations like Redis. This is ideal for a lot of reasons: if you are using a Java EE application server and want to scale out session replication, you can use an engine that was better designed for it. It&amp;rsquo;s a safe bet that the team behind Cassandra and Redis have thought about data replication more than the team behind Glassfish, isn&amp;rsquo;t it? If you&amp;rsquo;re deploying your application to a PaaS like Cloud Foundry or Heroku, where session replication isn&amp;rsquo;t enabled by default, then this gives you an easy way to add it, and to do so in a manner that&amp;rsquo;s consistant from one environment to another.&lt;/li&gt;
-  &lt;li&gt;I put together a &lt;a href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring"&gt;blog on how Spring supports 12-Factor application style &lt;em&gt;configuration&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Our pal Nicolas Frankel is at it again, this time with a nice post on using &lt;a href="http://blog.frankel.ch/spring-profiles-or-maven-profiles"&gt;Spring&amp;rsquo;s profiles and Maven&amp;rsquo;s profiles&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/08/spring-boot-1-2-1-released"&gt;Spring Boot 1.2.1, mostly a maintenance release, has just been released&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out this SpringOne2GX 2014 replay of Janne Valkealahti&amp;rsquo;s talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-painless-build-and-deploy-for-yarn-applications-with-spring"&gt;&lt;em&gt;Painless Build and Deploy for YARN Applications with Spring&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out Groovy ninja Cedric Champeau&amp;rsquo;s SpringOne2GX 2014 talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-android-and-groovy-a-winning-pair"&gt;Android and Groovy: a Winning Pair&lt;/a&gt;. This talk is hot off the heels of his announcement of support for Groovy on Android, immediately after Apple announced Swift - a Groovy-like language for iOS. Naturally, it gained a &lt;em&gt;lot&lt;/em&gt; of interest, and this talk fills in the gaps. Check it out!&lt;/li&gt;
-  &lt;li&gt;Jeff Beck&amp;rsquo;s talk, &lt;a href="https://spring.io/blog/2015/01/08/springone2gx-2014-replay-experiences-using-grails-in-a-microservice-architecture"&gt;&lt;em&gt;Experiences using Grails in A Microservice Architecture&lt;/em&gt;&lt;/a&gt;, is now available. It&amp;rsquo;s a worthy watch for insight into pain-points in making the move to micorservices.&lt;/li&gt;
-  &lt;li&gt;Longtime readers of this roundup will no doubt remember my former teammate &lt;a href="http://twitter.com/pledbrook"&gt;Peter Ledbrook&lt;/a&gt;. I serve as the Spring Developer Advocate, and he served as the Grails Developer Advocate, and taught me a whole world of things. I mention that all to say that if you want to learn from one of the best, you should check out his talks, including this one, &lt;a href="https://spring.io/blog/2015/01/09/springone2gx-2014-replay-how-to-get-groovy-with-java-8"&gt;&lt;em&gt;How to get Groovy with Java 8&lt;/em&gt;&lt;/a&gt;, from SpringOne2GX 2014.&lt;/li&gt;
-  &lt;li&gt;Speaking of Peter, he &lt;em&gt;also&lt;/em&gt; wrote this amazing post on &lt;a href="https://twitter.com/pledbrook/status/554613928438026240"&gt;Groovy &amp;amp; Java 8&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Check out Brian Clozel&amp;rsquo;s SpringOne2GX 2014 talk on the guts of the open-source &lt;a href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-inside-spring-io-a-production-spring-reference-application"&gt;Spring IO reference application and website&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;ETrade&amp;rsquo;s Durai Arasan and Monish Unni &lt;a href="https://spring.io/blog/2015/01/13/springone2gx-2014-replay-rest-services-with-rabbitmq-spring-integration-and-node-js"&gt;gave a nice talk on building REST services with Spring Integration and Node.js&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Speaking of our pal Nicolas Frankel, check out his book,&lt;a href="https://leanpub.com/integrationtest"&gt;&lt;em&gt;Integration Testing from Trenches&lt;/em&gt;, which has a large section on Spring&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
 

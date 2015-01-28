@@ -3,6 +3,42 @@
 <descriptor id="org.springframework.templates.mvc" kind="template" local="true" name="Spring MVC Project" requiresbundle="org.eclipse.m2e.core" size="0" version="3.2.2">
 <description>A new Spring MVC web application development project</description>
 </descriptor>
+<descriptor category="Integration" id="org.springframework.integration.sts.template.standalone.simple" kind="template" local="false" name="Spring Integration Project (Standalone) - Simple" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="9500" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-simple-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Integration project that runs as a standalone Java application using core components only.</description>
+</descriptor>
+<descriptor category="Integration" id="org.springframework.integration.sts.template.standalone" kind="template" local="false" name="Spring Integration Project (Standalone) - File" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="12100" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Integration project that runs as a standalone Java application using file polling and file output.</description>
+</descriptor>
+<descriptor category="Integration" id="org.springframework.integration.sts.template.war" kind="template" local="false" name="Spring Integration Project (War)" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="155900" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-war-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Integration project that runs within a servlet container. Uses the Spring Integration Twitter adapter.</description>
+</descriptor>
+<descriptor category="Integration" id="org.springframework.integration.sts.template.adapter" kind="template" local="false" name="Spring Integration Adapter Template Project" requires="[3.2.0,4.0)" requiresbundle="org.springsource.ide.eclipse.gradle.core" size="122100" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-adapter-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Integration Adapter Template. Requires Gradle Support.</description>
+</descriptor>
+<descriptor category="Integration" id="org.springframework.integration.sts.template.adapter" kind="template" local="false" name="Spring Integration Adapter Template Project" requires="[3.0.0,3.2)" size="118119" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-adapter-1.0.0.M4.zip" version="1.0.0.M4">
+<description>Creates a Spring Integration Adapter Template. Requires Gradle Support. Deprecated, please update STS to version 3.2+ for the latest template version</description>
+</descriptor>
+<descriptor id="org.springframework.integration.sts.template.standalone.simple" kind="template" local="false" name="Spring Integration Project (Standalone) - Simple" requires="[0.0.0,3.0.0)" size="8390" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-simple-1.0.0.M2.zip" version="1.0.0.M2">
+<description>Creates a Spring Integration project that runs as a standalone Java application using core components only. Deprecated, please update STS to version 3.2+ for the latest template version</description>
+</descriptor>
+<descriptor id="org.springframework.integration.sts.template.standalone" kind="template" local="false" name="Spring Integration Project (Standalone) - File" requires="[0.0.0,3.0.0)" size="10258" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-1.0.0.M2.zip" version="1.0.0.M2">
+<description>Creates a Spring Integration project that runs as a standalone Java application using file polling and file output. Deprecated, please update STS to version 3.2+ for the latest template version</description>
+</descriptor>
+<descriptor id="org.springframework.integration.sts.template.war" kind="template" local="false" name="Spring Integration Project (War)" requires="[0.0.0,3.0.0)" size="56242" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-war-1.0.0.M2.zip" version="1.0.0.M2">
+<description>Creates a Spring Integration project that runs within a servlet container. Uses the Spring Integration Twitter adapter. Deprecated, please update STS to version 3.2+ for the latest template version</description>
+</descriptor>
+<descriptor category="GemFire" id="org.springframework.data.gemfire.template.standalone" kind="template" local="false" name="Spring Data GemFire Project (Standalone)" requires="[3.0.0,4.0)" size="7467" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-standalone-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Data GemFire project with an embedded cache and one region that runs as a standalone Java application.</description>
+</descriptor>
+<descriptor category="GemFire" id="org.springframework.data.gemfire.template.server.standalone" kind="template" local="false" name="Spring Data GemFire Cache Server Project (Standalone)" requires="[3.0.0,4.0)" size="7582" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-server-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a GemFire Cache Server project with a cache server, embedded cache and one region that runs as a standalone Java application.</description>
+</descriptor>
+<descriptor category="GemFire" id="org.springframework.data.gemfire.template.server.war" kind="template" local="false" name="Spring Data GemFire Cache Server Project (WAR)" requires="[3.0.0,4.0)" size="7543" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-server-war-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a GemFire Cache Server project with a cache server, embedded cache and one region that runs as a web application.</description>
+</descriptor>
+<descriptor category="GemFire" id="org.springframework.data.gemfire.template.client" kind="template" local="false" name="Spring Data GemFire Client Project" requires="[3.0.0,4.0)" size="7881" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-client-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
+<description>Creates a Spring Data GemFire project with a client cache and client region that runs as a standalone Java application.</description>
+</descriptor>
 <descriptor id="com.springsource.sts.org.apache.tomcat" kind="server" local="false" name="Apache Tomcat 6.0.20" size="6282517" url="http://dist.springsource.com/release/STS/help/com.springsource.sts.org.apache.tomcat-6.0.20.20090615-0000.zip" version="6.0.20.20090615-0000">
 <description/>
 </descriptor>
@@ -96,41 +132,5 @@
 <descriptor category="Spring Web Services" id="org.springframework.webservices.tutorials.creatingcontroller" kind="tutorial" local="false" name="Creating a contract-first web service" size="9741990" url="http://dist.springsource.com/release/STS/help/org.springframework.webservices.tutorials.creatingcontroller-1.0.0.zip" version="1.0.0">
 <description>This tutorial shows you how to create a contract-first web service with Spring-WS. The contract-first approach is an industry recognized best practice. In short it means we'll design an XML contract first and a Java implementation second.</description>
 <dependency id="com.springsource.sts.org.apache.tomcat"/>
-</descriptor>
-<descriptor category="GemFire" id="org.springframework.data.gemfire.template.standalone" kind="template" local="false" name="Spring Data GemFire Project (Standalone)" requires="[3.0.0,4.0)" size="7467" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-standalone-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Data GemFire project with an embedded cache and one region that runs as a standalone Java application.</description>
-</descriptor>
-<descriptor category="GemFire" id="org.springframework.data.gemfire.template.server.standalone" kind="template" local="false" name="Spring Data GemFire Cache Server Project (Standalone)" requires="[3.0.0,4.0)" size="7582" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-server-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a GemFire Cache Server project with a cache server, embedded cache and one region that runs as a standalone Java application.</description>
-</descriptor>
-<descriptor category="GemFire" id="org.springframework.data.gemfire.template.server.war" kind="template" local="false" name="Spring Data GemFire Cache Server Project (WAR)" requires="[3.0.0,4.0)" size="7543" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-server-war-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a GemFire Cache Server project with a cache server, embedded cache and one region that runs as a web application.</description>
-</descriptor>
-<descriptor category="GemFire" id="org.springframework.data.gemfire.template.client" kind="template" local="false" name="Spring Data GemFire Client Project" requires="[3.0.0,4.0)" size="7881" url="https://raw.github.com/SpringSource/spring-data-gemfire-sts-templates/master/builds/gemfire-client-sts-template-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Data GemFire project with a client cache and client region that runs as a standalone Java application.</description>
-</descriptor>
-<descriptor category="Integration" id="org.springframework.integration.sts.template.standalone.simple" kind="template" local="false" name="Spring Integration Project (Standalone) - Simple" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="9500" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-simple-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Integration project that runs as a standalone Java application using core components only.</description>
-</descriptor>
-<descriptor category="Integration" id="org.springframework.integration.sts.template.standalone" kind="template" local="false" name="Spring Integration Project (Standalone) - File" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="12100" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Integration project that runs as a standalone Java application using file polling and file output.</description>
-</descriptor>
-<descriptor category="Integration" id="org.springframework.integration.sts.template.war" kind="template" local="false" name="Spring Integration Project (War)" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="155900" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-war-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Integration project that runs within a servlet container. Uses the Spring Integration Twitter adapter.</description>
-</descriptor>
-<descriptor category="Integration" id="org.springframework.integration.sts.template.adapter" kind="template" local="false" name="Spring Integration Adapter Template Project" requires="[3.2.0,4.0)" requiresbundle="org.springsource.ide.eclipse.gradle.core" size="122100" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-adapter-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
-<description>Creates a Spring Integration Adapter Template. Requires Gradle Support.</description>
-</descriptor>
-<descriptor category="Integration" id="org.springframework.integration.sts.template.adapter" kind="template" local="false" name="Spring Integration Adapter Template Project" requires="[3.0.0,3.2)" size="118119" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-adapter-1.0.0.M4.zip" version="1.0.0.M4">
-<description>Creates a Spring Integration Adapter Template. Requires Gradle Support. Deprecated, please update STS to version 3.2+ for the latest template version</description>
-</descriptor>
-<descriptor id="org.springframework.integration.sts.template.standalone.simple" kind="template" local="false" name="Spring Integration Project (Standalone) - Simple" requires="[0.0.0,3.0.0)" size="8390" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-simple-1.0.0.M2.zip" version="1.0.0.M2">
-<description>Creates a Spring Integration project that runs as a standalone Java application using core components only. Deprecated, please update STS to version 3.2+ for the latest template version</description>
-</descriptor>
-<descriptor id="org.springframework.integration.sts.template.standalone" kind="template" local="false" name="Spring Integration Project (Standalone) - File" requires="[0.0.0,3.0.0)" size="10258" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-1.0.0.M2.zip" version="1.0.0.M2">
-<description>Creates a Spring Integration project that runs as a standalone Java application using file polling and file output. Deprecated, please update STS to version 3.2+ for the latest template version</description>
-</descriptor>
-<descriptor id="org.springframework.integration.sts.template.war" kind="template" local="false" name="Spring Integration Project (War)" requires="[0.0.0,3.0.0)" size="56242" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-war-1.0.0.M2.zip" version="1.0.0.M2">
-<description>Creates a Spring Integration project that runs within a servlet container. Uses the Spring Integration Twitter adapter. Deprecated, please update STS to version 3.2+ for the latest template version</description>
 </descriptor>
 </descriptors>
