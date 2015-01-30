@@ -1,0 +1,9 @@
+package vn.edu.cit.model;
+
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+public class GroupExtractor implements ResultSetExtractor<T>{
+	public Object extractData(ResultSet rs){
+		
+	}
+}

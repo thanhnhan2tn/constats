@@ -2,26 +2,28 @@ package vn.edu.cit.model;
 
 /**
  * Class Group is e model of Group table in DB
+ * 
  * @author Thanh
  *
  */
 public class Group {
-	private int group_id;
-	private String group_name;
+	private int groupId;
+	private String groupName;
 
-	public int getGroup_id() {
-		return group_id;
+	public int getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup_id(int group_id) {
-		this.group_id = group_id;
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 
-	public String getGroup_name() {
-		return group_name;
+	public String getGroupName() {
+		return groupName;
 	}
 
-	public void setGroup_name(String group_name) {
-		this.group_name = group_name;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
+
 }

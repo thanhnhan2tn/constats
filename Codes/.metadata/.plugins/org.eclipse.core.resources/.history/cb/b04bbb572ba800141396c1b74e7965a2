@@ -1,0 +1,13 @@
+package vn.edu.cit.model;
+
+import java.sql.ResultSet;
+
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+public class GroupExtractor implements ResultSetExtractor<T>{
+	public Object extractData(ResultSet rs){
+		Group group = new Group();
+		group.setGroup_id(rs.getInt("groupId"));
+		group.setGroup_name(rs.getString("groupName"));
+	}
+}

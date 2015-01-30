@@ -1,0 +1,12 @@
+package vn.edu.cit.dao;
+
+
+/**
+ * Server object with JSCH and Server table in DB
+ * 
+ * @author Thanh
+ *
+ */
+public class ServerDAO {
+
+}

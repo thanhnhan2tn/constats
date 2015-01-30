@@ -5,7 +5,311 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-28T04:24:00Z</updated>
+  <updated>2015-01-29T01:59:01Z</updated>
+  <entry>
+    <title>Spring XD 1.1 RC1 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/29/spring-xd-1-1-rc1-released" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Mark Pollack</name>
+    </author>
+    <id>tag:spring.io,2015-01-28:1950</id>
+    <updated>2015-01-29T01:59:01Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring XD team, I am very pleased to announce that the Spring XD 1.1 Release Candidate is now &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/xd/spring-xd/1.1.0.RC1/spring-xd-1.1.0.RC1-dist.zip"&gt;available for download.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The 1.1 RC1 release includes several new features as well as bug fixes.&lt;/p&gt;&lt;p&gt;One theme in the 1.1 release is around Stream processing. The 1.1 M2 version introduced support for Reactor’s Stream API in processing modules. The 1.1 RC1 release adds support for stream processing using RxJava’s Observable API and Spark Streaming alongside the existing Spark job support. By providing a range of options, you can pick the functional programming model that best suits the task at hand.&lt;/p&gt;&lt;p&gt;Spark Streaming integration features include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Data-Stream-Processor-Module#spark-streaming"&gt;XD Processor modules&lt;/a&gt; that act as drivers for workloads on the Spark Cluster.&lt;/li&gt;
+  &lt;li&gt;An XD processor’s input DStream is generated from data received on the XD Message Bus, and the RDDs from its output DStream are sent to the bus. This allows you to immediately take advantage of the many Source modules to drive computation in Spark and direct the output to XD Sinks. This removes a great amount of complex code that you would need to write otherwise, such as mapping Kafka partitions to multiple DStreams.&lt;/li&gt;
+  &lt;li&gt;The Spark Streaming driver process is automatically restarted if it dies due to the inherent module redeployment features of XD.&lt;/li&gt;
+  &lt;li&gt;Simplify development and testing of Spark applications by decoupling your Spark computation code from code to setup input and output data. This allows creating integration tests using a test message bus to send specific data to the Spark module’s input channel and assert on the results contained in the output channel.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;RxJava integration features include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Data-Stream-Processor-Module#rxjava-streams"&gt;Development of processor modules using RxJava’s Observable API&lt;/a&gt; This allows you to use a functional programming model to process event streams. Combined with XD’s support for &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Deployment#stream-partitioning"&gt;Data Partitioning on the Message Bus&lt;/a&gt;, you can create very powerful distributed stream processing solutions.&lt;/li&gt;
+  &lt;li&gt;Support for mapping input messages to one or multiple Observerble Stream instances, for example allowing a Stream per Kafka partition.&lt;/li&gt;
+  &lt;li&gt;Refer to the &lt;a href="https://github.com/spring-projects/spring-xd-samples/tree/master/rxjava-moving-average"&gt;rxjava-moving-average&lt;/a&gt; project for an example of using RxJava’s Observable API.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Other features include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://github.com/jvalkeal/spring-xd/wiki/Running-on-YARN#working-with-container-groups"&gt;Container Group Management when running XD on YARN&lt;/a&gt;. You can now create groups of XD Admin and XD Container instances on YARN. Groups can specify the number of initial member instances, ramp up or down the number of instances at runtime, and specify specific machines or racks where they will be deployed. If any YARN containers fail, they will automatically restarted to maintain the number of instances specified for the group.&lt;/li&gt;
+  &lt;li&gt;Refactored Kafka Based Message Bus and Kafka Source based on the new &lt;a href="https://github.com/spring-projects/spring-integration-kafka"&gt;Spring Integration Kafka client library&lt;/a&gt;. For the Kafka Source, this translates into new options, such as specifying the partitions that a source can listen to, or the starting offsets for replayability.&lt;/li&gt;
+  &lt;li&gt;Gemfire source and sink support for multiple locators.&lt;/li&gt;
+  &lt;li&gt;Improved tooling and updated examples for custom module development.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Feedback is very important, so please keep in touch with questions and comments via&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://stackoverflow.com/questions/tagged/spring-xd"&gt;StackOverflow&lt;/a&gt; &lt;code&gt;spring-xd&lt;/code&gt; tag&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://jira.spring.io/browse/XD/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel"&gt;Spring JIRA&lt;/a&gt; or &lt;a href="https://github.com/spring-projects/spring-xd/issues"&gt;GitHub Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Data Evans SR 2 and Dijkstra SR 5 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/28/spring-data-evans-sr-2-and-dijkstra-sr-5-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Oliver Gierke</name>
+    </author>
+    <id>tag:spring.io,2015-01-28:1948</id>
+    <updated>2015-01-28T17:33:26Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring Data team I&amp;rsquo;d like to announce the availability of the second service release for Spring Data release train Evans as well as the fifth - and final one - of Spring Data Dijkstra. &lt;/p&gt;&lt;p&gt;The releases ship 191 tickets fixed, some of them quite significant bugfix and performance improvements and thus the releases recommended upgrades within the trains. The Dijkstra service release is planned to be the last one for that train. Users are recommended to upgrade to Evans as bug fixes will only be ported to that branch going forward.&lt;/p&gt;&lt;p&gt;Find all resolved tickets for Evans SR 2 &lt;a href="https://jira.spring.io/issues/?filter=14849"&gt;here&lt;/a&gt;, all tickets for Dijkstra SR5 &lt;a href="https://jira.spring.io/issues/?filter=14931"&gt;here&lt;/a&gt;. Up next is the first release candidate of the Fowler release train that already contains a few &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;very interesting features&lt;/a&gt;. Be sure to check them out, we&amp;rsquo;re looking forward to your feedback!&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-data-evans-sr2" class="anchor" name="spring-data-evans-sr2"&gt;&lt;/a&gt;Spring Data Evans SR2&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Data Commons 1.9.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-commons/1.9.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.9.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.9.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.9.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data JPA 1.7.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-jpa/1.7.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.7.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.7.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.7.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data MongoDB 1.6.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-mongodb/1.6.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.6.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.6.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.6.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Neo4j 3.2.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-neo4j/3.2.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.2.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.2.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.2.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Solr 1.3.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-solr/1.3.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.3.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.3.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.3.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Couchbase 1.2.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-couchbase/1.2.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.2.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.2.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.2.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Cassandra 1.1.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-cassandra/1.1.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.1.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.1.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.1.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Elasticsearch 1.1.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-elasticsearch/1.1.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.1.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.1.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.1.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Gemfire 1.5.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-gemfire/1.5.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.5.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.5.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.5.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Redis 1.4.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-redis/1.4.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.4.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.4.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.4.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data REST 2.2.2 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-rest-webmvc/2.2.2.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.2.2.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.2.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.2.2.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;&lt;a href="#spring-data-dijkstra-sr5" class="anchor" name="spring-data-dijkstra-sr5"&gt;&lt;/a&gt;Spring Data Dijkstra SR5&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Data Commons 1.8.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-commons/1.8.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.8.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.8.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.8.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data JPA 1.6.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-jpa/1.6.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.6.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.6.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.6.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data MongoDB 1.5.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-mongodb/1.5.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.5.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.5.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.5.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Neo4j 3.1.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-neo4j/3.1.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.1.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.1.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.1.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Solr 1.2.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-solr/1.2.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.2.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.2.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.2.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Couchbase 1.1.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-couchbase/1.1.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.1.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.1.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.1.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Cassandra 1.0.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-cassandra/1.0.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.0.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.0.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.0.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Elasticsearch 1.0.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-elasticsearch/1.0.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.0.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.0.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.0.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Gemfire 1.4.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-gemfire/1.4.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.4.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.4.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.4.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Redis 1.3.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-redis/1.3.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.3.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.3.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.3.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data REST 2.1.5 - &lt;a href="http://repo.spring.io/libs-release/org/springframework/data/spring-data-rest-webmvc/2.1.5.RELEASE"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.1.5.RELEASE/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.1.5.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.1.5.RELEASE/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>The API Gateway Pattern: Angular JS and Spring Security Part IV</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-01-05:1906</id>
+    <updated>2015-01-28T14:16:00Z</updated>
+    <content type="html">&lt;p&gt;In this article we continue &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we show how to build an API Gateway to control the authentication and access to the backend resources using &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt;. This is the fourth in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/proxy"&gt;source code in Github&lt;/a&gt;. In the &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;last article&lt;/a&gt; we built a simple distributed application that used &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt; to authenticate the backend resources. In this one we make the UI server into a reverse proxy to the backend resource server, fixing the issues with the last implementation (technical complexity introduced by custom token authentication), and giving us a lot of new options for controlling access from the browser client.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#creating-an-api-gateway" class="anchor" name="creating-an-api-gateway"&gt;&lt;/a&gt;Creating an API Gateway&lt;/h2&gt;&lt;p&gt;An API Gateway is a single point of entry (and control) for front end clients, which could be browser based (like the examples in this article) or mobile. The client only has to know the URL of one server, and the backend can be refactored at will with no change, which is a significant advantage. There are other advantages in terms of centralization and control: rate limiting, authentication, auditing and logging. And implementing a simple reverse proxy is really simple with &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;If you were following along in the code, you will know that the application implementation at the end of the &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;last article&lt;/a&gt; was a bit complicated, so it&amp;rsquo;s not a great place to iterate away from. There was, however, a halfway point which we could start from more easily, where the backend resource wasn&amp;rsquo;t yet secured with Spring Security. The source code for this is a separate project &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/vanilla"&gt;in Github&lt;/a&gt; so we are going to start from there. It has a UI server and a resource server and they are talking to each other. The resource server doesn&amp;rsquo;t have Spring Security yet so we can get the system working first and then add that layer.&lt;/p&gt;&lt;h3&gt;&lt;a href="#declarative-reverse-proxy-in-one-line" class="anchor" name="declarative-reverse-proxy-in-one-line"&gt;&lt;/a&gt;Declarative Reverse Proxy in One Line&lt;/h3&gt;&lt;p&gt;To turn it into an API Gateawy, the UI server needs one small tweak. Somewhere in the Spring configuration we need to add an &lt;code&gt;@EnableZuulProxy&lt;/code&gt; annotation, e.g. in the main (only) &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/proxy/ui/src/main/java/demo/UiApplication.java"&gt;application class&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableZuulProxy&#xD;
+public class UiApplication {&#xD;
+  ...&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and in an external configuration file we need to map a local resource in the UI server to a remote one in the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/proxy/ui/src/main/resources/application.yml"&gt;external configuration&lt;/a&gt; (&amp;ldquo;application.yml&amp;rdquo;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;security:&#xD;
+  ...&#xD;
+zuul:&#xD;
+  routes:&#xD;
+    resource:&#xD;
+      path: /resource/**&#xD;
+      url: http://localhost:9000
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This says &amp;ldquo;map paths with the pattern /resource/** in this server to the same paths in the remote server at localhost:9000&amp;rdquo;. Simple and yet effective (OK so it&amp;rsquo;s 6 lines including the YAML, but you don&amp;rsquo;t always need that)!&lt;/p&gt;&lt;p&gt;All we need to make this work is the right stuff on the classpath. For that purpose we have a few new lines in our Maven POM:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencyManagement&amp;gt;&#xD;
+  &amp;lt;dependencies&amp;gt;&#xD;
+    &amp;lt;dependency&amp;gt;&#xD;
+      &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+      &amp;lt;artifactId&amp;gt;spring-cloud-starter-parent&amp;lt;/artifactId&amp;gt;&#xD;
+      &amp;lt;version&amp;gt;1.0.0.BUILD-SNAPSHOT&amp;lt;/version&amp;gt;&#xD;
+      &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+      &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+    &amp;lt;/dependency&amp;gt;&#xD;
+  &amp;lt;/dependencies&amp;gt;&#xD;
+&amp;lt;/dependencyManagement&amp;gt;&#xD;
+&#xD;
+&amp;lt;dependencies&amp;gt;&#xD;
+  &amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-cloud-starter-zuul&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;/dependency&amp;gt;&#xD;
+  ...&#xD;
+&amp;lt;/dependencies&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note the use of the &amp;ldquo;spring-cloud-starter-zuul&amp;rdquo; - it&amp;rsquo;s a starter POM just like the Spring Boot ones, but it governs the dependencies we need for this Zuul proxy. We are also using &lt;code&gt;&amp;lt;dependencyManagement&amp;gt;&lt;/code&gt; because we want to be able to depend on all the versions of transitive dependencies being correct.&lt;/p&gt;&lt;h3&gt;&lt;a href="#consuming-the-proxy-in-the-client" class="anchor" name="consuming-the-proxy-in-the-client"&gt;&lt;/a&gt;Consuming the Proxy in the Client&lt;/h3&gt;&lt;p&gt;With those changes in place our application still works, but we haven&amp;rsquo;t actually used the new proxy yet until we modify the client. Fortunately that&amp;rsquo;s trivial. We just need to go from this implementation of the &amp;ldquo;home&amp;rdquo; controller:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
+...&#xD;
+.controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
+	$http.get(&amp;#39;http://localhost:9000/&amp;#39;).success(function(data) {&#xD;
+		$scope.greeting = data;&#xD;
+	})&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to a local resource:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
+...&#xD;
+.controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
+	$http.get(&amp;#39;resource/&amp;#39;).success(function(data) {&#xD;
+		$scope.greeting = data;&#xD;
+	})&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now when we fire up the servers everything is working and the requests are being proxied through the UI (API Gateway) to the resource server.&lt;/p&gt;&lt;h3&gt;&lt;a href="#further-simplifications" class="anchor" name="further-simplifications"&gt;&lt;/a&gt;Further Simplifications&lt;/h3&gt;&lt;p&gt;Even better: we don&amp;rsquo;t need the CORS filter any more in the resource server. We threw that one together pretty quickly anyway, and it should have been a red light that we had to do anything as technically focused by hand (especially where it concerns security). Fortunately it is now redundant, so we can just throw it away, and go back to sleeping at night!&lt;/p&gt;&lt;h2&gt;&lt;a href="#securing-the-resource-server" class="anchor" name="securing-the-resource-server"&gt;&lt;/a&gt;Securing the Resource Server&lt;/h2&gt;&lt;p&gt;You might remember in the intermediate state that we started from there is no security in place for the resource server. &lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Aside: Lack of software security might not even be a problem if your network architecture mirrors the application architecture (you can just make the resource server physically inaccessible to anyone but the UI server). As a simple demonstration of that we can make the resource server only accessible on localhost. Just add this to &lt;code&gt;application.properties&lt;/code&gt; in the resource server:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;    server.address: 127.0.0.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;&lt;p&gt;Wow, that was easy! Do that with a network address that&amp;rsquo;s only visible in your data center and you have a security solution that works for all resource servers and all user desktops.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;Suppose that we decide we do need security at the software level (quite likely for a number of reasons). That&amp;rsquo;s not going to be a problem, because all we need to do is add Spring Security as a dependency (in the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/proxy/resource/pom.xml"&gt;resource server POM&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s enough to get us a secure resource server, but it won&amp;rsquo;t get us a working application yet, for the same reason that it didn&amp;rsquo;t in &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;Part III&lt;/a&gt;: there is no shared authentication state between the two servers.&lt;/p&gt;&lt;h2&gt;&lt;a href="#sharing-authentication-state" class="anchor" name="sharing-authentication-state"&gt;&lt;/a&gt;Sharing Authentication State&lt;/h2&gt;&lt;p&gt;We can use the same mechanism to share authentication (and CSRF) state as we did in the last, i.e. &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt;. We add the dependency to both servers as before:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.session&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-session&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.0.0.RELEASE&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;&#xD;
+&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-redis&amp;lt;/artifactId&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;but this time the configuration is much simpler because we can just add the same &lt;code&gt;Filter&lt;/code&gt; declaration to both. First the UI server (adding &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableZuulProxy&#xD;
+@EnableRedisHttpSession&#xD;
+public class UiApplication {&#xD;
+&#xD;
+  ...&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then the resource server. There are two changes to make: one is adding &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; and a &lt;code&gt;HeaderHttpSessionStrategy&lt;/code&gt; bean to the &lt;code&gt;ResourceApplication&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableRedisHttpSession&#xD;
+class ResourceApplication {&#xD;
+  ...&#xD;
+  @Bean&#xD;
+  HeaderHttpSessionStrategy sessionStrategy() {&#xD;
+    new HeaderHttpSessionStrategy();&#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and the other is to explicitly ask for a non-stateless session creation policy in &lt;code&gt;application.properties&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;security.sessions: NEVER
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As long as redis is still running in the background (use the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/proxy/fig.yml"&gt;&lt;code&gt;fig.yml&lt;/code&gt;&lt;/a&gt; if you like to start it) then the system will work. Load the homepage for the UI at &lt;a href="http://localhost:8080"&gt;http://localhost:8080&lt;/a&gt; and login and you will see the message from the backend rendered on the homepage.&lt;/p&gt;&lt;h2&gt;&lt;a href="#how-does-it-work" class="anchor" name="how-does-it-work"&gt;&lt;/a&gt;How Does it Work?&lt;/h2&gt;&lt;p&gt;What is going on behind the scenes now? First we can look at the HTTP requests in the UI server (and API Gateway):&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Verb &lt;/th&gt;
+      &lt;th&gt;Path &lt;/th&gt;
+      &lt;th&gt;Status &lt;/th&gt;
+      &lt;th&gt;Response&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/ &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;index.html&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/css/angular-bootstrap.css &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Twitter bootstrap CSS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/angular-bootstrap.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Bootstrap and Angular JS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/hello.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Application logic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Whitelabel login page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Whitelabel login page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login.html &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Angular login form partial&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POST &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to home page (ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;JSON authenticated user&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;(Proxied) JSON greeting&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;That&amp;rsquo;s identical to the sequence at the end of &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; except for the fact that the cookie names are slightly different (&amp;ldquo;SESSION&amp;rdquo; instead of &amp;ldquo;JSESSIONID&amp;rdquo;) because we are using Spring Session. But the architecture is different and that last request to &amp;ldquo;/resource&amp;rdquo; is special because it was proxied to the resource server. &lt;/p&gt;&lt;p&gt;We can see the reverse proxy in action by looking at the &amp;ldquo;/trace&amp;rdquo; endpoint in the UI server (from Spring Boot Actuator, which we added with the Spring Cloud dependencies). Go to &lt;a href="http://localhost:8080/trace"&gt;http://localhost:8080/trace&lt;/a&gt; in a browser and scroll to the end (if you don&amp;rsquo;t have one already get a JSON plugin for your browser to make it nice and readable). You will need to authenticate with HTTP Basic (browser popup), but the same credentials are valid as for your login form. At or near the end you should see a pair of requests something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;{&#xD;
+  &amp;quot;timestamp&amp;quot;: 1420558194546,&#xD;
+  &amp;quot;info&amp;quot;: {&#xD;
+    &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,&#xD;
+    &amp;quot;path&amp;quot;: &amp;quot;/&amp;quot;,&#xD;
+    &amp;quot;query&amp;quot;: &amp;quot;&amp;quot;&#xD;
+    &amp;quot;remote&amp;quot;: true,&#xD;
+    &amp;quot;proxy&amp;quot;: &amp;quot;resource&amp;quot;,&#xD;
+    &amp;quot;headers&amp;quot;: {&#xD;
+      &amp;quot;request&amp;quot;: {&#xD;
+        &amp;quot;accept&amp;quot;: &amp;quot;application/json, text/plain, */*&amp;quot;,&#xD;
+        &amp;quot;x-xsrf-token&amp;quot;: &amp;quot;542c7005-309c-4f50-8a1d-d6c74afe8260&amp;quot;,&#xD;
+        &amp;quot;cookie&amp;quot;: &amp;quot;SESSION=c18846b5-f805-4679-9820-cd13bd83be67; XSRF-TOKEN=542c7005-309c-4f50-8a1d-d6c74afe8260&amp;quot;,&#xD;
+        &amp;quot;x-forwarded-prefix&amp;quot;: &amp;quot;/resource&amp;quot;,&#xD;
+        &amp;quot;x-forwarded-host&amp;quot;: &amp;quot;localhost:8080&amp;quot;&#xD;
+      },&#xD;
+      &amp;quot;response&amp;quot;: {&#xD;
+        &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json;charset=UTF-8&amp;quot;,&#xD;
+        &amp;quot;status&amp;quot;: &amp;quot;200&amp;quot;&#xD;
+      }&#xD;
+    },&#xD;
+  }&#xD;
+},&#xD;
+{&#xD;
+  &amp;quot;timestamp&amp;quot;: 1420558200232,&#xD;
+  &amp;quot;info&amp;quot;: {&#xD;
+    &amp;quot;method&amp;quot;: &amp;quot;GET&amp;quot;,&#xD;
+    &amp;quot;path&amp;quot;: &amp;quot;/resource/&amp;quot;,&#xD;
+    &amp;quot;headers&amp;quot;: {&#xD;
+      &amp;quot;request&amp;quot;: {&#xD;
+        &amp;quot;host&amp;quot;: &amp;quot;localhost:8080&amp;quot;,&#xD;
+        &amp;quot;accept&amp;quot;: &amp;quot;application/json, text/plain, */*&amp;quot;,&#xD;
+        &amp;quot;x-xsrf-token&amp;quot;: &amp;quot;542c7005-309c-4f50-8a1d-d6c74afe8260&amp;quot;,&#xD;
+        &amp;quot;cookie&amp;quot;: &amp;quot;SESSION=c18846b5-f805-4679-9820-cd13bd83be67; XSRF-TOKEN=542c7005-309c-4f50-8a1d-d6c74afe8260&amp;quot;&#xD;
+      },&#xD;
+      &amp;quot;response&amp;quot;: {&#xD;
+        &amp;quot;Content-Type&amp;quot;: &amp;quot;application/json;charset=UTF-8&amp;quot;,&#xD;
+        &amp;quot;status&amp;quot;: &amp;quot;200&amp;quot;&#xD;
+      }&#xD;
+    }&#xD;
+  }&#xD;
+},
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The second entry there is the request from the client to the gateway on &amp;ldquo;/resource&amp;rdquo; and you can see the cookies (added by the browser) and the CSRF header (added by Angular as discussed in &lt;a href="second"&gt;Part II&lt;/a&gt;). The first entry has &lt;code&gt;remote: true&lt;/code&gt; and that means it&amp;rsquo;s tracing the call to the resource server. You can see it went out to a uri path &amp;ldquo;/&amp;rdquo; and you can see that (crucially) the cookies and CSRF headers have been sent too. Without Spring Session these headers would be meaningless to the resource server, but the way we have set it up it can now use those headers to re-constitute a session with authentication and CSRF token data. So the request is permitted and we are in business!&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We covered quite a lot in this article but we got to a really nice place where there is a minimal amount of boilerplate code in our two servers, they are both nicely secure and the user experience isn&amp;rsquo;t compromised. That alone would be a reason to use the API Gateway pattern, but really we have only scratched the surface of what that might be used for (Netflix uses it for &lt;a href="https://github.com/Netflix/zuul/wiki/How-We-Use-Zuul-At-Netflix"&gt;a lot of things&lt;/a&gt;). Read up on &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to find out more on how to make it easy to add more features to the gateway. The next article in this series will extend the application architecture a bit by extracting the authentication responsibilities to a separate server (the Single Sign On pattern).&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - January 27th, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/28/this-week-in-spring-january-27th-2015" />
@@ -659,8 +963,8 @@ class ResourceApplication {&#xD;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This &lt;code&gt;Filter&lt;/code&gt; created is the mirror image of the one in the UI server, so it establishes Redis as the session store. The only difference is that it uses a custom &lt;code&gt;HttpSessionStrategy&lt;/code&gt; that looks in the header (&amp;ldquo;X-Auth-Token&amp;rdquo; by default) instead of the default (cookie named &amp;ldquo;JSESSIONID&amp;rdquo;). &lt;/p&gt;&lt;p&gt;There is one final change to the resource server to make it work with our new authentication scheme. Spring Boot default security is stateless, and we want this to store authentication in the session, so we need to be explicit in &lt;code&gt;application.yml&lt;/code&gt; (or &lt;code&gt;application.properties&lt;/code&gt;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint yaml"&gt;security:&#xD;
   sessions: NEVER
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This says to Spring Security &amp;ldquo;never create a session, but use one if it is there&amp;rdquo; (it will be already be there because of the authentication in the UI).&lt;/p&gt;&lt;p&gt;Re-launch the resource server and open the UI up in a new browser window.&lt;/p&gt;&lt;h2&gt;&lt;a href="#why-doesn-rsquo-t-it-all-work-with-cookies" class="anchor" name="why-doesn-rsquo-t-it-all-work-with-cookies"&gt;&lt;/a&gt;Why Doesn&amp;rsquo;t it All Work With Cookies?&lt;/h2&gt;&lt;p&gt;We had to use a custom header and write code in the client to populate the header, which isn&amp;rsquo;t terribly complicated, but it seems to contradict the advice in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; to use cookies and sessions wherever possible. The argument there was that not to do so introduces additional unecessary complexity, and for sure the implementation we have now is the most complex we have seen so far: the technical part of the solution far outweighs the business logic (which is admittedly tiny). This is definitely a fair criticism (and one we plan to address in the next article in this series), but let&amp;rsquo;s just briefly look at why it&amp;rsquo;s not as simple as just using cookies and sessions for everything.&lt;/p&gt;&lt;p&gt;At least we are still using the session, which makes sense because Spring Security and the Servlet container know how to do that with no effort on our part. But couldn&amp;rsquo;t we have continued to use cookies to transport the authentication token? It would have been nice, but there is a reason it wouldn&amp;rsquo;t work, and that is that the browser wouldn&amp;rsquo;t let us. You can just go poking around in the browser&amp;rsquo;s cookie store from a JavaScript client, but there are some restrictions, and for good reason. In particular you don&amp;rsquo;t have access to the cookies that were sent by the server as &amp;ldquo;HttpOnly&amp;rdquo; (which you will see is the case by default for session cookies). You also can&amp;rsquo;t set cookies in outgoing requests, so we couldn&amp;rsquo;t set a &amp;ldquo;SESSION&amp;rdquo; cookie (which is the Spring Session default cookie name), we had to use a custom &amp;ldquo;X-Session&amp;rdquo; header. Both these restrictions are for your own protection so malicious scripts cannot access your resources without proper authorization.&lt;/p&gt;&lt;p&gt;TL;DR the UI and resource servers do not have a common origin, so they cannot share cookies (even though we can use Spring Session to force them to share sessions).&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We have duplicated the features of the application in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II of this series&lt;/a&gt;: a home page with a greeting fetched from a remote backend, with login and logout links in a navigation bar. The difference is that the greeting comes from a resource server that is a standalone, instead of being embedded in the UI server. This added significant complexity to the implementation, but the good news is that we have a mostly configuration-based (and practically 100% declarative) solution. We could even make the solution 100% declarative by extracting all the new code into libraries (Spring configuration and Angular custom directives). We are going to defer that interesting task for after the next couple of installments. In the next article we are going to look at a different really great way to reduce all the complexity in the current implementation: the API Gateway Pattern (the client sends all its requests to one place and authentication is handled there).&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Note: we used Spring Session here to share sessions between 2 servers that are not logically the same the same application. It&amp;rsquo;s a neat trick, and it isn&amp;rsquo;t possible with &amp;ldquo;regular&amp;rdquo; JEE distributed sessions.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This says to Spring Security &amp;ldquo;never create a session, but use one if it is there&amp;rdquo; (it will be already be there because of the authentication in the UI).&lt;/p&gt;&lt;p&gt;Re-launch the resource server and open the UI up in a new browser window.&lt;/p&gt;&lt;h2&gt;&lt;a href="#why-doesn-rsquo-t-it-all-work-with-cookies" class="anchor" name="why-doesn-rsquo-t-it-all-work-with-cookies"&gt;&lt;/a&gt;Why Doesn&amp;rsquo;t it All Work With Cookies?&lt;/h2&gt;&lt;p&gt;We had to use a custom header and write code in the client to populate the header, which isn&amp;rsquo;t terribly complicated, but it seems to contradict the advice in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; to use cookies and sessions wherever possible. The argument there was that not to do so introduces additional unecessary complexity, and for sure the implementation we have now is the most complex we have seen so far: the technical part of the solution far outweighs the business logic (which is admittedly tiny). This is definitely a fair criticism (and one we plan to address in the next article in this series), but let&amp;rsquo;s just briefly look at why it&amp;rsquo;s not as simple as just using cookies and sessions for everything.&lt;/p&gt;&lt;p&gt;At least we are still using the session, which makes sense because Spring Security and the Servlet container know how to do that with no effort on our part. But couldn&amp;rsquo;t we have continued to use cookies to transport the authentication token? It would have been nice, but there is a reason it wouldn&amp;rsquo;t work, and that is that the browser wouldn&amp;rsquo;t let us. You can just go poking around in the browser&amp;rsquo;s cookie store from a JavaScript client, but there are some restrictions, and for good reason. In particular you don&amp;rsquo;t have access to the cookies that were sent by the server as &amp;ldquo;HttpOnly&amp;rdquo; (which you will see is the case by default for session cookies). You also can&amp;rsquo;t set cookies in outgoing requests, so we couldn&amp;rsquo;t set a &amp;ldquo;SESSION&amp;rdquo; cookie (which is the Spring Session default cookie name), we had to use a custom &amp;ldquo;X-Session&amp;rdquo; header. Both these restrictions are for your own protection so malicious scripts cannot access your resources without proper authorization.&lt;/p&gt;&lt;p&gt;TL;DR the UI and resource servers do not have a common origin, so they cannot share cookies (even though we can use Spring Session to force them to share sessions).&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We have duplicated the features of the application in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II of this series&lt;/a&gt;: a home page with a greeting fetched from a remote backend, with login and logout links in a navigation bar. The difference is that the greeting comes from a resource server that is a standalone, instead of being embedded in the UI server. This added significant complexity to the implementation, but the good news is that we have a mostly configuration-based (and practically 100% declarative) solution. We could even make the solution 100% declarative by extracting all the new code into libraries (Spring configuration and Angular custom directives). We are going to defer that interesting task for after the next couple of installments. In the &lt;a href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv"&gt;next article&lt;/a&gt; we are going to look at a different really great way to reduce all the complexity in the current implementation: the API Gateway Pattern (the client sends all its requests to one place and authentication is handled there).&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: we used Spring Session here to share sessions between 2 servers that are not logically the same application. It&amp;rsquo;s a neat trick, and it isn&amp;rsquo;t possible with &amp;ldquo;regular&amp;rdquo; JEE distributed sessions.&lt;/p&gt;
 &lt;/blockquote&gt;</content>
   </entry>
   <entry>
@@ -959,72 +1263,6 @@ class Bookmark {&#xD;
 &lt;p&gt;For more project specific information please see the [&lt;a href="http://projects.spring.io/spring-roo/"&gt;Project Page&lt;/a&gt;] | [&lt;a href="https://github.com/spring-projects/spring-roo"&gt;GitHub&lt;/a&gt;] &lt;/p&gt;
 &lt;p&gt;Thanks to the awesome users who came up with useful bug reports and suggestions. This is a candidate release, please try out the updates and provide feedback. As always, you'll also find Roo on Twitter - either follow &lt;a href="https://www.twitter.com/springroo"&gt;@SpringRoo&lt;/a&gt; or just include #SpringRoo in your tweets. &lt;/p&gt;
 &lt;p&gt;Our current plan is to go 1.3.1.RELEASE in late january. Stay tuned!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Tool Suite and Groovy/Grails Tool Suite 3.6.3.SR1 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/19/spring-tool-suite-and-groovy-grails-tool-suite-3-6-3-sr1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Martin Lippert</name>
-    </author>
-    <id>tag:spring.io,2015-01-19:1935</id>
-    <updated>2015-01-19T13:09:42Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;&lt;p&gt;We have released a minor service release for STS/GGTS 3.6.3 on Eclipse 4.4.1 to address a&lt;br/&gt;security vulnerability that was found in the JGit client. More details on this can be found here:&lt;br/&gt;&lt;a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=456947"&gt;JGit client (CVE-2014-9390)&lt;/a&gt;&lt;/p&gt;&lt;p&gt;To download the updated distributions, please go visit:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-&lt;li&gt;Spring Tool Suite: &lt;a href="https://spring.io/tools/sts/all"&gt;https://spring.io/tools/sts/all&lt;/a&gt;&lt;/li&gt;&#xD;
-&lt;li&gt;Groovy/Grails Tool Suite: &lt;a href="https://spring.io/tools/ggts/all"&gt;https://spring.io/tools/ggts/all&lt;/a&gt;&lt;/li&gt;&#xD;
-&lt;/ul&gt;&lt;p&gt;Detailed new and noteworthy notes can be found here: &lt;a href="http://docs.spring.io/sts/nan/v363sr1/NewAndNoteworthy.html"&gt;STS/GGTS 3.6.3.SR1 New &amp;amp; Noteworthy&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;STS/GGTS 3.6.4 is scheduled to ship in March 2015, shortly after the Eclipse Luna SR2 release.&lt;/p&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar Replay: Building Scalable Data Applications with Spring and GemFire</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/19/webinar-replay-building-scalable-data-applications-with-spring-and-gemfire" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-19:1936</id>
-    <updated>2015-01-19T10:31:00Z</updated>
-    <content type="html">&lt;p&gt;Webinar: Building Scalable Data Applications with Spring and GemFire &lt;/p&gt;
-&lt;p&gt;Speakers: Luke Shannon, Pivotal &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/building-scalable-web-applications-with-spring-data-gemfire"&gt;http://www.slideshare.net/SpringCentral/building-scalable-web-applications-with-spring-data-gemfire&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;GemFire is Pivotal's distributed In Memory Data grid. In this session we will cover simplifying configuring a GemFire grid using Spring Data GemFire, and explore how data is dynamically distributed and made highly available as the grid resources are increased or decreased to meet increased client demand. GemFire access and testing patterns using Spring will be reviewed in detail.  We will walk through creating a domain object and using Spring Data GemFire Repositories to perform CRUD operations on a GemFire grid, creating a Spring MVC/Spring Boot application that uses GemFire as its persistence layer, review how Spring Boot and Spring Data GemFire can be used to help with GemFire test cases and how Spring Data GemFire can make creation and execution of GemFire functions easier. We will also explore how Spring XD can be used to load and monitor data changes in the grid. This will be a hands on, code oriented session.&lt;/p&gt;
-&lt;p&gt; &lt;iframe width="420" height="315" src="//www.youtube.com/embed/HvqLJSZoEJ0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Batch and Spring Batch Admin Releases</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/16/spring-batch-and-spring-batch-admin-releases" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Michael Minella</name>
-    </author>
-    <id>tag:spring.io,2015-01-16:1933</id>
-    <updated>2015-01-16T15:39:00Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce a number of Spring Batch related releases today.  A bug fix release for Spring Batch, a bug fix release for Spring Batch Admin and a milestone release for the new version of Spring Batch Admin are all now available.&lt;/p&gt;
-&lt;h2&gt;Spring Batch 3.0.3&lt;/h2&gt;
-&lt;p&gt;Spring Batch 3.0.3 represents the latest maintenance release for Spring Batch, addressing a number of enhancements and minor bug fixes.  New features in Spring Batch 3.0.3 include:&lt;/p&gt;
-&lt;h3&gt;Improved Support For JSR-352 Custom Infrastructures&lt;/h3&gt;
-&lt;p&gt;Before this release, the only way to override the infrastructure provided by Spring Batch out of the box for JSR-352 configured jobs was to include the configuration in the job's context.  This prevented the ability to configure a global override for really shared components.  With 3.0.3, you can now specify the location of a Spring configuration via a System property that can override the existing infrastructure.&lt;/p&gt;
-&lt;h3&gt;Optional Polling For Partitioned Results&lt;/h3&gt;
-&lt;p&gt;When using remote partitioning, the master needs a way to be notified that the slave partitions have completed their work.  Historically that has been accomplished by each slave replying to the master, the results being aggregated, and then the master being notified that all the slaves have completed.  However, this required extra configuration that may not be necessary.  Since the slaves in a partitioned job maintain their state in the same job repository that the master does, the master can just poll the job repository to see if the slaves are complete.  This release adds the ability to configure the &lt;code&gt;MessageChannelPartitionHandler&lt;/code&gt; to poll the job repository instead of waiting for response messages.  You can read more about the configuration of this new feature in the documentation for the &lt;a href="http://docs.spring.io/spring-batch/trunk/apidocs/org/springframework/batch/integration/partition/MessageChannelPartitionHandler.html"&gt;&lt;code&gt;MessageChannelPartitionHandler&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This isn't a complete list of updates, but highlight the major new features.  You can see exactly what changed in Spring Batch's Jira issue tracker here: &lt;a href="https://jira.spring.io/browse/BATCH/"&gt;https://jira.spring.io/browse/BATCH/&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;Spring Batch Admin&lt;/h2&gt;
-&lt;h3&gt;1.3.1&lt;/h3&gt;
-&lt;p&gt;The first of two Spring Batch Admin releases we are making available today is the first maintenance release for the Spring Batch Admin 1.3 line.  This release addresses a number of minor bugs, the list of which can be found in Jira here: &lt;a href="https://jira.spring.io/browse/BATCHADM/"&gt;https://jira.spring.io/browse/BATCHADM/&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;2.0.0.M1&lt;/h3&gt;
-&lt;p&gt;The biggest question I received at SpringOne2GX this past year was "What's going on with Spring Batch Admin?"  Spring Batch Admin had its last update in July (shortly before SpringOne2GX last year), but it wasn't much of a feature upgrade.  It was released to update the dependencies and address some bugs.  Since then, we've been hard at work updating a number of features to bring Spring Batch Admin up to date.  Today we announce the first milestone towards that goal.&lt;/p&gt;
-&lt;h4&gt;JSR-352 Support&lt;/h4&gt;
-&lt;p&gt;Spring Batch Admin, as part of the 2.0.0.M1 release, will now support JSR-352 configured jobs.  By dropping your XML based configuration in the &lt;code&gt;/META-INF/batch-jobs&lt;/code&gt; directory as the spec requires, Spring Batch Admin will load the job to be launchable by the REST endpoints and the current UI.  All of the monitoring aspects provided by Spring Batch Admin (viewing the executions, start/stop/restart, etc) are available.&lt;/p&gt;
-&lt;h4&gt;Java Configuration Support&lt;/h4&gt;
-&lt;p&gt;As the shift within the Spring community has been going from XML based configuration to java based configuration, Spring Batch Admin is keeping up.  As of this release, Spring Batch Admin supports the configuration of a package to scan for java configured Spring Batch jobs.  As with any other batch jobs, these will be loaded and available for execution just like their XML counterparts.&lt;/p&gt;
-&lt;p&gt;It's important to note, that while Spring Batch Admin now supports java based configuration, you won't want to use &lt;code&gt;@EnableBatchProcessing&lt;/code&gt; with it.  There's a reason for that.  &lt;code&gt;@EnableBatchProcessing&lt;/code&gt; provides a collection of infrastructure that is already provided out of the box by Spring Batch Admin.  Configuring jobs via java config for use within Spring Batch Admin is exactly the same as if you were using &lt;code&gt;@EnableBatchProcessing&lt;/code&gt;...without using that annotation.  You still get the ability to autowire the &lt;code&gt;JobBuilderFactory&lt;/code&gt; and &lt;code&gt;StepBuilderFactory&lt;/code&gt; just like you normally would.&lt;/p&gt;
-&lt;h4&gt;REST Endpoint Updates&lt;/h4&gt;
-&lt;p&gt;As part of the work the Spring XD team has been doing in their administration UI, they have created a completely new set of batch related REST endpoints.  This release migrates those endpoints into Spring Batch Admin for all to consume.  Off of the &lt;code&gt;/batch&lt;/code&gt; path lives a collection of endpoints that provide functionality similar to the existing REST API, however goes much further.  The new API follows HATEOAS principles allowing for API discovery and traversal.  While the support of HATEOAS is a work in progress, this release provides a look into where we're going with this.&lt;/p&gt;
-&lt;h4&gt;The Future of Spring Batch Admin&lt;/h4&gt;
-&lt;p&gt;Like all of the Spring projects, we strive to make things backwards compatible as much as reasonable possible.  Because of that, Spring Batch Admin 2.0 is undergoing some major changes to allow backwards compatibility in the future.  These changes include, the removal of an "official" UI, and deprecation of the older version of the REST API.  &lt;em&gt;This release does not contain any of these changes.&lt;/em&gt;  These changes will be coming before Spring Batch Admin 2.0 is generally available.  It is our desire to be open and transparent as to the direction of the project.&lt;/p&gt;
-&lt;p&gt;Anyone that has followed the rate of change in the UI space over the past few years can quickly discern that picking a modern front-end technology and being able to maintain backwards compatibility for the foreseeable future is not possible right now.  The rate of breaking changes is just too great right now.  When factoring this into our desire to provide tools at the forefront of their related space, we've decided to remove the UI as a formal part of the project.  That being said, we still understand that a client is an important piece of what Spring Batch Admin brings to the table.  Because of this, it is our plan to provide a collection of sample projects that demonstrate a couple different client options.  This will allow us to evolve client options independently of the core framework/API in a way that doesn't prevent us from being backwards compatible.&lt;/p&gt;
-&lt;p&gt;We will also be deprecating the older version of the REST API.  The new API takes a step forward in the REST API maturity model, moving from basic CRUD over HTTP to support for true resources.  While the new REST endpoints are still a work in progress, once they are feature complete, we will deprecate the old ones to focus development efforts on improving and evolving the new set.&lt;/p&gt;
-&lt;h3&gt;Where We Go From Here&lt;/h3&gt;
-&lt;p&gt;We will continue to work on the changes mentioned above and currently plan on another release early in the second quarter of this year.  We are excited about the future of Spring Batch Admin and look forward to your feedback in &lt;a href="https://jira.spring.io/browse/BATCH/"&gt;Jira&lt;/a&gt;, &lt;a href="https://github.com/spring-projects/spring-batch"&gt;Github&lt;/a&gt;, &lt;a href="http://stackoverflow.com/tags/spring-batch/info"&gt;StackOverflow&lt;/a&gt;, and social media!&lt;/p&gt;</content>
   </entry>
 </feed>
 
