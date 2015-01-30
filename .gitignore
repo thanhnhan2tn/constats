@@ -11,10 +11,10 @@ nbactions.xml
 /src/main/webapp/jsc/*.js
 /src/main/webapp/repository
 # IDE/Eclipse settings
-/.project
-/.classpath
-/.settings
-/.externalToolBuilders
+#/.project
+#/.classpath
+#/.settings
+#/.externalToolBuilders
 #I think that this is where MANIFEST.MF should go according to maven specs.
 #For now, I will ignore it. Esteban
 /src/main/webapp/META-INF/MANIFEST.MF
