@@ -5,7 +5,46 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-01-29T01:59:01Z</updated>
+  <updated>2015-02-02T09:43:41Z</updated>
+  <entry>
+    <title>Spring Cloud 1.0.0.RC2 Available Now</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/spring-cloud-1-0-0-rc2-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-02-02:1952</id>
+    <updated>2015-02-02T09:43:41Z</updated>
+    <content type="html">&lt;p&gt;&lt;a href="http://spring.io/spring-projects/spring-cloud"&gt;Spring Cloud&lt;/a&gt; 1.0.0.RC2 is available now in the &lt;a href="http://repo.spring.io"&gt;http://repo.spring.io&lt;/a&gt; repository. There was a lot of activity pruning and curating dependencies, so users upgrading from RC1 might need to tweak their starter dependencies a bit, but hopefully we are all in a better place as a result. There were also a lot of changes in the Security features, making it easier to customize various parts of that, mainly in response to people actually using it and needing help (so thanks for the feedback). We will probably have an RC3 before the GA, but things are getting pretty close to ready.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Security OAuth 2.0.6.RELEASE Available Now</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/spring-security-oauth-2-0-6-release-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-02-02:1951</id>
+    <updated>2015-02-02T09:35:00Z</updated>
+    <content type="html">&lt;p&gt;Spring Security OAuth 2.0.6.RELEASE is available now in the usual repositories. It&amp;rsquo;s a bug fix release, and users of 2.0.5.RELEASE should upgrade. The only critical bug was for users of JWT with refresh tokens, and there were also some people experiencing double encoding of redirect uris, which is now fixed. Highlights of new features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;(Much requested) ability to have non-expiring refresh tokens with no customizations (just set the validity period to zero or less)&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;The /token endpoint only accepts POST requests by default&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Resource servers do not accept cookie based authentication by default (you have to switch it on)&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Resource server configuration has a few new options including the ability to inject custom error handlers&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Thanks, as usual, go to the community for contributing code and ideas. It feels like the community if growing, and that&amp;rsquo;s always good to see. Finally, watch out for a new blog on Angular JS with Spring Security and OAuth2 coming out soon here.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Why 12 Factor Application Patterns, Microservices and CloudFoundry Matter</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/01/30/why-12-factor-application-patterns-microservices-and-cloudfoundry-matter" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Tim Spann</name>
+    </author>
+    <id>tag:spring.io,2015-01-28:1949</id>
+    <updated>2015-01-30T09:45:00Z</updated>
+    <content type="html">&lt;p&gt;It seems like a lifetime ago, but a few short years ago I was leading a $100 million government project for a large system integrator that involved 50+ developers, 20+ testers, 15+ managers, 5+ ops and a cast of characters. Once a week we had to do our deploy. &lt;/p&gt;&lt;p&gt;Despite using Scrum, Cruise Control, SVN, Java, Eclipse, Guava, Google Guice, UML, JUnit, PMD, Findbugs, Checkstyle, MDD, TDD, eclEmma and mostly modern tools; our deploy process was a fragile, long, manual, person intensive process. Each Friday night we started. A long email thread began the process with a text check list that we emailed back and forth as each person in the process did their piece. Another architect or I would manage the process and be responsible for the Go/No Go decision and the critical DB compare step. We were using a proprietary vertical framework from a major software company for the basis of the project. It involved manually running SQL scripts, running diff scripts, visually comparing some items, checking the version control check list, checking the Cruise Control results, JUnit / Code Coverage HTML and some other generated reports. A UNIX admin would copy over the giant EAR files, SQL and a ton of giant XML files. Once there they would run a number of shell scripts to change some things, sometimes using environment variables. Then they would be moved to a special directory and the Java app server would be stopped, everything backed up. The EARs would be moved over, datasources and other configs would be copied and checked. DB change scripts would be run against Oracle and meta data would be updated/inserted/deleted via numerous sql scripts. The server would be started up. I would run a Selenium test to hit the various sites to &amp;ldquo;warm them up&amp;rdquo; as the complex proprietary DB framework needed the cache warmed and started. The first few tries would fail. &lt;/p&gt;&lt;p&gt;Once initialized, we would email the team and a person in Canada would run a different scripted web test that was our &amp;ldquo;Smoke Test&amp;rdquo;. If that worked, about 40% success, the email would pass off to the test team to start a few hours more testing. If all went well, by 2am on Saturday the site would be ready to go. That usually didn&amp;rsquo;t happen. Some minor thing would be broken because something was forgotten in the configuration or a file wasn&amp;rsquo;t committed, or someone missed one step. Giant files, no way to move pieces, this file transfer was not fast. &lt;/p&gt;&lt;p&gt;The local development machines were running Windows, Oracle JDK and Tomcat plus a special Java application to simulate an application server. For production, we ran on a UNIX Java application server with a different implementation of the JDK. It almost never went smoothly. So many weird issues with different JDKs, application servers, memory, JMS, database connections and library issues. There were over 20,000 Java classes with many Session and Entity EJBs. The only good thing was that all the items my team developed had good unit tests and everything used good domain modeling. Despite crushing deadlines, we kept our code coverage above 80% and used FindBugs/PMD/CheckStyle. We mandated peer reviews for all modules and that was very useful, but without automating that, it did add a manual step to the process. I forgot to mention that we had several hour plus ANT builds; I think I blocked that out.&lt;/p&gt;&lt;p&gt;Good code fails when you don&amp;rsquo;t have good process and a platform to help you.&lt;br/&gt;Good teams fail when you don&amp;rsquo;t have a good culture that embraces DevOps, microservices and not giant monoliths.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring XD 1.1 RC1 released</title>
     <link rel="alternate" href="https://spring.io/blog/2015/01/29/spring-xd-1-1-rc1-released" />
@@ -1200,69 +1239,6 @@ class Bookmark {&#xD;
 &lt;p&gt;Data / Integration Track &lt;/p&gt;
 &lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/cassandra-couchbase-andspringdataintheenterprise"&gt;http://www.slideshare.net/SpringCentral/cassandra-couchbase-andspringdataintheenterprise&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt; Spring Data Cassandra brings Cassandra support to the Spring Data umbrella of projects, offering Spring Data's familiar Repository concepts &amp;amp; POJO persistence. This talk will focus first on POJO persistence over Cassandra, including automatic Cassandra schema generation and Spring context configuration using both XML &amp;amp; Java. Then, the talk will dig deeper into some of the lower-level features that Spring Data Cassandra is built upon (AKA &amp;quot;Spring CQL&amp;quot;), which make plain, old Cassandra development simpler &amp;amp; easier. Couchbase Server is well-known as one of the leaders in the NoSQL space, heavily used in enterprises and startups alike where low latency even at hundreds of thousands of operations per seconds matters. This talk will not only give a short introduction about the benefits of adopting Couchbase, but also show how to integrate it into your Java Enterprise landscape through its support for Spring Data. You will learn how to fully control your database schema from the application through entities and repositories, how to deploy new application versions or scale out your cluster without a single second of downtime and also how to integrate easily with elasticsearch.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/LkDb2dZyoTk" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Applications of Enterprise Integration Patterns to Near-Real Time Radar Data Processing</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-applications-of-enterprise-integration-patterns-to-near-real-time-radar-data-processing" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1922</id>
-    <updated>2015-01-20T00:58:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Garrett Wampole, MITRE&lt;/p&gt;
-&lt;p&gt; Data / Integration Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/applications-of-enterprise-integration-patterns-to-nearreal-time-radar-data-processing"&gt;http://www.slideshare.net/SpringCentral/applications-of-enterprise-integration-patterns-to-nearreal-time-radar-data-processing &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Enterprise Integration Patterns, a set of software design concepts described in a book by Gregor Hohpe and Bobby Woolf and implemented in software by the Spring Integration project, are traditionally applied in the application domains such as business intelligence, supply chain management, and customer relationship management. The topic of this presentation is to describe an experimental methodology of applying Enterprise Integration Patterns to the near-real time processing of surveillance radar data and the engineering trade-offs encountered in the areas of development, deployment, operation, and analysis of ground-based surveillance radar systems with a focus on the Modular Experimental Radar program developed by MITRE for its sponsors.&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/iL83KYHapbQ" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Deep dive into Spring WebSockets</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-deep-dive-into-spring-websockets" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1921</id>
-    <updated>2015-01-20T00:55:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Sergi Almar &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/deep-dive-intospringwebsockets-sergialmarspringone2gx2014"&gt;http://www.slideshare.net/SpringCentral/deep-dive-intospringwebsockets-sergialmarspringone2gx2014 &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Web / JavaScript Track &lt;/p&gt;
-&lt;p&gt;WebSocket support has been part of Spring since 4.0. In this session we'll review the architecture behind it and we'll try to show how to build highly scalable websocket based applications. We will also cover the new features in Spring 4.1, the new Spring Security 4 support for WebSockets and the different testing approaches. &lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/oCAC2yow8xk" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Roo 1.3.1 RC2 Available Now</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/19/spring-roo-1-3-1-rc2-available-now" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-19:1937</id>
-    <updated>2015-01-19T15:36:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Roo 1.3.1 RC2 Available Now&lt;/p&gt;
-&lt;p&gt; On behalf on the Spring Roo team at &lt;a href="http://www.disid.com/"&gt;Disid Corp&lt;/a&gt;, I am pleased to announce the 1.3.1 RC2 Release Candidate is out.&lt;/p&gt;
-&lt;p&gt; Spring Roo jar files have been published to Maven Central. &lt;/p&gt;
-&lt;p&gt;As always, the release is available in the Spring IO repository. &lt;/p&gt;
-&lt;p&gt;The candidate release fixes the following issues:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-  &lt;li&gt;  NullPointerException at WarPackaging [&lt;a href="https://jira.spring.io/browse/ROO-3566"&gt;ROO-3566&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt;  NullPointerException when run dbre [&lt;a href="https://jira.spring.io/browse/ROO-3567"&gt;ROO-3567&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; Cannot uninstall or update any osgi bundles [&lt;a href="https://jira.spring.io/browse/ROO-3573"&gt;ROO-3573&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; NullPointerException when create repository mongodb [&lt;a href="https://jira.spring.io/browse/ROO-3574"&gt;ROO-3574&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; Roo commands allows to create two entities with the same name [&lt;a href="https://jira.spring.io/browse/ROO-3580"&gt;ROO-3580&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; Focus set on non existing class [&lt;a href="https://jira.spring.io/browse/ROO-3581"&gt;ROO-3581&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; Error adding InnerType constructor on ITD Generation [&lt;a href="https://jira.spring.io/browse/ROO-3583"&gt;ROO-3583&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; JavaBean implementing Interface defining getters and setters [&lt;a href="https://jira.spring.io/browse/ROO-3584"&gt;ROO-3584&lt;/a&gt;]&lt;/li&gt;&#xD;
-  &lt;li&gt; JavaBean implementing Interface and overriding getter causing null pointer [&lt;a href="https://jira.spring.io/browse/ROO-3585"&gt;ROO-3585&lt;/a&gt;]&lt;/li&gt;&#xD;
-&lt;/ul&gt;
-&lt;p&gt;It is recommended that all Spring Roo users upgrade to this version. &lt;/p&gt;
-&lt;p&gt;For full details on the changes made in the release, please refer to the [&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10340&amp;version=14870"&gt;Release Notes in Jira&lt;/a&gt;] &lt;/p&gt;
-&lt;p&gt;For more project specific information please see the [&lt;a href="http://projects.spring.io/spring-roo/"&gt;Project Page&lt;/a&gt;] | [&lt;a href="https://github.com/spring-projects/spring-roo"&gt;GitHub&lt;/a&gt;] &lt;/p&gt;
-&lt;p&gt;Thanks to the awesome users who came up with useful bug reports and suggestions. This is a candidate release, please try out the updates and provide feedback. As always, you'll also find Roo on Twitter - either follow &lt;a href="https://www.twitter.com/springroo"&gt;@SpringRoo&lt;/a&gt; or just include #SpringRoo in your tweets. &lt;/p&gt;
-&lt;p&gt;Our current plan is to go 1.3.1.RELEASE in late january. Stay tuned!&lt;/p&gt;</content>
   </entry>
 </feed>
 

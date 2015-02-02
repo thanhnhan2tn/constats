@@ -1,0 +1,6 @@
+package vn.example.cms.components;
+
+public class Label {
+	private String labelName;
+	private String labelText;
+}

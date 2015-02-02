@@ -6,9 +6,6 @@
 **/**/.DS_Store
 .DS_Store
 # Other
-nbactions.xml
-/reports
-/src/main/webapp/jsc/*.js
 /src/main/webapp/repository
 # IDE/Eclipse settings
 #/.project

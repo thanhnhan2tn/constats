@@ -12,7 +12,7 @@ public class ServerExtractor implements ResultSetExtractor {
 	public Object extractData(ResultSet rs) throws SQLException {
 		List<Server> servers = new ArrayList<Server>();
 		while (rs.next()) {
-			Server sv
+			Server sv;
 		}
 		return servers;
 	}

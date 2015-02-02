@@ -26,6 +26,7 @@
 	<!-- declare datasource bean -->
 
 	<context:component-scan base-package="vn.edu.cit" />
+	<!--
 	<beans:bean id="data"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver">
@@ -34,4 +35,5 @@
 		<beans:property name="username" value="root"></beans:property>
 		<beans:property name="password" value=""></beans:property>
 	</beans:bean>
+	-->
 </beans:beans>

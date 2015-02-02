@@ -1,0 +1,6 @@
+<%@page import="import javax.servlet.http.HttpServletRequest;
+"%>
+<%
+Import
+HttpServletRequest rs = new HttpServletRequest();
+%>

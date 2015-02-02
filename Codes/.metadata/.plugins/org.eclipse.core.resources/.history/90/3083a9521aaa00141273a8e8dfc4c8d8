@@ -1,0 +1,38 @@
+package vn.example.cms.components;
+
+import java.util.List;
+
+public class Form {
+	private String action;
+	private String method;
+	private List<Input> inputs;
+	
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	
+	public String makeForm() {
+		String str = "";
+		str += "<form action=\"" + this.getAction() + "\" method=\""
+				+ this.getMethod() + "\" >";
+		str += "InForm";
+		//Input input = new Input();
+		for(Input input : this.inputs){
+			str += input.makeInput(input)	
+		}
+		str += "</form>";
+		return str;
+	}
+}
