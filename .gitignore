@@ -9,9 +9,10 @@
 /src/main/webapp/repository
 # IDE/Eclipse settings
 #/.project
-#/.classpath
-#/.settings
-#/.externalToolBuilders
+/.classpath
+/.settings
+/.externalToolBuilders
+/.metadata
 #I think that this is where MANIFEST.MF should go according to maven specs.
 #For now, I will ignore it. Esteban
 /src/main/webapp/META-INF/MANIFEST.MF
