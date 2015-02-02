@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<Button id = "1">
+    <type>button</type>
+    <value>Click Vao Day</value>
+</Button>
