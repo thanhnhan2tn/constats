@@ -5,7 +5,412 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-02-02T09:43:41Z</updated>
+  <updated>2015-02-03T14:30:37Z</updated>
+  <entry>
+    <title>SSO with OAuth2: Angular JS and Spring Security Part V</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-01-05:1907</id>
+    <updated>2015-02-03T14:30:37Z</updated>
+    <content type="html">&lt;p&gt;In this article we continue &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we show how to use &lt;a href="http://projects.spring.io/spring-security-oauth/"&gt;Spring Security OAuth&lt;/a&gt; together with &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to extend our API Gateway to do Single Sign On and OAuth2 token authentication to backend resources. This is the fifth in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/oauth2"&gt;source code in Github&lt;/a&gt;. In the &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;last article&lt;/a&gt; we built a small distributed application that used &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt; to authenticate the backend resources and &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to implement an embedded API Gateway in the UI server. In this article we extract the authentication responsibilities to a separate server to make our UI server the first of potentially many Single Sign On applications to the authorization server. This is a common pattern in many applications these days, both in the enterprise and in social startups. We will use an OAuth2 server as the authenticator, so that we can also use it to grant tokens for the backend resource server. Spring Cloud will automatically relay the access token to our backend, and enable us to further simplify the implementation of both the UI and resource servers.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#creating-an-oauth2-authorization-server" class="anchor" name="creating-an-oauth2-authorization-server"&gt;&lt;/a&gt;Creating an OAuth2 Authorization Server&lt;/h2&gt;&lt;p&gt;Our first step is to create a new server to handle authentication and token management. Following the steps in &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;Part I&lt;/a&gt; we can begin with &lt;a href="https://start.spring.io"&gt;Spring Boot Initializr&lt;/a&gt;. E.g. using curl on a UN*X like system:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ curl https://start.spring.io/starter.tgz -d style=web \&#xD;
+-d style=security -d name=authserver | tar -xzvf - 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can then import that project (it&amp;rsquo;s a normal Maven Java project by default) into your favourite IDE, or just work with the files and &amp;ldquo;mvn&amp;rdquo; on the command line.&lt;/p&gt;&lt;h3&gt;&lt;a href="#adding-the-oauth2-dependencies" class="anchor" name="adding-the-oauth2-dependencies"&gt;&lt;/a&gt;Adding the OAuth2 Dependencies&lt;/h3&gt;&lt;p&gt;We need to add the &lt;a href="http://projects.spring.io/spring-security-oauth"&gt;Spring OAuth&lt;/a&gt; dependencies, so in our &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/oauth2/authserver/pom.xml"&gt;POM&lt;/a&gt; we add:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.security.oauth&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-security-oauth2&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;2.0.5.RELEASE&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The authorization server is pretty easy to implement. A minimal version looks like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+public class AuthserverApplication extends WebMvcConfigurerAdapter {&#xD;
+&#xD;
+  public static void main(String[] args) {&#xD;
+    SpringApplication.run(AuthserverApplication.class, args);&#xD;
+  }&#xD;
+  &#xD;
+  @Configuration&#xD;
+  @EnableAuthorizationServer&#xD;
+  protected static class OAuth2Config extends AuthorizationServerConfigurerAdapter {&#xD;
+&#xD;
+    @Autowired&#xD;
+    private AuthenticationManager authenticationManager;&#xD;
+    &#xD;
+    @Override&#xD;
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {&#xD;
+      endpoints.authenticationManager(authenticationManager);&#xD;
+    }&#xD;
+&#xD;
+@Override&#xD;
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {&#xD;
+      clients.inMemory()&#xD;
+          .withClient(&amp;quot;acme&amp;quot;)&#xD;
+          .secret(&amp;quot;acmesecret&amp;quot;)&#xD;
+          .authorizedGrantTypes(&amp;quot;authorization_code&amp;quot;, &amp;quot;refresh_token&amp;quot;,&#xD;
+              &amp;quot;password&amp;quot;).scopes(&amp;quot;openid&amp;quot;);&#xD;
+    }&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We only had to do 2 things (after adding &lt;code&gt;@EnableAuthorizationServer&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;p&gt;Register a client &amp;ldquo;acme&amp;rdquo; with a secret and some authorized grant types including &amp;ldquo;authorization_code&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;p&gt;Inject the default &lt;code&gt;AuthenticationManager&lt;/code&gt; from Spring Boot autoconfiguration and wire it into the OAuth2 endpoints.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Now let&amp;rsquo;s get it running on port 9999, with a predictable password for testing:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;server.port=9999&#xD;
+security.user.password=password&#xD;
+server.contextPath=/uaa
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We also set the context path so that it doesn&amp;rsquo;t use the default (&amp;ldquo;/&amp;rdquo;) because otherwise you can get cookies for other servers on localhost being sent to the wrong server. So get the server running and we can make sure it is working:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn spring-boot:run
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;or start the &lt;code&gt;main()&lt;/code&gt; method in your IDE.&lt;/p&gt;&lt;h3&gt;&lt;a href="#testing-the-authorization-server" class="anchor" name="testing-the-authorization-server"&gt;&lt;/a&gt;Testing the Authorization Server&lt;/h3&gt;&lt;p&gt;Our server is using the Spring Boot default security settings, so like the server in &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;Part I&lt;/a&gt; it will be protected by HTTP Basic authentication. To initiate an &lt;a href="https://tools.ietf.org/html/rfc6749#section-1.3.1"&gt;authorization code token grant&lt;/a&gt; you visit the authorization endpoint, e.g. at &lt;a href="http://localhost:9999/uaa/oauth/authorize?response_type=code&amp;client_id=acme&amp;redirect_uri=http://example.com"&gt;http://localhost:9999/uaa/oauth/authorize?response_type=code&amp;client_id=acme&amp;redirect_uri=http://example.com&lt;/a&gt; once you have authenticated you will get a redirect to example.com with an authorization code attached, e.g. &lt;a href="http://example.com/?code=jYWioI"&gt;http://example.com/?code=jYWioI&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: for the purposes of this sample application we have created a client &amp;ldquo;acme&amp;rdquo; with no registered redirect, which is what enables us to get a redirect the example.com. In a production application you should always register a redirect (and use HTTPS).&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;The code can be exchanged for an access token using the &amp;ldquo;acme&amp;rdquo; client credentials on the token endpoint:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ curl acme:acmesecret@localhost:9999/uaa/oauth/token  \&#xD;
+-d grant_type=authorization_code -d client_id=acme     \&#xD;
+-d redirect_uri=http://example.com -d code=jYWioI&#xD;
+{&amp;quot;access_token&amp;quot;:&amp;quot;2219199c-966e-4466-8b7e-12bb9038c9bb&amp;quot;,&amp;quot;token_type&amp;quot;:&amp;quot;bearer&amp;quot;,&amp;quot;refresh_token&amp;quot;:&amp;quot;d193caf4-5643-4988-9a4a-1c03c9d657aa&amp;quot;,&amp;quot;expires_in&amp;quot;:43199,&amp;quot;scope&amp;quot;:&amp;quot;openid&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The access token is a UUID (&amp;ldquo;2219199c&amp;hellip;&amp;rdquo;), backed by an in-memory token store in the server. We also got a refresh token that we can use to get a new access token when the current one expires.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: since we allowed &amp;ldquo;password&amp;rdquo; grants for the &amp;ldquo;acme&amp;rdquo; client we can also get a token directly from the token endpoint using curl and user credentials instead of an authorization code. This is not suitable for a browser based client, but it&amp;rsquo;s useful for testing.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;If you followed the link above you would have seen the whitelabel UI provided by Spring OAuth. To start with we will use this and we can come back later to beef it up like we did in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; for the self-contained server.&lt;/p&gt;&lt;p&gt;&lt;span id="changing-the-resource-server"&gt;&lt;/span&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#changing-the-resource-server" class="anchor" name="changing-the-resource-server"&gt;&lt;/a&gt;Changing the Resource Server&lt;/h2&gt;&lt;p&gt;If we follow on from &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;Part IV&lt;/a&gt;, our resource server is using &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt; for authentication, so we can take that out and replace it with Spring OAuth. We also need to remove the Spring Session and Redis dependencies, so replace this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.session&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-session&amp;lt;/artifactId&amp;gt;&#xD;
+  &amp;lt;version&amp;gt;1.0.0.RC1&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;&#xD;
+&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-boot-starter-redis&amp;lt;/artifactId&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;with this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+  &amp;lt;groupId&amp;gt;org.springframework.security.oauth&amp;lt;/groupId&amp;gt;&#xD;
+  &amp;lt;artifactId&amp;gt;spring-security-oauth2&amp;lt;/artifactId&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then remove the session &lt;code&gt;Filter&lt;/code&gt; from the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/vanilla-oauth2/resource/src/main/groovy/demo/ResourceApplication.groovy"&gt;main application class&lt;/a&gt;, replacing it with the convenient &lt;code&gt;@EnableOAuth2ResourceServer&lt;/code&gt; annotation (from Spring Cloud Security):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableOAuth2Resource&#xD;
+class ResourceApplication {&#xD;
+&#xD;
+  @RequestMapping(&amp;#39;/&amp;#39;)&#xD;
+  def home() {&#xD;
+    [id: UUID.randomUUID().toString(), content: &amp;#39;Hello World&amp;#39;]&#xD;
+  }&#xD;
+&#xD;
+  static void main(String[] args) {&#xD;
+    SpringApplication.run ResourceApplication, args&#xD;
+  }&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That much is enough to get us a protected resource. Run the application and hit the home page with a command line client:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ curl -v localhost:9000&#xD;
+&amp;gt; GET / HTTP/1.1&#xD;
+&amp;gt; User-Agent: curl/7.35.0&#xD;
+&amp;gt; Host: localhost:9000&#xD;
+&amp;gt; Accept: */*&#xD;
+&amp;gt; &#xD;
+&amp;lt; HTTP/1.1 401 Unauthorized&#xD;
+...&#xD;
+&amp;lt; WWW-Authenticate: Bearer realm=&amp;quot;null&amp;quot;, error=&amp;quot;unauthorized&amp;quot;, error_description=&amp;quot;An Authentication object was not found in the SecurityContext&amp;quot;&#xD;
+&amp;lt; Content-Type: application/json;charset=UTF-8&#xD;
+{&amp;quot;error&amp;quot;:&amp;quot;unauthorized&amp;quot;,&amp;quot;error_description&amp;quot;:&amp;quot;An Authentication object was not found in the SecurityContext&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and you will see a 401 with a &amp;ldquo;WWW-Authenticate&amp;rdquo; header indicating that it wants a bearer token. We are going to add a small amount of external configuration (in &amp;ldquo;application.properties&amp;rdquo;) to allow the resource server to decode the tokens it is given and authenticate a user:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint properties"&gt;...&#xD;
+oauth2.resource.userInfoUri: http://localhost:9999/uaa/user
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This tells the server that it can use the token to access a &amp;ldquo;/user&amp;rdquo; endpoint and use that to derive authentication information (it&amp;rsquo;s a bit like the &lt;a href="https://developers.facebook.com/docs/graph-api/reference/v2.2/user/?locale=en_GB"&gt;&amp;ldquo;/me&amp;rdquo; endpoint&lt;/a&gt; in the Facebook API). Effectively it provides a way for the resource server to decode the token, as expressed by the &lt;code&gt;ResourceServerTokenServices&lt;/code&gt; interface in Spring OAuth2.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Note: the &lt;code&gt;userInfoUri&lt;/code&gt; is by far not the only way of hooking a resource server up with a way to decode tokens. In fact it&amp;rsquo;s sort of a lowest common denominator (and not part of the spec), but quite often available from OAuth2 providers (like Facebook, Cloud Foundry, Github), and other choices are available. For instance you can encode the user authentication in the token itself (e.g. with &lt;a href="http://en.wikipedia.org/wiki/JWT" title="Jason Web Tokens"&gt;JWT&lt;/a&gt;), or use a shared backend store. There is also a &lt;code&gt;/token_info&lt;/code&gt; endpoint in CloudFoundry, which provides more detailed information than the user info endpoint, but which requires more thorough authentication. Different options (naturally) provide different benefits and trade-offs, but a full discussion of those is outside the scope of this article.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#implementing-the-user-endpoint" class="anchor" name="implementing-the-user-endpoint"&gt;&lt;/a&gt;Implementing the User Endpoint&lt;/h2&gt;&lt;p&gt;On the authorization server we can easily add that endpoint&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableResourceServer&#xD;
+public class AuthserverApplication {&#xD;
+&#xD;
+  @RequestMapping(&amp;quot;/user&amp;quot;)&#xD;
+  public Principal user(Principal user) {&#xD;
+    return user;&#xD;
+  }&#xD;
+&#xD;
+  ...&#xD;
+&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We added a &lt;code&gt;@RequestMapping&lt;/code&gt; the same as the UI server in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt;, and also the &lt;code&gt;@EnableResourceServer&lt;/code&gt; annotation from Spring OAuth, which by default secures everything in an authorization server except the &amp;ldquo;/oauth/*&amp;rdquo; endpoints.&lt;/p&gt;&lt;p&gt;With that endpoint in place we can test it and the greeting resource, since they both now accept bearer tokens that were created by the authorization server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;$ TOKEN=2219199c-966e-4466-8b7e-12bb9038c9bb&#xD;
+$ curl -H &amp;quot;Authorization: Bearer $TOKEN&amp;quot; localhost:9000&#xD;
+{&amp;quot;id&amp;quot;:&amp;quot;03af8be3-2fc3-4d75-acf7-c484d9cf32b1&amp;quot;,&amp;quot;content&amp;quot;:&amp;quot;Hello World&amp;quot;}&#xD;
+$ curl -H &amp;quot;Authorization: Bearer $TOKEN&amp;quot; localhost:9999/uaa/user&#xD;
+{&amp;quot;details&amp;quot;:...,&amp;quot;principal&amp;quot;:{&amp;quot;username&amp;quot;:&amp;quot;user&amp;quot;,...},&amp;quot;name&amp;quot;:&amp;quot;user&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(substitute the value of the access token that you obtain from your own authorization server to get that working yourself).&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-ui-server" class="anchor" name="the-ui-server"&gt;&lt;/a&gt;The UI Server&lt;/h2&gt;&lt;p&gt;The final piece of this application we need to complete is the UI server, extracting the authentication part and delegating to the authorization server. So, as with &lt;a href="#changing-the-resource-server"&gt;the resource server&lt;/a&gt;, we first need to remove the Spring Session and Redis dependencies and replace them with Spring OAuth2.&lt;/p&gt;&lt;p&gt;Once that is done we can remove the session filter and the &amp;ldquo;/user&amp;rdquo; endpoint as well, and set up the application to redirect to the authorization server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@EnableZuulProxy&#xD;
+@EnableOAuth2Sso&#xD;
+public class UiApplication {&#xD;
+&#xD;
+  public static void main(String[] args) {&#xD;
+    SpringApplication.run(UiApplication.class, args);&#xD;
+  }&#xD;
+&#xD;
+  @Configuration&#xD;
+  @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)&#xD;
+  protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Recall from &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;Part IV&lt;/a&gt; that the UI server acts an API Gateway and we can declare the route mappings in YAML. So the &amp;ldquo;/user&amp;rdquo; endpoint can be proxied to the authorization server:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;zuul:&#xD;
+  routes:&#xD;
+    resource:&#xD;
+      path: /resource/**&#xD;
+      url: http://localhost:9000&#xD;
+    user:&#xD;
+      path: /user/**&#xD;
+      url: http://localhost:9999/uaa/user
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#in-the-client" class="anchor" name="in-the-client"&gt;&lt;/a&gt;In the Client&lt;/h3&gt;&lt;p&gt;There are some minor tweaks to the UI application on the front end that we still need to make to trigger the redirect to the authorization server. The first is in the navigation bar in &amp;ldquo;index.html&amp;rdquo; where the &amp;ldquo;login&amp;rdquo; link changes from an Angular route:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;div ng-controller=&amp;quot;navigation&amp;quot; class=&amp;quot;container&amp;quot;&amp;gt;&#xD;
+  &amp;lt;ul class=&amp;quot;nav nav-pills&amp;quot; role=&amp;quot;tablist&amp;quot;&amp;gt;&#xD;
+    ...&#xD;
+    &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;#/login&amp;quot;&amp;gt;login&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+    ...&#xD;
+  &amp;lt;/ul&amp;gt;&#xD;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;to a plain HTML link&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;div ng-controller=&amp;quot;navigation&amp;quot; class=&amp;quot;container&amp;quot;&amp;gt;&#xD;
+  &amp;lt;ul class=&amp;quot;nav nav-pills&amp;quot; role=&amp;quot;tablist&amp;quot;&amp;gt;&#xD;
+    ...&#xD;
+    &amp;lt;li&amp;gt;&amp;lt;a href=&amp;quot;login&amp;quot;&amp;gt;login&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&#xD;
+    ...&#xD;
+  &amp;lt;/ul&amp;gt;&#xD;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &amp;ldquo;/login&amp;rdquo; endpoint that this goes to is handled by Spring Security and if the user is not authenticated it will result in a redirect to the authorization server.&lt;/p&gt;&lt;p&gt;We can also remove the definition of the &lt;code&gt;login()&lt;/code&gt; function in the &amp;ldquo;navigation&amp;rdquo; controller, and the &amp;ldquo;/login&amp;rdquo; route from the Angular configuration, which simplifies the implementation a bit:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ]).config(function($routeProvider) {&#xD;
+&#xD;
+  $routeProvider.when(&amp;#39;/&amp;#39;, {&#xD;
+    templateUrl : &amp;#39;home.html&amp;#39;,&#xD;
+    controller : &amp;#39;home&amp;#39;&#xD;
+  }).otherwise(&amp;#39;/&amp;#39;);&#xD;
+&#xD;
+}). // ...&#xD;
+.controller(&amp;#39;navigation&amp;#39;,&#xD;
+&#xD;
+function($rootScope, $scope, $http, $location, $route) {&#xD;
+&#xD;
+  $http.get(&amp;#39;user&amp;#39;).success(function(data) {&#xD;
+    if (data.name) {&#xD;
+      $rootScope.authenticated = true;&#xD;
+    } else {&#xD;
+      $rootScope.authenticated = false;&#xD;
+    }&#xD;
+  }).error(function() {&#xD;
+    $rootScope.authenticated = false;&#xD;
+  });&#xD;
+&#xD;
+  $scope.credentials = {};&#xD;
+&#xD;
+  $scope.logout = function() {&#xD;
+    $http.post(&amp;#39;logout&amp;#39;, {}).success(function() {&#xD;
+      $rootScope.authenticated = false;&#xD;
+      $location.path(&amp;quot;/&amp;quot;);&#xD;
+    }).error(function(data) {&#xD;
+      $rootScope.authenticated = false;&#xD;
+    });&#xD;
+  }&#xD;
+&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#how-does-it-work" class="anchor" name="how-does-it-work"&gt;&lt;/a&gt;How Does it Work?&lt;/h2&gt;&lt;p&gt;Run all the servers together now, and visit the UI in a browser at &lt;a href="http://localhost:8080"&gt;http://localhost:8080&lt;/a&gt;. Click on the &amp;ldquo;login&amp;rdquo; link and you will be redirected to the authorization server to authenticate (HTTP Basic popup) and approve the token grant (whitelabel HTML), before being redirected to the home page in the UI with the greeting fetched from the OAuth2 resource server using the same token as we authenticated the UI with.&lt;/p&gt;&lt;p&gt;The interactions between the browser and the backend can be seen in your browser if you use some developer tools (usually F12 opens this up, works in Chrome by default, requires a plugin in Firefox). Here&amp;rsquo;s a summary:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Verb &lt;/th&gt;
+      &lt;th&gt;Path &lt;/th&gt;
+      &lt;th&gt;Status &lt;/th&gt;
+      &lt;th&gt;Response&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/ &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;index.html&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/css/angular-bootstrap.css &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Twitter bootstrap CSS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/angular-bootstrap.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Bootstrap and Angular JS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/js/hello.js &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;Application logic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/home.html &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;HTML partial for home page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to auth server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;(uaa)/oauth/authorize &lt;/td&gt;
+      &lt;td&gt;401 &lt;/td&gt;
+      &lt;td&gt;(ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to login page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to auth server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;(uaa)/oauth/authorize &lt;/td&gt;
+      &lt;td&gt;401 &lt;/td&gt;
+      &lt;td&gt;(ignored)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to auth server&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;(uaa)/oauth/authorize &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;HTTP Basic auth happens here&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;POST &lt;/td&gt;
+      &lt;td&gt;(uaa)/oauth/authorize &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;User approves grant, redirect to /login&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/login &lt;/td&gt;
+      &lt;td&gt;302 &lt;/td&gt;
+      &lt;td&gt;Redirect to home page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/user &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;(Proxied) JSON authenticated user&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/home.html &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;HTML partial for home page&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GET &lt;/td&gt;
+      &lt;td&gt;/resource &lt;/td&gt;
+      &lt;td&gt;200 &lt;/td&gt;
+      &lt;td&gt;(Proxied) JSON greeting&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;&lt;p&gt;The requests prefixed with (uaa) are to the authorization server. The responses that are marked &amp;ldquo;ignored&amp;rdquo; are responses received by Angular in an XHR call, and since we aren&amp;rsquo;t processing that data they are dropped on the floor. We do look for an authenticated user in the case of the &amp;ldquo;/user&amp;rdquo; resource, but since it isn&amp;rsquo;t there in the first call, that response is dropped.&lt;/p&gt;&lt;p&gt;In the &amp;ldquo;/trace&amp;rdquo; endpoint of the UI (scroll down to the bottom) you will see the proxied backend requests to &amp;ldquo;/user&amp;rdquo; and &amp;ldquo;/resource&amp;rdquo;, with &lt;code&gt;remote:true&lt;/code&gt; and the bearer token instead of the cookie (as it would have been in &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;Part IV&lt;/a&gt;) being used for authentication. Spring Cloud Security has taken care of this for us: by recognising that we has &lt;code&gt;@EnableOAuth2Sso&lt;/code&gt; and &lt;code&gt;@EnableZuulProxy&lt;/code&gt; it has figured out that (by default) we want to relay the token to the proxied backends.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-logout-experience" class="anchor" name="the-logout-experience"&gt;&lt;/a&gt;The Logout Experience&lt;/h2&gt;&lt;p&gt;If you click on the &amp;ldquo;logout&amp;rdquo; link you will see that the home page changes (the greeting is no longer displayed) so the user is no longer authenticated with the UI server. Click back on &amp;ldquo;login&amp;rdquo; though and you actually &lt;em&gt;don&amp;rsquo;t&lt;/em&gt; need to go back through the authentication and approval cycle in the authorization server (because you haven&amp;rsquo;t logged out of that). Opinions will be divided as to whether that is a desirable user experience, and it&amp;rsquo;s a notoriously tricky problem (Single Sign Out: &lt;a href="http://www.sciencedirect.com/science/article/pii/S2214212614000179"&gt;Science Direct article&lt;/a&gt; and &lt;a href="https://wiki.shibboleth.net/confluence/display/SHIB2/SLOIssues"&gt;Shibboleth docs&lt;/a&gt;). The ideal user experience might not be technically feasible, and you also have to be suspicious sometimes that users really want what they say they want. &amp;ldquo;I want &amp;lsquo;logout&amp;rsquo; to log me out&amp;rdquo; sounds simple enough, but the obvious response is, &amp;ldquo;Logged out of what? Do you want to be logged out of &lt;em&gt;all&lt;/em&gt; the systems controlled by this SSO server, or just the one that you clicked the &amp;lsquo;logout&amp;rsquo; link in?&amp;rdquo; We don&amp;rsquo;t have room to discuss this topic more broadly here but it does deserve more attention. If you are interested then there is some discussion of the principles and some (fairly unappetising) ideas about implementations in the &lt;a href="http://openid.net/connect/"&gt;Open ID Connect&lt;/a&gt; specification.&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;This is almost the end of our shallow tour through the Spring Security and Angular JS stack. We have a nice architecture now with clear responsibilities in three separate components, UI/API Gateway, resource server and authorization server/token granter. The amount of non-business code in all layers is now minimal, and it&amp;rsquo;s easy to see where to extend and improve the implementation with more business logic. The next steps will be to tidy up the UI in our authorization server, and probably add some more tests, including tests on the JavaScript client. Another interesting task is to extract all the boiler plate code and put it in a library (e.g. &amp;ldquo;spring-security-angular&amp;rdquo;) containing Spring Security and Spring Session autoconfiguration and some webjars resources for the navigation controller in the Angular piece. Having read the articles in thir series, anyone who was hoping to learn the inner workings of either Angular JS or Spring Security will probably be disappointed, but if you wanted to see how they can work well together and how a little bit of configuration can go a long way, then hopefully you will have had a good experience. &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; is new and these samples required snapshots when they were written, but there are release candidates available and a GA release coming soon, so check it out and send some feedback &lt;a href="https://github.com/spring-cloud"&gt;via Github&lt;/a&gt; or &lt;a href="https://gitter.im/spring-cloud/spring-cloud"&gt;gitter.im&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#addendum-bootstrap-ui-and-jwt-tokens-for-the-authorization-server" class="anchor" name="addendum-bootstrap-ui-and-jwt-tokens-for-the-authorization-server"&gt;&lt;/a&gt;Addendum: Bootstrap UI and JWT Tokens for the Authorization Server&lt;/h2&gt;&lt;p&gt;You will find another version of this application in the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/oauth2"&gt;source code in Github&lt;/a&gt; which has a pretty login page and user approval page implemented similarly to the way we did the login page in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt;. It also uses &lt;a href="http://en.wikipedia.org/wiki/JWT" title="Jason Web Tokens"&gt;JWT&lt;/a&gt; to encode the tokens, so instead of using the &amp;ldquo;/user&amp;rdquo; endpoint, the resource server can pull enough information out of the token itself to do a simple authentication. The browser client still uses it, proxied through the UI server, so that it can determine if a user is authenticated (it doesn&amp;rsquo;t need to do that very often, compared to the likely number of calls to a resource server in a real application).&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Introducing Spring Social Slideshare</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/03/introducing-spring-social-slideshare" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-02-03:1955</id>
+    <updated>2015-02-03T01:00:00Z</updated>
+    <content type="html">&lt;blockquote&gt;&lt;p&gt;This post is a guest post by community &lt;a href="http://twitter.com/ttddyy"&gt;member Tadaya Tsuyukubo (@ttddyy)&lt;/a&gt;, creator of the Spring Social Slideshare project. Thanks Tadaya! I&amp;rsquo;d like to see more of these guest posts, so - as usual - don&amp;rsquo;t hesitate to &lt;a href="http://spring.io/team/jlong"&gt;ping me&lt;/a&gt;! -Josh&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr/&gt;&lt;p&gt;&lt;a href="https://github.com/ttddyy/spring-social-slideshare"&gt;Spring Social Slideshare&lt;/a&gt; is one of the community modules in &lt;a href="http://projects.spring.io/spring-social/"&gt;Spring Social&lt;/a&gt; ecosystem. It is a Java binding built on top of the Spring Social framework to interact with the SlideShare REST API.&lt;/p&gt;&lt;p&gt;Spring Social modules provide an implementation of the &lt;code&gt;ApiBinding&lt;/code&gt; interface that binds Java interfaces and concrete implementation classes to a REST API. By convention, an interface is named as target service, e.g. &lt;code&gt;GitHub&lt;/code&gt;, &lt;code&gt;LinkedIn&lt;/code&gt;, &lt;code&gt;Facebook&lt;/code&gt;, etc. The implementation class is of the form &lt;code&gt;*Template&lt;/code&gt;, e.g.: &lt;code&gt;GitHubTemplate&lt;/code&gt;, &lt;code&gt;LinkedInTemplate&lt;/code&gt;, and &lt;code&gt;FacebookTemplate.&lt;/code&gt; In Spring Social Slideshare, there is a &lt;code&gt;Slideshare&lt;/code&gt; interface and &lt;code&gt;SlideshareTemplate&lt;/code&gt; implementation class. You can use spring to inject the &lt;code&gt;SlideshareTemplate&lt;/code&gt; to your service. Or, if you choose to, you can directly instantiate &lt;code&gt;SlideshareTemplate&lt;/code&gt; and interact with SlideShare API outside of DI from spring.&lt;/p&gt;&lt;h2&gt;&lt;a href="#creating-a-code-slideshare-code-instance" class="anchor" name="creating-a-code-slideshare-code-instance"&gt;&lt;/a&gt;Creating a &lt;code&gt;SlideShare&lt;/code&gt; instance&lt;/h2&gt;&lt;p&gt;You need to &lt;a href="http://www.slideshare.net/developers/applyforapi"&gt;apply for a SlideShare API key&lt;/a&gt;. Once you submit the application form, you will get an email containing &lt;strong&gt;“API Key”&lt;/strong&gt; and &lt;strong&gt;“Shared Secret”&lt;/strong&gt;. You need these two keys to access SlideShare API.&lt;/p&gt;&lt;p&gt;This is the core part of the module to interact with SlideShare API.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;SlideShare slideshare = new SlideShareTemplate(&amp;quot;api_key&amp;quot;, &amp;quot;shared_secret&amp;quot;);&#xD;
+SlideshowOperations slideshow = slideshare.slideshowOperations();
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Now you can perform slideshow related operation via &lt;code&gt;slideshow&lt;/code&gt; instance.&lt;/p&gt;&lt;h2&gt;&lt;a href="#retrieving-a-specific-code-slideshow-code" class="anchor" name="retrieving-a-specific-code-slideshow-code"&gt;&lt;/a&gt;Retrieving a specific &lt;code&gt;Slideshow&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;Specific slideshow can be retrieved by slideshow id or url.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;// get a slideshow &amp;quot;Booting up Spring Social&amp;quot;&#xD;
+Slideshow show = slideshow.getSlideshowById(&amp;quot;41084028&amp;quot;);&#xD;
+&#xD;
+// By url&#xD;
+Slideshow show =  slideshow.getSlideshowByUrl(&#xD;
+  &amp;quot;http://www.slideshare.net/SpringCentral/booting-up-spring-social&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;There are many different properties that you can consume including the slideshow&amp;rsquo;s &lt;code&gt;id,&lt;/code&gt; &lt;code&gt;url,&lt;/code&gt; &lt;code&gt;title,&lt;/code&gt; &lt;code&gt;description,&lt;/code&gt; &lt;code&gt;created,&lt;/code&gt; &lt;code&gt;username,&lt;/code&gt; and &lt;code&gt;downloadUrl&lt;/code&gt;. If you want to embed the presentation in HTML, use the &lt;code&gt;embed&lt;/code&gt; property.&lt;/p&gt;&lt;p&gt;Also, you can retrieve slideshows by user, tag, or group.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;GetSlideshowsResponse response;&#xD;
+&#xD;
+// by user&#xD;
+response = slideshow.getSlideshowsByUser(&#xD;
+  &amp;quot;SpringCentral&amp;quot;, FETCH_SIZE);&#xD;
+&#xD;
+// you can also specify offset and detailed flag&#xD;
+response = slideshow.getSlideshowsByUser(&amp;quot;SpringCentral&amp;quot;,&#xD;
+  FETCH_SIZE, offset, true);&#xD;
+&#xD;
+// by tag or group&#xD;
+response = slideshow.getSlideshowsByTag(&amp;quot;spring&amp;quot;, FETCH_SIZE);&#xD;
+response = slideshow.getSlideshowsByGroup(&amp;quot;group_name&amp;quot;, FETCH_SIZE);&#xD;
+&#xD;
+// You can print the `count` and `name`&#xD;
+List&amp;lt;Slideshow&amp;gt; shows = response.getSlideshows();    // list of slideshows&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#performing-searches" class="anchor" name="performing-searches"&gt;&lt;/a&gt;Performing Searches&lt;/h2&gt;&lt;p&gt;You can search slideshows by keyword:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;SearchSlideshowsResponse response;&#xD;
+response = slideshow.searchSlideshows(&amp;quot;spring&amp;quot;);&#xD;
+&#xD;
+// paginated access&#xD;
+int page = 3;&#xD;
+int itemsPerPage = 20;&#xD;
+response = slideshow.searchSlideshows(&amp;quot;spring&amp;quot;, page, itemsPerPage);&#xD;
+&#xD;
+List&amp;lt;Slideshow&amp;gt; shows = response.getSlideshows();
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Each response has a &lt;code&gt;numResults&lt;/code&gt; and &lt;code&gt;totalResults&lt;/code&gt; property that gives you the number of results returned and the total results of the result collection.&lt;/p&gt;&lt;h2&gt;&lt;a href="#creating-and-uploading-presentations" class="anchor" name="creating-and-uploading-presentations"&gt;&lt;/a&gt;Creating and Uploading Presentations&lt;/h2&gt;&lt;p&gt;You can upload a presentation by specifying a &lt;code&gt;java.io.File&lt;/code&gt;, &lt;code&gt;String&lt;/code&gt;, and an implementation of Spring&amp;rsquo;s &lt;code&gt;Resource&lt;/code&gt; hierarchy.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; SlideShare API requires extra permission for upload operation. Please see &lt;a href="http://www.slideshare.net/developers/documentation#upload_slideshow"&gt;“SlideShare API Documentation”&lt;/a&gt; for requesting upload permission on your dev account.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;File file = new File( &amp;quot;path_to_your_presentation_file&amp;quot;);&#xD;
+String uploadedShowId = slideshow.uploadSlideshowFromFile(&#xD;
+  username, password, file, &amp;quot;My Title&amp;quot;, &amp;quot;My Description&amp;quot;);&#xD;
+&#xD;
+// Other API to upload slideshows&#xD;
+//   slideshow.uploadSlideshowResource(...)&#xD;
+//   slideshow.uploadSlideshowFromContent(...)&#xD;
+//   slideshow.uploadSlideshowFromUrl(...)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can modify your slideshow&amp;rsquo;s information, as well.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;List&amp;lt;String&amp;gt; tags = Arrays.asList(&amp;quot;spring&amp;quot;, &amp;quot;social&amp;quot;);&#xD;
+PrivacySetting privacy = new PrivacySetting();&#xD;
+privacy.setMakeSlideshowPrivate(false);    // make slideshow public&#xD;
+&#xD;
+String editedShowId = slideshow.editSlideshow(username, password,&#xD;
+    &amp;quot;01234&amp;quot;, &amp;quot;New Title&amp;quot;, &amp;quot;New Desc&amp;quot;, tags, privacy);&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Simply you can delete slideshow by ID.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;String deletedShowId = slideshow.deleteSlideshow(username, password, &amp;quot;01234&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#what-s-next" class="anchor" name="what-s-next"&gt;&lt;/a&gt;What’s next?&lt;/h2&gt;&lt;p&gt;The Slideshare API provides four areas of functionality supporting slideshows, users, favorites and lead/campaign operations. The current version of Spring Social Slideshare only supports slideshow-specific operations.&lt;/p&gt;&lt;p&gt;The project is evolving. Don&amp;rsquo;t hesitate to reach &lt;a href="https://twitter.com/ttddyy"&gt;me&lt;/a&gt;, &lt;a href="https://github.com/ttddyy/spring-social-slideshare/issues/new"&gt;create an issue on GitHub&lt;/a&gt;, or send pull-requests for specific improvements.&lt;/p&gt;&lt;h2&gt;&lt;a href="#summary" class="anchor" name="summary"&gt;&lt;/a&gt;Summary&lt;/h2&gt;&lt;p&gt;If your application needs to integrate with SlideShare, &lt;a href="https://github.com/ttddyy/spring-social-slideshare"&gt;Spring Social Slideshare&lt;/a&gt; is an easy, familiar approach. I created a &lt;a href="https://github.com/ttddyy/spring-social-slideshare-demo"&gt;sample project&lt;/a&gt; which demonstrates the basic operations explained in this post. &lt;a href="https://github.com/ttddyy/spring-social-slideshare-demo/blob/master/src/main/java/demo/Application.java"&gt;Start here&lt;/a&gt;. Thank you for reading this post.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Cloud 1.0.0.RC2 Available Now</title>
     <link rel="alternate" href="https://spring.io/blog/2015/02/02/spring-cloud-1-0-0-rc2-available-now" />
@@ -14,8 +419,8 @@
       <name>Dave Syer</name>
     </author>
     <id>tag:spring.io,2015-02-02:1952</id>
-    <updated>2015-02-02T09:43:41Z</updated>
-    <content type="html">&lt;p&gt;&lt;a href="http://spring.io/spring-projects/spring-cloud"&gt;Spring Cloud&lt;/a&gt; 1.0.0.RC2 is available now in the &lt;a href="http://repo.spring.io"&gt;http://repo.spring.io&lt;/a&gt; repository. There was a lot of activity pruning and curating dependencies, so users upgrading from RC1 might need to tweak their starter dependencies a bit, but hopefully we are all in a better place as a result. There were also a lot of changes in the Security features, making it easier to customize various parts of that, mainly in response to people actually using it and needing help (so thanks for the feedback). We will probably have an RC3 before the GA, but things are getting pretty close to ready.&lt;/p&gt;</content>
+    <updated>2015-02-02T13:58:00Z</updated>
+    <content type="html">&lt;p&gt;&lt;a href="http://projects.spring.io/spring-cloud"&gt;Spring Cloud&lt;/a&gt; 1.0.0.RC2 is available now in the &lt;a href="http://repo.spring.io"&gt;http://repo.spring.io&lt;/a&gt; repository. There was a lot of activity pruning and curating dependencies, so users upgrading from RC1 might need to tweak their starter dependencies a bit, but hopefully we are all in a better place as a result. There were also a lot of changes in the Security features, making it easier to customize various parts of that, mainly in response to people actually using it and needing help (so thanks for the feedback). We will probably have an RC3 before the GA, but things are getting pretty close to ready.&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Spring Security OAuth 2.0.6.RELEASE Available Now</title>
@@ -25,14 +430,101 @@
       <name>Dave Syer</name>
     </author>
     <id>tag:spring.io,2015-02-02:1951</id>
-    <updated>2015-02-02T09:35:00Z</updated>
+    <updated>2015-02-02T13:57:00Z</updated>
     <content type="html">&lt;p&gt;Spring Security OAuth 2.0.6.RELEASE is available now in the usual repositories. It&amp;rsquo;s a bug fix release, and users of 2.0.5.RELEASE should upgrade. The only critical bug was for users of JWT with refresh tokens, and there were also some people experiencing double encoding of redirect uris, which is now fixed. Highlights of new features:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;p&gt;(Much requested) ability to have non-expiring refresh tokens with no customizations (just set the validity period to zero or less)&lt;/p&gt;&lt;/li&gt;
   &lt;li&gt;&lt;p&gt;The /token endpoint only accepts POST requests by default&lt;/p&gt;&lt;/li&gt;
   &lt;li&gt;&lt;p&gt;Resource servers do not accept cookie based authentication by default (you have to switch it on)&lt;/p&gt;&lt;/li&gt;
   &lt;li&gt;&lt;p&gt;Resource server configuration has a few new options including the ability to inject custom error handlers&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Thanks, as usual, go to the community for contributing code and ideas. It feels like the community if growing, and that&amp;rsquo;s always good to see. Finally, watch out for a new blog on Angular JS with Spring Security and OAuth2 coming out soon here.&lt;/p&gt;</content>
+&lt;/ul&gt;&lt;p&gt;Thanks, as usual, go to the community for contributing code and ideas. It feels like the community is growing, and that&amp;rsquo;s always good to see. Finally, watch out for a new blog on Angular JS with Spring Security and OAuth2 coming out soon here.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Working with Databases and Groovy</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-working-with-databases-and-groovy" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-02-02:1954</id>
+    <updated>2015-02-02T13:56:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
+&lt;p&gt;More Groovy Track&lt;/p&gt;
+&lt;p&gt; Slides: &lt;a href="http://www.slideshare.net/SpringCentral/databases-withgroovy-paulkingoct2013"&gt;http://www.slideshare.net/SpringCentral/databases-withgroovy-paulkingoct2013 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This talk reviews the features in Groovy which make it easy to work with databases. It reviews the features of Groovy SQL including Groovy's LINQ-like lazy evaluation technology called datasets. In addition, it looks at working with a couple of NoSQL databases: MongoDB (using GMongo) and Neo4J (using it's Java api and via Gremlin support).&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/Y8PV1tlw0Vk" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Roo 1.3.1.RELEASE now available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/spring-roo-1-3-1-release-now-available" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-02-02:1953</id>
+    <updated>2015-02-02T13:29:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring Roo Team at &lt;a href="http://www.disid.com"&gt;Disid Corp&lt;/a&gt;, we are pleased to announce the 1.3.1.RELEASE is out! &lt;/p&gt;
+&lt;p&gt;Spring Roo 1.3.1.RC2 was closed without new reported issues. &lt;/p&gt;
+&lt;p&gt;Spring Roo jar files have been published to Maven Central. &lt;/p&gt;
+&lt;p&gt;It is recommended that all Spring Roo users upgrade to this version. For full details on the changes made in the release, please refer to the &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10340&amp;version=14836"&gt;Spring Roo 1.3.1.RC1 Release Notes&lt;/a&gt; and &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10340&amp;version=14870"&gt;Spring Roo 1.3.1.RC2 Release Notes&lt;/a&gt; in JIRA.&lt;/p&gt;
+&lt;p&gt; Thanks to all awesome users who came up with useful bug reports and suggestions, currently we are working on defining final points of Spring Roo 2.0 Roadmap and it will be published as soon as possible. &lt;/p&gt;
+&lt;p&gt;For more specific information about Spring Roo project please see the &lt;a href="http://projects.spring.io/spring-roo/"&gt;Project Page&lt;/a&gt;  or &lt;a href="https://github.com/spring-projects/spring-roo"&gt;GitHub.&lt;/a&gt; As always, you'll also find Roo on Twitter - either follow &lt;a href="https://www.twitter.com/springroo"&gt;@SpringRoo&lt;/a&gt; or just include #SpringRoo in your tweets. Stay tuned to Spring Roo news!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX Replay: Making Spring Boot Even Groovier</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/springone2gx-replay-making-spring-boot-even-groovier" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-27:1944</id>
+    <updated>2015-02-02T12:40:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
+&lt;p&gt;Speaker: Graeme Rocher&lt;/p&gt;
+&lt;p&gt;Core Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/2-gx-2014-making-spring-boot-groovier"&gt;http://www.slideshare.net/SpringCentral/2-gx-2014-making-spring-boot-groovier &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;In this talk Grails project lead Graeme Rocher will show how you can leverage key technologies from the Groovy and Grails communities to become even more productive with Spring Boot.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/KeLs6k8-QJ8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Introduction to Spring for Apache Hadoop</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-introduction-to-spring-for-apache-hadoop" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-27:1943</id>
+    <updated>2015-02-02T12:35:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Thomas Risberg &lt;/p&gt;
+&lt;p&gt;Big Data Track &lt;/p&gt;
+&lt;p&gt;&lt;a href="Slides: http://www.slideshare.net/SpringCentral/spring-one2gx-2014springforapachehadoop"&gt;Slides: http://www.slideshare.net/SpringCentral/spring-one2gx-2014springforapachehadoop&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Leverage your existing Java and Spring skills when making the jump to write applications and workflows for Apache Hadoop. In this presentation we will introduce the Spring for Apache Hadoop project and see how it can make developing workflows with Map Reduce, Hive and Pig jobs easier, while providing portability across ASF, Cloudera, HortonWorks, and Pivotal distros. We'll also look at integration with Spring XD, batch jobs and external data sources. In addition to all this we'll show how use a mini-cluster to test your new Hadoop workflows without having to deploy to a full cluster.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/JlsSnELdSMU" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Groovy, in the light of Java 8</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-groovy-in-the-light-of-java-8" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-01-27:1942</id>
+    <updated>2015-02-02T12:27:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Guillaume LaForge &lt;/p&gt;
+&lt;p&gt;Core Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-in-thelightofjava8"&gt;http://www.slideshare.net/SpringCentral/groovy-in-thelightofjava8 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;With Java 8 out the door, Java developers can, at last, benefit from the long-awaited lambdas, to taste the newly-found functional flavor of the language. Streams are there to work more easily and efficiently with heaps of data. Those things are not new to developers acquainted with Groovy. But what is left to Groovy to make it attractive beyond all the aspects Java has caught up with Groovy? &lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/sDWG-B5zrM8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Why 12 Factor Application Patterns, Microservices and CloudFoundry Matter</title>
@@ -207,18 +699,32 @@ public class UiApplication {&#xD;
   ...&#xD;
 &#xD;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then the resource server. There are two changes to make: one is adding &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; and a &lt;code&gt;HeaderHttpSessionStrategy&lt;/code&gt; bean to the &lt;code&gt;ResourceApplication&lt;/code&gt;:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then the resource server. There are three small changes to make: one is adding &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; to the &lt;code&gt;ResourceApplication&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
 @RestController&#xD;
 @EnableRedisHttpSession&#xD;
 class ResourceApplication {&#xD;
   ...&#xD;
-  @Bean&#xD;
-  HeaderHttpSessionStrategy sessionStrategy() {&#xD;
-    new HeaderHttpSessionStrategy();&#xD;
-  }&#xD;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and the other is to explicitly ask for a non-stateless session creation policy in &lt;code&gt;application.properties&lt;/code&gt;:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;another is to explicitly disable HTTP Basic in the resource server (to prevent the browser from popping up authentication dialogs):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+@RestController&#xD;
+@EnableRedisHttpSession&#xD;
+class ResourceApplication extends WebSecurityConfigurerAdapter {&#xD;
+&#xD;
+  ...&#xD;
+&#xD;
+  @Override&#xD;
+  protected void configure(HttpSecurity http) throws Exception {&#xD;
+    http.httpBasic().disable()&#xD;
+    http.authorizeRequests().anyRequest().authenticated()&#xD;
+  }&#xD;
+&#xD;
+}&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;&lt;p&gt;Aside: an alternative, which would also prevent the authentication dialog, would be to keep HTTP Basic but change the 401 challenge to something other than &amp;ldquo;Basic&amp;rdquo;. You can do that with a one-line implementation of &lt;code&gt;AuthenticationEntryPoint&lt;/code&gt; in the &lt;code&gt;HttpSecurity&lt;/code&gt; configuration callback.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;and the last one is to explicitly ask for a non-stateless session creation policy in &lt;code&gt;application.properties&lt;/code&gt;:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint properties"&gt;security.sessions: NEVER
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As long as redis is still running in the background (use the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/proxy/fig.yml"&gt;&lt;code&gt;fig.yml&lt;/code&gt;&lt;/a&gt; if you like to start it) then the system will work. Load the homepage for the UI at &lt;a href="http://localhost:8080"&gt;http://localhost:8080&lt;/a&gt; and login and you will see the message from the backend rendered on the homepage.&lt;/p&gt;&lt;h2&gt;&lt;a href="#how-does-it-work" class="anchor" name="how-does-it-work"&gt;&lt;/a&gt;How Does it Work?&lt;/h2&gt;&lt;p&gt;What is going on behind the scenes now? First we can look at the HTTP requests in the UI server (and API Gateway):&lt;/p&gt;
 &lt;table&gt;
@@ -347,7 +853,7 @@ class ResourceApplication {&#xD;
     }&#xD;
   }&#xD;
 },
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The second entry there is the request from the client to the gateway on &amp;ldquo;/resource&amp;rdquo; and you can see the cookies (added by the browser) and the CSRF header (added by Angular as discussed in &lt;a href="second"&gt;Part II&lt;/a&gt;). The first entry has &lt;code&gt;remote: true&lt;/code&gt; and that means it&amp;rsquo;s tracing the call to the resource server. You can see it went out to a uri path &amp;ldquo;/&amp;rdquo; and you can see that (crucially) the cookies and CSRF headers have been sent too. Without Spring Session these headers would be meaningless to the resource server, but the way we have set it up it can now use those headers to re-constitute a session with authentication and CSRF token data. So the request is permitted and we are in business!&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We covered quite a lot in this article but we got to a really nice place where there is a minimal amount of boilerplate code in our two servers, they are both nicely secure and the user experience isn&amp;rsquo;t compromised. That alone would be a reason to use the API Gateway pattern, but really we have only scratched the surface of what that might be used for (Netflix uses it for &lt;a href="https://github.com/Netflix/zuul/wiki/How-We-Use-Zuul-At-Netflix"&gt;a lot of things&lt;/a&gt;). Read up on &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to find out more on how to make it easy to add more features to the gateway. The next article in this series will extend the application architecture a bit by extracting the authentication responsibilities to a separate server (the Single Sign On pattern).&lt;/p&gt;</content>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The second entry there is the request from the client to the gateway on &amp;ldquo;/resource&amp;rdquo; and you can see the cookies (added by the browser) and the CSRF header (added by Angular as discussed in &lt;a href="second"&gt;Part II&lt;/a&gt;). The first entry has &lt;code&gt;remote: true&lt;/code&gt; and that means it&amp;rsquo;s tracing the call to the resource server. You can see it went out to a uri path &amp;ldquo;/&amp;rdquo; and you can see that (crucially) the cookies and CSRF headers have been sent too. Without Spring Session these headers would be meaningless to the resource server, but the way we have set it up it can now use those headers to re-constitute a session with authentication and CSRF token data. So the request is permitted and we are in business!&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We covered quite a lot in this article but we got to a really nice place where there is a minimal amount of boilerplate code in our two servers, they are both nicely secure and the user experience isn&amp;rsquo;t compromised. That alone would be a reason to use the API Gateway pattern, but really we have only scratched the surface of what that might be used for (Netflix uses it for &lt;a href="https://github.com/Netflix/zuul/wiki/How-We-Use-Zuul-At-Netflix"&gt;a lot of things&lt;/a&gt;). Read up on &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to find out more on how to make it easy to add more features to the gateway. The &lt;a href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v"&gt;next article&lt;/a&gt; in this series will extend the application architecture a bit by extracting the authentication responsibilities to a separate server (the Single Sign On pattern).&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>This Week in Spring - January 27th, 2015</title>
@@ -788,457 +1294,6 @@ class Reservation {&#xD;
   &lt;li&gt;Want to stand up services via Docker? Check out our pal &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;Chris Richardson&amp;rsquo;s post on standing up services via Docker&lt;/a&gt;! You could, for example, consume these services from another Docker-packaged Spring Boot application, or on Cloud Foundry.next (hitherto called &amp;ldquo;Diego&amp;rdquo;). &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Are you following &lt;a href="http://www.thisweekincf.com/blog/2015/01/19/this-week-in-cloud-foundry-19th-january-2015/"&gt;&lt;em&gt;This Week in Cloud Foundry&lt;/em&gt;&lt;/a&gt;? Do! There&amp;rsquo;s so much good stuff there, as usual.&lt;/li&gt;
 &lt;/ol&gt;&lt;p&gt;Webinars make up a lot of this week&amp;rsquo;s roundup. Nice work, &lt;a href="https://twitter.com/pieterhumphrey"&gt;Pieter Humphrey&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Spring XD - A Platform for data at scale and developer productivity</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-20:1940</id>
-    <updated>2015-01-20T13:35:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Sabby Anandan &lt;/p&gt;
-&lt;p&gt;Worried about Big Data and the challenges inherent in making a real application? You don’t have to worry anymore! Spring XD provides a one-stop shop solution that spans traditional enterprise to Big Data use cases - both batch and streaming. It's important to choose the right tool for each use-case, which is why Spring XD integrates with technologies such as Spark, Reactor and RxJava to demonstrate the flexibility and the unified programming model to support complex data computation use-cases. In this webinar, we'll show you how to develop data-driven use cases much faster than other big data solutions on the out of the box XD runtime. &lt;/p&gt;&lt;p&gt;Tuesday, Feb 17th, 2015 3:00PM GMT (London GMT)&lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMSpringXDAPlatformfordataatscaleanddeveloperproductivity_Register.html"&gt; Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, Feb 17th, 2015 10:00AM PST (San Francisco GMT-08:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMSpringXDAPlatformfordataatscaleanddeveloperproductivity_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Introducing Spring Session</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/webinar-introducing-spring-session" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-20:1939</id>
-    <updated>2015-01-20T13:25:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Josh Long, Pivotal &lt;/p&gt;
-&lt;p&gt;Back in the era of the application server, HTTP Session replication was a common way to scale out user session data, as well as make it fault tolerant. In today's world of lightweight containers, PaaS, and virtualization, Spring Session offers a 100% server and/or container portable HTTP Session. See how Spring Session easily plugs in implementations like Redis, scales out across a cluster, handles multiple users' browser sessions, works with WebSocket, and allows header based authentication within REST apps. It's a perfect fit for working with user data, particularly in a highly distributed environment like the cloud, or on a Platform like Cloud Foundry.&lt;/p&gt;&lt;p&gt;Tuesday, Feb 24th, 2015 3:00PM GMT (London GMT)&lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMIntroducingSpringSession_Register.html"&gt; Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, Feb 24th, 2015 10:00AM PST (San Francisco GMT-08:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMIntroducingSpringSession_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Documenting RESTful APIs</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/webinar-documenting-restful-apis" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-20:1938</id>
-    <updated>2015-01-20T13:23:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Andy Wilkinson, Pivotal &lt;/p&gt;
-&lt;p&gt;An API's documentation is a vital part of making it easy to understand and easy to use. RESTful APIs are no different. In this webinar we'll look at what should be included in your RESTful API's documentation and, just as importantly, what should be omitted. To illustrate this we'll look at some real-world examples of good and bad API documentation. We'll look at some of the problems and limitations of choosing a tool like Swagger to produce your API's documentation and conclude by looking at some alternatives that are better-suited to producing documentation that your users will love. &lt;/p&gt;&lt;p&gt;Tuesday, Feb 3rd, 2015 3:00PM GMT (London GMT)&lt;a href="http://connect.pivotal.io/7AMDocumentingRESTfulAPIs_Register.html"&gt; Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, Feb 3rd, 2015 10:00AM PST (San Francisco GMT-08:00) &lt;a href="http://connect.pivotal.io/10AMDocumentingRESTfulAPIs_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>The Resource Server: Angular JS and Spring Security Part III</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Dave Syer</name>
-    </author>
-    <id>tag:spring.io,2015-01-05:1905</id>
-    <updated>2015-01-20T09:54:00Z</updated>
-    <content type="html">&lt;p&gt;In this article we continue &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we start by breaking out the &amp;ldquo;greeting&amp;rdquo; resource that we are using as the dynamic content in our application into a separate server, first as an unprotected resource, and then protected by an opaque token. This is the third in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the source code in Github, which is in two parts: one where the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/vanilla"&gt;resource is unprotected&lt;/a&gt;, and one where it is &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/spring-session"&gt;protected by a token&lt;/a&gt;.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#a-separate-resource-server" class="anchor" name="a-separate-resource-server"&gt;&lt;/a&gt;A Separate Resource Server&lt;/h2&gt;&lt;h3&gt;&lt;a href="#client-side-changes" class="anchor" name="client-side-changes"&gt;&lt;/a&gt;Client Side Changes&lt;/h3&gt;&lt;p&gt;On the client side there isn&amp;rsquo;t very much to do to move the resource to a different backend. Here&amp;rsquo;s the &amp;ldquo;home&amp;rdquo; controller in the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/single/src/main/resources/static/js/hello.js"&gt;last article&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
-...&#xD;
-.controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
-	$http.get(&amp;#39;/resource/&amp;#39;).success(function(data) {&#xD;
-		$scope.greeting = data;&#xD;
-	})&#xD;
-})&#xD;
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;All we need to do to this is change the URL. For example, if we are going to run the new resource on localhost, it could look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
-...&#xD;
-.controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
-	$http.get(&amp;#39;http://localhost:9000/&amp;#39;).success(function(data) {&#xD;
-		$scope.greeting = data;&#xD;
-	})&#xD;
-})&#xD;
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#server-side-changes" class="anchor" name="server-side-changes"&gt;&lt;/a&gt;Server Side Changes&lt;/h3&gt;&lt;p&gt;The &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/vanilla/ui/src/main/java/demo/UiApplication.java"&gt;UI server&lt;/a&gt; is trivial to change: we just need to remove the &lt;code&gt;@RequestMapping&lt;/code&gt; for the greeting resource (it was &amp;ldquo;/resource&amp;rdquo;). Then we need to create a new resource server, which we can do like we did in the &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt; using the &lt;a href="https://start.spring.io"&gt;Spring Boot Initializr&lt;/a&gt;. E.g. using curl on a UN*X like system:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mkdir resource &amp;amp;&amp;amp; cd resource&#xD;
-$ curl https://start.spring.io/starter.tgz -d style=web \&#xD;
--d name=resource -d language=groovy | tar -xzvf - 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can then import that project (it&amp;rsquo;s a normal Maven Java project by default) into your favourite IDE, or just work with the files and &amp;ldquo;mvn&amp;rdquo; on the command line. We are using Groovy because we can, but please feel free to use Java if you prefer. There isn&amp;rsquo;t going to be much code anyway.&lt;/p&gt;&lt;p&gt;Just add a &lt;code&gt;@RequestMapping&lt;/code&gt; to the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/vanilla/resource/src/main/groovy/demo/ResourceApplication.groovy"&gt;main application class&lt;/a&gt;, copying the implementation from the &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/single/src/main/java/demo/UiApplication.java"&gt;old UI&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
-@RestController&#xD;
-class ResourceApplication {&#xD;
-	&#xD;
-	@RequestMapping(&amp;#39;/&amp;#39;)&#xD;
-	def home() {&#xD;
-		[id: UUID.randomUUID().toString(), content: &amp;#39;Hello World&amp;#39;]&#xD;
-	}&#xD;
-&#xD;
-    static void main(String[] args) {&#xD;
-        SpringApplication.run ResourceApplication, args&#xD;
-    }&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once that is done your application will be loadable in a browser. On the command line you can do this&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn spring-boot:run --server.port=9000
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and go to a browser at &lt;a href="http://localhost:9000"&gt;http://localhost:9000&lt;/a&gt; and you should see JSON with a greeting. You can bake in the port change in &lt;code&gt;application.properties&lt;/code&gt; (in&amp;ldquo;src/main/resources&amp;rdquo;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint properties"&gt;server.port: 9000
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If you try loading that resource from the UI (on port 8080) in a browser, you will find that it doesn&amp;rsquo;t work because the browser won&amp;rsquo;t allow the XHR request.&lt;/p&gt;&lt;h2&gt;&lt;a href="#cors-negotiation" class="anchor" name="cors-negotiation"&gt;&lt;/a&gt;CORS Negotiation&lt;/h2&gt;&lt;p&gt;The browser tries to negotiate with our resource server to find out if it is allowed to access it according to the &lt;a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"&gt;Common Origin Resource Sharing&lt;/a&gt; protocol. It&amp;rsquo;s not an Angular JS responsibility, so just like the cookie contract it will work like this with all JavaScript in the browser. The two servers do not declare that they have a common origin, so the browser declines to send the request and the UI is broken.&lt;/p&gt;&lt;p&gt;To fix that we need to support the CORS protocol which involves a &amp;ldquo;pre-flight&amp;rdquo; OPTIONS request and some headers to list the allowed behaviour of the caller. Spring 4.2 might have some nice &lt;a href="https://jira.spring.io/browse/SPR-9278"&gt;fine-grained CORS support&lt;/a&gt;, but until that is released we can do an adequate job for the purposes of this application by sending the same CORS responses to all requests using a &lt;code&gt;Filter&lt;/code&gt;. We can just create a class in the same directory as the resource server application and make sure it is a &lt;code&gt;@Component&lt;/code&gt; (so it gets scanned into the Spring application context), for example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Component&#xD;
-@Order(Ordered.HIGHEST_PRECEDENCE)&#xD;
-class CorsFilter implements Filter {&#xD;
-&#xD;
-	void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) {&#xD;
-		HttpServletResponse response = (HttpServletResponse) res&#xD;
-		response.setHeader(&amp;quot;Access-Control-Allow-Origin&amp;quot;, &amp;quot;*&amp;quot;)&#xD;
-		response.setHeader(&amp;quot;Access-Control-Allow-Methods&amp;quot;, &amp;quot;POST, PUT, GET, OPTIONS, DELETE&amp;quot;)&#xD;
-		response.setHeader(&amp;quot;Access-Control-Max-Age&amp;quot;, &amp;quot;3600&amp;quot;)&#xD;
-		if (request.getMethod()!=&amp;#39;OPTIONS&amp;#39;) {&#xD;
-			chain.doFilter(req, res)&#xD;
-		} else {&#xD;
-		}&#xD;
-	}&#xD;
-&#xD;
-	void init(FilterConfig filterConfig) {}&#xD;
-&#xD;
-	void destroy() {}&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;Filter&lt;/code&gt; is defined with an &lt;code&gt;@Order&lt;/code&gt; so that it is definitely applied &lt;em&gt;before&lt;/em&gt; the main Spring Security filter. With that change to the resource server, we should be able to re-launch it and get our greeting in the UI.&lt;/p&gt;&lt;h2&gt;&lt;a href="#securing-the-resource-server" class="anchor" name="securing-the-resource-server"&gt;&lt;/a&gt;Securing the Resource Server&lt;/h2&gt;&lt;p&gt;Great! We have a working application with a new architecture. The only problem is that the resource server has no security.&lt;/p&gt;&lt;h3&gt;&lt;a href="#adding-spring-security" class="anchor" name="adding-spring-security"&gt;&lt;/a&gt;Adding Spring Security&lt;/h3&gt;&lt;p&gt;We can also look at how to add security to the resource server as a filter layer, like in the UI server. This is perhaps more conventional, and is certainly the best option in most PaaS environments (since they don&amp;rsquo;t usually make private networks available to applications). The first step is really easy: just add Spring Security to the classpath in the Maven POM:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependencies&amp;gt;&#xD;
-  &amp;lt;dependency&amp;gt;&#xD;
-    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
-    &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;/dependency&amp;gt;&#xD;
-  ...&#xD;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Re-launch the resource server and, hey presto! It&amp;rsquo;s secure:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;$ curl -v localhost:9000&#xD;
-&amp;lt; HTTP/1.1 401 Unauthorized&#xD;
-&amp;lt; WWW-Authenticate: Basic realm=&amp;quot;Spring&amp;quot;&#xD;
-...&#xD;
-{&amp;quot;timestamp&amp;quot;:1420544006458,&amp;quot;status&amp;quot;:401,&amp;quot;error&amp;quot;:&amp;quot;Unauthorized&amp;quot;,&amp;quot;message&amp;quot;:&amp;quot;Full authentication is required to access this resource&amp;quot;,&amp;quot;path&amp;quot;:&amp;quot;/&amp;quot;}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So all we need to do is teach the client to send credentials with every request.&lt;/p&gt;&lt;h2&gt;&lt;a href="#token-authentication" class="anchor" name="token-authentication"&gt;&lt;/a&gt;Token Authentication&lt;/h2&gt;&lt;p&gt;The internet, and people&amp;rsquo;s Spring backend projects, are littered with custom token-based authentication solutions. Spring Security provides a barebones &lt;code&gt;Filter&lt;/code&gt; implementation to get you started on your own (see for example &lt;a href="https://github.com/spring-projects/spring-security/blob/master/web/src/main/java/org/springframework/security/web/authentication/preauth/AbstractPreAuthenticatedProcessingFilter.java"&gt;&lt;code&gt;AbstractPreAuthenticatedProcessingFilter&lt;/code&gt;&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-security/blob/master/core/src/main/java/org/springframework/security/core/token/TokenService.java"&gt;&lt;code&gt;TokenService&lt;/code&gt;&lt;/a&gt;). There is no canonical implementation in Spring Security though, and one of the reasons why is probably that there&amp;rsquo;s an easier way.&lt;/p&gt;&lt;p&gt;Remember from &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; of this series that Spring Security uses the &lt;code&gt;HttpSession&lt;/code&gt; to store authentication data by default. It doesn&amp;rsquo;t interact directly with the session though: there&amp;rsquo;s an abstraction layer (&lt;a href="https://github.com/spring-projects/spring-security/blob/master/web/src/main/java/org/springframework/security/web/context/SecurityContextRepository.java"&gt;&lt;code&gt;SecurityContextRepository&lt;/code&gt;&lt;/a&gt;) in between that you can use to change the storage backend. If we can point that repository, in our resource server, to a store with an authentication verified by our UI, then we have a way to share authentication between the two servers. The UI server already has such a store (the &lt;code&gt;HttpSession&lt;/code&gt;), so if we can distribute that store and open it up to the resource server, we have most of a solution.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-session" class="anchor" name="spring-session"&gt;&lt;/a&gt;Spring Session&lt;/h3&gt;&lt;p&gt;That part of the solution is pretty easy with &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt;. All we need is a shared data store (Redis is supported out of the box), and a few lines of configuration in the servers to set up a &lt;code&gt;Filter&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;In the UI application we need to add some dependencies to our &lt;a href="https://github.com/dsyer/spring-security-angular/blob/master/spring-session/ui/pom.xml"&gt;POM&lt;/a&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.springframework.session&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;spring-session&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;1.0.0.RELEASE&amp;lt;/version&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;&#xD;
-&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;spring-boot-starter-redis&amp;lt;/artifactId&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then add the &lt;code&gt;Filter&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
-@RestController&#xD;
-@EnableRedisHttpSession&#xD;
-public class UiApplication {&#xD;
-&#xD;
-  public static void main(String[] args) {&#xD;
-    SpringApplication.run(UiApplication.class, args);&#xD;
-  }&#xD;
-&#xD;
-  ...&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; is provided by Spring Session, and Spring Boot supplies a redis connection (a URL and credentials can be configured using environment variables or configuration files).&lt;/p&gt;&lt;p&gt;With that 1 line of code in place and a Redis server running on localhost you can run the UI application, login with some valid user credentials, and the session data (the authentication and CSRF token) will be stored in redis.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Tip: if you don&amp;rsquo;t have a redis server running locally you can easily spin one up with &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt; (on Windows or MacOS this requires a VM). There is a &lt;a href="http://www.fig.sh/"&gt;&lt;code&gt;fig.yml&lt;/code&gt;&lt;/a&gt; file in the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/spring-session/fig.yml"&gt;source code in Github&lt;/a&gt; which you can run really easily on the command line with &lt;code&gt;fig up&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#sending-a-custom-token-from-the-ui" class="anchor" name="sending-a-custom-token-from-the-ui"&gt;&lt;/a&gt;Sending a Custom Token from the UI&lt;/h2&gt;&lt;p&gt;The only missing piece is the transport mechanism for the key to the data in the store. The key is the &lt;code&gt;HttpSession&lt;/code&gt; ID, so if we can get hold of that key in the UI client, we can send it as a custom header to the resource server. So the &amp;ldquo;home&amp;rdquo; controller would need to change so that it sends the header as part of the HTTP request for the greeting resource. For example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, [ &amp;#39;ngRoute&amp;#39; ])&#xD;
-...&#xD;
-.controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
-	$http.get(&amp;#39;token&amp;#39;).success(function(token) {&#xD;
-		$http({&#xD;
-			url : &amp;#39;http://localhost:9000&amp;#39;,&#xD;
-			method : &amp;#39;GET&amp;#39;,&#xD;
-			headers : {&#xD;
-				&amp;#39;X-Auth-Token&amp;#39; : token.token&#xD;
-			}&#xD;
-		}).success(function(data) {&#xD;
-			$scope.greeting = data;&#xD;
-		});&#xD;
-	})&#xD;
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;(A more elegant solution might be to grab the token as needed, and use an Angular &lt;a href="https://docs.angularjs.org/api/ng/service/$http"&gt;interceptor&lt;/a&gt; to add the header to every request to the resource server. The interceptor definition could then be abstracted instead of doing it all in one place and cluttering up the business logic.)&lt;/p&gt;&lt;p&gt;Instead of going directly to &amp;ldquo;&lt;a href="http://localhost:9000"&gt;http://localhost:9000&lt;/a&gt;&amp;rdquo; we have wrapped that call in the success callback of a call to a new custom endpoint on the UI server at &amp;ldquo;/token&amp;rdquo;. The implementation of that is trivial:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
-@RestController&#xD;
-@EnableRedisHttpSession&#xD;
-public class UiApplication {&#xD;
-&#xD;
-  public static void main(String[] args) {&#xD;
-    SpringApplication.run(UiApplication.class, args);&#xD;
-  }&#xD;
-&#xD;
-  ...&#xD;
-&#xD;
-  @RequestMapping(&amp;quot;/token&amp;quot;)&#xD;
-  @ResponseBody&#xD;
-  public Map&amp;lt;String,String&amp;gt; token(HttpSession session) {&#xD;
-    return Collections.singletonMap(&amp;quot;token&amp;quot;, session.getId());&#xD;
-  }&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So the UI application is ready and will include the session ID in a header called &amp;ldquo;X-Auth-Token&amp;rdquo; for all calls to the backend.&lt;/p&gt;&lt;h2&gt;&lt;a href="#authentication-in-the-resource-server" class="anchor" name="authentication-in-the-resource-server"&gt;&lt;/a&gt;Authentication in the Resource Server&lt;/h2&gt;&lt;p&gt;There is one tiny change to the resource server for it to be able to accept the custom header. The CORS filter has to nominate that header as an allowed one from remote clients, e.g.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Component&#xD;
-@Order(Ordered.HIGHEST_PRECEDENCE)&#xD;
-public class CorsFilter implements Filter {&#xD;
-&#xD;
-  void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {&#xD;
-    ...&#xD;
-    response.setHeader(&amp;quot;Access-Control-Allow-Headers&amp;quot;, &amp;quot;x-auth-token&amp;quot;)&#xD;
-    ...&#xD;
-  }&#xD;
-&#xD;
-  ...&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;All that remains is to pick up the custom token in the resource server and use it to authenticate our user. This turns out to be pretty straightforward because all we need to do is tell Spring Security where the session repository is, and where to look for the token (session ID) in an incoming request. First we need to add the Spring Session and Redis dependencies, and then we can set up the &lt;code&gt;Filter&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
-@RestController&#xD;
-@EnableRedisHttpSession&#xD;
-class ResourceApplication {&#xD;
-&#xD;
-  ...&#xD;
-  &#xD;
-  @Bean&#xD;
-  HeaderHttpSessionStrategy sessionStrategy() {&#xD;
-    new HeaderHttpSessionStrategy();&#xD;
-  }&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This &lt;code&gt;Filter&lt;/code&gt; created is the mirror image of the one in the UI server, so it establishes Redis as the session store. The only difference is that it uses a custom &lt;code&gt;HttpSessionStrategy&lt;/code&gt; that looks in the header (&amp;ldquo;X-Auth-Token&amp;rdquo; by default) instead of the default (cookie named &amp;ldquo;JSESSIONID&amp;rdquo;). &lt;/p&gt;&lt;p&gt;There is one final change to the resource server to make it work with our new authentication scheme. Spring Boot default security is stateless, and we want this to store authentication in the session, so we need to be explicit in &lt;code&gt;application.yml&lt;/code&gt; (or &lt;code&gt;application.properties&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;security:&#xD;
-  sessions: NEVER
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This says to Spring Security &amp;ldquo;never create a session, but use one if it is there&amp;rdquo; (it will be already be there because of the authentication in the UI).&lt;/p&gt;&lt;p&gt;Re-launch the resource server and open the UI up in a new browser window.&lt;/p&gt;&lt;h2&gt;&lt;a href="#why-doesn-rsquo-t-it-all-work-with-cookies" class="anchor" name="why-doesn-rsquo-t-it-all-work-with-cookies"&gt;&lt;/a&gt;Why Doesn&amp;rsquo;t it All Work With Cookies?&lt;/h2&gt;&lt;p&gt;We had to use a custom header and write code in the client to populate the header, which isn&amp;rsquo;t terribly complicated, but it seems to contradict the advice in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt; to use cookies and sessions wherever possible. The argument there was that not to do so introduces additional unecessary complexity, and for sure the implementation we have now is the most complex we have seen so far: the technical part of the solution far outweighs the business logic (which is admittedly tiny). This is definitely a fair criticism (and one we plan to address in the next article in this series), but let&amp;rsquo;s just briefly look at why it&amp;rsquo;s not as simple as just using cookies and sessions for everything.&lt;/p&gt;&lt;p&gt;At least we are still using the session, which makes sense because Spring Security and the Servlet container know how to do that with no effort on our part. But couldn&amp;rsquo;t we have continued to use cookies to transport the authentication token? It would have been nice, but there is a reason it wouldn&amp;rsquo;t work, and that is that the browser wouldn&amp;rsquo;t let us. You can just go poking around in the browser&amp;rsquo;s cookie store from a JavaScript client, but there are some restrictions, and for good reason. In particular you don&amp;rsquo;t have access to the cookies that were sent by the server as &amp;ldquo;HttpOnly&amp;rdquo; (which you will see is the case by default for session cookies). You also can&amp;rsquo;t set cookies in outgoing requests, so we couldn&amp;rsquo;t set a &amp;ldquo;SESSION&amp;rdquo; cookie (which is the Spring Session default cookie name), we had to use a custom &amp;ldquo;X-Session&amp;rdquo; header. Both these restrictions are for your own protection so malicious scripts cannot access your resources without proper authorization.&lt;/p&gt;&lt;p&gt;TL;DR the UI and resource servers do not have a common origin, so they cannot share cookies (even though we can use Spring Session to force them to share sessions).&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;We have duplicated the features of the application in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II of this series&lt;/a&gt;: a home page with a greeting fetched from a remote backend, with login and logout links in a navigation bar. The difference is that the greeting comes from a resource server that is a standalone, instead of being embedded in the UI server. This added significant complexity to the implementation, but the good news is that we have a mostly configuration-based (and practically 100% declarative) solution. We could even make the solution 100% declarative by extracting all the new code into libraries (Spring configuration and Angular custom directives). We are going to defer that interesting task for after the next couple of installments. In the &lt;a href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv"&gt;next article&lt;/a&gt; we are going to look at a different really great way to reduce all the complexity in the current implementation: the API Gateway Pattern (the client sends all its requests to one place and authentication is handled there).&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Note: we used Spring Session here to share sessions between 2 servers that are not logically the same application. It&amp;rsquo;s a neat trick, and it isn&amp;rsquo;t possible with &amp;ldquo;regular&amp;rdquo; JEE distributed sessions.&lt;/p&gt;
-&lt;/blockquote&gt;</content>
-  </entry>
-  <entry>
-    <title>Microservice  Registration and Discovery with Spring Cloud and Netflix's Eureka</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-01-18:1934</id>
-    <updated>2015-01-20T09:00:00Z</updated>
-    <content type="html">&lt;p&gt;The microservice style of architecture is not so much about building individual services so much as it is making the &lt;em&gt;interactions between&lt;/em&gt; services reliable and failure-tolerant. While the focus on these interactions is new, the need for that focus is not. We&amp;rsquo;ve long known that services don&amp;rsquo;t operate in a vacuum. Even before cloud economics, we knew that - in a practical world - clients should be designed to be immune to service outages. The cloud makes it easy to think of capacity as ephemeral, fluid. The burden is on the client to manage this intrinsic complexity.&lt;/p&gt;&lt;p&gt;In this post, we&amp;rsquo;ll look at how &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt; helps you manage that complexity with a service registry like Eureka and Consul and client-side load-balancing.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-cloud-rsquo-s-phone-book" class="anchor" name="the-cloud-rsquo-s-phone-book"&gt;&lt;/a&gt;The Cloud&amp;rsquo;s Phone Book&lt;/h2&gt;&lt;p&gt;A service registry is a phone book for your microservices. Each service registers itself with the service registry and tells the registry where it lives (host, port, node name) and perhaps other service-specific metadata - things that other services can use to make informed decisions about it. Clients can ask questions about the service topology (&amp;ldquo;are there any &amp;lsquo;fulfillment-services&amp;rsquo; available, and if so, where?&amp;rdquo;) and service capabilities (&amp;ldquo;can you handle X, Y, and Z?&amp;rdquo;). You probably already use a technology that has some notion of a cluster (Cassandra, Memcached, etc.), and that information is ideally stored in a service registry.&lt;/p&gt;&lt;p&gt;There &lt;a href="http://jasonwilder.com/blog/2014/02/04/service-discovery-in-the-cloud/"&gt;are several popular options for service registries&lt;/a&gt;. Netflix built and then open-sourced their own service registry, &lt;a href="https://github.com/netflix/eureka"&gt;Eureka&lt;/a&gt;. Another new, but increasingly popular option is &lt;a href="http://consul.io"&gt;Consul&lt;/a&gt;. We&amp;rsquo;ll look principally at some of the integration between Spring Cloud and Netflix&amp;rsquo;s Eureka service registry.&lt;/p&gt;&lt;p&gt;From the &lt;a href="http://projects.spring.io/spring-cloud/"&gt;the Spring Cloud project page&lt;/a&gt;: &amp;ldquo;Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Coordination of distributed systems leads to boiler plate patterns, and using Spring Cloud developers can quickly stand up services and applications that implement those patterns. They will work well in any distributed environment, including the developer&amp;rsquo;s own laptop, bare metal data centres, and managed platforms such as Cloud Foundry.&amp;rdquo;&lt;/p&gt;&lt;p&gt;Spring Cloud already supports both Eureka and Consul, though I&amp;rsquo;ll focus on Eureka in this post because it can be bootstrapped automatically in one of Spring Cloud&amp;rsquo;s auto-configurations. Eureka is implemented on the JVM but Consul is implemented in Go.&lt;/p&gt;&lt;h2&gt;&lt;a href="#installing-eureka" class="anchor" name="installing-eureka"&gt;&lt;/a&gt;Installing Eureka&lt;/h2&gt;&lt;p&gt;Standing up an instance of the Eureka service registry is easy if you have &lt;code&gt;org.springframework.boot:spring-cloud-starter-eureka-server&lt;/code&gt; on your classpath.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package registry;&#xD;
-&#xD;
-import org.springframework.boot.SpringApplication;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-@EnableEurekaServer&#xD;
-public class Application {&#xD;
-&#xD;
-  public static void main(String[] args) {&#xD;
-    SpringApplication.run(Application.class, args);&#xD;
-  }&#xD;
-}&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;My nominal &lt;code&gt;src/main/resources/application.yml&lt;/code&gt; looks like this these days.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yml"&gt;server:&#xD;
-  port: ${PORT:8761}&#xD;
-&#xD;
-eureka:&#xD;
-  client:&#xD;
-    registerWithEureka: false&#xD;
-    fetchRegistry: false&#xD;
-    server:&#xD;
-      waitTimeInMsWhenSyncEmpty: 0&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The service&amp;rsquo;s port is defaulted to the well-known 8761 if &lt;a href="http://cloudfoundry.org/index.html"&gt;Cloud Foundry&lt;/a&gt;&amp;rsquo;s &lt;code&gt;VCAP_APPLICATION_PORT&lt;/code&gt; environment variable isn&amp;rsquo;t available. The rest of the configuration simply tells this instance to not register itself with the Eureka instance it finds, because that instance is.. itself. If you run it locally, you can point a browser to &lt;code&gt;http://localhost:8761&lt;/code&gt; and monitor the registry from there.&lt;/p&gt;&lt;h2&gt;&lt;a href="#deploying-eureka" class="anchor" name="deploying-eureka"&gt;&lt;/a&gt;Deploying Eureka&lt;/h2&gt;&lt;p&gt;Spring Cloud will startup a &lt;a href="http://projects.spring.io/spring-cloud/spring-cloud.html#spring-cloud-eureka-server"&gt; Eureka instance with its Spring Boot auto-configuration&lt;/a&gt;. There are a couple of things to consider when deploying Eureka. First, you should &lt;em&gt;always&lt;/em&gt; use a highly-available configuration in production. &lt;a href="https://github.com/spring-cloud-samples/eureka"&gt;The Spring Cloud Eureka sample&lt;/a&gt; shows how to deploy it in a highly-available configuration.&lt;/p&gt;&lt;p&gt;Clients need to know where to find the Eureka instance. If you have DNS then that might be one option, if you&amp;rsquo;re not polluting too large a global namespace. If you&amp;rsquo;re &lt;a href="http://12factor.net/"&gt;running in a Platform-as-a-Service and embracing 12-Factor app style applications&lt;/a&gt; then backing service credentials are configuration, and live external to the application, often exposed as environment variables. You can get the effect of having a Eureka service right now, though, by using Cloud Foundry&amp;rsquo;s &lt;code&gt;cf&lt;/code&gt; CLI &lt;a href="http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html"&gt;to create &lt;em&gt;a user-provided service&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;cf cups eureka-service -p &amp;#39;{&amp;quot;uri&amp;quot;:&amp;quot;http://host-of-your-eureka-setup&amp;quot;}&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Point &lt;code&gt;host-of-your-eureka-setup&lt;/code&gt; to a well-known host for your highly-available Eureka setup. I suspect we&amp;rsquo;ll soon see a way to create Eureka as a backing service in the same way you might a PostgreSQL or ElasticSearch instance on &lt;a href="http://www.pivotal.io/platform-as-a-service/pivotal-cf"&gt;Pivotal Cloud Foundry&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Now that Eureka is up and running, let&amp;rsquo;s use it to connect some services to each other!&lt;/p&gt;&lt;h2&gt;&lt;a href="#speak-for-yourself" class="anchor" name="speak-for-yourself"&gt;&lt;/a&gt;Speak for Yourself&lt;/h2&gt;&lt;p&gt;Spring Cloud-based services have a &lt;code&gt;spring.application.name&lt;/code&gt; property. It&amp;rsquo;s used to pull down configuration from the Configuration server, to identify the service to Eureka, and is referenceable in numerous other contexts when building Spring Cloud-based applications. This value typically lives in &lt;code&gt;src/main/resources/bootstrap.(yml,properties)&lt;/code&gt;, which is picked up earlier in the initialization than the normal &lt;code&gt;src/main/resources/application.(yml,properties)&lt;/code&gt;. A service with &lt;code&gt;org.springframework.cloud:spring-cloud-starter-eureka&lt;/code&gt; on the classpath will be registered with the Eureka registry by its &lt;code&gt;spring.application.name&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;src/main/resources/boostrap.yml&lt;/code&gt; file for each of my services looks like this, where &lt;code&gt;my-service&lt;/code&gt; is the service name that changes from service to service:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yaml"&gt;spring:&#xD;
-  application:&#xD;
-    name: my-service
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Cloud uses the information in &lt;code&gt;bootstrap.yml&lt;/code&gt; at service startup to discover the Eureka service registry and register the service and its &lt;code&gt;spring.application.name&lt;/code&gt;, host, port, etc. You might wonder about that first bit. Spring Cloud attempts to look for it at a well-known address (&lt;code&gt;http://127.0.0.1:&lt;/code&gt;), but you can change that. Here&amp;rsquo;s my &lt;code&gt;src/main/resources/application.yml&lt;/code&gt; for a nominal Spring Cloud microservice, though &lt;a href="https://spring.io/blog/2015/01/13/configuring-it-all-out-or-12-factor-app-style-configuration-with-spring"&gt;there&amp;rsquo;s no reason this couldn&amp;rsquo;t live in the Spring Cloud configuration server&lt;/a&gt;. There may be many instances identifying themselves as &lt;code&gt;my-service&lt;/code&gt;; Eureka will append the process&amp;rsquo; information to a list of registrations for the same ID.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint yml"&gt;&lt;br/&gt;&lt;br/&gt;eureka:&#xD;
-  client:&#xD;
-    serviceUrl:&#xD;
-      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://127.0.0.1:8761}/eureka/&#xD;
-&#xD;
----&#xD;
-spring:&#xD;
-  profiles: cloud&#xD;
-eureka:&#xD;
-  instance:&#xD;
-    hostname: ${APPLICATION_DOMAIN}&#xD;
-    nonSecurePort: 80&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this configuration, the Spring Cloud Eureka client knows to connect to the Eureka instance running on localhost &lt;em&gt;if&lt;/em&gt; Cloud Foundry&amp;rsquo;s &lt;code&gt;VCAP_SERVICES&lt;/code&gt; environment variable doesn&amp;rsquo;t exist or contain valid credentials.&lt;/p&gt;&lt;p&gt;The bit of configuration under the &lt;code&gt;---&lt;/code&gt; delimiter is for when the application &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html"&gt;is run under the &lt;code&gt;cloud&lt;/code&gt; Spring profile&lt;/a&gt;. It&amp;rsquo;s easy to set a profile using the &lt;code&gt;SPRING_PROFILES_ACTIVE&lt;/code&gt; environment variable. You can configure Cloud Foundry environment variables in your &lt;code&gt;manifest.yml&lt;/code&gt; or, &lt;a href="https://github.com/pivotal-cf-experimental/lattice"&gt;on Cloud Foundry Lattice&lt;/a&gt;, your &lt;a href="https://docs.docker.com/reference/builder/"&gt;Docker file&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;cloud&lt;/code&gt; profile specific configuration specifically tells the Eureka client how to register the service in the discovered Eureka registry. I do this because my services don&amp;rsquo;t use fixed DNS. &lt;code&gt;APPLICATION_DOMAIN&lt;/code&gt; is an environment variable I set in my deploy scripts that tells a service what its externally referenceable URI is.&lt;/p&gt;&lt;p&gt;Click refresh on the Eureka web UI after 30 seconds (as of this writing) and you&amp;rsquo;ll see your web service(s) registered.&lt;/p&gt;&lt;h2&gt;&lt;a href="#client-side-load-balancing-with-ribbon" class="anchor" name="client-side-load-balancing-with-ribbon"&gt;&lt;/a&gt;Client-Side Load Balancing with Ribbon&lt;/h2&gt;&lt;p&gt;Spring Cloud references other services through their &lt;code&gt;spring.application.name&lt;/code&gt; value. Knowing this value can be handy in a lot of contexts when building Spring Cloud-based services.&lt;/p&gt;&lt;p&gt;The goal, you&amp;rsquo;ll recall, is to let the &lt;em&gt;client&lt;/em&gt; decide based on contextual information (which could change from client to client) which service instance it will connect to. Netflix has a Eureka-aware client-side load-balancing client called &lt;a href="https://github.com/Netflix/ribbon"&gt;Ribbon&lt;/a&gt; that Spring Cloud integrates extensively. Ribbon is a client library with built-in software load balancers. Let&amp;rsquo;s look at an example that uses Eureka directly and then uses it through the Ribbon and Spring Cloud integration.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package passport;&#xD;
-&#xD;
-import org.springframework.beans.factory.annotation.Autowired;&#xD;
-import org.springframework.boot.CommandLineRunner;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.boot.builder.SpringApplicationBuilder;&#xD;
-import org.springframework.cloud.client.ServiceInstance;&#xD;
-import org.springframework.cloud.client.discovery.DiscoveryClient;&#xD;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;&#xD;
-import org.springframework.cloud.netflix.feign.FeignConfiguration;&#xD;
-import org.springframework.context.annotation.Bean;&#xD;
-import org.springframework.core.ParameterizedTypeReference;&#xD;
-import org.springframework.http.HttpMethod;&#xD;
-import org.springframework.http.ResponseEntity;&#xD;
-import org.springframework.stereotype.Component;&#xD;
-import org.springframework.web.bind.annotation.PathVariable;&#xD;
-import org.springframework.web.bind.annotation.RequestMapping;&#xD;
-import org.springframework.web.bind.annotation.RequestMethod;&#xD;
-import org.springframework.web.client.RestTemplate;&#xD;
-&#xD;
-import java.util.List;&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-@EnableEurekaClient&#xD;
-public class Application extends FeignConfiguration {&#xD;
-&#xD;
-  public static void main(String[] args) {&#xD;
-    new SpringApplicationBuilder(Application.class)&#xD;
-    .web(false)&#xD;
-    .run(args);&#xD;
-  }&#xD;
-&#xD;
-  @Bean&#xD;
-  BookmarkClient bookmarkClient() {&#xD;
-    return loadBalance(BookmarkClient.class, &amp;quot;http://bookmark-service&amp;quot;);&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-@Component&#xD;
-class DiscoveryClientExample implements CommandLineRunner {&#xD;
-&#xD;
-  @Autowired&#xD;
-  private DiscoveryClient discoveryClient;&#xD;
-&#xD;
-  @Override&#xD;
-  public void run(String... strings) throws Exception {&#xD;
-    List&amp;lt;ServiceInstance&amp;gt; photoServices = discoveryClient.getInstances(&amp;quot;photo-service&amp;quot;);&#xD;
-    photoServices.forEach(System.out::println);&#xD;
-&#xD;
-    List&amp;lt;ServiceInstance&amp;gt; bookmarkServices = discoveryClient.getInstances(&amp;quot;bookmark-service&amp;quot;);&#xD;
-    bookmarkServices.forEach(System.out::println);&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-@Component&#xD;
-class RestTemplateExample implements CommandLineRunner {&#xD;
-&#xD;
-  @Autowired&#xD;
-  private RestTemplate restTemplate;&#xD;
-&#xD;
-  @Override&#xD;
-  public void run(String... strings) throws Exception {&#xD;
-    // use the &amp;quot;smart&amp;quot; Eureka-aware RestTemplate&#xD;
-    ResponseEntity&amp;lt;List&amp;lt;Bookmark&amp;gt;&amp;gt; exchange = this.restTemplate.exchange(&#xD;
-      &amp;quot;http://bookmark-service/{userId}/bookmarks&amp;quot;, HttpMethod.GET, null,&#xD;
-      new ParameterizedTypeReference&amp;lt;List&amp;lt;Bookmark&amp;gt;&amp;gt;() {}, (Object) &amp;quot;mstine&amp;quot;);&#xD;
-&#xD;
-    exchange.getBody().forEach(System.out::println);&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-@Component&#xD;
-class FeignExample implements CommandLineRunner {&#xD;
-&#xD;
-  @Autowired&#xD;
-  private BookmarkClient bookmarkClient;&#xD;
-&#xD;
-  @Override&#xD;
-  public void run(String... strings) throws Exception {&#xD;
-    this.bookmarkClient.getBookmarks(&amp;quot;jlong&amp;quot;).forEach(System.out::println);&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-interface BookmarkClient {&#xD;
-&#xD;
-  @RequestMapping(method = RequestMethod.GET, value = &amp;quot;/{userId}/bookmarks&amp;quot;)&#xD;
-  List&amp;lt;Bookmark&amp;gt; getBookmarks(@PathVariable(&amp;quot;userId&amp;quot;) String userId);&#xD;
-}&#xD;
-&#xD;
-class Bookmark {&#xD;
-  private Long id;&#xD;
-  private String href, label, description, userId;&#xD;
-&#xD;
-  @Override&#xD;
-  public String toString() {&#xD;
-    return &amp;quot;Bookmark{&amp;quot; +&#xD;
-    &amp;quot;id=&amp;quot; + id +&#xD;
-    &amp;quot;, href=&amp;#39;&amp;quot; + href + &amp;#39;\&amp;#39;&amp;#39; +&#xD;
-    &amp;quot;, label=&amp;#39;&amp;quot; + label + &amp;#39;\&amp;#39;&amp;#39; +&#xD;
-    &amp;quot;, description=&amp;#39;&amp;quot; + description + &amp;#39;\&amp;#39;&amp;#39; +&#xD;
-    &amp;quot;, userId=&amp;#39;&amp;quot; + userId + &amp;#39;\&amp;#39;&amp;#39; +&#xD;
-    &amp;#39;}&amp;#39;;&#xD;
-  }&#xD;
-&#xD;
-  public Bookmark() {&#xD;
-  }&#xD;
-&#xD;
-  public Long getId() {&#xD;
-    return id;&#xD;
-  }&#xD;
-&#xD;
-  public String getHref() {&#xD;
-    return href;&#xD;
-  }&#xD;
-&#xD;
-  public String getLabel() {&#xD;
-    return label;&#xD;
-  }&#xD;
-&#xD;
-  public String getDescription() {&#xD;
-    return description;&#xD;
-  }&#xD;
-&#xD;
-  public String getUserId() {&#xD;
-    return userId;&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;DiscoveryClientExample&lt;/code&gt; bean demonstrates using the Spring Cloud common &lt;code&gt;DiscoveryClient&lt;/code&gt; to interrogate the services. The results contain information like the hostname and the port for each service.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;RestTemplateExample&lt;/code&gt; bean demonstrates the auto-configured Ribbon-aware &lt;code&gt;RestTemplate&lt;/code&gt; instance. Note that the URI uses a service ID, not an actual hostname. The service ID from the URI is extracted and given to Ribbon which then uses a load-balancer to pick from among the registered instances in Eureka and, finally, the HTTP call is made to a real service instance.&lt;/p&gt;&lt;p&gt;The &lt;code&gt;FeignExample&lt;/code&gt; bean demonstrates using the Spring Cloud Feign integration. &lt;a href="https://github.com/Netflix/feign"&gt;Feign&lt;/a&gt; is a handy project from Netflix that lets you describe a REST API client declaratively with annotations on an interface. In this case, we want to map the HTTP results from calls to the &lt;code&gt;bookmark-service&lt;/code&gt; to the &lt;code&gt;BookmarkClient&lt;/code&gt; Java interface. This mapping is configured in the &lt;code&gt;Application&lt;/code&gt; class towards the top of the code page:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;  @Bean&#xD;
-  BookmarkClient bookmarkClient() {&#xD;
-    return loadBalance(BookmarkClient.class, &amp;quot;http://bookmark-service&amp;quot;);&#xD;
-  }&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The URI is a service reference, not an actual hostname. It&amp;rsquo;s passed through the same processing as the URI given to the &lt;code&gt;RestTemplate&lt;/code&gt; in the last example.&lt;/p&gt;&lt;p&gt;Pretty cool, eh? You can use the more basic &lt;code&gt;DiscoveryClient&lt;/code&gt; API and make a call, or use the Ribbon and Eureka-aware &lt;code&gt;RestTemplate&lt;/code&gt; or Feign-integrated client.&lt;/p&gt;&lt;h2&gt;&lt;a href="#review" class="anchor" name="review"&gt;&lt;/a&gt;Review&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Cloud supports both the Eureka and Consul service registries (and perhaps more!)&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;DiscoveryClient&lt;/code&gt; API can be used to interactively query Eureka given a service ID.&lt;/li&gt;
-  &lt;li&gt;Ribbon is a client-side load balancer&lt;/li&gt;
-  &lt;li&gt;The &lt;code&gt;RestTemplate&lt;/code&gt; can substitute service IDs for hostnames in URIs and can defer to Ribbon to pick a service.&lt;/li&gt;
-  &lt;li&gt;The Netflix Spring Cloud Feign integration makes it simple to create smart, Eureka-aware REST clients that uses Ribbon for client-side load-balacing to pick an available service instance.&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#where-to-go-from-here" class="anchor" name="where-to-go-from-here"&gt;&lt;/a&gt;Where to go from Here&lt;/h2&gt;&lt;p&gt;We&amp;rsquo;ve only looked at service discovery and resolution with Eureka. Most of what we talked about here applies to Consul as well and indeed Consul has some features that Netflix doesn&amp;rsquo;t have.&lt;/p&gt;&lt;p&gt;Round-robin load-balancing is just one option. You might instead require some notion of a leader node, and leadership election. Spring Cloud aims provides support for that kind of coordination, as well.&lt;/p&gt;&lt;p&gt;Service registration and client-side load-balancing are just &lt;em&gt;one&lt;/em&gt; of the things that Spring Cloud does to promote more resilient service-to-service calls. We have &lt;em&gt;not&lt;/em&gt; looked at its support single-sign on and security, distributed locks and leadership election, reliability patterns like the circuit breaker, and much more.&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/joshlong/service-registration-and-discovery"&gt;The example code is all available online&lt;/a&gt; so don&amp;rsquo;t hesitate to the check out the example on your local machine or push it to Cloud Foundry using &lt;a href="https://github.com/joshlong/service-registration-and-discovery/blob/master/cf.sh"&gt;the provided &lt;code&gt;cf.sh&lt;/code&gt; script&lt;/a&gt; and various &lt;code&gt;manifest.yml&lt;/code&gt; files.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring 4 Web Applications</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-spring-4-web-applications" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1924</id>
-    <updated>2015-01-20T01:10:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
-&lt;p&gt;Speaker: Rossen Stoyanchev &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/s2gx2014-spring4webapps"&gt;http://www.slideshare.net/SpringCentral/s2gx2014-spring4webapps&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;Web / JavaScript Track &lt;/p&gt;
-&lt;p&gt;The Web and Spring MVC continue to be one of the most active areas of the Spring Framework with each new release adding plenty of features and refinements requested by the community. Furthermore version 4 added a significant choice for web applications to build WebSocket-style architectures. This talk provides an overview of the areas in which the framework has evolved along with highlights of specific noteworthy features from the most recent releases. &lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/yxKJsgNYDQI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Cassandra, Couchbase and Spring Data in the Enterprise</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-cassandra-couchbase-and-spring-data-in-the-enterprise" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1923</id>
-    <updated>2015-01-20T01:07:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speakers: Matthew Adams (SCI Spike), Michael Nitschinger (Couchbase) &lt;/p&gt;
-&lt;p&gt;Data / Integration Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/cassandra-couchbase-andspringdataintheenterprise"&gt;http://www.slideshare.net/SpringCentral/cassandra-couchbase-andspringdataintheenterprise&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; Spring Data Cassandra brings Cassandra support to the Spring Data umbrella of projects, offering Spring Data's familiar Repository concepts &amp;amp; POJO persistence. This talk will focus first on POJO persistence over Cassandra, including automatic Cassandra schema generation and Spring context configuration using both XML &amp;amp; Java. Then, the talk will dig deeper into some of the lower-level features that Spring Data Cassandra is built upon (AKA &amp;quot;Spring CQL&amp;quot;), which make plain, old Cassandra development simpler &amp;amp; easier. Couchbase Server is well-known as one of the leaders in the NoSQL space, heavily used in enterprises and startups alike where low latency even at hundreds of thousands of operations per seconds matters. This talk will not only give a short introduction about the benefits of adopting Couchbase, but also show how to integrate it into your Java Enterprise landscape through its support for Spring Data. You will learn how to fully control your database schema from the application through entities and repositories, how to deploy new application versions or scale out your cluster without a single second of downtime and also how to integrate easily with elasticsearch.&lt;/p&gt;&lt;p&gt;&lt;pre&gt;&lt;iframe width="560" height="315" src="//www.youtube.com/embed/LkDb2dZyoTk" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/pre&gt;&lt;/p&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
 

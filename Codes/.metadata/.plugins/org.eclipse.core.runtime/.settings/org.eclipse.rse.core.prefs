@@ -1,4 +1,4 @@
-activeuserprofiles=TNC;Team
+activeuserprofiles=Notexittran-PC;Team
 eclipse.preferences.version=1
-org.eclipse.rse.systemtype.local.systemType.defaultUserId=Thanh
-useridperkey=TNC.Local\=Thanh;
+org.eclipse.rse.systemtype.local.systemType.defaultUserId=Notexittran
+useridperkey=Notexittran-PC.Local\=Notexittran;
