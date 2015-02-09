@@ -24,7 +24,7 @@ public class Server {
 	public void setServerId(int serverId) {
 		this.serverId = serverId;
 	}
-	
+
 	public String getServerAddress() {
 		return serverAddress;
 	}
@@ -65,6 +65,7 @@ public class Server {
 		this.serverPassword = serverPassword;
 	}
 
+	// Xay dung
 	public Server(String ip, int port, String username, String password) {
 		super();
 		this.serverAddress = ip;
@@ -73,13 +74,7 @@ public class Server {
 		this.serverPassword = password;
 	}
 
-	/**
-	 * Contrustor Server without port
-	 * 
-	 * @param ip
-	 * @param username
-	 * @param password
-	 */
+	// Xay dung
 	public Server(String ip, String username, String password) {
 		super();
 		this.serverAddress = ip;
@@ -87,23 +82,20 @@ public class Server {
 		this.serverPassword = password;
 	}
 
+	// Xay dung mac nhien
 	public Server() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Connect method to server
-	 * 
-	 * @param sv
-	 */
-	public Session Connect(Server sv) {
-//		System.out.println(sv.getServerAddress() + sv.getServerUsername()
-//				+ sv.getPort() + sv.getServerPassword());
+	// Get Session
+	public Session getSession(Server sv) {
+
 		try {
 			java.util.Properties config = new java.util.Properties();
 			config.put("StrictHostKeyChecking", "no");
 			JSch jsch = new JSch();
+			// Khoi tao doi tuong Session
 			Session session = jsch.getSession(sv.getServerUsername(),
 					sv.getServerAddress(), sv.getPort());
 			session.setPassword(sv.getServerPassword());
@@ -113,7 +105,6 @@ public class Server {
 			return session;
 		} catch (Exception e) {
 			System.out.println("Khong the connect den server");
-			// e.printStackTrace();
 		}
 		return null;
 	}

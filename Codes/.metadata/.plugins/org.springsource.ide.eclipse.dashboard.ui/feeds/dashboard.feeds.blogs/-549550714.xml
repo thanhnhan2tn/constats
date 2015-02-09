@@ -5,7 +5,34 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-02-03T14:30:37Z</updated>
+  <updated>2015-02-03T18:53:00Z</updated>
+  <entry>
+    <title>This Week in Spring -  February  3rd, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/03/this-week-in-spring-february-3rd-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-02-04:1956</id>
+    <updated>2015-02-03T18:53:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! We&amp;rsquo;ve got a lot to cover, so without further ado, let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href="http://spring.io/team/mpollack"&gt;Spring XD co-lead Dr. Mark Pollack&lt;/a&gt;&amp;rsquo;s just announced &lt;a href="https://spring.io/blog/2015/01/29/spring-xd-1-1-rc1-released"&gt;that Spring XD 1.1 RC1 is now available&lt;/a&gt;! Now&amp;rsquo;s the time to get the bits, try it out and see if there any gaps!&lt;/li&gt;
+  &lt;li&gt;If you&amp;rsquo;ve been reading the amazing Dr. Syer&amp;rsquo;s blogs of late, you&amp;rsquo;ll know that he&amp;rsquo;s been introducing people to how to use expose and secure REST services for a UI client. The &lt;a href="https://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv"&gt;fourth post&lt;/a&gt; looks at how to insert an API gateway between the clients and the backend service. The fifth post then &lt;a href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v"&gt;introduces OAuth as a drop-in replacement&lt;/a&gt; for the bespoke authentication session tokens being used. If you&amp;rsquo;re not following this series, do go back and reread them. This series treats a subject that I get asked about all the time.&lt;/li&gt;
+  &lt;li&gt;Sabby Anandan is joining us for the Spring XD 1.1 launch webinar on &lt;a href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity"&gt;Tuesday, Feb 17th - Spring XD: A Platform for data at scale and developer productivity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I hope you&amp;rsquo;ll join me for a fresh look at the HTTP session with the Spring Session project on &lt;a href="https://spring.io/blog/2015/01/20/webinar-introducing-spring-session"&gt;Tuesday, February 24th, 2015&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The &lt;em&gt;Simplicity Itself&lt;/em&gt; blog has a nice treatment of the topic of service discovery and registration and includes a nice look at various service registries, &lt;a href="http://www.simplicityitself.com/learning/getting-started-microservices/service-discovery-overview/"&gt;Consul, Eureka, and Zookeeper&lt;/a&gt;. Spring Cloud includes support for Consul, Eureka, and ZooKeeper.&lt;/li&gt;
+  &lt;li&gt;This week, we&amp;rsquo;re lucky to have the founder of the &lt;a href="https://github.com/ttddyy/spring-social-slideshare/"&gt;Spring Social Slideshare&lt;/a&gt; project, &lt;a href="https://twitter.com/ttddyy"&gt;Tadaya Tsuyukubo (@ttddyy)&lt;/a&gt;, introduce the &lt;a href="https://spring.io/blog/2015/02/03/introducing-spring-social-slideshare"&gt;project to us in this guest post&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;The good &lt;a href="https://twitter.com/david_syer"&gt;Dr. Syer (@david_syer)&lt;/a&gt; has &lt;a href="https://spring.io/blog/2015/02/02/spring-cloud-1-0-0-rc2-available-now"&gt;just announced Spring Cloud 1.0.0 RC2&lt;/a&gt; is now available! The new release improves the security integrations, and cleans up some of the starters. This ship is saling to 1.0 quickly! Check out the bits while you can!&lt;/li&gt;
+  &lt;li&gt;Speaking of &lt;a href="https://twitter.com/david_syer"&gt;Dr. Syer (@david_syer)&lt;/a&gt;, he &lt;em&gt;also&lt;/em&gt; just &lt;a href="https://spring.io/blog/2015/02/02/spring-security-oauth-2-0-6-release-available-now"&gt;announced Spring Security 2.0.6&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Check out &lt;a href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-working-with-databases-and-groovy"&gt;Dr. Paul King&amp;rsquo;s SpringOne2GX 2014 talk on manipulating databases with Groovy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Disid &lt;a href="https://spring.io/blog/2015/02/02/spring-roo-1-3-1-release-now-available"&gt;have announced Spring Roo 1.3.1&lt;/a&gt;, including numerous bug fixes and some tweaks.&lt;/li&gt;
+  &lt;li&gt;Check out Grails project lead Graeme Rocher&amp;rsquo;s SpringOne2GX 2014 talk, &lt;a href="https://spring.io/blog/2015/02/02/springone2gx-replay-making-spring-boot-even-groovier"&gt;&lt;em&gt;Making Spring Boot Even Groovier&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data ninja Thomas Risberg&amp;rsquo;s SpringOne2GX 2014 post. &lt;a href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-introduction-to-spring-for-apache-hadoop"&gt;&lt;em&gt;Introduction to Spring for Apache Hadoop&lt;/em&gt;&lt;/a&gt;, is also now available online. This is a great place to get started with Spring and big-data.&lt;/li&gt;
+  &lt;li&gt;Groovy project lead Guillaume LaForge&amp;rsquo;s talk, &lt;a href="https://spring.io/blog/2015/02/02/springone2gx-2014-replay-groovy-in-the-light-of-java-8"&gt;&lt;em&gt;Groovy in the Light of Java 8&lt;/em&gt;&lt;/a&gt;, is now available online. Check this out to understand where the two languages are similar and where Groovy leaves Java 8 in the dust&lt;/li&gt;
+  &lt;li&gt;Spring Data lead Oliver Gierke just announced &lt;a href="https://spring.io/blog/2015/01/28/spring-data-evans-sr-2-and-dijkstra-sr-5-released"&gt;that Spring Data Evans SR2 and Spring Data Dijkstra SR5&lt;/a&gt; are now available! This release includes a &lt;em&gt;lot&lt;/em&gt; of improvements, so an upgrade is recommended!&lt;/li&gt;
+&lt;/ol&gt;</content>
+  </entry>
   <entry>
     <title>SSO with OAuth2: Angular JS and Spring Security Part V</title>
     <link rel="alternate" href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v" />
@@ -1248,52 +1275,6 @@ class Reservation {&#xD;
 &lt;p&gt;&#xD;
   &lt;iframe width="560" height="315" src="//www.youtube.com/embed/IcuTdJgUFmo" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
 &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - January 20th, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/20/this-week-in-spring-january-20th-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-01-21:1941</id>
-    <updated>2015-01-20T19:14:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week&amp;rsquo;s roundup could&amp;rsquo;ve just as easily been titled, &lt;em&gt;This Week in Spring Videos and Webinars&lt;/em&gt;, because we&amp;rsquo;ve got a &lt;em&gt;lot&lt;/em&gt; of them!&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The good Dr. Dave Syer continues his series &lt;a href="https://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii"&gt;introducing Spring Security and Angular.js integration, this time looking at breaking apart the resource server from the authorization server&lt;/a&gt;. This post looks&lt;/li&gt;
-  &lt;li&gt;Our pal Nicoalas Frankel is back at it! Nicolas lives in both the &lt;a href="http://vaadin.com"&gt;Vaadin&lt;/a&gt; and the Spring communities. So, naturally, when Petter Holmström and I started the &lt;a href="https://github.com/peholmst/vaadin4spring"&gt;Vaadin4Spring project&lt;/a&gt; at the beginning of 2014, we weren&amp;rsquo;t surprised when Nicolas started making great contributions. His latest contribution introduces an elegant &lt;a href="http://blog.frankel.ch/improving-the-vaadin-4-spring-project-with-a-simpler-mvp"&gt;implementation of the MVP pattern for Vaadin and he&amp;rsquo;s written a very nice introduction to it&lt;/a&gt; - check it out!&lt;/li&gt;
-  &lt;li&gt;I&amp;rsquo;ll be speaking at the Oakland JUG on the 28th &lt;a href="http://www.meetup.com/eastbayjug/events/219652953/"&gt;on building microservices with Spring Cloud and Cloud Foundry&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Tadaya Tsuyukubo just announced the &lt;a href="https://github.com/ttddyy/spring-social-slideshare"&gt;first 1.0.0 release of the Spring Social Slideshare project&lt;/a&gt;. I haven&amp;rsquo;t had a chance to play with it yet, but it looks like it could scratch a few itches I&amp;rsquo;ve got! Nice work!&lt;/li&gt;
-  &lt;li&gt;I hope you&amp;rsquo;ll join me next month for &lt;a href="https://spring.io/blog/2015/01/20/webinar-introducing-spring-session"&gt;a webinar introducing the Spring Session project&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Speaking of Vaadin and Spring, I&amp;rsquo;ll be co-presenting this week at the GWT.create conference. &lt;a href="http://gwtcreate.com/#agenda-us_room1_event7"&gt;Our talk&lt;/a&gt; will look at controlling a Parrot AR Drone using a Vaadin-based HTML5 frontend and a Spring Boot-powered backend and drone client. Come join us, it&amp;rsquo;s sure to be fun!&lt;/li&gt;
-  &lt;li&gt;InfoQ did an interview with Spring Boot co-founder &lt;a href="http://www.infoq.com/news/2015/01/Spring-Boot-1.2.1-Released"&gt;Phil Webb on all the new features in Spring Boot 1.2.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Alexandre Lourenco put together a post demonstrating how easy it is to get a REST API up and running &lt;a href="http://java.dzone.com/articles/spring-boot-creating"&gt;with Spring Boot in this quick post on DZone&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Be sure to check out Spring XD&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/webinar-spring-xd-a-platform-for-data-at-scale-and-developer-productivity"&gt;Sabby Anandan in this webinar on Spring XD.next on February 17th&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The incomparable, amazing Andy Wilkinson will &lt;a href="https://spring.io/blog/2015/01/20/webinar-documenting-restful-apis"&gt;be talking about how to document REST APIs&lt;/a&gt; in a February 3rd webinar.&lt;/li&gt;
-  &lt;li&gt;I put together a post that introduces service registries like Consul and Eureka &lt;a href="https://spring.io/blog/2015/01/20/microservice-registration-and-discovery-with-spring-cloud-and-netflix-s-eureka"&gt;for more resilient service-to-service calls&lt;/a&gt; in a Spring Cloud-based system.&lt;/li&gt;
-  &lt;li&gt;Our pal Jakub Kubrynski has put together a &lt;em&gt;wonderful&lt;/em&gt; &lt;a href="http://www.dzone.com/links/r/including_java_agent_in_standalone_spring_boot_ap.html"&gt;post on including the NewRelic Java agent in a Spring Boot uber-jar&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;In putting together the post on service discovery and registration with Spring Cloud, I stumbled upon &lt;a href="http://jasonwilder.com/blog/2014/02/04/service-discovery-in-the-cloud/"&gt;Jason Wilder&amp;rsquo;s fantastic look at service registries&lt;/a&gt; and really liked it, even though it doesn&amp;rsquo;t have anything to do with Spring, per se.&lt;/li&gt;
-  &lt;li&gt;Check out this replay of Rossen Stoyanchev&amp;rsquo;s SpringOne2GX 2014 talk &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-spring-4-web-applications"&gt;introducing Spring 4&amp;rsquo;s support for web applications&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out this SpringOne2gx 2014 talk from Matthew Adams (SCI Spike) and Michael Nitschinger (Couchbase) on using &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-cassandra-couchbase-and-spring-data-in-the-enterprise"&gt;Spring Data Cassandra and Spring Data Couchbase in the enterprise&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Garrett Wampole&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-applications-of-enterprise-integration-patterns-to-near-real-time-radar-data-processing"&gt;SpringOne2GX 2014 talk on enterprise integration patterns as applied to real-time data processing&lt;/a&gt; is worth a watch!&lt;/li&gt;
-  &lt;li&gt;Check out our pal and the Spanish Spring I/O conference&amp;rsquo;s organizer Sergi Almar&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/20/springone2gx-2014-replay-deep-dive-into-spring-websockets"&gt;talk deep-diving into websockets&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Speaking of super awesome Spaniards, &lt;a href="https://spring.io/blog/2015/01/19/spring-roo-1-3-1-rc2-available-now"&gt;the Disid team just announced Spring Roo 1.3.1 RC2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/19/spring-tool-suite-and-groovy-grails-tool-suite-3-6-3-sr1-released"&gt;Spring Tool Suite and Groovy Tool Suite lead Martin Lippert just announced the latest releases, 3.6.3 SR1&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;My pal Luke Shannon did a &lt;a href="https://spring.io/blog/2015/01/19/webinar-replay-building-scalable-data-applications-with-spring-and-gemfire"&gt;fantastic webinar introducing Spring Data Gemfire&lt;/a&gt;, a world-class integration for a world-class data-grid.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2015/01/16/spring-batch-and-spring-batch-admin-releases"&gt;Spring Batch and Spring Batch Admin lead Michael Minella has just announced the latest release of both projects&lt;/a&gt;. The new Spring Batch revision includes support for JSR 352 custom infrastructures, polling for partitioned results, and more. The Spring Batch Admin revision integrates the latest and greatest in Spring Batch, including JSR 352 and Java configuration support. Check it out!&lt;/li&gt;
-  &lt;li&gt;Spring IO Platform lead Andy Wilkinson has announced &lt;a href="https://spring.io/blog/2015/01/15/spring-io-platform-1-1-1-released"&gt;Spring IO Platform 1.1.1, which includes the latest cuts of Spring AMQP, Boot, and Integration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Integration lead Gary Russell&amp;rsquo;s SpringOne2GX 2014 talk on Spring Integration&amp;rsquo;s new Java configuration support is &lt;em&gt;not to be missed&lt;/em&gt;!&lt;/li&gt;
-  &lt;li&gt;Check out Spring framework &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-caching-and-messaging-improvements-in-spring-framework-4-1"&gt;lead Juergen Hoeller and Stephane Nicoll&amp;rsquo;s talk on caching and messaging improvements in Spring 4.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The sleepless Spring Security lead Rob Winch&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-from-0-to-spring-security-4-0"&gt;SpringOne2GX 2014 introduction talk on Spring Security is also available&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring framework lead Juergen Hoeller&amp;rsquo;s SpringOne2GX 2014 talk on Spring framework and Java 8 is not-to-be-missed primer for those looking at &lt;a href="https://spring.io/blog/2015/01/14/springone2gx-2014-replay-spring-framework-on-java-8"&gt;the next-gen Spring 4 and 4.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Another nice post on using &lt;a href="http://devilspace.org/2015/01/19/data-insertion-in-to-tables-by-using-simplejdbcinsert-class-of-spring-framework/"&gt;&lt;code&gt;SimpleJdbcInsert&lt;/code&gt; to handle JDBC data insertion&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Alvin Henrick put together a nice post on using &lt;a href="http://alvinhenrick.com/2015/01/16/spring-boot-app-deployed-with-docker-and-data-only-container-pattern-explained/"&gt;Spring Boot and Docker together&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;I found &lt;a href="http://hiteshtwo.org/asley/2015/01/20/spring-boot-with-groovy-and-external-libraries/"&gt;this interesting Q&amp;amp;A post on using Groovy with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Alex Collins&amp;rsquo; post on using &lt;a href="http://www.alexecollins.com/elastic-search-in-a-box-with-docker/"&gt;Docker, Elastic Search, and Selenium to create a search-in-a-box&lt;/a&gt; is &lt;em&gt;epic&lt;/em&gt;! Check it out!&lt;/li&gt;
-  &lt;li&gt;This Japanese-language post on &lt;a href="http://backpaper0.github.io/2015/01/14/spring_boot_jersey.html"&gt;using the new Spring Boot 1.2.1&amp;rsquo;s Jersey support&lt;/a&gt; looked pretty good (via Google Translate!)&lt;/li&gt;
-  &lt;li&gt;Want to stand up services via Docker? Check out our pal &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;Chris Richardson&amp;rsquo;s post on standing up services via Docker&lt;/a&gt;! You could, for example, consume these services from another Docker-packaged Spring Boot application, or on Cloud Foundry.next (hitherto called &amp;ldquo;Diego&amp;rdquo;). &lt;a href="http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/"&gt;http://plainoldobjects.com/2015/01/14/need-to-install-mongodb-rabbitmq-or-mysql-use-docker-to-simplify-dev-and-test/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Are you following &lt;a href="http://www.thisweekincf.com/blog/2015/01/19/this-week-in-cloud-foundry-19th-january-2015/"&gt;&lt;em&gt;This Week in Cloud Foundry&lt;/em&gt;&lt;/a&gt;? Do! There&amp;rsquo;s so much good stuff there, as usual.&lt;/li&gt;
-&lt;/ol&gt;&lt;p&gt;Webinars make up a lot of this week&amp;rsquo;s roundup. Nice work, &lt;a href="https://twitter.com/pieterhumphrey"&gt;Pieter Humphrey&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
 </feed>
 
