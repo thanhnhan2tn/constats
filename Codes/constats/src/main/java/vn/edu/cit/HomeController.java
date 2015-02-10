@@ -58,7 +58,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/changeNIC", method = RequestMethod.GET)
 	public String changeNic() throws FileNotFoundException {
-		Server sv = new Server("192.168.0.101", 22, "root", "root");
+		Server sv = new Server(0, "192.168.0.101", 22, "root", "root");
 		Power pw = new Power();
 		Nics ns = Nic.Nics_convert("E:/XML_File/NIC.xml");
 		Nic nic = new Nic();

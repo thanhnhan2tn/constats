@@ -1,6 +1,9 @@
 package vn.edu.cit.servercontrol;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream.GetField;
 
 import vn.edu.cit.model.Server;
 
@@ -78,19 +81,16 @@ public class Power {
 		}
 	}
 
-	public static void main(String[] args) {
-		Server sv = new Server("192.168.0.101", 22, "root", "root");
-		Power pw = new Power();
-		Restart(sv);
-	}
-
 	public static boolean changeNic(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
+			// option -e giup nhan dang ki tu xuong dong
 			Channel channel = ss.openChannel("exec");
-	((ChannelExec) channel).setCommand("echo "  + cmd +  " > " 
+			((ChannelExec) channel).setCommand(" echo " + " -e " + cmd + " > "
 					+ "/home/maya/hello.txt");
 			((ChannelExec) channel).setErrStream(System.err);
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					System.in));
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];

@@ -10,12 +10,29 @@ import com.jcraft.jsch.Session;
  *
  */
 public class Server {
-	private int serverId;
+	public int serverId;
 	private String serverAddress;
 	private int port = 22;
-	private String serverName;
+	// private String serverName;
 	private String serverUsername;
 	private String serverPassword;
+
+	public Server() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Server(int serverId, String serverAddress, int port,
+			String serverUsername, String serverPassword) {
+		super();
+		this.serverId = serverId;
+		this.serverAddress = serverAddress;
+		this.port = port;
+
+		this.serverUsername = serverUsername;
+		this.serverPassword = serverPassword;
+
+	}
 
 	public int getServerId() {
 		return serverId;
@@ -41,14 +58,6 @@ public class Server {
 		this.port = port;
 	}
 
-	public String getServerName() {
-		return serverName;
-	}
-
-	public void setServerName(String serverName) {
-		this.serverName = serverName;
-	}
-
 	public String getServerUsername() {
 		return serverUsername;
 	}
@@ -65,29 +74,6 @@ public class Server {
 		this.serverPassword = serverPassword;
 	}
 
-	// Xay dung
-	public Server(String ip, int port, String username, String password) {
-		super();
-		this.serverAddress = ip;
-		this.port = port;
-		this.serverUsername = username;
-		this.serverPassword = password;
-	}
-
-	// Xay dung
-	public Server(String ip, String username, String password) {
-		super();
-		this.serverAddress = ip;
-		this.serverUsername = username;
-		this.serverPassword = password;
-	}
-
-	// Xay dung mac nhien
-	public Server() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	// Get Session
 	public Session getSession(Server sv) {
 
@@ -101,7 +87,7 @@ public class Server {
 			session.setPassword(sv.getServerPassword());
 			session.setConfig(config);
 			session.connect();
-			System.out.println("Connected");
+			System.out.println("Connected to Server Success !!!!");
 			return session;
 		} catch (Exception e) {
 			System.out.println("Khong the connect den server");

@@ -136,22 +136,26 @@ public class Nic {
 		return null;
 	}
 
-	// get Text tu xml - Luu y ko nen de "\n" neu muon chuyen qua Ubuntu server
 	public String getTextConfig(Nics nics) {
 		String kq = "";
+		// Luu y "'\n'" giup Ubuntu Server nhan dang ki tu xuong dong, neu ko se
+		// loi ko in ra tren file dc
 		for (Nic nic : nics.getNic()) {
-			String chuoi = "iface " + nic.id + " inet " + nic.type 
-					+ " address " + nic.address + " netmask " + nic.netmask
-					+ " gateway " + nic.gateway + " network " + nic.network
-					+ " broadcast " + nic.broadcast;
+			String chuoi = "iface " + nic.id + " inet " + nic.type + "'\n'"
+					+ " address " + nic.address + "'\n'" + " netmask "
+					+ nic.netmask + "'\n'" + " gateway " + nic.gateway + "'\n'"
+					+ " network " + nic.network + "'\n'" + " broadcast "
+					+ nic.broadcast + "'\n'";
 			try {
 				for (int i = 0; i <= nic.ip_tenmien[i].length(); i++) {
-					chuoi = chuoi + nic.ip_tenmien[i];
+
+					chuoi = chuoi + " dns-nameservers " + nic.ip_tenmien[i]
+							+ "'\n'";
 				}
 			} catch (ArrayIndexOutOfBoundsException ar) {
 
 			}
-			kq = kq + chuoi;
+			kq = kq + chuoi + "'\n'";
 		}
 
 		return kq;

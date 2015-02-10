@@ -5,7 +5,137 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-02-03T18:53:00Z</updated>
+  <updated>2015-02-09T15:18:00Z</updated>
+  <entry>
+    <title>Spring for Apache Hadoop 2.1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/09/spring-for-apache-hadoop-2-1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Thomas Risberg</name>
+    </author>
+    <id>tag:spring.io,2015-01-15:1932</id>
+    <updated>2015-02-09T15:18:00Z</updated>
+    <content type="html">&lt;p&gt;It was about six months ago that we started work on the 2.1 version of Spring for Apache Hadoop. We are now pleased to announce the general availability of version 2.1.0.&lt;/p&gt;&lt;p&gt;Beginning with the Spring for Apache Hadoop 2.1 version, we now only support Hadoop 2.0 APIs and no longer provide backwards compatibility with older Hadoop v1 distributions. If you need support for older Hadoop versions please use the 2.0.4 or 1.1.0 versions of Spring for Apache Hadoop.&lt;/p&gt;&lt;p&gt;The main new features for the 2.1 version are:&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Configuration and Boot support&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;New @Configuration changes and improvements to the Boot auto configuration features. A good example of this support can be seen in the &lt;code&gt;boot-fsshell&lt;/code&gt; &lt;code&gt;DemoApplication&lt;/code&gt; example app&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;@SpringBootApplication&#xD;
+public class DemoApplication implements CommandLineRunner {&#xD;
+&#xD;
+	@Autowired&#xD;
+	private FsShell shell;&#xD;
+&#xD;
+	@Override&#xD;
+	public void run(String... args) {&#xD;
+		for (FileStatus s : shell.lsr(&amp;quot;/tmp&amp;quot;)) {&#xD;
+			System.out.println(&amp;quot;&amp;gt; &amp;quot; + s.getPath());&#xD;
+		}&#xD;
+	}&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(DemoApplication.class, args);&#xD;
+	}&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For the full sample, go to &lt;a href="https://github.com/spring-projects/spring-hadoop-samples/blob/master/boot/boot-fsshell"&gt;https://github.com/spring-projects/spring-hadoop-samples/blob/master/boot/boot-fsshell&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Store&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Added support for append mode in the HDFS store writers.&lt;/li&gt;
+  &lt;li&gt;The Kite SDK dataset support updated to 0.17.0. This means there are some changes to the API. The use of a namespace in addition to the basePath is now mandatory. The DatasetTemplate now also uses ViewCallbacks instead of a partition expression for querying the data.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;YARN&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Support for container grouping and clustering in Spring YARN, which brings functionality for running multiple container types within a single YARN application.&lt;/li&gt;
+  &lt;li&gt;A new REST API for submitted apps and an improved application model with new client side commands and a command line shell.&lt;/li&gt;
+  &lt;li&gt;To see examples of these features look at the &lt;code&gt;yarn-store-groups&lt;/code&gt; &lt;a href="https://github.com/spring-projects/spring-hadoop-samples/tree/master/boot/yarn-store-groups"&gt;example app&lt;/a&gt; or at the Spring XD implementation for &lt;a href="https://github.com/spring-projects/spring-xd/tree/master/spring-xd-yarn"&gt;running on YARN&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We continue to update support for the latest Hadoop versions. We now provide “flavored” versions for the following distributions:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Apache Hadoop 2.4.1 (2.1.0.RELEASE-hadoop24)&lt;/li&gt;
+  &lt;li&gt;Apache Hadoop 2.5.2 (2.1.0.RELEASE-hadoop25)&lt;/li&gt;
+  &lt;li&gt;Apache Hadoop 2.6.0 (2.1.0.RELEASE)&lt;/li&gt;
+  &lt;li&gt;Pivotal HD 2.1 (2.1.0.RELEASE-phd21)&lt;/li&gt;
+  &lt;li&gt;Cloudera CDH5 5.3.0 (2.1.0.RELEASE-cdh5)&lt;/li&gt;
+  &lt;li&gt;Hortonworks HDP 2.2 (2.1.0.RELEASE-hdp22)&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The default distribution version is now Apache Hadoop 2.6.0.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Going forward&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;With the Hadoop ecosystem moving at a rapid pace, we hope that more frequent releases will help us keep up. For the next version we are planning on adding the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Better Java Configuration support.&lt;/li&gt;
+  &lt;li&gt;Add better support for for Hiveserver2 including a batch tasklet.&lt;/li&gt;
+  &lt;li&gt;Basic support for a batch tasklet to run Spark apps.&lt;/li&gt;
+  &lt;li&gt;Better boot support throughout the different modules.&lt;/li&gt;
+  &lt;li&gt;Improved security support (i.e. the YARN Boot CLI interaction, etc).&lt;/li&gt;
+  &lt;li&gt;Enhancements to have seamless integration with spring-cloud components (i.e. spring-cloud-cluster).&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Please provide feedback and feature requests via JIRA issues or GitHub issues (see project page for links).&lt;/p&gt;&lt;p&gt;The project page is at - &lt;a href="http://projects.spring.io/spring-hadoop/"&gt;http://projects.spring.io/spring-hadoop/&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Integration Kafka 1.0.GA is available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/02/09/spring-integration-kafka-1-0-ga-is-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Artem Bilan</name>
+    </author>
+    <id>tag:spring.io,2015-02-09:1964</id>
+    <updated>2015-02-09T13:39:00Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;We are pleased to announce that the Spring Integration Kafka 1.0 GA is now available.&lt;br/&gt;As usual, use the &lt;a href="http://repo.springsource.org/release"&gt;Release Repository&lt;/a&gt; with Maven or Gradle&lt;br/&gt;&lt;code&gt;&#xD;
+compile &amp;quot;org.springframework.integration:spring-integration-kafka:1.0.0.RELEASE&amp;quot;&#xD;
+&lt;/code&gt;&lt;br/&gt;or download a &lt;a href="http://repo.spring.io/release/org/springframework/integration/spring-integration-kafka/1.0.0.RELEASE"&gt;distribution archive&lt;/a&gt;, to give it a spin.&lt;/p&gt;&lt;p&gt;First of all thanks to all who contributed to the project - special thanks to the project&amp;rsquo;s founder &lt;strong&gt;Soby Chacko&lt;/strong&gt;, who implemented the infrastructure, as well as the High Level Consumer-based message source and the producers, and also to &lt;strong&gt;Marius Bogoevici&lt;/strong&gt;, who learned the intricacies of the Simple Consumer API for the message-driven consumer.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;It isn&amp;rsquo;t a surprise that this project is fully based on &lt;a href="http://kafka.apache.org/"&gt;Apache Kafka&lt;/a&gt; (the 0.8.1.1&lt;br/&gt;version) and on the &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration&lt;/a&gt; foundation (4.0.5.RELEASE version).&lt;br/&gt;We provide several abstractions like &lt;code&gt;Configuration&lt;/code&gt;, &lt;code&gt;ConnectionFactory&lt;/code&gt;, &lt;code&gt;KafkaMessageListenerContainer&lt;/code&gt;, &lt;code&gt;KafkaConsumerContext&lt;/code&gt;/&lt;code&gt;KafkaProducerContext&lt;/code&gt;, &lt;code&gt;KafkaMessage&lt;/code&gt; etc. to follow with Spring&amp;rsquo;s principles of decoupling and ease of use. Basing on those abstraction we provide high-level API like &lt;code&gt;KafkaMessageDrivenChannelAdapter&lt;/code&gt;, &lt;code&gt;KafkaHighLevelConsumerMessageSource&lt;/code&gt; and &lt;code&gt;KafkaProducerMessageHandler&lt;/code&gt; which are adapters in terms of Spring Integration. The XML configuration support is also provided.&lt;/p&gt;&lt;p&gt;&lt;em&gt;KafkaHighLevelConsumerMessageSource&lt;/em&gt;&lt;/p&gt;&lt;p&gt;The &lt;a href="https://cwiki.apache.org/confluence/display/KAFKA/Consumer+Group+Example"&gt;Kafka High Level Consumer&lt;/a&gt; is presented with &lt;code&gt;&amp;lt;int-kafka:inbound-channel-adapter&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;int-kafka:consumer-context&amp;gt;&lt;/code&gt; to &lt;code&gt;poll&lt;/code&gt; messages from Kafka topics using &lt;code&gt;KafkaStream&lt;/code&gt;. Its main advantage is simplicity of use and ability to balance partitions between consumers, if multiple instances of the message source are running in parallel.&lt;/p&gt;&lt;p&gt;The typical configuration may looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;int-kafka:inbound-channel-adapter kafka-consumer-context-ref=&amp;quot;consumerContext&amp;quot;&#xD;
+                                    channel=&amp;quot;inputFromKafka&amp;quot;&amp;gt;&#xD;
+       &amp;lt;int:poller fixed-delay=&amp;quot;10&amp;quot;/&amp;gt;&#xD;
+&amp;lt;/int-kafka:inbound-channel-adapter&amp;gt;&#xD;
+&#xD;
+&amp;lt;int-kafka:consumer-context id=&amp;quot;consumerContext&amp;quot;&#xD;
+                            consumer-timeout=&amp;quot;4000&amp;quot;&#xD;
+                            zookeeper-connect=&amp;quot;zookeeperConnect&amp;quot;&amp;gt;&#xD;
+     &amp;lt;int-kafka:consumer-configurations&amp;gt;&#xD;
+           &amp;lt;int-kafka:consumer-configuration group-id=&amp;quot;default&amp;quot;&#xD;
+                                  value-decoder=&amp;quot;valueDecoder&amp;quot;&#xD;
+                                  key-decoder=&amp;quot;valueDecoder&amp;quot;&#xD;
+                                  max-messages=&amp;quot;5000&amp;quot;&amp;gt;&#xD;
+                  &amp;lt;int-kafka:topic id=&amp;quot;test1&amp;quot; streams=&amp;quot;4&amp;quot;/&amp;gt;&#xD;
+                  &amp;lt;int-kafka:topic id=&amp;quot;test2&amp;quot; streams=&amp;quot;4&amp;quot;/&amp;gt;&#xD;
+           &amp;lt;/int-kafka:consumer-configuration&amp;gt;&#xD;
+    &amp;lt;/int-kafka:consumer-configurations&amp;gt;&#xD;
+&amp;lt;/int-kafka:consumer-context&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you see in addition the &lt;code&gt;&amp;lt;int-kafka:consumer-context&amp;gt;&lt;/code&gt; requires a reference to the &lt;code&gt;zookeeperConnect&lt;/code&gt;. It is a simple bean, which represent a connection to the Zookeeper ensemble:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;int-kafka:zookeeper-connect id=&amp;quot;zookeeperConnect&amp;quot; &#xD;
+                          zk-connect=&amp;quot;host1,host2,host3:2182&amp;quot;&#xD;
+                          zk-connection-timeout=&amp;quot;6000&amp;quot;&#xD;
+                          zk-session-timeout=&amp;quot;6000&amp;quot;&#xD;
+                          zk-sync-time=&amp;quot;2000&amp;quot;/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;KafkaHighLevelConsumerMessageSource&lt;/code&gt; produces &lt;code&gt;Message&lt;/code&gt; with &lt;code&gt;Map&amp;lt;String, Map&amp;lt;Integer, List&amp;lt;Object&amp;gt;&amp;gt;&amp;gt;&lt;/code&gt; &lt;code&gt;payload&lt;/code&gt;, where it is like &amp;ldquo;Kafka messages by partitions for each topic&amp;rdquo;.&lt;/p&gt;&lt;p&gt;&lt;em&gt;KafkaMessageDrivenChannelAdapter&lt;/em&gt;&lt;/p&gt;&lt;p&gt;The &lt;a href="https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+SimpleConsumer+Example"&gt;Kafka Simple Consumer&lt;/a&gt; is presented with &lt;code&gt;&amp;lt;int-kafka:message-driven-adapter&amp;gt;&lt;/code&gt; and based on the well-know &lt;code&gt;ListenerContainer&lt;/code&gt; abstraction - &lt;code&gt;KafkaMessageListenerContainer&lt;/code&gt; (similar to Spring AMQP &lt;a href="http://docs.spring.io/spring-amqp/docs/latest-ga/reference/html/amqp.html#containerAttributes"&gt;&lt;code&gt;SimpleMessageListenerContainer&lt;/code&gt;&lt;/a&gt; or Spring JMS &lt;a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/jms.html#jms-asynchronousMessageReception"&gt;&lt;code&gt;DefaultMessageListenerContainer&lt;/code&gt;&lt;/a&gt;):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Bean&#xD;
+public Configuration zkConfiguration() {&#xD;
+   return new ZookeeperConfiguration(new ZookeeperConnect());&#xD;
+}&#xD;
+&#xD;
+@Bean&#xD;
+public ConnectionFactory kafkaConnectionFactory() {&#xD;
+   return new DefaultConnectionFactory(zkConfiguration());&#xD;
+}&#xD;
+&#xD;
+@Bean&#xD;
+public MessageProducer kafkaMessageDrivenChannelAdapter() {&#xD;
+   KafkaMessageDrivenChannelAdapter adapter = &#xD;
+            new KafkaMessageDrivenChannelAdapter(&#xD;
+   		new KafkaMessageListenerContainer(kafkaConnectionFactory(),    &#xD;
+                                       &amp;quot;topic1&amp;quot;, &amp;quot;topic2&amp;quot;));&#xD;
+   adapter.setOutputChannel(inputChannel());&#xD;
+   return adapter;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The main advantage of this component is better control of the partitions one component listens to (which are configurable), as well as starting offsets (wherever replaying a topic is, for example, necessary). Also, richer offset management and error handling strategies are available, too.&lt;/p&gt;&lt;p&gt;The result of the listening task is a single &lt;code&gt;Message&lt;/code&gt; with &lt;code&gt;payload&lt;/code&gt; based on the Kafka message and additional &lt;code&gt;headers&lt;/code&gt; with keys from &lt;code&gt;KafkaHeaders&lt;/code&gt;. Ordering is preserved inside a partition. &lt;/p&gt;&lt;p&gt;Both adapters can be configured with &lt;code&gt;kafka.serializer.Decoder&lt;/code&gt; for the Kafka message as well as for the Kafka message key. The Spring Integration Kafka provides out-of-the-box the &lt;a href="http://avro.apache.org/"&gt;Avro&lt;/a&gt; &lt;code&gt;Encoder/Decoder&lt;/code&gt; implementations.&lt;/p&gt;&lt;p&gt;In addition the Spring Integration Kafka introduces the &lt;code&gt;OffsetManager&lt;/code&gt; abstraction to get deal with Kafka topic offset, which isn&amp;rsquo;t available with &lt;code&gt;High Level Consumer&lt;/code&gt;. The &lt;code&gt;MetadataStoreOffsetManager&lt;/code&gt; and &lt;code&gt;KafkaTopicOffsetManager&lt;/code&gt; are presented. The &lt;code&gt;OffsetManager&lt;/code&gt; must be injected to the &lt;code&gt;KafkaMessageListenerContainer&lt;/code&gt;. By default the&lt;br/&gt;&lt;code&gt;MetadataStoreOffsetManager&lt;/code&gt; is used, backed by &lt;code&gt;SimpleMetadataStore&lt;/code&gt; from Spring Integration Core.&lt;/p&gt;&lt;p&gt;&lt;em&gt;KafkaProducerMessageHandler&lt;/em&gt;&lt;/p&gt;&lt;p&gt;The &lt;a href="https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example"&gt;Kafka Producer&lt;/a&gt; represents with &lt;code&gt;&amp;lt;int-kafka:outbound-channel-adapter&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;int-kafka:producer-context&amp;gt;&lt;/code&gt; pair. The last one utilizes the configurations for the target Kafka &lt;code&gt;Producer&lt;/code&gt;, which is selected by the &lt;code&gt;KafkaHeaders.TOPIC&lt;/code&gt; from the &lt;code&gt;MessageHeaders&lt;/code&gt; or by the &lt;code&gt;topic-expression&lt;/code&gt; on the &lt;code&gt;&amp;lt;int-kafka:outbound-channel-adapter&amp;gt;&lt;/code&gt; and matched to the configured &lt;code&gt;topic&lt;/code&gt; option on the &lt;code&gt;&amp;lt;int-kafka:producer-configuration&amp;gt;&lt;/code&gt; sub-element:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;int-kafka:producer-context id=&amp;quot;kafkaProducerContext&amp;quot;&amp;gt;&#xD;
+	&amp;lt;int-kafka:producer-configurations&amp;gt;&#xD;
+		&amp;lt;int-kafka:producer-configuration broker-list=&amp;quot;localhost:9092&amp;quot;&#xD;
+					key-class-type=&amp;quot;java.lang.String&amp;quot;&#xD;
+					value-class-type=&amp;quot;java.lang.String&amp;quot;&#xD;
+					topic=&amp;quot;test1&amp;quot;&#xD;
+					value-encoder=&amp;quot;kafkaEncoder&amp;quot;&#xD;
+					key-encoder=&amp;quot;kafkaEncoder&amp;quot;&#xD;
+					compression-codec=&amp;quot;default&amp;quot;/&amp;gt;&#xD;
+		&amp;lt;int-kafka:producer-configuration broker-list=&amp;quot;localhost:9092&amp;quot;&#xD;
+					topic=&amp;quot;test2&amp;quot;&#xD;
+					compression-codec=&amp;quot;default&amp;quot;/&amp;gt;&#xD;
+	&amp;lt;/int-kafka:producer-configurations&amp;gt;&#xD;
+&amp;lt;/int-kafka:producer-context&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you see there are enough options for tuning the target &lt;code&gt;Producer&lt;/code&gt;, as well as each &lt;code&gt;Producer&lt;/code&gt; can be backed by the specific &lt;code&gt;broker-list&lt;/code&gt;. If only the single &lt;code&gt;&amp;lt;int-kafka:producer-configuration&amp;gt;&lt;/code&gt; is present you can send messages to any &lt;code&gt;topic&lt;/code&gt;, e.g. based on the &lt;code&gt;Message&lt;/code&gt; context headers.&lt;/p&gt;&lt;p&gt;The &lt;a href="http://projects.spring.io/spring-xd/"&gt;Spring XD&lt;/a&gt; utilizes these adapters as Kafka Source and Sink. In addition it provides the &lt;code&gt;KafkaMessageBus&lt;/code&gt;. These features will be available in the Spring XD 1.1 RELEASE soon.&lt;/p&gt;&lt;p&gt;Also, while we were finishing this release, &lt;a href="http://kafka.apache.org/"&gt;Apache Kafka&lt;/a&gt; 0.8.2 has received its final release as well. We are happy to congratulate the team, and we will incorporate the new features available in the near future - this is just the beginning of providing premier support for Kafka in Spring applications!&lt;/p&gt;&lt;p&gt;See the project &lt;a href="https://github.com/spring-projects/spring-integration-kafka"&gt;home page&lt;/a&gt; for more information.&lt;/p&gt;&lt;p&gt;As always, we look forward to your comments and feedback (&lt;a href="http://stackoverflow.com"&gt;StackOverflow&lt;/a&gt; (&lt;code&gt;spring-integration&lt;/code&gt; tag), &lt;a href="https://jira.spring.io/browse/INTEXT"&gt;Spring JIRA&lt;/a&gt;, &lt;a href="https://github.com/spring-projects/spring-integration-kafka/issues"&gt;GitHub&lt;/a&gt;) and we very much welcome &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.md"&gt;contributions&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring -  February  3rd, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/02/03/this-week-in-spring-february-3rd-2015" />
@@ -1236,45 +1366,6 @@ class Reservation {&#xD;
     <id>tag:spring.io,2015-01-09:1927</id>
     <updated>2015-01-26T01:18:00Z</updated>
     <content type="html">&lt;p&gt;Fastest Servlets in the West?&lt;br/&gt;&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Speakers: Stuart Willliams, Daniel Mikusa &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west"&gt;&lt;a href="http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west"&gt;http://www.slideshare.net/SpringCentral/williams-fastest-servlets-in-the-west&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt; Applied Spring Track&lt;/p&gt;&lt;br/&gt;&lt;p&gt; The venerable Servlet Container still has some performance tricks up its sleeve - this talk will demonstrate Apache Tomcat&amp;rsquo;s stability under high load, describe some do&amp;rsquo;s (and some don&amp;rsquo;ts!), explain how to performance test a Servlet-based application, troubleshoot and tune the container and your application and compare the performance characteristics of the different Tomcat connectors. The presenters will share their combined experience supporting real Tomcat applications for over 20 years and show how a few small changes can make a big, big difference. &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;br/&gt; &lt;iframe width="560" height="315" src="//www.youtube.com/embed/uMtYcWB7Z4s" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;br/&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Booting up Spring Social</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-booting-up-spring-social" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1926</id>
-    <updated>2015-01-26T01:16:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Craig Walls &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/booting-up-spring-social"&gt;http://www.slideshare.net/SpringCentral/booting-up-spring-social&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Applied Spring Track &lt;/p&gt;
-&lt;p&gt;In recent years, people are using social networks like Facebook and Twitter to connect, meet, and share experiences and ideas. But it's not just people making connections; modern applications are also leveraging the APIs provided by the social networks to connect with their users and customers. It's hard to find applications these days that aren't somehow connected to their users via social APIs. Spring Social is an extension to the Spring Framework that enables you to create applications that connect with APIs. With it, your application can offer social login, learn about its users' interests, and inject itself into their social graph. In this session, we'll take a look at the latest that Spring Social has to offer, including integration with Spring Security, automatic reconnect, and a dramatically simpler configuration model using Spring Boot. &lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/FGksai2vCvA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Hadoop 201 -- Deeper into the Elephant</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/01/26/springone2gx-2014-replay-hadoop-201-deeper-into-the-elephant" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-01-09:1925</id>
-    <updated>2015-01-26T01:13:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Roman Shaposhnik &lt;/p&gt;
-&lt;p&gt;Big Data Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/hadoop-201-deeper-into-the-elephant"&gt;http://www.slideshare.net/SpringCentral/hadoop-201-deeper-into-the-elephant &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This session expands on the previous year's &amp;quot;Hadoop: Just the Basics for Big Data Rookies&amp;quot;, diving deeper into the details of key Apache Hadoop projects. We will start with a brief recap of HDFS and MapReduce, then discuss more advanced features of HDFS, in addition to how YARN has enabled businesses to massively scale their systems beyond what was previously possible. We will then discuss Apache HBase, the non-relational database modeled after Google's BIg table, review the data model, architecture, and common use cases. By the end of this session, you will learn how these three core Hadoop projects are used to solve even the most challenging Big Data problems.&#xD;
-&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="//www.youtube.com/embed/IcuTdJgUFmo" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
   </entry>
 </feed>
 

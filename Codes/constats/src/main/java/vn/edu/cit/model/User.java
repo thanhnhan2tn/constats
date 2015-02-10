@@ -1,14 +1,36 @@
 package vn.edu.cit.model;
 
+import java.util.List;
+
+/**
+ * @author Notexittran
+ *
+ */
 public class User {
 	private int userId;
 	private String userName;
 	private String passWord;
-	private int groupId;
+	private String role; // 1 hoac 2
 	private String fullName;
 	private String email;
 	private String sdt;
-	private String diaChi;
+	List<Server> server;
+
+	public User() {
+
+	}
+
+	public User(int userId, String userName, String passWord, String role,
+			String fullName, String email, String sdt) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.role = role;
+		this.fullName = fullName;
+		this.email = email;
+		this.sdt = sdt;
+	}
 
 	public int getUserId() {
 		return userId;
@@ -32,14 +54,6 @@ public class User {
 
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
-	}
-
-	public int getGroupId() {
-		return groupId;
-	}
-
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
 	}
 
 	public String getFullName() {
@@ -66,11 +80,20 @@ public class User {
 		this.sdt = sdt;
 	}
 
-	public String getDiaChi() {
-		return diaChi;
+	public String getRole() {
+		return role;
 	}
 
-	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
+	public void setRole(String role) {
+		this.role = role;
 	}
+
+	public List<Server> getServer() {
+		return server;
+	}
+
+	public void setServer(List<Server> server) {
+		this.server = server;
+	}
+
 }
