@@ -67,6 +67,16 @@
                     <!-- end li notification -->
                     <!-- li user menu -->
                     <li class="dropdown user user-menu">
+                    <!-- Chua dang nhap -->
+                    <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#Login">
+                          	<i class="glyphicon glyphicon-user"></i></a>
+                    <div class="modal fade" id="Login" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<!--  -->
+							<%@include file="include/loginForm.jsp"%>
+					</div> 
+					<!-- //Chua dang nhap -->
+                    <!--  Da dang nhap -->
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="glyphicon glyphicon-user"></i>
                                 <span>Thanh Nhan<i class="caret"></i></span>
@@ -91,6 +101,7 @@
                                     </div>
                                 </li>
                             </ul>
+                         <!-- Da dang nhap -->   
 					</li>
 					<!-- end li user menu -->
 				</ul>
@@ -128,28 +139,15 @@
                </div>
                <!-- AddServer Modal -->
 				<div class="modal fade" id="AddServer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-				      </div>
-				      <div class="modal-body">
-				        ...
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
-				      </div>
-				    </div>
-				  </div>
+				  <!--  -->
+				  <%@include file="include/addServerForm.jsp"%>
 				</div>
             </section>
             <!--  End Content Header -->
             <!--  Main Content -->
             <section class="content">
             <div class="main-content">
-            	<%@include file="include/maincontent.jsp"%>
+            	<%@include file="include/mainContent.jsp"%>
             </div>
             </section>
             <!--  End Main Content -->

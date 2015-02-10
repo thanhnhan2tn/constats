@@ -18,45 +18,18 @@ import vn.edu.cit.servercontrol.Power;
  */
 @Controller
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+	public String home() {
 		return "home";
 	}
-	@RequestMapping(value = "/Shutdown", method = RequestMethod.GET)
-	public String shutDown(){
-		Power pw = new Power();
-//		pw.Shutdown();
-//		if(){
-//			System.out.print("Shut");
-//		}else{
-//			System.out.print("coloi");
-//		}
-		return "home";
-	}
-	@RequestMapping(value = "/Restart", method = RequestMethod.GET)
-	public String reStart(){
-		Power pw = new Power();
-//		pw.Restart();
-//		if(){
-//			System.out.print("Shut");
-//		}else{
-//			System.out.print("coloi");
-//		}
+	
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
+	public String checkLogin() {
+		
 		return "home";
 	}
 }

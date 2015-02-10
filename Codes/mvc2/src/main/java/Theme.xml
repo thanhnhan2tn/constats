@@ -4,16 +4,17 @@
 	<version>1.0</version>
 	<patch>src/main/resources/theme/default/</patch>
 	<author>TNC</author>
-	<header>
+	<div name="header">
+		<class>header</class>
 		<logo>
 			<image>images/logo.png</image>
 			<text>DemoCMS</text>
 			<url>src/logo.png</url>
 			<isText>true</isText>
 		</logo>
-
-	</header>
-	<content>
+	</div>
+	<div name="content">
+		<class>content</class>
 		<top_content>
 			<form>
 				<action>URL</action>
@@ -49,12 +50,5 @@
 			</form>
 			
 		</top_content>
-	</content>
-
-
-
-
-
-
-
+	</div>
 </theme>

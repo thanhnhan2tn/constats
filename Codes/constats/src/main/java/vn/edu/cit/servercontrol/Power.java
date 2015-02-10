@@ -9,7 +9,10 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
 
 public class Power {
-	public boolean Shutdown(Server sv) {
+	private Server sv2;
+	
+	public boolean Shutdown() {
+		Server sv = new Server();
 		Session ss = sv.Connect(sv);
 		try {
 			Channel channel = ss.openChannel("exec");

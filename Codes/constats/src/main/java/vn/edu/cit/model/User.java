@@ -1,6 +1,10 @@
 package vn.edu.cit.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document(collection="user")
 public class User {
+	@Id
 	private int userId;
 	private String userName;
 	private String passWord;

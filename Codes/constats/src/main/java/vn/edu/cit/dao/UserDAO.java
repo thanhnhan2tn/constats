@@ -1,33 +1,15 @@
 package vn.edu.cit.dao;
 
-import javax.sql.DataSource;
+import vn.edu.cit.model.User;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+public interface UserDAO {
+	public void create(User user);
 
-public class UserDAO {
-	@Autowired
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplateObject;
+	public User getByUsername(String userName);
 
-	/**
-		 * 
-		 */
-	public UserDAO() {
-	}
+	public void update(User user);
 
-	public void setDataSource(DataSource ds) {
-		this.dataSource = ds;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-	}
+	public int deleteById(String userId);
 
-	public boolean check(String username, String password) {
-		jdbcTemplateObject = new JdbcTemplate(dataSource);
-		String sql = "select count(*) from User where username = ? and password = ?";
-		int result = jdbcTemplateObject.queryForInt(sql, new Object[] {
-				username, password });
-		System.out.println("Result = " + result);
-		return (result == 1);
-	}
-
+	public int deleteByUsername(String userName);
 }
