@@ -5,6 +5,13 @@
 	name='viewport'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+<!-- Script Jquery -->
+<script type="text/javascript" src="<c:url value='/resources/themes/constats/js/jquery-2.1.1.min.js'/>"></script>
+<!-- Script Jquery-UI -->
+<script type="text/javascript" src="<c:url value='/resources/themes/constats/js/jquery-ui.min.js'/>"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="<c:url value='/resources/themes/constats/plugins/bootstrap/js/bootstrap.min.js'/>"></script>
 <!-- bootstrap css framwork -->
 <link
 	href='<c:url value="/resources/themes/constats/plugins/bootstrap/css/bootstrap.min.css"/>'

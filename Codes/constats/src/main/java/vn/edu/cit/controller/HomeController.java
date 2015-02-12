@@ -1,4 +1,4 @@
-package vn.edu.cit;
+package vn.edu.cit.controller;
 
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import vn.edu.cit.model.Server;
+import vn.edu.cit.repositories.UserRepository;
 import vn.edu.cit.servercontrol.Power;
 import vn.edu.cit.servercontrol.nics_controller.Nic;
 import vn.edu.cit.servercontrol.nics_controller.Nics;
@@ -42,15 +43,19 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String login(HttpServletRequest request) {
+		request.setAttribute("type", "modules");
+		request.setAttribute("p", "login");
 		return "home";
 	}
 	
-	@RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String loginCheck(HttpServletRequest request){
+		UserRepository repository = null;
 		HttpSession session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		repository.count();
 		boolean result = true;// = User.check(username, password);
 		if (result == true) {
 			session.setAttribute("username", username);

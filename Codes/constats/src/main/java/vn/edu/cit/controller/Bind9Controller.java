@@ -1,4 +1,4 @@
-package vn.edu.cit;
+package vn.edu.cit.controller;
 
 import java.io.FileNotFoundException;
 
