@@ -27,7 +27,6 @@ public class TestController {
 		user.setUserName(username);
 		System.out.println("Retrieved User=" + username);
 		user.setPassWord("â");
-		user.setDiaChi("Nhà Minh");
 		user.setEmail("@@");
 		user.setSdt("0909");
 		

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
+<aop-project name="DemoCMS"/>
+<aop-project name="SpringTest"/>
 <aop-project name="mvc2"/>
+<aop-project name="Hello-module"/>
 <aop-project name="constats"/>
 </aop-reference-model>

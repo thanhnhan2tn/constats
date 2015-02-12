@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%
-		Server sv = new Server("192.168.0.101", 22, "root", "root");
+		Server sv = new Server(1, "192.168.0.101", 22, "root", "root");
 		Power pw = new Power();
 		pw.Restart(sv);
 	%>

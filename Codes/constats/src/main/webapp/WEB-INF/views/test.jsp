@@ -14,7 +14,6 @@
 		for (User user : users) {
 			pageContext.setAttribute("username", user.getUserName());
 			pageContext.setAttribute("userid", user.getUserId());
-			pageContext.setAttribute("diachi", user.getDiaChi());
 			
 	%>
 	<div>${username}</div>

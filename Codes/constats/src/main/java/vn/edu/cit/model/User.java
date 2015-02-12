@@ -2,11 +2,16 @@ package vn.edu.cit.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author Notexittran
  *
  */
+@Document(collection="user")
 public class User {
+	@Id
 	private int userId;
 	private String userName;
 	private String passWord;
