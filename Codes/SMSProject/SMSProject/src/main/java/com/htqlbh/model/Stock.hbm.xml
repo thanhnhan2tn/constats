@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.Stock" table="stock" >
+        <id name="stockId" type="string">
+            <column name="STOCKID" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="stockName" type="string">
+            <column name="STOCKNAME" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="100" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="200" />
+        </property>
+        <set name="warehouseInventories" table="warehouseinventory" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STOCKID" length="20" />
+            </key>
+            <one-to-many class="com.htqlbh.model.WarehouseInventory" />
+        </set>
+        <set name="purchaseOrdDetails" table="purchaseorddetail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STOCKID" length="20" />
+            </key>
+            <one-to-many class="com.htqlbh.model.PurchaseOrdDetail" />
+        </set>
+        <set name="inventoryVoucherDetails" table="inventoryvoucherdetail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="STOCKID" length="20" />
+            </key>
+            <one-to-many class="com.htqlbh.model.InventoryVoucherDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

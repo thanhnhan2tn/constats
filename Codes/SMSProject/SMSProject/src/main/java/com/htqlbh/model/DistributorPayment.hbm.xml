@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.DistributorPayment" table="distributorpayment">
+        <id name="dPaymentId" type="java.lang.Integer">
+            <column name="DPAYMENTID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="vendor" class="com.htqlbh.model.Vendor" fetch="select">
+            <column name="VENDORID" length="20" />
+        </many-to-one>
+        <property name="dPaymentNo" type="string">
+            <column name="DPAYMENTNO" length="20" />
+        </property>
+        <property name="dPaymentDate" type="date">
+            <column name="DPAYMENTDATE" length="10" />
+        </property>
+        <property name="dPaymentAmt" type="java.lang.Long">
+            <column name="DPAYMENTAMT" precision="10" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

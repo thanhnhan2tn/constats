@@ -5,6 +5,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -23,40 +26,39 @@ import vn.edu.cit.servercontrol.nics_controller.Nics;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
-
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		if (username == null) {
+			return "home";
+		} else {
+			return "redirect:/login";
+		}
+
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
 		return "home";
 	}
-
-	@RequestMapping(value = "/chbi", method = RequestMethod.GET)
-	public String shutDown() {
-
-		return "index";
+	
+	@RequestMapping(value = "/loginCheck", method = RequestMethod.GET)
+	public String loginCheck(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		boolean result = true;// = User.check(username, password);
+		if (result == true) {
+			session.setAttribute("username", username);
+			session.setAttribute("logined", true);
+			return "redirect:/home";
+		} else {
+			return "redirect:/";
+		}
 	}
 
-	@RequestMapping(value = "/vn", method = RequestMethod.GET)
-	public String reStart() {
-
-		return "xuly";
-	}
-
-	@RequestMapping(value = "/changeNIC", method = RequestMethod.GET)
-	public String changeNic() throws FileNotFoundException {
-		Server sv = new Server(0, "192.168.0.101", 22, "root", "root");
-		Power pw = new Power();
-		Nics ns = Nic.Nics_convert("E:/XML_File/NIC.xml");
-		Nic nic = new Nic();
-		String kq = nic.getTextConfig(ns);
-		// Luu y neu trong String co "\n" lenh van thuc thi nhung ko jsch qua
-		// ben server dc -> chua hieu dieu nay
-		pw.changeNic(sv, kq);
-		System.out.print(kq);
-		return "index";
-	}
 }
