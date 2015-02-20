@@ -42,15 +42,28 @@ public class HomeController {
 
 	}
 
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String register(HttpServletRequest request) {
+		UserRepository repository = null;
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
+		String passWord = request.getParameter("passwd");
+
+		return "";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request) {
 		request.setAttribute("type", "modules");
 		request.setAttribute("p", "login");
 		return "home";
 	}
-	
+
 	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
-	public String loginCheck(HttpServletRequest request){
+	public String loginCheck(HttpServletRequest request) {
 		UserRepository repository = null;
 		HttpSession session = request.getSession();
 		String username = request.getParameter("username");

@@ -61,10 +61,11 @@
 							<!-- Button -->
 
 							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-success">Login </a> <a
-									id="btn-fblogin" href="#" class="btn btn-primary">Login
+								<a id="btn-login" href="#" class="btn btn-success">Login </a> 
+								<!-- 
+								<a id="btn-fblogin" href="#" class="btn btn-primary">Login
 									with Facebook</a>
-
+								 -->
 							</div>
 						</div>
 
@@ -99,8 +100,7 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<form id="signupform" class="form-horizontal" role="form">
-
+					<form action="register" id="signupform" class="form-horizontal" role="form" method="POST">
 						<div id="signupalert" style="display: none"
 							class="alert alert-danger">
 							<p>Error:</p>
@@ -151,6 +151,7 @@
 							</div>
 						</div>
 
+						<!-- 
 						<div style="border-top: 1px solid #999; padding-top: 20px"
 							class="form-group">
 
@@ -159,9 +160,9 @@
 									<i class="icon-facebook"></i>   Sign Up with Facebook
 								</button>
 							</div>
-
+						 
 						</div>
-
+						-->
 
 
 					</form>

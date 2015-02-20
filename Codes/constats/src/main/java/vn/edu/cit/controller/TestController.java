@@ -21,18 +21,23 @@ public class TestController {
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
 	public String addUser(HttpServletRequest request) {
-		String username = (String) request.getParameter("userName");
-		User user = new User();
+		String username = (String) request.getParameter("username");
+		long maxId = repository.count();
+		long userId = 0;
+		System.out.println(maxId);
 		
-		user.setUserName(username);
 		System.out.println("Retrieved User=" + username);
-		user.setPassWord("â");
-		user.setEmail("@@");
-		user.setSdt("0909");
+		if (maxId != 0) {
+			userId = maxId + 1;
+		} else {
+			userId = 1;
+		}
 		
-		if(!repository.exists(username)){
+		User user = new User(userId,username,"1234","1", "Nhamc","tha@mail.com","1111");
+		
+		if (!repository.exists(username)) {
 			repository.insert(user);
-		}		
+		}
 		return "redirect:/testMongo";
 	}
 

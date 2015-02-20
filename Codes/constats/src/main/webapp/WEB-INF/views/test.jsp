@@ -14,11 +14,10 @@
 		for (User user : users) {
 			pageContext.setAttribute("username", user.getUserName());
 			pageContext.setAttribute("userid", user.getUserId());
-			
 	%>
 	<div>${username}</div>
 	<div>${userid}</div>
-	<div>${diachi}</div>
+
 	<%
 		}
 	%>
