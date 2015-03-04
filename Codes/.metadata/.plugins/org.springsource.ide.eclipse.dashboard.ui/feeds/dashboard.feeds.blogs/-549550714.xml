@@ -5,7 +5,38 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-03T22:17:00Z</updated>
+  <updated>2015-03-04T15:15:50Z</updated>
+  <entry>
+    <title>Spring Cloud 1.0.0 Available Now</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Dave Syer</name>
+    </author>
+    <id>tag:spring.io,2015-03-04:2008</id>
+    <updated>2015-03-04T15:15:50Z</updated>
+    <content type="html">&lt;p&gt;Spring Cloud 1.0.0.RELEASE is available now in Maven Central (and repo.spring.io). Not too many changes since RC3 but we did find a few bugs, thanks largely to community involvement, so thanks to all who tried it out up to now. Here is a reminder of the goals of Spring Cloud:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Coordination of distributed systems leads to boiler plate patterns, and using Spring Cloud developers can quickly stand up services and applications that implement those patterns. They will work well in any distributed environment, including the developer&amp;rsquo;s own laptop, bare metal data centres, and managed platforms such as Cloud Foundry.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;and a quick summary of the content of 1.0:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Config server with git backend&lt;/li&gt;
+  &lt;li&gt;Config client featuring refresh and encryption/decryption as well as the bootstrap phase in Spring application lifecycle&lt;/li&gt;
+  &lt;li&gt;Common abstractions for load balancer, service discovery and circuit breaker&lt;/li&gt;
+  &lt;li&gt;Security integrations: declarative SSO and proxy authentication strategies&lt;/li&gt;
+  &lt;li&gt;Eureka for service discovery: client and server (with UI)&lt;/li&gt;
+  &lt;li&gt;Eureka sidecar for non-JVM clients&lt;/li&gt;
+  &lt;li&gt;Automatic reverse proxy using Zuul&lt;/li&gt;
+  &lt;li&gt;Spring configuration model for Zuul filters&lt;/li&gt;
+  &lt;li&gt;Spring configuration model for Ribbon load balancer&lt;/li&gt;
+  &lt;li&gt;Feign declarative web service clients (with Ribbon integration)&lt;/li&gt;
+  &lt;li&gt;RestTemplate integration with Ribbon&lt;/li&gt;
+  &lt;li&gt;Hystrix for circuit breaker: client and dashboard (UI)&lt;/li&gt;
+  &lt;li&gt;Turbine for circuit breaker aggregation, pull over HTTP and push over AMQP&lt;/li&gt;
+  &lt;li&gt;AWS integration: relational databases, messaging and EC2 metadata&lt;/li&gt;
+  &lt;li&gt;AMQP bus for a defined set of operational events like config changes&lt;/li&gt;
+  &lt;li&gt;Groovy CLI with support for most of the above&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Find out more at &lt;a href="http://cloud.spring.io"&gt;http://cloud.spring.io&lt;/a&gt; and in &lt;a href="https://github.com/spring-cloud"&gt;Github&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - March 3, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/03/this-week-in-spring-march-3-2015" />
@@ -550,35 +581,6 @@ dependencies {&#xD;
   compile &amp;quot;org.springframework.boot:spring-boot-starter-web&amp;quot;&#xD;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#learning-more" class="anchor" name="learning-more"&gt;&lt;/a&gt;Learning more&lt;/h2&gt;&lt;p&gt;In addition to the features described above, the plugin has support for working with a bom&amp;rsquo;s properties (both overriding them and using them in your Gradle build), automatically including dependency management metadata in Gradle-generated pom files, and more. Take a look at the &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin/blob/master/README.md"&gt;README&lt;/a&gt; for further details.&lt;/p&gt;&lt;p&gt;The plugin is Apache-licensed and is on &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin"&gt;GitHub&lt;/a&gt;. GitHub&amp;rsquo;s also used for &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin/issues"&gt;issue tracking&lt;/a&gt;. Feature suggestions, pull requests, and bug reports are always welcome.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Stream Processing in Spring XD 1.1</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/20/stream-processing-in-spring-xd-1-1" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-02-20:1987</id>
-    <updated>2015-02-20T22:17:06Z</updated>
-    <content type="html">&lt;blockquote&gt;&lt;p&gt;This tip is drawn heavily from this Wiki-page on &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Data-Stream-Processor-Module#reactor-streams"&gt;Spring XD&amp;rsquo;s streaming support&lt;/a&gt; by various Spring XD team-members, and particularly the amazing &lt;a href="https://github.com/ilayaperumalg"&gt;Ilayaperumal Gopinathan&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;&lt;p&gt;Spring XD 1.1 is here and is &lt;em&gt;packed&lt;/em&gt; with lots of new features. One theme for this release is rich stream processing support. Spring XD 1.1 provides integration with &lt;a href="https://github.com/reactor"&gt;Project Reactor&lt;/a&gt; &lt;a href="https://github.com/reactor/reactor/blob/master/reactor-core/src/main/java/reactor/rx/Stream.java"&gt;&lt;code&gt;Stream&lt;/code&gt;&lt;/a&gt;s, &lt;a href="https://github.com/ReactiveX/"&gt;RxJava&lt;/a&gt; &lt;a href="https://github.com/ReactiveX/RxJava/wiki/Observable"&gt;&lt;code&gt;Observable&lt;/code&gt;&lt;/a&gt;s, and &lt;a href="https://spark.apache.org/"&gt;Spark&lt;/a&gt;&amp;rsquo;s streaming.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s look specifically at using Reactor, though the concepts are similar across all of the supported streaming APIs.&lt;/p&gt;&lt;p&gt;Messages that are delivered on the Message Bus are accessed from the input Stream. The return value is the output Stream that is the result of applying various operations to the input stream. The content of the output Stream is sent to the message bus for consumption by other processors or sinks. To implement a &lt;code&gt;Stream&lt;/code&gt;-based processor module you need to implement the interface &lt;code&gt;org.springframework.xd.reactor.Processor&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;import org.springframework.xd.reactor.Processor;&#xD;
-import org.springframework.xd.tuple.Tuple;&#xD;
-import reactor.rx.Stream;&#xD;
-&#xD;
-import static com.acme.Math.avg;&#xD;
-import static org.springframework.xd.tuple.TupleBuilder.tuple;&#xD;
-&#xD;
-public class MovingAverage implements Processor&amp;lt;Tuple, Tuple&amp;gt; {&#xD;
-&#xD;
-  @Override&#xD;
-  public Stream&amp;lt;Tuple&amp;gt; process(Stream&amp;lt;Tuple&amp;gt; inputStream) {&#xD;
-    return inputStream.map(tuple -&amp;gt; tuple.getDouble(&amp;quot;measurement&amp;quot;))&#xD;
-      .buffer(5)&#xD;
-      .map(data -&amp;gt; tuple().of(&amp;quot;average&amp;quot;, avg(data)));&#xD;
-  }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Writing a test for this is as simple as setting up a Spring Integration flow that takes input on a request channel and routes it to this processor via a &lt;code&gt;org.springframework.xd.reactor.SynchronousDispatcherMessageHandler&lt;/code&gt; component which itself writes its output to an output channel. From there, you can &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Modules#module-packaging"&gt;package&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Processor-Module#register-the-module"&gt;register&lt;/a&gt; the custom processor in the Spring XD admin server.&lt;/p&gt;</content>
   </entry>
 </feed>
 
