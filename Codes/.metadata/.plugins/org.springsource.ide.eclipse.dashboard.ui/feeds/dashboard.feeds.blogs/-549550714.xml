@@ -5,7 +5,40 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-04T15:15:50Z</updated>
+  <updated>2015-03-05T19:42:10Z</updated>
+  <entry>
+    <title>Spring Data Release Train Fowler RC1 Available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/05/spring-data-release-train-fowler-rc1-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Christoph Strobl</name>
+    </author>
+    <id>tag:spring.io,2015-03-05:2009</id>
+    <updated>2015-03-05T19:42:10Z</updated>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the availability of the first and final release candidate of the Spring Data release train named &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;Fowler&lt;/a&gt;. The release ships &lt;a href="https://jira.spring.io/issues/?filter=14932"&gt;149 tickets&lt;/a&gt; fixed. Here are some of the highlights:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Support for Java 8 &lt;code&gt;Stream&lt;/code&gt; as return type in JPA and MongoDB.&lt;/li&gt;
+  &lt;li&gt;Enhanced support for JSR-310 and the ThreeTen back port types.&lt;/li&gt;
+  &lt;li&gt;Dedicated &lt;a href="http://geojson.org"&gt;GeoJSON&lt;/a&gt; types for the MongoDB module.&lt;/li&gt;
+  &lt;li&gt;Compatibility with MongoDB 3.0 and the new MongoDB Java driver (current beta3).&lt;/li&gt;
+  &lt;li&gt;Auto-populate the last modified header for audited entities in Spring Data REST.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;@Score&lt;/code&gt; annotation for Solr.&lt;/li&gt;
+  &lt;li&gt;Support for suggestions in Elasticsearch.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;A curated change log can be found in the &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;wiki&lt;/a&gt; while the full list can be viewed in &lt;a href="https://jira.spring.io/issues/?filter=14932"&gt;JIRA&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Here are the participating modules:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Data Commons 1.10 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-commons/1.10.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.10.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.10.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.10.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data JPA 1.8 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-jpa/1.8.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.8.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.8.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.8.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data MongoDB 1.7 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-mongodb/1.7.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.7.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.7.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.7.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Neo4j 3.3 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-neo4j/3.3.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.3.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.3.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.3.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Solr 1.4 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-solr/1.4.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.4.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.4.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.4.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Couchbase 1.3 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-couchbase/1.3.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.3.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.3.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.3.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Cassandra 1.2 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-cassandra/1.2.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.2.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.2.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.2.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Elasticsearch 1.2 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-elasticsearch/1.2.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.2.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.2.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.2.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Gemfire 1.6 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-gemfire/1.6.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Redis 1.5 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-redis/1.5.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data REST 2.3 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-rest-webmvc/2.3.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Get in touch via &lt;a href="https://twitter.com/SpringData"&gt;Twitter&lt;/a&gt;, &lt;a href="http://stackoverflow.com/questions/tagged/spring-data"&gt;StackOverflow&lt;/a&gt; or &lt;a href="https://jira.spring.io"&gt;JIRA&lt;/a&gt; - We&amp;rsquo;re looking forward to your feedback!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Cloud 1.0.0 Available Now</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now" />
@@ -475,112 +508,6 @@ class HelloRestController {&#xD;
 &lt;p&gt;&#xD;
   &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/byp1zz-NqiE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
 &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Better dependency management for Gradle</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/23/better-dependency-management-for-gradle" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Andy Wilkinson</name>
-    </author>
-    <id>tag:spring.io,2015-02-19:1982</id>
-    <updated>2015-02-23T13:44:00Z</updated>
-    <content type="html">&lt;p&gt;Maven&amp;rsquo;s &lt;a href="http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html"&gt;dependency management&lt;/a&gt; includes the concept of a bill-of-materials (bom). A bom is a special kind of pom that is used to control the versions of a project&amp;rsquo;s dependencies and provides a central place to define and update those versions.&lt;/p&gt;&lt;p&gt;A number of Spring projects including Spring Framework, Spring Cloud, Spring Boot, and the Spring IO Platform provide boms to make things easier for Maven users. Unfortunately, things haven&amp;rsquo;t been quite so easy if you&amp;rsquo;re using Gradle.&lt;/p&gt;&lt;h2&gt;&lt;a href="#dependency-management-in-gradle" class="anchor" name="dependency-management-in-gradle"&gt;&lt;/a&gt;Dependency management in Gradle&lt;/h2&gt;&lt;p&gt;&lt;a href="https://gradle.org/docs/current/userguide/dependency_management.html"&gt;Gradle&amp;rsquo;s dependency management&lt;/a&gt; uses a &lt;a href="https://gradle.org/docs/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html"&gt;&lt;code&gt;ResolutionStrategy&lt;/code&gt;&lt;/a&gt; to take control of a project&amp;rsquo;s dependency versions. This offers a lot of power and flexibility but doesn&amp;rsquo;t provide a way to reuse the dependency management that&amp;rsquo;s already been declared in a Maven bom. As a result, you have to do so manually. Depending on the bom, this can easily equate to tens of additional lines in your &lt;code&gt;build.gradle&lt;/code&gt; script just to reuse some existing configuration.&lt;/p&gt;&lt;h2&gt;&lt;a href="#reusing-a-bom-in-gradle" class="anchor" name="reusing-a-bom-in-gradle"&gt;&lt;/a&gt;Reusing a bom in Gradle&lt;/h2&gt;&lt;p&gt;One of Gradle&amp;rsquo;s key strengths is that it can be easily extended and its behaviour customized through the use of plugins. We&amp;rsquo;ve taken advantage of this and written a &lt;a href="https://plugins.gradle.org/plugin/io.spring.dependency-management"&gt;dependency management plugin for Gradle&lt;/a&gt;. It&amp;rsquo;s compatible with both Gradle 1.x and 2.x. This plugin allows you to use a Maven bom to control your build&amp;rsquo;s dependencies in a handful of lines. The first step is to apply the plugin. In Gradle 2.1 and later:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;plugins {&#xD;
-  id &amp;quot;io.spring.dependency-management&amp;quot; version &amp;quot;0.4.0.RELEASE&amp;quot;&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In earlier versions of Gradle it&amp;rsquo;s a little more verbose:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
-  repositories {&#xD;
-    jcenter()&#xD;
-  }&#xD;
-  dependencies {&#xD;
-    classpath &amp;quot;io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE&amp;quot;&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Once the plugin&amp;rsquo;s been applied you can use it to import a Maven bom:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;dependencyManagement {&#xD;
-  imports {&#xD;
-    mavenBom &amp;#39;io.spring.platform:platform-bom:1.1.1.RELEASE&amp;#39;&#xD;
-  }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;With this configuration in place you can declare dependencies on anything in the bom without specifying a version:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;dependencies {&#xD;
-    compile &amp;#39;org.springframework:spring-core&amp;#39;&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The imported bom will control the version of the dependency. It will also control the version of its transitive dependencies if they&amp;rsquo;re listed in the bom.&lt;/p&gt;&lt;h2&gt;&lt;a href="#exclusions-in-gradle" class="anchor" name="exclusions-in-gradle"&gt;&lt;/a&gt;Exclusions in Gradle&lt;/h2&gt;&lt;p&gt;Gradle can retrieve dependencies from a Maven repository and it uses the metadata in Maven pom files to do so. However, rather than obeying Maven&amp;rsquo;s rules, it applies its own, subtly different semantics to the metadata. One area where this can cause problems is with the exclusion of transitive dependencies. This is best illustrated with a simple example.&lt;/p&gt;&lt;p&gt;Imagine a module that depends on a couple of Spring Framework modules,&lt;code&gt;spring-core&lt;/code&gt; and &lt;code&gt;spring-beans&lt;/code&gt;, and that uses SLF4J rather than Commons Logging. The dependencies in its pom would look something like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;spring-core&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;4.1.4.RELEASE&amp;lt;/version&amp;gt;&#xD;
-  &amp;lt;exclusions&amp;gt;&#xD;
-    &amp;lt;exclusion&amp;gt;&#xD;
-      &amp;lt;groupId&amp;gt;commons-logging&amp;lt;/groupId&amp;gt;&#xD;
-      &amp;lt;artifactId&amp;gt;commons-logging&amp;lt;/artifactId&amp;gt;&#xD;
-    &amp;lt;/exclusion&amp;gt;&#xD;
-  &amp;lt;/exclusions&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;&#xD;
-&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.springframework&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;spring-beans&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;4.1.4.RELEASE&amp;lt;/version&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;&#xD;
-&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.slf4j&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;jcl-over-slf4j&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;1.7.10&amp;lt;/version&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If a Maven build depends on this module its dependency tree will look like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;\- com.example:my-library:jar:0.0.1-SNAPSHOT:compile&#xD;
-   +- org.springframework:spring-core:jar:4.1.4.RELEASE:compile&#xD;
-   +- org.springframework:spring-beans:jar:4.1.4.RELEASE:compile&#xD;
-   \- org.slf4j:jcl-over-slf4j:jar:1.7.10:compile&#xD;
-      \- org.slf4j:slf4j-api:jar:1.7.10:compile
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;commons-logging&lt;/code&gt; isn&amp;rsquo;t listed as the only module that depends upon it is &lt;code&gt;spring-core&lt;/code&gt; where it has been excluded.&lt;/p&gt;&lt;p&gt;The dependency tree of the equivalent Gradle build looks like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;\--- com.example:my-library:0.0.1-SNAPSHOT&#xD;
-     +--- org.springframework:spring-core:4.1.4.RELEASE&#xD;
-     |    \--- commons-logging:commons-logging:1.2&#xD;
-     +--- org.springframework:spring-beans:4.1.4.RELEASE&#xD;
-     |    \--- org.springframework:spring-core:4.1.4.RELEASE (*)&#xD;
-     \--- org.slf4j:jcl-over-slf4j:1.7.10&#xD;
-          \--- org.slf4j:slf4j-api:1.7.10
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Despite the exclusion, &lt;code&gt;commons-logging&lt;/code&gt; is listed this time. This can be problematic as it leaves your classpath polluted with dependencies that should not be there. You can work around the problem by manually configuring the required exclusions in your Gradle build, but first of all you have to know what the exclusions should be, and then you have to go through the tedious and error-prone process of configuring them.&lt;/p&gt;&lt;h2&gt;&lt;a href="#honoring-a-pom-rsquo-s-exclusions" class="anchor" name="honoring-a-pom-rsquo-s-exclusions"&gt;&lt;/a&gt;Honoring a pom&amp;rsquo;s exclusions&lt;/h2&gt;&lt;p&gt;The dependency management plugin changes Gradle&amp;rsquo;s handling of a pom&amp;rsquo;s exclusions so that they behave as they do in Maven. With the plugin applied to the example project, it no longer pulls in &lt;code&gt;commons-logging&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;\--- com.example:my-library:0.0.1-SNAPSHOT&#xD;
-     +--- org.springframework:spring-core:4.1.4.RELEASE&#xD;
-     +--- org.springframework:spring-beans:4.1.4.RELEASE&#xD;
-     |    \--- org.springframework:spring-core:4.1.4.RELEASE&#xD;
-     \--- org.slf4j:jcl-over-slf4j:1.7.10&#xD;
-          \--- org.slf4j:slf4j-api:1.7.10
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#using-the-plugin-with-spring-boot" class="anchor" name="using-the-plugin-with-spring-boot"&gt;&lt;/a&gt;Using the plugin with Spring Boot&lt;/h2&gt;&lt;p&gt;There are some similarities between this plugin and Spring Boot&amp;rsquo;s Gradle plugin. For example, the Spring Boot plugin also &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-gradle-dependencies-without-versions"&gt;allows dependencies to be declared without a version&lt;/a&gt;, however it doesn&amp;rsquo;t affect transitive dependencies and doesn&amp;rsquo;t honor Maven exclusions. In Spring Boot 1.3 we intend to &lt;a href="https://github.com/spring-projects/spring-boot/issues/2133"&gt;remove Boot&amp;rsquo;s own dependency management and to start using the dependency management plugin instead&lt;/a&gt;. In the meantime, the two plugins will happily co-exist and you can configure the dependency management plugin to use Spring Boot&amp;rsquo;s starter bom:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint groovy"&gt;buildscript {&#xD;
-  repositories {&#xD;
-    jcenter()&#xD;
-  }&#xD;
-  dependencies {&#xD;
-    classpath &amp;quot;io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE&amp;quot;&#xD;
-    classpath &amp;quot;org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE&amp;quot;&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-apply plugin: &amp;quot;io.spring.dependency-management&amp;quot;&#xD;
-apply plugin: &amp;quot;spring-boot&amp;quot;&#xD;
-&#xD;
-repositories {&#xD;
-  jcenter()&#xD;
-}&#xD;
-&#xD;
-dependencyManagement {&#xD;
-  imports {&#xD;
-    mavenBom &amp;#39;org.springframework.boot:spring-boot-starter-parent:1.2.1.RELEASE&amp;#39;&#xD;
-  }&#xD;
-}&#xD;
-&#xD;
-dependencies {&#xD;
-  compile &amp;quot;org.springframework.boot:spring-boot-starter-web&amp;quot;&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#learning-more" class="anchor" name="learning-more"&gt;&lt;/a&gt;Learning more&lt;/h2&gt;&lt;p&gt;In addition to the features described above, the plugin has support for working with a bom&amp;rsquo;s properties (both overriding them and using them in your Gradle build), automatically including dependency management metadata in Gradle-generated pom files, and more. Take a look at the &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin/blob/master/README.md"&gt;README&lt;/a&gt; for further details.&lt;/p&gt;&lt;p&gt;The plugin is Apache-licensed and is on &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin"&gt;GitHub&lt;/a&gt;. GitHub&amp;rsquo;s also used for &lt;a href="https://github.com/spring-gradle-plugins/dependency-management-plugin/issues"&gt;issue tracking&lt;/a&gt;. Feature suggestions, pull requests, and bug reports are always welcome.&lt;/p&gt;</content>
   </entry>
 </feed>
 
