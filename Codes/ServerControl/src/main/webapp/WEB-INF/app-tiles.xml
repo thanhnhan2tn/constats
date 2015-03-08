@@ -22,6 +22,6 @@
 			value="/WEB-INF/views/themes/default/modules/loginForm.jsp" />
 		<put-attribute name="mainContent"
 			value="/WEB-INF/views/themes/default/modules/mainContent.jsp" />
-		
 	</definition>
+	<definition name="login" template="/WEB-INF/views/themes/default/modules/login.jsp" />
 </tiles-definitions>	

@@ -11,8 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <tiles:insertAttribute name="head" ignore="true" />
 </head>
-<body>
-	<div class="container">
+<body class="container">
 		<header class="header">
 			<tiles:insertAttribute name="header" />
 		</header>
@@ -27,6 +26,5 @@
 		<footer class="footer">
 			<tiles:insertAttribute name="footer" />
 		</footer>
-	</div>
 </body>
 </html>

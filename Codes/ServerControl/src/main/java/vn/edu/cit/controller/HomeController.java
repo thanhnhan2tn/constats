@@ -20,7 +20,8 @@ public class HomeController {
 	public String home(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		if (username == null) {
+		if (username != null) {
+			request.setAttribute("page", "home");
 			return "home";
 		} else {
 			return "redirect:/login";
@@ -43,8 +44,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request) {
-		request.setAttribute("type", "modules");
-		request.setAttribute("p", "login");
+		request.setAttribute("page", "login");
 		return "home";
 	}
 

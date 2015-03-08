@@ -65,16 +65,9 @@
 			<!-- end li notification -->
 			<!-- li user menu -->
 			<li class="dropdown user user-menu">
-				<!-- Chua dang nhap --> <a href="#" class="dropdown-toggle"
-				data-toggle="modal" data-target="#Login"> <i
-					class="glyphicon glyphicon-user"></i></a>
-				<div class="modal fade" id="Login" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel" aria-hidden="true">
-					<!--  -->
-					<tiles:insertAttribute name="loginForm" />
-				</div> <!-- //Chua dang nhap --> <!--  Da dang nhap --> <a href="#"
-				class="dropdown-toggle" data-toggle="dropdown"> <i
-					class="glyphicon glyphicon-user"></i> <span>Thanh Nhan<i
+				<!--  Da dang nhap --> 
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
+				<i class="glyphicon glyphicon-user"></i> <span>Thanh Nhan<i
 						class="caret"></i></span>
 			</a>
 				<ul class="dropdown-menu">

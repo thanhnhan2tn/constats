@@ -1,25 +1,30 @@
 package vn.edu.cit.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "userlogs")
 public class UserLog {
-	private int userlogId;
-	private int userId;
+	private User user;
 	private String logContent;
-	
-	public int getUserlogId() {
-		return userlogId;
+
+	public UserLog(User user, String logContent) {
+		super();
+		this.user = user;
+		this.logContent = logContent;
 	}
-	public void setUserlogId(int userlogId) {
-		this.userlogId = userlogId;
+
+	public User getUser() {
+		return user;
 	}
-	public int getUserId() {
-		return userId;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 	public String getLogContent() {
 		return logContent;
 	}
+
 	public void setLogContent(String logContent) {
 		this.logContent = logContent;
 	}

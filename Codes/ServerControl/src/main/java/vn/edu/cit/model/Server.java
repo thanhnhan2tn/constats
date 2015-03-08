@@ -1,5 +1,8 @@
 package vn.edu.cit.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
@@ -9,8 +12,10 @@ import com.jcraft.jsch.Session;
  * @author Thanh
  *
  */
+@Document(collection="servers")
 public class Server {
-	public int serverId;
+	@Id
+	private int serverId;
 	private String serverAddress;
 	private int port = 22;
 	// private String serverName;

@@ -14,14 +14,14 @@
 		<div class="modal fade" id="AddServer" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<!--  -->
-			<tiles:insertAttribute name="addServerForm" />
+			<%@include file="/WEB-INF/views/themes/default/modules/addServerForm.jsp" %>
 		</div>
 	</section>
 	<!--  End Content Header -->
 	<!--  Main Content -->
 	<section class="content">
 		<div class="main-content">
-			<tiles:insertAttribute name="mainContent" />
+			<%@include file="/WEB-INF/views/themes/default/modules/mainContent.jsp" %>
 		</div>
 	</section>
 	<!--  End Main Content -->

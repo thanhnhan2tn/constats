@@ -11,7 +11,7 @@
 
 <body class="container">
 	<header class="header">
-		<a href="#" class="logo">ConStats</a>
+		<a href="#" class="logo">Server Control</a>
 		<!-- Header Navbar -->
 		<nav class="navbar navbar-static-top" role="navigation">
 			<!-- toggle button -->
