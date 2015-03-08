@@ -30,19 +30,19 @@
 					<div style="display: none" id="login-alert"
 						class="alert alert-danger col-sm-12"></div>
 
-					<form id="loginform" class="form-horizontal" role="form">
+					<form id="loginform" class="form-horizontal" role="form" action="loginCheck" method="POST">
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-								type="text" class="form-control" name="username" value=""
-								placeholder="username or email">
+								type="text" class="form-control" name="email" value=""
+								placeholder="Input your email">
 						</div>
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-								type="password" class="form-control" name="password"
+								type="password" class="form-control" name="passwd"
 								placeholder="password">
 						</div>
 
@@ -61,7 +61,8 @@
 							<!-- Button -->
 
 							<div class="col-sm-12 controls">
-								<a id="btn-login" href="#" class="btn btn-success">Login </a> 
+								<input type="submit" id="btn-login" class="btn btn-success"
+									value="Login" />
 								<!-- 
 								<a id="btn-fblogin" href="#" class="btn btn-primary">Login
 									with Facebook</a>
@@ -100,15 +101,13 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					<form action="register" id="signupform" class="form-horizontal" role="form" method="POST">
+					<form action="register" id="signupform" class="form-horizontal"
+						role="form" method="POST">
 						<div id="signupalert" style="display: none"
 							class="alert alert-danger">
 							<p>Error:</p>
 							<span></span>
 						</div>
-
-
-
 						<div class="form-group">
 							<label for="email" class="col-md-3 control-label">Email</label>
 							<div class="col-md-9">
@@ -144,7 +143,7 @@
 						<div class="form-group">
 							<!-- Button -->
 							<div class="col-md-offset-3 col-md-9">
-								<button id="btn-signup" type="button" class="btn btn-info">
+								<button id="btn-signup" type="submit" class="btn btn-info">
 									<i class="icon-hand-right"></i> &nbsp Sign Up
 								</button>
 								<span style="margin-left: 8px;">or</span>
@@ -163,17 +162,13 @@
 						 
 						</div>
 						-->
-
-
 					</form>
 				</div>
 			</div>
-
-
-
-
 		</div>
 	</div>
-
+	<div class="modal fade" id="AddServer" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">dhsudh</div>
+	<tiles:insertAttribute name="footer" ignore="true" />
 </body>
 </html>

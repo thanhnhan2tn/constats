@@ -23,7 +23,6 @@
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.Power"/>
 <fullyQualifiedTypeName name="java.lang.ClassCastException"/>
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.nics_controller.Nic"/>
-<fullyQualifiedTypeName name="vn.edu.cit.model.User"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
@@ -39,4 +38,7 @@
 <fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="vn.edu.cit.model.User"/>
+<fullyQualifiedTypeName name="java.security.MessageDigest"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
 </qualifiedTypeNameHistroy>

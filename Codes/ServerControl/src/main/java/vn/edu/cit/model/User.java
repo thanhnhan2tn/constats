@@ -10,12 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection = "users")
 public class User {
-	private String userName;
+	private String email;
 	private String passWord;
-	private String role;
+	private int role;
 	private String firstName;
 	private String lastName;
-	private String email;
 	private String sdt;
 	List<Server> server;
 
@@ -23,25 +22,15 @@ public class User {
 
 	}
 
-	public User(String userName, String passWord, String role,
-			String firstName, String lastName, String email, String sdt) {
+	public User(String email, String passWord, int role, String firstName,
+			String lastName) {
 		super();
 
-		this.userName = userName;
 		this.passWord = passWord;
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.sdt = sdt;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getPassWord() {
@@ -84,11 +73,11 @@ public class User {
 		this.sdt = sdt;
 	}
 
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 

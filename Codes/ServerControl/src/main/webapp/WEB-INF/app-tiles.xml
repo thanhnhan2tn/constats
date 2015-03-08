@@ -23,5 +23,11 @@
 		<put-attribute name="mainContent"
 			value="/WEB-INF/views/themes/default/modules/mainContent.jsp" />
 	</definition>
-	<definition name="login" template="/WEB-INF/views/themes/default/modules/login.jsp" />
+	<definition name="login"
+		template="/WEB-INF/views/themes/default/modules/login.jsp">
+		<put-attribute name="head"
+			value="/WEB-INF/views/themes/default/modules/head.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
+	</definition>
 </tiles-definitions>	
