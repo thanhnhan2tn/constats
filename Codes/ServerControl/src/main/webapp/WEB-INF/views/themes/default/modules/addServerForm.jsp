@@ -1,3 +1,5 @@
+<%@ taglib uri="http://www.springframework.org/tags/form"
+	prefix="spring"%>
 <!-- Add Server Model FOrm -->
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -9,28 +11,45 @@
 			<h4 class="modal-title" id="myModalLabel">Add new server</h4>
 		</div>
 		<div class="modal-body">
-			<form action="addServer" method="POST" role="form">
-				<div style="margin-bottom: 25px" class="input-group">
-					IP: <input id="ip"
-						type="text" class="form-control" name="ip" value=""
-						placeholder="IP Address">
+			<spring:form action="addServer" method="POST" role="form"
+				commandName="Server" class="form-horizontal">
+				<div class="form-group">
+					<label for="ip" class="col-md-3 control-label">IP: *</label>
+					<div class="col-md-9">
+						<spring:input path="serverAddress" class="ip form-control"
+							name="ip" placeholder="IP Address" required="required" />
+					</div>
 				</div>
-				<div style="margin-bottom: 25px" class="input-group">
-					Root Username: <input id="root-username"
-						type="text" class="form-control" name="root-username" value=""
-						placeholder="Input username of Root">
+				<div class="form-group">
+					<label for="username" class="col-md-3 control-label">Root
+						Username: *</label>
+					<div class="col-md-9">
+						<spring:input path="serverUsername" lass="username form-control"
+							name="username"
+							placeholder="Username have root permision login to Server"
+							required="required" />
+					</div>
 				</div>
-				<div style="margin-bottom: 25px" class="input-group">
-					Root Password: <input id="root-password"
-						type="text" class="form-control" name="root-password" value=""
-						placeholder="Input root password">
+				<div class="form-group">
+					<label for="password" class="col-md-3 control-label">Password:
+						*</label>
+					<div class="col-md-9">
+						<spring:password path="serverPassword"
+							class="password form-control" name="password"
+							placeholder="Input your server user password" required="required" />
+					</div>
 				</div>
-				<div style="margin-bottom: 25px" class="input-group">
-					SSH Port: <input id="ssh-port"
-						type="text" class="form-control" name="ssh-port" value=""
-						placeholder="Input SSH Port">
+				<div class="form-group">
+					<label for="ssh-port" class="col-md-3 control-label">SSH
+						Port: *</label>
+					<div class="col-md-9">
+						<spring:input path="port" class="port form-control"
+							placeholder="SSH Port" required="required" />
+					</div>
 				</div>
-			</form>
+				<div style="display: none" id="signup-err"
+					class="alert alert-danger col-sm-12 signup-err"></div>
+			</spring:form>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

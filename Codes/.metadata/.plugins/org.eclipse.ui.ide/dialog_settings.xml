@@ -66,8 +66,8 @@
 		<item value="org.eclipse.jpt.common.eclipselink.feature:1.3.100.v201405081709-35A78s7359535B77DL"/>
 		<item value="org.eclipse.jpt.common.feature:1.4.0.v201405081709-67E-AkF7BJB8CKDFRZ"/>
 		<item value="org.eclipse.jpt.dbws.eclipselink.feature:1.2.101.v201501152048"/>
-		<item value="org.eclipse.jpt.jaxb.eclipselink.feature:1.4.100.v201405081709-777IDFBgJ9EODHEUGrXp19c7"/>
-		<item value="org.eclipse.jpt.jaxb.feature:1.5.0.v201405081709-57D8ZAkF7BJB7BNFFRg"/>
+		<item value="org.eclipse.jpt.jaxb.eclipselink.feature:1.4.102.v201501171820"/>
+		<item value="org.eclipse.jpt.jaxb.feature:1.5.2.v201501171820"/>
 		<item value="org.eclipse.jpt.jpa.eclipselink.feature:3.4.1.v201409111648"/>
 		<item value="org.eclipse.jpt.jpa.feature:3.4.0.v201405081709-7V7dEpFC7sReAYthMgWBL39c7"/>
 		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.6.3.v201501141810"/>

@@ -5,7 +5,463 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-05T19:42:10Z</updated>
+  <updated>2015-03-12T10:17:00Z</updated>
+  <entry>
+    <title>Webinar Replay: Introducing Spring Session</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/12/webinar-replay-introducing-spring-session" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-12:2019</id>
+    <updated>2015-03-12T10:17:00Z</updated>
+    <content type="html">&lt;p&gt;Webinar Replay: Introducing Spring Session&lt;br/&gt;&lt;p&gt;Speaker: Josh Long, Pivotal &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Slides: &lt;a href="https://speakerdeck.com/joshlong/bootiful-sessions"&gt;&lt;a href="https://speakerdeck.com/joshlong/bootiful-sessions"&gt;https://speakerdeck.com/joshlong/bootiful-sessions&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Back in the era of the application server, HTTP Session replication was a common way to scale out user session data, as well as make it fault tolerant. In today&amp;rsquo;s world of lightweight containers, PaaS, and virtualization, Spring Session offers a 100% server and/or container portable HTTP Session. See how Spring Session easily plugs in implementations like Redis, scales out across a cluster, handles multiple users&amp;rsquo; browser sessions, works with WebSocket, and allows header based authentication within REST apps. It&amp;rsquo;s a perfect fit for working with user data, particularly in a highly distributed environment like the cloud, or on a Platform like Cloud Foundry.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Learn more about Spring Session: &lt;a href="http://projects.spring.io/spring-session"&gt;&lt;a href="http://projects.spring.io/spring-session"&gt;http://projects.spring.io/spring-session&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
+&lt;p&gt; &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/9HG5VFGPm_8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Security Kerberos 1.0.0.RC1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/11/spring-security-kerberos-1-0-0-rc1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Janne Valkealahti</name>
+    </author>
+    <id>tag:spring.io,2015-03-11:2018</id>
+    <updated>2015-03-11T16:34:16Z</updated>
+    <content type="html">&lt;p&gt;With a very long overdue from a previous milestone release we are pleased to announce the release of Spring Security Kerberos 1.0.0.RC1.&lt;/p&gt;&lt;p&gt;A summary of changes can be seen below:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;We did a lot of housekeeping to put a whole project up-to-date.&lt;/li&gt;
+  &lt;li&gt;Rerefence documentation is now updated to reflect what we have. &lt;a href="http://docs.spring.io/spring-security-kerberos/docs/1.0.0.RC1/reference/htmlsingle"&gt;Reference Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;We added a new KerberosRestTemplate for use cases where you need to have a programmatic access to kerberized web resources.&lt;/li&gt;
+  &lt;li&gt;Samples has been re-written from scratch. These samples are &lt;code&gt;bootified&lt;/code&gt; meaning user should have relatively few steps to test Kerberized functionality. There are more about samples in our reference documentation but those include working with Windows AD, MIT Kerberos and RestTemplate.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We&amp;rsquo;d love to hear back what people think by participating in a project or simply creating issues or feature requests at &lt;a href="https://github.com/spring-projects/spring-security-kerberos"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Tool Suite and Groovy/Grails Tool Suite 3.6.4 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/11/spring-tool-suite-and-groovy-grails-tool-suite-3-6-4-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Martin Lippert</name>
+    </author>
+    <id>tag:spring.io,2015-03-11:2017</id>
+    <updated>2015-03-11T03:09:15Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;&lt;p&gt;I am happy to announce the new release of our Eclipse-based tooling today:&lt;br/&gt;The Spring Tool Suite (STS) 3.6.4 and the Groovy/Grails Tool Suite (GGTS) 3.6.4.&lt;/p&gt;&lt;p&gt;Highlights from this release include:&lt;/p&gt;
+&lt;ul&gt;&#xD;
+&lt;li&gt;updated to Eclipse Luna SR2&lt;/li&gt;&#xD;
+&lt;li&gt;Pivotal tc Server updated to 3.1.0&lt;/li&gt;&#xD;
+&lt;li&gt;Spring Boot properties editor (including content-assist, hovers, navigation, and errors/warnings)&lt;/li&gt;&#xD;
+&lt;li&gt;improved launch support for Spring Boot apps&lt;/li&gt;&#xD;
+&lt;li&gt;support for Groovy 2.4&lt;/li&gt;&#xD;
+&lt;/ul&gt;&lt;p&gt;To download the distributions, please go visit:&lt;/p&gt;
+&lt;ul&gt;&#xD;
+&lt;li&gt;Spring Tool Suite: &lt;a href="https://spring.io/tools/sts/all"&gt;https://spring.io/tools/sts/all&lt;/a&gt;&lt;/li&gt;&#xD;
+&lt;li&gt;Groovy/Grails Tool Suite: &lt;a href="https://spring.io/tools/ggts/all"&gt;https://spring.io/tools/ggts/all&lt;/a&gt;&lt;/li&gt;&#xD;
+&lt;/ul&gt;&lt;p&gt;Detailed new and noteworthy notes can be found here: &lt;a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html"&gt;STS/GGTS 3.6.4 New &amp;amp; Noteworthy&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;This is the final release of the GGTS bundle. Please take a look at the &lt;a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html"&gt;New and Noteworthy&lt;/a&gt; for further details.&lt;br/&gt;STS 3.7.0 is scheduled to ship in late June 2015, shortly after the Eclipse Mars release.&lt;/p&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>This Week in Spring - March 10, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/10/this-week-in-spring-march-10-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-03-10:2012</id>
+    <updated>2015-03-10T22:47:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring!&lt;/em&gt; This week &lt;a href="https://devnexus.com/s/devnexus2015/speakers#Josh_Long"&gt;I am at DevNexus in Atlanta, GA&lt;/a&gt; along with a handful of Spring team members and Spring community luminaries. I&amp;rsquo;ll be presenting a talk on getting started &lt;a href="https://devnexus.com/s/devnexus2015/speakers#Josh_Long"&gt;with Spring Boot&lt;/a&gt; and I hope you&amp;rsquo;ll join me, or one of the many other talks on Spring team:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4156"&gt;Spring 4 Web Applications&lt;/a&gt; by Rossen Stoyanchev&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4446"&gt;Cloud Native Apps with Spring Cloud&lt;/a&gt; by Spencer Gibb&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4765"&gt;Building microservices with Scala, functional domain models and Spring Boot&lt;/a&gt; by Chris Richardson&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4227"&gt;What is new in Spring Integration 4?&lt;/a&gt; by Marius Bogoevici&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4417"&gt;Spring Data REST - Data Meets Hypermedia&lt;/a&gt; by Greg Turnquist and Roy Clarkson&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4444"&gt;IoT Realized - The Connected Car&lt;/a&gt; by Michael Minella&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4409"&gt;Keeping It Clean - Lessons learned from Open Source on how to polish code&lt;/a&gt; by Phillip Webb&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4448"&gt;Spring Integration Java DSL - A Deep Dive&lt;/a&gt; by Gary Russell&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We&amp;rsquo;ll also be at &lt;a href="http://www.meetup.com/AtlantaSpring/events/219263159/"&gt;the Spring User Group meeting&lt;/a&gt;. Come out and see Rossen Stoyanchev talk about what&amp;rsquo;s new in Spring MVC, and see Michael Minella talk about what&amp;rsquo;s new in Spring Batch.&lt;/p&gt;&lt;p&gt;Anyway, with that out of the way, let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The amazing Dr. Syer just announced &lt;a href="https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now"&gt;Spring Cloud 1.0.0.RELEASE&lt;/a&gt;! This is the culmination of a long, frenzied development cycle and includes a &lt;em&gt;lot&lt;/em&gt; of great stuff. Spring Cloud is delivered as a set of Spring Boot-style auto-configurations and starter dependencies for infrastructure supporting microservices.&lt;/li&gt;
+  &lt;li&gt;Spring Data ninja Christoph Strobl just announced &lt;a href="https://spring.io/blog/2015/03/05/spring-data-release-train-fowler-rc1-available"&gt;RC1 for the Spring Data Fowler release train&lt;/a&gt;. This new release adds many new features including support for the &lt;code&gt;@Score&lt;/code&gt;-annotation in Solr, updated MongoDB 3 support (including support for both types of MongoDB GIS indexes), and much more.&lt;/li&gt;
+  &lt;li&gt;Javascript month continues with our remaining March Webinars. Scott Deeg will examine Polymer, Spring Security, and Spring Cloud for a lightweight API gateway on &lt;a href="https://spring.io/blog/2015/02/24/webinar-building-a-secure-polymer-app-with-spring-backend"&gt;March 24th&lt;/a&gt;. Lastly, Julien Dubois will introduce the AngularJS+Boot application generator, JHipster on &lt;a href="https://spring.io/blog/2015/02/24/webinar-jhipster-for-spring-boot"&gt;March 17th, 2015&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;This week&amp;rsquo;s SpringOne2GX 2014 replays are out! Check out Gunnar&amp;rsquo;s excellent talk on &lt;a href="http://spring.io/blog/2015/03/10/springone2gx-2014-replay-creating-modular-test-driven-spas-with-spring-and-angularjs"&gt;Creating modular test driven SPAs with Spring and AngularJS&lt;/a&gt;. Rob Winch and Ken Krueger cover Spring MVC Test in &lt;a href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-the-quest-for-the-holy-integration-test"&gt;The Quest for the Holy Integration Test&lt;/a&gt; - a less known and super helpful part of Spring MVC. Scott Frederick, Ramnivas Laddad cover the original Spring Cloud (now called Spring Cloud Connectors) in their talk &lt;a href="http://spring.io/blog/2015/03/10/springone2gx-2014-replay-simplify-cloud-applications-using-spring-cloud-connectors"&gt;Simplify Cloud Applications using Spring Cloud Connectors&lt;/a&gt;, and one from RedHat/OpenShift about &lt;a href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-spring-your-apps-into-the-cloud-with-a-paas"&gt;Spring your apps into the cloud with a PaaS&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;EMC Academics have just released their first of &lt;a href="https://flipboard.com/@emcacademics/spring-bn5acksky"&gt;their Flipboard Spring magazine&lt;/a&gt; - check it out!&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://jaxenter.com/spring-cloud-1-0-0-now-available-115269.html"&gt;JAXenter had an nice writeup on the recently released Spring Cloud 1.0.0&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;My (super highly rated, owing I think to the subject..) talk from &lt;a href="https://www.parleys.com/talk/building-bootiful-applications-spring-boot"&gt;Devoxx UK 2014 on Spring Boot&lt;/a&gt; is available on Parleys.com! Check it out!&lt;/li&gt;
+  &lt;li&gt;I had the pleasure of doing two webinars for O&amp;rsquo;Reilly whose recordings I just learned are now online, one on building &lt;a href="http://www.oreilly.com/pub/e/3282"&gt;applications with Spring Boot&lt;/a&gt; and &lt;a href="http://www.oreilly.com/pub/e/3283"&gt;microservices with Spring Cloud&lt;/a&gt;. O&amp;rsquo;Reilly are publishing my book on Spring and Cloud Foundry-based microservices.&lt;/li&gt;
+  &lt;li&gt;Our pal and community member Joram Barrez, co-founder of the Activiti BPMN workflow engine, &lt;a href="https://spring.io/blog/2015/03/08/getting-started-with-activiti-and-spring-boot"&gt;put together a nice post introducing the Spring Boot and Activiti integration&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;InfoQ interviewed Spring framework lead Juergen Hoeller on a wide &lt;a href="http://www.infoq.com/interviews/spring-today-past-and-future"&gt;variety of things at the recent Voxxed Days Vienna event&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Spring your apps into the cloud with a PaaS</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-spring-your-apps-into-the-cloud-with-a-paas" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-11:2016</id>
+    <updated>2015-03-10T17:43:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Grant Shipley, RedHat &lt;/p&gt;
+&lt;p&gt;Developing for the Cloud Track &lt;/p&gt;
+&lt;p&gt;Slides:  &lt;a href="http://www.slideshare.net/SpringCentral/spring-your-apps-into-the-cloud-with-a-paa-s"&gt;http://www.slideshare.net/SpringCentral/spring-your-apps-into-the-cloud-with-a-paa-s&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whether you have one or a million visitors accessing your Spring web app, they are all going to demand a great user experience regardless of what it takes for you to deliver it. This invariably means quick page loads and fast response times every single time. When things go south, you just throw more hardware at the problem and increase your caches and buffers, right? Wrong. Toss in an infrastructure that resides on the cloud and now you’ve got a really interesting problem on your hands. I’ll leave the marketecure slides at the door, this is a hands-on technical talk in which we’ll deploy an application to the cloud and then turn up the heat by leveraging the right mix of elasticity and auto-scaling.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ytRkybUqMp0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Simplify Cloud Applications using Spring Cloud Connectors</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-simplify-cloud-applications-using-spring-cloud-connectors" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-11:2015</id>
+    <updated>2015-03-10T17:27:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
+&lt;p&gt;NOTE: this project has been renamed Spring Cloud Connectors and is part of the larger &lt;a href="http://cloud.spring.io/spring-cloud-connectors/"&gt;spring cloud umbrella projec&lt;/a&gt;t. &lt;/p&gt;
+&lt;p&gt;Speaker: Scott Frederick, Ramnivas Laddad &lt;/p&gt;
+&lt;p&gt;Developing for the Cloud Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/simplify-cloud-applicationsusingspringcloud"&gt;http://www.slideshare.net/SpringCentral/simplify-cloud-applicationsusingspringcloud &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Developing an application to a cloud platform involves working with deployed application's environment and connecting to services. Spring Cloud, a new project, simplifies these tasks in a variety of cloud platforms including Cloud Foundry and Heroku. Spring Cloud makes it possible to deploy the same artifact (a war or a jar) to multiple cloud environments. It supports multiple clouds through the concept of Cloud Connector and provides out of the box implementation for Cloud Foundry and Heroku. Spring Cloud is designed for extension, making it simple to create a cloud connector for other cloud platforms. Spring Cloud also supports connecting to multiple services through the concept of service connectors. Out of the box, it provides support for many common services, but also makes it easy to extend it to other services. While Spring Cloud can be used by applications using any JVM language and framework, it further simplifies Spring applications through Java and XML-based configuration. In this talk, we will introduce the Spring Cloud project, show how you can simplify configuring applications for cloud deployment, discuss its extensibility mechanism, and put it to good use by showing practical examples from the field.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/T8SPV4rnxjg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: The Quest for the Holy Integration Test</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-the-quest-for-the-holy-integration-test" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-10:2014</id>
+    <updated>2015-03-10T16:59:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Ken Kreuger, Rob Winch &lt;/p&gt;
+&lt;p&gt;Web / JavaScript Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014holyintegrationtest"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014holyintegrationtest &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Spring MVC Test can help greatly to thoroughly test controllers including their configuration. However for browser based clients we are not able to easily interact with the application as a user does. For example, a user would request a page that contains a form, fill out a form, submit the form, some Java Script may execute, and then the user would see some sort of result. In this presentation, we will provide an overview of testing Spring Web applications . We will see that see that by combining Spring MVC Test &amp;amp; HtmlUnit we are able to able to easily interact with our application in the same way (including JavaScript execution) users do. We will also see how we can easily create reusable components that represent our views, so that as we refactor our application our tests can easily be updated. Finally, we will see how we can combine these techniques with BDD to find our holy grail of integration testing.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ZKy7xbpamUM" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Creating modular test driven SPAs with Spring and AngularJS</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-creating-modular-test-driven-spas-with-spring-and-angularjs" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-10:2013</id>
+    <updated>2015-03-10T16:49:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speaker: Gunnar Hillert &lt;/p&gt;
+&lt;p&gt;Web / JavaScript Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/creating-modular-test-driven-spas-with-spring-and-angularjs-41166049"&gt;http://www.slideshare.net/SpringCentral/creating-modular-test-driven-spas-with-spring-and-angularjs-41166049 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Single-page Applications (SPA) are all the rage these days and with them there is an avalanche of new tools, libraries and frameworks we need to know. But what does this mean for us as Spring developers? In this session we will give you an overview of the current landscape and illustrate the choices the Spring XD team has made for its user interface. What do I use to write SPA applications? How do I integrate them into existing Spring-based backends? How do I build them? Can I integrate them into my existing Gradle or Maven build processes in order to achieve complete build automation? How do I integrate realtime messaging using Spring's SockJS/WebSocket support? In this talk we will answer these and many more questions. We will cover frameworks such as AngularJS, Bootstrap, RequireJS; tools like Bower, Grunt, Gulp; and also talk about testing using Karma and Protractor.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ktAchmrtIUs" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Getting started with Activiti and Spring Boot</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/08/getting-started-with-activiti-and-spring-boot" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-03-08:2010</id>
+    <updated>2015-03-08T23:15:00Z</updated>
+    <content type="html">&lt;blockquote&gt;&lt;p&gt;This post is a guest post by Activiti co-founder and community &lt;a href="https://twitter.com/jbarrez"&gt;member Joram Barrez (@jbarrez)&lt;/a&gt; who works for Alfresco. Thanks Joram! I&amp;rsquo;d like to see more of these community guest posts, so - as usual - don&amp;rsquo;t hesitate to &lt;a href="http://twitter.com/starbuxman"&gt;ping me (@starbuxman)&lt;/a&gt; with ideas and contributions! -Josh&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr/&gt;&lt;h2&gt;&lt;a href="#introduction" class="anchor" name="introduction"&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;Activiti is an Apache-licensed business process management (BPM) engine. Such an engine has as core goal to take a process definition comprised of human tasks and service calls and execute those in a certain order, while exposing various API&amp;rsquo;s to start, manage and query data about process instances for that definition. Contrary to many of its competitors, Activiti is lightweight and integrates easily with any Java technology or project. All that, and it works at any scale - from just a few dozen to many thousands or even millions of process executions.&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/joshlong/meh/master/activiti/activiti-logo.png" /&gt;&lt;/p&gt;&lt;p&gt;The source code of Activiti can be found on &lt;a href="https://github.com/Activiti/Activiti"&gt;Github&lt;/a&gt;. The project was founded and is sponsored by &lt;a href="http://www.alfresco.com"&gt;Alfresco&lt;/a&gt;, but enjoys contributions from all across the globe and industries.&lt;/p&gt;&lt;p&gt;A process definition is typically visualized as a flow-chart-like diagram. In recent years, the BPMN 2.0 standard (an OMG standard, like UML) has become the de-facto &amp;lsquo;language&amp;rsquo; of these diagrams. This standard defines how a certain shape on the diagram should be interpreted, both technically and business-wise and how it is stored, as a not-so-hipster XML file.. but luckily most of the tooling hides this for you. This is a standard, and you can use any number of compliant tools to design (and even run) your BPMN processes. That said, if you&amp;rsquo;re asking me, there is no better choice than Activiti!&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-boot-integration" class="anchor" name="spring-boot-integration"&gt;&lt;/a&gt;Spring Boot integration&lt;/h2&gt;&lt;p&gt;Activiti and Spring play nicely together. The convention-over-configuration approach in Spring Boot works nicely with Activiti&amp;rsquo;s process engine is setup and use. Out of the box, you only need a database, as process executions can span anywhere from a few seconds to a couple of years. Obviously, as an intrinsic part of a process definition is calling and consuming data to and from various systems with all kinds of technologies. The simplicity of adding the needed dependencies and integrating various pieces of (boiler-plate) logic with Spring Boot really makes this child&amp;rsquo;s play.&lt;/p&gt;&lt;p&gt;Using Spring Boot and Activiti in a microservice approach also makes a lot of sense. Spring Boot makes it easy to get a production-ready service up and running in no time and - in a distributed microservice architecture - Activiti processes can glue together various microservices while also weaving in human workflow (tasks and forms) to achieve a certain goal.&lt;/p&gt;&lt;p&gt;The Spring Boot integration in Activiti was created by Spring expert &lt;a href="https://twitter.com/starbuxman"&gt;Josh Long&lt;/a&gt;. Josh and I &lt;a href="https://www.youtube.com/watch?v=0PV_8Lew3vg"&gt;did a webinar a couple of months ago&lt;/a&gt; that should give you a good insight into the basics of the Activiti integration for Spring Boot. The &lt;a href="http://activiti.org/userguide/index.html#springSpringBoot"&gt;Activiti user guide section on Spring Boot&lt;/a&gt; is also a great starting place to get more information.&lt;/p&gt;&lt;h2&gt;&lt;a href="#getting-started" class="anchor" name="getting-started"&gt;&lt;/a&gt;Getting Started&lt;/h2&gt;&lt;p&gt;The code for this example can be &lt;a href="https://github.com/jbarrez/spring-boot-with-activiti-example"&gt;found in my Github repository&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The process we&amp;rsquo;ll implement here is a hiring process for a developer. It&amp;rsquo;s simplified of course (as it needs to fit on this web page), but you should get the core concepts. Here&amp;rsquo;s the diagram:&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/joshlong/meh/master/activiti/hire-process.png" /&gt; &lt;/p&gt;&lt;p&gt;As said in the introduction, all shapes here have a very specific interpretation thanks to the BPMN 2.0 standard. But even without knowledge of BPMN, the process is pretty easy to understand:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;When the process starts, the resume of the job applicant is stored in an external system.&lt;/li&gt;
+  &lt;li&gt;The process then waits until a telephone interview has been conducted. This is done by a user (see the little icon of a person in the corner).&lt;/li&gt;
+  &lt;li&gt;If the telephone interview wasn&amp;rsquo;t all that, a polite rejection email is sent. Otherwise, both a tech interview and financial negotiation should happen.&lt;/li&gt;
+  &lt;li&gt;Note that at any point, the applicant can cancel. That&amp;rsquo;s shown in the diagram as the event on the boundary of the big rectangle. When the event happens, everything inside will be killed and the process halts.&lt;/li&gt;
+  &lt;li&gt;If all goes well, a welcome email is sent.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;This is the &lt;a href="https://github.com/jbarrez/spring-boot-with-activiti-example/blob/master/src/main/resources/processes/Developer_Hiring.bpmn20.xml"&gt;BPMN for this process&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s create a new Maven project, and add the dependencies needed to get Spring Boot, Activiti and a database. We&amp;rsquo;ll use an in memory database to keep things simple.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-basic&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;${activiti.version}&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;&#xD;
+&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;com.h2database&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;h2&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;1.4.185&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So only two dependencies is what is needed to create a very first Spring Boot + Activiti application:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
+public class MyApp {&#xD;
+&#xD;
+    public static void main(String[] args) {&#xD;
+        SpringApplication.run(MyApp.class, args);&#xD;
+    } &#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You could already run this application, it won&amp;rsquo;t do anything functionally but behind the scenes it already&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;creates an in-memory H2 database&lt;/li&gt;
+  &lt;li&gt;creates an Activiti process engine using that database&lt;/li&gt;
+  &lt;li&gt;exposes all Activiti services as Spring Beans&lt;/li&gt;
+  &lt;li&gt;configures tidbits here and there such as the Activiti async job executor, mail server, etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Let&amp;rsquo;s get something running. Drop the BPMN 2.0 process definition into the &lt;code&gt;src/main/resources/processes&lt;/code&gt; folder. All processes placed here will automatically be deployed (ie. parsed and made to be executable) to the Activiti engine. Let&amp;rsquo;s keep things simple to start, and create a &lt;code&gt;CommanLineRunner&lt;/code&gt; that will be executed when the app boots up:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Bean&#xD;
+CommandLineRunner init( final RepositoryService repositoryService,&#xD;
+                              final RuntimeService runtimeService,&#xD;
+                              final TaskService taskService) {&#xD;
+&#xD;
+    return new CommandLineRunner() {&#xD;
+&#xD;
+        public void run(String... strings) throws Exception {&#xD;
+            Map&amp;lt;String, Object&amp;gt; variables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+            variables.put(&amp;quot;applicantName&amp;quot;, &amp;quot;John Doe&amp;quot;);&#xD;
+            variables.put(&amp;quot;email&amp;quot;, &amp;quot;john.doe@activiti.com&amp;quot;);&#xD;
+            variables.put(&amp;quot;phoneNumber&amp;quot;, &amp;quot;123456789&amp;quot;);&#xD;
+            runtimeService.startProcessInstanceByKey(&amp;quot;hireProcess&amp;quot;, variables);&#xD;
+        }&#xD;
+    };&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So what&amp;rsquo;s happening here is that we create a map of all the variables needed to run the process and pass it when starting process. If you&amp;rsquo;d check the process definition you&amp;rsquo;ll see we reference those variables using &lt;code&gt;${variableName}&lt;/code&gt; in many places (such as the task description).&lt;/p&gt;&lt;p&gt;The first step of the process is an automatic step (see the little cogwheel icon), implemented using an expression that uses a Spring Bean:&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/joshlong/meh/master/activiti/servicetask.png" /&gt; &lt;/p&gt;&lt;p&gt;which is implemented with&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;activiti:expression=&amp;quot;${resumeService.storeResume()}&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Of course, we need that bean or the process would not start. So let&amp;rsquo;s create it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;@Component&#xD;
+public class ResumeService {&#xD;
+&#xD;
+    public void storeResume() {&#xD;
+        System.out.println(&amp;quot;Storing resume ...&amp;quot;);&#xD;
+    }&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When running the application now, you&amp;rsquo;ll see that the bean is called:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;  .   ____          _            __ _ _&#xD;
+ /\\ / ___&amp;#39;_ __ _ _(_)_ __  __ _ \ \ \ \&#xD;
+( ( )\___ | &amp;#39;_ | &amp;#39;_| | &amp;#39;_ \/ _` | \ \ \ \&#xD;
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )&#xD;
+  &amp;#39;  |____| .__|_| |_|_| |_\__, | / / / /&#xD;
+ =========|_|==============|___/=/_/_/_/&#xD;
+ :: Spring Boot ::        (v1.2.0.RELEASE)&#xD;
+&#xD;
+2015-02-16 11:55:11.129  INFO 304 --- [           main] MyApp                                    : Starting MyApp on The-Activiti-Machine.local with PID 304 ...&#xD;
+Storing resume ...&#xD;
+2015-02-16 11:55:13.662  INFO 304 --- [           main] MyApp                                    : Started MyApp in 2.788 seconds (JVM running for 3.067)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And that&amp;rsquo;s it! Congrats with running your first process instance using Activiti in Spring Boot!&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s spice things up a bit, and add following dependency to our pom.xml:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-rest-api&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;${activiti.version}}&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Having this on the classpath does a nifty thing: it takes the Activiti REST API (which is written in Spring MVC) and exposes this fully in your application. The REST API of Activiti &lt;a href="http://activiti.org/userguide/index.html#_rest_api"&gt;is fully documented in the Activiti User Guide&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The REST API is secured by basic auth, and won&amp;rsquo;t have any users by default. Let&amp;rsquo;s add an admin user to the system as shown below (add this to the MyApp class). Don&amp;rsquo;t do this in a production system of course, there you&amp;rsquo;ll want to hook in the authentication to LDAP or something else.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Bean&#xD;
+InitializingBean usersAndGroupsInitializer(final IdentityService identityService) {&#xD;
+&#xD;
+    return new InitializingBean() {&#xD;
+        public void afterPropertiesSet() throws Exception {&#xD;
+&#xD;
+            Group group = identityService.newGroup(&amp;quot;user&amp;quot;);&#xD;
+            group.setName(&amp;quot;users&amp;quot;);&#xD;
+            group.setType(&amp;quot;security-role&amp;quot;);&#xD;
+            identityService.saveGroup(group);&#xD;
+&#xD;
+            User admin = identityService.newUser(&amp;quot;admin&amp;quot;);&#xD;
+            admin.setPassword(&amp;quot;admin&amp;quot;);&#xD;
+            identityService.saveUser(admin);&#xD;
+&#xD;
+        }&#xD;
+    };&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Start the application. We can now start a process instance as we did in the CommandLineRunner, but now using REST:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;curl -u admin:admin -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;#39;{&amp;quot;processDefinitionKey&amp;quot;:&amp;quot;hireProcess&amp;quot;, &amp;quot;variables&amp;quot;: [ {&amp;quot;name&amp;quot;:&amp;quot;applicantName&amp;quot;, &amp;quot;value&amp;quot;:&amp;quot;John Doe&amp;quot;}, {&amp;quot;name&amp;quot;:&amp;quot;email&amp;quot;, &amp;quot;value&amp;quot;:&amp;quot;john.doe@alfresco.com&amp;quot;}, {&amp;quot;name&amp;quot;:&amp;quot;phoneNumber&amp;quot;, &amp;quot;value&amp;quot;:&amp;quot;1234567&amp;quot;} ]}&amp;#39; http://localhost:8080/runtime/process-instances
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Which returns us the json representation of the process instance:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;{&#xD;
+     &amp;quot;tenantId&amp;quot;: &amp;quot;&amp;quot;,&#xD;
+     &amp;quot;url&amp;quot;: &amp;quot;http://localhost:8080/runtime/process-instances/5&amp;quot;,&#xD;
+     &amp;quot;activityId&amp;quot;: &amp;quot;sid-42BAE58A-8FFB-4B02-AAED-E0D8EA5A7E39&amp;quot;,&#xD;
+     &amp;quot;id&amp;quot;: &amp;quot;5&amp;quot;,&#xD;
+     &amp;quot;processDefinitionUrl&amp;quot;: &amp;quot;http://localhost:8080/repository/process-definitions/hireProcess:1:4&amp;quot;,&#xD;
+     &amp;quot;suspended&amp;quot;: false,&#xD;
+     &amp;quot;completed&amp;quot;: false,&#xD;
+     &amp;quot;ended&amp;quot;: false,&#xD;
+     &amp;quot;businessKey&amp;quot;: null,&#xD;
+     &amp;quot;variables&amp;quot;: [],&#xD;
+     &amp;quot;processDefinitionId&amp;quot;: &amp;quot;hireProcess:1:4&amp;quot;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;I just want to stand still for a moment how cool this is. Just by adding one dependency, you&amp;rsquo;re getting the whole Activiti REST API embedded in your application!&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s make it even cooler, and add following dependency&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;${activiti.version}&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This adds a Spring Boot actuator endpoint for Activiti. If we restart the application, and hit &lt;code&gt;http://localhost:8080/activiti/&lt;/code&gt;, we get some basic stats about our processes. With some imagination that in a live system you&amp;rsquo;ve got many more process definitions deployed and executing, you can see how this is useful.&lt;/p&gt;&lt;p&gt;The same actuator is also registered as a JMX bean exposing similar information.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
+    completedTaskCountToday: 0,&#xD;
+    deployedProcessDefinitions: [&#xD;
+       &amp;quot;hireProcess (v1)&amp;quot;&#xD;
+    ],&#xD;
+    processDefinitionCount: 1,&#xD;
+   cachedProcessDefinitionCount: 1,&#xD;
+   runningProcessInstanceCount: {&#xD;
+       hireProcess (v1): 0&#xD;
+    },&#xD;
+    completedTaskCount: 0,&#xD;
+    completedActivities: 0,&#xD;
+    completedProcessInstanceCount: {&#xD;
+        hireProcess (v1): 0&#xD;
+    },&#xD;
+    openTaskCount: 0&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;To finish our coding, let&amp;rsquo;s create a dedicated REST endpoint for our hire process, that could be consumed by for example a javascript web application (out of scope for this article). So most likely, we&amp;rsquo;ll have a form for the applicant to fill in the details we&amp;rsquo;ve been passing programmatically above. And while we&amp;rsquo;re at it, let&amp;rsquo;s store the applicant information as a JPA entity. In that case, the data won&amp;rsquo;t be stored in Activiti anymore, but in a separate table and referenced by Activiti when needed.&lt;/p&gt;&lt;p&gt;You probably guessed it by now, JPA support is enabled by adding a dependency:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.activiti&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-boot-starter-jpa&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;${activiti.version}&amp;lt;/version&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and add the entity to the MyApp class:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;@Entity&#xD;
+class Applicant {&#xD;
+&#xD;
+    @Id&#xD;
+    @GeneratedValue&#xD;
+    private Long id;&#xD;
+&#xD;
+    private String name;&#xD;
+&#xD;
+    private String email;&#xD;
+&#xD;
+    private String phoneNumber;&#xD;
+&#xD;
+    // Getters and setters&#xD;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We&amp;rsquo;ll also need a Repository for this Entity (put this in a separate file or also in MyApp). No need for any methods, the Repository magic from Spring will generate the methods we need for us.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;public interface ApplicantRepository extends JpaRepository&amp;lt;Applicant, Long&amp;gt; {&#xD;
+  // .. &#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And now we can create the dedicated REST endpoint:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java "&gt;&lt;br/&gt;@RestController&#xD;
+public class MyRestController {&#xD;
+&#xD;
+    @Autowired&#xD;
+    private RuntimeService runtimeService;&#xD;
+&#xD;
+    @Autowired&#xD;
+    private ApplicantRepository applicantRepository;&#xD;
+&#xD;
+    @RequestMapping(value=&amp;quot;/start-hire-process&amp;quot;, method= RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)&#xD;
+    public void startHireProcess(@RequestBody Map&amp;lt;String, String&amp;gt; data) {&#xD;
+&#xD;
+        Applicant applicant = new Applicant(data.get(&amp;quot;name&amp;quot;), data.get(&amp;quot;email&amp;quot;), data.get(&amp;quot;phoneNumber&amp;quot;));&#xD;
+        applicantRepository.save(applicant);&#xD;
+&#xD;
+        Map&amp;lt;String, Object&amp;gt; variables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+        variables.put(&amp;quot;applicant&amp;quot;, applicant);&#xD;
+        runtimeService.startProcessInstanceByKey(&amp;quot;hireProcessWithJpa&amp;quot;, variables);&#xD;
+    } &#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note we&amp;rsquo;re now using a slightly different process called &amp;lsquo;hireProcessWithJpa&amp;rsquo;, which has a few tweaks in it to cope with the fact the data is now in a JPA entity. So for example, we can&amp;rsquo;t use ${applicantName} anymore, but we now have to use ${applicant.name}.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s restart the application and start a new process instance:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;curl -u admin:admin -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;#39;{&amp;quot;name&amp;quot;:&amp;quot;John Doe&amp;quot;, &amp;quot;email&amp;quot;: &amp;quot;john.doe@alfresco.com&amp;quot;, &amp;quot;phoneNumber&amp;quot;:&amp;quot;123456789&amp;quot;}&amp;#39; http://localhost:8080/start-hire-process
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can now go through our process. You could create a custom endpoints for this too, exposing different task queries with different forms &amp;hellip; but I&amp;rsquo;ll leave this to your imagination and use the default Activiti REST end points to walk through the process.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s see which task the process instance currently is at (you could pass in more detailed parameters here, for example the &amp;lsquo;processInstanceId&amp;rsquo; for better filtering):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;curl -u admin:admin -H &amp;quot;Content-Type: application/json&amp;quot; http://localhost:8080/runtime/tasks
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;which returns&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
+     &amp;quot;order&amp;quot;: &amp;quot;asc&amp;quot;,&#xD;
+     &amp;quot;size&amp;quot;: 1,&#xD;
+     &amp;quot;sort&amp;quot;: &amp;quot;id&amp;quot;,&#xD;
+     &amp;quot;total&amp;quot;: 1,&#xD;
+     &amp;quot;data&amp;quot;: [{&#xD;
+          &amp;quot;id&amp;quot;: &amp;quot;14&amp;quot;,&#xD;
+          &amp;quot;processInstanceId&amp;quot;: &amp;quot;8&amp;quot;,&#xD;
+          &amp;quot;createTime&amp;quot;: &amp;quot;2015-02-16T13:11:26.078+01:00&amp;quot;,&#xD;
+          &amp;quot;description&amp;quot;: &amp;quot;Conduct a telephone interview with John Doe. Phone number = 123456789&amp;quot;,&#xD;
+          &amp;quot;name&amp;quot;: &amp;quot;Telephone interview&amp;quot;&#xD;
+          ...&#xD;
+     }],&#xD;
+     &amp;quot;start&amp;quot;: 0&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;So, our process is now at the &lt;code&gt;Telephone interview&lt;/code&gt;. In a realistic application, there would be a task list and a form that could be filled in to complete this task. Let&amp;rsquo;s complete this task (we have to set the &lt;code&gt;telephoneInterviewOutcome&lt;/code&gt; variable as the exclusive gateway uses it to route the execution):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;curl -u admin:admin -H &amp;quot;Content-Type: application/json&amp;quot; -d &amp;#39;{&amp;quot;action&amp;quot; : &amp;quot;complete&amp;quot;, &amp;quot;variables&amp;quot;: [ {&amp;quot;name&amp;quot;:&amp;quot;telephoneInterviewOutcome&amp;quot;, &amp;quot;value&amp;quot;:true} ]}&amp;#39; http://localhost:8080/runtime/tasks/14
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When we get the tasks again now, the process instance will have moved on to the two tasks in parallel in the subprocess (big rectangle):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
+     &amp;quot;order&amp;quot;: &amp;quot;asc&amp;quot;,&#xD;
+     &amp;quot;size&amp;quot;: 2,&#xD;
+     &amp;quot;sort&amp;quot;: &amp;quot;id&amp;quot;,&#xD;
+     &amp;quot;total&amp;quot;: 2,&#xD;
+     &amp;quot;data&amp;quot;: [&#xD;
+          {&#xD;
+              ...&#xD;
+               &amp;quot;name&amp;quot;: &amp;quot;Tech interview&amp;quot;&#xD;
+          },&#xD;
+          {&#xD;
+              ...&#xD;
+               &amp;quot;name&amp;quot;: &amp;quot;Financial negotiation&amp;quot;&#xD;
+          }&#xD;
+     ],&#xD;
+     &amp;quot;start&amp;quot;: 0&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We can now continue the rest of the process in a similar fashion, but I&amp;rsquo;ll leave that to you to play around with.&lt;/p&gt;&lt;h2&gt;&lt;a href="#testing" class="anchor" name="testing"&gt;&lt;/a&gt;Testing&lt;/h2&gt;&lt;p&gt;One of the strengths of using Activiti for creating business processes is that everything is simply Java. As a consequence, processes can be tested as regular Java code with unit tests. Spring Boot makes writing such test a breeze.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s how the unit test for the &amp;ldquo;happy path&amp;rdquo; looks like (while omitting &lt;code&gt;@Autowired&lt;/code&gt; fields and test e-mail server setup). The code also shows the use of the Activiti API&amp;rsquo;s for querying tasks for a given group and process instance.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@RunWith(SpringJUnit4ClassRunner.class)&#xD;
+@SpringApplicationConfiguration(classes = {MyApp.class})&#xD;
+@WebAppConfiguration&#xD;
+@IntegrationTest&#xD;
+public class HireProcessTest {&#xD;
+&#xD;
+    @Test&#xD;
+    public void testHappyPath() {&#xD;
+&#xD;
+        // Create test applicant&#xD;
+        Applicant applicant = new Applicant(&amp;quot;John Doe&amp;quot;, &amp;quot;john@activiti.org&amp;quot;, &amp;quot;12344&amp;quot;);&#xD;
+        applicantRepository.save(applicant);&#xD;
+&#xD;
+        // Start process instance&#xD;
+        Map&amp;lt;String, Object&amp;gt; variables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+        variables.put(&amp;quot;applicant&amp;quot;, applicant);&#xD;
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(&amp;quot;hireProcessWithJpa&amp;quot;, variables);&#xD;
+&#xD;
+        // First, the &amp;#39;phone interview&amp;#39; should be active&#xD;
+        Task task = taskService.createTaskQuery()&#xD;
+                .processInstanceId(processInstance.getId())&#xD;
+                .taskCandidateGroup(&amp;quot;dev-managers&amp;quot;)&#xD;
+                .singleResult();&#xD;
+        Assert.assertEquals(&amp;quot;Telephone interview&amp;quot;, task.getName());&#xD;
+&#xD;
+        // Completing the phone interview with success should trigger two new tasks&#xD;
+        Map&amp;lt;String, Object&amp;gt; taskVariables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+        taskVariables.put(&amp;quot;telephoneInterviewOutcome&amp;quot;, true);&#xD;
+        taskService.complete(task.getId(), taskVariables);&#xD;
+&#xD;
+        List&amp;lt;Task&amp;gt; tasks = taskService.createTaskQuery()&#xD;
+                .processInstanceId(processInstance.getId())&#xD;
+                .orderByTaskName().asc()&#xD;
+                .list();&#xD;
+        Assert.assertEquals(2, tasks.size());&#xD;
+        Assert.assertEquals(&amp;quot;Financial negotiation&amp;quot;, tasks.get(0).getName());&#xD;
+        Assert.assertEquals(&amp;quot;Tech interview&amp;quot;, tasks.get(1).getName());&#xD;
+&#xD;
+        // Completing both should wrap up the subprocess, send out the &amp;#39;welcome mail&amp;#39; and end the process instance&#xD;
+        taskVariables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+        taskVariables.put(&amp;quot;techOk&amp;quot;, true);&#xD;
+        taskService.complete(tasks.get(0).getId(), taskVariables);&#xD;
+&#xD;
+        taskVariables = new HashMap&amp;lt;String, Object&amp;gt;();&#xD;
+        taskVariables.put(&amp;quot;financialOk&amp;quot;, true);&#xD;
+        taskService.complete(tasks.get(1).getId(), taskVariables);&#xD;
+&#xD;
+        // Verify email&#xD;
+        Assert.assertEquals(1, wiser.getMessages().size());&#xD;
+&#xD;
+        // Verify process completed&#xD;
+        Assert.assertEquals(1, historyService.createHistoricProcessInstanceQuery().finished().count());&#xD;
+&#xD;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#next-steps" class="anchor" name="next-steps"&gt;&lt;/a&gt;Next steps&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;We haven&amp;rsquo;t touched any of the tooling around Activiti. There is a bunch more than just the engine, like the Eclipse plugin to design processes, a free web &lt;a href="https://activiti.alfresco.com"&gt;editor&lt;/a&gt; in the cloud (also included in the &lt;code&gt;.zip&lt;/code&gt; download you can get from &lt;a href="http://activiti.org/"&gt;&lt;code&gt;Activiti&amp;#39;s&lt;/code&gt; site&lt;/a&gt;, a web application that showcases many of the features of the engine, &amp;hellip;&lt;/li&gt;
+  &lt;li&gt;The current release of Activiti (version 5.17.0) has integration with Spring Boot 1.1.6. However, the current master version is compatible with 1.2.1.&lt;/li&gt;
+  &lt;li&gt;Using Spring Boot 1.2.0 brings us sweet stuff like support for XA transactions with JTA. This means you can hook up your processes easily with JMS, JPA and Activiti logic all in the same transaction! ..Which brings us to the next point &amp;hellip;&lt;/li&gt;
+  &lt;li&gt;In this example, we&amp;rsquo;ve focussed heavily on human interactions (and barely touched it). But there&amp;rsquo;s many things you can do around orchestrating systems too. The Spring Boot integration also has Spring Integration support you could leverage to do just that in a very neat way!&lt;/li&gt;
+  &lt;li&gt;And of course there is much much more about the BPMN 2.0 standard. Read more about it &lt;a href="http://activiti.org/userguide/index.html#bpmnConstructs"&gt;in the Activiti docs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Spring Data Release Train Fowler RC1 Available</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/05/spring-data-release-train-fowler-rc1-available" />
@@ -14,7 +470,7 @@
       <name>Christoph Strobl</name>
     </author>
     <id>tag:spring.io,2015-03-05:2009</id>
-    <updated>2015-03-05T19:42:10Z</updated>
+    <updated>2015-03-05T19:42:00Z</updated>
     <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the availability of the first and final release candidate of the Spring Data release train named &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;Fowler&lt;/a&gt;. The release ships &lt;a href="https://jira.spring.io/issues/?filter=14932"&gt;149 tickets&lt;/a&gt; fixed. Here are some of the highlights:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Support for Java 8 &lt;code&gt;Stream&lt;/code&gt; as return type in JPA and MongoDB.&lt;/li&gt;
@@ -37,7 +493,15 @@
   &lt;li&gt;Spring Data Gemfire 1.6 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-gemfire/1.6.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.6.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Spring Data Redis 1.5 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-redis/1.5.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.5.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Spring Data REST 2.3 RC1 - &lt;a href="http://repo.spring.io/libs-milestone/org/springframework/data/spring-data-rest-webmvc/2.3.0.RC1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.3.0.RC1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Get in touch via &lt;a href="https://twitter.com/SpringData"&gt;Twitter&lt;/a&gt;, &lt;a href="http://stackoverflow.com/questions/tagged/spring-data"&gt;StackOverflow&lt;/a&gt; or &lt;a href="https://jira.spring.io"&gt;JIRA&lt;/a&gt; - We&amp;rsquo;re looking forward to your feedback!&lt;/p&gt;</content>
+&lt;/ul&gt;&lt;p&gt;The easiest way to upgrade to the release candidate is by adding the Spring Milestone repository at &lt;a href="https://repo.spring.io/libs-milestone"&gt;https://repo.spring.io/libs-milestone&lt;/a&gt;. Using Spring Boot you can then simply set the &lt;code&gt;spring-data-releasetrain.version&lt;/code&gt; to &lt;code&gt;Fowler-RC1&lt;/code&gt;. For non-Boot projects, simply add this snippet to the &lt;code&gt;&amp;lt;dependencyManagement /&amp;gt;&lt;/code&gt; section of your Maven &lt;code&gt;pom.xml&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
+    &amp;lt;groupId&amp;gt;org.springframework.data&amp;lt;/groupId&amp;gt;&#xD;
+    &amp;lt;artifactId&amp;gt;spring-data-releasetrain&amp;lt;/artifactId&amp;gt;&#xD;
+    &amp;lt;version&amp;gt;Fowler-RC1&amp;lt;/version&amp;gt;&#xD;
+    &amp;lt;type&amp;gt;pom&amp;lt;/type&amp;gt;&#xD;
+    &amp;lt;scope&amp;gt;import&amp;lt;/scope&amp;gt;&#xD;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Get in touch via &lt;a href="https://twitter.com/SpringData"&gt;Twitter&lt;/a&gt;, &lt;a href="http://stackoverflow.com/questions/tagged/spring-data"&gt;StackOverflow&lt;/a&gt; or &lt;a href="https://jira.spring.io"&gt;JIRA&lt;/a&gt; - We&amp;rsquo;re looking forward to your feedback!&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Spring Cloud 1.0.0 Available Now</title>
@@ -358,156 +822,6 @@ class HelloRestController {&#xD;
   &lt;li&gt;Refinements in &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/reference/htmlsingle/#websocket"&gt;WebSocket Configuration&lt;/a&gt; (&lt;a href="https://jira.spring.io/browse/SEC-2827"&gt;SEC-2827&lt;/a&gt; &lt;a href="https://jira.spring.io/browse/SEC-2833"&gt;SEC-2833&lt;/a&gt; &lt;a href="https://jira.spring.io/browse/SEC-2853"&gt;SEC-2853&lt;/a&gt; )&lt;/li&gt;
   &lt;li&gt;More intuitive HTTP Response Headers Configuration (&lt;a href="https://jira.spring.io/browse/SEC-2846"&gt;SEC-2846&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;Assuming everything goes smoothly, the plan is to do a GA release in approximately two weeks. In the meantime, make sure to try everything out and give us feedback!&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SEC/"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security 3.2.6 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/26/spring-security-3-2-6-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1998</id>
-    <updated>2015-02-26T17:47:26Z</updated>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 3.2.6.RELEASE. This release contains some important fixes (many addressing Java Configuration and Spring Boot issues). You can find a complete list of changes in the &lt;a href="https://jira.spring.io/issues/?jql=fixVersion%20%3D%203.2.6%20AND%20project%20%3D%20SEC%20ORDER%20BY%20priority%20DESC"&gt;changelog&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.6.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.6.RELEASE/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SEC/"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - February 24th, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/24/this-week-in-spring-february-24th-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-02-24:1990</id>
-    <updated>2015-02-24T23:25:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! We&amp;rsquo;ve got a &lt;em&gt;lot&lt;/em&gt; to cover so let&amp;rsquo;s get to it!&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Our pal Adam Koblentz (from ZeroTurnaround) put up this &lt;a href="https://www.voxxed.com/blog/2015/02/no-snail-herding-websocket-addition-jrebel-spring-boot/"&gt;great post introducing building a websocket application with Spring Boot and JRebel&lt;/a&gt;. Check it out!&lt;/li&gt;
-  &lt;li&gt;Check out this replay of Mark Fisher, Dr. Mark Pollack, and Sabby Anandan&amp;rsquo;s webinar &lt;a href="http://spring.io/blog/2015/02/20/webinar-replay-spring-xd-a-platform-for-data-at-scale-and-developer-productivity"&gt;introducing Spring XD - A Platform for data at scale and developer productivity&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;A huge part of the Pivotal Data Suite, of course, is Spring XD. Last week I surfaced some of the amazing Spring XD wiki content on &lt;a href="http://spring.io/blog/2015/02/20/stream-processing-in-spring-xd-1-1"&gt;the new stream processing supports in Spring XD 1.1&lt;/a&gt;. Check out &lt;a href="https://github.com/spring-projects/spring-xd/wiki/Creating-a-Data-Stream-Processor-Module#reactor-streams"&gt;the Wiki page&lt;/a&gt; for a more detailed look by Spring XD ninja Ilayaperumal Gopinathan.&lt;/li&gt;
-  &lt;li&gt;Spring Cloud co-lead Spencer Gibb has been improving the Spring Cloud Netflix integration. Check out this example &lt;a href="https://github.com/spencergibb/myfeed/blob/master/myfeed-ui/src/main/java/myfeed/ui/UiController.java#L38-L57"&gt;demonstrating using RxJava&amp;rsquo;s &lt;code&gt;Observable&amp;lt;T&amp;gt;&lt;/code&gt; return-values from Spring MVC&lt;/a&gt;. &lt;a href="https://github.com/spencergibb/myfeed/commit/a301aba6139fce7a87a1aab1d1311e6ceb8adfb7"&gt;Here are the changes&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;March Webinars are here, and it&amp;rsquo;s packed with Javascript, Spring Boot and Spring Cloud.&lt;br/&gt;This killer lineup starts with Dr. Dave Syer&amp;rsquo;s epic VII part blog series on Angular - lightweight API gateway - Spring Security - made into a &lt;a href="https://spring.io/blog/2015/02/24/webinar-a-single-page-application-with-spring-security-and-angular-js"&gt;webinar on March 10th&lt;/a&gt;. Then Scott Deeg will examine the same thing, except with Google&amp;rsquo;s Polymer on the frontend, &lt;a href="https://spring.io/blog/2015/02/24/webinar-building-a-secure-polymer-app-with-spring-backend"&gt;on a webinar March 24th&lt;/a&gt;. Lastly, Julien Dubois will introduce the AngularJS+Boot application generator, JHipster on &lt;a href="https://spring.io/blog/2015/02/24/webinar-jhipster-for-spring-boot"&gt;March 17th, 2015&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Alvin Reyes&amp;rsquo;s posts introducing how to configure Apache Tomcat&amp;rsquo;s &lt;a href="http://examples.javacodegeeks.com/enterprise-java/tomcat/tomcat-server-xml-configuration-example/"&gt;&lt;code&gt;server.xml&lt;/code&gt;&lt;/a&gt; and &lt;a href="http://examples.javacodegeeks.com/enterprise-java/tomcat/tomcat-users-xml-configuration-example"&gt;&lt;code&gt;users.xml&lt;/code&gt;&lt;/a&gt; are &lt;em&gt;wonderful&lt;/em&gt; resources.&lt;/li&gt;
-  &lt;li&gt;Reactor project-lead Jon Brisbin has &lt;a href="http://spring.io/blog/2015/02/18/reactor-2-0-0-rc1-with-native-reactive-streams-support-now-available"&gt;just announced Reactor RC1&lt;/a&gt;!&lt;/li&gt;
-  &lt;li&gt;Spring ninja Stéphane Nicoll has just announced &lt;a href="http://spring.io/blog/2015/02/20/spring-framework-4-1-5-released"&gt;the Spring framework maintenance release, 4.1.5&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Last week, we at Pivotal announced some big changes; we&amp;rsquo;ve open-sourced our Pivotal Data Suite! Check out this &lt;a href="http://www.infoq.com/news/2015/02/pivotal-big-data-suite"&gt;InfoQ post on the subject&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring IO Platform lead Andy Wilkinson has just released improved support for &lt;a href="http://spring.io/blog/2015/02/23/better-dependency-management-for-gradle"&gt;Maven Bill-of-Material dependency management using Gradle &lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Eclipse foundation member John Arthorne and Spring Tool Suite lead Martin Lippert&amp;rsquo;s talk, &lt;a href="https://old.parleys.com/share_channel.html#play/543f97d7e4b08dc7823e54cc"&gt;Eclipse IDE to the Cloud-Based Era of Developer Tooling&lt;/a&gt; from JavaOne 2014 is available online and well worth a watch!&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://sdtimes.com/pivotal-pivots-open-source/"&gt;The SD Times article on the open-sourcing of the Pivotal Data Suite&lt;/a&gt; is worth a read, too.&lt;/li&gt;
-  &lt;li&gt;Not related but still awesome: &lt;a href="http://sdtimes.com/http2-specification-formally-approved/"&gt;HTTP2 is now a thing&lt;/a&gt;!&lt;/li&gt;
-  &lt;li&gt;Check out Rick Hightower&amp;rsquo;s post on &lt;a href="http://rick-hightower.blogspot.com/2015/02/using-qbit-java-microservice-lib-with.html"&gt;using the QBit framework with Spring Boot&lt;/a&gt;. Interesting..&lt;/li&gt;
-  &lt;li&gt;Hubert Klein Ikkink put together a quick look &lt;a href="http://java.dzone.com/articles/spocklight-capture-and-assert"&gt;at using Spring Boot&amp;rsquo;s &lt;code&gt;OutputCapture&lt;/code&gt; JUnit &lt;code&gt;@Rule&lt;/code&gt; in a Spock test&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Our pal Eugen Paraschiv put together a great look &lt;a href="http://www.baeldung.com/spring-jdbc-jdbctemplate"&gt;at using the venerable &lt;code&gt;JdbcTemplate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Disid&amp;rsquo;s Enrique Ruiz put together &lt;a href="http://spring.io/blog/2015/02/19/working-with-spring-roo-from-spring-tool-suite-sts"&gt;a nice post on using Spring Roo from STS&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Check out this week&amp;rsquo;s SpringOne2GX 2014 replays:&lt;br/&gt;&lt;a href="https://spring.io/blog/2015/02/23/springone2gx-2014-replay-panel-session-real-world-boot-up-sequences"&gt;SpringOne2GX 2014 Replay: Panel Session: Real World Boot-up sequences&lt;/a&gt;&lt;br/&gt;&lt;a href="http://spring.io/blog/2015/02/24/springone2gx-2014-replay-spring-data-rest-data-meets-hypermedia"&gt;SpringOne2GX 2014 Replay: Spring Data REST - Data Meets Hypermedia&lt;/a&gt;&lt;br/&gt;&lt;a href="http://spring.io/blog/2015/02/23/springone2gx-replay-spring-batch-performance-tuning"&gt;SpringOne2GX Replay: Spring Batch Performance Tuning&lt;/a&gt;&lt;br/&gt;&lt;a href="https://spring.io/blog/2015/02/23/springone2gx-2014-replay-artistic-spring-data-neo4j-3-x-with-spring-boot"&gt;SpringOne2GX 2014 Replay: Artistic Spring Data Neo4j 3.x with Spring Boot&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Building a secure Polymer app with Spring backend</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/24/webinar-building-a-secure-polymer-app-with-spring-backend" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1993</id>
-    <updated>2015-02-24T23:16:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Scott Deeg &lt;/p&gt;
-&lt;p&gt;Polymer is the latest web framework out of Google. Designed completely around the emerging Web Components standards, it has the lofty goal of making it easy to build apps based on these low level primitives. Along with Polymer comes a new set of Elements (buttons, dialog boxes and such) based on the ideas of &amp;quot;Material Design&amp;quot;. These technologies together make it easy to build responsive, componentized &amp;quot;Single Page&amp;quot; web applications that work for browsers on PCs or mobile devices. But what about the backend, and how do we make these apps secure? In this talk Scott Deeg will take you through an introduction to Polmyer and its related technologies, and then through the build out of a full blown cloud based app with a secure, RESTful backend based on Spring REST, Spring Cloud, and Spring Security and using Thymeleaf for backend rendering jobs. At the end he will show the principles applied in a tool he's currently building. The talk will be mainly code walk through and demo, and assumes familiarity with Java/Spring and JavaScript.&lt;/p&gt;&lt;p&gt;Tuesday, March 24th, 2015 2:00PM GMT (London GMT) &lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMBuildingasecurePolymerappwithSpringbackend_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, March 24th, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMBuildingasecurePolymerappwithSpringbackend_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: JHipster for Spring Boot</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/24/webinar-jhipster-for-spring-boot" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1992</id>
-    <updated>2015-02-24T23:12:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Julien Dubois &lt;/p&gt;
-&lt;p&gt;JHipster focuses on generating a high quality application with a Java back-end using an extensive set of Spring technologies; Spring Boot, Spring Security, Spring Data, Spring MVC (providing a framework for websockets, REST and MVC), etc. an Angular.js front-end and a suite of pre-configured development tools like Yeoman, Maven, Gradle, Grunt, Gulp.js and Bower. JHipster creates a fully configured Spring Boot application with a set of pre-defined screens for user management, monitoring, and logging. The generated Spring Boot application is specifically tailored to make working with Angular.js a smoother experience. Join Julien for a quick-live coding session to build a simple application, and deploy it to Cloud Foundry.&lt;/p&gt;&lt;p&gt;Tuesday, March 17th, 2015 2:00PM GMT (London GMT) &lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMJHipster_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, March 17th, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMJHipster_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: A Single-Page Application with Spring Security and Angular JS</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/24/webinar-a-single-page-application-with-spring-security-and-angular-js" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1991</id>
-    <updated>2015-02-24T23:06:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: David Syer&lt;/p&gt;
-&lt;p&gt; Pivotal Spring Security, Spring Boot and Angular JS all have nice features for making it really easy to produce modern applications, so there is potentially a lot of value in making them work together very smoothly. Things to consider are cookies, headers, native clients, various security vulnerabilities and how modern browser technology can help us to avoid them. In this session we show how nice features of the component frameworks can be integrated simply to provide a pleasant and secure user experience. We start with a very basic single-server implementation and scale it up in stages, splitting out backend resources and authentication to separate services. The final state includes a simple API Gateway on the front end implemented declaratively using Spring Cloud, and using this we are able to neatly sidestep a lot of the problems people encounter securing a javascript front end with a distributed back end.&lt;/p&gt;&lt;p&gt;Tuesday, March 10th, 2015 2:00PM GMT (London GMT)&lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMSinglePageApp-SpringSecurity-AngularJS_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, March 10th, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMSinglePageApp-SpringSecurity-AngularJS_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring Data REST - Data Meets Hypermedia</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/24/springone2gx-2014-replay-spring-data-rest-data-meets-hypermedia" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1995</id>
-    <updated>2015-02-24T13:46:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014 &lt;/p&gt;
-&lt;p&gt;Speakers: Roy Clarkson, Greg Turnquist &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014widedatameetshypermedia"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014widedatameetshypermedia &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Spring Data REST bridges the gap between the convenient data access layers provided by Spring Data's repository abstraction and hypermedia-driven REST web services, effectively taking out the boilerplate needed during implementation. This talk will give a quick overview of the project, explain fundamental design decisions and introduce new features of the latest version (namely service documentation and discoverability). We will then look at the Spring-A-Gram sample application (built using Spring Data REST), focusing on the implementation of the frontend bits and pieces.&lt;/p&gt;
-&lt;p&gt; Learn more about Spring Boot at &lt;a href="http://projects.spring.io/spring-boot"&gt;http://projects.spring.io/spring-boot&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/APk8OWtXM2s" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX Replay: Spring Batch Performance Tuning</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/23/springone2gx-replay-spring-batch-performance-tuning" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1997</id>
-    <updated>2015-02-23T13:51:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speakers: Gunnar Hillert, Chris Schaefer Slides: Data / Integration Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-batch-performance-tuning"&gt;http://www.slideshare.net/SpringCentral/spring-batch-performance-tuning &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;In this presentation we will examine various scalability options in order to improve the robustness and performance of your Spring Batch applications. We start out with a single threaded Spring Batch application that we will refactor so we can demonstrate how to run it using: * Concurrent Steps * Remote Chunking * AsyncItemProcessor and AsyncItemWriter * Remote Partitioning Additionally, we will show how you can deploy Spring Batch applications to Spring XD which provides high availability and failover capabilities. Spring XD also allows you to integrate Spring Batch applications with other Big Data processing needs.&lt;a href="http://projects.spring.io/spring-boot"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/4unuv-oKkCA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Panel Session: Real World Boot-up sequences</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/23/springone2gx-2014-replay-panel-session-real-world-boot-up-sequences" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1994</id>
-    <updated>2015-02-23T13:50:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speakers: Erdem Gunay, Turkcell - Tim Hobson, Intuit - Zach Lendon, Independent &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014wideerdemgunay-41125935"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014wideerdemgunay-41125935&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Core Spring Track &lt;/p&gt;
-&lt;p&gt;In this Panel session, each of these presenters will have 20 minutes to respond to the question: tell us about your experiences with Spring Boot? Following that is about 30 minutes of moderated panel discussion. Erdem Gunay from Turkcell will present his experience of re-writing a Mobile BaaS originally written with Spring 3.x. He wrote the service from scratch using Boot in one week, integrating spring security, elasticsearch, mongodb, camel, angular.js, for the win: 40x throughput, 100% availability - zero crashes, 3x the users - used on 300k mobile devices. Tim Hobson from Intuit will present his lessons learned from using with Boot - he will take you through what configuration was necessary, what needed to be built, and how the project leveraged Boot to minimize cross-cutting code and configuration, maximize testability, and focus on the application domain. Zach will present a view of Boot from the hospitality industry, where they are using JAX-RS, DropWizard, and Spring Boot to create micro-service applications. He will help you understand which dropwizard-spring integrations work, and which one's don't, what to watch out for, and how to integrate your Spring applications into dropwizard whether you configure your Spring applications with xml, annotations, and/or java config files.&lt;/p&gt;
-&lt;p&gt; Learn more about Spring Boot at &lt;a href="http://projects.spring.io/spring-boot"&gt;http://projects.spring.io/spring-boot&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/K4JcX8NnaAg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Artistic Spring Data Neo4j 3.x with Spring Boot</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/23/springone2gx-2014-replay-artistic-spring-data-neo4j-3-x-with-spring-boot" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1996</id>
-    <updated>2015-02-23T13:47:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speakers: Michael Hunger, Lorenzo Speranzoni - Neo Technology &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/artistic-spring-data-neo4j-3x-with-spring-boot-and-van-gogh"&gt;http://www.slideshare.net/SpringCentral/artistic-spring-data-neo4j-3x-with-spring-boot-and-van-gogh &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This session will show, how easy it is to get started with Spring Data Neo4j using Spring Boot. After a quick introduction of the concepts behind the Neo4j NoSQL graph database and its Spring Data integration library, we will discuss the general approach used in Spring Data Neo4j and highlight the exciting, new features of the new 3.x releases which now works with the most recent Neo4j 2.x versions. During the session we'll demonstrate the development steps of an exciting and unusual application - tracking an famous' artists journey connecting him to the places, paintings, people and other aspects that influenced him. Having this data in a graph allows us to find new insights and conclusions as well as quickly adding different aspects to it. This application will use Spring Boot and Spring Data Neo4j to get started quickly. We import the data, look at it as a graph visualization and then build a web-application using Spring Boot's supporting infrastructure. As a final step we show how evolving this application from being a just Neo4j client application to a REST extension of the Neo4j server requires only a few steps and can leverage Spring Data REST to provide the neccessary endpoints for consumers.&lt;/p&gt;
-&lt;p&gt; Learn more about Spring Boot at &lt;a href="http://projects.spring.io/spring-boot"&gt;http://projects.spring.io/spring-boot&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/byp1zz-NqiE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
   </entry>
 </feed>
 

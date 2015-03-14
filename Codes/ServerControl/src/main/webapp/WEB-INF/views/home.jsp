@@ -3,15 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="true"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%
-	String p = (String) request.getAttribute("page");
-	if (p.equals("home")) {
-%>
+	<!-- 
+	Spring MVC Template with Tiles
+	Source: https://www.youtube.com/watch?v=hbM8tccsIQM
+	
+	 -->
 <tiles:insertDefinition name="home-default" />
-<%
-	} else {
-%>
-<tiles:insertDefinition name="login" />
-<%
-	}
-%>

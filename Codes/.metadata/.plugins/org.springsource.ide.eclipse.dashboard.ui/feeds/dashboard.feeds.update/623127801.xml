@@ -8,8 +8,8 @@
 		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
 		<language>en-us</language>
 		<managingEditor>sts@springsource.com</managingEditor>
-		<pubDate>Wed, 25 Feb 2015 10:38:33 +0100</pubDate>
-		<lastBuildDate>Wed, 25 Feb 2015 10:38:33 +0100</lastBuildDate>
+		<pubDate>Tue, 10 Mar 2015 10:38:33 +0100</pubDate>
+		<lastBuildDate>Tue, 10 Mar 2015 10:38:33 +0100</lastBuildDate>
 		<atom:link href="http://dist.springsource.com.s3.amazonaws.com/release/STS/doc/updates.xml" rel="self" type="application/rss+xml"/>
 
 <!--		<item>
@@ -40,27 +40,27 @@
 -->
 
 		<item>
-            <title>Thanks for installing STS/GGTS 3.6.3.SR1</title>
+            <title>Thanks for installing STS/GGTS 3.6.4</title>
             <link>http://spring.io/tools</link>
             <description><![CDATA[<form><p><a href="http://pivotal.io">Pivotal</a> has released an update to Spring Tool Suite (STS) and Groovy/Grails Tool Suite (GGTS), the best Eclipse-powered development environment for building Spring, Groovy, and Grails powered enterprise application.</p>
 		<p>Please review the following documents:</p>
-		<li bindent="3"><a href="http://docs.spring.io/sts/nan/v363sr1/NewAndNoteworthy.html">3.6.3.SR1 New &amp; Noteworthy</a></li><p></p></form>]]></description>
-            <pubDate>Thu, 19 Jan 2015 12:13:33 +0100</pubDate>
-			<category>version=[3.6.3.201411271001-RELEASE,3.6.4)</category>
+		<li bindent="3"><a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html">3.6.4 New &amp; Noteworthy</a></li><p></p></form>]]></description>
+            <pubDate>Tue, 10 Mar 2015 12:13:33 +0100</pubDate>
+			<category>version=[3.6.4.201503050833-RELEASE,3.7.0)</category>
 		<!--            <category>severity=important</category>-->
-	        <guid isPermaLink="false">thanks-for-installing-sts-363sr1</guid>
+	        <guid isPermaLink="false">thanks-for-installing-sts-364</guid>
 		</item>
 		
 		<item>
-			<title>STS/GGTS 3.6.3.SR1 has been released</title>
+			<title>STS/GGTS 3.6.4 has been released</title>
 			<link>http://spring.io/tools</link>
 			<description><![CDATA[<form><p><a href="http://pivotal.io">Pivotal</a> has released an update to Spring Tool Suite (STS) and Groovy/Grails Tool Suite (GGTS), the best Eclipse-powered development environment for building Spring, Groovy, and Grails powered enterprise application.</p><p>It is recommend to update as soon as possible.</p>
 		<p>Please review the following documents:</p>
-		<li bindent="3"><a href="http://docs.spring.io/sts/nan/v363sr1/NewAndNoteworthy.html">3.6.3.SR1 New &amp; Noteworthy</a></li><p></p></form>]]></description>
-        	<pubDate>Thu, 19 Jan 2015 12:12:33 +0100</pubDate>
-			<category>version=[0,3.6.3.201411271001-RELEASE)</category>
+		<li bindent="3"><a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html">3.6.4 New &amp; Noteworthy</a></li><p></p></form>]]></description>
+        	<pubDate>Tue, 10 Mar 2015 12:12:33 +0100</pubDate>
+			<category>version=[0,3.6.4.201503050833-RELEASE)</category>
 <!--			<category>severity=important</category> -->
-			<guid isPermaLink="false">sts-363sr1-released</guid>
+			<guid isPermaLink="false">sts-364-released</guid>
 		</item>
 
 <!--

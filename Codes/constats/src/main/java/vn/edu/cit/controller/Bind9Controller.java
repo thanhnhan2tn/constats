@@ -27,7 +27,7 @@ public class Bind9Controller {
 	public String changeNic() throws FileNotFoundException {
 		Server sv = new Server(0, "192.168.0.101", 22, "root", "root");
 		Power pw = new Power();
-		Nics ns = Nic.Nics_convert("E:/XML_File/NIC.xml");
+		Nics ns = Nic.Nics_convert("");
 		Nic nic = new Nic();
 		String kq = nic.getTextConfig(ns);
 		// Luu y neu trong String co "\n" lenh van thuc thi nhung ko jsch qua

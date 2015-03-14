@@ -1,4 +1,8 @@
+<%@page import="vn.edu.cit.model.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	User user = (User) session.getAttribute("user");
+%>
 <a href="#" class="logo">ConStats</a>
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
@@ -65,9 +69,9 @@
 			<!-- end li notification -->
 			<!-- li user menu -->
 			<li class="dropdown user user-menu">
-				<!--  Da dang nhap --> 
-				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
-				<i class="glyphicon glyphicon-user"></i> <span>Thanh Nhan<i
+				<!--  Da dang nhap --> <a href="#" class="dropdown-toggle"
+				data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i>
+					<span><%=user.getFirstName() + " " + user.getLastName()%><i
 						class="caret"></i></span>
 			</a>
 				<ul class="dropdown-menu">
@@ -75,17 +79,19 @@
 					<li class="user-header bg-light-blue"><img
 						src="<c:url value='/resources/themes/default/images/avatar.png'/>"
 						class="img-circle" alt="User Image" />
-						<p>
-							Thanh Nhan - Web Developer <small>Member</small>
+						<p><%=user.getFirstName() + " " + user.getLastName()%>
+							<small>
+							<%=((user.getRole()==2) ? "Admin":"Member") %>
+							</small>
 						</p></li>
 
 					<!-- Menu Footer-->
 					<li class="user-footer">
 						<div class="pull-left">
-							<a href="#" class="btn btn-default btn-flat">Profile</a>
+							<a href="/profile" class="btn btn-default btn-flat">Profile</a>
 						</div>
 						<div class="pull-right">
-							<a href="#" class="btn btn-default btn-flat">Sign out</a>
+							<a href="${pageContext.request.contextPath}/signout" class="btn btn-default btn-flat">Sign out</a>
 						</div>
 					</li>
 				</ul> <!-- Da dang nhap -->

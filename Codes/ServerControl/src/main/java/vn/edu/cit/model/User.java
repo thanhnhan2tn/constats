@@ -25,7 +25,6 @@ public class User {
 	public User(String email, String passWord, int role, String firstName,
 			String lastName) {
 		super();
-
 		this.passWord = passWord;
 		this.role = role;
 		this.firstName = firstName;

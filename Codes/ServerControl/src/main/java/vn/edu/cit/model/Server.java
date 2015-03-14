@@ -33,7 +33,6 @@ public class Server {
 		this.serverId = serverId;
 		this.serverAddress = serverAddress;
 		this.port = port;
-
 		this.serverUsername = serverUsername;
 		this.serverPassword = serverPassword;
 
