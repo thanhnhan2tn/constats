@@ -123,7 +123,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BuildSiteDemo" path="/constats" reloadable="true" source="org.eclipse.jst.jee.server:BuildSiteDemo"/></Host>
+      <Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\GenerateSite" path="/generate" reloadable="true" source="org.eclipse.jst.jee.server:GenerateSite"/><Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BuildSiteDemo" path="/constats" reloadable="true" source="org.eclipse.jst.jee.server:BuildSiteDemo"/><Context docBase="D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ServerControl" path="/cit" reloadable="true" source="org.eclipse.jst.jee.server:ServerControl"/></Host>
     </Engine>
   </Service>
 </Server>

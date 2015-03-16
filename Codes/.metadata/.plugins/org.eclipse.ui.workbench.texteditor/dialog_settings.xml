@@ -13,8 +13,9 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="" key="selection"/>
+		<item value="delete" key="selection"/>
 		<list key="findhistory">
+			<item value="delete"/>
 			<item value="signin"/>
 			<item value="singin"/>
 			<item value="wrapper "/>

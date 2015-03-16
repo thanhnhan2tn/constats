@@ -3,9 +3,9 @@
 	<list key="installedFeatures">
 		<item value="com.atlassian.connector.eclipse.jira:3.2.3.v20140630"/>
 		<item value="com.atlassian.connector.eclipse.monitor:3.2.3.v20140630"/>
-		<item value="org.aspectj:1.8.5.20141218084900"/>
+		<item value="org.aspectj:1.8.5.20150128171000"/>
 		<item value="org.cloudfoundry.ide.eclipse.server:1.8.0.201502131756-RELEASE"/>
-		<item value="org.eclipse.ajdt:2.2.4.e44x-20141218-0900"/>
+		<item value="org.eclipse.ajdt:2.2.4.e44x-20150202-1700"/>
 		<item value="org.eclipse.cvs:1.4.100.v20150204-1700"/>
 		<item value="org.eclipse.datatools.common.doc.user:1.12.0.v201405281819-26-311A16321A3557"/>
 		<item value="org.eclipse.datatools.connectivity.doc.user:1.12.0.v201405281819-37D-7733L3D753L7BBF"/>
@@ -122,28 +122,24 @@
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.14.0.201401060023"/>
 		<item value="org.sonatype.m2e.mavenarchiver.feature:0.16.0.201401211452-signed-20140310144306"/>
-		<item value="org.springframework.ide.eclipse.ajdt.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.aop.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.autowire.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.batch.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.data.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.integration.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.maven.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.mylyn.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.security.feature:3.6.3.201411271034-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.ajdt.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.aop.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.autowire.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.batch.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.data.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.integration.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.maven.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.mylyn.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.security.feature:3.6.4.201503051146-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.uaa.feature:3.6.3.201411271002-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.webflow.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springsource.sts.package:3.6.3.201501121239-SR1-e44"/>
-		<item value="org.springsource.sts:3.6.3.201501121239-SR1"/>
+		<item value="org.springframework.ide.eclipse.webflow.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springsource.sts.package:3.6.4.201503100339-RELEASE-e44"/>
+		<item value="org.springsource.sts:3.6.4.201503100339-RELEASE"/>
 	</list>
 	<section name="ChooseWorkspaceDialogSettings">
 		<item value="185" key="DIALOG_Y_ORIGIN"/>
 		<item value="381" key="DIALOG_X_ORIGIN"/>
-	</section>
-	<section name="WORKBENCH_SETTINGS">
-		<list key="ENABLED_TRANSFERS">
-		</list>
 	</section>
 	<section name="ExternalProjectImportWizard">
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
@@ -157,11 +153,15 @@
 			<item value=""/>
 		</list>
 	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
 	<section name="CleanDialogSettings">
 		<item value="500" key="DIALOG_WIDTH"/>
 		<item value="112" key="DIALOG_Y_ORIGIN"/>
-		<item value="433" key="DIALOG_X_ORIGIN"/>
 		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="433" key="DIALOG_X_ORIGIN"/>
 		<item value="false" key="TOGGLE_SELECTED"/>
 	</section>
 </section>

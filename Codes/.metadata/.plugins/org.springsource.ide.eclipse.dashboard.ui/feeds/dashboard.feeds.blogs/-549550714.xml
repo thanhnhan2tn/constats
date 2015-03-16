@@ -5,7 +5,24 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-12T10:17:00Z</updated>
+  <updated>2015-03-14T17:00:00Z</updated>
+  <entry>
+    <title>Webinar Replay: A Single-Page Application with Spring Security and Angular JS</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/14/webinar-replay-a-single-page-application-with-spring-security-and-angular-js" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-15:2020</id>
+    <updated>2015-03-14T17:00:00Z</updated>
+    <content type="html">&lt;p&gt;Speaker: Dr. David Syer, Pivotal  &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://presos.dsyer.com/decks/spring-security-angular.html"&gt;http://presos.dsyer.com/decks/spring-security-angular.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Spring Security, Spring Boot and Angular JS all have nice features for making it really easy to produce modern applications, so there is potentially a lot of value in making them work together very smoothly. Things to consider are cookies, headers, native clients, various security vulnerabilities and how modern browser technology can help us to avoid them.  In this session we show how nice features of the component frameworks can be integrated simply to provide a pleasant and secure user experience. We start with a very basic single-server implementation and scale it up in stages, splitting out backend resources and authentication to separate services. The final state includes a simple API Gateway on the front end implemented declaratively using Spring Cloud, and using this we are able to neatly sidestep a lot of the problems people encounter securing a javascript front end with a distributed back end. &lt;/p&gt;
+&lt;p&gt;Learn about about Spring Security at &lt;a href="http://projects.spring.io/spring-security"&gt;http://projects.spring.io/spring-security&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn about about Spring Cloud at &lt;a href="http://projects.spring.io/spring-cloud"&gt;http://projects.spring.io/spring-cloud&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt; &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/vX_txZ3ETBg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Webinar Replay: Introducing Spring Session</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/12/webinar-replay-introducing-spring-session" />
@@ -806,22 +823,6 @@ class HelloRestController {&#xD;
     <id>tag:spring.io,2015-02-27:2000</id>
     <updated>2015-02-27T00:47:00Z</updated>
     <content type="html">&lt;p&gt;Spring Boot 1.1.11 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release includes a &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.1.11"&gt;number of fixes&lt;/a&gt; and is recommended for anyone still on the 1.1.x line. We&amp;rsquo;re only planning critical bug fixes for 1.1.x from now on so please consider &lt;a href="http://spring.io/blog/2015/02/27/spring-boot-1-2-2-released"&gt;upgrading to 1.2.2&lt;/a&gt; if possible.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.1.11.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security 4.0.0.RC2 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/26/spring-security-4-0-0-rc2-released" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2015-02-25:1999</id>
-    <updated>2015-02-26T17:48:10Z</updated>
-    <content type="html">&lt;p&gt;We are please to announce the release of Spring Security 4.0.0.RC2. &lt;/p&gt;&lt;p&gt;We were very keen on doing a GA release, but due to community feedback we decided that another RC was necessary. Ultimately, this release resolved nearly &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%204.0.0.RC2%20ORDER%20BY%20priority%20DESC"&gt;50 tickets&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;A summary of changes can be seen below:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Support for enforcing &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/reference/htmlsingle/#websocket-sameorigin"&gt;Same Origin for WebSocket connections&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Refinements in &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/reference/htmlsingle/#websocket"&gt;WebSocket Configuration&lt;/a&gt; (&lt;a href="https://jira.spring.io/browse/SEC-2827"&gt;SEC-2827&lt;/a&gt; &lt;a href="https://jira.spring.io/browse/SEC-2833"&gt;SEC-2833&lt;/a&gt; &lt;a href="https://jira.spring.io/browse/SEC-2853"&gt;SEC-2853&lt;/a&gt; )&lt;/li&gt;
-  &lt;li&gt;More intuitive HTTP Response Headers Configuration (&lt;a href="https://jira.spring.io/browse/SEC-2846"&gt;SEC-2846&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Assuming everything goes smoothly, the plan is to do a GA release in approximately two weeks. In the meantime, make sure to try everything out and give us feedback!&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RC2/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SEC/"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme id="theme-1" name="theme1">
+	<themeName>Default</themeName>
+	<version>1.0</version>
+	<path>/default/</path>
+	<author>TNC</author>
+	<file name="home">
+		<fileName>home.jsp</fileName>
+		<div name="header" id="header">
+			<value>Head</value>
+		</div>
+		<div name="contain">
+			<div id="left">
+				<divClass>left</divClass>
+				<value>left</value>
+			</div>
+			<div id="right">
+				<divClass>right</divClass>
+				<form name="form">
+					<action>#input</action>
+					<method>get</method>
+					<label name="input">
+						<value>Input:</value>
+					</label>
+					<input name="input">
+						<type>text</type>
+					</input>
+					<button name="btn1">
+						<type>submit</type>
+						<value>Send</value>
+					</button>
+				</form>
+			</div>
+		</div>
+	</file>
+</theme>
