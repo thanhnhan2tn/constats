@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.WarehouseInventoryDetail" table="warehouseinventorydetail" >
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="inventory" class="com.htqlbh.model.Inventory" fetch="select">
+            <column name="INVTID" length="20" />
+        </many-to-one>
+        <many-to-one name="warehouseInventory" class="com.htqlbh.model.WarehouseInventory" fetch="select">
+            <column name="WINVENTORYNO" length="20" />
+        </many-to-one>
+        <many-to-one name="unit" class="com.htqlbh.model.Unit" fetch="select">
+            <column name="UNITID" />
+        </many-to-one>
+        <property name="qty" type="java.lang.Integer">
+            <column name="QTY" />
+        </property>
+    </class>
+</hibernate-mapping>

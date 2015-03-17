@@ -3,10 +3,17 @@
 	<list key="installedFeatures">
 		<item value="com.atlassian.connector.eclipse.jira:3.2.3.v20140630"/>
 		<item value="com.atlassian.connector.eclipse.monitor:3.2.3.v20140630"/>
+<<<<<<< HEAD
 		<item value="org.aspectj:1.8.5.20141218084900"/>
 		<item value="org.cloudfoundry.ide.eclipse.server:1.8.0.201502131756-RELEASE"/>
 		<item value="org.eclipse.ajdt:2.2.4.e44x-20141218-0900"/>
 		<item value="org.eclipse.cvs:1.4.100.v20140925-0400"/>
+=======
+		<item value="org.aspectj:1.8.5.20150128171000"/>
+		<item value="org.cloudfoundry.ide.eclipse.server:1.8.0.201502131756-RELEASE"/>
+		<item value="org.eclipse.ajdt:2.2.4.e44x-20150202-1700"/>
+		<item value="org.eclipse.cvs:1.4.100.v20150204-1700"/>
+>>>>>>> 6957f2bd27b1d4e7107ff8ffc1dc8466bb1de08c
 		<item value="org.eclipse.datatools.common.doc.user:1.12.0.v201405281819-26-311A16321A3557"/>
 		<item value="org.eclipse.datatools.connectivity.doc.user:1.12.0.v201405281819-37D-7733L3D753L7BBF"/>
 		<item value="org.eclipse.datatools.connectivity.feature:1.12.0.v201406061321-7C7n9DEsxcwtN5odeWrQrgwYHq8"/>
@@ -39,109 +46,114 @@
 		<item value="org.eclipse.draw2d:3.9.101.201408150207"/>
 		<item value="org.eclipse.egit.mylyn:3.5.2.201411120430-r"/>
 		<item value="org.eclipse.egit:3.5.2.201411120430-r"/>
-		<item value="org.eclipse.emf.codegen.ecore.ui:2.10.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.codegen.ecore:2.10.1.v20140901-1055"/>
-		<item value="org.eclipse.emf.codegen.ui:2.8.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.codegen:2.10.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.common.ui:2.9.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.common:2.10.1.v20140901-1043"/>
-		<item value="org.eclipse.emf.converter:2.10.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.databinding.edit:1.4.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.databinding:1.4.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.ecore.edit:2.9.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.ecore.editor:2.10.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.ecore:2.10.1.v20140901-1043"/>
-		<item value="org.eclipse.emf.edit.ui:2.10.1.v20140901-1055"/>
-		<item value="org.eclipse.emf.edit:2.10.1.v20140901-1055"/>
-		<item value="org.eclipse.emf.mapping.ecore.editor:2.9.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.mapping.ecore:2.8.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.mapping.ui:2.8.0.v20140901-1055"/>
-		<item value="org.eclipse.emf.mapping:2.8.0.v20140901-1055"/>
-		<item value="org.eclipse.emf:2.10.1.v20140901-1055"/>
-		<item value="org.eclipse.epp.mpc:1.3.1.v20140908-1651"/>
+		<item value="org.eclipse.emf.codegen.ecore.ui:2.10.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.codegen.ecore:2.10.2.v20150123-0452"/>
+		<item value="org.eclipse.emf.codegen.ui:2.8.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.codegen:2.10.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.common.ui:2.9.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.common:2.10.1.v20150123-0348"/>
+		<item value="org.eclipse.emf.converter:2.10.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.databinding.edit:1.4.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.databinding:1.4.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.ecore.edit:2.9.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.ecore.editor:2.10.1.v20150123-0452"/>
+		<item value="org.eclipse.emf.ecore:2.10.2.v20150123-0348"/>
+		<item value="org.eclipse.emf.edit.ui:2.10.2.v20150123-0452"/>
+		<item value="org.eclipse.emf.edit:2.10.1.v20150123-0452"/>
+		<item value="org.eclipse.emf.mapping.ecore.editor:2.9.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.mapping.ecore:2.8.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.mapping.ui:2.8.0.v20150123-0452"/>
+		<item value="org.eclipse.emf.mapping:2.8.0.v20150123-0452"/>
+		<item value="org.eclipse.emf:2.10.2.v20150123-0452"/>
+		<item value="org.eclipse.epp.mpc:1.3.2.v20150218-2039"/>
 		<item value="org.eclipse.gef:3.9.101.201408150207"/>
-		<item value="org.eclipse.help:2.0.102.v20140925-0400"/>
-		<item value="org.eclipse.jdt:3.10.0.v20140925-0400"/>
+		<item value="org.eclipse.help:2.0.103.v20150204-1700"/>
+		<item value="org.eclipse.jdt:3.10.1.v20150204-1700"/>
 		<item value="org.eclipse.jgit:3.5.2.201411120430-r"/>
 		<item value="org.eclipse.jpt.common.eclipselink.feature:1.3.100.v201405081709-35A78s7359535B77DL"/>
 		<item value="org.eclipse.jpt.common.feature:1.4.0.v201405081709-67E-AkF7BJB8CKDFRZ"/>
-		<item value="org.eclipse.jpt.dbws.eclipselink.feature:1.2.100.v201405081709-797LBiCcNBHQFTGaGVbu3KEF"/>
-		<item value="org.eclipse.jpt.jaxb.eclipselink.feature:1.4.100.v201405081709-777IDFBgJ9EODHEUGrXp19c7"/>
-		<item value="org.eclipse.jpt.jaxb.feature:1.5.0.v201405081709-57D8ZAkF7BJB7BNFFRg"/>
+		<item value="org.eclipse.jpt.dbws.eclipselink.feature:1.2.101.v201501152048"/>
+		<item value="org.eclipse.jpt.jaxb.eclipselink.feature:1.4.102.v201501171820"/>
+		<item value="org.eclipse.jpt.jaxb.feature:1.5.2.v201501171820"/>
 		<item value="org.eclipse.jpt.jpa.eclipselink.feature:3.4.1.v201409111648"/>
 		<item value="org.eclipse.jpt.jpa.feature:3.4.0.v201405081709-7V7dEpFC7sReAYthMgWBL39c7"/>
-		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.6.1.v201409111458"/>
-		<item value="org.eclipse.jst.enterprise_ui.feature:3.6.0.v201405070300-7b7OIumFSK2W_CbOM9lcCU_kNlXd"/>
+		<item value="org.eclipse.jst.common.fproj.enablement.jdt:3.6.3.v201501141810"/>
+		<item value="org.eclipse.jst.enterprise_ui.feature:3.6.3.v201501281502"/>
 		<item value="org.eclipse.jst.ws.axis2tools.feature:1.1.300.v201405061940-78-FPZDZRDKYKDReDDRe"/>
-		<item value="org.eclipse.jst.ws.cxf.feature:1.1.200.v201405212141-7H79FX_FAKldjn_7mQk5lE8A8A6E"/>
-		<item value="org.eclipse.jst.ws.jaxws.feature:1.2.200.v201405061940-7E7AFHxF8NcJSfMpU1VmWg"/>
-		<item value="org.eclipse.m2e.feature:1.5.0.20140606-0033"/>
-		<item value="org.eclipse.m2e.logback.feature:1.5.0.20140606-0033"/>
+		<item value="org.eclipse.jst.ws.cxf.feature:1.1.202.v201410232139"/>
+		<item value="org.eclipse.jst.ws.jaxws.feature:1.2.201.v201410232139"/>
+		<item value="org.eclipse.m2e.feature:1.5.1.20150109-1820"/>
+		<item value="org.eclipse.m2e.logback.feature:1.5.1.20150109-1820"/>
 		<item value="org.eclipse.m2e.wtp.feature:1.1.0.20140611-1646"/>
 		<item value="org.eclipse.m2e.wtp.jaxrs.feature:1.1.0.20140611-1646"/>
 		<item value="org.eclipse.m2e.wtp.jpa.feature:1.1.0.e43-20140611-1648"/>
 		<item value="org.eclipse.m2e.wtp.jsf.feature:1.1.0.20140611-1646"/>
-		<item value="org.eclipse.mylyn.bugzilla_feature:3.13.0.v20140830-0030"/>
-		<item value="org.eclipse.mylyn.commons.identity:1.5.0.v20140702-2248"/>
-		<item value="org.eclipse.mylyn.commons.notifications:1.5.0.v20140702-2248"/>
-		<item value="org.eclipse.mylyn.commons.repositories:1.5.0.v20140905-0008"/>
-		<item value="org.eclipse.mylyn.commons:3.13.0.v20140704-2323"/>
-		<item value="org.eclipse.mylyn.context_feature:3.13.0.v20140819-2236"/>
-		<item value="org.eclipse.mylyn.discovery:3.13.0.v20140820-1854"/>
+		<item value="org.eclipse.mylyn.bugzilla_feature:3.14.2.v20150217-2341"/>
+		<item value="org.eclipse.mylyn.commons.identity:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons.notifications:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons.repositories:1.6.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.commons:3.14.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.context_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn.discovery:3.14.2.v20150217-2244"/>
 		<item value="org.eclipse.mylyn.github.feature:3.5.0.201409260305-r"/>
-		<item value="org.eclipse.mylyn.ide_feature:3.13.0.v20140702-2225"/>
-		<item value="org.eclipse.mylyn.java_feature:3.13.0.v20140819-2236"/>
-		<item value="org.eclipse.mylyn.monitor:3.13.0.v20140702-2155"/>
-		<item value="org.eclipse.mylyn.tasks.ide:3.13.0.v20140704-0050"/>
-		<item value="org.eclipse.mylyn.team_feature:3.13.0.v20140702-2225"/>
-		<item value="org.eclipse.mylyn.wikitext_feature:2.2.0.v20140905-1515"/>
-		<item value="org.eclipse.mylyn_feature:3.13.0.v20140826-1734"/>
-		<item value="org.eclipse.pde:3.10.0.v20140925-0400"/>
-		<item value="org.eclipse.platform:4.4.0.v20140925-0400"/>
-		<item value="org.eclipse.rcp:4.4.0.v20140925-0400"/>
-		<item value="org.eclipse.rse.core:3.4.100.201406091451"/>
-		<item value="org.eclipse.rse.dstore:3.4.100.201406041609"/>
-		<item value="org.eclipse.rse.ftp:3.2.0.201406020016"/>
-		<item value="org.eclipse.rse.local:2.1.500.201406020016"/>
-		<item value="org.eclipse.rse.ssh:3.0.500.201406020016"/>
-		<item value="org.eclipse.rse.telnet:2.3.100.201406020016"/>
-		<item value="org.eclipse.rse.terminals:1.2.100.201406060905"/>
-		<item value="org.eclipse.rse.useractions:1.1.500.201406020016"/>
-		<item value="org.eclipse.rse:3.5.0.201406091451"/>
-		<item value="org.eclipse.tm.terminal.ssh:2.1.300.201406020016"/>
-		<item value="org.eclipse.tm.terminal.telnet:2.1.300.201406020016"/>
-		<item value="org.eclipse.tm.terminal.view:2.4.100.201406020016"/>
-		<item value="org.eclipse.tm.terminal:3.2.300.201406060905"/>
+		<item value="org.eclipse.mylyn.ide_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn.java_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn.monitor:3.14.2.v20150217-2244"/>
+		<item value="org.eclipse.mylyn.tasks.ide:3.14.2.v20150217-2341"/>
+		<item value="org.eclipse.mylyn.team_feature:3.14.2.v20150218-0125"/>
+		<item value="org.eclipse.mylyn.wikitext_feature:2.3.2.v20150217-2315"/>
+		<item value="org.eclipse.mylyn_feature:3.14.2.v20150217-2341"/>
+		<item value="org.eclipse.pde:3.10.1.v20150204-1700"/>
+		<item value="org.eclipse.platform:4.4.2.v20150204-1700"/>
+		<item value="org.eclipse.rcp:4.4.2.v20150204-1700"/>
+		<item value="org.eclipse.rse.core:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.dstore:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.ftp:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.local:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.ssh:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.telnet:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.terminals:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse.useractions:3.7.0.201502160819"/>
+		<item value="org.eclipse.rse:3.7.0.201502160819"/>
+		<item value="org.eclipse.tm.terminal.ssh:3.7.0.201502160819"/>
+		<item value="org.eclipse.tm.terminal.telnet:3.7.0.201502160819"/>
+		<item value="org.eclipse.tm.terminal.view:3.7.0.201502160819"/>
+		<item value="org.eclipse.tm.terminal:3.7.0.201502160819"/>
 		<item value="org.eclipse.wst.common.fproj:3.6.1.v201409111446"/>
-		<item value="org.eclipse.wst.jsdt.feature:1.6.0.v201405071612-7G7FFyXFBBoPc8Pvc8c0wn"/>
-		<item value="org.eclipse.wst.web_ui.feature:3.6.0.v201405062148-7O7XGA-EMjBb6nLaqlPbjbbsokeynV4Qpz-UGZwo"/>
+		<item value="org.eclipse.wst.jsdt.feature:1.6.100.v201410221502"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.6.3.v201501312139"/>
 		<item value="org.eclipse.wst.xml.xpath2.processor.feature:2.0.301.v201409111854"/>
-		<item value="org.eclipse.wst.xml_ui.feature:3.6.0.v201405062148-7H7NFm0DxumWv9-7bhgNooiVMQ_TBruLpRz012TF"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.6.3.v201501292352"/>
 		<item value="org.eclipse.wst.xsl.feature:1.3.401.v201409111855"/>
 		<item value="org.eclipse.zest:1.5.101.201408150207"/>
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.14.0.201401060023"/>
 		<item value="org.sonatype.m2e.mavenarchiver.feature:0.16.0.201401211452-signed-20140310144306"/>
-		<item value="org.springframework.ide.eclipse.ajdt.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.aop.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.autowire.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.batch.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.data.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.integration.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.maven.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.mylyn.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.security.feature:3.6.3.201411271034-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.ajdt.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.aop.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.autowire.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.batch.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.data.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.integration.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.maven.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.mylyn.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.security.feature:3.6.4.201503051146-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.uaa.feature:3.6.3.201411271002-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.webflow.feature:3.6.3.201411271034-RELEASE"/>
-		<item value="org.springsource.sts.package:3.6.3.201501121239-SR1-e44"/>
-		<item value="org.springsource.sts:3.6.3.201501121239-SR1"/>
+		<item value="org.springframework.ide.eclipse.webflow.feature:3.6.4.201503051146-RELEASE"/>
+		<item value="org.springsource.sts.package:3.6.4.201503100339-RELEASE-e44"/>
+		<item value="org.springsource.sts:3.6.4.201503100339-RELEASE"/>
 	</list>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="185" key="DIALOG_Y_ORIGIN"/>
+		<item value="381" key="DIALOG_X_ORIGIN"/>
+	</section>
 	<section name="ExternalProjectImportWizard">
-		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
-		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\Github\lv-nhan\contats\Codes"/>
 			<item value="C:\Users\Notexittran\Desktop\LV Github\constats\Codes"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
@@ -152,8 +164,11 @@
 		<list key="ENABLED_TRANSFERS">
 		</list>
 	</section>
-	<section name="ChooseWorkspaceDialogSettings">
-		<item value="381" key="DIALOG_X_ORIGIN"/>
-		<item value="185" key="DIALOG_Y_ORIGIN"/>
+	<section name="CleanDialogSettings">
+		<item value="500" key="DIALOG_WIDTH"/>
+		<item value="112" key="DIALOG_Y_ORIGIN"/>
+		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="433" key="DIALOG_X_ORIGIN"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
 	</section>
 </section>

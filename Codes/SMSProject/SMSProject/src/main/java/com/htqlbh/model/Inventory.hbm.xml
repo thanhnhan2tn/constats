@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.Inventory" table="inventory" >
+        <id name="invtId" type="string">
+            <column name="INVTID" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="unitIdT" class="com.htqlbh.model.Unit" fetch="select" lazy="false">
+            <column name="UNITID_T" />
+        </many-to-one>
+        <many-to-one name="unitIdL" class="com.htqlbh.model.Unit" fetch="select" lazy="false">
+            <column name="UNITID_L" />
+        </many-to-one>
+        <property name="invtName" type="string">
+            <column name="INVTNAME" length="50" />
+        </property>
+        <property name="className" type="string">
+            <column name="CLASSNAME" length="50" />
+        </property>
+        <property name="unitRate" type="java.lang.Integer">
+            <column name="UNITRATE" />
+        </property>
+        <property name="salesPriceT" type="java.lang.Long">
+            <column name="SALESPRICET" precision="10" scale="0" />
+        </property>
+        <property name="salesPriceL" type="java.lang.Long">
+            <column name="SALESPRICEL" precision="10" scale="0" />
+        </property>
+        <property name="qtyStock" type="java.lang.Integer">
+            <column name="QTYSTOCK" />
+        </property>
+        <property name="slsTax" type="java.lang.Long">
+            <column name="SLSTAX" precision="10" scale="0" />
+        </property>
+        <property name="status" type="string" not-null="true">
+            <column name="STATUS" length="2" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="200" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

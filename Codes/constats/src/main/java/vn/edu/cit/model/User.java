@@ -2,16 +2,22 @@ package vn.edu.cit.model;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author Notexittran
  *
  */
+@Document(collection = "user")
 public class User {
-	private int userId;
+	@Id
+	private long userId;
 	private String userName;
 	private String passWord;
 	private String role; // 1 hoac 2
-	private String fullName;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String sdt;
 	List<Server> server;
@@ -20,23 +26,24 @@ public class User {
 
 	}
 
-	public User(int userId, String userName, String passWord, String role,
+	public User(long userId, String userName, String passWord, String role,
 			String fullName, String email, String sdt) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
 		this.passWord = passWord;
 		this.role = role;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.sdt = sdt;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -56,12 +63,20 @@ public class User {
 		this.passWord = passWord;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
