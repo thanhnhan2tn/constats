@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Theme>
+	<Name>Default</Name>
+	<Version>1.0</Version>
+	<Patch>src/main/resources/theme/default/</Patch>
+	<Author>TNC</Author>
+	<Headder>
+		<Logo>
+			<image>images/logo.png</image>
+			<text>DemoCMS</text>
+			<url>/</url>
+			<isText>false</isText>
+		</Logo>
+	</Headder>
+	<Content>
+		<top-content>
+			<Form>
+				<action>Hello</action>
+				<method>POST</method>
+				<Label>
+					<name>name</name>
+					<text>Nhap ten:</text>
+				</Label>
+				<Input>
+					<inputType>text</inputType>
+					<inputName>name</inputName>
+					<inputLength>30</inputLength>
+				</Input>
+				<Label>
+					<name>ho</name>
+					<text>Nhap ho:</text>
+				</Label>
+				<Input>
+					<inputType>text</inputType>
+					<inputName>ho</inputName>
+					<inputLength>30</inputLength>
+				</Input>
+				<Input>
+					<inputType>submit</inputType>
+					<inputName>submit</inputName>
+					<inputValue>OK</inputValue>
+				</Input>
+			</Form>
+		</top-content>
+	</Content>
+	<Footer>
+		<text>@TNC</text>
+	</Footer>
+</Theme>

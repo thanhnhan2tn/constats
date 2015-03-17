@@ -87,7 +87,7 @@ public class Power {
 			// option -e giup nhan dang ki tu xuong dong
 			Channel channel = ss.openChannel("exec");
 			((ChannelExec) channel).setCommand(" echo " + " -e " + cmd + " > "
-					+ "/home/maya/hello.txt");
+					+ "/home/maya/hello3.txt");
 			((ChannelExec) channel).setErrStream(System.err);
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
