@@ -12,16 +12,18 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
+import vn.edu.cit.services.MongoDBService;
+import vn.edu.cit.services.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -30,6 +32,8 @@ import vn.edu.cit.model.User;
 public class HomeController {
 	@Autowired
 	public ApplicationContext ctx;
+	public UserService userService = new UserService();
+	public MongoOperations mongo = MongoDBService.getMongoService();
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -37,8 +41,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpSession session,
 			ModelMap mm) {
-		User user = (User) session.getAttribute("user");
-		if (user != null) {
+		String username = (String) session.getAttribute("username");
+		if (username != null && !username.isEmpty()) {
 			request.setAttribute("page", "home");
 			mm.put("title", "Home - Server Control");
 			mm.put("Server", new Server());
@@ -69,6 +73,7 @@ public class HomeController {
 		String passWord = request.getParameter("passwd");
 		String hashPassWord = Calculator.MD5(passWord);
 		int role = 1;
+		List<Server> servers = new ArrayList<Server>();
 		/*
 		 * MongoOperation lay du lieu tu Bean xml, tu Aplication Context
 		 */
@@ -91,7 +96,8 @@ public class HomeController {
 			return "redirect:/login";
 		} else {
 			// Khoi tao Doi tuong User voi thong tin dang ki moi
-			User user = new User(email, hashPassWord, role, firstName, lastName);
+			User user = new User(email, hashPassWord, role, firstName,
+					lastName, servers);
 			// Chen vao DB
 			mongoOperation.insert(user, "users");
 			// Tra ve thong bao dang ki thanh cong, yeu cau dang nhap
@@ -120,14 +126,15 @@ public class HomeController {
 		Query searchQuery = new Query(Criteria.where("email").is(
 				user.getEmail()));
 		User avaiable = mongoOperation.findOne(searchQuery, User.class);
-		if (avaiable == null) {
+		if (avaiable == null) { // Neu khong co user nao co email dang nhap
+								// tuong tu
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
 					"An email is not registered!");
 			return "redirect:/login";
 		} else if (Calculator.MD5(user.getPassWord()).equals(
-				avaiable.getPassWord())) {
-			session.setAttribute("user", avaiable);
+				avaiable.getPassWord())) {// so sanh password
+			session.setAttribute("username", avaiable.getEmail());
 			System.out.println("Login success!");
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";
@@ -174,28 +181,36 @@ public class HomeController {
 	 * Add Server controller
 	 */
 	@RequestMapping(value = "/addserver", method = RequestMethod.POST)
-	public ModelAndView addServer(
-			@ModelAttribute(value = "Server") Server server,
+	public String addServer(@ModelAttribute(value = "Server") Server server,
 			HttpServletRequest request, HttpSession session,
 			RedirectAttributes redirectAtt) {
-		ModelAndView mav = new ModelAndView();
-		List<Server> listServer = new ArrayList<Server>();
-		listServer.add(server);
+		String sessionUser = (String) session.getAttribute("username");
 
-		User sessionUser = (User) session.getAttribute("user");
-		MongoOperations mongoOperations =(MongoOperations)ctx.getBean("mongoTemplate");
-		//
-		Query searchQuery = new Query(Criteria.where("email").is(sessionUser.getEmail()));
-		User user = mongoOperations.findOne(searchQuery, User.class);
-		if (user != null) {
-			user.setServer(listServer);
-			mongoOperations.save(user);
-			redirectAtt.addFlashAttribute("message","AddServer Cu");
+		if (sessionUser != null && !sessionUser.isEmpty()) {
+			System.out.println(userService.getUser(sessionUser));
+			
+			User user = userService.getUser(sessionUser);
+
+			if (user != null) {
+				List<Server> listServer = user.getServers(); 
+				// Get list server
+				// System.out.println(listServer);
+				// server.setServerId();
+				listServer.add(server);// Add Server to list
+				user.setServers(listServer);// Set list server to user
+				Query searchQuery = new Query(Criteria.where("email").is(
+						sessionUser));
+				mongo.updateFirst(searchQuery,
+						Update.update("servers", listServer), User.class);
+				// Save user info
+				redirectAtt.addFlashAttribute("message", "AddServer");
+			}
+			return "redirect:/";
+
+		} else {
+			return "redirect:/login";
 		}
-		mav.addObject("list", listServer);
-		mav.setViewName("");
-		return mav;
 	}
-	
+
 	private static final Logger _log = Logger.getLogger(HomeController.class);
 }

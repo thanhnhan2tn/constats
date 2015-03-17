@@ -2,7 +2,12 @@ package vn.edu.cit.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * @author Notexittran
@@ -16,20 +21,21 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String sdt;
-	List<Server> server;
+	List<Server> servers = null;
 
 	public User() {
 
 	}
 
 	public User(String email, String passWord, int role, String firstName,
-			String lastName) {
+			String lastName, List<Server> servers) {
 		super();
 		this.passWord = passWord;
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.servers = servers;
 	}
 
 	public String getPassWord() {
@@ -80,12 +86,12 @@ public class User {
 		this.role = role;
 	}
 
-	public List<Server> getServer() {
-		return server;
+	public List<Server> getServers() {
+		return servers;
 	}
 
-	public void setServer(List<Server> server) {
-		this.server = server;
+	public void setServers(List<Server> servers) {
+		this.servers = servers;
 	}
 
 }

@@ -32,13 +32,13 @@
 	<context:annotation-config />
 	<!-- config mongodb connection -->
 	<mongo:mongo host="localhost" port="27017" />
-	<mongo:db-factory dbname="serverControl" mongo-ref="mongo" id="mongoDbFactory" />
+	<mongo:db-factory dbname="serverControl" mongo-ref="mongo"
+		id="mongoDbFactory" />
 	<beans:bean id="mongoTemplate"
 		class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
 	</beans:bean>
-
 	<!-- Tiles -->
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -56,5 +56,5 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
+
 </beans:beans>

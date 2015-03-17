@@ -1,6 +1,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form"
 	prefix="spring"%>
 <!-- Add Server Model FOrm -->
+
 <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -10,9 +11,10 @@
 			</button>
 			<h4 class="modal-title" id="myModalLabel">Add new server</h4>
 		</div>
-		<div class="modal-body">
-			<spring:form action="addServer" method="POST" role="form"
-				commandName="Server" class="form-horizontal">
+		<spring:form action="addserver" method="POST" role="form"
+			commandName="Server" class="form-horizontal">
+			<div class="modal-body">
+
 				<div class="form-group">
 					<label for="ip" class="col-md-3 control-label">IP: *</label>
 					<div class="col-md-9">
@@ -24,7 +26,7 @@
 					<label for="username" class="col-md-3 control-label">Root
 						Username: *</label>
 					<div class="col-md-9">
-						<spring:input path="serverUsername" lass="username form-control"
+						<spring:input path="serverUsername" class="username form-control"
 							name="username"
 							placeholder="Username have root permision login to Server"
 							required="required" />
@@ -49,11 +51,12 @@
 				</div>
 				<div style="display: none" id="signup-err"
 					class="alert alert-danger col-sm-12 signup-err"></div>
-			</spring:form>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="submit" class="btn btn-primary">Save changes</button>
-		</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+		</spring:form>
 	</div>
 </div>

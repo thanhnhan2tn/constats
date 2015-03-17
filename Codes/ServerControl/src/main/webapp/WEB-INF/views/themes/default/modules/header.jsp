@@ -1,7 +1,11 @@
 <%@page import="vn.edu.cit.model.*"%>
+<%@page import="vn.edu.cit.services.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	User user = (User) session.getAttribute("user");
+	UserService userService = new UserService();
+	String username = (String) session.getAttribute("username");
+	User user = userService.getUser(username);
+	
 %>
 <a href="#" class="logo">ConStats</a>
 <!-- Header Navbar -->
@@ -80,8 +84,7 @@
 						src="<c:url value='/resources/themes/default/images/avatar.png'/>"
 						class="img-circle" alt="User Image" />
 						<p><%=user.getFirstName() + " " + user.getLastName()%>
-							<small>
-							<%=((user.getRole()==2) ? "Admin":"Member") %>
+							<small> <%=((user.getRole() == 2) ? "Admin" : "Member")%>
 							</small>
 						</p></li>
 
@@ -91,7 +94,8 @@
 							<a href="/profile" class="btn btn-default btn-flat">Profile</a>
 						</div>
 						<div class="pull-right">
-							<a href="${pageContext.request.contextPath}/signout" class="btn btn-default btn-flat">Sign out</a>
+							<a href="${pageContext.request.contextPath}/signout"
+								class="btn btn-default btn-flat">Sign out</a>
 						</div>
 					</li>
 				</ul> <!-- Da dang nhap -->
@@ -101,3 +105,4 @@
 		<!-- end ul nav menu -->
 	</div>
 </nav>
+

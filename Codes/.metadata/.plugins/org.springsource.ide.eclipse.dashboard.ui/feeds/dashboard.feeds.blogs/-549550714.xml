@@ -5,7 +5,101 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-14T17:00:00Z</updated>
+  <updated>2015-03-16T05:20:06Z</updated>
+  <entry>
+    <title>Getting Started with Couchbase and Spring Data Couchbase</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/16/getting-started-with-couchbase-and-spring-data-couchbase" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-03-16:2022</id>
+    <updated>2015-03-16T05:20:06Z</updated>
+    <content type="html">&lt;blockquote&gt;&lt;p&gt;This blog was inspired by a talk that &lt;a href="https://twitter.com/ldoguin"&gt;Laurent Doguin&lt;/a&gt;, a developer advocate over at Couchbase, and I gave at &lt;a href="http://www.couchbase.com/connect/"&gt;Couchbase Connect&lt;/a&gt; last year. Merci Laurent!&lt;/p&gt;
+&lt;/blockquote&gt;&lt;p&gt;This is a demo of the &lt;a href="https://github.com/spring-projects/spring-data-couchbase"&gt;Spring Data Couchbase&lt;/a&gt; integration. From &lt;a href="http://spring.io/projects/spring-data-couchbase"&gt;the project page&lt;/a&gt;, Spring Data Couchbase is:&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;The Spring Data Couchbase project provides integration with the Couchbase Server database. Key functional areas of Spring Data Couchbase are a POJO centric model for interacting with Couchbase Buckets and easily writing a Repository style data access layer.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#what-is-couchbase" class="anchor" name="what-is-couchbase"&gt;&lt;/a&gt;What is Couchbase?&lt;/h2&gt;&lt;p&gt;Couchbase is a distributed data-store that enjoys true horizontal scaling. I like to think of it as a mix of Redis and MongoDB: you work with documents that are accessed through their keys. There are numerous client APIs for all languages. If you&amp;rsquo;re using Couchbase for your backend and using the JVM, you&amp;rsquo;ll &lt;a href="http://projects.spring.io/spring-data-couchbase/"&gt;love Spring Data Couchbase&lt;/a&gt;. The bullets on the project home page best enumerate its many features:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring configuration support using Java based &lt;code&gt;@Configuration&lt;/code&gt; classes or an XML namespace for the Couchbase driver.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;CouchbaseTemplate&lt;/code&gt; helper class that increases productivity performing common Couchbase operations. Includes integrated object mapping between documents and POJOs.&lt;/li&gt;
+  &lt;li&gt;Exception translation into Spring&amp;rsquo;s portable Data Access Exception hierarchy.&lt;/li&gt;
+  &lt;li&gt;Feature Rich Object Mapping integrated with Spring&amp;rsquo;s Conversion Service.&lt;/li&gt;
+  &lt;li&gt;Annotation based mapping metadata but extensible to support other metadata formats.&lt;/li&gt;
+  &lt;li&gt;Automatic implementation of Repository interfaces including support for custom finder methods (backed by Couchbase Views).&lt;/li&gt;
+  &lt;li&gt;JMX administration and monitoring&lt;/li&gt;
+  &lt;li&gt;Transparent &lt;code&gt;@Cacheable&lt;/code&gt; support to cache any objects you need for high performance access.&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;&lt;a href="#running-couchbase" class="anchor" name="running-couchbase"&gt;&lt;/a&gt;Running Couchbase&lt;/h2&gt;&lt;h3&gt;&lt;a href="#use-vagrant-to-run-couchbase-locally" class="anchor" name="use-vagrant-to-run-couchbase-locally"&gt;&lt;/a&gt;Use Vagrant to Run Couchbase Locally&lt;/h3&gt;&lt;p&gt;You will need to have Couchbase installed if you don&amp;rsquo;t already (naturally). Michael Nitschinger (&lt;a href="https://twitter.com/daschl"&gt;@daschl&lt;/a&gt;, also lead of the Spring Data Couchbase project), blogged about how to get a simple &lt;a href="http://blog.couchbase.com/couchbase-cluster-minutes-vagrant-and-puppet"&gt;4-node Vagrant cluster up and running here&lt;/a&gt;. I&amp;rsquo;ve reproduced his example here in the &lt;code&gt;vagrant&lt;/code&gt; directory. To use it, you&amp;rsquo;ll need to install &lt;a href="https://www.virtualbox.org/"&gt;Virtual Box&lt;/a&gt; and &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt;, of course, but then simply run &lt;code&gt;vagrant up&lt;/code&gt; in the &lt;code&gt;vagrant&lt;/code&gt; directory. To get the most up-to-date version of this configuration script, I went to Michael&amp;rsquo;s &lt;a href="https://github.com/daschl/vagrants"&gt;GitHub &lt;code&gt;vagrants&lt;/code&gt; project&lt;/a&gt; and found that, beyond this example, there are &lt;a href="https://github.com/couchbaselabs/vagrants"&gt;&lt;em&gt;numerous&lt;/em&gt; other Vagrant scripts available&lt;/a&gt;. I have a submodule in this code&amp;rsquo;s project directory that points to that, but be sure to consult that for the latest-and-greatest. To get everything running on my machine, I chose &lt;a href="https://github.com/couchbaselabs/vagrants/tree/master/3.0.2/ubuntu12"&gt;the Ubuntu 12 installation of Couchbase 3.0.2&lt;/a&gt;. You can change how many nodes are started by configuring the &lt;code&gt;VAGRANT_NODES&lt;/code&gt; environment variable before startup:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;VAGRANT_NODES=2 vagrant up
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You&amp;rsquo;ll need to administer and configure Couchbase on initial setup. Point your browser to the right IP for each node. The rules for determining that IP &lt;a href="https://github.com/couchbaselabs/vagrants"&gt;are well described in the &lt;code&gt;README&lt;/code&gt;&lt;/a&gt;. The admin interface, in my case, was available at &lt;code&gt;192.168.105.101:8091&lt;/code&gt; and &lt;code&gt;192.168.105.102:8091&lt;/code&gt;. For more on this process, I recommend that you follow the &lt;a href="http://docs.couchbase.com/prebuilt/couchbase-manual-3.0/Install/init-setup.html"&gt;guidelines here&lt;/a&gt; for the details.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s how I did it. I hit the admin interface &lt;a href="http://192.168.105.101:8091/"&gt;on the first node&lt;/a&gt; and created a new cluster. I used &lt;code&gt;admin&lt;/code&gt; for the username and &lt;code&gt;password&lt;/code&gt; for the password. On all subsequent management pages, I simply joined the existing cluster by pointing the nodes to &lt;code&gt;192.168.105.101&lt;/code&gt; and using the aforementioned &lt;code&gt;admin&lt;/code&gt; credential. Once you&amp;rsquo;ve joined all nodes, look for the &lt;code&gt;Rebalance&lt;/code&gt; button in the &lt;em&gt;Server Nodes&lt;/em&gt; panel and trigger a cluster rebalance.&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/server-nodes.png" /&gt;&lt;/p&gt;&lt;p&gt;If you are done with your Vagrant cluster, you can use the &lt;code&gt;vagrant halt&lt;/code&gt; command to shut it down cleanly. Very handy is also &lt;code&gt;vagrant suspend&lt;/code&gt;, which will save the state of the nodes instead of shutting them down completely.&lt;/p&gt;&lt;p&gt;If you want to administer the Couchbase cluster from the command line there is the handy &lt;a href="http://docs.couchbase.com/couchbase-manual-2.5/cb-cli/#couchbase-cli-too"&gt;&lt;code&gt;couchbase-cli&lt;/code&gt;&lt;/a&gt;. You can simply use the &lt;code&gt;vagrant ssh&lt;/code&gt; command to get into each of the nodes (by their node-names: &lt;code&gt;node1&lt;/code&gt;, &lt;code&gt;node2&lt;/code&gt;, etc..). Once there, you can run cluster configuration commands. For example the &lt;code&gt;server-list&lt;/code&gt; command will enumerate cluster nodes.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;/opt/couchbase/bin/couchbase-cli server-list -c 192.168.56.101 -u admin -p password
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It&amp;rsquo;s easy to trigger a &lt;em&gt;rebalance&lt;/em&gt; using:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint sh"&gt;/opt/couchbase/bin/couchbase-cli rebalance -c 192.168.56.101 -u admin -p password
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#couchbase-in-the-cloud-and-on-cloud-foundry" class="anchor" name="couchbase-in-the-cloud-and-on-cloud-foundry"&gt;&lt;/a&gt;Couchbase In the Cloud and on Cloud Foundry&lt;/h3&gt;&lt;p&gt;Couchbase lends itself to use in the cloud. It&amp;rsquo;s horizontally scalable (like Gemfire or Cassandra) in that there&amp;rsquo;s no single point of failure. It does not employ a master-slave or active/passive system. There are a few ways to get it up and running where your applications are running. If you&amp;rsquo;re running a Cloud Foundry installation, then you can install the the &lt;a href="https://github.com/cumulogic/cumulogic_cloudfoundry_broker"&gt;Cumulogic Service Broker&lt;/a&gt; which then lets your Cloud Foundry installation talk to the Cumulogic platform which itself can manage Couchbase instances. Service brokers are the bit of integration code that teach Cloud Foundry how to provision, destroy and generally interact with a managed service, like Couchbase, in this case.&lt;/p&gt;&lt;h2&gt;&lt;a href="#using-spring-data-couchbase-to-store-facebook-places" class="anchor" name="using-spring-data-couchbase-to-store-facebook-places"&gt;&lt;/a&gt;Using Spring Data Couchbase to Store Facebook Places&lt;/h2&gt;&lt;p&gt;Let&amp;rsquo;s look at a simple example that reads data (in this case from the Facebook Places API using Spring Social Facebook&amp;rsquo;s &lt;code&gt;FacebookTemplate&lt;/code&gt; API) and then loads it into the Couchbase server.&lt;/p&gt;&lt;h3&gt;&lt;a href="#get-a-facebook-access-token" class="anchor" name="get-a-facebook-access-token"&gt;&lt;/a&gt;Get a Facebook Access Token&lt;/h3&gt;&lt;p&gt;You&amp;rsquo;ll also need a Facebook access token. The easiest way to do this is to go to &lt;a href="https://developers.facebook.com/"&gt;the Facebook Developer Portal&lt;/a&gt; and create a new application and then get an application ID and an application secret. Take these two values and concatenate them with a pike character (&lt;code&gt;|&lt;/code&gt;). Thus, you&amp;rsquo;ll have something of the form: &lt;code&gt;appID|appSecret&lt;/code&gt;. The sample application uses Spring&amp;rsquo;s &lt;code&gt;Environment&lt;/code&gt; mechanism to resolve the &lt;code&gt;facebook.accessToken&lt;/code&gt; key. You can provide a value for it in the &lt;code&gt;src/main/resources/application.properties&lt;/code&gt; file or using any of the other supported Spring Boot property resolution mechanisms. You could even provide the value as a &lt;code&gt;-D&lt;/code&gt; argument: &lt;code&gt;-Dfacebook.accessToken=...|...&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/facebook-app.png" /&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#telling-spring-data-couchbase-about-our-cluster" class="anchor" name="telling-spring-data-couchbase-about-our-cluster"&gt;&lt;/a&gt;Telling Spring Data Couchbase About our Cluster&lt;/h3&gt;&lt;p&gt;Data in Couchbase is stored in &lt;em&gt;buckets&lt;/em&gt;. It&amp;rsquo;s logically the same as a &lt;em&gt;database&lt;/em&gt; in a SQL RDBMS. It is typically replicated across nodes and has its own configuration. We&amp;rsquo;ll be using the &lt;em&gt;default&lt;/em&gt; bucket, but it&amp;rsquo;s a snap to create more buckets.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s look at the basic configuration required to use Spring Data Couchbase (in this case, in terms of a Spring Boot application):&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;@SpringBootApplication&#xD;
+@EnableScheduling&#xD;
+@EnableCaching&#xD;
+public class Application {&#xD;
+&#xD;
+  @EnableCouchbaseRepositories&#xD;
+	@Configuration&#xD;
+	static class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {&#xD;
+&#xD;
+		@Value(&amp;quot;${couchbase.cluster.bucket}&amp;quot;)&#xD;
+		private String bucketName;&#xD;
+&#xD;
+		@Value(&amp;quot;${couchbase.cluster.password}&amp;quot;)&#xD;
+		private String password;&#xD;
+&#xD;
+		@Value(&amp;quot;${couchbase.cluster.ip}&amp;quot;)&#xD;
+		private String ip;&#xD;
+&#xD;
+		@Override&#xD;
+		protected List&amp;lt;String&amp;gt; bootstrapHosts() {&#xD;
+			return Arrays.asList(this.ip);&#xD;
+		}&#xD;
+&#xD;
+		@Override&#xD;
+		protected String getBucketName() {&#xD;
+			return this.bucketName;&#xD;
+		}&#xD;
+&#xD;
+		@Override&#xD;
+		protected String getBucketPassword() {&#xD;
+			return this.password;&#xD;
+		}&#xD;
+	}&#xD;
+&#xD;
+  // more beans&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#a-spring-data-couchbase-repository" class="anchor" name="a-spring-data-couchbase-repository"&gt;&lt;/a&gt;A Spring Data Couchbase Repository&lt;/h3&gt;&lt;p&gt;Spring Data provides the notion of repositories - objects that handle typical data-access logic and provide convention-based queries. They can be used to map POJOs to data in the backing data store.&lt;/p&gt;&lt;p&gt;Our example simply stores the information on businesses it reads from Facebook&amp;rsquo;s Places API. To acheive this we&amp;rsquo;ve created a simple &lt;code&gt;Place&lt;/code&gt; entity that Spring Data Couchbase repositories will know how to persist:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;@Document(expiry = 0)&#xD;
+class Place {&#xD;
+&#xD;
+	@Id&#xD;
+	private String id;&#xD;
+&#xD;
+	@Field&#xD;
+	private Location location;&#xD;
+&#xD;
+	@Field&#xD;
+	@NotNull&#xD;
+	private String name;&#xD;
+&#xD;
+	@Field&#xD;
+	private String affilitation, category, description, about;&#xD;
+&#xD;
+	@Field&#xD;
+	private Date insertionDate;&#xD;
+  // .. getters, constructors, toString, etc&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;Place&lt;/code&gt; entity references another entity, &lt;code&gt;Location&lt;/code&gt;, which is basically the same.&lt;/p&gt;&lt;p&gt;In the case of Spring Data Couchbase, repository finder methods map to &lt;em&gt;views&lt;/em&gt; - queries written in JavaScript - in a Couchbase server. You&amp;rsquo;ll need to setup views on the Couchbase servers. Go to any Couchbase server&amp;rsquo;s admin console and visit the &lt;em&gt;Views&lt;/em&gt; screen, then click &lt;em&gt;Create Development View&lt;/em&gt; and name it &lt;code&gt;place&lt;/code&gt;, as our entity will be &lt;code&gt;demo.Place&lt;/code&gt; (the development view name is adapted from the entity&amp;rsquo;s class name by default).&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ll create two views, the generic &lt;code&gt;all&lt;/code&gt;, which is required for any Spring Data Couchbase POJO, and the &lt;code&gt;byName&lt;/code&gt; view, which will be used to drive the repository&amp;rsquo;s &lt;code&gt;findByName&lt;/code&gt; finder method. This mapping is by convention, though you can override which view is employed with the &lt;code&gt;@View&lt;/code&gt; annotation on the finder method&amp;rsquo;s declaration.&lt;/p&gt;&lt;p&gt;First, &lt;code&gt;all&lt;/code&gt;:&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/all-view.png" /&gt;&lt;/p&gt;&lt;p&gt;Now, &lt;code&gt;byName&lt;/code&gt;:&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/byName-view.png" /&gt;&lt;/p&gt;&lt;p&gt;When you&amp;rsquo;re done, be sure to &lt;em&gt;Publish&lt;/em&gt; each view!&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/views.png" /&gt;&lt;/p&gt;&lt;p&gt;Now you can use Spring Data repositories as you&amp;rsquo;d expect. The only thing that&amp;rsquo;s a bit different about these repositories is that we&amp;rsquo;re declaring a Spring Data Couchbase &lt;code&gt;Query&lt;/code&gt; type for the argument to the &lt;code&gt;findByName&lt;/code&gt; finder method, not a String. Using the &lt;code&gt;@Query&lt;/code&gt; is straightforward:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;Query query = new Query();&#xD;
+query.setKey(&amp;quot;Philz Coffee&amp;quot;);&#xD;
+Collection&amp;lt;Place&amp;gt; places = placeRepository.findByName(query);&#xD;
+places.forEach(System.out::println);
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#where-to-go-from-here" class="anchor" name="where-to-go-from-here"&gt;&lt;/a&gt;Where to go from Here&lt;/h2&gt;&lt;p&gt;We&amp;rsquo;ve only covered some of the basics here. Spring Data Couchbase supports the &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#validation"&gt;Java bean validation API&lt;/a&gt;, and can be configured to honor validation constraints on its entities. Spring Data Couchbase also provides lower-level access to the &lt;code&gt;CouchbaseClient&lt;/code&gt; API, if you want it. Spring Data Couchbase &lt;em&gt;also&lt;/em&gt; implements &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#couchbase.caching"&gt;the Spring &lt;code&gt;CacheManager&lt;/code&gt; abstraction&lt;/a&gt; - you can use &lt;code&gt;@Cacheable&lt;/code&gt; and friends with data on service methods and it&amp;rsquo;ll be transparently persisted to Couchbase for you.&lt;/p&gt;&lt;p&gt;The code for &lt;a href="https://github.com/joshlong/spring-data-couchbase-talk"&gt;this example is in my Github repository&lt;/a&gt;, co-developed with my pal Laurent Doguin (&lt;a href="https://twitter.com/ldoguin"&gt;@ldoguin&lt;/a&gt;) over at Couchbase. &lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Webinar Replay: A Single-Page Application with Spring Security and Angular JS</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/14/webinar-replay-a-single-page-application-with-spring-security-and-angular-js" />
@@ -812,17 +906,6 @@ class HelloRestController {&#xD;
     <id>tag:spring.io,2015-02-27:2001</id>
     <updated>2015-02-27T00:52:38Z</updated>
     <content type="html">&lt;p&gt;Spring Boot 1.2.2 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release includes a &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.2.2"&gt;significant number of fixes&lt;/a&gt; and is a recommended upgrade for all users.&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ve also managed to sneak support for JMustache into this release, see &lt;a href="https://github.com/spring-projects/spring-boot/tree/v1.2.2.RELEASE/spring-boot-samples/spring-boot-sample-web-mustache"&gt;this application&lt;/a&gt; for an example of how to use it.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.2.2.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 1.1.11 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/02/27/spring-boot-1-1-11-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Phil Webb</name>
-    </author>
-    <id>tag:spring.io,2015-02-27:2000</id>
-    <updated>2015-02-27T00:47:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Boot 1.1.11 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release includes a &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.1.11"&gt;number of fixes&lt;/a&gt; and is recommended for anyone still on the 1.1.x line. We&amp;rsquo;re only planning critical bug fixes for 1.1.x from now on so please consider &lt;a href="http://spring.io/blog/2015/02/27/spring-boot-1-2-2-released"&gt;upgrading to 1.2.2&lt;/a&gt; if possible.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/1.1.11.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
 

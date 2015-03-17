@@ -12,4 +12,10 @@ public class AdminController {
 		m.put("title", "AdminCP");
 		return "admincp/home";
 	}
+	
+	@RequestMapping(value="/admincp/usermanager", method=RequestMethod.GET)
+	public String usermanager(ModelMap m){
+		m.put("title", "AdminCP");
+		return "admincp?action=usermanager";
+	}
 }

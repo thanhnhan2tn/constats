@@ -24,7 +24,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<session-config>
-		<session-timeout>60</session-timeout>
+		<session-timeout>600</session-timeout>
 	</session-config>
 	<!-- <listener> <listener-class> org.apache.tiles.extras.complete.CompleteAutoloadTilesListener 
 		</listener-class> </listener> <servlet> <servlet-name>Tiles Dispatch Servlet</servlet-name> 

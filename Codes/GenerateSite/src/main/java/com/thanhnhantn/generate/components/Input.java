@@ -4,7 +4,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = { "id", "name", "type", "iClass", "value", "others","location" })
+@XmlType(propOrder = { "id", "name", "type", "iClass", "value", "others",
+		"positionx", "positiony" })
 public class Input {
 	private String id;
 	private String name;
@@ -12,11 +13,13 @@ public class Input {
 	private String type;
 	private String value;
 	private String others;
-	private Location location;
+	private String positionx;
+	private String positiony;
 
 	public Input() {
 		// TODO Auto-generated constructor stub
 	}
+
 	@XmlAttribute
 	public String getId() {
 		return id;
@@ -25,6 +28,7 @@ public class Input {
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	@XmlAttribute
 	public String getName() {
 		return name;
@@ -33,6 +37,7 @@ public class Input {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	@XmlElement
 	public String getiClass() {
 		return iClass;
@@ -41,6 +46,7 @@ public class Input {
 	public void setiClass(String iClass) {
 		this.iClass = iClass;
 	}
+
 	@XmlElement
 	public String getType() {
 		return type;
@@ -49,6 +55,7 @@ public class Input {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	@XmlElement
 	public String getOthers() {
 		return others;
@@ -57,14 +64,25 @@ public class Input {
 	public void setOthers(String others) {
 		this.others = others;
 	}
+
 	@XmlElement
-	public Location getLocation() {
-		return location;
+	public String getPositionx() {
+		return positionx;
 	}
 
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setPositionx(String positionx) {
+		this.positionx = positionx;
 	}
+
+	@XmlElement
+	public String getPositiony() {
+		return positiony;
+	}
+
+	public void setPositiony(String positiony) {
+		this.positiony = positiony;
+	}
+
 	@XmlElement
 	public String getValue() {
 		return value;
@@ -86,15 +104,22 @@ public class Input {
 
 	@Override
 	public String toString() {
+		String p = "";
+		if (getPositionx() != null) {
+			p += "margin-left: " + getPositionx() + "px";
+		}
+		if (getPositiony() != null) {
+			p += "margin-right: " + getPositionx() + "px";
+		}
 		String str = "<input ";
 		str += ((getId() == null) ? "" : " id= \"" + getId() + "\"");
 		str += ((getiClass() == null) ? "" : " class= \"" + getiClass() + "\"");
 		str += ((getName() == null) ? "" : " name= \"" + getName() + "\"");
 		str += ((getType() == null) ? "" : " type= \"" + getType() + "\"");
 		str += ((getValue() == null) ? "" : " value= \"" + getValue() + "\"");
+		str += ((p != "") ? "" : p);
 		str += ((getOthers() == null) ? "" : getOthers());
 		str += "/>";
 		return str;
 	}
-
 }
