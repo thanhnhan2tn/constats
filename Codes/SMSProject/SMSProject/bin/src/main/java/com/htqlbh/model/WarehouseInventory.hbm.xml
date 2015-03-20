@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.WarehouseInventory" table="warehouseinventory" >
+        <id name="wInventoryNo" type="string">
+            <column name="WINVENTORYNO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="stock" class="com.htqlbh.model.Stock" fetch="select" lazy="false">
+            <column name="STOCKID" length="20" />
+        </many-to-one>
+        <property name="wInventoryDate" type="date">
+            <column name="WINVENTORYDATE" length="10" />
+        </property>
+        <set name="warehouseInventoryDetails" table="warehouseinventorydetail" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="WINVENTORYNO" length="20" />
+            </key>
+            <one-to-many class="com.htqlbh.model.WarehouseInventoryDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

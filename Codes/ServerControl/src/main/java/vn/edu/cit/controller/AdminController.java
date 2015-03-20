@@ -17,6 +17,6 @@ public class AdminController {
 	@RequestMapping(value = "/admincp/{action}", method = RequestMethod.GET)
 	public String manager(ModelMap m, @PathVariable("action") String action) {
 		m.put("title", "AdminCP");
-		return "admincp?action=usermanager";
+		return "admincp?action=" + action;
 	}
 }

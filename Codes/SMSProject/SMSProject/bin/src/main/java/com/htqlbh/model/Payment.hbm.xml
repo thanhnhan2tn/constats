@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.Payment" table="payment" >
+        <id name="paymentId" type="java.lang.Integer">
+            <column name="PAYMENTID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="salesPerson" class="com.htqlbh.model.SalesPerson" fetch="select">
+            <column name="SALESPERSONID" length="20" />
+        </many-to-one>
+        <many-to-one name="customer" class="com.htqlbh.model.Customer" fetch="select">
+            <column name="CUSTID" length="20" />
+        </many-to-one>
+        <property name="paymentNo" type="string">
+            <column name="PAYMENTNO" length="20" />
+        </property>
+        <property name="paymentDate" type="date">
+            <column name="PAYMENTDATE" length="10" />
+        </property>
+        <property name="paymentAmt" type="java.lang.Long">
+            <column name="PAYMENTAMT" precision="10" scale="0" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

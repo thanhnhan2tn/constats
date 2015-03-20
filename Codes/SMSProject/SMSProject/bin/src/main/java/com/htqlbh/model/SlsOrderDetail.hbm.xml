@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.htqlbh.model.SlsOrderDetail" table="slsorderdetail" >
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="salesOrder" class="com.htqlbh.model.SalesOrder" fetch="select">
+            <column name="ORDERNO" length="20" />
+        </many-to-one>
+        <many-to-one name="inventory" class="com.htqlbh.model.Inventory" fetch="select">
+            <column name="INVTID" length="20" />
+        </many-to-one>
+        <property name="qty" type="java.lang.Integer">
+            <column name="QTY" />
+        </property>
+        <property name="salesPrice" type="java.lang.Long">
+            <column name="SALESPRICE" precision="10" scale="0" />
+        </property>
+        <property name="discount" type="java.lang.Long">
+            <column name="DISCOUNT" precision="10" scale="0" />
+        </property>
+        <property name="taxAmt" type="java.lang.Long">
+            <column name="TAXAMT" precision="10" scale="0" />
+        </property>
+        <property name="amount" type="java.lang.Long">
+            <column name="AMOUNT" precision="10" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
