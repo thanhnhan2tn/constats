@@ -1,9 +1,6 @@
 package vn.edu.cit.servercontrol;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream.GetField;
 
 import vn.edu.cit.model.Server;
 
@@ -11,24 +8,41 @@ import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
 
+/**
+ * Class Power - Dieu khien Nguon cua server
+ * 
+ * @author ThanhNhan
+ *
+ */
 public class Power {
-
+	/**
+	 * Shutdown Function - sent Signal shutdown to Server
+	 * 
+	 * @param sv
+	 * @return
+	 */
 	public static boolean Shutdown(Server sv) {
 		Session ss = sv.getSession(sv);
 		try {
+			// Khoi tao kenh
 			Channel channel = ss.openChannel("exec");
-			((ChannelExec) channel).setCommand("shutdown -P 0");
+			// Set cau lenh
+			((ChannelExec) channel).setCommand("sudo shutdown -P 0");
+			// Khoi tao input Stream
 			channel.setInputStream(null);
 			((ChannelExec) channel).setErrStream(System.err);
+
 			InputStream in = channel.getInputStream();
+			// Ket noi
 			channel.connect();
-			byte[] tmp = new byte[1024];
+			// Khoi tao bien tam
+			byte[] tmp = new byte[2048];
 			while (true) {
 				while (in.available() > 0) {
-					int i = in.read(tmp, 0, 1024);
+					int i = in.read(tmp, 0, tmp.length);
 					if (i < 0)
 						break;
-					System.out.print(new String(tmp, 0, i));
+					// System.out.print(new String(tmp, 0, i));
 				}
 				if (channel.isClosed()) {
 					System.out.println("exit-status: "
@@ -47,50 +61,19 @@ public class Power {
 		}
 	}
 
+	/**
+	 * Restart Function - Send Reboot signal to Server
+	 * 
+	 * @param sv
+	 * @return
+	 */
 	public static boolean Restart(Server sv) {
 		Session ss = sv.getSession(sv);
 		try {
 			Channel channel = ss.openChannel("exec");
-			((ChannelExec) channel).setCommand("ifconfig");
+			((ChannelExec) channel).setCommand("sudo reboot");
 			channel.setInputStream(null);
 			((ChannelExec) channel).setErrStream(System.err);
-			InputStream in = channel.getInputStream();
-			channel.connect();
-			byte[] tmp = new byte[1024];
-			while (true) {
-				while (in.available() > 0) {
-					int i = in.read(tmp, 0, 1024);
-					if (i < 0)
-						break;
-					System.out.print(new String(tmp, 0, i));
-				}
-				if (channel.isClosed()) {
-					System.out.println("exit-status: "
-							+ channel.getExitStatus());
-					break;
-				}
-				try {
-					Thread.sleep(1000);
-				} catch (Exception ee) {
-				}
-			}
-			channel.disconnect();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	public static boolean changeNic(Server sv, String cmd) {
-		Session ss = sv.getSession(sv);
-		try {
-			// option -e giup nhan dang ki tu xuong dong
-			Channel channel = ss.openChannel("exec");
-			((ChannelExec) channel).setCommand(" echo " + " -e " + cmd + " > "
-					+ "/home/maya/hello3.txt");
-			((ChannelExec) channel).setErrStream(System.err);
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];

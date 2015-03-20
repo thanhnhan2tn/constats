@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -34,10 +35,10 @@ import vn.edu.cit.services.UserService;
  */
 @Controller
 public class HomeController {
-	@Autowired
-	public ApplicationContext ctx; //
-	public UserService userService = new UserService();
-	public MongoOperations mongo = MongoDBService.getMongoService();
+	// @Autowired
+	// public ApplicationContext ctx; //
+	// public UserService userService = new UserService();
+	// public MongoOperations mongo = MongoDBService.getMongoService();
 	@Autowired
 	private UserDAO userDAO;
 
@@ -47,15 +48,19 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpSession session,
 			ModelMap mm) {
+		// Lay thong tin user tu Session
 		String username = (String) session.getAttribute("username");
+		// Su dung thong tin tu session de lay Doi tuong
 		User user = userDAO.getUser(username);
+		// Neu user tong tai, thi tra ve file home, set doi tuong server
 		if (user != null) {
-			// request.setAttribute("page", "home");
 			mm.put("title", "Home - Server Control");
 			mm.put("Server", new Server());
 			mm.put("user", user);
 			return "home";
 		} else {
+			// Neu user khong ton tai, xoa het session dang co, va redirect ve
+			// Login
 			session.invalidate();
 			return "redirect:/login";
 		}
@@ -81,22 +86,17 @@ public class HomeController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, ModelMap mm,
 			RedirectAttributes redirectAtt) {
+		// Nhan vao thong tin dang ki tai khoan
 		String email = request.getParameter("email");
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		String passWord = request.getParameter("passwd");
+		// Ma hoa MD5 cho password
 		String hashPassWord = Calculator.MD5(passWord);
-		int role = 1;
+		int role = 1; // role mac dinh khi dang ki là 1 (member)
 		List<Server> servers = new ArrayList<Server>();
-		/*
-		 * MongoOperation lay du lieu tu Bean xml, tu Aplication Context
-		 */
-		MongoOperations mongoOperation = (MongoOperations) ctx
-				.getBean("mongoTemplate");
-		// query to search user with Email
-		Query searchQuery = new Query(Criteria.where("email").is(email));
 		// Tim kim va khoi tao User neu co san trong DB
-		User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		User avaiable = userDAO.getUser(email);
 		// Neu tim thay thong tin, tra ve thong bao tai khoan da co
 		if (avaiable != null) {
 			redirectAtt.addFlashAttribute("display", "block");
@@ -113,7 +113,8 @@ public class HomeController {
 			User user = new User(email, hashPassWord, role, firstName,
 					lastName, servers);
 			// Chen vao DB
-			mongoOperation.insert(user, "users");
+			// mongoOperation.insert(user, "users");
+			userDAO.createUser(user);
 			// Tra ve thong bao dang ki thanh cong, yeu cau dang nhap
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
@@ -133,31 +134,27 @@ public class HomeController {
 	public String loginCheck(@ModelAttribute(value = "User") User user,
 			ModelMap mm, HttpSession session, HttpServletRequest request,
 			RedirectAttributes redirectAtt) {
-
-		// MongoOperations mongoOperation = (MongoOperations) ctx
-		// .getBean("mongoTemplate");
-		// query to search user
-		// Query searchQuery = new Query(Criteria.where("email").is(
-		// user.getEmail()));
-		// User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		// Lay thong tin IP cua nguoi dung
 		String remoteAddress = ((ServletRequestAttributes) RequestContextHolder
 				.currentRequestAttributes()).getRequest().getRemoteAddr();
+		// Get thong tin user tu Database
 		User avaiable = userDAO.getUser(user.getEmail());
-		if (avaiable == null) { // Neu khong co user nao co email dang nhap
-								// tuong tu
+		if (avaiable == null) {
+			// Neu khong co user nao co email dang nhap
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
 					"An email is not registered!");
 			return "redirect:/login";
 		} else if (Calculator.MD5(user.getPassWord()).equals(
-				avaiable.getPassWord())) {// so sanh password
+				avaiable.getPassWord())) {
+			// kiem tra so sanh password neu dung
 			session.setAttribute("username", avaiable.getEmail());
 			session.setAttribute("cc",
 					Calculator.MD5(avaiable.getEmail() + remoteAddress));
-			System.out.println("Login success!");
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";
 		} else {
+			// neu sai password
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
 					"Email or Password dose not match!");
@@ -176,11 +173,13 @@ public class HomeController {
 	public String forgot(HttpServletRequest request,
 			RedirectAttributes redirectAtt) {
 		String email = (String) request.getAttribute("email");
-		MongoOperations mongoOperation = (MongoOperations) ctx
-				.getBean("mongoTemplate");
-		// query to search user
-		Query searchQuery = new Query(Criteria.where("email").is(email));
-		User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		// MongoOperations mongoOperation = (MongoOperations) ctx
+		// .getBean("mongoTemplate");
+		// // query to search user
+		// Query searchQuery = new Query(Criteria.where("email").is(email));
+		// User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		// Lay thong tin user
+		User avaiable = userDAO.getUser(email);
 		if (avaiable == null) {
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
@@ -188,7 +187,7 @@ public class HomeController {
 			// request.setAttribute("message", "An email is not registered!");
 			return "redirect:/login";
 		} else {
-
+			// Ham gui email
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message",
 					"Password has been sent to your email!");
@@ -210,19 +209,43 @@ public class HomeController {
 
 			if (user != null) {
 				List<Server> listServer = user.getServers();
-				// Get list server
-				// System.out.println(listServer);
-				// server.setServerId();
 				listServer.add(server);// Add Server to list
 				user.setServers(listServer);// Set list server to user
-				// Query searchQuery = new Query(Criteria.where("email").is(
-				// sessionUser));
-				// updateFirst(searchQuery,
-				// Update.update("servers", listServer), User.class);
-				userDAO.updateUser(user);
 				// Save user info
+				userDAO.updateUser(user);
 				redirectAtt.addFlashAttribute("message", "AddServer");
 			}
+			return "redirect:/";
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/*
+	 * Add Server controller
+	 */
+	@RequestMapping(value = "/removeserver/{ip}/{cc}", method = RequestMethod.GET)
+	public String removeServer(@PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, HttpServletRequest request,
+			HttpSession session, RedirectAttributes redirectAtt) {
+		String username = (String) session.getAttribute("username");
+		if (username != null) {
+			User user = userDAO.getUser(username);
+			if (user != null) {
+				List<Server> listServer = user.getServers();
+				if (!listServer.isEmpty()) {
+					for (int i = 0; i < listServer.size(); i++) {
+						if (listServer.get(i).getServerAddress().equals(ip)) {
+							// Xoa mot server trong list
+							listServer.remove(i);
+						}
+					}
+				}
+				// dua danh sach server da sua chua vao user
+				user.setServers(listServer);
+				// Save user info
+				userDAO.updateUser(user);
+			}// end check
 			return "redirect:/";
 		} else {
 			return "redirect:/login";

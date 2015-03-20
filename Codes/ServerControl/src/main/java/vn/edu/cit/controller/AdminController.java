@@ -1,5 +1,6 @@
 package vn.edu.cit.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,4 +20,6 @@ public class AdminController {
 		m.put("title", "AdminCP");
 		return "admincp?action=" + action;
 	}
+
+	private static final Logger _log = Logger.getLogger(AdminController.class);
 }

@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 /**
@@ -86,7 +87,22 @@ public class Server {
 		this.serverPassword = serverPassword;
 	}
 
-	// Get Session
+	/**
+	 * Check Server Status
+	 * 
+	 * @param sv
+	 * @return
+	 */
+	public boolean checkStatus() {
+		return true;
+	}
+
+	/**
+	 * Get Session
+	 * 
+	 * @param sv
+	 * @return
+	 */
 	public Session getSession(Server sv) {
 
 		try {
@@ -99,12 +115,13 @@ public class Server {
 			session.setPassword(sv.getServerPassword());
 			session.setConfig(config);
 			session.connect();
-			System.out.println("Connected to Server Success !!!!");
+			// System.out.println("Connected to Server Success !!!!");
 			return session;
 		} catch (Exception e) {
-			System.out.println("Khong the connect den server");
+			// System.out.println("Khong the connect den server");
+			return null;
 		}
-		return null;
+
 	}
 
 }
