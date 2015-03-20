@@ -1,5 +1,0 @@
-<%@page import="javax.servlet.http.HttpServletRequest"%>
-<%
-request.getAttribute("name");
-%>
-

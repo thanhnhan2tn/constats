@@ -1,4 +1,0 @@
-<%
-HttpServletRequest rs = new HttpServletRequest();
-getAttribute("name");
-%>

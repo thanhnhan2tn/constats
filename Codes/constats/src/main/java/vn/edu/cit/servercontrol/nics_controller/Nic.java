@@ -47,7 +47,7 @@ public class Nic {
 		// TODO Auto-generated constructor stub
 	}
 
-	// Nhung phan tu thuoc con neu la Attribute can phai khai bao Anotation ro
+	// Nhung phan tu thuoc phan tu con neu la Attribute can phai khai bao Anotation ro
 	// rang
 	@XmlAttribute
 	public String getId() {

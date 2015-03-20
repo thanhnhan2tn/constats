@@ -1,3 +1,49 @@
+<<<<<<< HEAD
+INDEX VERSION 1.127+C:\Users\Notexittran\Desktop\LV Github\constats\Codes\.metadata\.plugins\org.eclipse.jdt.core
+2753594723.index
+620136207.index
+844601494.index
+4067345157.index
+3149007292.index
+881303192.index
+1551169389.index
+3305461273.index
+3520661010.index
+583354557.index
+3963179895.index
+290714306.index
+2908945669.index
+248351807.index
+1654984216.index
+2958705335.index
+3176364129.index
+949515501.index
+1966913140.index
+745014547.index
+452201006.index
+4149565839.index
+2271887997.index
+1446146655.index
+119443837.index
+1068710424.index
+2550476294.index
+2143716467.index
+2936364063.index
+847618560.index
+2448461075.index
+2330941220.index
+3011048262.index
+2417397772.index
+1899656108.index
+2394392208.index
+358050146.index
+3776425001.index
+881895235.index
+3097394219.index
+3550156203.index
+1125901134.index
+2448026493.index
+=======
 INDEX VERSION 1.127+D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jdt.core
 1697886153.index
 1652505740.index
@@ -90,6 +136,7 @@ INDEX VERSION 1.127+D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclip
 3041136361.index
 934068894.index
 198727299.index
+<<<<<<< HEAD
 121763525.index
 1121320100.index
 2580355995.index
@@ -101,3 +148,6 @@ INDEX VERSION 1.127+D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclip
 912223411.index
 449384428.index
 1455018756.index
+=======
+>>>>>>> 6957f2bd27b1d4e7107ff8ffc1dc8466bb1de08c
+>>>>>>> 52b6dac3ebd1c6f3a9066c53cdedb90e6b7b9f3f

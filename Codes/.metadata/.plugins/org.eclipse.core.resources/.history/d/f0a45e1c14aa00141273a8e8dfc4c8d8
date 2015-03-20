@@ -1,8 +1,0 @@
-package vn.example.cms.components;
-
-public class Input {
-	private String inputName;
-	private String inputType;
-	private String inputValue;
-	private String inputLength;
-}

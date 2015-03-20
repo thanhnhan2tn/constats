@@ -1,6 +1,0 @@
-package vn.example.cms.components;
-
-public class Form {
-	String action;
-	String method;
-}

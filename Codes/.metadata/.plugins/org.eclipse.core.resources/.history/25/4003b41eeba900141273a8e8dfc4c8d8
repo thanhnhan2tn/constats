@@ -1,5 +1,0 @@
-<%
-HttpServletRequest rs = new HttpServletRequest(); 
-String str = rs.getAttribute("name");
-%>
-<%=str%>

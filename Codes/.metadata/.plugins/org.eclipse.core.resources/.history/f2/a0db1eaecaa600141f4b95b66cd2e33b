@@ -1,7 +1,0 @@
-package vn.edu.cit.model;
-
-public class ServerStatus {
-	private int serverStatusId;
-	private int serverId;
-	
-}

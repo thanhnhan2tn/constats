@@ -1,6 +1,0 @@
-package vn.edu.cit.model;
-
-public class Group {
-	private int group_id;
-	private String group_name;
-}

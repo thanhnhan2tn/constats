@@ -1,3 +1,0 @@
-<%=rs.getAttribute("name");
-%>
-<%=str%>
