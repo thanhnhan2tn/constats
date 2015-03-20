@@ -7,10 +7,10 @@
             	</div>
             	 -->
 		<ul class="sidebar-menu">
-			<li class="list-item active"><a href="/"><i
+			<li class="list-item active"><a href="${pageContext.request.contextPath}/"><i
 					class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-			<li class="list-item"><a href="/"> <i
-					class="fa fa-dashboard"></i> <span>Apps</span></a></li>
+<!-- 			<li class="list-item"><a href="/"> <i -->
+<!-- 					class="fa fa-dashboard"></i> <span>Apps</span></a></li> -->
 		</ul>
 	</section>
 	<!-- end sidebar -->

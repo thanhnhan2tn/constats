@@ -12,11 +12,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.UserDAO;
@@ -55,6 +59,12 @@ public class HomeController {
 			session.invalidate();
 			return "redirect:/login";
 		}
+	}
+
+	@RequestMapping("/errorPage")
+	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+	public String showErrorPage() {
+		return "errorPage";
 	}
 
 	/**
@@ -130,6 +140,8 @@ public class HomeController {
 		// Query searchQuery = new Query(Criteria.where("email").is(
 		// user.getEmail()));
 		// User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		String remoteAddress = ((ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes()).getRequest().getRemoteAddr();
 		User avaiable = userDAO.getUser(user.getEmail());
 		if (avaiable == null) { // Neu khong co user nao co email dang nhap
 								// tuong tu
@@ -140,6 +152,8 @@ public class HomeController {
 		} else if (Calculator.MD5(user.getPassWord()).equals(
 				avaiable.getPassWord())) {// so sanh password
 			session.setAttribute("username", avaiable.getEmail());
+			session.setAttribute("cc",
+					Calculator.MD5(avaiable.getEmail() + remoteAddress));
 			System.out.println("Login success!");
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";

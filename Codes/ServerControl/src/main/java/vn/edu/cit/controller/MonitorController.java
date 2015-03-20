@@ -19,7 +19,7 @@ import vn.edu.cit.services.MongoDBService;
 import vn.edu.cit.services.UserService;
 
 @Controller
-public class ServiceController {
+public class MonitorController {
 	@Autowired
 	public ApplicationContext ctx; //
 	public UserService userService = new UserService();
@@ -27,37 +27,8 @@ public class ServiceController {
 	@Autowired
 	private UserDAO userDAO;
 
-	@RequestMapping(value = "/shutdown/{ip}/{cc}", method = RequestMethod.GET)
-	public String shutdown(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c) {
-		User user = userDAO.getUser(username);
-		if (user != null && c.equals(cc)) {
-			for (Server server : user.getServers()) {
-				if (server.getServerAddress().equals(ip)) {
-					sv = server;
-					break;
-				}
-			}
-			mm.put("server", sv);
-			return "service-config";
-		} else {
-
-		}
-		return "redirect:/";
-	}
-
-	@RequestMapping(value = "/restart/{ip}/{cc}", method = RequestMethod.GET)
-	public String restart(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, ModelMap mm) {
-		System.out.println(ip);
-		return "redirect:/";
-	}
-
-	@RequestMapping(value = "/serviceconfig/{name}/{ip}/{cc}", method = RequestMethod.GET)
-	public String service(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "name") String configname,
+	@RequestMapping(value = "/monitor/{ip}/{cc}", method = RequestMethod.GET)
+	public String monitor(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, ModelMap mm) {
 		String username = (String) session.getAttribute("username");
@@ -72,9 +43,10 @@ public class ServiceController {
 				}
 			}
 			mm.put("server", sv);
-			return "service-config";
 		} else {
-			return "redirect:/";
+			session.invalidate();
+			return "redirect:/login";
 		}
+		return "monitor";
 	}
 }
