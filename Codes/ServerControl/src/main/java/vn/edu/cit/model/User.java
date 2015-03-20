@@ -2,12 +2,8 @@ package vn.edu.cit.model;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 
 /**
  * @author Notexittran
@@ -15,13 +11,15 @@ import org.springframework.data.mongodb.core.query.Query;
  */
 @Document(collection = "users")
 public class User {
+	@Id
+	private String id;
 	private String email;
 	private String passWord;
 	private int role;
 	private String firstName;
 	private String lastName;
 	private String sdt;
-	List<Server> servers = null;
+	List<Server> servers;
 
 	public User() {
 

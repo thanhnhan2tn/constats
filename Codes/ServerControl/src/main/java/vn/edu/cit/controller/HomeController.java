@@ -12,7 +12,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
 import vn.edu.cit.services.MongoDBService;
@@ -31,9 +31,11 @@ import vn.edu.cit.services.UserService;
 @Controller
 public class HomeController {
 	@Autowired
-	public ApplicationContext ctx;
+	public ApplicationContext ctx; //
 	public UserService userService = new UserService();
 	public MongoOperations mongo = MongoDBService.getMongoService();
+	@Autowired
+	private UserDAO userDAO;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -42,15 +44,17 @@ public class HomeController {
 	public String home(HttpServletRequest request, HttpSession session,
 			ModelMap mm) {
 		String username = (String) session.getAttribute("username");
-		if (username != null && !username.isEmpty()) {
-			request.setAttribute("page", "home");
+		User user = userDAO.getUser(username);
+		if (user != null) {
+			// request.setAttribute("page", "home");
 			mm.put("title", "Home - Server Control");
 			mm.put("Server", new Server());
+			mm.put("user", user);
 			return "home";
 		} else {
+			session.invalidate();
 			return "redirect:/login";
 		}
-
 	}
 
 	/**
@@ -110,8 +114,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(HttpServletRequest request, ModelMap mm,
-			RedirectAttributes redirectAtt) {
+	public String login(HttpServletRequest request, ModelMap mm) {
 		mm.put("User", new User());
 		return "login";
 	}
@@ -120,12 +123,14 @@ public class HomeController {
 	public String loginCheck(@ModelAttribute(value = "User") User user,
 			ModelMap mm, HttpSession session, HttpServletRequest request,
 			RedirectAttributes redirectAtt) {
-		MongoOperations mongoOperation = (MongoOperations) ctx
-				.getBean("mongoTemplate");
+
+		// MongoOperations mongoOperation = (MongoOperations) ctx
+		// .getBean("mongoTemplate");
 		// query to search user
-		Query searchQuery = new Query(Criteria.where("email").is(
-				user.getEmail()));
-		User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		// Query searchQuery = new Query(Criteria.where("email").is(
+		// user.getEmail()));
+		// User avaiable = mongoOperation.findOne(searchQuery, User.class);
+		User avaiable = userDAO.getUser(user.getEmail());
 		if (avaiable == null) { // Neu khong co user nao co email dang nhap
 								// tuong tu
 			redirectAtt.addFlashAttribute("display", "block");
@@ -149,7 +154,7 @@ public class HomeController {
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public String signout(HttpServletRequest request, ModelMap mm,
 			HttpSession session) {
-		session.removeAttribute("user");
+		session.invalidate();
 		return "redirect:/login";
 	}
 
@@ -187,26 +192,24 @@ public class HomeController {
 		String sessionUser = (String) session.getAttribute("username");
 
 		if (sessionUser != null && !sessionUser.isEmpty()) {
-			System.out.println(userService.getUser(sessionUser));
-			
-			User user = userService.getUser(sessionUser);
+			User user = userDAO.getUser(sessionUser);
 
 			if (user != null) {
-				List<Server> listServer = user.getServers(); 
+				List<Server> listServer = user.getServers();
 				// Get list server
 				// System.out.println(listServer);
 				// server.setServerId();
 				listServer.add(server);// Add Server to list
 				user.setServers(listServer);// Set list server to user
-				Query searchQuery = new Query(Criteria.where("email").is(
-						sessionUser));
-				mongo.updateFirst(searchQuery,
-						Update.update("servers", listServer), User.class);
+				// Query searchQuery = new Query(Criteria.where("email").is(
+				// sessionUser));
+				// updateFirst(searchQuery,
+				// Update.update("servers", listServer), User.class);
+				userDAO.updateUser(user);
 				// Save user info
 				redirectAtt.addFlashAttribute("message", "AddServer");
 			}
 			return "redirect:/";
-
 		} else {
 			return "redirect:/login";
 		}

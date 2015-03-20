@@ -1,11 +1,12 @@
+<%@page import="vn.edu.cit.dao.UserDAOImpl"%>
+<%@page import="vn.edu.cit.dao.UserDAO"%>
 <%@page import="vn.edu.cit.model.*"%>
 <%@page import="vn.edu.cit.services.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	UserService userService = new UserService();
-	String username = (String) session.getAttribute("username");
-	User user = userService.getUser(username);
-	
+	//UserService userService = new UserService();
+	// 	UserDAOImpl userDAO = new UserDAOImpl();
+	// 	String username = (String) session.getAttribute("username");
 %>
 <a href="#" class="logo">ConStats</a>
 <!-- Header Navbar -->
@@ -75,7 +76,7 @@
 			<li class="dropdown user user-menu">
 				<!--  Da dang nhap --> <a href="#" class="dropdown-toggle"
 				data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i>
-					<span><%=user.getFirstName() + " " + user.getLastName()%><i
+					<span>${user.getFirstName()} ${user.getLastName()}<i
 						class="caret"></i></span>
 			</a>
 				<ul class="dropdown-menu">
@@ -83,9 +84,8 @@
 					<li class="user-header bg-light-blue"><img
 						src="<c:url value='/resources/themes/default/images/avatar.png'/>"
 						class="img-circle" alt="User Image" />
-						<p><%=user.getFirstName() + " " + user.getLastName()%>
-							<small> <%=((user.getRole() == 2) ? "Admin" : "Member")%>
-							</small>
+						<p>${user.getFirstName()}${user.getLastName()}
+<!-- 							<small>User </small> -->
 						</p></li>
 
 					<!-- Menu Footer-->

@@ -4,7 +4,7 @@
 <aop-project name="mvc2"/>
 <aop-project name="GenerateSite"/>
 <aop-project name="BuildSiteDemo"/>
-<aop-project name="RFO"/>
 <aop-project name="SMSProject"/>
+<aop-project name="Project"/>
 <aop-project name="constats"/>
 </aop-reference-model>

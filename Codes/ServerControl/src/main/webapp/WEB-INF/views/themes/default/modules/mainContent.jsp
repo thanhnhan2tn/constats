@@ -3,9 +3,8 @@
 <%@page import="org.springframework.data.mongodb.core.*"%>
 
 <%
-	UserService userService = new UserService();
-	String username = (String) session.getAttribute("username");
-	User user = userService.getUser(username);
+	// 	UserService userService = new UserService();
+	User user = (User) request.getAttribute("user");
 %>
 <ul class="list-server">
 	<%

@@ -13,19 +13,19 @@
 <tiles:insertAttribute name="head" ignore="true" />
 </head>
 <body class="container">
-		<header class="header">
-			<tiles:insertAttribute name="header" />
-		</header>
-		<!-- start wrapper -->
-		<div class="wrapper row-offcanvas row-offcanvas-left">
-			<!-- Left side column -->
-			<tiles:insertAttribute name="sidebar" />
-			<!-- Right side column -->
-			<tiles:insertAttribute name="left-content" />
-			<tiles:insertAttribute name="right-content" />
-		</div>
-		<footer class="footer">
-			<tiles:insertAttribute name="footer" />
-		</footer>
+	<header class="header">
+		<tiles:insertAttribute name="header" />
+	</header>
+	<!-- start wrapper -->
+	<div class="wrapper row-offcanvas row-offcanvas-left">
+		<!-- Left side column -->
+		<tiles:insertAttribute name="sidebar" />
+		<!-- Right side column -->
+		<tiles:insertAttribute name="left-content" />
+		<tiles:insertAttribute name="right-content" />
+	</div>
+	<footer class="footer">
+		<tiles:insertAttribute name="footer" />
+	</footer>
 </body>
 </html>

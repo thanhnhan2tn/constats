@@ -1,17 +1,23 @@
-package vn.edu.cit.services;
+package vn.edu.cit.dao;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
 
-public class UserService {
+public class UserDAOImpl implements UserDAO {
+	public static final String COLLECTION = "users";
+
+	public UserDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// private MongoOperations mongo = MongoDBService.getMongoService();
 	//
 	// public User getUser(String username) {
@@ -26,16 +32,24 @@ public class UserService {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+	@Override
+	public void createUser(User user) {
+		mongoTemplate.save(user);
+	}
+
+	@Override
 	public User getUser(String username) {
 		// query to search user
 		Query searchQuery = new Query(Criteria.where("email").is(username));
-		User user = mongoTemplate.findOne(searchQuery, User.class);
-		// System.out.println(user);
-		return user;
+		return mongoTemplate.findOne(searchQuery, User.class);
 	}
 
-	public static void main(String args[]) {
-		// System.out.println(UserService.getUser("thanhnhan2tn@gmail.com"));
-
+	@Override
+	public void updateUser(User user) {
+		mongoTemplate.save(user);
 	}
 }

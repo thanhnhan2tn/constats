@@ -12,13 +12,13 @@ import com.jcraft.jsch.Session;
  * @author Thanh
  *
  */
-@Document(collection="servers")
+@Document(collection = "servers")
 public class Server {
 	@Id
 	private int serverId;
 	private String serverAddress;
 	private int port = 22;
-	// private String serverName;
+	private String serverName;
 	private String serverUsername;
 	private String serverPassword;
 
@@ -27,19 +27,27 @@ public class Server {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Server(int serverId, String serverAddress, int port,
-			String serverUsername, String serverPassword) {
-		super();
-		this.serverId = serverId;
-		this.serverAddress = serverAddress;
-		this.port = port;
-		this.serverUsername = serverUsername;
-		this.serverPassword = serverPassword;
+	public String getServerName() {
+		return serverName;
+	}
 
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
 	}
 
 	public int getServerId() {
 		return serverId;
+	}
+
+	public Server(int serverId, String serverAddress, int port,
+			String serverName, String serverUsername, String serverPassword) {
+		super();
+		this.serverId = serverId;
+		this.serverAddress = serverAddress;
+		this.port = port;
+		this.serverName = serverName;
+		this.serverUsername = serverUsername;
+		this.serverPassword = serverPassword;
 	}
 
 	public void setServerId(int serverId) {

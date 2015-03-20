@@ -25,10 +25,10 @@ public class TestMongoDB {
 		MongoOperations mongoOperation = (MongoOperations) ctx
 				.getBean("mongoTemplate");
 		for(int i = 1;i<=99;i++){
-		Server server = new Server(i, "192.168.1.1"+i, 22, "root", "123456");
+	//	Server server = new Server(i, "192.168.1.1"+i, 22, "root", "123456");
 		// save
-		mongoOperation.insert(server);
-		System.out.println(i+". server : " + server);
+//		mongoOperation.insert(server);
+//		System.out.println(i+". server : " + server);
 		}
 		// now user object got the created id.
 

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="vn.edu.cit.servercontrol.Power"/>
-<fullyQualifiedTypeName name="java.lang.ClassCastException"/>
-<fullyQualifiedTypeName name="vn.edu.cit.servercontrol.nics_controller.Nic"/>
-<fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
@@ -37,7 +32,6 @@
 <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
 <fullyQualifiedTypeName name="com.thanhnhantn.constats.components.LinkRel"/>
 <fullyQualifiedTypeName name="com.thanhnhantn.constats.components.Script"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.thanhnhantn.constats.components.Location"/>
 <fullyQualifiedTypeName name="com.thanhnhantn.generate.components.Theme"/>
 <fullyQualifiedTypeName name="com.thanhnhantn.generate.components.TextArea"/>
@@ -45,7 +39,6 @@
 <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlAttribute"/>
 <fullyQualifiedTypeName name="javax.xml.bind.annotation.XmlElement"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream.GetField"/>
-<fullyQualifiedTypeName name="vn.edu.cit.dao.UserDAO"/>
 <fullyQualifiedTypeName name="java.beans.beancontext.BeanContext"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.MongoService"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
@@ -60,4 +53,11 @@
 <fullyQualifiedTypeName name="org.springframework.validation.BindingResult"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="vn.edu.cit.dao.UserDAOImpl"/>
+<fullyQualifiedTypeName name="vn.edu.cit.dao.UserDAO"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="org.springframework.data.mongodb.core.query.Update"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
 </qualifiedTypeNameHistroy>
