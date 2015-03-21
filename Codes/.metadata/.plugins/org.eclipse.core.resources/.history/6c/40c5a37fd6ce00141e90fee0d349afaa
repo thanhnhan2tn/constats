@@ -1,0 +1,2 @@
+<%@page import="vn.edu.cit.servercontrol.Server"%>
+<%@page import="vn.edu.cit.model.Server"%>

@@ -126,7 +126,7 @@ public class NicConfig {
 					// "src\\nic_config.txt"));
 					// f.write(chuoilay.getBytes(), 0, chuoilay.length());
 					// // f.write("\n".getBytes());
-					System.out.print(chuoilay);
+					//System.out.print(chuoilay);
 				}
 				if (channel.isClosed()) {
 					System.out.println("exit-status: "

@@ -44,9 +44,10 @@ public class NICController {
 				}
 			}
 			NicConfig nic_c = new NicConfig();
-			// mm.put("server", sv);
-			// nic_c.loadConfigToLocal(sv);
 			Nic nic = nic_c.convertXMLToObject(sv);
+			mm.put("cc", c);
+			mm.put("title", "Home - Server Control");
+			mm.put("user", user);
 			mm.put("nics", nic);
 			mm.put("server", sv);
 			return "nic-config";
@@ -55,5 +56,41 @@ public class NICController {
 			session.invalidate();
 			return "redirect:/login";
 		}
+	}
+
+	@RequestMapping(value = "/serviceconfig/nic/{action}/{ip}/{if}/{cc}", method = RequestMethod.GET)
+	public String controlNIC(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "action") String action,
+			@PathVariable(value = "ip") String ip,
+			@PathVariable(value = "if") String iface,
+			@PathVariable(value = "cc") String c, ModelMap mm) {
+		if (action.equals("stop")) {
+			System.out.println("Stop : " + ip + ",iface: " + iface);
+		} else if (action.equals("start")) {
+			System.out.println("Start : " + ip + ",iface: " + iface);
+		} else if (action.equals("restart")) {
+			System.out.println("Restart : " + ip + ",iface: " + iface);
+		} else {
+			return "redirect:/serviceconfig/nic/" + ip + "/" + c;
+		}
+		return "redirect:/serviceconfig/nic/" + ip + "/" + c;
+	}
+
+	@RequestMapping(value = "/serviceconfig/nic/save/{ip}", method = RequestMethod.POST)
+	public String saveNIC(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip) {
+		String iface = request.getParameter("iface");
+		String inet = request.getParameter("iface");
+		String address = request.getParameter("address");
+		String netmask = request.getParameter("netmask");
+		String gateway = request.getParameter("gateway");
+		String network = request.getParameter("network");
+		String broadcast = request.getParameter("broadcast");
+		String dns_nameservers = request.getParameter("dns_nameservers");
+
+		String cc = request.getParameter("cc");
+		System.out.println(ip + "," + iface + "," + inet + "," + address + ","
+				+ gateway + "," + cc);
+		return "redirect:/serviceconfig/nic/" + ip + "/" + cc;
 	}
 }

@@ -22,7 +22,6 @@
 		<tiles:insertAttribute name="sidebar" />
 		<!-- Right side column -->
 		<tiles:insertAttribute name="left-content" />
-		<tiles:insertAttribute name="right-content" />
 	</div>
 	<footer class="footer">
 		<tiles:insertAttribute name="footer" />

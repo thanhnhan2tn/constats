@@ -1,4 +1,4 @@
-<%@page import="vn.edu.cit.servercontrol.Power"%>
+<%@page import="vn.edu.cit.servercontrol.vn.edu.cit.servercontrol.Power"%>
 <%@page import="vn.edu.cit.model.Server"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -11,8 +11,8 @@
 <body>
 	<%
 		Server sv = new Server(1, "192.168.0.101", 22, "root", "root");
-		Power pw = new Power();
-		pw.Restart(sv);
+			Server pw = new Server();
+			pw.Restart(sv);
 	%>
 </body>
 </html>

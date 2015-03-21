@@ -1,4 +1,4 @@
-<%@page import="vn.edu.cit.servercontrol.Power"%>
+<%@page import="vn.edu.cit.servercontrol.vn.edu.cit.servercontrol.Power"%>
 <%@page import="vn.edu.cit.model.Server"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

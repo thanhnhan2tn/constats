@@ -94,7 +94,7 @@ public class Server {
 	 * @return
 	 */
 	public boolean checkStatus() {
-		return true;
+		return (getSession(this)!=null);
 	}
 
 	/**

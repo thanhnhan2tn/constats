@@ -37,7 +37,7 @@
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-default dropdown-toggle"
 						data-toggle="dropdown" aria-expanded="false" id="services-config">
-						<i class="glyphicon glyphicon-cog"></i><span class="caret"></span>
+						<i class="glyphicon glyphicon-cog"></i>
 					</button>
 					<ul class="dropdown-menu" role="menu"
 						area-labelledby="services-config">
@@ -55,7 +55,9 @@
 					</ul>
 				</div>
 			</div>
-		</div></li>
+			</div>
+			<div><%=server.getServerAddress()%></div>
+			</li>
 	<%
 		}//end check status
 			else{
@@ -78,7 +80,7 @@
 					<i class="glyphicon glyphicon-cog"></i>
 				</button>
 			</div>
-		</div></li>
+		</div><div><%=server.getServerAddress()%></div></li>
 	<%
 		}
 			} // end for
