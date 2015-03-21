@@ -152,6 +152,13 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.13.0</version>
 		</dependency>
+		<!--  JSON -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20141113</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

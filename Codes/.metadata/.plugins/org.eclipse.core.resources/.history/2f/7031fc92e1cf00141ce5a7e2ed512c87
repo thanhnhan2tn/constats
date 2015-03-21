@@ -1,0 +1,15 @@
+$(document).ready(function() {
+	var cc='<%=session.getAttribute("cc")%>';
+	$(".list-server").ready(function() {
+		
+		$.ajax({
+			url:'getservers',
+			type:'GET',
+			data:{cc:cc},
+			timeout:30000,
+			success:function(data, status){
+				console.log(data);
+			}
+		})
+	});
+});

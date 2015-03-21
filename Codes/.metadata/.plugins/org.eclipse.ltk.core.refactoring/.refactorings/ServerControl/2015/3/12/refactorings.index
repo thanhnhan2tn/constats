@@ -10,3 +10,6 @@
 1426838138803	Rename type 'Server'
 1426851939887	Rename resource 'service-config.jsp'
 1426851982448	Rename resource 'service-config-content.jsp'
+1426945788431	Delete element
+1426957113258	Delete element
+1426961133110	Rename resource 'ajax-loader.gif'

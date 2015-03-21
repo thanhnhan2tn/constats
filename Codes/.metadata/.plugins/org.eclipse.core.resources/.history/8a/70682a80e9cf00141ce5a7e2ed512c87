@@ -1,0 +1,15 @@
+$(document).ready(function() {
+	$(".server-item").ready(function() {
+		var ip = $(".server-ip").val();
+		$.ajax({
+			url : 'checkstatus/' + ip + cc,
+			type : 'GET',
+			data : {},
+			timeout : 30000,
+			success : function(data, status) {
+
+				console.log(data);
+			}
+		})
+	});
+});

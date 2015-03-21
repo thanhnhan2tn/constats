@@ -1,0 +1,45 @@
+<%@page import="vn.edu.cit.services.UserService"%>
+<%@page import="vn.edu.cit.model.*"%>
+<%@page import="org.springframework.data.mongodb.core.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<ul class="list-server">
+	<%
+		if (user.getServers() != null && !user.getServers().isEmpty()) {
+		for (Server server : user.getServers()) {
+		Boolean check = false;
+			//check Server status
+			//if(server.checkStatus()){
+	%>
+	<script>
+		$(document).ready(function() {
+			 $(document).ajaxStart(function(){
+				 $(".wait").css("display", "block");
+			 });
+			 $(document).ajaxComplete(function(){
+				 $(".wait").css("display", "none");
+			 });
+			$(".list-server").ready(function() {
+				var ip = '<%=server.getServerAddress()%>';
+				$.ajax({
+					url : 'checkstatus/' + ip + '/' + cc,
+					type : 'GET',
+					data : {},
+					success : function(data, status) {
+						$(".server-item").html(data);
+					}
+				})
+
+			});
+		});
+	</script>
+	<li class="server-item col-md-2"><span class="wait"
+		style="display: none: text-align:center"><img
+			src="<c:url value='/resources/themes/default/images/loading.gif'/>" /></span></li>
+
+	<%
+		}}
+	%>
+</ul>

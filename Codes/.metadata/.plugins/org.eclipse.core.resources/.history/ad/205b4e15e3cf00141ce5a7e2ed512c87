@@ -1,0 +1,14 @@
+$(document).ready(function() {
+	$(".list-server").ready(function() {
+		
+		$.ajax({
+			url:'getservers/'+cc,
+			type:'GET',
+			data:{cc:cc},
+			timeout:30000,
+			success:function(data, status){
+				console.log(data);
+			}
+		})
+	});
+});

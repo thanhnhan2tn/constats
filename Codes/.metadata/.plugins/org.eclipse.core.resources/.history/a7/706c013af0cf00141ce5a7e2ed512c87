@@ -1,0 +1,36 @@
+<%@page import="vn.edu.cit.services.UserService"%>
+<%@page import="vn.edu.cit.model.*"%>
+<%@page import="org.springframework.data.mongodb.core.*"%>
+<script>
+	$(document).ready(function() {
+		$(".list-server").ready(function() {
+			alert($(".server-item").val);
+			$.ajax({
+				url : 'checkstatus/' + cc,
+				type : 'GET',
+				data : {},
+				timeout : 30000,
+				success : function(data, status) {
+					$(".list-server").text(data);
+				}
+			})
+		});
+	});
+</script>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<ul class="list-server">
+	<%
+		if (user.getServers() != null && !user.getServers().isEmpty()) {
+			for (Server server : user.getServers()) {
+		//check Server status
+		//if(server.checkStatus()){
+	%>
+	<li class="server-item col-md-2" name="<%=server.getServerAddress()%>">
+		
+	</li>
+	<%
+		}}
+	%>
+</ul>

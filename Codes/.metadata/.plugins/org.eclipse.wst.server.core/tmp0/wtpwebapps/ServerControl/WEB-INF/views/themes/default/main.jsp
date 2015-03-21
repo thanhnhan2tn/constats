@@ -19,7 +19,7 @@
 	<!-- start wrapper -->
 	<div class="wrapper row-offcanvas row-offcanvas-left">
 		<!-- Left side column -->
-		<tiles:insertAttribute name="sidebar" />
+<%-- 		<tiles:insertAttribute name="sidebar" /> --%>
 		<!-- Right side column -->
 		<tiles:insertAttribute name="left-content" />
 	</div>
