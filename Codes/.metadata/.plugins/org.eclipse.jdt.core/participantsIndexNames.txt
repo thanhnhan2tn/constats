@@ -27,6 +27,8 @@ D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jst.jsp.core\jsps
 \mvc2\src\main\java
 D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\606803512.index
 \mvc2\src\main\java
+D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2342864529.index
+\ServerControl\src\main\java
 D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2343123403.index
 \ServerControl\src\main\java
 D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4271458029.index

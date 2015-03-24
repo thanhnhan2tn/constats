@@ -13,8 +13,10 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="json" key="selection"/>
+		<item value="server-item col-md-2" key="selection"/>
 		<list key="findhistory">
+			<item value="server-item col-md-2"/>
+			<item value="checkstatus"/>
 			<item value="json"/>
 			<item value="js"/>
 			<item value="loadConfigToLocal"/>
@@ -23,5 +25,9 @@
 		</list>
 		<list key="replacehistory">
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="252" key="DIALOG_Y_ORIGIN"/>
+		<item value="452" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

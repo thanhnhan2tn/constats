@@ -43,8 +43,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, HttpSession session,
-			ModelMap mm) {
+	public String home(HttpServletRequest request, HttpSession session, ModelMap mm) {
 		// Lay thong tin user tu Session
 		String username = (String) session.getAttribute("username");
 		// Su dung thong tin tu session de lay Doi tuong
@@ -70,18 +69,17 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/checkstatus/{ip}/{cc}", method = RequestMethod.GET)
 	@ResponseBody
-	public String checkStatus(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "ip") String ip,
+	public String checkStatus(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c) {
 		String cc = (String) session.getAttribute("cc");
-		User user = (User) userDAO.getUser((String) session
-				.getAttribute("username"));
+		User user = (User) userDAO.getUser((String) session.getAttribute("username"));
 		String check = "false";
 		if (user != null && c.equals(cc)) {
 			for (Server server : user.getServers()) {
-				server.getServerAddress().equals(ip);
-				if (server.checkStatus()) {
-					check = "true";
+				if(server.getServerAddress().equals(ip)){
+					if (server.checkStatus()) {
+						check = "true";
+					}
 				}
 			}
 		}
@@ -95,8 +93,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/getservers/{cc}", method = RequestMethod.GET)
 	@ResponseBody
-	public String getServers(HttpSession session, HttpServletRequest request,
-			@PathVariable(value = "cc") String c, ModelMap mm) {
+	public String getServers(HttpSession session, HttpServletRequest request, @PathVariable(value = "cc") String c,
+			ModelMap mm) {
 		User user = userDAO.getUser((String) session.getAttribute("username"));
 		String cc = (String) session.getAttribute("cc");
 		String str = "[";
@@ -127,8 +125,7 @@ public class HomeController {
 	 *
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(HttpServletRequest request, ModelMap mm,
-			RedirectAttributes redirectAtt) {
+	public String register(HttpServletRequest request, ModelMap mm, RedirectAttributes redirectAtt) {
 		// Nhan vao thong tin dang ki tai khoan
 		String email = request.getParameter("email");
 		String firstName = request.getParameter("firstname");
@@ -143,25 +140,20 @@ public class HomeController {
 		// Neu tim thay thong tin, tra ve thong bao tai khoan da co
 		if (avaiable != null) {
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt
-					.addFlashAttribute(
-							"message",
-							"Email is already exist, Are you "
-									+ "	<a href=\"#\" onClick=\"$('#loginbox').hide();"
-									+ " $('#fogotpassword').show()\">Forgot password?</a>?");
+			redirectAtt.addFlashAttribute("message", "Email is already exist, Are you "
+					+ "	<a href=\"#\" onClick=\"$('#loginbox').hide();"
+					+ " $('#fogotpassword').show()\">Forgot password?</a>?");
 			// Kiem tra, tra ve login neu user da ton tai
 			return "redirect:/login";
 		} else {
 			// Khoi tao Doi tuong User voi thong tin dang ki moi
-			User user = new User(email, hashPassWord, role, firstName,
-					lastName, servers);
+			User user = new User(email, hashPassWord, role, firstName, lastName, servers);
 			// Chen vao DB
 			// mongoOperation.insert(user, "users");
 			userDAO.createUser(user);
 			// Tra ve thong bao dang ki thanh cong, yeu cau dang nhap
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt.addFlashAttribute("message",
-					"Account created successfully!");
+			redirectAtt.addFlashAttribute("message", "Account created successfully!");
 			// Kiem tra, tra ve login neu user da ton tai
 			return "redirect:/login";
 		}
@@ -174,47 +166,40 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginCheck(@ModelAttribute(value = "User") User user,
-			ModelMap mm, HttpSession session, HttpServletRequest request,
-			RedirectAttributes redirectAtt) {
+	public String loginCheck(@ModelAttribute(value = "User") User user, ModelMap mm, HttpSession session,
+			HttpServletRequest request, RedirectAttributes redirectAtt) {
 		// Lay thong tin IP cua nguoi dung
-		String remoteAddress = ((ServletRequestAttributes) RequestContextHolder
-				.currentRequestAttributes()).getRequest().getRemoteAddr();
+		String remoteAddress = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+				.getRequest().getRemoteAddr();
 		// Get thong tin user tu Database
 		User avaiable = userDAO.getUser(user.getEmail());
 		if (avaiable == null) {
 			// Neu khong co user nao co email dang nhap
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt.addFlashAttribute("message",
-					"An email is not registered!");
+			redirectAtt.addFlashAttribute("message", "An email is not registered!");
 			return "redirect:/login";
-		} else if (Calculator.MD5(user.getPassWord()).equals(
-				avaiable.getPassWord())) {
+		} else if (Calculator.MD5(user.getPassWord()).equals(avaiable.getPassWord())) {
 			// kiem tra so sanh password neu dung
 			session.setAttribute("username", avaiable.getEmail());
-			session.setAttribute("cc",
-					Calculator.MD5(avaiable.getEmail() + remoteAddress));
+			session.setAttribute("cc", Calculator.MD5(avaiable.getEmail() + remoteAddress));
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";
 		} else {
 			// neu sai password
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt.addFlashAttribute("message",
-					"Email or Password dose not match!");
+			redirectAtt.addFlashAttribute("message", "Email or Password dose not match!");
 			return "redirect:/login";
 		}
 	}
 
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
-	public String signout(HttpServletRequest request, ModelMap mm,
-			HttpSession session) {
+	public String signout(HttpServletRequest request, ModelMap mm, HttpSession session) {
 		session.invalidate();
 		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
-	public String forgot(HttpServletRequest request,
-			RedirectAttributes redirectAtt) {
+	public String forgot(HttpServletRequest request, RedirectAttributes redirectAtt) {
 		String email = (String) request.getAttribute("email");
 		// MongoOperations mongoOperation = (MongoOperations) ctx
 		// .getBean("mongoTemplate");
@@ -225,15 +210,13 @@ public class HomeController {
 		User avaiable = userDAO.getUser(email);
 		if (avaiable == null) {
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt.addFlashAttribute("message",
-					"An email is not registered!");
+			redirectAtt.addFlashAttribute("message", "An email is not registered!");
 			// request.setAttribute("message", "An email is not registered!");
 			return "redirect:/login";
 		} else {
 			// Ham gui email
 			redirectAtt.addFlashAttribute("display", "block");
-			redirectAtt.addFlashAttribute("message",
-					"Password has been sent to your email!");
+			redirectAtt.addFlashAttribute("message", "Password has been sent to your email!");
 			return "redirect:/login";
 		}
 	}
@@ -242,9 +225,8 @@ public class HomeController {
 	 * Add Server controller
 	 */
 	@RequestMapping(value = "/addserver", method = RequestMethod.POST)
-	public String addServer(@ModelAttribute(value = "Server") Server server,
-			HttpServletRequest request, HttpSession session,
-			RedirectAttributes redirectAtt) {
+	public String addServer(@ModelAttribute(value = "Server") Server server, HttpServletRequest request,
+			HttpSession session, RedirectAttributes redirectAtt) {
 		String sessionUser = (String) session.getAttribute("username");
 
 		if (sessionUser != null && !sessionUser.isEmpty()) {
@@ -268,9 +250,8 @@ public class HomeController {
 	 * Add Server controller
 	 */
 	@RequestMapping(value = "/removeserver/{ip}/{cc}", method = RequestMethod.GET)
-	public String removeServer(@PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, HttpServletRequest request,
-			HttpSession session, RedirectAttributes redirectAtt) {
+	public String removeServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
 		String username = (String) session.getAttribute("username");
 		if (username != null) {
 			User user = userDAO.getUser(username);
@@ -293,6 +274,43 @@ public class HomeController {
 		} else {
 			return "redirect:/login";
 		}
+	}
+
+	/**
+	 * Services Controller
+	 * 
+	 * @param ip
+	 * @param c
+	 * @param request
+	 * @param session
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/services/{ip}/{cc}", method = RequestMethod.GET)
+	public String serviceController(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
+		// Lay thong tin username trong session;
+		String username = (String) session.getAttribute("username");
+		String str = "redirect:/"; // Chuoi return
+		if (username != null) {
+			User user = userDAO.getUser(username); // Kiem tra thong tin user
+													// trong csdl
+			if (user != null) { // Lay thong tin Server cua user trong csdl
+				List<Server> listServer = user.getServers();
+				if (!listServer.isEmpty()) {
+					for (int i = 0; i < listServer.size(); i++) {
+						if (listServer.get(i).getServerAddress().equals(ip)) {
+							str = "services-default";
+						}
+					}
+				} else {
+					str = "redirect:/";
+				}
+			}// end check user, if user not signin, or ending session
+		} else {
+			str = "redirect:/login";
+		}
+		return str;
 	}
 
 	private static final Logger _log = Logger.getLogger(HomeController.class);

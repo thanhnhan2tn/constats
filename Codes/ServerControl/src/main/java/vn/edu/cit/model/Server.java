@@ -94,19 +94,7 @@ public class Server {
 	 * @return
 	 */
 	public boolean checkStatus() {
-		try {
-			JSch jsch = new JSch();
-			// Khoi tao doi tuong Session
-			Session session = jsch.getSession(this.getServerUsername(),
-					this.getServerAddress(), this.getPort());
-			session.setPassword(this.getServerPassword());
-			session.connect();
-			session.disconnect();
-			// System.out.println("Connected to Server Success !!!!");
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return (getSession(this)!=null);
 	}
 
 	/**
