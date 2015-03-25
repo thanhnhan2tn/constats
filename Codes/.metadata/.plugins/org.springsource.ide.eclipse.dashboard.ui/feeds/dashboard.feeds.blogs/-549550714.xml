@@ -5,7 +5,113 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-23T15:01:25Z</updated>
+  <updated>2015-03-24T22:05:00Z</updated>
+  <entry>
+    <title>This Week in Spring - March 24th, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/24/this-week-in-spring-march-24th-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-03-24:2038</id>
+    <updated>2015-03-24T22:05:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week, I&amp;rsquo;m in São Paulo, Brazil, where I presented a workshop on building cloud-native applications - specifically microservices - with &lt;a href="http://start.spring.io"&gt;Spring Boot&lt;/a&gt;, &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt; and &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; (via &lt;a href="http://run.pivotal.io"&gt;Pivotal Web Services&lt;/a&gt;). &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Data lead Oliver Gierke has just announced Spring Data Fowler has gone GA, &lt;a href="http://spring.io/blog/2015/03/23/spring-data-release-train-fowler-goes-ga"&gt;packed with lots of advanced Java 8 features, as well&lt;/a&gt;!&lt;/li&gt;
+  &lt;li&gt;The agenda for the &lt;a href="http://www.springio.net/agenda/"&gt;Spring IO show in Barcelona, Spain is now available&lt;/a&gt;! Check it out!&lt;/li&gt;
+  &lt;li&gt;Done with the microservices hype? Then let&amp;rsquo;s get practical &lt;a href="https://spring.io/blog/2015/03/17/webinar-smarter-service-to-service-invocations-with-spring-cloud"&gt;on April 21st&lt;/a&gt;. I&amp;rsquo;ll be talking about how Spring Cloud integrates service registration (e.g.: Eureka, Consul, or Zookeeper), declarative REST clients (with Netflix&amp;rsquo;s Feign), reactive programming and the circuit breaker pattern with Hystrix to support easy, robust service-to-service invocations.&lt;/li&gt;
+  &lt;li&gt;Marius Bogoevici and Mark Pollack are teaming up for a webinar on Tues April 28th about &lt;a href="https://spring.io/blog/2015/03/17/webinar-reactive-data-pipelines-with-spring-xd-and-kafka"&gt;Reactive data-pipelines with Spring XD and Kafka&lt;/a&gt;, a must for any big / fast data enthusiasts.&lt;/li&gt;
+  &lt;li&gt;Colin Harrington&amp;rsquo;s SpringOne2GX 2014 Replay is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-browser-automation"&gt;Groovy Browser Automation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Peter Ledbrook&amp;rsquo;s SpringOne2GX 2014 Replay is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-for-java-developers"&gt;Groovy for Java Developers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Likely the coolest demo of SpringOne2GX 2014, brought to you by the dream team of Pivotal Ninjas Derek Beauregard, Phil Berman, Michael Minella, Darrel Sharpe&lt;br/&gt;is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-iot-realized-the-connected-car"&gt;IoT Realized - The Connected Car&lt;/a&gt; showing you just how powerful Spring XD truly is for Big Data and IoT.&lt;/li&gt;
+  &lt;li&gt;Frustrated with Java serialization performance? Are you a Spring Integration peformance fanatic? Or perhaps you&amp;rsquo;re just trying to shave milliseconds and microseconds off your Java network calls? You won&amp;rsquo;t want to miss John Davies from C24 as he shows you how to reclaim performance with Java serialzation in this mind blowing SpringOne2GX 2014 Replay: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-big-data-in-memory"&gt;Big Data in Memory&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The good Dr. Syer is back at it again with a followup to his epic blog series introducing single page applications &lt;a href="http://spring.io/blog/2015/03/23/multiple-ui-applications-and-a-gateway-single-page-application-with-spring-and-angular-js-part-vi"&gt;using Spring Security OAuth, Spring Cloud Zuul, and more&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;I put together a look at &lt;a href="http://spring.io/blog/2015/03/22/using-google-protocol-buffers-with-spring-mvc-based-rest-services"&gt;using Google Protocol Buffers to build efficient Spring-based REST services&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Tool Suite ninja Kris De Volder put together a great tutorial introducing some of the new features in &lt;a href="http://spring.io/blog/2015/03/18/spring-boot-support-in-spring-tool-suite-3-6-4"&gt;STS 3.6.4 that support building Spring Boot applications&lt;/a&gt;. Check it out!&lt;/li&gt;
+  &lt;li&gt;I&amp;rsquo;ll be doing another vJUG session, this time on &lt;a href="http://www.meetup.com/virtualJUG/events/221218834/"&gt;using Spring Cloud to build &amp;ldquo;Bootiful&amp;rdquo; Microservices&lt;/a&gt; - I hope you&amp;rsquo;ll join me there! Let&amp;rsquo;s make this a super well attended event!&lt;/li&gt;
+  &lt;li&gt;This post on &lt;a href="https://ngjweb.wordpress.com/2015/03/23/securing-gwt-apps-using-spring-oauth-spring-social/"&gt;using Spring Social and Spring Security to secure GWT applications is kind of interesting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Hey, did you miss Adrian Cockroft&amp;rsquo;s talk at O&amp;rsquo;Reilly&amp;rsquo;s Software Architecture Summit? Check out this &lt;a href="http://java.dzone.com/articles/key-takeaways-adrian-cockrofts"&gt;blog summarizing the key takeaways&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;I enjoyed the ideas raised in this blog post on &lt;a href="http://java.dzone.com/articles/microservice-hybrids-and"&gt;possible variants of microservices&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;and, a &lt;em&gt;super&lt;/em&gt; simple example of using &lt;a href="https://gerrydevstory.com/2015/03/19/setting-up-spring-security-on-spring-boot-project/"&gt;Spring Security with Spring Boot&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Groovy Browser Automation</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-browser-automation" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-24:2037</id>
+    <updated>2015-03-24T20:49:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
+&lt;p&gt;Speaker: Colin Harrington&lt;/p&gt;
+&lt;p&gt;Core Groovy Track&lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovybrowserautomation-2gx2014"&gt;http://www.slideshare.net/SpringCentral/groovybrowserautomation-2gx2014 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;GEB (pronounced 'jeb') is a browser automation solution. It brings together the power of WebDriver, the elegance of jQuery content selection, the robustness of Page Object modelling and the expressiveness of the Groovy language.&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ucGuzy0sNuY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Groovy for Java Developers</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-for-java-developers" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-24:2036</id>
+    <updated>2015-03-24T20:43:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
+&lt;p&gt;Speaker: Peter Ledbrook &lt;/p&gt;
+&lt;p&gt;Core Groovy Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-forjavadeveloperss2gx2014"&gt;http://www.slideshare.net/SpringCentral/groovy-forjavadeveloperss2gx2014&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; Java is a good all-purpose programming language, but does that mean it's the best tool for all jobs?&lt;a href="http://projects.spring.io/spring-batch"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/BXRDTiJfrSE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: IoT Realized - The Connected Car</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-iot-realized-the-connected-car" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-24:2035</id>
+    <updated>2015-03-24T20:39:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
+&lt;p&gt;Speakers: Derek Beauregard, Phil Berman, Michael Minella, Darrel Sharpe &lt;/p&gt;
+&lt;p&gt;Big Data Track Slides: &lt;a href="http://www.slideshare.net/SpringCentral/iot-realized-the-connected-car"&gt;http://www.slideshare.net/SpringCentral/iot-realized-the-connected-car &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For this session we will explore the power of Spring XD in the context of the Internet of Things (IoT). We will look at a solution developed with Spring XD to stream real time analytics from a moving car using open standards. Ingestion of the real time data (location, speed, engine diagnostics, etc), analyzing it to provide highly accurate MPG and vehicle range prediction, as well as providing real time dashboards will all be covered. Coming out of this session, you’ll understand how Spring XD can serve as “Legos®” for the IoT.&lt;/p&gt;
+&lt;p&gt;Learn more about Spring XD: &lt;a href="http://projects.spring.io/spring-xd"&gt;http://projects.spring.io/spring-xd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Spring Integration: &lt;a href="http://projects.spring.io/spring-integration"&gt;http://projects.spring.io/spring-integration&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Spring Batch: &lt;a href="http://projects.spring.io/spring-batch"&gt;http://projects.spring.io/spring-batch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/cejQ46IQpUI" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>SpringOne2GX 2014 Replay: Big Data in Memory</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-big-data-in-memory" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-03-24:2034</id>
+    <updated>2015-03-24T20:35:00Z</updated>
+    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. Big Data in Memory&lt;/p&gt;
+&lt;p&gt; Speaker: John Davies, C24&lt;/p&gt;
+&lt;p&gt; Big Data Track &lt;/p&gt;
+&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014-john-davies-41130273"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014-john-davies-41130273&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;OK so everyone’s into big data but they’re usually talking about persistence, disk or more recently SSD, how about memory? We could simply add a few terabytes of RAM but even at $100 per GB that’s going to cost a LOT. What if we could reduce the size of the data by 50 fold and effectively bring the cost RAM down towards cost of disk? Keep Spring Integration, Spring Batch, GemFire in-memory cache, RabbitMQ messaging but reduce your data down to binary, yes bits and bytes rather than objects. Less garbage, less network overhead, same APIs but big-data in memory. John will show a Spring work-flow consuming 7.4kB XML messages, binding them to 25kB Java but storing them in just 450 bytes each, 10 million derivative contracts in-memory on a laptop.&lt;/p&gt;
+&lt;p&gt;Learn more about Spring XD: &lt;a href="http://projects.spring.io/spring-xd"&gt;http://projects.spring.io/spring-xd&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Spring Integration: &lt;a href="http://projects.spring.io/spring-integration"&gt;http://projects.spring.io/spring-integration&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn more about Spring Batch: &lt;a href="http://projects.spring.io/spring-batch"&gt;http://projects.spring.io/spring-batch&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&#xD;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/fcpeXNxaLoc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
+&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Data Release Train Fowler Goes GA</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/23/spring-data-release-train-fowler-goes-ga" />
@@ -38,7 +144,7 @@
       <name>Dave Syer</name>
     </author>
     <id>tag:spring.io,2015-03-09:2011</id>
-    <updated>2015-03-23T14:50:30Z</updated>
+    <updated>2015-03-23T14:50:00Z</updated>
     <content type="html">&lt;p&gt;In this article we continue &lt;a href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v" title="Fifth Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we show how to use &lt;a href="http://projects.spring.io/spring-security-oauth/"&gt;Spring Session&lt;/a&gt; together with &lt;a href="http://projects.spring.io/spring-cloud/"&gt;Spring Cloud&lt;/a&gt; to combine the features of the systems we built in parts II and IV, and actually end up building 3 single page applications with quite different responsibilities. The aim is to build a Gateway (like in &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;part IV&lt;/a&gt;) that is used not only for API resources but also to load the UI from a backend server. We simplify the token-wrangling bits of &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;part II&lt;/a&gt; by using the Gateway to pass through the authentication to the backends. Then we extend the system to show how we can make local, granular access decisions in the backends, while still controlling identity and authentication at the Gateway. This is a very powerful model for building distributed systems in general, and has a number of benefits that we can explore as we introduce the features in the code we build.&lt;/p&gt;
 &lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this article with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that is to open a new incognito window.&lt;/p&gt;
 &lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#target-architecture" class="anchor" name="target-architecture"&gt;&lt;/a&gt;Target Architecture&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a picture of the basic system we are going to build to start with:&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/dsyer/spring-security-angular/master/double/double-simple.png" alt="Components of the System""/&gt;&lt;/p&gt;&lt;p&gt;Like the other sample applications in this series it has a UI (HTML and JavaScript) and a Resource server. Like the sample in &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;Part IV&lt;/a&gt; it has a Gateway, but here it is separate, not part of the UI. The UI effectively becomes part of the backend, giving us even more choice to re-configure and re-implement features, and also bringing other benefits as we will see.&lt;/p&gt;&lt;p&gt;The browser goes to the Gateway for everything and it doesn&amp;rsquo;t have to know about the architecture of the backend (fundamentally, it has no idea that there is a back end). One of the things the browser does in this Gateway is authentication, e.g. it sends a username and password like in &lt;a href="http://spring.io/blog/2015/01/12/the-login-page-angular-js-and-spring-security-part-ii" title="Second Article in the Series"&gt;Part II&lt;/a&gt;, and it gets a cookie in return. On subsequent requests it presents the cookie automatically and the Gateway passes it through to the backends. No code needs to be written on the client to enable the cookie passing. The backends use the cookie to authenticate and because all components share a session they share the same information about the user. Contrast this with &lt;a href="https://spring.io/blog/2015/02/03/sso-with-oauth2-angular-js-and-spring-security-part-v" title="Fifth Article in the Series"&gt;Part V&lt;/a&gt; where the cookie had to be converted to an access token in the Gateway, and the access token then had to be independently decoded by all the backend components.&lt;/p&gt;&lt;p&gt;As in &lt;a href="http://spring.io/blog/2015/01/28/the-api-gateway-pattern-angular-js-and-spring-security-part-iv" title="Fourth Article in the Series"&gt;Part IV&lt;/a&gt; the Gateway simplifies the interaction between clients and servers, and it presents a small, well-defined surface on which to deal with security. For example, we don&amp;rsquo;t need to worry about &lt;a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing"&gt;Common Origin Resource Sharing&lt;/a&gt;, which is a welcome relief since it is easy to get wrong.&lt;/p&gt;&lt;p&gt;The source code for the complete project we are going to build is in &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/double"&gt;Github here&lt;/a&gt;, so you can just clone the project and work directly from there if you want. There is an extra component in the end state of this system (&amp;ldquo;double-admin&amp;rdquo;) so ignore that for now.&lt;/p&gt;&lt;h2&gt;&lt;a href="#building-the-backend" class="anchor" name="building-the-backend"&gt;&lt;/a&gt;Building the Backend&lt;/h2&gt;&lt;p&gt;In this architecture the backend is very similar to the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/spring-session"&gt;&amp;ldquo;spring-session&amp;rdquo;&lt;/a&gt; sample we built in &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;Part III&lt;/a&gt;, with the exception that it doesn&amp;rsquo;t actually need a login page. The easiest way to get to what we want here is probably to copy the &amp;ldquo;resource&amp;rdquo; server from Part III and take the UI from the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/basic"&gt;&amp;ldquo;basic&amp;rdquo;&lt;/a&gt; sample in &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;Part I&lt;/a&gt;. To get from the &amp;ldquo;basic&amp;rdquo; UI to the one we want here, we need only to add a couple of dependencies (like when we first used &lt;a href="https://github.com/spring-projects/spring-session/"&gt;Spring Session&lt;/a&gt; in Part III):&lt;/p&gt;
@@ -67,12 +173,12 @@ security.sessions: NEVER
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;If that&amp;rsquo;s the &lt;em&gt;whole&lt;/em&gt; content &lt;code&gt;application.properties&lt;/code&gt; then the application will be secure and accessible to a user called &amp;ldquo;user&amp;rdquo; with a password that is random, but printed on the console (at log level INFO) on startup. The &amp;ldquo;security.sessions&amp;rdquo; setting means that Spring Security will accept cookies as authentication tokens but won&amp;rsquo;t create them unless they already exist.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-resource-server" class="anchor" name="the-resource-server"&gt;&lt;/a&gt;The Resource Server&lt;/h2&gt;&lt;p&gt;The Resource server is easy to generate from one of our existing samples. It is the same as the &amp;ldquo;spring-session&amp;rdquo; Resource server in &lt;a href="http://spring.io/blog/2015/01/20/the-resource-server-angular-js-and-spring-security-part-iii" title="Third Article in the Series"&gt;Part III&lt;/a&gt;: just a &amp;ldquo;/resource&amp;rdquo; endpoint and &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; to get the distributed session data. We want this server to have a non-default port to listen on, and we want to be able to look up authentication in the session so we need this (in &lt;code&gt;application.properties&lt;/code&gt;):&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint properties"&gt;server.port: 9000&#xD;
 security.sessions: NEVER
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The completed sample is &lt;a href="https://github.com/dsyer/spring-security-angular/double/resource"&gt;here in github&lt;/a&gt; if you want to take a peek.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-gateway" class="anchor" name="the-gateway"&gt;&lt;/a&gt;The Gateway&lt;/h2&gt;&lt;p&gt;For an initial implementation of a Gateway (the simplest thing that could possibly work) we can just take an empty Spring Boot web application and add the &lt;code&gt;@EnableZuulProxy&lt;/code&gt; annotation. As we saw in &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;Part I&lt;/a&gt; there are several ways to do that, and one is to use the &lt;a href="http://start.spring.io"&gt;Spring Initializr&lt;/a&gt; to generate a skeleton project. Even easier, is to use the &lt;a href="http://cloud-start.spring.io"&gt;Spring Cloud Initializr&lt;/a&gt; which is the same thing, but for &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt; applications. Using the same sequence of command line operations as in Part I:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The completed sample is &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/double/resource"&gt;here in github&lt;/a&gt; if you want to take a peek.&lt;/p&gt;&lt;h2&gt;&lt;a href="#the-gateway" class="anchor" name="the-gateway"&gt;&lt;/a&gt;The Gateway&lt;/h2&gt;&lt;p&gt;For an initial implementation of a Gateway (the simplest thing that could possibly work) we can just take an empty Spring Boot web application and add the &lt;code&gt;@EnableZuulProxy&lt;/code&gt; annotation. As we saw in &lt;a href="http://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;Part I&lt;/a&gt; there are several ways to do that, and one is to use the &lt;a href="http://start.spring.io"&gt;Spring Initializr&lt;/a&gt; to generate a skeleton project. Even easier, is to use the &lt;a href="http://cloud-start.spring.io"&gt;Spring Cloud Initializr&lt;/a&gt; which is the same thing, but for &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt; applications. Using the same sequence of command line operations as in Part I:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint"&gt;$ mkdir gateway &amp;amp;&amp;amp; cd gateway&#xD;
 $ curl https://cloud-start.spring.io/starter.tgz -d style=web \&#xD;
   -d style=security -d style=cloud-zuul -d name=gateway \&#xD;
   -d style=redis | tar -xzvf - 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can then import that project (it&amp;rsquo;s a normal Maven Java project by default) into your favourite IDE, or just work with the files and &amp;ldquo;mvn&amp;rdquo; on the command line. There is a version &lt;a href="https://github.com/dsyer/spring-security-angular/double/gateway"&gt;in github&lt;/a&gt; if you want to go from there, but it has a few extra features that we don&amp;rsquo;t need yet.&lt;/p&gt;&lt;p&gt;Starting from the blank Initializr application, we add the Spring Session dependency (like in the UI above), and the &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; annotation:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can then import that project (it&amp;rsquo;s a normal Maven Java project by default) into your favourite IDE, or just work with the files and &amp;ldquo;mvn&amp;rdquo; on the command line. There is a version &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/double/gateway"&gt;in github&lt;/a&gt; if you want to go from there, but it has a few extra features that we don&amp;rsquo;t need yet.&lt;/p&gt;&lt;p&gt;Starting from the blank Initializr application, we add the Spring Session dependency (like in the UI above), and the &lt;code&gt;@EnableRedisHttpSession&lt;/code&gt; annotation:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
 @EnableRedisHttpSession&#xD;
 @EnableZuulProxy&#xD;
@@ -926,116 +1032,6 @@ places.forEach(System.out::println);
   &lt;li&gt;We added a new KerberosRestTemplate for use cases where you need to have a programmatic access to kerberized web resources.&lt;/li&gt;
   &lt;li&gt;Samples has been re-written from scratch. These samples are &lt;code&gt;bootified&lt;/code&gt; meaning user should have relatively few steps to test Kerberized functionality. There are more about samples in our reference documentation but those include working with Windows AD, MIT Kerberos and RestTemplate.&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;We&amp;rsquo;d love to hear back what people think by participating in a project or simply creating issues or feature requests at &lt;a href="https://github.com/spring-projects/spring-security-kerberos"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Tool Suite and Groovy/Grails Tool Suite 3.6.4 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/11/spring-tool-suite-and-groovy-grails-tool-suite-3-6-4-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Martin Lippert</name>
-    </author>
-    <id>tag:spring.io,2015-03-11:2017</id>
-    <updated>2015-03-11T03:09:15Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;&lt;p&gt;I am happy to announce the new release of our Eclipse-based tooling today:&lt;br/&gt;The Spring Tool Suite (STS) 3.6.4 and the Groovy/Grails Tool Suite (GGTS) 3.6.4.&lt;/p&gt;&lt;p&gt;Highlights from this release include:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-&lt;li&gt;updated to Eclipse Luna SR2&lt;/li&gt;&#xD;
-&lt;li&gt;Pivotal tc Server updated to 3.1.0&lt;/li&gt;&#xD;
-&lt;li&gt;Spring Boot properties editor (including content-assist, hovers, navigation, and errors/warnings)&lt;/li&gt;&#xD;
-&lt;li&gt;improved launch support for Spring Boot apps&lt;/li&gt;&#xD;
-&lt;li&gt;support for Groovy 2.4&lt;/li&gt;&#xD;
-&lt;/ul&gt;&lt;p&gt;To download the distributions, please go visit:&lt;/p&gt;
-&lt;ul&gt;&#xD;
-&lt;li&gt;Spring Tool Suite: &lt;a href="https://spring.io/tools/sts/all"&gt;https://spring.io/tools/sts/all&lt;/a&gt;&lt;/li&gt;&#xD;
-&lt;li&gt;Groovy/Grails Tool Suite: &lt;a href="https://spring.io/tools/ggts/all"&gt;https://spring.io/tools/ggts/all&lt;/a&gt;&lt;/li&gt;&#xD;
-&lt;/ul&gt;&lt;p&gt;Detailed new and noteworthy notes can be found here: &lt;a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html"&gt;STS/GGTS 3.6.4 New &amp;amp; Noteworthy&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;This is the final release of the GGTS bundle. Please take a look at the &lt;a href="http://docs.spring.io/sts/nan/v364/NewAndNoteworthy.html"&gt;New and Noteworthy&lt;/a&gt; for further details.&lt;br/&gt;STS 3.7.0 is scheduled to ship in late June 2015, shortly after the Eclipse Mars release.&lt;/p&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - March 10, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/10/this-week-in-spring-march-10-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-03-10:2012</id>
-    <updated>2015-03-10T22:47:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring!&lt;/em&gt; This week &lt;a href="https://devnexus.com/s/devnexus2015/speakers#Josh_Long"&gt;I am at DevNexus in Atlanta, GA&lt;/a&gt; along with a handful of Spring team members and Spring community luminaries. I&amp;rsquo;ll be presenting a talk on getting started &lt;a href="https://devnexus.com/s/devnexus2015/speakers#Josh_Long"&gt;with Spring Boot&lt;/a&gt; and I hope you&amp;rsquo;ll join me, or one of the many other talks on Spring team:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4156"&gt;Spring 4 Web Applications&lt;/a&gt; by Rossen Stoyanchev&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4446"&gt;Cloud Native Apps with Spring Cloud&lt;/a&gt; by Spencer Gibb&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4765"&gt;Building microservices with Scala, functional domain models and Spring Boot&lt;/a&gt; by Chris Richardson&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4227"&gt;What is new in Spring Integration 4?&lt;/a&gt; by Marius Bogoevici&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4417"&gt;Spring Data REST - Data Meets Hypermedia&lt;/a&gt; by Greg Turnquist and Roy Clarkson&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4444"&gt;IoT Realized - The Connected Car&lt;/a&gt; by Michael Minella&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4409"&gt;Keeping It Clean - Lessons learned from Open Source on how to polish code&lt;/a&gt; by Phillip Webb&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://devnexus.com/s/devnexus2015/presentations#id-4448"&gt;Spring Integration Java DSL - A Deep Dive&lt;/a&gt; by Gary Russell&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;We&amp;rsquo;ll also be at &lt;a href="http://www.meetup.com/AtlantaSpring/events/219263159/"&gt;the Spring User Group meeting&lt;/a&gt;. Come out and see Rossen Stoyanchev talk about what&amp;rsquo;s new in Spring MVC, and see Michael Minella talk about what&amp;rsquo;s new in Spring Batch.&lt;/p&gt;&lt;p&gt;Anyway, with that out of the way, let&amp;rsquo;s get to it!&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The amazing Dr. Syer just announced &lt;a href="https://spring.io/blog/2015/03/04/spring-cloud-1-0-0-available-now"&gt;Spring Cloud 1.0.0.RELEASE&lt;/a&gt;! This is the culmination of a long, frenzied development cycle and includes a &lt;em&gt;lot&lt;/em&gt; of great stuff. Spring Cloud is delivered as a set of Spring Boot-style auto-configurations and starter dependencies for infrastructure supporting microservices.&lt;/li&gt;
-  &lt;li&gt;Spring Data ninja Christoph Strobl just announced &lt;a href="https://spring.io/blog/2015/03/05/spring-data-release-train-fowler-rc1-available"&gt;RC1 for the Spring Data Fowler release train&lt;/a&gt;. This new release adds many new features including support for the &lt;code&gt;@Score&lt;/code&gt;-annotation in Solr, updated MongoDB 3 support (including support for both types of MongoDB GIS indexes), and much more.&lt;/li&gt;
-  &lt;li&gt;Javascript month continues with our remaining March Webinars. Scott Deeg will examine Polymer, Spring Security, and Spring Cloud for a lightweight API gateway on &lt;a href="https://spring.io/blog/2015/02/24/webinar-building-a-secure-polymer-app-with-spring-backend"&gt;March 24th&lt;/a&gt;. Lastly, Julien Dubois will introduce the AngularJS+Boot application generator, JHipster on &lt;a href="https://spring.io/blog/2015/02/24/webinar-jhipster-for-spring-boot"&gt;March 17th, 2015&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;This week&amp;rsquo;s SpringOne2GX 2014 replays are out! Check out Gunnar&amp;rsquo;s excellent talk on &lt;a href="http://spring.io/blog/2015/03/10/springone2gx-2014-replay-creating-modular-test-driven-spas-with-spring-and-angularjs"&gt;Creating modular test driven SPAs with Spring and AngularJS&lt;/a&gt;. Rob Winch and Ken Krueger cover Spring MVC Test in &lt;a href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-the-quest-for-the-holy-integration-test"&gt;The Quest for the Holy Integration Test&lt;/a&gt; - a less known and super helpful part of Spring MVC. Scott Frederick, Ramnivas Laddad cover the original Spring Cloud (now called Spring Cloud Connectors) in their talk &lt;a href="http://spring.io/blog/2015/03/10/springone2gx-2014-replay-simplify-cloud-applications-using-spring-cloud-connectors"&gt;Simplify Cloud Applications using Spring Cloud Connectors&lt;/a&gt;, and one from RedHat/OpenShift about &lt;a href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-spring-your-apps-into-the-cloud-with-a-paas"&gt;Spring your apps into the cloud with a PaaS&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;EMC Academics have just released their first of &lt;a href="https://flipboard.com/@emcacademics/spring-bn5acksky"&gt;their Flipboard Spring magazine&lt;/a&gt; - check it out!&lt;/li&gt;
-  &lt;li&gt;&lt;a href="http://jaxenter.com/spring-cloud-1-0-0-now-available-115269.html"&gt;JAXenter had an nice writeup on the recently released Spring Cloud 1.0.0&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;My (super highly rated, owing I think to the subject..) talk from &lt;a href="https://www.parleys.com/talk/building-bootiful-applications-spring-boot"&gt;Devoxx UK 2014 on Spring Boot&lt;/a&gt; is available on Parleys.com! Check it out!&lt;/li&gt;
-  &lt;li&gt;I had the pleasure of doing two webinars for O&amp;rsquo;Reilly whose recordings I just learned are now online, one on building &lt;a href="http://www.oreilly.com/pub/e/3282"&gt;applications with Spring Boot&lt;/a&gt; and &lt;a href="http://www.oreilly.com/pub/e/3283"&gt;microservices with Spring Cloud&lt;/a&gt;. O&amp;rsquo;Reilly are publishing my book on Spring and Cloud Foundry-based microservices.&lt;/li&gt;
-  &lt;li&gt;Our pal and community member Joram Barrez, co-founder of the Activiti BPMN workflow engine, &lt;a href="https://spring.io/blog/2015/03/08/getting-started-with-activiti-and-spring-boot"&gt;put together a nice post introducing the Spring Boot and Activiti integration&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;InfoQ interviewed Spring framework lead Juergen Hoeller on a wide &lt;a href="http://www.infoq.com/interviews/spring-today-past-and-future"&gt;variety of things at the recent Voxxed Days Vienna event&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Spring your apps into the cloud with a PaaS</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-spring-your-apps-into-the-cloud-with-a-paas" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-11:2016</id>
-    <updated>2015-03-10T17:43:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Grant Shipley, RedHat &lt;/p&gt;
-&lt;p&gt;Developing for the Cloud Track &lt;/p&gt;
-&lt;p&gt;Slides:  &lt;a href="http://www.slideshare.net/SpringCentral/spring-your-apps-into-the-cloud-with-a-paa-s"&gt;http://www.slideshare.net/SpringCentral/spring-your-apps-into-the-cloud-with-a-paa-s&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Whether you have one or a million visitors accessing your Spring web app, they are all going to demand a great user experience regardless of what it takes for you to deliver it. This invariably means quick page loads and fast response times every single time. When things go south, you just throw more hardware at the problem and increase your caches and buffers, right? Wrong. Toss in an infrastructure that resides on the cloud and now you’ve got a really interesting problem on your hands. I’ll leave the marketecure slides at the door, this is a hands-on technical talk in which we’ll deploy an application to the cloud and then turn up the heat by leveraging the right mix of elasticity and auto-scaling.&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ytRkybUqMp0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Simplify Cloud Applications using Spring Cloud Connectors</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-simplify-cloud-applications-using-spring-cloud-connectors" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-11:2015</id>
-    <updated>2015-03-10T17:27:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
-&lt;p&gt;NOTE: this project has been renamed Spring Cloud Connectors and is part of the larger &lt;a href="http://cloud.spring.io/spring-cloud-connectors/"&gt;spring cloud umbrella projec&lt;/a&gt;t. &lt;/p&gt;
-&lt;p&gt;Speaker: Scott Frederick, Ramnivas Laddad &lt;/p&gt;
-&lt;p&gt;Developing for the Cloud Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/simplify-cloud-applicationsusingspringcloud"&gt;http://www.slideshare.net/SpringCentral/simplify-cloud-applicationsusingspringcloud &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Developing an application to a cloud platform involves working with deployed application's environment and connecting to services. Spring Cloud, a new project, simplifies these tasks in a variety of cloud platforms including Cloud Foundry and Heroku. Spring Cloud makes it possible to deploy the same artifact (a war or a jar) to multiple cloud environments. It supports multiple clouds through the concept of Cloud Connector and provides out of the box implementation for Cloud Foundry and Heroku. Spring Cloud is designed for extension, making it simple to create a cloud connector for other cloud platforms. Spring Cloud also supports connecting to multiple services through the concept of service connectors. Out of the box, it provides support for many common services, but also makes it easy to extend it to other services. While Spring Cloud can be used by applications using any JVM language and framework, it further simplifies Spring applications through Java and XML-based configuration. In this talk, we will introduce the Spring Cloud project, show how you can simplify configuring applications for cloud deployment, discuss its extensibility mechanism, and put it to good use by showing practical examples from the field.&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/T8SPV4rnxjg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: The Quest for the Holy Integration Test</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/10/springone2gx-2014-replay-the-quest-for-the-holy-integration-test" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-10:2014</id>
-    <updated>2015-03-10T16:59:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Ken Kreuger, Rob Winch &lt;/p&gt;
-&lt;p&gt;Web / JavaScript Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/spring-one2gx-2014holyintegrationtest"&gt;http://www.slideshare.net/SpringCentral/spring-one2gx-2014holyintegrationtest &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Spring MVC Test can help greatly to thoroughly test controllers including their configuration. However for browser based clients we are not able to easily interact with the application as a user does. For example, a user would request a page that contains a form, fill out a form, submit the form, some Java Script may execute, and then the user would see some sort of result. In this presentation, we will provide an overview of testing Spring Web applications . We will see that see that by combining Spring MVC Test &amp;amp; HtmlUnit we are able to able to easily interact with our application in the same way (including JavaScript execution) users do. We will also see how we can easily create reusable components that represent our views, so that as we refactor our application our tests can easily be updated. Finally, we will see how we can combine these techniques with BDD to find our holy grail of integration testing.&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ZKy7xbpamUM" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
   </entry>
 </feed>
 

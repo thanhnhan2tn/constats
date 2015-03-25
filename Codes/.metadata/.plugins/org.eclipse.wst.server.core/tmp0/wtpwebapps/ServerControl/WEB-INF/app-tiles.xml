@@ -41,18 +41,7 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
 	</definition>
-	<definition name="services-nic-default" template="/WEB-INF/views/themes/default/main.jsp">
-		<put-attribute name="head"
-			value="/WEB-INF/views/themes/default/modules/head.jsp" />
-		<put-attribute name="header"
-			value="/WEB-INF/views/themes/default/modules/header.jsp" />
-		<put-attribute name="sidebar"
-			value="/WEB-INF/views/themes/default/modules/sidebar.jsp" />
-		<put-attribute name="left-content"
-			value="/WEB-INF/views/themes/default/modules/services-nic-content.jsp" />
-		<put-attribute name="footer"
-			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
-	</definition>
+
 	<definition name="services-default" template="/WEB-INF/views/themes/default/main.jsp">
 		<put-attribute name="head"
 			value="/WEB-INF/views/themes/default/modules/head.jsp" />
@@ -65,4 +54,29 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
 	</definition>
+	<definition name="services-nic-default" template="/WEB-INF/views/themes/default/main.jsp">
+		<put-attribute name="head"
+			value="/WEB-INF/views/themes/default/modules/head.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/themes/default/modules/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/themes/default/modules/sidebar.jsp" />
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-nic-content.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
+	</definition>
+	<definition name="nameservers-config-default" template="/WEB-INF/views/themes/default/main.jsp">
+		<put-attribute name="head"
+			value="/WEB-INF/views/themes/default/modules/head.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/themes/default/modules/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/themes/default/modules/sidebar.jsp" />
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/nameservers-content.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
+	</definition>
+
 </tiles-definitions>	

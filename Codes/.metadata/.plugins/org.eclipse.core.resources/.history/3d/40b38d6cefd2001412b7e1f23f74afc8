@@ -1,0 +1,24 @@
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Control Services Server<small> (${server.serverAddress})</small>
+		</h1>
+
+	</section>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content bs-glyphicons">
+			<ul class="bs-glyphicons-list">
+				<li><button class="col-md-3 btn btn-info" data-toggle="collapse" data-target="network-card-config">
+						Network Configuration </button></li>
+				<li><a class="col-md-3"
+					href="${pageContext.request.contextPath }/serviceconfig/dns/${server.serverAddress}/${cc}">
+						DNS Service... </a></li>
+			</ul>
+
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>

@@ -288,7 +288,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/services/{ip}/{cc}", method = RequestMethod.GET)
 	public String serviceController(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
-			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		// Lay thong tin username trong session;
 		String username = (String) session.getAttribute("username");
 		String str = "redirect:/"; // Chuoi return
@@ -299,8 +299,10 @@ public class HomeController {
 				List<Server> listServer = user.getServers();
 				if (!listServer.isEmpty()) {
 					for (int i = 0; i < listServer.size(); i++) {
-						if (listServer.get(i).getServerAddress().equals(ip)) {
-							str = "services-default";
+						Server s = listServer.get(i); 			//get server in list 
+						if (s.getServerAddress().equals(ip)) { 	// check Ip address in Database vs IP
+							mm.put("server", s);
+							str = "services-control";
 						}
 					}
 				} else {
@@ -312,6 +314,7 @@ public class HomeController {
 		}
 		return str;
 	}
-
+	
+	
 	private static final Logger _log = Logger.getLogger(HomeController.class);
 }

@@ -50,55 +50,63 @@
 		$(".wait").css("display", "block");
 	});
 
-	$(document).ready(function() {
-		var listServer = $('.server-listed');
+	$(document).ready(
+			function() {
+				var listServer = $('.server-listed');
 
-		function check_server(index) {
-			if (!listServer[index]) {
-				return false;
-			}
-
-			var data = $(listServer[index]).attr('data-id');
-
-			$.ajax({
-				url : 'checkstatus/' + data + '/' + cc,
-				type : 'GET',
-				data : {},
-				timeout : '30000',
-				success : function(data, status) {
-					data = $.trim(data);
-					$(listServer[index]).find(".wait").css("display", "none");
-					if (data == 'false') {
-						$(listServer[index]).find(".i-server-icon").remove;
-						$(listServer[index]).find(".i-server-icon-off").css({
-							"display" : "block"
-						});
-					} else {
-						$(listServer[index]).find(".i-server-icon-off").remove;
-						$(listServer[index]).find(".i-server-icon").css({
-							"display" : "block"
-						});
-						$(listServer[index]).find(".disabled").removeClass("disabled");
+				function check_server(index) {
+					if (!listServer[index]) {
+						return false;
 					}
-				}
-			}).always(function() {
-				check_server(++index);
-			});
-		}
 
-		if (listServer.length > 0) {
-			check_server(0);
-		}
-		// ok e chay thu
-	});
+					var data = $(listServer[index]).attr('data-id');
+
+					$.ajax(
+							{
+								url : 'checkstatus/' + data + '/' + cc,
+								type : 'GET',
+								data : {},
+								timeout : '30000',
+								success : function(data, status) {
+									data = $.trim(data);
+									$(listServer[index]).find(".wait").css(
+											"display", "none");
+									if (data == 'false') {
+										$(listServer[index]).find(
+												".i-server-icon").remove;
+										$(listServer[index]).find(
+												".i-server-icon-off").css({
+											"display" : "block"
+										});
+									} else {
+										$(listServer[index]).find(
+												".i-server-icon-off").remove;
+										$(listServer[index]).find(
+												".i-server-icon").css({
+											"display" : "block"
+										});
+										$(listServer[index]).find(".disabled")
+												.removeClass("disabled");
+									}
+								}
+							}).always(function() {
+						check_server(++index);
+					});
+				}
+
+				if (listServer.length > 0) {
+					check_server(0);
+				}
+				// ok e chay thu
+			});
 </script>
 <ul class="list-server">
 	<%
 		if (user.getServers() != null && !user.getServers().isEmpty()) {
-			for (Server server : user.getServers()) {
-			Boolean check = false;
-		//check Server status
-		//if(server.checkStatus()){
+		for (Server server : user.getServers()) {
+		Boolean check = false;
+			//check Server status
+			//if(server.checkStatus()){
 	%>
 	<li class="server-item col-md-2 server-listed"
 		data-id="<%=server.getServerAddress()%>"
@@ -147,8 +155,7 @@
 				</div>
 			</div>
 			<!-- //control action -->
-		</div>
-		<!-- //Showw server  -->
+		</div> <!-- //Showw server  -->
 	</li>
 	<%
 		}}

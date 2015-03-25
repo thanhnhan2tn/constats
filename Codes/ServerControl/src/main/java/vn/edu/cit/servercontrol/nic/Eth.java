@@ -8,7 +8,6 @@ public class Eth {
 	String gateway;
 	String network;
 	String broadcast;
-	String dns_nameservers;
 
 	// Dung list co uu diem tot hon dung 1 mang String[]
 
@@ -17,8 +16,7 @@ public class Eth {
 	}
 
 	public Eth(String iface, String inet, String address, String netmask,
-			String gateway, String network, String broadcast,
-			String dns_nameservers) {
+			String gateway, String network, String broadcast) {
 		super();
 		this.iface = iface;
 		this.inet = inet;
@@ -27,7 +25,6 @@ public class Eth {
 		this.gateway = gateway;
 		this.network = network;
 		this.broadcast = broadcast;
-		this.dns_nameservers = dns_nameservers;
 	}
 
 	public String getIface() {
@@ -85,17 +82,5 @@ public class Eth {
 	public void setBroadcast(String broadcast) {
 		this.broadcast = broadcast;
 	}
-
-	public String getDns_nameservers() {
-		return dns_nameservers;
-	}
-
-	public void setDns_nameservers(String dns_nameservers) {
-		this.dns_nameservers = dns_nameservers;
-	}
-
-	
-
-	
 
 }

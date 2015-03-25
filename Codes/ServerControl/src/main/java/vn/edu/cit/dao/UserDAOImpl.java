@@ -30,7 +30,12 @@ public class UserDAOImpl implements UserDAO {
 	public User getUser(String username) {
 		// query to search user
 		Query searchQuery = new Query(Criteria.where("email").is(username));
-		return mongoTemplate.findOne(searchQuery, User.class);
+		User user = mongoTemplate.findOne(searchQuery, User.class);
+		if (user != null) {
+			return user;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
