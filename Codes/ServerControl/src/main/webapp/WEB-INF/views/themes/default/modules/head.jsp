@@ -37,4 +37,5 @@
 <script>
 	var cc= '<%=session.getAttribute("cc")%>';
 	var check = false;
+	var ctx = "${pageContext.request.contextPath}";
 </script>

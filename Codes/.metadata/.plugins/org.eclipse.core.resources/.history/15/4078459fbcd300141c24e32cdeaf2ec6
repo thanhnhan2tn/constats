@@ -1,0 +1,94 @@
+$(document).ajaxStart(function() {
+		$(".wait").css("display", "block");
+	});
+
+	$(document).ready(
+			function() {
+				var listServer = $('.server-listed');
+				function check_server(index) {
+					if (!listServer[index]) {
+						return false;
+					}
+					var data = $(listServer[index]).attr('data-id');
+					$.ajax(
+							{
+								url : 'checkstatus/' + data + '/' + cc,
+								type : 'GET',
+								data : {},
+								timeout : '30000',
+								success : function(data, status) {
+									data = $.trim(data);
+									$(listServer[index]).find(".wait").css(
+											"display", "none");
+									if (data == 'false') {
+										$(listServer[index]).find(
+												".i-server-icon").remove;
+										$(listServer[index]).find(
+												".i-server-icon-off").css({
+											"display" : "block"
+										});
+									} else {
+										$(listServer[index]).find(
+												".i-server-icon-off").remove;
+										$(listServer[index]).find(
+												".i-server-icon").css({
+											"display" : "block"
+										});
+										$(listServer[index]).find(".disabled")
+												.removeClass("disabled");
+									}
+								}
+							}).always(function() {
+						check_server(++index);
+						
+					});
+					
+					/** Context menu **/
+					context.init({
+						preventDoubleContext : false
+					});
+
+					context.settings({
+						compress : true
+					});
+
+					context.attach('.content', [ {
+						header : 'MENU'
+					}, {
+						text : 'Add Server',
+						action : function(e) {
+							e.preventDefault();
+							$('#AddServer').modal('show');
+						}
+					}, {
+						text : 'Reload',
+						action : function(e) {
+							location.reload();
+						}
+					}, {
+						text : 'Donate',
+						action : function(e) {
+							e.preventDefault();
+							$('#donate').submit();
+						}
+					} ]);
+					context.attach("", [{
+						header : 'ACTION..'
+					}, {
+						text : 'Edit Server',
+						href : ctx+'/editserver/'+data+'/'+cc
+					},{
+						text : 'Remove Server',
+						href : ctx+'/removeserver/'+data+'/'+cc
+					}]);
+				}// end function
+
+				if (listServer.length > 0) {
+					check_server(0);
+				}
+				
+				
+				
+			});
+
+			

@@ -156,14 +156,14 @@ body>.header {
 .content ul .server-item {
 	list-tyle: none;
 	min-height: 56px;
-	background: none repeat scroll 0% 0% #E9E9E9;
+	_background: none repeat scroll 0% 0% #E9E9E9;
 	padding: 17px 10px;
-	border-top: 1px #ccc solid;
+	border: 1px #ccc solid;
 	margin: 3px 5px;
 }
 
 .content ul li:FIRST-CHILD {
-	border-top: none;
+	_border-top: none;
 }
 
 .content .server-icon {

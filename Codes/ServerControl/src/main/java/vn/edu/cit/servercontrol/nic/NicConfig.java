@@ -38,8 +38,7 @@ public class NicConfig {
 					System.out.print(new String(tmp, 0, i));
 				}
 				if (channel.isClosed()) {
-					System.out.println("exit-status: "
-							+ channel.getExitStatus());
+					System.out.println("exit-status: " + channel.getExitStatus());
 					break;
 				}
 				try {
@@ -124,26 +123,57 @@ public class NicConfig {
 	public boolean uploadConfigToServer(Server sv, Nic n) throws IOException {
 		String config = "";
 		for (Eth eth : n.getEth()) {
+			/*
+			 * config = config + "auto " + eth.getIface() + "'\n'" + "iface " +
+			 * eth.getIface() + " " + "inet " + eth.getInet() + "'\n'" +
+			 * "address " + eth.getAddress() + "'\n'" + "netmask " +
+			 * eth.getNetmask() + "'\n'" + "gateway " + eth.getGateway() +
+			 * "'\n'" + "network " + eth.getNetwork() + "'\n'" + "broadcast " +
+			 * eth.getBroadcast() + "'\n'" + "'\n'";
+			 */
 
-				System.out.println("a:"+ eth.getAddress());
-				System.out.println("b:"+eth.getBroadcast());
-			
+			if (eth.getIface() != null && !eth.getIface().equals("")) {
+				config = config + "auto " + eth.getIface() + "'\n'" + "iface " + eth.getIface();
+			}
 
+			if (eth.getInet() != null && !eth.getInet().equals("")) {
+				config = config + " inet " + eth.getInet() + "'\n'";
+			}
 
-			config = config + "auto " + eth.getIface() + "'\n'" + "iface "
-					+ eth.getIface() + " " + "inet " + eth.getInet() + "'\n'"
-					+ "address " + eth.getAddress() + "'\n'" + "netmask "
-					+ eth.getNetmask() + "'\n'" + "gateway " + eth.getGateway()
-					+ "'\n'" + "network " + eth.getNetwork() + "'\n'"
-					+ "broadcast " + eth.getBroadcast() + "'\n'" + "'\n'";
+			if (eth.getAddress() != null && !eth.getAddress().equals("")) {
+				config = config + "address " + eth.getAddress() + "'\n'";
+			}
 
+			if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
+				config = config + "netmask " + eth.getNetmask() + "'\n'";
+			}
+
+			if (eth.getGateway() != null && !eth.getGateway().equals("")) {
+				config = config + "gateway " + eth.getGateway() + "'\n'";
+			}
+
+			if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
+				config = config + "network " + eth.getNetwork() + "'\n'";
+			}
+
+			if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
+				config = config + "broadcast " + eth.getBroadcast() + "'\n'";
+			}
+
+			config = (config + "'\n'").trim();
 		}
-		for (String dns : n.getDns_nameservers()) {
-			config = config + "dns-nameservers " + dns + "'\n'";
+		if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0) {
+			// check null and check empty.
+			for (String dns : n.getDns_nameservers()) {
+				config = (config + "dns-nameservers " + dns + "'\n'").trim();
+
+			}
 		}
+		config = config + "'\n'";
+
 		// thuc hien xoa dong chua ki tu "null"
-		config = XoaNull(config);
-		config = "sudo echo -e > /home/mayb/nic.txt " + config;
+		// config = XoaNull(config);
+		config = "sudo echo -e > /home/ubuntu/nic.txt " + config;
 		if (uploadToServer(sv, config) == true) {
 			System.out.println("Upload Success!!");
 			return true;
@@ -162,11 +192,6 @@ public class NicConfig {
 		String kq = "";
 		String line = "";
 		while ((line = br.readLine()) != null) {
-			System.out.println("Xoa null");
-			line = line.trim();
-			if (line.endsWith(" ")){
-				line = "";
-			}
 			if (line.indexOf("null") != -1) {
 				line = "";
 			} else {
@@ -202,8 +227,7 @@ public class NicConfig {
 
 				}
 				if (channel.isClosed()) {
-					System.out.println("exit-status: "
-							+ channel.getExitStatus());
+					System.out.println("exit-status: " + channel.getExitStatus());
 					break;
 				}
 				try {
@@ -266,29 +290,25 @@ public class NicConfig {
 			while (!mang[i].equals(null)) {
 				// System.out.println("Vong lap thu " + i);
 
-				if (mang[i].equals("iface") || mang[i].equals("address")
-						|| mang[i].equals("inet") || mang[i].equals("netmask")
-						|| mang[i].equals("gateway")
-						|| mang[i].equals("network")
+				if (mang[i].equals("iface") || mang[i].equals("address") || mang[i].equals("inet")
+						|| mang[i].equals("netmask") || mang[i].equals("gateway") || mang[i].equals("network")
 						|| mang[i].equals("broadcast")) {
 
 					hm1.put(mang[i], mang[i + 1]);
 
 					if (mang[i].equals("iface") && i != 2) {
-						lay = lay + "\n</eth>\n<eth>\n" + "<" + mang[i] + ">"
-								+ mang[i + 1] + "</" + mang[i] + ">" + "\n";
+						lay = lay + "\n</eth>\n<eth>\n" + "<" + mang[i] + ">" + mang[i + 1] + "</" + mang[i] + ">"
+								+ "\n";
 					}
 
 					else {
-						lay = lay + "<" + mang[i] + ">" + mang[i + 1] + "</"
-								+ mang[i] + ">" + "\n";
+						lay = lay + "<" + mang[i] + ">" + mang[i + 1] + "</" + mang[i] + ">" + "\n";
 					}
 
 				}
 
 				if (mang[i].equals("dns-nameservers")) {
-					lay_dns = lay_dns + "<dns_nameservers>" + mang[i + 1]
-							+ "</dns_nameservers>" + "\n";
+					lay_dns = lay_dns + "<dns_nameservers>" + mang[i + 1] + "</dns_nameservers>" + "\n";
 				}
 
 				i++;
@@ -299,8 +319,7 @@ public class NicConfig {
 
 		} catch (NullPointerException nu) {
 		}
-		return "<nic>" + "\n" + "<eth>\n" + lay + "\n" + "</eth>\n" + lay_dns
-				+ "</nic>";// String
+		return "<nic>" + "\n" + "<eth>\n" + lay + "\n" + "</eth>\n" + lay_dns + "</nic>";// String
 	}
 
 	// convert XML to Object
@@ -324,8 +343,7 @@ public class NicConfig {
 		return null;
 	}
 
-	public Eth getEthFromAdd(String index, Server sv) throws IOException,
-			IndexOutOfBoundsException {
+	public Eth getEthFromAdd(String index, Server sv) throws IOException, IndexOutOfBoundsException {
 		Nic nic = convertXMLToObject(sv);
 		System.out.println("------Khoi tao doi tuong, in ra man hinh-------");
 		for (Eth eth : nic.getEth()) {
@@ -351,30 +369,31 @@ public class NicConfig {
 
 	public static void main(String[] args) throws IOException {
 
-//		NicConfig nic_c = new NicConfig();
-//		Server sv = new Server(1, "192.168.1.149", 22, "mayb", "root", "root");
-//		// Server sv = new Server(1, "", 22, "mayb", "root", "root");
-//
-//		// System.out.println(nic_c.convertTextToXMl(sv));
-//
-//		Nic n = nic_c.convertXMLToObject(sv);
-//		System.out.println("----------Create Object---------");
-//
-//		for (Eth eth : n.getEth()) {
-//			System.out.println("auto  " + eth.getIface());
-//			System.out.println("iface  " + eth.getIface());
-//			System.out.println("inet " + eth.getInet());
-//			System.out.println("address " + eth.getAddress());
-//			System.out.println("netmask " + eth.getNetmask());
-//			System.out.println("gateway " + eth.getGateway());
-//			System.out.println("network " + eth.getNetwork());
-//			System.out.println("broadcast " + eth.getBroadcast());
-//			System.out.println("-----------------");
-//
-//		}
-//		System.out.println("Dns-nameservers " + n.getDns_nameservers());
-//
-//		 nic_c.uploadConfigToServer(sv, n);
+		// NicConfig nic_c = new NicConfig();
+		// Server sv = new Server(1, "192.168.0.105", 22, "mayb", "root",
+		// "root");
+		// // Server sv = new Server(1, "", 22, "mayb", "root", "root");
+		//
+		// // System.out.println(nic_c.convertTextToXMl(sv));
+		//
+		// Nic n = nic_c.convertXMLToObject(sv);
+		// System.out.println("----------Create Object---------");
+		//
+		// for (Eth eth : n.getEth()) {
+		// System.out.println("auto " + eth.getIface());
+		// System.out.println("iface " + eth.getIface());
+		// System.out.println("inet " + eth.getInet());
+		// System.out.println("address " + eth.getAddress());
+		// System.out.println("netmask " + eth.getNetmask());
+		// System.out.println("gateway " + eth.getGateway());
+		// System.out.println("network " + eth.getNetwork());
+		// System.out.println("broadcast " + eth.getBroadcast());
+		// System.out.println("-----------------");
+		//
+		// }
+		// System.out.println("Dns-nameservers " + n.getDns_nameservers());
+		//
+		// nic_c.uploadConfigToServer(sv, n);
 
 	}
 }

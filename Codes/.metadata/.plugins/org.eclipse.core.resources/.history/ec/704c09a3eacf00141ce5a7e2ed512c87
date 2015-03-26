@@ -1,5 +1,0 @@
-$(document).ready(function() {
-	$("list-server").ready(function() {
-		$(".list-server").load
-	});
-});

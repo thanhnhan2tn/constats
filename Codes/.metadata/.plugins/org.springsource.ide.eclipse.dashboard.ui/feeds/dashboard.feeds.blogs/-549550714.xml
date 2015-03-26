@@ -5,7 +5,273 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-24T22:05:00Z</updated>
+  <updated>2015-03-26T17:10:40Z</updated>
+  <entry>
+    <title>Spring WS 2.2.1 is released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-ws-2-2-1-is-released" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Greg Turnquist</name>
+    </author>
+    <id>tag:spring.io,2015-03-25:2040</id>
+    <updated>2015-03-26T17:10:40Z</updated>
+    <content type="html">&lt;p&gt;Greetings Spring community,&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-ws/"&gt;Spring WS&lt;/a&gt; has just released version 2.2.1.RELEASE. This is a patch upgrade with no breaking API or behavior changes. I recommend upgrading to ensure you have the latest fixes. For a listing of completed issues see the report below:&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10060&amp;version=14639"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-ws/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-ws"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SWS"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-ws/docs/2.2.1.RELEASE/reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The artifacts are staged on maven central, &lt;a href="http://repo.spring.io/release"&gt;http://repo.spring.io/release&lt;/a&gt;, and bintray.&lt;/p&gt;&lt;p&gt;Cheers!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Security 4.0.0 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-security-4-0-0-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2015-03-26:2041</id>
+    <updated>2015-03-26T14:26:24Z</updated>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 4.0.0.RELEASE which closes over &lt;a href="http://goo.gl/ui9GCl"&gt;175+ tickets&lt;/a&gt;. You can find the highlights below:&lt;/p&gt;&lt;h3&gt;&lt;a href="#websocket-support" class="anchor" name="websocket-support"&gt;&lt;/a&gt;WebSocket Support&lt;/h3&gt;&lt;p&gt;Spring Security 4 added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#websocket"&gt;WebSocket Support&lt;/a&gt;. It is now possible to use Spring Security with &lt;a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/websocket.html"&gt;Spring&amp;rsquo;s WebSocket&lt;/a&gt; support.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-data-integration" class="anchor" name="spring-data-integration"&gt;&lt;/a&gt;Spring Data Integration&lt;/h3&gt;&lt;p&gt;Spring Security 4 added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#data"&gt;Spring Data Integration&lt;/a&gt;. It is now possible to refer to Spring Security&amp;rsquo;s user within Spring Data queries using SpEL.&lt;/p&gt;&lt;h3&gt;&lt;a href="#test-support" class="anchor" name="test-support"&gt;&lt;/a&gt;Test Support&lt;/h3&gt;&lt;p&gt;Spring Security 4 has added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#test"&gt;Test Support&lt;/a&gt;. It is now much easier to write tests with Spring Security applications.&lt;/p&gt;&lt;h3&gt;&lt;a href="#more-secure-by-default" class="anchor" name="more-secure-by-default"&gt;&lt;/a&gt;More Secure by Default&lt;/h3&gt;&lt;p&gt;As exploits against applications evolve, so must Spring Security. As a major release version, the Spring Security team took the opportunity to make some non-passive changes which focus on:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ensuring Spring Security is more &lt;a href="https://www.owasp.org/index.php/Establish_secure_defaults"&gt;secure by default&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Minimizing &lt;a href="https://www.owasp.org/index.php/Information_Leakage"&gt;Information Leakage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Removing deprecated APIs&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;For complete details on &lt;strong&gt;migrating from Spring Security 3 to Spring Security 4&lt;/strong&gt; refer &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#m3to4"&gt;Migrating from 3.x to 4.x&lt;/a&gt; section of the reference.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/guides/html5/"&gt;Guides&lt;/a&gt; | &lt;a href="http://goo.gl/ui9GCl"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>What's new in Spring Data Fowler?</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/what-s-new-in-spring-data-fowler" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Thomas Darimont</name>
+    </author>
+    <id>tag:spring.io,2015-03-26:2043</id>
+    <updated>2015-03-26T13:53:00Z</updated>
+    <content type="html">&lt;p&gt;The GA release of Spring Data release train Fowler marks the finishing line of 6 month of development. It&amp;rsquo;s time to give you an impression of the content of this release and a brief overview about individual features. The major themes of the Fowler release train were performance improvements and enhanced Java 8 support that are mainly reflected in the Spring Data JPA and MongoDB modules but a lot of other ones have seen significant improvements, too.&lt;/p&gt;&lt;p&gt;The easiest way to upgrade to the Spring Data Fowler release train is by using Spring Boot and configuring the &lt;code&gt;spring-data-releasetrain.version&lt;/code&gt; property to &lt;code&gt;Fowler-RELEASE&lt;/code&gt;. If you&amp;rsquo;re not using Spring Boot yet, add the &lt;a href="http://search.maven.org/#artifactdetails%7Corg.springframework.data%7Cspring-data-releasetrain%7CFowler-RELEASE%7Cpom"&gt;Spring Data BOM&lt;/a&gt; to your &lt;code&gt;&amp;lt;dependencyManagement /&amp;gt;&lt;/code&gt; section of your Maven POM.&lt;/p&gt;&lt;h2&gt;&lt;a href="#general-themes" class="anchor" name="general-themes"&gt;&lt;/a&gt;General themes&lt;/h2&gt;&lt;h3&gt;&lt;a href="#java-8-streams-in-repository-methods" class="anchor" name="java-8-streams-in-repository-methods"&gt;&lt;/a&gt;Java 8 streams in repository methods&lt;/h3&gt;&lt;p&gt;One of Java 8&amp;rsquo;s great new features is the &lt;code&gt;Stream&lt;/code&gt; API, which allows Java developers to define a pipeline of operations to be executed on a stream of objects but only the final operation actually triggering the consumption of elements from the &lt;code&gt;Stream&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;In the context of data access providing the result of a query execution as &lt;code&gt;Stream&lt;/code&gt; is an extremely useful use case as it prevents the caller of the query method from blocking until all items were read. Not even mentioning the more efficient memory usage here.&lt;/p&gt;&lt;p&gt;With the Fowler release we introduce support for Java 8 Streams as return types of finder methods in repositories. In both the MongoDB and the JPA module you can now go ahead and declare finder methods like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface CustomerRepository extends Repository&amp;lt;Customer, Long&amp;gt; {&#xD;
+&#xD;
+  Stream&amp;lt;Customer&amp;gt; findByLastname(String lastname);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Calling this method will execute the query backing the repository method and immediately return once the first result is available. To achieve this with JPA, we use persistence provider specific API as JPA itself only provides means to obtain query results as &lt;code&gt;List&lt;/code&gt;s. Repository clients can now go ahead and use the result of the method call in a try-with-resources block. This will make sure the resources held open to be able to traverse the stream will be closed eventually:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;try (Stream&amp;lt;Customer&amp;gt; customers = repository.findByLastname(&amp;quot;Matthews&amp;quot;)) {&#xD;
+  customers.filter(…).map(…).collect(…);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#jsr-310-and-threeten-backport-support" class="anchor" name="jsr-310-and-threeten-backport-support"&gt;&lt;/a&gt;JSR-310 and ThreeTen Backport support&lt;/h3&gt;&lt;p&gt;To easily persist JSR-310 types - the date/time API newly introduced in JDK 8 - from within domain objects we added converters for the relevant types in the MongoDB and JPA module. For developers not able to upgrade to Java 8 yet, we added a similar set of converters for the &lt;a href="https://github.com/ThreeTen/threetenbp"&gt;ThreeTen Backport project&lt;/a&gt; so that you can start using the types in your code even if you&amp;rsquo;re still on Java 7. A switch to Java 8 will be a simple switch in the package names going forward.&lt;/p&gt;&lt;p&gt;In the MongoDB module, the corresponding &lt;code&gt;Converter&lt;/code&gt; implementations are available automatically. For JPA you can simply register either &lt;code&gt;Jsr310JpaConverters&lt;/code&gt; or &lt;code&gt;ThreeTenBackPortJpaConverters&lt;/code&gt; with your persistence provider. If you&amp;rsquo;re using a &lt;code&gt;LocalContainerEntityManagerFactoryBean&lt;/code&gt; to set up your JPA environment in Spring simply add &lt;code&gt;org.springframework.data.jpa.convert.threeten&lt;/code&gt; or &lt;code&gt;….threetenbp&lt;/code&gt; to the packages to scan. With Spring Boot, it&amp;rsquo;s just a matter of adding the aforementioned classes to the &lt;code&gt;@EntityScan&lt;/code&gt; declaration:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@EntityScan(&#xD;
+  basePackageClasses = { Application.class, Jsr310JpaConverters.class }&#xD;
+)&#xD;
+@SpringBootApplication&#xD;
+class Application { … }
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This setup will make sure that both your application package and the Spring Data JPA one for the JSR-310 converters will be scanned and handed to the persistence provider. Find a complete example for that in our &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/jpa/java8"&gt;Spring Data Examples repository&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#mongodb" class="anchor" name="mongodb"&gt;&lt;/a&gt;MongoDB&lt;/h2&gt;&lt;h3&gt;&lt;a href="#3-0-server-and-driver-support" class="anchor" name="3-0-server-and-driver-support"&gt;&lt;/a&gt;3.0 server and driver support&lt;/h3&gt;&lt;p&gt;Spring Data Fowler ships support for the latest and greatest MongoDB 3.0 server generation. While that generation can already be used with the MongoDB Java driver in version 2.13.0 we also made sure Spring Data MongoDB will work flawlessly with the upcoming 3.0 version of the Java driver. Thus, developers are free to choose which version they&amp;rsquo;re going to work with or rather when they would like to upgrade to the new driver. For general information on compatibility between driver and server versions be sure to check out the &lt;a href="http://docs.mongodb.org/ecosystem/drivers/java/"&gt;MongoDB documentation&lt;/a&gt; Be aware though that subsequent development will clearly focus on the 3.0 line of both the server and the driver.&lt;/p&gt;&lt;p&gt;In general we encourage everyone to favour &lt;code&gt;MongoClient&lt;/code&gt; over &lt;code&gt;Mongo&lt;/code&gt; within JavaConfig or use the newly introduced XML elements for &lt;code&gt;&amp;lt;mongo:mongo-client /&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;mongo:client-options /&amp;gt;&lt;/code&gt;. For more information please refer to the &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.7.0.RELEASE/reference/html/#mongo.mongo-3"&gt;reference documentation&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#geojson-support" class="anchor" name="geojson-support"&gt;&lt;/a&gt;GeoJSON support&lt;/h3&gt;&lt;p&gt;It’s been awhile since MongoDB had introduced &lt;a href="http://geosjon.org"&gt;GeoJSON&lt;/a&gt; as format for dealing with geo structures. These data structures operate on an earth like sphere and therefore cannot be used along with a 2D index. Having said that, the usage is pretty much straight forward since we provide dedicated types to support GeoJSON. Those can be used in both your domain types as well as query parameters.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Document&#xD;
+class Store {&#xD;
+&#xD;
+  @Id String id;&#xD;
+&#xD;
+  /**&#xD;
+   * The location is stored in GeoJSON format:&#xD;
+   * { &amp;quot;type&amp;quot; : &amp;quot;Point&amp;quot;, &amp;quot;coordinates&amp;quot; : [ x, y ] }&#xD;
+   */&#xD;
+  GeoJsonPoint location;&#xD;
+}&#xD;
+&#xD;
+interface StoreRepository extends CrudRepository&amp;lt;Store, String&amp;gt; {&#xD;
+&#xD;
+  List&amp;lt;Store&amp;gt; findByLocationWithin(Polygon polygon);&#xD;
+}&#xD;
+&#xD;
+repo.findByLocationWithin(&#xD;
+  new GeoJsonPolygon(&#xD;
+    new Point(-73.992514, 40.758934),&#xD;
+    new Point(-73.961138, 40.760348),&#xD;
+    new Point(-73.991658, 40.730006),&#xD;
+    new Point(-73.992514, 40.758934)));
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This creates the following query to be executed in MongoDB:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
+  &amp;quot;location&amp;quot;: {&#xD;
+    &amp;quot;$geoWithin&amp;quot;: {&#xD;
+      &amp;quot;$geometry&amp;quot;: {&#xD;
+        &amp;quot;type&amp;quot;: &amp;quot;Polygon&amp;quot;,&#xD;
+        &amp;quot;coordinates&amp;quot;: [[&#xD;
+           [-73.992514,40.758934],&#xD;
+           [-73.961138,40.760348],&#xD;
+           [-73.991658,40.730006],&#xD;
+           [-73.992514,40.758934]&#xD;
+        ]]&#xD;
+      }&#xD;
+    }&#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that the &lt;code&gt;StoreRepository.findByLocationWithin(…)&lt;/code&gt; still takes a &lt;code&gt;Polygon&lt;/code&gt;. Using &lt;code&gt;GeoJsonPolygon&lt;/code&gt; with &lt;code&gt;findByLocationWithin(…)&lt;/code&gt; will create the query using the &lt;code&gt;$geometry&lt;/code&gt; operator alongside the GeoJSON representation. More Details on usage and restrictions can be found in the &lt;a href="http://docs.mongodb.org/manual/core/2dsphere/#geospatial-indexes-store-geojson/"&gt;MongoDB manual&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#execution-of-mongodb-stored-scripts" class="anchor" name="execution-of-mongodb-stored-scripts"&gt;&lt;/a&gt;Execution of MongoDB stored scripts&lt;/h3&gt;&lt;p&gt;MongoDB allows to execute JavaScript functions on the server by either directly sending the raw source script or calling one previously stored. We expose this functionality through the newly introduced &lt;code&gt;ScriptOperations&lt;/code&gt; interface which can be obtained from &lt;code&gt;MongoOperations&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;ScriptOperations ops = mongoOperations.scriptOps();&#xD;
+ExecutableMongoScript script = new ExecutableMongoScript(&amp;quot;function(x) { return x; }&amp;quot;);&#xD;
+Object r1 = ops.execute(script, &amp;quot;Direct function execution.&amp;quot;)&#xD;
+&#xD;
+ops.register(new NamedMongoScript(&amp;quot;echo&amp;quot;, script));&#xD;
+Object r2 = ops.call(&amp;quot;echo&amp;quot;, &amp;quot;Call stored function.&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The server-side script support will be enhanced in follow-up releases where we will add return type conversion, annotations for calling procedures from repository methods as well as support for the &lt;code&gt;$where&lt;/code&gt; operator.&lt;/p&gt;&lt;h3&gt;&lt;a href="#performance-improvements-in-object-to-store-conversion" class="anchor" name="performance-improvements-in-object-to-store-conversion"&gt;&lt;/a&gt;Performance improvements in object-to-store conversion&lt;/h3&gt;&lt;p&gt;The object-to-store mapping subsystem has undergone a significant overhaul in terms of performance improvements. We profiled the Commons and store modules, introduced some caching here and there and could actually gain quite an impressive increase of operations per second compared to the Evans release train (although most of the improvements were ported back to the service releases of Evans, too).&lt;/p&gt;&lt;p&gt;&lt;img src="https://gist.githubusercontent.com/olivergierke/1d4239b59c57e05760c3/raw/fowler-bar-chart-read-write.png" alt="Performance improvements in Spring Data Fowler""/&gt;&lt;/p&gt;&lt;p&gt;As you can see, we more than doubled the number of operations per second for read access and are a close to that in write operations, too.&lt;/p&gt;&lt;p&gt;When reading a lot of objects from the data store, a significant amount of time is spent creating the object instances via reflection. With the Fowler release train we introduce a new default &lt;code&gt;EntityInstantiator&lt;/code&gt; that solves that bottleneck by creating a factory class for the domain object at runtime using ASM. This factory class calls the constructor of the domain class directly, which is significantly faster than doing so by reflection. If you&amp;rsquo;re interested in the nifty details, &lt;a href="https://github.com/spring-projects/spring-data-commons/blob/1.10.0.RELEASE/src/main/java/org/springframework/data/convert/BytecodeGeneratingEntityInstantiator.java#L54"&gt;here&lt;/a&gt;&amp;rsquo;s the class that does the trick for us.&lt;/p&gt;&lt;h2&gt;&lt;a href="#redis" class="anchor" name="redis"&gt;&lt;/a&gt;Redis&lt;/h2&gt;&lt;h3&gt;&lt;a href="#hyperloglog" class="anchor" name="hyperloglog"&gt;&lt;/a&gt;HyperLogLog&lt;/h3&gt;&lt;p&gt;Redis &lt;a href="http://redis.io/commands#hyperloglog"&gt;HyperLogLog commands&lt;/a&gt; provide an efficient solution to counting unique things without the need to remember elements already encountered. This applies for instance to counting unique page visits by IP.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;HyperLogLogOperations hll = redisTemplate.opsForHyperLogLog();&#xD;
+&#xD;
+hll.add(today(), &amp;quot;8.8.8.8&amp;quot;, &amp;quot;8.8.4.4&amp;quot;);&#xD;
+hll.size(today()); // Unique page visits today = 2&#xD;
+&#xD;
+hll.add(today(), &amp;quot;198.153.192.40&amp;quot;, &amp;quot;8.8.8.8&amp;quot;);&#xD;
+hll.size(today()); // Unique page visits today = 3&#xD;
+hll.size(today(), yesterday()); // Unique page visits today and yesterday
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#gemfire" class="anchor" name="gemfire"&gt;&lt;/a&gt;Gemfire&lt;/h2&gt;&lt;p&gt;By far, the most significant change to the GemFire module is full support for GemFire 8. GemFire 8 introduced &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#relnotes/release_notes.html#topic_5mbwjl"&gt;several new changes&lt;/a&gt; since 7.0.2 including a new &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#relnotes/release_notes.html#topic_5mbwjl__section_zk2_p35_v4"&gt;cluster-based configuration service&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;With that service enabled, developers can record their actions and schema-like changes in Gfsh as they perform actions, like adding regions, creating indexes, configuring disk stores, etc. When a developer spins up a new GemFire peer in the cluster, the member will automatically pick up its configuration from the new cluster-based configuration service, hosted in a locator.&lt;/p&gt;&lt;p&gt;While Spring Data GemFire&amp;rsquo;s &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap"&gt;XML-namespace-based configuration&lt;/a&gt; remains a popular choice, especially during development with highly iterative, short feedback cycles, Spring Data GemFire adds support for the new &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/1.6.0.RC1/reference/html/#bootstrap:cache:cluster-configuration"&gt;cluster-based configuration&lt;/a&gt;, which behaves similarly to Spring Data Gemfire&amp;rsquo;s support for GemFire&amp;rsquo;s &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/1.6.0.RC1/reference/html/#bootstrap:cache"&gt;native `cache.xml&lt;/a&gt; format.&lt;/p&gt;&lt;p&gt;To enable cluster-based configuration in Spring-configured GemFire node, a developer only needs to set the &lt;code&gt;use-cluster-configuration&lt;/code&gt; attribute on the &lt;code&gt;&amp;lt;gfe:cache /&amp;gt;&lt;/code&gt; element, like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;gfe:cache id=&amp;quot;?gemfireCache&amp;quot;? use-cluster-configuration=&amp;quot;?true&amp;quot;? … /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Data GemFire will first request and apply the cluster-wide configuration before applying the XML namespace-specific configuration. You can think of the XML configuration meta-data as augmenting the cluster config sent by the cluster configuration service.&lt;/p&gt;&lt;p&gt;For more information on GemFire&amp;rsquo;s new cluster configuration service, see the &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#deploying/gfsh/gfsh_persist.html"&gt;GemFire user guide&lt;/a&gt; and &lt;a href="https://jira.spring.io/browse/SGF-226"&gt;SGF-226&lt;/a&gt; for more details.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-data-rest" class="anchor" name="spring-data-rest"&gt;&lt;/a&gt;Spring Data REST&lt;/h2&gt;&lt;p&gt;Spring Data REST has seen a wide range of improvements in the Fowler release, too. One of the most notable improvements is more entity metadata inspected and used to populate response headers. For example, stores supporting optimistic locking through an &lt;code&gt;@Version&lt;/code&gt; annotation will now get the entity version used as &lt;code&gt;ETag&lt;/code&gt; header, so that clients can leverage them to trigger conditional &lt;code&gt;GET&lt;/code&gt; requests.&lt;/p&gt;&lt;p&gt;Quite related, entities that use Spring Data auditing support will automatically get their last modification date be propagated into the &lt;code&gt;LastModified&lt;/code&gt; header of the response of item resources:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;class Customer {&#xD;
+&#xD;
+  @Version Long version;&#xD;
+  @LastModifiedDate LocalDate lastModifiedDate;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;curl -v http://…/customers/1&#xD;
+&#xD;
+Etag: 1&#xD;
+Last-Modified: Tue, 24 Mar 2015 12:34:56 GMT
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#json-schema" class="anchor" name="json-schema"&gt;&lt;/a&gt;JSON Schema&lt;/h3&gt;&lt;p&gt;The Fowler release of Spring Data REST also ships with revamped support for JSON Schema. By default, the schema is pointed to by the representation descriptor in the ALPS document exposed for a domain type. In the &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks"&gt;Starbucks example&lt;/a&gt; you can see the link rendered like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;curl http://…/alps/stores&#xD;
+&#xD;
+{&#xD;
+  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;,&#xD;
+  &amp;quot;descriptors&amp;quot;: [ {&#xD;
+    &amp;quot;id&amp;quot;: &amp;quot;store-representation&amp;quot;,&#xD;
+    &amp;quot;href&amp;quot;: &amp;quot;http://localhost:8080/stores/schema&amp;quot;,&#xD;
+    &amp;quot;descriptors&amp;quot;: [ … ]&#xD;
+  }],&#xD;
+  …&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Following the link will reveal the JSON Schema document for a store:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;{&#xD;
+  &amp;quot;title&amp;quot;: &amp;quot;example.stores.Store&amp;quot;,&#xD;
+  &amp;quot;properties&amp;quot;: {&#xD;
+    &amp;quot;address&amp;quot;: {&#xD;
+      &amp;quot;$ref&amp;quot;: &amp;quot;#/descriptors/address&amp;quot;&#xD;
+    },&#xD;
+    &amp;quot;name&amp;quot;: {&#xD;
+      &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
+    }&#xD;
+  },&#xD;
+  &amp;quot;descriptors&amp;quot;: {&#xD;
+    &amp;quot;address&amp;quot;: {&#xD;
+      &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
+      &amp;quot;properties&amp;quot;: {&#xD;
+        &amp;quot;zip&amp;quot;: {&#xD;
+          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
+        },&#xD;
+        &amp;quot;city&amp;quot;: {&#xD;
+          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
+        },&#xD;
+        &amp;quot;street&amp;quot;: {&#xD;
+          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
+        },&#xD;
+        &amp;quot;location&amp;quot;: {&#xD;
+          &amp;quot;$ref&amp;quot;: &amp;quot;#/descriptors/point&amp;quot;&#xD;
+        }&#xD;
+      }&#xD;
+    },&#xD;
+    &amp;quot;point&amp;quot;: {&#xD;
+      &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
+      &amp;quot;properties&amp;quot;: {&#xD;
+        &amp;quot;x&amp;quot;: {&#xD;
+          &amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;&#xD;
+        },&#xD;
+        &amp;quot;y&amp;quot;: {&#xD;
+          &amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;&#xD;
+        }&#xD;
+      }&#xD;
+    }&#xD;
+  },&#xD;
+  &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
+  &amp;quot;$schema&amp;quot;: &amp;quot;http://json-schema.org/draft-04/schema#&amp;quot;&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note how we derive basic traits of the schema from the domain type and its Jackson mappings. Required properties can be determined by using &lt;code&gt;@JsonProperty(required = true)&lt;/code&gt;, date/time types are correctly discovered and advertised. You can register a custom JSON Schema format or pattern on &lt;code&gt;RepositoryRestConfiguration.metadataConfiguration()&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Configuration&#xD;
+static class SampleConfiguration extends RepositoryRestMvcConfiguration {&#xD;
+&#xD;
+  @Override&#xD;
+  protected void configureRepositoryRestConfiguration(&#xD;
+    RepositoryRestConfiguration config) {&#xD;
+    config.metadataConfiguration().&#xD;
+      registerJsonSchemaFormat(JsonSchemaFormat.EMAIL, EmailAddress.class);&#xD;
+  }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Assuming &lt;code&gt;EmailAddress&lt;/code&gt; is a value object that you have tweaked Jackson into rendering as plain &lt;code&gt;String&lt;/code&gt;, this configuration will cause all properties of type &lt;code&gt;EmailAddress&lt;/code&gt; to appear with the &lt;code&gt;format&lt;/code&gt;set to &lt;code&gt;email&lt;/code&gt; in the JSON schema document.&lt;/p&gt;&lt;h2&gt;&lt;a href="#solr" class="anchor" name="solr"&gt;&lt;/a&gt;Solr&lt;/h2&gt;&lt;h3&gt;&lt;a href="#document-score-improvements" class="anchor" name="document-score-improvements"&gt;&lt;/a&gt;Document score improvements&lt;/h3&gt;&lt;p&gt;The Fowler release added support for realtime-get allowing to read uncommitted changes from the index. &lt;code&gt;getById&lt;/code&gt; is available on &lt;code&gt;SolrTemplate&lt;/code&gt;. Also noteworthy is the addition of &lt;code&gt;@Score&lt;/code&gt; which was inspired by &lt;code&gt;@TextScore&lt;/code&gt; available for Spring Data MongoDB. The annotation allows retrieving document score and will implicitly add required parameters so that one no longer has to explicitly add &lt;code&gt;@Query(fields={&amp;quot;*&amp;quot;, &amp;quot;score&amp;quot;}&lt;/code&gt; when retrieving document query match score.&lt;/p&gt;&lt;h2&gt;&lt;a href="#miscellaneous" class="anchor" name="miscellaneous"&gt;&lt;/a&gt;Miscellaneous&lt;/h2&gt;&lt;h3&gt;&lt;a href="#elevating-projections" class="anchor" name="elevating-projections"&gt;&lt;/a&gt;Elevating projections&lt;/h3&gt;&lt;p&gt;Spring Data REST shipped a feature called projections with the Evans release train. In Fowler we moved the infrastructure backing that into Spring Data Commons and tweaked it a bit, so that other projects can use it without further dependencies. The very heart of the feature is a &lt;code&gt;ProjectionFactory&lt;/code&gt; that allows you to create object instances for interfaces that are backed some other object, e.g. a &lt;code&gt;Map&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface Customer {&#xD;
+&#xD;
+  String getFirstname();&#xD;
+&#xD;
+  String getLastname();&#xD;
+&#xD;
+  @Value(&amp;quot;#{target.firstname + &amp;#39; &amp;#39; + target.lastname}&amp;quot;)&#xD;
+  String getFullName();&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This interface can now be turned into an object using a &lt;code&gt;ProjectionFactory&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;();&#xD;
+map.put(&amp;quot;firstname&amp;quot;, &amp;quot;Dave&amp;quot;);&#xD;
+map.put(&amp;quot;lastname&amp;quot;, &amp;quot;Matthews&amp;quot;);&#xD;
+&#xD;
+ProjectionFactory factory = new SpelAwareProjectionFactory();&#xD;
+Customer customer = factory.createProjection(Customer.class, map)&#xD;
+&#xD;
+assertThat(customer.getFirstname(), is(&amp;quot;Dave&amp;quot;));&#xD;
+assertThat(customer.getLastname(), is(&amp;quot;Matthews&amp;quot;));&#xD;
+assertThat(customer.getFullName(), is(&amp;quot;Dave Matthews&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you can see, we chose a &lt;code&gt;Map&lt;/code&gt; to back the created projection instance. Under the hood a JDK proxy is created equipped with method interceptors that - in case of a &lt;code&gt;Map&lt;/code&gt; backing the proxy - delegating calls to accessors to property lookups within the &lt;code&gt;Map&lt;/code&gt;. Methods annotated with &lt;code&gt;@Value&lt;/code&gt; will get the annotated SpEL expression evaluated. In case you configure a &lt;code&gt;BeanFactory&lt;/code&gt; on the &lt;code&gt;SpelAwareProjectionFactory&lt;/code&gt; you can even refer to Spring beans from within these expressions and thus trigger more complex calculations.&lt;/p&gt;&lt;p&gt;In case the backing lookup does not return a value assignable to the return type declared, a standard &lt;code&gt;ConversionService&lt;/code&gt; is used for simple conversions followed by a recursive projection step.&lt;/p&gt;&lt;h3&gt;&lt;a href="#projections-in-spring-mvc" class="anchor" name="projections-in-spring-mvc"&gt;&lt;/a&gt;Projections in Spring MVC&lt;/h3&gt;&lt;p&gt;The projection mechanism can now be used by Spring MVC controller implementations to create form backing objects solely using interfaces. Using &lt;code&gt;@EnableSpringDataWebSupport&lt;/code&gt; in your Spring configuration (automatically activated in Boot) a &lt;code&gt;ProxyingHandlerMethodArgumentResolver&lt;/code&gt; is resolved that will automatically create a proxy instance for the interface and bind the according request parameters to it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface Form {&#xD;
+&#xD;
+  @NotBlank String getName();&#xD;
+  @NotBlank String getText();&#xD;
+}&#xD;
+&#xD;
+@Controller&#xD;
+@RequestMapping(value = &amp;quot;/guestbook&amp;quot;)&#xD;
+class GuestbookController {&#xD;
+&#xD;
+  @RequestMapping(method = RequestMethod.GET)&#xD;
+  String guestbook(Form form, Model model) { … }&#xD;
+&#xD;
+  @RequestMapping(method = RequestMethod.POST)&#xD;
+  String guestbook(@Valid Form form, Errors errors, Model model) { … }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;See how the interface is used in the method accepting a &lt;code&gt;GET&lt;/code&gt; request to provide an empty form-backing object to the view about to be rendered. The method receiving the &lt;code&gt;POST&lt;/code&gt; request uses the &lt;code&gt;Form&lt;/code&gt; to indicate it wants to get form data bound to the proxy instance and validation applied.&lt;/p&gt;&lt;h2&gt;&lt;a href="#summary" class="anchor" name="summary"&gt;&lt;/a&gt;Summary&lt;/h2&gt;&lt;p&gt;Despite the length of the post, we barely scratched the surface of all the new features Spring Data Fowler ships. You might want to explore the &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;release train wiki&lt;/a&gt; for further gems, and traverse the links to the tickets and related commits in turn as they contain test cases that usually demonstrate a the individual features nicely.&lt;/p&gt;&lt;p&gt;Also, the already mentioned &lt;a href="https://github.com/spring-projects/spring-data-examples"&gt;Spring Data examples repository&lt;/a&gt; has a lot of stuff to play with and explore.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Security 3.2.7 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-security-3-2-7-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2015-03-26:2044</id>
+    <updated>2015-03-26T08:28:00Z</updated>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 3.2.7.RELEASE. This release brings a number of &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;bug fixes&lt;/a&gt; including a fix for a regression in the Active Directory support.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Integration Kafka Support 1.1.GA is available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-integration-kafka-support-1-1-ga-is-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Artem Bilan</name>
+    </author>
+    <id>tag:spring.io,2015-03-23:2033</id>
+    <updated>2015-03-26T01:00:00Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;We are pleased to announce that the Spring Integration Kafka Support 1.1 GA is now available.&lt;br/&gt;Use the &lt;a href="http://repo.springsource.org/release"&gt;Release Repository&lt;/a&gt; with Maven or Gradle&lt;br/&gt;&lt;code&gt;&#xD;
+compile &amp;quot;org.springframework.integration:spring-integration-kafka:1.1.1.RELEASE&amp;quot;&#xD;
+&lt;/code&gt;&lt;br/&gt;or download a &lt;a href="http://repo.spring.io/release/org/springframework/integration/spring-integration-kafka/1.1.1.RELEASE"&gt;distribution archive&lt;/a&gt;, to give it a spin.&lt;/p&gt;&lt;h2&gt;&lt;a href="#overview" class="anchor" name="overview"&gt;&lt;/a&gt;Overview&lt;/h2&gt;&lt;p&gt;The main reason of such a quick next point release just after &lt;a href="https://spring.io/blog/2015/02/09/spring-integration-kafka-extension-1-0-ga-is-available"&gt;1.0 GA&lt;/a&gt; is to address a number of critical &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=11101&amp;version=14931"&gt;fixes&lt;/a&gt; for the upcoming &lt;a href="http://projects.spring.io/spring-xd/"&gt;Spring XD&lt;/a&gt; &lt;code&gt;1.1.1&lt;/code&gt; and &lt;code&gt;1.2&lt;/code&gt; releases. In addition, this release provides performance improvements around message generation streaming scenarios, which required an upgrade to &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration&lt;/a&gt; &lt;code&gt;4.1&lt;/code&gt;, which is the minimum for Spring XD also.&lt;/p&gt;&lt;p&gt;One more important feature, which has been introduced with this release, is &lt;em&gt;manual acknowledgment&lt;/em&gt;, where a message&amp;rsquo;s &lt;code&gt;offset&lt;/code&gt; can be committed later on demand.&lt;br/&gt;For this purpose, Spring Integration Kafka introduces the &lt;code&gt;Acknowledgment&lt;/code&gt; interface. When &lt;code&gt;KafkaMessageDrivenChannelAdapter#autoCommitOffset&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;, a &lt;code&gt;KafkaHeaders.ACKNOWLEDGMENT&lt;/code&gt; header is added to the message, containing an &lt;code&gt;Acknowledgment&lt;/code&gt; object. Having that message header you always can decide to &lt;code&gt;acknowledge()&lt;/code&gt; the Kafka message or not in the downstream flow.&lt;/p&gt;&lt;p&gt;If you are using &lt;code&gt;KafkaMessageListenerContainer&lt;/code&gt; directly, you can now register an &lt;code&gt;AcknowledgingMessageListener&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;public interface AcknowledgingMessageListener {&#xD;
+	void onMessage(KafkaMessage message, Acknowledgment acknowledgment);&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When doing so, automatic offset updates are disabled, and you can use the &lt;code&gt;acknowledge()&lt;/code&gt; method of the &lt;code&gt;Acknowledgment&lt;/code&gt; argument to trigger an offset update.&lt;/p&gt;&lt;h2&gt;&lt;a href="#what-next" class="anchor" name="what-next"&gt;&lt;/a&gt;What next?&lt;/h2&gt;&lt;p&gt;Our plans are to work on &lt;code&gt;1.2&lt;/code&gt; release. It will be a critical upgrade to &lt;a href="http://kafka.apache.org/downloads.html"&gt;Kafka 0.8.2&lt;/a&gt;, possibly non-backwards compatible. Plus we are going to expose more configurable options for retry support within Kafka Adapters. And much more!&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-kafka"&gt;Project Page&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/INTEXT"&gt;JIRA&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-kafka/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.md"&gt;Contributions&lt;/a&gt; | &lt;a href="http://stackoverflow.com"&gt;StackOverflow&lt;/a&gt; (&lt;code&gt;spring-integration&lt;/code&gt; tag)&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Framework 4.1.6 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/25/spring-framework-4-1-6-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Juergen Hoeller</name>
+    </author>
+    <id>tag:spring.io,2015-03-25:2039</id>
+    <updated>2015-03-25T18:44:30Z</updated>
+    <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;It’s my pleasure to announce that Spring Framework 4.1.6 is available now. This is almost exclusively a bugfix release and therefore a strongly recommended upgrade for all current 4.x users. In particular, we recommend an upgrade from the superseded 4.0.x line as well.&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10000&amp;version=14863"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Spring Framework 4.1.6 is also the first release to be formally compatible with the recently released JDK 8 update 40. Spring 4.1.x supports a wide range of Java runtimes now, from 2010-era JDK 6 variants up until the latest 2015-era JDK 8 offerings from Oracle and IBM.&lt;/p&gt;&lt;p&gt;On a related note, for Spring Framework 4.2, we&amp;rsquo;re even testing on early JDK 9 builds already. If you&amp;rsquo;re interested in how we go about supporting different JDK generations in one and the same Spring Framework generation, stay tuned for our upcoming blog post&amp;hellip;&lt;/p&gt;&lt;p&gt;Cheers,&lt;/p&gt;&lt;p&gt;Juergen&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - March 24th, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/24/this-week-in-spring-march-24th-2015" />
@@ -866,172 +1132,6 @@ public class HelloController {&#xD;
   &lt;li&gt;There are a few case studies on the Pivotal blog today. First, Jarrod Vawdrey&amp;rsquo;s post on using data-science to &lt;a href="http://blog.pivotal.io/data-science-pivotal/case-studies-2/using-data-science-to-predict-tv-viewer-behavior-and-formulate-a-hit-tv-show"&gt;predict TV viewer behavior and formulate a hit TV show is awesome&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Dwayne Forde has put together a nice case study on &lt;a href="http://blog.pivotal.io/cloud-foundry-pivotal/case-studies-2/how-pivotal-performs-continuous-delivery-of-mobile-services"&gt;How Pivotal Performs Continuous Delivery of Mobile Services&lt;/a&gt;.&lt;/li&gt;
 &lt;/ol&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Reactive data-pipelines with Spring XD and Kafka</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/17/webinar-reactive-data-pipelines-with-spring-xd-and-kafka" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-17:2029</id>
-    <updated>2015-03-17T07:40:00Z</updated>
-    <content type="html">&lt;p&gt;Speakers: Marius Bogoevici &amp;amp; Mark Pollack &lt;/p&gt;
-&lt;p&gt;In the recent years, drastic increases in data volume as well as a greater demand for low latency have led to a radical shift in business requirements and application development methods. In response to these demands, frameworks such as RxJava and high throughput messaging systems such as Kafka have emerged as key building blocks.&#xD;
-However, integrating technologies is never easy and Spring XD provides a solution. Through its development model and runtime, Spring XD makes it easy to develop highly scalable data pipelines, and lets you focus on writing and testing business logic vs. integrating and scaling a big data stack.  &#xD;
-Come and see how easy this can be in this webinar, where we will demonstrate how to build highly scalable data pipelines with RxJava and Kafka, using Spring XD as a platform.&lt;/p&gt;&lt;p&gt;Tuesday, April 28th, 2015 2:00PM GMT (London GMT) &lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMReactivedata-pipelineswithSpringXDandKafka_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, April 28th, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMReactivedata-pipelineswithSpringXDandKafka_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar: Smarter Service-to-Service Invocations with Spring Cloud</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/17/webinar-smarter-service-to-service-invocations-with-spring-cloud" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-17:2028</id>
-    <updated>2015-03-17T07:35:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Josh Long  &lt;/p&gt;
-&lt;p&gt;Spring Cloud 1.0 is here! It offers a powerful way to create and consume microservices. As you introduce new services, you introduce integration problems: services can be shaky, they can disappear and - as they're often exposed over HTTP - they require a bit more footwork than in-process method invocations. In this webinar, we'll focus specifically on how Spring Cloud integrates service registration (e.g.: Eureka, Consul, or Zookeeper), declarative REST clients (with Netflix's Feign), reactive programming and the circuit breaker pattern with Hystrix to support easy, robust service-to-service invocations. This is a deep dive on how to make connect and consume microservices, and is a natural next step after my introduction to building microservices with Spring Cloud. &lt;/p&gt;&lt;p&gt;Tuesday, April 21st, 2015 2:00PM GMT (London GMT) &lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMSmarterService-to-ServiceInvocationswithSpringCloud_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, April 21st, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMSmarterService-to-ServiceInvocationswithSpringCloud_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Getting Started with Couchbase and Spring Data Couchbase</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/16/getting-started-with-couchbase-and-spring-data-couchbase" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-03-16:2022</id>
-    <updated>2015-03-16T05:20:06Z</updated>
-    <content type="html">&lt;blockquote&gt;&lt;p&gt;This blog was inspired by a talk that &lt;a href="https://twitter.com/ldoguin"&gt;Laurent Doguin&lt;/a&gt;, a developer advocate over at Couchbase, and I gave at &lt;a href="http://www.couchbase.com/connect/"&gt;Couchbase Connect&lt;/a&gt; last year. Merci Laurent!&lt;/p&gt;
-&lt;/blockquote&gt;&lt;p&gt;This is a demo of the &lt;a href="https://github.com/spring-projects/spring-data-couchbase"&gt;Spring Data Couchbase&lt;/a&gt; integration. From &lt;a href="http://spring.io/projects/spring-data-couchbase"&gt;the project page&lt;/a&gt;, Spring Data Couchbase is:&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;The Spring Data Couchbase project provides integration with the Couchbase Server database. Key functional areas of Spring Data Couchbase are a POJO centric model for interacting with Couchbase Buckets and easily writing a Repository style data access layer.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#what-is-couchbase" class="anchor" name="what-is-couchbase"&gt;&lt;/a&gt;What is Couchbase?&lt;/h2&gt;&lt;p&gt;Couchbase is a distributed data-store that enjoys true horizontal scaling. I like to think of it as a mix of Redis and MongoDB: you work with documents that are accessed through their keys. There are numerous client APIs for all languages. If you&amp;rsquo;re using Couchbase for your backend and using the JVM, you&amp;rsquo;ll &lt;a href="http://projects.spring.io/spring-data-couchbase/"&gt;love Spring Data Couchbase&lt;/a&gt;. The bullets on the project home page best enumerate its many features:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring configuration support using Java based &lt;code&gt;@Configuration&lt;/code&gt; classes or an XML namespace for the Couchbase driver.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;CouchbaseTemplate&lt;/code&gt; helper class that increases productivity performing common Couchbase operations. Includes integrated object mapping between documents and POJOs.&lt;/li&gt;
-  &lt;li&gt;Exception translation into Spring&amp;rsquo;s portable Data Access Exception hierarchy.&lt;/li&gt;
-  &lt;li&gt;Feature Rich Object Mapping integrated with Spring&amp;rsquo;s Conversion Service.&lt;/li&gt;
-  &lt;li&gt;Annotation based mapping metadata but extensible to support other metadata formats.&lt;/li&gt;
-  &lt;li&gt;Automatic implementation of Repository interfaces including support for custom finder methods (backed by Couchbase Views).&lt;/li&gt;
-  &lt;li&gt;JMX administration and monitoring&lt;/li&gt;
-  &lt;li&gt;Transparent &lt;code&gt;@Cacheable&lt;/code&gt; support to cache any objects you need for high performance access.&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#running-couchbase" class="anchor" name="running-couchbase"&gt;&lt;/a&gt;Running Couchbase&lt;/h2&gt;&lt;h3&gt;&lt;a href="#use-vagrant-to-run-couchbase-locally" class="anchor" name="use-vagrant-to-run-couchbase-locally"&gt;&lt;/a&gt;Use Vagrant to Run Couchbase Locally&lt;/h3&gt;&lt;p&gt;You will need to have Couchbase installed if you don&amp;rsquo;t already (naturally). Michael Nitschinger (&lt;a href="https://twitter.com/daschl"&gt;@daschl&lt;/a&gt;, also lead of the Spring Data Couchbase project), blogged about how to get a simple &lt;a href="http://blog.couchbase.com/couchbase-cluster-minutes-vagrant-and-puppet"&gt;4-node Vagrant cluster up and running here&lt;/a&gt;. I&amp;rsquo;ve reproduced his example here in the &lt;code&gt;vagrant&lt;/code&gt; directory. To use it, you&amp;rsquo;ll need to install &lt;a href="https://www.virtualbox.org/"&gt;Virtual Box&lt;/a&gt; and &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt;, of course, but then simply run &lt;code&gt;vagrant up&lt;/code&gt; in the &lt;code&gt;vagrant&lt;/code&gt; directory. To get the most up-to-date version of this configuration script, I went to Michael&amp;rsquo;s &lt;a href="https://github.com/daschl/vagrants"&gt;GitHub &lt;code&gt;vagrants&lt;/code&gt; project&lt;/a&gt; and found that, beyond this example, there are &lt;a href="https://github.com/couchbaselabs/vagrants"&gt;&lt;em&gt;numerous&lt;/em&gt; other Vagrant scripts available&lt;/a&gt;. I have a submodule in this code&amp;rsquo;s project directory that points to that, but be sure to consult that for the latest-and-greatest. To get everything running on my machine, I chose &lt;a href="https://github.com/couchbaselabs/vagrants/tree/master/3.0.2/ubuntu12"&gt;the Ubuntu 12 installation of Couchbase 3.0.2&lt;/a&gt;. You can change how many nodes are started by configuring the &lt;code&gt;VAGRANT_NODES&lt;/code&gt; environment variable before startup:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint sh"&gt;VAGRANT_NODES=2 vagrant up
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You&amp;rsquo;ll need to administer and configure Couchbase on initial setup. Point your browser to the right IP for each node. The rules for determining that IP &lt;a href="https://github.com/couchbaselabs/vagrants"&gt;are well described in the &lt;code&gt;README&lt;/code&gt;&lt;/a&gt;. The admin interface, in my case, was available at &lt;code&gt;192.168.105.101:8091&lt;/code&gt; and &lt;code&gt;192.168.105.102:8091&lt;/code&gt;. For more on this process, I recommend that you follow the &lt;a href="http://docs.couchbase.com/prebuilt/couchbase-manual-3.0/Install/init-setup.html"&gt;guidelines here&lt;/a&gt; for the details.&lt;/p&gt;&lt;p&gt;Here&amp;rsquo;s how I did it. I hit the admin interface &lt;a href="http://192.168.105.101:8091/"&gt;on the first node&lt;/a&gt; and created a new cluster. I used &lt;code&gt;admin&lt;/code&gt; for the username and &lt;code&gt;password&lt;/code&gt; for the password. On all subsequent management pages, I simply joined the existing cluster by pointing the nodes to &lt;code&gt;192.168.105.101&lt;/code&gt; and using the aforementioned &lt;code&gt;admin&lt;/code&gt; credential. Once you&amp;rsquo;ve joined all nodes, look for the &lt;code&gt;Rebalance&lt;/code&gt; button in the &lt;em&gt;Server Nodes&lt;/em&gt; panel and trigger a cluster rebalance.&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/server-nodes.png" /&gt;&lt;/p&gt;&lt;p&gt;If you are done with your Vagrant cluster, you can use the &lt;code&gt;vagrant halt&lt;/code&gt; command to shut it down cleanly. Very handy is also &lt;code&gt;vagrant suspend&lt;/code&gt;, which will save the state of the nodes instead of shutting them down completely.&lt;/p&gt;&lt;p&gt;If you want to administer the Couchbase cluster from the command line there is the handy &lt;a href="http://docs.couchbase.com/couchbase-manual-2.5/cb-cli/#couchbase-cli-too"&gt;&lt;code&gt;couchbase-cli&lt;/code&gt;&lt;/a&gt;. You can simply use the &lt;code&gt;vagrant ssh&lt;/code&gt; command to get into each of the nodes (by their node-names: &lt;code&gt;node1&lt;/code&gt;, &lt;code&gt;node2&lt;/code&gt;, etc..). Once there, you can run cluster configuration commands. For example the &lt;code&gt;server-list&lt;/code&gt; command will enumerate cluster nodes.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint sh"&gt;/opt/couchbase/bin/couchbase-cli server-list -c 192.168.56.101 -u admin -p password
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;It&amp;rsquo;s easy to trigger a &lt;em&gt;rebalance&lt;/em&gt; using:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint sh"&gt;/opt/couchbase/bin/couchbase-cli rebalance -c 192.168.56.101 -u admin -p password
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#couchbase-in-the-cloud-and-on-cloud-foundry" class="anchor" name="couchbase-in-the-cloud-and-on-cloud-foundry"&gt;&lt;/a&gt;Couchbase In the Cloud and on Cloud Foundry&lt;/h3&gt;&lt;p&gt;Couchbase lends itself to use in the cloud. It&amp;rsquo;s horizontally scalable (like Gemfire or Cassandra) in that there&amp;rsquo;s no single point of failure. It does not employ a master-slave or active/passive system. There are a few ways to get it up and running where your applications are running. If you&amp;rsquo;re running a Cloud Foundry installation, then you can install the the &lt;a href="https://github.com/cumulogic/cumulogic_cloudfoundry_broker"&gt;Cumulogic Service Broker&lt;/a&gt; which then lets your Cloud Foundry installation talk to the Cumulogic platform which itself can manage Couchbase instances. Service brokers are the bit of integration code that teach Cloud Foundry how to provision, destroy and generally interact with a managed service, like Couchbase, in this case.&lt;/p&gt;&lt;h2&gt;&lt;a href="#using-spring-data-couchbase-to-store-facebook-places" class="anchor" name="using-spring-data-couchbase-to-store-facebook-places"&gt;&lt;/a&gt;Using Spring Data Couchbase to Store Facebook Places&lt;/h2&gt;&lt;p&gt;Let&amp;rsquo;s look at a simple example that reads data (in this case from the Facebook Places API using Spring Social Facebook&amp;rsquo;s &lt;code&gt;FacebookTemplate&lt;/code&gt; API) and then loads it into the Couchbase server.&lt;/p&gt;&lt;h3&gt;&lt;a href="#get-a-facebook-access-token" class="anchor" name="get-a-facebook-access-token"&gt;&lt;/a&gt;Get a Facebook Access Token&lt;/h3&gt;&lt;p&gt;You&amp;rsquo;ll also need a Facebook access token. The easiest way to do this is to go to &lt;a href="https://developers.facebook.com/"&gt;the Facebook Developer Portal&lt;/a&gt; and create a new application and then get an application ID and an application secret. Take these two values and concatenate them with a pike character (&lt;code&gt;|&lt;/code&gt;). Thus, you&amp;rsquo;ll have something of the form: &lt;code&gt;appID|appSecret&lt;/code&gt;. The sample application uses Spring&amp;rsquo;s &lt;code&gt;Environment&lt;/code&gt; mechanism to resolve the &lt;code&gt;facebook.accessToken&lt;/code&gt; key. You can provide a value for it in the &lt;code&gt;src/main/resources/application.properties&lt;/code&gt; file or using any of the other supported Spring Boot property resolution mechanisms. You could even provide the value as a &lt;code&gt;-D&lt;/code&gt; argument: &lt;code&gt;-Dfacebook.accessToken=...|...&lt;/code&gt;&lt;/p&gt;&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/facebook-app.png" /&gt;&lt;/p&gt;&lt;h3&gt;&lt;a href="#telling-spring-data-couchbase-about-our-cluster" class="anchor" name="telling-spring-data-couchbase-about-our-cluster"&gt;&lt;/a&gt;Telling Spring Data Couchbase About our Cluster&lt;/h3&gt;&lt;p&gt;Data in Couchbase is stored in &lt;em&gt;buckets&lt;/em&gt;. It&amp;rsquo;s logically the same as a &lt;em&gt;database&lt;/em&gt; in a SQL RDBMS. It is typically replicated across nodes and has its own configuration. We&amp;rsquo;ll be using the &lt;em&gt;default&lt;/em&gt; bucket, but it&amp;rsquo;s a snap to create more buckets.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s look at the basic configuration required to use Spring Data Couchbase (in this case, in terms of a Spring Boot application):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;@SpringBootApplication&#xD;
-@EnableScheduling&#xD;
-@EnableCaching&#xD;
-public class Application {&#xD;
-&#xD;
-  @EnableCouchbaseRepositories&#xD;
-	@Configuration&#xD;
-	static class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {&#xD;
-&#xD;
-		@Value(&amp;quot;${couchbase.cluster.bucket}&amp;quot;)&#xD;
-		private String bucketName;&#xD;
-&#xD;
-		@Value(&amp;quot;${couchbase.cluster.password}&amp;quot;)&#xD;
-		private String password;&#xD;
-&#xD;
-		@Value(&amp;quot;${couchbase.cluster.ip}&amp;quot;)&#xD;
-		private String ip;&#xD;
-&#xD;
-		@Override&#xD;
-		protected List&amp;lt;String&amp;gt; bootstrapHosts() {&#xD;
-			return Arrays.asList(this.ip);&#xD;
-		}&#xD;
-&#xD;
-		@Override&#xD;
-		protected String getBucketName() {&#xD;
-			return this.bucketName;&#xD;
-		}&#xD;
-&#xD;
-		@Override&#xD;
-		protected String getBucketPassword() {&#xD;
-			return this.password;&#xD;
-		}&#xD;
-	}&#xD;
-&#xD;
-  // more beans&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#a-spring-data-couchbase-repository" class="anchor" name="a-spring-data-couchbase-repository"&gt;&lt;/a&gt;A Spring Data Couchbase Repository&lt;/h3&gt;&lt;p&gt;Spring Data provides the notion of repositories - objects that handle typical data-access logic and provide convention-based queries. They can be used to map POJOs to data in the backing data store.&lt;/p&gt;&lt;p&gt;Our example simply stores the information on businesses it reads from Facebook&amp;rsquo;s Places API. To acheive this we&amp;rsquo;ve created a simple &lt;code&gt;Place&lt;/code&gt; entity that Spring Data Couchbase repositories will know how to persist:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;&lt;br/&gt;@Document(expiry = 0)&#xD;
-class Place {&#xD;
-&#xD;
-	@Id&#xD;
-	private String id;&#xD;
-&#xD;
-	@Field&#xD;
-	private Location location;&#xD;
-&#xD;
-	@Field&#xD;
-	@NotNull&#xD;
-	private String name;&#xD;
-&#xD;
-	@Field&#xD;
-	private String affilitation, category, description, about;&#xD;
-&#xD;
-	@Field&#xD;
-	private Date insertionDate;&#xD;
-  // .. getters, constructors, toString, etc&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;Place&lt;/code&gt; entity references another entity, &lt;code&gt;Location&lt;/code&gt;, which is basically the same.&lt;/p&gt;&lt;p&gt;In the case of Spring Data Couchbase, repository finder methods map to &lt;em&gt;views&lt;/em&gt; - queries written in JavaScript - in a Couchbase server. You&amp;rsquo;ll need to setup views on the Couchbase servers. Go to any Couchbase server&amp;rsquo;s admin console and visit the &lt;em&gt;Views&lt;/em&gt; screen, then click &lt;em&gt;Create Development View&lt;/em&gt; and name it &lt;code&gt;place&lt;/code&gt;, as our entity will be &lt;code&gt;demo.Place&lt;/code&gt; (the development view name is adapted from the entity&amp;rsquo;s class name by default).&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ll create two views, the generic &lt;code&gt;all&lt;/code&gt;, which is required for any Spring Data Couchbase POJO, and the &lt;code&gt;byName&lt;/code&gt; view, which will be used to drive the repository&amp;rsquo;s &lt;code&gt;findByName&lt;/code&gt; finder method. This mapping is by convention, though you can override which view is employed with the &lt;code&gt;@View&lt;/code&gt; annotation on the finder method&amp;rsquo;s declaration.&lt;/p&gt;&lt;p&gt;First, &lt;code&gt;all&lt;/code&gt;:&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/all-view.png" /&gt;&lt;/p&gt;&lt;p&gt;Now, &lt;code&gt;byName&lt;/code&gt;:&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/byName-view.png" /&gt;&lt;/p&gt;&lt;p&gt;When you&amp;rsquo;re done, be sure to &lt;em&gt;Publish&lt;/em&gt; each view!&lt;/p&gt;&lt;p&gt;&lt;img src = "https://raw.githubusercontent.com/joshlong/meh/master/sd-couchbase-blog/views.png" /&gt;&lt;/p&gt;&lt;p&gt;Now you can use Spring Data repositories as you&amp;rsquo;d expect. The only thing that&amp;rsquo;s a bit different about these repositories is that we&amp;rsquo;re declaring a Spring Data Couchbase &lt;code&gt;Query&lt;/code&gt; type for the argument to the &lt;code&gt;findByName&lt;/code&gt; finder method, not a String. Using the &lt;code&gt;@Query&lt;/code&gt; is straightforward:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;Query query = new Query();&#xD;
-query.setKey(&amp;quot;Philz Coffee&amp;quot;);&#xD;
-Collection&amp;lt;Place&amp;gt; places = placeRepository.findByName(query);&#xD;
-places.forEach(System.out::println);
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#where-to-go-from-here" class="anchor" name="where-to-go-from-here"&gt;&lt;/a&gt;Where to go from Here&lt;/h2&gt;&lt;p&gt;We&amp;rsquo;ve only covered some of the basics here. Spring Data Couchbase supports the &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#validation"&gt;Java bean validation API&lt;/a&gt;, and can be configured to honor validation constraints on its entities. Spring Data Couchbase also provides lower-level access to the &lt;code&gt;CouchbaseClient&lt;/code&gt; API, if you want it. Spring Data Couchbase &lt;em&gt;also&lt;/em&gt; implements &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/current/reference/html/#couchbase.caching"&gt;the Spring &lt;code&gt;CacheManager&lt;/code&gt; abstraction&lt;/a&gt; - you can use &lt;code&gt;@Cacheable&lt;/code&gt; and friends with data on service methods and it&amp;rsquo;ll be transparently persisted to Couchbase for you.&lt;/p&gt;&lt;p&gt;The code for &lt;a href="https://github.com/joshlong/spring-data-couchbase-talk"&gt;this example is in my Github repository&lt;/a&gt;, co-developed with my pal Laurent Doguin (&lt;a href="https://twitter.com/ldoguin"&gt;@ldoguin&lt;/a&gt;) over at Couchbase. &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar Replay: A Single-Page Application with Spring Security and Angular JS</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/14/webinar-replay-a-single-page-application-with-spring-security-and-angular-js" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-15:2020</id>
-    <updated>2015-03-14T17:00:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: Dr. David Syer, Pivotal  &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://presos.dsyer.com/decks/spring-security-angular.html"&gt;http://presos.dsyer.com/decks/spring-security-angular.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Spring Security, Spring Boot and Angular JS all have nice features for making it really easy to produce modern applications, so there is potentially a lot of value in making them work together very smoothly. Things to consider are cookies, headers, native clients, various security vulnerabilities and how modern browser technology can help us to avoid them.  In this session we show how nice features of the component frameworks can be integrated simply to provide a pleasant and secure user experience. We start with a very basic single-server implementation and scale it up in stages, splitting out backend resources and authentication to separate services. The final state includes a simple API Gateway on the front end implemented declaratively using Spring Cloud, and using this we are able to neatly sidestep a lot of the problems people encounter securing a javascript front end with a distributed back end. &lt;/p&gt;
-&lt;p&gt;Learn about about Spring Security at &lt;a href="http://projects.spring.io/spring-security"&gt;http://projects.spring.io/spring-security&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Learn about about Spring Cloud at &lt;a href="http://projects.spring.io/spring-cloud"&gt;http://projects.spring.io/spring-cloud&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt; &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/vX_txZ3ETBg" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Webinar Replay: Introducing Spring Session</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/12/webinar-replay-introducing-spring-session" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-12:2019</id>
-    <updated>2015-03-12T10:17:00Z</updated>
-    <content type="html">&lt;p&gt;Webinar Replay: Introducing Spring Session&lt;br/&gt;&lt;p&gt;Speaker: Josh Long, Pivotal &lt;/p&gt;&lt;br/&gt;&lt;p&gt;Slides: &lt;a href="https://speakerdeck.com/joshlong/bootiful-sessions"&gt;&lt;a href="https://speakerdeck.com/joshlong/bootiful-sessions"&gt;https://speakerdeck.com/joshlong/bootiful-sessions&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Back in the era of the application server, HTTP Session replication was a common way to scale out user session data, as well as make it fault tolerant. In today&amp;rsquo;s world of lightweight containers, PaaS, and virtualization, Spring Session offers a 100% server and/or container portable HTTP Session. See how Spring Session easily plugs in implementations like Redis, scales out across a cluster, handles multiple users&amp;rsquo; browser sessions, works with WebSocket, and allows header based authentication within REST apps. It&amp;rsquo;s a perfect fit for working with user data, particularly in a highly distributed environment like the cloud, or on a Platform like Cloud Foundry.&lt;/p&gt;&lt;br/&gt;&lt;p&gt;Learn more about Spring Session: &lt;a href="http://projects.spring.io/spring-session"&gt;&lt;a href="http://projects.spring.io/spring-session"&gt;http://projects.spring.io/spring-session&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;
-&lt;p&gt; &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/9HG5VFGPm_8" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security Kerberos 1.0.0.RC1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/11/spring-security-kerberos-1-0-0-rc1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Janne Valkealahti</name>
-    </author>
-    <id>tag:spring.io,2015-03-11:2018</id>
-    <updated>2015-03-11T16:34:16Z</updated>
-    <content type="html">&lt;p&gt;With a very long overdue from a previous milestone release we are pleased to announce the release of Spring Security Kerberos 1.0.0.RC1.&lt;/p&gt;&lt;p&gt;A summary of changes can be seen below:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;We did a lot of housekeeping to put a whole project up-to-date.&lt;/li&gt;
-  &lt;li&gt;Rerefence documentation is now updated to reflect what we have. &lt;a href="http://docs.spring.io/spring-security-kerberos/docs/1.0.0.RC1/reference/htmlsingle"&gt;Reference Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;We added a new KerberosRestTemplate for use cases where you need to have a programmatic access to kerberized web resources.&lt;/li&gt;
-  &lt;li&gt;Samples has been re-written from scratch. These samples are &lt;code&gt;bootified&lt;/code&gt; meaning user should have relatively few steps to test Kerberized functionality. There are more about samples in our reference documentation but those include working with Windows AD, MIT Kerberos and RestTemplate.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;We&amp;rsquo;d love to hear back what people think by participating in a project or simply creating issues or feature requests at &lt;a href="https://github.com/spring-projects/spring-security-kerberos"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 
