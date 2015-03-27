@@ -1,0 +1,38 @@
+<%@page import="vn.edu.cit.model.Server"%>
+<%@page import="vn.edu.cit.model.User"%>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<aside class="left-side sidebar-offcanvas">
+	<!-- sidebar -->
+	<section class="sidebar">
+		<!-- Sidebar user panel
+            	<div class="user-panel">
+            	//image
+            	</div>
+        -->
+		<ul class="sidebar-menu">
+			<%
+				if (user.getServers() != null && !user.getServers().isEmpty()) {
+												for (Server server : user.getServers()) {
+																			//check Server status
+																			//if(server.checkStatus()){
+			%>
+			<li class="list-item list-server-left" data-id="<%=server.getServerAddress()%>">
+					<i class="fa fa-desktop server-icon"></i> <%=server.getServerAddress()%>
+					<i style="color: green;display:none" class="glyphicon glyphicon-ok-circle" ></i> 
+					<i style="color: red;display:none" class="glyphicon glyphicon-ban-circle"></i>
+					<ul>
+						<li>Edit..</li>
+						<li>Remove</li>
+						<li>C
+					</ul>
+			</li>
+			<%
+				}
+														}
+			%>
+		</ul>
+	</section>
+	<!-- end sidebar -->
+</aside>

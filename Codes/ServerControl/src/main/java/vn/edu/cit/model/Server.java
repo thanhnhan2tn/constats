@@ -40,8 +40,8 @@ public class Server {
 		return serverId;
 	}
 
-	public Server(int serverId, String serverAddress, int port,
-			String serverName, String serverUsername, String serverPassword) {
+	public Server(int serverId, String serverAddress, int port, String serverName, String serverUsername,
+			String serverPassword) {
 		super();
 		this.serverId = serverId;
 		this.serverAddress = serverAddress;
@@ -94,7 +94,7 @@ public class Server {
 	 * @return
 	 */
 	public boolean checkStatus() {
-		return (getSession(this)!=null);
+		return (getSession(this) != null);
 	}
 
 	/**
@@ -110,10 +110,10 @@ public class Server {
 			config.put("StrictHostKeyChecking", "no");
 			JSch jsch = new JSch();
 			// Khoi tao doi tuong Session
-			Session session = jsch.getSession(sv.getServerUsername(),
-					sv.getServerAddress(), sv.getPort());
+			Session session = jsch.getSession(sv.getServerUsername(), sv.getServerAddress(), sv.getPort());
 			session.setPassword(sv.getServerPassword());
 			session.setConfig(config);
+			//session.setTimeout(10000);
 			session.connect();
 			// System.out.println("Connected to Server Success !!!!");
 			return session;

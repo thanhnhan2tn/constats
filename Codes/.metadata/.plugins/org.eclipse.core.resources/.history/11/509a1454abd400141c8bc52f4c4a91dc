@@ -1,0 +1,29 @@
+<%@page import="vn.edu.cit.model.Server"%>
+<%@page import="vn.edu.cit.model.User"%>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<aside class="left-side sidebar-offcanvas">
+	<!-- sidebar -->
+	<section class="sidebar">
+		<!-- Sidebar user panel
+            	<div class="user-panel">
+            	//image
+            	</div>
+        -->
+		<ul class="sidebar-menu">
+			<%
+				if (user.getServers() != null && !user.getServers().isEmpty()) {
+					for (Server server : user.getServers()) {
+			%>
+			<li>
+			        <a class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">${server.serverAddress}</a>
+			</li>
+			<%
+				}
+																	}
+			%>
+		</ul>
+	</section>
+	<!-- end sidebar -->
+</aside>

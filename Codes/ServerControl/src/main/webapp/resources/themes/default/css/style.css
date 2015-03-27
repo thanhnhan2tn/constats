@@ -67,10 +67,11 @@ body>.header {
 	.sidebar .sidebar-menu {
 		padding: 0;
 		list-style: none;
+		background:;
 	}
 	.sidebar .sidebar-menu a {
 		display: block;
-		padding: 15px;
+		padding: 10px;
 		font-family: Arial;
 		font-size: 13pt;
 		border-bottom: 1px #B7DFF5 solid;
@@ -123,7 +124,7 @@ body>.header {
 		margin-left: 20%;
 		float: right;
 	}
-	.content .list-server .server-item .server-off {
+	.content .list-server .server-off {
 		color: #ccc;
 	}
 	.content .list-server .server-item a:hover .server-off .server-info {

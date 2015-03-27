@@ -1,0 +1,43 @@
+<%@page import="vn.edu.cit.model.Server"%>
+<%@page import="vn.edu.cit.model.User"%>
+<%
+	User user = (User) request.getAttribute("user");
+%>
+<aside class="left-side sidebar-offcanvas">
+	<!-- sidebar -->
+	<section class="sidebar">
+		<!-- Sidebar user panel
+            	<div class="user-panel">
+            	//image
+            	</div>
+        -->
+		<ul class="sidebar-menu">
+			<%
+				if (user.getServers() != null && !user.getServers().isEmpty()) {
+												for (Server server : user.getServers()) {
+																			//check Server status
+																			//if(server.checkStatus()){
+			%>
+			<div class="dropdown">
+			<li  class="list-item list-server-left dropdown-toggle" data-id="<%=server.getServerAddress()%>" data-hover="dropdown">
+					<i class="fa fa-desktop server-icon"></i> <%=server.getServerAddress()%>
+					<i style="color: green;display:none" class="glyphicon glyphicon-ok-circle" ></i> 
+					<i style="color: red;display:none" class="glyphicon glyphicon-ban-circle"></i>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu-sidebar">
+						<li role="presentation" class="dropdown-header">MENU</li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit .. </a></li>
+						<li>Remove</li>
+						<li role="presentation" class="divider"></li>
+						<li>Config</li>
+						
+					</ul>
+			</li>
+			</div>
+			<%
+				}
+														}
+			%>
+		</ul>
+	</section>
+	<!-- end sidebar -->
+</aside>

@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="services-nic-default" key="selection"/>
+		<item value=".server-item" key="selection"/>
 		<list key="findhistory">
+			<item value=".server-item"/>
+			<item value="list-server"/>
+			<item value="server-off"/>
 			<item value="services-nic-default"/>
 			<item value="convertXMLToObject"/>
 			<item value="convertXMLToObject\"/>
 			<item value="iface"/>
 			<item value="server-item col-md-2"/>
-			<item value="checkstatus"/>
-			<item value="json"/>
-			<item value="js"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

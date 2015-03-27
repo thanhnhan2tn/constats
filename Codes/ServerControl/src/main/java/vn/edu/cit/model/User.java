@@ -25,8 +25,7 @@ public class User {
 
 	}
 
-	public User(String email, String passWord, int role, String firstName,
-			String lastName, List<Server> servers) {
+	public User(String email, String passWord, int role, String firstName, String lastName, List<Server> servers) {
 		super();
 		this.passWord = passWord;
 		this.role = role;
@@ -92,4 +91,14 @@ public class User {
 		this.servers = servers;
 	}
 
+	public Server getServerByIp(String ip) {
+		for (Server sv : this.getServers()) {
+			if (sv.getServerAddress().equals(ip)) {
+				return sv;
+			} else {
+				return null;
+			}
+		}
+		return null;
+	}
 }

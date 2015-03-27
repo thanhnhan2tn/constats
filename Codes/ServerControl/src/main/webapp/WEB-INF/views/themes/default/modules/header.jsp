@@ -8,7 +8,7 @@
 	// 	UserDAOImpl userDAO = new UserDAOImpl();
 	// 	String username = (String) session.getAttribute("username");
 %>
-<a href="#" class="logo">ConStats</a>
+<a href="${pageContext.request.contextPath}/" class="logo">ConStats</a>
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
 	<!-- toggle button -->

@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -76,7 +74,7 @@ public class HomeController {
 		String check = "false";
 		if (user != null && c.equals(cc)) {
 			for (Server server : user.getServers()) {
-				if(server.getServerAddress().equals(ip)){
+				if (server.getServerAddress().equals(ip)) {
 					if (server.checkStatus()) {
 						check = "true";
 					}
@@ -277,6 +275,78 @@ public class HomeController {
 	}
 
 	/**
+	 * EditServer
+	 */
+	@RequestMapping(value = "/editserver/{ip}/{cc}", method = RequestMethod.GET)
+	public String editServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
+		String username = (String) session.getAttribute("username");
+		if (username != null) {
+			User user = userDAO.getUser(username);
+			if (user != null) {
+				List<Server> listServer = user.getServers();
+				if (!listServer.isEmpty()) {
+					for (int i = 0; i < listServer.size(); i++) {
+						if (listServer.get(i).getServerAddress().equals(ip)) {
+							// put server object to page
+							mm.put("user", user);
+							mm.put("server", listServer.get(i));
+							return "editserver";
+						} // end if IP
+					} // end for
+				} // end if
+			}// end check user
+			return "redirect:/";
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
+	 * Editserver to save
+	 */
+	/**
+	 * EditServer
+	 */
+	@RequestMapping(value = "/editserver/{ip}/{cc}", method = RequestMethod.POST)
+	public String saveEditServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			@ModelAttribute(value = "server") Server sv, HttpServletRequest request, HttpSession session,
+			RedirectAttributes redirectAtt, ModelMap mm) {
+		String username = (String) session.getAttribute("username");
+		if (username != null) {
+			User user = userDAO.getUser(username);
+			if (user != null) {
+				List<Server> listServer = user.getServers();
+				if (!listServer.isEmpty()) {
+					for (int i = 0; i < listServer.size(); i++) {
+						Server server = listServer.get(i);
+						if (server.getServerAddress().equals(ip)) {
+							// Set server to new info
+							server.setServerAddress(sv.getServerAddress());
+							server.setServerName(sv.getServerName());
+							server.setPort(sv.getPort());
+							server.setServerPassword(sv.getServerPassword());
+							server.setServerUsername(sv.getServerUsername());
+							server.setPort(sv.getPort());
+
+							// return "redirect:/";
+						} // end if IP
+					} // end for
+				} // end if
+				// dua danh sach server da sua chua vao user
+				user.setServers(listServer);
+				// Save user info
+				userDAO.updateUser(user);
+				mm.put("user", user);
+				return "redirect:/";
+			}// end check user
+			return "redirect:/";
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
 	 * Services Controller
 	 * 
 	 * @param ip
@@ -299,10 +369,18 @@ public class HomeController {
 				List<Server> listServer = user.getServers();
 				if (!listServer.isEmpty()) {
 					for (int i = 0; i < listServer.size(); i++) {
-						Server s = listServer.get(i); 			//get server in list 
-						if (s.getServerAddress().equals(ip)) { 	// check Ip address in Database vs IP
-							mm.put("server", s);
-							str = "services-control";
+						Server s = listServer.get(i); // get server in list
+						if (s.getServerAddress().equals(ip)) { // check Ip
+							mm.put("user", user);
+							if (s.checkStatus()) {
+								mm.put("server", s);
+								str = "services-control";
+							} else {
+								str = "redirect:/";
+								//Add a message to page
+								redirectAtt.addFlashAttribute("display", "block");
+								redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
+							}
 						}
 					}
 				} else {
@@ -314,7 +392,6 @@ public class HomeController {
 		}
 		return str;
 	}
-	
-	
+
 	private static final Logger _log = Logger.getLogger(HomeController.class);
 }

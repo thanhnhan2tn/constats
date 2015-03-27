@@ -49,8 +49,6 @@ public class NICController {
 
 			NicConfig nicConfig = new NicConfig();
 			Nic nic = nicConfig.convertXMLToObject(sv); // Call function
-														// generate Object from
-														// lib
 			mm.put("cc", c);
 			mm.put("title", "Home - Server Control");
 			mm.put("user", user);
@@ -99,9 +97,8 @@ public class NICController {
 			}
 
 			NicConfig nicConfig = new NicConfig();
-			Nic nic = nicConfig.convertXMLToObject(sv); // Call function
-														// generate Object from
-														// lib
+			Nic nic = nicConfig.convertXMLToObject(sv);
+			// Call function
 			mm.put("cc", c);
 			mm.put("title", "Home - Server Control");
 			mm.put("user", user);
@@ -109,11 +106,8 @@ public class NICController {
 			mm.put("server", sv);
 			session.setAttribute("nics", nic);
 			Nic nicForm = new Nic(); // put a nic object to form
-			nicForm.setDns_nameservers(nic.getDns_nameservers()); // truyen vao
-																	// nicForm
-																	// danh sach
-																	// cac
-			// eth
+			nicForm.setDns_nameservers(nic.getDns_nameservers());
+			// truyen vao
 			mm.put("nicForm", nicForm);
 			return "nameservers-config";
 		} else {
@@ -127,16 +121,37 @@ public class NICController {
 	public String controlNIC(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "if") String iface, @PathVariable(value = "cc") String c, ModelMap mm) {
-		if (action.equals("stop")) {
-			System.out.println("Stop : " + ip + ",iface: " + iface);
-		} else if (action.equals("start")) {
-			System.out.println("Start : " + ip + ",iface: " + iface);
-		} else if (action.equals("restart")) {
-			System.out.println("Restart : " + ip + ",iface: " + iface);
-		} else {
-			return "redirect:/serviceconfig/nic/" + ip + "/" + c;
+		String username = (String) session.getAttribute("username");
+		String cc = (String) session.getAttribute("cc");
+		// Lay doi tuong server trong CSDL
+		User user = userDAO.getUser(username);
+		// check User and token
+		if (user != null && c.equals(cc)) {
+			// Khoi tao doi tuong Server
+			Server sv = user.getServerByIp(ip);
+			if (sv != null) {
+				NicConfig nicConfig = new NicConfig();
+				if (action.equals("stop")) {
+					nicConfig.Stop(sv);
+					// Log
+					System.out.println("Stop : " + ip + ",iface: " + iface);
+				} else if (action.equals("start")) {
+					nicConfig.Start(sv);
+					// Log
+					System.out.println("Start : " + ip + ",iface: " + iface);
+				} else if (action.equals("restart")) {
+					nicConfig.Stop(sv);
+					nicConfig.Start(sv);
+					// Log
+					System.out.println("Restart : " + ip + ",iface: " + iface);
+				} else {
+					return "redirect:/serviceconfig/nic/" + ip + "/" + c;
+				}
+				return "redirect:/serviceconfig/nic/interfaces/" + ip + "/" + c;
+			}
+			return "redirect:/serviceconfig/nic/interfaces/" + ip + "/" + c;
 		}
-		return "redirect:/serviceconfig/nic/" + ip + "/" + c;
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/serviceconfig/nic/save/{ip}/{cc}", method = RequestMethod.POST)
@@ -170,6 +185,42 @@ public class NICController {
 				NicConfig nicConfig = new NicConfig();
 				try {
 					nicConfig.uploadConfigToServer(sv, nicToConfig);
+				} catch (IOException e) {
+					return "redirect:/services/" + ip + "/" + cc;
+					// Thong bao khong the upload
+				}
+
+				session.removeAttribute("nics"); // remove session for nics
+			} else {
+				session.invalidate();
+				return "redirect:/login";
+			} // end check token
+		} // end check user
+		return "redirect:/services/" + ip + "/" + cc;
+	}
+
+	@RequestMapping(value = "/serviceconfig/nic/file/save/{ip}/{cc}", method = RequestMethod.POST)
+	public String saveConfigFile(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c) {
+		String cc = (String) session.getAttribute("cc");
+		String username = (String) session.getAttribute("username");
+		User user = userDAO.getUser(username);
+		if (user != null) { // check user login
+			if (c.equals(cc)) {
+				Nic nicToConfig = (Nic) session.getAttribute("nics");
+				String config = (String) request.getAttribute("config");
+				//
+				Server sv = new Server(); // khoi tao server
+				// duyet danh sach server cua user
+				for (Server server : user.getServers()) {
+					if (server.getServerAddress().equals(ip)) {
+						sv = server; // get server Object
+						break;
+					}
+				}
+				NicConfig nicConfig = new NicConfig();
+				try {
+					nicConfig.uploadConfigToServer2(sv, config);
 				} catch (IOException e) {
 					return "redirect:/services/" + ip + "/" + cc;
 					// Thong bao khong the upload

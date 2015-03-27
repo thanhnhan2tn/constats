@@ -5,16 +5,38 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-26T17:10:40Z</updated>
+  <updated>2015-03-26T18:37:00Z</updated>
+  <entry>
+    <title>Spring XD 1.1.1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-xd-1-1-1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Mark Pollack</name>
+    </author>
+    <id>tag:spring.io,2015-03-26:2045</id>
+    <updated>2015-03-26T18:37:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring XD team, I am very pleased to announce the&lt;br/&gt;first maintenance release of Spring XD 1.1.&lt;/p&gt;&lt;p&gt;Download Link:&lt;br/&gt;1.1.1.RELEASE: &lt;a href="http://repo.spring.io/release/org/springframework/xd/spring-xd/1.1.1.RELEASE/spring-xd-1.1.1.RELEASE-dist.zip"&gt;zip&lt;/a&gt; and &lt;a href="http://docs.spring.io/spring-xd/docs/1.1.1.RELEASE/reference/html/#osx-homebrew-installation"&gt;brew&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;The 1.1.1 release includes bug fixes and some enhancements. The full list of tickets is available in &lt;a href="https://jira.spring.io/issues/?filter=14948"&gt;our JIRA&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;Here are some highlights. &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Improved performance and offset management when using Kafka message bus.&lt;/li&gt;
+  &lt;li&gt;Support for Spark Streaming&amp;rsquo;s reliable receiver.&lt;/li&gt;
+  &lt;li&gt;Kryo serialization improvements.&lt;/li&gt;
+  &lt;li&gt;Option to clean up Rabbit queue/topics when deleting the stream.&lt;/li&gt;
+  &lt;li&gt;Add a Sqoop example&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Feedback is very important, so please get in touch with questions and comments via&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="http://stackoverflow.com/questions/tagged/spring-xd"&gt;StackOverflow&lt;/a&gt; &lt;code&gt;spring-xd&lt;/code&gt; tag&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://jira.spring.io/browse/XD/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel"&gt;Spring JIRA&lt;/a&gt; or &lt;a href="https://github.com/spring-projects/spring-xd/issues"&gt;GitHub Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Spring WS 2.2.1 is released</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-ws-2-2-1-is-released" />
-    <category term="engineering" label="Engineering" />
+    <category term="releases" label="Releases" />
     <author>
       <name>Greg Turnquist</name>
     </author>
     <id>tag:spring.io,2015-03-25:2040</id>
-    <updated>2015-03-26T17:10:40Z</updated>
+    <updated>2015-03-26T17:10:00Z</updated>
     <content type="html">&lt;p&gt;Greetings Spring community,&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-ws/"&gt;Spring WS&lt;/a&gt; has just released version 2.2.1.RELEASE. This is a patch upgrade with no breaking API or behavior changes. I recommend upgrading to ensure you have the latest fixes. For a listing of completed issues see the report below:&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10060&amp;version=14639"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-ws/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-ws"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SWS"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-ws/docs/2.2.1.RELEASE/reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The artifacts are staged on maven central, &lt;a href="http://repo.spring.io/release"&gt;http://repo.spring.io/release&lt;/a&gt;, and bintray.&lt;/p&gt;&lt;p&gt;Cheers!&lt;/p&gt;</content>
   </entry>
   <entry>
@@ -1103,35 +1125,6 @@ public class HelloController {&#xD;
 &lt;p&gt;&#xD;
   &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ObKGl0f5a7I" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
 &lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - March 17th, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/17/this-week-in-spring-march-17th-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-03-17:2030</id>
-    <updated>2015-03-17T21:18:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;ve been busily preparin for a workshop &lt;a href="http://qconsp.com/speaker/josh-long"&gt;I&amp;rsquo;ll be giving at QCon São Paulo next week&lt;/a&gt;. If you&amp;rsquo;re at the show, I hope you&amp;rsquo;ll come out to say hi, ask questions and we&amp;rsquo;ll talk Spring and Cloud Foundry. &lt;strong&gt;Obrigado&lt;/strong&gt;!&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The replay on my humble webinar &lt;a href="https://spring.io/blog/2015/03/12/webinar-replay-introducing-spring-session"&gt;introducing Spring Session is online, check it out&lt;/a&gt;!&lt;/li&gt;
-  &lt;li&gt;Janne Valkealahti has just announced the latest release &lt;a href="https://spring.io/blog/2015/03/11/spring-security-kerberos-1-0-0-rc1-released"&gt;of Spring Security Kerberos 1.0.0.RC1&lt;/a&gt;, packed with new features and now - at long last!! - near GA! Go Janne and team, go!&lt;/li&gt;
-  &lt;li&gt;Spring and Groovy &amp;amp; Grails Tool Suite lead &lt;a href="https://spring.io/blog/2015/03/11/spring-tool-suite-and-groovy-grails-tool-suite-3-6-4-released"&gt;Martin Lippert just announced STS and GGTS 3.6.4&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;I put together a post &lt;a href="https://spring.io/blog/2015/03/16/getting-started-with-couchbase-and-spring-data-couchbase"&gt;on getting started with Spring Data Couchbase&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring XD ninjas Marius Bogoevici and Dr. Mark Pollack are going to be giving a webinar on April 28th that &lt;a href="https://spring.io/blog/2015/03/17/webinar-reactive-data-pipelines-with-spring-xd-and-kafka"&gt;introduces using Spring XD and Apache Kafka&lt;/a&gt; to create reactive data-pipelines.&lt;/li&gt;
-  &lt;li&gt;I&amp;rsquo;ll be giving a webinar on April 21st that introduces &lt;a href="https://spring.io/blog/2015/03/17/webinar-smarter-service-to-service-invocations-with-spring-cloud"&gt;how to make smart service-to-service calls with Spring Cloud&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;This Week&amp;rsquo;s SpringOne2GX 2014 replays are out! Check out &lt;a href="http://spring.io/blog/2015/03/17/springone2gx-2014-replay-asychronous-design-with-spring-and-rti-1m-events-per-second"&gt;Asychronous design with Spring and RTI: 1M events per second&lt;/a&gt;, &lt;a href="http://spring.io/blog/2015/03/17/springone2gx-2014-replay-building-a-recommendation-engine-with-spring-and-hadoop"&gt;Building a Recommendation Engine with Spring and Hadoop&lt;/a&gt;, and author Peter Harrington&amp;rsquo;s &lt;a href="http://spring.io/blog/2015/03/17/springone2gx-2014-replay-become-a-data-driven-organization-with-machine-learning"&gt;Become a data-driven Organization with Machine Learning&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Curious about the why Pivotal considers iteself at the nexus of &lt;a href="http://spring.io/blog/2015/03/17/springone2gx-2014-replay-apps-data-cloud-what-does-it-all-mean"&gt;Apps, Data and Cloud&lt;/a&gt;? Check out Matt Stine&amp;rsquo;s SpringOne2GX replay for the answer.&lt;/li&gt;
-  &lt;li&gt;the Vaadin web framework now has &lt;a href="https://vaadin.com/wiki/-/wiki/Main/Vaadin+Spring"&gt;&lt;strong&gt;official&lt;/strong&gt; support for Spring and Spring Boot&lt;/a&gt;. This support is the official stamping of the &lt;a href="https://github.com/peholmst/vaadin4spring"&gt;code that Peter Holmst and I started&lt;/a&gt;, so I couldn&amp;rsquo;t be more excited to see how far it&amp;rsquo;s come and to see it finally graduate to an officially supported module.&lt;/li&gt;
-  &lt;li&gt;Intellij 14.1 is packed with all sorts of amazing Spring Boot goodness! Check out this post from &lt;a href="http://blog.jetbrains.com/idea/2015/03/develop-spring-boot-applications-more-productively-with-intellij-idea-14-1/"&gt;JetBrain&amp;rsquo;s Yann Cébron on some of the amazing new features&lt;/a&gt; and be sure to register for this March webinar in March with our &lt;a href="http://info.jetbrains.com/IDEA-Webinar-March2015-registration.html"&gt;own Stéphane Nicoll and Yann&lt;/a&gt; covering some of these amazing features!&lt;/li&gt;
-  &lt;li&gt;Heroku have put together a nice writeup &lt;a href="https://blog.heroku.com/archives/2015/3/3/managing_your_microservices_on_heroku_with_netflix_s_eureka"&gt;on using Spring Cloud to build cloud native applications on Heroku&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Check out this video of &lt;a href="http://www.infoq.com/interviews/spring-today-past-and-future"&gt;Spring framework lead Juergen Hoeller recorded from Voxxed Days Austria&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Alex Williams put together a nice post &lt;a href="http://thenewstack.io/cloud-foundry-and-apache-brooklyn-for-automating-paas-with-a-service-broker/"&gt;on using Apache Brooklyn - an application blueprint and management system which supports a wide range of software and services in the cloud - to automate Cloud Foundry with their custom service broker&lt;/a&gt;. The idea is simple: a Cloud Foundry service broker talks to backend services (it&amp;rsquo;s what drives the flow from &lt;code&gt;cf services&lt;/code&gt; and &lt;code&gt;cf create-service&lt;/code&gt;). Apache Brooklyn exposed as a service broker in this way is powerful; you only need one broker to expose the catalog of Brooklyn blueprints.&lt;/li&gt;
-  &lt;li&gt;Our pal Matt Stine just published a free e-book for O&amp;rsquo;Reilly on &lt;a href="http://blog.pivotal.io/cloud-foundry-pivotal/news-2/new-book-explains-how-cloud-native-application-architectures-drive-the-innovation-cycle"&gt;building cloud-native architectures&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;There are a few case studies on the Pivotal blog today. First, Jarrod Vawdrey&amp;rsquo;s post on using data-science to &lt;a href="http://blog.pivotal.io/data-science-pivotal/case-studies-2/using-data-science-to-predict-tv-viewer-behavior-and-formulate-a-hit-tv-show"&gt;predict TV viewer behavior and formulate a hit TV show is awesome&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Dwayne Forde has put together a nice case study on &lt;a href="http://blog.pivotal.io/cloud-foundry-pivotal/case-studies-2/how-pivotal-performs-continuous-delivery-of-mobile-services"&gt;How Pivotal Performs Continuous Delivery of Mobile Services&lt;/a&gt;.&lt;/li&gt;
-&lt;/ol&gt;</content>
   </entry>
 </feed>
 

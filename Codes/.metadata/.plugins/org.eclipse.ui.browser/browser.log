@@ -1,0 +1,72 @@
+
+Mar 28, 2015 24:50:14.68 NEW SESSION
+Mar 28, 2015 24:50:14.68 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Mar 28, 2015 24:50:14.69 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Mar 28, 2015 24:50:14.69 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Mar 28, 2015 24:51:26.50 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Mar 28, 2015 24:51:26.50 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Mar 28, 2015 24:51:26.51 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Mar 28, 2015 24:51:56.76 [Child 552] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Mar 28, 2015 01:19:58.03 console.warn: Asynchronous operation was aborted as selection changed.
+Mar 28, 2015 01:22:42.11 console.error: 
+Mar 28, 2015 01:22:42.11   Message: TypeError: node is null
+Mar 28, 2015 01:22:42.11   Stack:
+Mar 28, 2015 01:22:42.12     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.12 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.12 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.13 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.13 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.14 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.14 
+Mar 28, 2015 01:22:42.14 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.14 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.15 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.15 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.15 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.16 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.16 console.error: 
+Mar 28, 2015 01:22:42.16   Message: TypeError: node is null
+Mar 28, 2015 01:22:42.17   Stack:
+Mar 28, 2015 01:22:42.17     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.17 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.18 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.18 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.18 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.19 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.19 
+Mar 28, 2015 01:22:42.19 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.20 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.20 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.20 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.21 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.21 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.22 console.error: 
+Mar 28, 2015 01:22:42.22   Message: TypeError: node is null
+Mar 28, 2015 01:22:42.22   Stack:
+Mar 28, 2015 01:22:42.23     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.23 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.24 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.24 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.24 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.25 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.25 
+Mar 28, 2015 01:22:42.25 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1547:9
+Mar 28, 2015 01:22:42.26 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1004:19
+Mar 28, 2015 01:22:42.26 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1422:15
+Mar 28, 2015 01:22:42.26 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:545:11
+Mar 28, 2015 01:22:42.27 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.27 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Mar 28, 2015 01:22:42.28 console.error: 
+Mar 28, 2015 01:22:42.28   Protocol error (unknownError): TypeError: node is null
+Mar 28, 2015 01:22:42.28 console.error: 
+Mar 28, 2015 01:22:42.29   Protocol error (unknownError): TypeError: node is null
+Mar 28, 2015 01:22:42.29 console.error: 
+Mar 28, 2015 01:22:42.29   Protocol error (unknownError): TypeError: node is null
+Mar 28, 2015 01:22:42.30 console.error: 
+Mar 28, 2015 01:22:42.30   Protocol error (unknownError): TypeError: node is null
+Mar 28, 2015 01:22:42.30 console.warn: Could not show the node, the markup-view was destroyed while waiting for children
+Mar 28, 2015 01:22:42.31 console.warn: Could not mark node as selected, the markup-view was destroyed while showing the node.
+Mar 28, 2015 01:22:42.31 console.error: 
+Mar 28, 2015 01:22:42.31   Protocol error (unknownError): TypeError: node is null
+Mar 28, 2015 01:22:42.32 console.error: 
+Mar 28, 2015 01:22:42.32   Protocol error (unknownError): TypeError: node is null
