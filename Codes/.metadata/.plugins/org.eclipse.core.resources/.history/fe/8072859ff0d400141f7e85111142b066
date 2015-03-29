@@ -1,0 +1,20 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="vn.edu.cit.servercontrol.nic.Eth"%>
+<%@page import="vn.edu.cit.servercontrol.nic.Nic"%>
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Netword Interface Cards Config :<small>
+				(${server.serverAddress})</small>
+		</h1>
+
+
+	</section>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	
+</aside>

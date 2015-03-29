@@ -8,8 +8,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Netword Interface Cards Config :<small>
-				(${server.serverAddress})</small>
+			Netword Interface Cards Config :<small> (${server.serverAddress})</small>
 		</h1>
 
 
@@ -18,8 +17,8 @@
 	<!--  Main Content -->
 	<section class="content">
 		<div class="main-content">
-			<form:form 
-				action="${pageContext.request.contextPath }/serviceconfig/nic/file/save/${server.serverAddress}/${cc }"
+			<form
+				action="${pageContext.request.contextPath }/serviceconfig/nic/edit-file-nic/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -29,15 +28,15 @@
 						<input type="hidden" name="cc" value="${cc }">
 							<div class="form-group">
 								<div class="col-md-9">
-									<textarea class="form-control" cols="200" rows="50" name="config" ></textarea>
+									<textarea class="form-control" rows="30" name="config" ></textarea>
 								</div>
 							</div>
 					</div>
 				</div>
 				<!--  End Panel -->
-
-				<form:button type="submit" class="btn btn-default">Save</form:button>
-			</form:form>
+				<button type="button" onclick="javascript:history.back()" class="btn btn-default">Back</button>
+				<button type="submit" class="btn btn-primary">Save</button>
+			</form>
 		</div>
 	</section>
 	<!--  End Main Content -->

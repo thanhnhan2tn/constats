@@ -70,3 +70,24 @@ Mar 28, 2015 01:22:42.31 console.error:
 Mar 28, 2015 01:22:42.31   Protocol error (unknownError): TypeError: node is null
 Mar 28, 2015 01:22:42.32 console.error: 
 Mar 28, 2015 01:22:42.32   Protocol error (unknownError): TypeError: node is null
+
+Mar 28, 2015 09:55:02.99 NEW SESSION
+Mar 28, 2015 09:55:02.99 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) Code: 0x80070057
+Mar 28, 2015 09:55:44.63 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Mar 28, 2015 09:55:44.64 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Mar 28, 2015 09:55:44.64 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Mar 28, 2015 09:57:51.69 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) Code: 0x80070057
+Mar 28, 2015 10:08:37.91 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) Code: 0x80070057
+Mar 28, 2015 10:09:55.91 
+Mar 28, 2015 10:09:55.92 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+Mar 28, 2015 10:09:55.92 
+Mar 28, 2015 10:10:20.44 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Mar 28, 2015 10:10:20.45 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Mar 28, 2015 10:10:20.45 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Mar 28, 2015 10:10:26.37 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Mar 28, 2015 10:10:26.37 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Mar 28, 2015 10:10:26.37 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Mar 28, 2015 10:11:31.73 
+Mar 28, 2015 10:11:31.74 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+Mar 28, 2015 10:11:31.74 
+Mar 28, 2015 10:15:38.13 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) Code: 0x80070057
