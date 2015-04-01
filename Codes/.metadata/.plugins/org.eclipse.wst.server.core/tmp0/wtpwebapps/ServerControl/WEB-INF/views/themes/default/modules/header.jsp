@@ -91,7 +91,7 @@
 					<!-- Menu Footer-->
 					<li class="user-footer">
 						<div class="pull-left">
-							<a href="${pageContext.request.contextPath}/profile" class="btn btn-default btn-flat">Profile</a>
+							<a href="${pageContext.request.contextPath}/profile/${cc}" class="btn btn-default btn-flat">Profile</a>
 						</div>
 						<div class="pull-right">
 							<a href="${pageContext.request.contextPath}/signout"

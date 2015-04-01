@@ -91,3 +91,7 @@ Mar 28, 2015 10:11:31.73
 Mar 28, 2015 10:11:31.74 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
 Mar 28, 2015 10:11:31.74 
 Mar 28, 2015 10:15:38.13 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) Code: 0x80070057
+
+Mar 31, 2015 19:33:53.54 NEW SESSION
+Mar 31, 2015 19:33:53.54 1427805233499	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Mar 31, 2015 19:33:56.27 1427805236287	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property

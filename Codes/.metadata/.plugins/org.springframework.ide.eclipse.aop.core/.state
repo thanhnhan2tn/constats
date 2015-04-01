@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
 <aop-project name="ServerControl"/>
-<aop-project name="mvc2"/>
-<aop-project name="JAVA_J2SE"/>
+<aop-project name="ServerControlService"/>
 <aop-project name="constats"/>
 </aop-reference-model>

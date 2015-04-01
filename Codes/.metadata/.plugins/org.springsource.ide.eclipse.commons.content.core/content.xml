@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <descriptors>
+<descriptor id="org.springframework.templates.mvc" kind="template" local="true" name="Spring MVC Project" requiresbundle="org.eclipse.m2e.core" size="0" version="3.2.2">
+<description>A new Spring MVC web application development project</description>
+</descriptor>
 <descriptor category="Integration" id="org.springframework.integration.sts.template.standalone.simple" kind="template" local="false" name="Spring Integration Project (Standalone) - Simple" requires="[3.0.0,4.0)" requiresbundle="org.eclipse.m2e.core" size="9500" url="https://raw.github.com/SpringSource/spring-integration-templates/master/si-sts-templates/builds/si-template-standalone-simple-1.0.0.RELEASE.zip" version="1.0.0.RELEASE">
 <description>Creates a Spring Integration project that runs as a standalone Java application using core components only.</description>
 </descriptor>
@@ -129,8 +132,5 @@
 <descriptor category="Spring Web Services" id="org.springframework.webservices.tutorials.creatingcontroller" kind="tutorial" local="false" name="Creating a contract-first web service" size="9741990" url="http://dist.springsource.com/release/STS/help/org.springframework.webservices.tutorials.creatingcontroller-1.0.0.zip" version="1.0.0">
 <description>This tutorial shows you how to create a contract-first web service with Spring-WS. The contract-first approach is an industry recognized best practice. In short it means we'll design an XML contract first and a Java implementation second.</description>
 <dependency id="com.springsource.sts.org.apache.tomcat"/>
-</descriptor>
-<descriptor id="org.springframework.templates.mvc" kind="template" local="true" name="Spring MVC Project" requiresbundle="org.eclipse.m2e.core" size="0" version="3.2.2">
-<description>A new Spring MVC web application development project</description>
 </descriptor>
 </descriptors>

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.UserDAO;
@@ -190,6 +191,29 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * Profile page
+	 * 
+	 * @param request
+	 * @param mm
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/profile/{cc}", method = RequestMethod.GET)
+	public ModelAndView profile(HttpSession session, @PathVariable(value = "cc") String c, HttpServletRequest request,
+			RedirectAttributes redirectAtt) {
+		String username = (String) session.getAttribute("username");
+		User user = userDAO.getUser(username);
+		String cc = (String) session.getAttribute("cc");
+		if (user != null && cc.equals(c)) {
+			return new ModelAndView ("profile");
+		} else {
+			// Neu khong co user nao co email dang nhap
+			session.invalidate();
+			return new ModelAndView ("redirect:/login");
+		}
+	}
+
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public String signout(HttpServletRequest request, ModelMap mm, HttpSession session) {
 		session.invalidate();
@@ -229,15 +253,32 @@ public class HomeController {
 
 		if (sessionUser != null && !sessionUser.isEmpty()) {
 			User user = userDAO.getUser(sessionUser);
-
 			if (user != null) {
 				List<Server> listServer = user.getServers();
-				listServer.add(server);// Add Server to list
-				user.setServers(listServer);// Set list server to user
-				// Save user info
-				userDAO.updateUser(user);
-				redirectAtt.addFlashAttribute("message", "AddServer");
-			}
+				if (listServer != null && listServer.size() > 0) {
+					for (Server sv1 : listServer) { // kiem tra server ip co bi
+													// trung
+						if (sv1.getServerAddress().equals(server.getServerAddress())) {
+							redirectAtt.addFlashAttribute("message", "This IP address already exists!");
+							break;
+						} else {
+							listServer.add(server);// Add Server to list
+							user.setServers(listServer);// Set list server to
+														// user
+							// Save user info
+							userDAO.updateUser(user);
+							redirectAtt.addFlashAttribute("message", "Add Success!");
+						}
+					} // end For
+				}// check list
+				else {
+					listServer.add(server);// Add Server to list
+					user.setServers(listServer);// Set list server to user
+					// Save user info
+					userDAO.updateUser(user);
+					redirectAtt.addFlashAttribute("message", "Add Success!");
+				}
+			} // end check User
 			return "redirect:/";
 		} else {
 			return "redirect:/login";
@@ -333,7 +374,7 @@ public class HomeController {
 						} // end if IP
 					} // end for
 				} // end if
-				// dua danh sach server da sua chua vao user
+					// dua danh sach server da sua chua vao user
 				user.setServers(listServer);
 				// Save user info
 				userDAO.updateUser(user);
@@ -377,7 +418,7 @@ public class HomeController {
 								str = "services-control";
 							} else {
 								str = "redirect:/";
-								//Add a message to page
+								// Add a message to page
 								redirectAtt.addFlashAttribute("display", "block");
 								redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
 							}

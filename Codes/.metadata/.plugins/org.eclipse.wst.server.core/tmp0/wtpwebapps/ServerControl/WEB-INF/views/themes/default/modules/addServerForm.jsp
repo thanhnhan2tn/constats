@@ -28,25 +28,7 @@
 							placeholder="IP Address" required="required" />
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="username" class="col-md-3 control-label">Root
-						Username: *</label>
-					<div class="col-md-9">
-						<spring:input path="serverUsername" class="username form-control"
-							name="username"
-							placeholder="Username have root permision login to Server"
-							required="required" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="password" class="col-md-3 control-label">Password:
-						*</label>
-					<div class="col-md-9">
-						<spring:password path="serverPassword"
-							class="password form-control" name="password"
-							placeholder="Input your server user password" required="required" />
-					</div>
-				</div>
+				<!-- Root User và Pass Disabled -->
 				<div class="form-group">
 					<label for="ssh-port" class="col-md-3 control-label">SSH
 						Port: *</label>
@@ -61,7 +43,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save changes</button>
+				<button type="submit" class="btn btn-primary">Save</button>
 			</div>
 		</spring:form>
 	</div>

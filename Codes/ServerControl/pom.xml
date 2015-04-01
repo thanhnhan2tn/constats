@@ -152,11 +152,17 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.13.0</version>
 		</dependency>
-		<!--  JSON -->
+		<!-- JSON -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20141113</version>
+		</dependency>
+		<!-- System Information Gatherer And Reporter -->
+		<dependency>
+			<groupId>org.fusesource</groupId>
+			<artifactId>sigar</artifactId>
+			<version>1.6.4</version>
 		</dependency>
 
 	</dependencies>
