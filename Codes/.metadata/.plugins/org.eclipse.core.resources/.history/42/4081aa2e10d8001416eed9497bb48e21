@@ -1,0 +1,22 @@
+ <?xml version="1.0" encoding="UTF-8" ?>  
+ <!DOCTYPE tiles-definitions PUBLIC  
+     "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"  
+     "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="template.mytemplate" template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+	</definition>
+
+	<definition name="first_page" extends="template.mytemplate">
+		<put-attribute name="content" value="/WEB-INF/jsp/firstPageContent.jsp" />
+	</definition>
+
+	<definition name="second_page" extends="template.mytemplate">
+		<put-attribute name="content" value="/WEB-INF/jsp/secondPageContent.jsp" />
+	</definition>
+
+</tiles-definitions>  

@@ -95,3 +95,15 @@ Mar 28, 2015 10:15:38.13 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,24968) 
 Mar 31, 2015 19:33:53.54 NEW SESSION
 Mar 31, 2015 19:33:53.54 1427805233499	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
 Mar 31, 2015 19:33:56.27 1427805236287	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+
+Apr 01, 2015 21:05:38.63 NEW SESSION
+Apr 01, 2015 21:05:38.63 1427897138640	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Apr 01, 2015 21:05:39.03 1427897139053	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+Apr 01, 2015 21:51:11.74 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 01, 2015 21:51:11.75 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 01, 2015 21:51:11.75 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Apr 01, 2015 22:00:53.24 [Child 4756] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 01, 2015 22:01:31.35 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 01, 2015 22:01:31.35 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 01, 2015 22:01:31.35 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
+Apr 01, 2015 23:48:36.45 [Child 6776] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305

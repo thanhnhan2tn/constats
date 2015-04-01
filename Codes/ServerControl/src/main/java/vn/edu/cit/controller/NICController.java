@@ -31,10 +31,10 @@ public class NICController {
 	public String networkInterfaces(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm)
 			throws IOException {
-		String username = (String) session.getAttribute("username");
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
-		User user = userDAO.getUser(username);
+
 		// Khoi tao doi tuong Server
 		Server sv = new Server();
 		// Xet user dang nhap va token
@@ -80,10 +80,9 @@ public class NICController {
 	@RequestMapping(value = "/serviceconfig/nic/nameservers/{ip}/{cc}", method = RequestMethod.GET)
 	public String nameServers(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, ModelMap mm) throws IOException {
-		String username = (String) session.getAttribute("username");
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
-		User user = userDAO.getUser(username);
 		// Khoi tao doi tuong Server
 		Server sv = new Server();
 		// Xet user dang nhap va token
@@ -133,10 +132,9 @@ public class NICController {
 	public String controlNIC(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "if") String iface, @PathVariable(value = "cc") String c, ModelMap mm) {
-		String username = (String) session.getAttribute("username");
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
-		User user = userDAO.getUser(username);
 		// check User and token
 		if (user != null && c.equals(cc)) {
 			// Khoi tao doi tuong Server
@@ -170,9 +168,7 @@ public class NICController {
 	public String saveNIC(@ModelAttribute(value = "nicForm") Nic nic, HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c) {
 		String cc = (String) session.getAttribute("cc");
-
-		String username = (String) session.getAttribute("username");
-		User user = userDAO.getUser(username);
+		User user = (User) session.getAttribute("user");
 		if (user != null) { // check user login
 			if (c.equals(cc)) {
 				Nic nicToConfig = (Nic) session.getAttribute("nics");
@@ -223,10 +219,9 @@ public class NICController {
 	@RequestMapping(value = "/serviceconfig/nic/edit-file-nic/{ip}/{cc}", method = RequestMethod.GET)
 	public String editConfigFile(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
-		String username = (String) session.getAttribute("username");
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
-		User user = userDAO.getUser(username);
 		// Khoi tao doi tuong Server
 		Server sv = new Server();
 		// Xet user dang nhap va token
@@ -267,8 +262,7 @@ public class NICController {
 	public String saveConfigFile(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c) {
 		String cc = (String) session.getAttribute("cc");
-		String username = (String) session.getAttribute("username");
-		User user = userDAO.getUser(username);
+		User user = (User) session.getAttribute("user");
 		if (user != null) { // check user login
 			if (c.equals(cc)) {
 				Nic nicToConfig = (Nic) session.getAttribute("nics");

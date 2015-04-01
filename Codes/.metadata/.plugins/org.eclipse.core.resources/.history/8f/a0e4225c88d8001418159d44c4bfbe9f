@@ -1,0 +1,18 @@
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Copy command to your Server
+		</h1>
+
+
+	</section>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+		<div class="form-group"></div>
+		<textarea rows="10" cols="100"></textarea>
+		</div>
+		<button type="button" onclick="location.open(/);" class="btn btn-default">OK</button>
+	</section>

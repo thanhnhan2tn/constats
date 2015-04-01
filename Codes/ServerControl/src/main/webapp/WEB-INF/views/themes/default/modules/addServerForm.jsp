@@ -39,7 +39,14 @@
 				</div>
 				<div style="display: none" id="signup-err"
 					class="alert alert-danger col-sm-12 signup-err"></div>
-
+				<hr />
+				<div class="form-group">
+					<label for="password-svuser" class="col-md-3 control-label">Password for "svcontrol"</label>
+					<div class="col-md-9">
+						<spring:input path="serverPassword" class="port form-control"
+							placeholder="Choose a password for the SSH/Monitor user 'svcontrol'" required="required" />
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

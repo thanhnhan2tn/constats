@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.springframework.org/schema/beans">
+
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[
+	Spring XML Beans Schema, version 3.2
+	Authors: Juergen Hoeller, Rob Harrop, Mark Fisher, Chris Beams
+
+	This defines a simple and consistent way of creating a namespace
+	of JavaBeans objects, managed by a Spring BeanFactory, read by
+	XmlBeanDefinitionReader (with DefaultBeanDefinitionDocumentReader).
+
+	This document type is used by most Spring functionality, including
+	web application contexts, which are based on bean factories.
+
+	Each "bean" element in this document defines a JavaBean.
+	Typically the bean class is specified, along with JavaBean properties
+	and/or constructor arguments.
+
+	A bean instance can be a "singleton" (shared instance) or a "prototype"
+	(independent instance). Further scopes can be provided by extended
+	bean factories, for example in a web environment.
+
+	References among beans are supported, that is, setting a JavaBean property
+	or a constructor argument to refer to another bean in the same factory
+	(or an ancestor factory).
+
+	As alternative to bean references, "inner bean definitions" can be used.
+	Singleton flags of such inner bean definitions are effectively ignored:
+	inner beans are typically anonymous prototypes.
+
+	There is also support for lists, sets, maps, and java.util.Properties
+	as bean property types or constructor argument types.
+		]]></xsd:documentation>
+	</xsd:annotation>
+
+	<!-- base types -->
+	<xsd:complexType name="identifiedType" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	The unique identifier for a bean. The scope of the identifier
+	is the enclosing bean factory.
+			]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="id" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[
+	The unique identifier for a bean. A bean id may not be used more than once
+	within the same <beans> element.
+				]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Top-level <beans> tag -->
+	<xsd:element name="beans">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	Container for <bean> and other elements, typically the root element in the document.
+	Allows the definition of default values for all nested bean definitions. May itself
+	be nested for the purpose of defining a subset of beans with certain default values or
+	to be registered only when certain profile(s) are active. Any such nested <beans> element
+	must be declared as the last element in the document.
+			]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="description" minOccurs="0"/>
+				<xsd:choice minOccurs="0" maxOccurs="unbounded">
+					<xsd:element ref="import"/>
+					<xsd:element ref="alias"/>
+					<xsd:element ref="bean"/>
+					<xsd:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:choice>
+				<xsd:element ref="beans" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="profile" use="optional" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The set of profiles for which this <beans> element should be parsed. Multiple profiles
+	can be separated by spaces, commas, or semi-colons.
+
+	If one or more of the specified profiles are active at time of parsing, the <beans>
+	element will be parsed, and all of its <bean> elements registered, &lt;import&gt;
+	elements followed, etc.  If none of the specified profiles are active at time of
+	parsing, then the entire element and its contents will be ignored.
+
+	If a profile is prefixed with the NOT operator '!', e.g.
+
+		<beans profile="p1,!p2">
+
+	indicates that the <beans> element should be parsed if profile "p1" is active or
+	if profile "p2" is not active.
+
+	Profiles are activated in one of two ways:
+		Programmatic:
+			ConfigurableEnvironment#setActiveProfiles(String...)
+			ConfigurableEnvironment#setDefaultProfiles(String...)
+
+		Properties (typically through -D system properties, environment variables, or
+		servlet context init params):
+			spring.profiles.active=p1,p2
+			spring.profiles.default=p1,p2
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-lazy-init" default="default" type="defaultable-boolean">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The default 'lazy-init' value; see the documentation for the
+	'lazy-init' attribute of the 'bean' element.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-merge" default="default" type="defaultable-boolean">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The default 'merge' value; see the documentation for the
+	'merge' attribute of the various collection elements. The default
+	is 'false'.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-autowire" default="default">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The default 'autowire' value; see the documentation for the
+	'autowire' attribute of the 'bean' element. The default is 'default'.
+					]]></xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="default"/>
+						<xsd:enumeration value="no"/>
+						<xsd:enumeration value="byName"/>
+						<xsd:enumeration value="byType"/>
+						<xsd:enumeration value="constructor"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="default-autowire-candidates" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	A default bean name pattern for identifying autowire candidates:
+	e.g. "*Service", "data*", "*Service*", "data*Service".
+	Also accepts a comma-separated list of patterns: e.g. "*Service,*Dao".
+	See the documentation for the 'autowire-candidate' attribute of the
+	'bean' element for the semantic details of autowire candidate beans.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-init-method" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The default 'init-method' value; see the documentation for the
+	'init-method' attribute of the 'bean' element.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="default-destroy-method" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation><![CDATA[
+	The default 'destroy-method' value; see the documentation for the
+	'destroy-method' attribute of the 'bean' element.
+					]]></xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:anyAttribute namespace="##other" processContents="lax"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="description">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[
+	Contains informative text describing the purpose of the enclosing element.
+	Used primarily for user documentation of XML bean definition documents.
+			]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="true">
+			<xsd:choice minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="import">
+		<xsd:annotation>
+			<xsd:documentation source="java:org.springframework.core.io.Resource"><![CDATA[
+	Specifies an XML bean definition resource to import.
+			]]></xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:restriction base="xsd:anyType">
+					<xsd:attribute name="resource" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:documentation><![CDATA[
+	The relative resource location of the XML (bean definition) file to import,
+	for example "myImport.xml" or "includes/myImport.xml" or "../myImport.xml".
+							]]></xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:restriction>
+		

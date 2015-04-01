@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 import vn.edu.cit.model.Server;
 
@@ -158,7 +159,7 @@ public class ServerConfig {
 					if (i < 0)
 						break;
 					chuoilay = new String(tmp, 0, i);
-					// System.out.print(chuoilay);
+					System.out.print(chuoilay);
 					tong = tong + chuoilay;
 				}
 				if (channel.isClosed()) {
@@ -178,6 +179,98 @@ public class ServerConfig {
 		}
 	}
 
+	// Upload test
+	public ServerStatus uploadToServer2(Server sv) {
+		Session ss = sv.getSession(sv);
+		try {
+			HashMap<String, String> hm1 = new HashMap<String, String>();
+			String multi_cmd[] = { "hostname",
+					"cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='",
+					"uname -a", "cat /etc/webmin/version", "date",
+					"cat /proc/cpuinfo | grep 'model name'",
+					"cat /proc/uptime",
+					"cat /proc/meminfo | egrep '^(MemTotal|MemFree|Cached)' ",
+					"cat /proc/loadavg",
+					"df -h | grep /dev/mapper/ubuntu--vg-root" };
+			String index_cmd[] = { "hostname", "osversion", "kernel",
+					"webmin_version", "timeonsys", "processor_info", "uptime",
+					"memmory", "cpu_loadaverage", "local_disk" };
+
+			String chuoilay = "";
+			// option -e giup nhan dang ki tu xuong dong
+			int j = 0;
+
+			while (j < multi_cmd.length) {
+				String tong = "";
+
+				Channel channel = ss.openChannel("exec");
+
+				String cmd = multi_cmd[j];
+
+				((ChannelExec) channel).setCommand(cmd);
+
+				((ChannelExec) channel).setErrStream(System.err);
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						System.in));
+				InputStream in = channel.getInputStream();
+
+				channel.connect();
+				byte[] tmp = new byte[1024];
+				while (true) {
+					while (in.available() > 0) {
+						int i = in.read(tmp, 0, 1024);
+						if (i < 0)
+							break;
+						chuoilay = new String(tmp, 0, i).trim();
+						chuoilay = chuoilay.replaceAll("\\s+", " ");
+						chuoilay = chuoilay.replace(":", "");
+						chuoilay = chuoilay.replace("model name", "");
+						chuoilay = chuoilay.replace("DISTRIB_DESCRIPTION=", "");
+						chuoilay = chuoilay.replace("\"", "");
+						chuoilay = chuoilay.replace(
+								"/dev/mapper/ubuntu--vg-root", "");
+
+						chuoilay = chuoilay.trim();
+						// chuoilay = chuoilay + "\n";
+
+						System.out.print(chuoilay);
+						tong = tong + chuoilay + "\n";
+						if (index_cmd[j].equals("uptime")) {
+							tong = tong.substring(0, tong.indexOf(" "));
+							hm1.put(index_cmd[j],
+									convertStoH(Float.parseFloat(tong)));
+
+						} else {
+							hm1.put(index_cmd[j], tong);
+						}
+					}
+					if (channel.isClosed()) {
+						System.out.println("\nexit-status: "
+								+ channel.getExitStatus());
+
+						break;
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception ee) {
+					}
+				}
+				channel.disconnect();
+				j++;
+			}
+			// System.out.print(hm1);
+			ServerStatus svst = new ServerStatus(hm1.get("hostname"),
+					hm1.get("osversion"), hm1.get("kernel"),
+					hm1.get("webmin_version"), hm1.get("timeonsys"),
+					hm1.get("processor_info"), hm1.get("uptime"),
+					hm1.get("memmory"), hm1.get("cpu_loadaverage"),
+					hm1.get("local_disk"));
+			return svst;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 	// Check all service on Server
 	public String checkAllPS(Server sv) throws InterruptedException {
 		String chuoi = uploadToServer(sv, "sudo ps");
@@ -191,7 +284,8 @@ public class ServerConfig {
 
 	// Check Version on Server
 	public String checkVersion(Server sv) {
-		String chuoi = uploadToServer(sv, "sudo lsb_release -d");
+		String chuoi = uploadToServer(sv,
+				"cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='");
 		return chuoi;
 	}
 
@@ -215,7 +309,7 @@ public class ServerConfig {
 		String info = "";
 		String timefull = uploadToServer(sv, "cat /proc/uptime");
 		String second = timefull.substring(0, timefull.indexOf(" "));
-		System.out.println(second);
+
 		float so = Float.parseFloat(second);
 		// System.out.println(so + "");
 		String time = convertStoH(so);
@@ -251,7 +345,6 @@ public class ServerConfig {
 				+ "*Local Disk Space:"
 				+ uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root")
 				+ "\n";
-		;
 
 		return info;
 	}
@@ -269,15 +362,5 @@ public class ServerConfig {
 		return tong;
 	}
 
-	public static void main(String[] args) throws IOException,
-			InterruptedException {
-
-		ServerConfig svc = new ServerConfig();
-		Server sv = new Server("104.199.135.203", 22, "mayb", "root", "123456aA@");
-		// svc.checkAllPS(sv);
-		// System.out.println(svc.uploadToServer(sv, "ifconfig"));
-		// System.out.println("----------------------------");
-		System.out.println(svc.ServerInformation(sv));
-		//svc.checkAllPS(sv);
-	}
+	
 }

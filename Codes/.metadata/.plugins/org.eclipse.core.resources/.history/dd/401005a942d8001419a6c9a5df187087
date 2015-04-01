@@ -1,0 +1,50 @@
+package vn.edu.cit.controller;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.Session;
+
+public class TestConnect {
+	Session ss = sv.getSession(sv);
+	try {
+		String chuoilay = "";
+		String tong = "";
+		// option -e giup nhan dang ki tu xuong dong
+		Channel channel = ss.openChannel("exec");
+	
+		((ChannelExec) channel).setCommand(cmd);
+		((ChannelExec) channel).setErrStream(System.err);
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				System.in));
+		InputStream in = channel.getInputStream();
+		channel.connect();
+		byte[] tmp = new byte[1024];
+		while (true) {
+			while (in.available() > 0) {
+				int i = in.read(tmp, 0, 1024);
+				if (i < 0)
+					break;
+				chuoilay = new String(tmp, 0, i);
+				// System.out.print(chuoilay);
+				tong = tong + chuoilay;
+			}
+			if (channel.isClosed()) {
+				System.out.println("exit-status: "
+						+ channel.getExitStatus());
+				break;
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (Exception ee) {
+			}
+		}
+		channel.disconnect();
+		return tong;
+	} catch (Exception e) {
+		return null;
+	}
+}

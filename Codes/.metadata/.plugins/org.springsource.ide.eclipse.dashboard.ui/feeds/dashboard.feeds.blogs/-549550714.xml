@@ -5,7 +5,60 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-03-31T21:26:26Z</updated>
+  <updated>2015-04-01T15:01:53Z</updated>
+  <entry>
+    <title>Ongoing support for Java 7 (and even Java 6)</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/01/ongoing-support-for-java-7-and-even-java-6" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Juergen Hoeller</name>
+    </author>
+    <id>tag:spring.io,2015-04-01:2058</id>
+    <updated>2015-04-01T15:01:53Z</updated>
+    <content type="html">&lt;p&gt;You might have heard about the end of public updates for Java 7, coming up in just a few days with the release of Java 7 update 80. See the following Oracle pages for a reference:&lt;/p&gt;&lt;p&gt;&lt;a href="https://blogs.oracle.com/java-platform-group/entry/future_updates_of_java_7"&gt;https://blogs.oracle.com/java-platform-group/entry/future_updates_of_java_7&lt;/a&gt;&lt;br/&gt;&lt;a href="http://www.oracle.com/technetwork/java/eol-135779.html"&gt;http://www.oracle.com/technetwork/java/eol-135779.html&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s clarify what it really is: &lt;b&gt;the end of public updates&lt;/b&gt;, and by no means an end of life (EOL). With the second link above, scroll down to the &amp;ldquo;Oracle Java SE Support Roadmap&amp;rdquo; section and you&amp;rsquo;ll find the actual &lt;b&gt;EOL dates: Dec 2018 for Java 6 and Jul 2022 for Java 7.&lt;/b&gt; Yes, that&amp;rsquo;s another 3.5 years for Java 6 from now, and even another 7 years (!) for Java 7.&lt;/p&gt;&lt;p&gt;IBM&amp;rsquo;s EOL timeframes are similar, although an even longer Java 6 support timeline is to be expected there. &lt;b&gt;It&amp;rsquo;s generally worth noting that any end-of-updates statements from Oracle are completely irrelevant for IBM users:&lt;/b&gt; The IBM JDK is an independent product that just happens to be based on the same open source project (OpenJDK) in recent years.&lt;/p&gt;&lt;p&gt;So please, if you see any statements about Java 7 getting EOL&amp;rsquo;ed these days, take them with a large grain of salt. &lt;b&gt;The end of public updates is just the point of time when Oracle starts to charge for maintenance releases, that&amp;rsquo;s all.&lt;/b&gt; Java 7 remains with us for another 7 years.&lt;/p&gt;&lt;p&gt;In case you&amp;rsquo;re wondering about the Spring perspective: We designed &lt;a href="http://projects.spring.io/spring-framework/"&gt;Spring Framework 4.x&lt;/a&gt; to support Java 6, 7 and 8 in the same framework generation. &lt;b&gt;That&amp;rsquo;s a unified programming model to cover three generations of Java, allowing you to upgrade at your own pace while at the same time getting the maximum out of the JDK that you&amp;rsquo;re currently using!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The clue is that Spring Framework 4.x feels like a Java 8 based framework, out of the box, when using it on JDK 8. With the same framework version and framework jars, you&amp;rsquo;ll also get a fine experience on JDK 6 and 7: &lt;b&gt;You&amp;rsquo;ll just be restricted by the Java language and API level but will otherwise find the same 2015-era framework features at your fingertips.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Stay tuned for a follow-up blog post on how we go about supporting multiple JDK generations in our codebase&amp;hellip;&lt;/p&gt;&lt;p&gt;Juergen&lt;/p&gt;&lt;p&gt;P.S.: Note that the &lt;a href="http://platform.spring.io/platform/"&gt;Spring IO platform&lt;/a&gt;, including its wide arrangement of dependencies, is only supported on Java 7 and 8. At the same time, many of our Spring portfolio projects are still compatible with Java 6&amp;hellip; and JDK 6 based application servers such as WebSphere 7.0 / 8.0.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring IO Platform 1.1.2 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/01/spring-io-platform-1-1-2-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Andy Wilkinson</name>
+    </author>
+    <id>tag:spring.io,2015-03-31:2054</id>
+    <updated>2015-04-01T08:53:14Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.1.2.RELEASE is now available from both &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release upgrades the versions of a number of the projects in the Platform to pick up their latest maintenance releases:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring AMQP 1.4.3&lt;/li&gt;
+  &lt;li&gt;Spring Batch 3.0.3&lt;/li&gt;
+  &lt;li&gt;Spring Boot 1.2.3&lt;/li&gt;
+  &lt;li&gt;Spring Cloud Connectors 1.1.1&lt;/li&gt;
+  &lt;li&gt;Spring Data Evans SR2&lt;/li&gt;
+  &lt;li&gt;Spring Framework 4.1.6&lt;/li&gt;
+  &lt;li&gt;Spring Security 3.2.7&lt;/li&gt;
+  &lt;li&gt;Spring Web Services 2.2.1&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.1.2.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring IO Platform 1.0.5 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/01/spring-io-platform-1-0-5-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Andy Wilkinson</name>
+    </author>
+    <id>tag:spring.io,2015-03-31:2055</id>
+    <updated>2015-04-01T08:52:22Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce that &lt;a href="http://platform.spring.io/platform"&gt;Spring IO Platform&lt;/a&gt; 1.0.5.RELEASE is now available from both &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3Aio.spring.platform"&gt;Maven Central&lt;/a&gt;. This release is intended for users who remain on the 1.0.x line; where possible, upgrading to 1.1.x is recommended.&lt;/p&gt;&lt;p&gt;This maintenance release upgrades the versions of a number of the projects in the Platform to pick up their latest maintenance releases:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring AMQP 1.3.7&lt;/li&gt;
+  &lt;li&gt;Spring Batch 3.0.3&lt;/li&gt;
+  &lt;li&gt;Spring Boot 1.1.12&lt;/li&gt;
+  &lt;li&gt;Spring Data Dijkstra SR5&lt;/li&gt;
+  &lt;li&gt;Spring Framework 4.0.9&lt;/li&gt;
+  &lt;li&gt;Spring Integration 4.0.6&lt;/li&gt;
+  &lt;li&gt;Spring Security 3.2.7&lt;/li&gt;
+  &lt;li&gt;Spring Web Services 2.2.1&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The versions of many third-party dependencies have also been updated.&lt;/p&gt;&lt;p&gt;&lt;a href="http://platform.spring.io/platform"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-io/platform/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/platform/docs/1.0.5.RELEASE/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 1.1.12 released</title>
     <link rel="alternate" href="https://spring.io/blog/2015/03/31/spring-boot-1-1-12-released" />
@@ -454,7 +507,7 @@ Customer customer = factory.createProjection(Customer.class, map)&#xD;
 assertThat(customer.getFirstname(), is(&amp;quot;Dave&amp;quot;));&#xD;
 assertThat(customer.getLastname(), is(&amp;quot;Matthews&amp;quot;));&#xD;
 assertThat(customer.getFullName(), is(&amp;quot;Dave Matthews&amp;quot;));
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you can see, we chose a &lt;code&gt;Map&lt;/code&gt; to back the created projection instance. Under the hood a JDK proxy is created equipped with method interceptors that - in case of a &lt;code&gt;Map&lt;/code&gt; backing the proxy - delegating calls to accessors to property lookups within the &lt;code&gt;Map&lt;/code&gt;. Methods annotated with &lt;code&gt;@Value&lt;/code&gt; will get the annotated SpEL expression evaluated. In case you configure a &lt;code&gt;BeanFactory&lt;/code&gt; on the &lt;code&gt;SpelAwareProjectionFactory&lt;/code&gt; you can even refer to Spring beans from within these expressions and thus trigger more complex calculations.&lt;/p&gt;&lt;p&gt;In case the backing lookup does not return a value assignable to the return type declared, a standard &lt;code&gt;ConversionService&lt;/code&gt; is used for simple conversions followed by a recursive projection step.&lt;/p&gt;&lt;h3&gt;&lt;a href="#projections-in-spring-mvc" class="anchor" name="projections-in-spring-mvc"&gt;&lt;/a&gt;Projections in Spring MVC&lt;/h3&gt;&lt;p&gt;The projection mechanism can now be used by Spring MVC controller implementations to create form backing objects solely using interfaces. Using &lt;code&gt;@EnableSpringDataWebSupport&lt;/code&gt; in your Spring configuration (automatically activated in Boot) a &lt;code&gt;ProxyingHandlerMethodArgumentResolver&lt;/code&gt; is resolved that will automatically create a proxy instance for the interface and bind the according request parameters to it:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you can see, we chose a &lt;code&gt;Map&lt;/code&gt; to back the created projection instance. Under the hood a JDK proxy is created equipped with method interceptors that - in case of a &lt;code&gt;Map&lt;/code&gt; backing the proxy - delegating calls to accessors to property lookups within the &lt;code&gt;Map&lt;/code&gt;. Methods annotated with &lt;code&gt;@Value&lt;/code&gt; will get the annotated SpEL expression evaluated. In case you configure a &lt;code&gt;BeanFactory&lt;/code&gt; on the &lt;code&gt;SpelAwareProjectionFactory&lt;/code&gt; you can even refer to Spring beans from within these expressions and thus trigger more complex calculations.&lt;/p&gt;&lt;p&gt;In case the backing lookup does not return a value assignable to the return type declared, a standard &lt;code&gt;ConversionService&lt;/code&gt; is used for simple conversions followed by a recursive projection step.&lt;/p&gt;&lt;p&gt;For an example of how to use projections within a Spring MVC controller, see &lt;a href="http://stackoverflow.com/a/29386907/18122"&gt;this answer on StackOverflow&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#projections-in-spring-mvc" class="anchor" name="projections-in-spring-mvc"&gt;&lt;/a&gt;Projections in Spring MVC&lt;/h3&gt;&lt;p&gt;The projection mechanism can now be used by Spring MVC controller implementations to create form backing objects solely using interfaces. Using &lt;code&gt;@EnableSpringDataWebSupport&lt;/code&gt; in your Spring configuration (automatically activated in Boot) a &lt;code&gt;ProxyingHandlerMethodArgumentResolver&lt;/code&gt; is resolved that will automatically create a proxy instance for the interface and bind the according request parameters to it:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint java"&gt;interface Form {&#xD;
 &#xD;
   @NotBlank String getName();&#xD;
@@ -511,71 +564,6 @@ compile &amp;quot;org.springframework.integration:spring-integration-kafka:1.1.1
     <id>tag:spring.io,2015-03-25:2039</id>
     <updated>2015-03-25T18:44:30Z</updated>
     <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;It’s my pleasure to announce that Spring Framework 4.1.6 is available now. This is almost exclusively a bugfix release and therefore a strongly recommended upgrade for all current 4.x users. In particular, we recommend an upgrade from the superseded 4.0.x line as well.&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10000&amp;version=14863"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Spring Framework 4.1.6 is also the first release to be formally compatible with the recently released JDK 8 update 40. Spring 4.1.x supports a wide range of Java runtimes now, from 2010-era JDK 6 variants up until the latest 2015-era JDK 8 offerings from Oracle and IBM.&lt;/p&gt;&lt;p&gt;On a related note, for Spring Framework 4.2, we&amp;rsquo;re even testing on early JDK 9 builds already. If you&amp;rsquo;re interested in how we go about supporting different JDK generations in one and the same Spring Framework generation, stay tuned for our upcoming blog post&amp;hellip;&lt;/p&gt;&lt;p&gt;Cheers,&lt;/p&gt;&lt;p&gt;Juergen&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - March 24th, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/24/this-week-in-spring-march-24th-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-03-24:2038</id>
-    <updated>2015-03-24T22:05:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week, I&amp;rsquo;m in São Paulo, Brazil, where I presented a workshop on building cloud-native applications - specifically microservices - with &lt;a href="http://start.spring.io"&gt;Spring Boot&lt;/a&gt;, &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt; and &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; (via &lt;a href="http://run.pivotal.io"&gt;Pivotal Web Services&lt;/a&gt;). &lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Data lead Oliver Gierke has just announced Spring Data Fowler has gone GA, &lt;a href="http://spring.io/blog/2015/03/23/spring-data-release-train-fowler-goes-ga"&gt;packed with lots of advanced Java 8 features, as well&lt;/a&gt;!&lt;/li&gt;
-  &lt;li&gt;The agenda for the &lt;a href="http://www.springio.net/agenda/"&gt;Spring IO show in Barcelona, Spain is now available&lt;/a&gt;! Check it out!&lt;/li&gt;
-  &lt;li&gt;Done with the microservices hype? Then let&amp;rsquo;s get practical &lt;a href="https://spring.io/blog/2015/03/17/webinar-smarter-service-to-service-invocations-with-spring-cloud"&gt;on April 21st&lt;/a&gt;. I&amp;rsquo;ll be talking about how Spring Cloud integrates service registration (e.g.: Eureka, Consul, or Zookeeper), declarative REST clients (with Netflix&amp;rsquo;s Feign), reactive programming and the circuit breaker pattern with Hystrix to support easy, robust service-to-service invocations.&lt;/li&gt;
-  &lt;li&gt;Marius Bogoevici and Mark Pollack are teaming up for a webinar on Tues April 28th about &lt;a href="https://spring.io/blog/2015/03/17/webinar-reactive-data-pipelines-with-spring-xd-and-kafka"&gt;Reactive data-pipelines with Spring XD and Kafka&lt;/a&gt;, a must for any big / fast data enthusiasts.&lt;/li&gt;
-  &lt;li&gt;Colin Harrington&amp;rsquo;s SpringOne2GX 2014 Replay is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-browser-automation"&gt;Groovy Browser Automation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Peter Ledbrook&amp;rsquo;s SpringOne2GX 2014 Replay is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-for-java-developers"&gt;Groovy for Java Developers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Likely the coolest demo of SpringOne2GX 2014, brought to you by the dream team of Pivotal Ninjas Derek Beauregard, Phil Berman, Michael Minella, Darrel Sharpe&lt;br/&gt;is now available: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-iot-realized-the-connected-car"&gt;IoT Realized - The Connected Car&lt;/a&gt; showing you just how powerful Spring XD truly is for Big Data and IoT.&lt;/li&gt;
-  &lt;li&gt;Frustrated with Java serialization performance? Are you a Spring Integration peformance fanatic? Or perhaps you&amp;rsquo;re just trying to shave milliseconds and microseconds off your Java network calls? You won&amp;rsquo;t want to miss John Davies from C24 as he shows you how to reclaim performance with Java serialzation in this mind blowing SpringOne2GX 2014 Replay: &lt;a href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-big-data-in-memory"&gt;Big Data in Memory&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;The good Dr. Syer is back at it again with a followup to his epic blog series introducing single page applications &lt;a href="http://spring.io/blog/2015/03/23/multiple-ui-applications-and-a-gateway-single-page-application-with-spring-and-angular-js-part-vi"&gt;using Spring Security OAuth, Spring Cloud Zuul, and more&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;I put together a look at &lt;a href="http://spring.io/blog/2015/03/22/using-google-protocol-buffers-with-spring-mvc-based-rest-services"&gt;using Google Protocol Buffers to build efficient Spring-based REST services&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Tool Suite ninja Kris De Volder put together a great tutorial introducing some of the new features in &lt;a href="http://spring.io/blog/2015/03/18/spring-boot-support-in-spring-tool-suite-3-6-4"&gt;STS 3.6.4 that support building Spring Boot applications&lt;/a&gt;. Check it out!&lt;/li&gt;
-  &lt;li&gt;I&amp;rsquo;ll be doing another vJUG session, this time on &lt;a href="http://www.meetup.com/virtualJUG/events/221218834/"&gt;using Spring Cloud to build &amp;ldquo;Bootiful&amp;rdquo; Microservices&lt;/a&gt; - I hope you&amp;rsquo;ll join me there! Let&amp;rsquo;s make this a super well attended event!&lt;/li&gt;
-  &lt;li&gt;This post on &lt;a href="https://ngjweb.wordpress.com/2015/03/23/securing-gwt-apps-using-spring-oauth-spring-social/"&gt;using Spring Social and Spring Security to secure GWT applications is kind of interesting&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Hey, did you miss Adrian Cockroft&amp;rsquo;s talk at O&amp;rsquo;Reilly&amp;rsquo;s Software Architecture Summit? Check out this &lt;a href="http://java.dzone.com/articles/key-takeaways-adrian-cockrofts"&gt;blog summarizing the key takeaways&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;I enjoyed the ideas raised in this blog post on &lt;a href="http://java.dzone.com/articles/microservice-hybrids-and"&gt;possible variants of microservices&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;and, a &lt;em&gt;super&lt;/em&gt; simple example of using &lt;a href="https://gerrydevstory.com/2015/03/19/setting-up-spring-security-on-spring-boot-project/"&gt;Spring Security with Spring Boot&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Groovy Browser Automation</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-browser-automation" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-24:2037</id>
-    <updated>2015-03-24T20:49:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
-&lt;p&gt;Speaker: Colin Harrington&lt;/p&gt;
-&lt;p&gt;Core Groovy Track&lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovybrowserautomation-2gx2014"&gt;http://www.slideshare.net/SpringCentral/groovybrowserautomation-2gx2014 &lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;GEB (pronounced 'jeb') is a browser automation solution. It brings together the power of WebDriver, the elegance of jQuery content selection, the robustness of Page Object modelling and the expressiveness of the Groovy language.&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/ucGuzy0sNuY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Groovy for Java Developers</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/24/springone2gx-2014-replay-groovy-for-java-developers" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-03-24:2036</id>
-    <updated>2015-03-24T20:43:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014.&lt;/p&gt;
-&lt;p&gt;Speaker: Peter Ledbrook &lt;/p&gt;
-&lt;p&gt;Core Groovy Track &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-forjavadeveloperss2gx2014"&gt;http://www.slideshare.net/SpringCentral/groovy-forjavadeveloperss2gx2014&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt; Java is a good all-purpose programming language, but does that mean it's the best tool for all jobs?&lt;a href="http://projects.spring.io/spring-batch"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/BXRDTiJfrSE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
   </entry>
 </feed>
 

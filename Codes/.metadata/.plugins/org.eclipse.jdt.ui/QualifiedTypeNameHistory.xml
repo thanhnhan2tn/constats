@@ -29,4 +29,5 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.nic.NicConfig"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="vn.edu.cit.controller.TestConnect"/>
 </qualifiedTypeNameHistroy>

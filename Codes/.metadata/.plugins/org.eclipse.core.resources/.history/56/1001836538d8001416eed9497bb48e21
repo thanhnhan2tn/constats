@@ -1,0 +1,2 @@
+<tiles:insertDefinition name="defaultTemplate">
+    <tiles:putAttribute name="body">

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
+import vn.edu.cit.servercontrol.ServerConfig;
 
 /**
  * Handles requests for the application home page.
@@ -43,10 +44,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, HttpSession session, ModelMap mm) {
-		// Lay thong tin user tu Session
-		String username = (String) session.getAttribute("username");
 		// Su dung thong tin tu session de lay Doi tuong
-		User user = userDAO.getUser(username);
+		User user = (User) session.getAttribute("user");
 		// Neu user tong tai, thi tra ve file home, set doi tuong server
 		if (user != null) {
 			mm.put("title", "Home - Server Control");
@@ -71,11 +70,13 @@ public class HomeController {
 	public String checkStatus(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c) {
 		String cc = (String) session.getAttribute("cc");
-		User user = (User) userDAO.getUser((String) session.getAttribute("username"));
+		User user = (User) session.getAttribute("user");
 		String check = "false";
 		if (user != null && c.equals(cc)) {
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
+					server.setServerUsername("svcontrol"); // a user vs SSH
+															// permision
 					if (server.checkStatus()) {
 						check = "true";
 					}
@@ -94,7 +95,7 @@ public class HomeController {
 	@ResponseBody
 	public String getServers(HttpSession session, HttpServletRequest request, @PathVariable(value = "cc") String c,
 			ModelMap mm) {
-		User user = userDAO.getUser((String) session.getAttribute("username"));
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		String str = "[";
 		if (user != null && c.equals(cc)) {
@@ -179,7 +180,7 @@ public class HomeController {
 			return "redirect:/login";
 		} else if (Calculator.MD5(user.getPassWord()).equals(avaiable.getPassWord())) {
 			// kiem tra so sanh password neu dung
-			session.setAttribute("username", avaiable.getEmail());
+			session.setAttribute("user", avaiable);
 			session.setAttribute("cc", Calculator.MD5(avaiable.getEmail() + remoteAddress));
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";
@@ -202,15 +203,14 @@ public class HomeController {
 	@RequestMapping(value = "/profile/{cc}", method = RequestMethod.GET)
 	public ModelAndView profile(HttpSession session, @PathVariable(value = "cc") String c, HttpServletRequest request,
 			RedirectAttributes redirectAtt) {
-		String username = (String) session.getAttribute("username");
-		User user = userDAO.getUser(username);
+		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
-			return new ModelAndView ("profile");
+			return new ModelAndView("profile");
 		} else {
 			// Neu khong co user nao co email dang nhap
 			session.invalidate();
-			return new ModelAndView ("redirect:/login");
+			return new ModelAndView("redirect:/login");
 		}
 	}
 
@@ -248,39 +248,44 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/addserver", method = RequestMethod.POST)
 	public String addServer(@ModelAttribute(value = "Server") Server server, HttpServletRequest request,
-			HttpSession session, RedirectAttributes redirectAtt) {
-		String sessionUser = (String) session.getAttribute("username");
-
-		if (sessionUser != null && !sessionUser.isEmpty()) {
-			User user = userDAO.getUser(sessionUser);
-			if (user != null) {
-				List<Server> listServer = user.getServers();
-				if (listServer != null && listServer.size() > 0) {
-					for (Server sv1 : listServer) { // kiem tra server ip co bi
-													// trung
-						if (sv1.getServerAddress().equals(server.getServerAddress())) {
-							redirectAtt.addFlashAttribute("message", "This IP address already exists!");
-							break;
-						} else {
-							listServer.add(server);// Add Server to list
-							user.setServers(listServer);// Set list server to
-														// user
-							// Save user info
-							userDAO.updateUser(user);
-							redirectAtt.addFlashAttribute("message", "Add Success!");
-						}
-					} // end For
-				}// check list
-				else {
-					listServer.add(server);// Add Server to list
-					user.setServers(listServer);// Set list server to user
-					// Save user info
-					userDAO.updateUser(user);
-					redirectAtt.addFlashAttribute("message", "Add Success!");
-				}
-			} // end check User
+			HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
+		User user = (User) session.getAttribute("user");
+		String text = "sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
+				+ server.getServerPassword() + ")";
+		if (user != null) {
+			List<Server> listServer = user.getServers();
+			if (listServer != null && listServer.size() > 0) {
+				for (Server sv1 : listServer) { // kiem tra server ip co bi
+												// trung
+					if (sv1.getServerAddress().equals(server.getServerAddress())) {
+						redirectAtt.addFlashAttribute("message", "This IP address already exists!");
+						return "redirect:/";
+					} else {
+						listServer.add(server);// Add Server to list
+						user.setServers(listServer);// Set list server to
+													// user
+						// Save user info
+						userDAO.updateUser(user);
+						mm.put("user", user);
+						mm.put("text", text);
+						redirectAtt.addFlashAttribute("message", "Add Success!");
+						return "after-add-server";
+					}
+				} // end For
+			}// check list
+			else {
+				listServer.add(server);// Add Server to list
+				user.setServers(listServer);// Set list server to user
+				// Save user info
+				userDAO.updateUser(user);
+				redirectAtt.addFlashAttribute("message", "Add Success!");
+				mm.put("user", user);
+				mm.put("text", text);
+				return "after-add-server";
+			}
 			return "redirect:/";
 		} else {
+			redirectAtt.addFlashAttribute("message", "Please login First!");
 			return "redirect:/login";
 		}
 	}
@@ -291,24 +296,23 @@ public class HomeController {
 	@RequestMapping(value = "/removeserver/{ip}/{cc}", method = RequestMethod.GET)
 	public String removeServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
 			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
-		String username = (String) session.getAttribute("username");
-		if (username != null) {
-			User user = userDAO.getUser(username);
-			if (user != null) {
-				List<Server> listServer = user.getServers();
-				if (!listServer.isEmpty()) {
-					for (int i = 0; i < listServer.size(); i++) {
-						if (listServer.get(i).getServerAddress().equals(ip)) {
-							// Xoa mot server trong list
-							listServer.remove(i);
-						}
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+
+		if (user != null && cc.equals(c)) {
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					if (listServer.get(i).getServerAddress().equals(ip)) {
+						// Xoa mot server trong list
+						listServer.remove(i);
 					}
 				}
-				// dua danh sach server da sua chua vao user
-				user.setServers(listServer);
-				// Save user info
-				userDAO.updateUser(user);
-			}// end check
+			}
+			// dua danh sach server da sua chua vao user
+			user.setServers(listServer);
+			// Save user info
+			userDAO.updateUser(user);
 			return "redirect:/";
 		} else {
 			return "redirect:/login";
@@ -321,22 +325,21 @@ public class HomeController {
 	@RequestMapping(value = "/editserver/{ip}/{cc}", method = RequestMethod.GET)
 	public String editServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
 			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
-		String username = (String) session.getAttribute("username");
-		if (username != null) {
-			User user = userDAO.getUser(username);
-			if (user != null) {
-				List<Server> listServer = user.getServers();
-				if (!listServer.isEmpty()) {
-					for (int i = 0; i < listServer.size(); i++) {
-						if (listServer.get(i).getServerAddress().equals(ip)) {
-							// put server object to page
-							mm.put("user", user);
-							mm.put("server", listServer.get(i));
-							return "editserver";
-						} // end if IP
-					} // end for
-				} // end if
-			}// end check user
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+
+		if (user != null && cc.equals(c)) {
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					if (listServer.get(i).getServerAddress().equals(ip)) {
+						// put server object to page
+						mm.put("user", user);
+						mm.put("server", listServer.get(i));
+						return "editserver";
+					} // end if IP
+				} // end for
+			} // end if
 			return "redirect:/";
 		} else {
 			return "redirect:/login";
@@ -353,35 +356,33 @@ public class HomeController {
 	public String saveEditServer(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
 			@ModelAttribute(value = "server") Server sv, HttpServletRequest request, HttpSession session,
 			RedirectAttributes redirectAtt, ModelMap mm) {
-		String username = (String) session.getAttribute("username");
-		if (username != null) {
-			User user = userDAO.getUser(username);
-			if (user != null) {
-				List<Server> listServer = user.getServers();
-				if (!listServer.isEmpty()) {
-					for (int i = 0; i < listServer.size(); i++) {
-						Server server = listServer.get(i);
-						if (server.getServerAddress().equals(ip)) {
-							// Set server to new info
-							server.setServerAddress(sv.getServerAddress());
-							server.setServerName(sv.getServerName());
-							server.setPort(sv.getPort());
-							server.setServerPassword(sv.getServerPassword());
-							server.setServerUsername(sv.getServerUsername());
-							server.setPort(sv.getPort());
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		if (user != null && cc.equals(c)) {
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					Server server = listServer.get(i);
+					if (server.getServerAddress().equals(ip)) {
+						// Set server to new info
+						server.setServerAddress(sv.getServerAddress());
+						server.setServerName(sv.getServerName());
+						server.setPort(sv.getPort());
+						server.setServerPassword(sv.getServerPassword());
+						server.setServerUsername(sv.getServerUsername());
+						server.setPort(sv.getPort());
 
-							// return "redirect:/";
-						} // end if IP
-					} // end for
-				} // end if
-					// dua danh sach server da sua chua vao user
-				user.setServers(listServer);
-				// Save user info
-				userDAO.updateUser(user);
-				mm.put("user", user);
-				return "redirect:/";
-			}// end check user
+						// return "redirect:/";
+					} // end if IP
+				} // end for
+			} // end if
+				// dua danh sach server da sua chua vao user
+			user.setServers(listServer);
+			// Save user info
+			userDAO.updateUser(user);
+			mm.put("user", user);
 			return "redirect:/";
+
 		} else {
 			return "redirect:/login";
 		}
@@ -401,32 +402,33 @@ public class HomeController {
 	public String serviceController(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
 			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		// Lay thong tin username trong session;
-		String username = (String) session.getAttribute("username");
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+
 		String str = "redirect:/"; // Chuoi return
-		if (username != null) {
-			User user = userDAO.getUser(username); // Kiem tra thong tin user
-													// trong csdl
-			if (user != null) { // Lay thong tin Server cua user trong csdl
-				List<Server> listServer = user.getServers();
-				if (!listServer.isEmpty()) {
-					for (int i = 0; i < listServer.size(); i++) {
-						Server s = listServer.get(i); // get server in list
-						if (s.getServerAddress().equals(ip)) { // check Ip
-							mm.put("user", user);
-							if (s.checkStatus()) {
-								mm.put("server", s);
-								str = "services-control";
-							} else {
-								str = "redirect:/";
-								// Add a message to page
-								redirectAtt.addFlashAttribute("display", "block");
-								redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
-							}
+		if (user != null && cc.equals(c)) { // Lay thong tin Server cua user
+											// trong csdl
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					Server s = listServer.get(i); // get server in list
+					if (s.getServerAddress().equals(ip)) { // check Ip
+						ServerConfig sf = new ServerConfig();
+						mm.put("user", user);
+						s.setStatus(sf.uploadToServer2(s));
+						if (s.checkStatus()) {
+							mm.put("server", s);
+							str = "services-control";
+						} else {
+							str = "redirect:/";
+							// Add a message to page
+							redirectAtt.addFlashAttribute("display", "block");
+							redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
 						}
 					}
-				} else {
-					str = "redirect:/";
 				}
+			} else {
+				str = "redirect:/";
 			}// end check user, if user not signin, or ending session
 		} else {
 			str = "redirect:/login";

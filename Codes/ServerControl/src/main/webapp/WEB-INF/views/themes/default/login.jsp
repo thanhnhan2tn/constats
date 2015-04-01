@@ -82,6 +82,7 @@
 
 					<div style="display: none ${display}" id="login-alert"
 						class="alert alert-danger col-sm-12">${message }</div>
+					<div class="clearfix"></div>
 					<spring:form commandName="User" method="post"
 						class="form-horizontal" action="login">
 						<div style="margin-bottom: 25px" class="input-group">

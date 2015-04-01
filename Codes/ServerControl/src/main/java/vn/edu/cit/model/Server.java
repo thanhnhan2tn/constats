@@ -1,10 +1,10 @@
 package vn.edu.cit.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import vn.edu.cit.servercontrol.ServerStatus;
+
 import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 /**
@@ -25,6 +25,14 @@ public class Server {
 	public Server() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public ServerStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ServerStatus status) {
+		this.status = status;
 	}
 
 	public String getServerName() {
