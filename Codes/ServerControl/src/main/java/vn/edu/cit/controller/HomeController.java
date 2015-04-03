@@ -26,6 +26,7 @@ import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
 import vn.edu.cit.servercontrol.ServerConfig;
+import vn.edu.cit.servercontrol.ServerStatus;
 
 /**
  * Handles requests for the application home page.
@@ -389,7 +390,7 @@ public class HomeController {
 	}
 
 	/**
-	 * Services Controller
+	 * Services Controller, Xu ly thong tin va quan ly Service
 	 * 
 	 * @param ip
 	 * @param c
@@ -402,20 +403,20 @@ public class HomeController {
 	public String serviceController(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
 			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		// Lay thong tin username trong session;
+		// Lay thong tin token
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
-
-		String str = "redirect:/"; // Chuoi return
-		if (user != null && cc.equals(c)) { // Lay thong tin Server cua user
-											// trong csdl
+		// Chuoi return mac dinh
+		String str = "redirect:/";
+		if (user != null && cc.equals(c)) {
 			List<Server> listServer = user.getServers();
 			if (!listServer.isEmpty()) {
 				for (int i = 0; i < listServer.size(); i++) {
 					Server s = listServer.get(i); // get server in list
 					if (s.getServerAddress().equals(ip)) { // check Ip
-						ServerConfig sf = new ServerConfig();
+						// ServerConfig sf = new ServerConfig();
 						mm.put("user", user);
-						s.setStatus(sf.uploadToServer2(s));
+						// s.setStatus(sf.uploadToServer2(s));
 						if (s.checkStatus()) {
 							mm.put("server", s);
 							str = "services-control";
@@ -434,6 +435,33 @@ public class HomeController {
 			str = "redirect:/login";
 		}
 		return str;
+	}
+
+	@RequestMapping(value = "/getserverinfo/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public ServerStatus getServerInfoController(@PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, HttpServletRequest request, HttpSession session,
+			RedirectAttributes redirectAtt) {
+		// Lay thong tin username trong session;
+		// Lay thong tin token
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// Chuoi return mac dinh
+		ServerStatus status = null;
+		if (user != null && cc.equals(c)) {
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					Server s = listServer.get(i); // get server in list
+					if (s.getServerAddress().equals(ip)) { // check Ip
+						ServerConfig sf = new ServerConfig();
+						status = sf.uploadToServer2(s);
+					}
+				}
+			} // end check ListServer
+
+		}// end if User
+		return status;
 	}
 
 	private static final Logger _log = Logger.getLogger(HomeController.class);

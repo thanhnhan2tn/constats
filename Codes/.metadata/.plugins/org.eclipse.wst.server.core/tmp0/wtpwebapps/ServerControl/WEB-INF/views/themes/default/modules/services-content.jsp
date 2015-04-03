@@ -1,40 +1,71 @@
+<%@page import="vn.edu.cit.services.UserService"%>
+<%@page import="vn.edu.cit.model.*"%>
+<%@page import="org.springframework.data.mongodb.core.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script>
+	$(document).ajaxStart(function() {
+		$(".wait").css("display", "block");
+	});
+	//loading ServerInfomation
+	var ip = "${server.serverAddress}";
+	$(document).ready(function() {
+		$.ajax({
+			url : '${pageContext.request.contextPath}/getserverinfo/' + ip + '/' + cc,
+			type : 'GET',
+			data : {},
+			//timeout : 60000,
+			success : function(data, status){
+				//if(data != null){
+				var html = '<table class="table table-bordered">';
+					html+='<tr><td>Hostname:</td><td>'+data.hostname+'</td></tr>';
+					html+='<tr><td>OS Version:</td><td>'+data.osversion+'</td></tr>';
+					html+='<tr><td>Kernel:</td><td>'+data.kernel+'</td></tr>';
+					html+='<tr><td>Processor Info:</td><td>'+data.processor_info+'</td></tr>';
+					html+='<tr><td>Uptime:</td><td>'+data.uptime+'</td></tr>';
+					html+='<tr><td>Memory:</td><td>'+data.memmory+'</td></tr>';
+					html+='<tr><td>Cpu Loadaverage:</td><td>'+data.cpu_loadaverage+'</td></tr></table>';
+				//	alert(html);
+				$(".serverinfomation").html(html);
+				$(".wait").css("display", "none");
+				//}
+			}
+		});
+	})
+</script>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 			Control Services Server<small> (${server.serverAddress})</small>
 		</h1>
-
 	</section>
 	<!--  End Content Header -->
 	<!--  Main Content -->
 	<section class="content">
 		<div class="main-content panel-group" id="accordion">
 			<ul class="nav nav-tabs" id="serverTab">
-				<li class="active"><a data-toggle="tab" href="#monitor">Monitor</a></li>
+				<li class="active"><a data-toggle="tab" href="#monitor">System Infomation</a></li>
 				<li><a data-toggle="tab" href="#services">Service Configuation</a></li>
 			</ul>
 			<hr>
 			<div class="tab-content">
-			<!-- Tabs Monitor Config -->
+				<!-- Tabs Monitor Config -->
 				<div class="tab-pane active" id="monitor">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Monitor</h3>
+							<h3 class="panel-title">System Infomation</h3>
 						</div>
 						<div id="">
-							<div class="panel-body">
-							<table class="table table-bordered">
-							<tr><td>Hostname: </td><td>${server.status.hostname }</td></tr>
-							<tr><td>OS Version: </td><td>${server.status.osversion }</td></tr>
-							<tr><td>Kernel: </td><td>${server.status.kernel }</td></tr>
-							<tr><td>Processor Info: </td><td>${server.status.processor_info }</td></tr>
-							<tr><td>Uptime: </td><td>${server.status.uptime }</td></tr>
-							<tr><td>Memory: </td><td>${server.status.memmory }</td></tr>
-							<tr><td>cpu_loadaverage: </td><td>${server.status.cpu_loadaverage }</td></tr>
-							</table>
-						</div>
+							<div class="panel-body serverinfomation" id="serverinfomation">
+								<div class="pull-center">
+								<span class="wait"
+									style="display: none: text-align:center;displar:block; margin: 100px auto;"> <img
+									src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
+								</span>
+							
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
