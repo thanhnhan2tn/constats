@@ -3,6 +3,8 @@ package model.dhcp;
 public class HostFixIP {
 	String hostname;
 	String hardware_internet;
+	String filename;
+	String servername;
 	String fixed_address;
 
 	public HostFixIP() {
@@ -10,10 +12,12 @@ public class HostFixIP {
 	}
 
 	public HostFixIP(String hostname, String hardware_internet,
-			String fixed_address) {
+			String filename, String servername, String fixed_address) {
 		super();
 		this.hostname = hostname;
 		this.hardware_internet = hardware_internet;
+		this.filename = filename;
+		this.servername = servername;
 		this.fixed_address = fixed_address;
 	}
 
@@ -31,6 +35,22 @@ public class HostFixIP {
 
 	public void setHardware_internet(String hardware_internet) {
 		this.hardware_internet = hardware_internet;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getServername() {
+		return servername;
+	}
+
+	public void setServername(String servername) {
+		this.servername = servername;
 	}
 
 	public String getFixed_address() {

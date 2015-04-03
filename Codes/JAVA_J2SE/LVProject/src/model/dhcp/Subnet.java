@@ -5,8 +5,7 @@ import java.util.List;
 public class Subnet {
 	String subnet;
 	String netmask;
-	String range1;
-	String range2;
+	String range;
 	String domain_name_server;
 	String domain_name;
 	String router_gateway;
@@ -17,15 +16,14 @@ public class Subnet {
 	public Subnet() {
 	}
 
-	public Subnet(String subnet, String netmask, String range1, String range2,
+	public Subnet(String subnet, String netmask, String range,
 			String domain_name_server, String domain_name,
 			String router_gateway, String broadcast_address,
 			String default_lease_time, String max_lease_time) {
 		super();
 		this.subnet = subnet;
 		this.netmask = netmask;
-		this.range1 = range1;
-		this.range2 = range2;
+		this.range = range;
 		this.domain_name_server = domain_name_server;
 		this.domain_name = domain_name;
 		this.router_gateway = router_gateway;
@@ -50,20 +48,12 @@ public class Subnet {
 		this.netmask = netmask;
 	}
 
-	public String getRange1() {
-		return range1;
+	public String getRange() {
+		return range;
 	}
 
-	public void setRange1(String range1) {
-		this.range1 = range1;
-	}
-
-	public String getRange2() {
-		return range2;
-	}
-
-	public void setRange2(String range2) {
-		this.range2 = range2;
+	public void setRange(String range) {
+		this.range = range;
 	}
 
 	public String getDomain_name_server() {
