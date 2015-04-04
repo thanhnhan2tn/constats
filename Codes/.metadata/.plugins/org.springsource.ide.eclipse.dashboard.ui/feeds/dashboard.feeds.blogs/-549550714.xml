@@ -5,7 +5,36 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-04-01T15:01:53Z</updated>
+  <updated>2015-04-02T20:43:00Z</updated>
+  <entry>
+    <title>Check out Dave Syer's "Spring Security and AngularJS" blog series converted to tutorial</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/02/check-out-dave-syer-s-spring-security-and-angularjs-blog-series-converted-to-tutorial" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Greg Turnquist</name>
+    </author>
+    <id>tag:spring.io,2015-04-02:2060</id>
+    <updated>2015-04-02T20:43:00Z</updated>
+    <content type="html">&lt;p&gt;Greetings Spring community,&lt;/p&gt;&lt;p&gt;&lt;a href="https://spring.io/team/dsyer"&gt;Dave Syer&amp;rsquo;s&lt;/a&gt; six-part blog series on &lt;strong&gt;Spring Security and AngularJS&lt;/strong&gt; has been a smash hit! It has echoed across the twittersphere, torn up DZone, and drawn people far and wide.&lt;/p&gt;&lt;p&gt;Did you miss any of it? Perhaps you&amp;rsquo;ve heard of it and found it too difficult to track down the first post. No more.&lt;/p&gt;&lt;p&gt;Please navigate to our newly minted &lt;a href="https://spring.io/guides/tutorials/spring-security-and-angular-js"&gt;Spring Security and AngularJS tutorial&lt;/a&gt; and enjoy all that solid gold. We migrated 100% of it into that tutorial, made slight edits to the links, and polished it up just for you.&lt;/p&gt;&lt;p&gt;Share and enjoy!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Security Kerberos 1.0.0.RC2 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/02/spring-security-kerberos-1-0-0-rc2-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Rob Winch</name>
+    </author>
+    <id>tag:spring.io,2015-04-02:2059</id>
+    <updated>2015-04-02T17:01:37Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring Security Kerberos team, I&amp;rsquo;m pleased to announce the release of Spring Security Kerberos 1.0.0.RC2. This release brings a number of changes. The highlights can be found below:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Added support LdapContextSource. Special thanks to &lt;a href="https://github.com/nrodrigues"&gt;Nelson Rodrigues&lt;/a&gt; for this contribution!&lt;/li&gt;
+  &lt;li&gt;Repackaging for better management of dependencies&lt;/li&gt;
+  &lt;li&gt;Specific implementations are moved to their own packages to signal additional optional dependencies&lt;/li&gt;
+  &lt;li&gt;spring-security-kerberos-web now contains all of the web related dependencies (i.e. servlet dependencies)&lt;/li&gt;
+  &lt;li&gt;Bug fixes&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We’d love to hear back what people think by participating in a project or simply creating issues or feature requests at &lt;a href="https://github.com/spring-projects/spring-security-kerberos"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Ongoing support for Java 7 (and even Java 6)</title>
     <link rel="alternate" href="https://spring.io/blog/2015/04/01/ongoing-support-for-java-7-and-even-java-6" />
@@ -536,34 +565,6 @@ class GuestbookController {&#xD;
     <id>tag:spring.io,2015-03-26:2044</id>
     <updated>2015-03-26T08:28:00Z</updated>
     <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 3.2.7.RELEASE. This release brings a number of &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;bug fixes&lt;/a&gt; including a fix for a regression in the Active Directory support.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Integration Kafka Support 1.1.GA is available</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-integration-kafka-support-1-1-ga-is-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Artem Bilan</name>
-    </author>
-    <id>tag:spring.io,2015-03-23:2033</id>
-    <updated>2015-03-26T01:00:00Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;We are pleased to announce that the Spring Integration Kafka Support 1.1 GA is now available.&lt;br/&gt;Use the &lt;a href="http://repo.springsource.org/release"&gt;Release Repository&lt;/a&gt; with Maven or Gradle&lt;br/&gt;&lt;code&gt;&#xD;
-compile &amp;quot;org.springframework.integration:spring-integration-kafka:1.1.1.RELEASE&amp;quot;&#xD;
-&lt;/code&gt;&lt;br/&gt;or download a &lt;a href="http://repo.spring.io/release/org/springframework/integration/spring-integration-kafka/1.1.1.RELEASE"&gt;distribution archive&lt;/a&gt;, to give it a spin.&lt;/p&gt;&lt;h2&gt;&lt;a href="#overview" class="anchor" name="overview"&gt;&lt;/a&gt;Overview&lt;/h2&gt;&lt;p&gt;The main reason of such a quick next point release just after &lt;a href="https://spring.io/blog/2015/02/09/spring-integration-kafka-extension-1-0-ga-is-available"&gt;1.0 GA&lt;/a&gt; is to address a number of critical &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=11101&amp;version=14931"&gt;fixes&lt;/a&gt; for the upcoming &lt;a href="http://projects.spring.io/spring-xd/"&gt;Spring XD&lt;/a&gt; &lt;code&gt;1.1.1&lt;/code&gt; and &lt;code&gt;1.2&lt;/code&gt; releases. In addition, this release provides performance improvements around message generation streaming scenarios, which required an upgrade to &lt;a href="http://projects.spring.io/spring-integration/"&gt;Spring Integration&lt;/a&gt; &lt;code&gt;4.1&lt;/code&gt;, which is the minimum for Spring XD also.&lt;/p&gt;&lt;p&gt;One more important feature, which has been introduced with this release, is &lt;em&gt;manual acknowledgment&lt;/em&gt;, where a message&amp;rsquo;s &lt;code&gt;offset&lt;/code&gt; can be committed later on demand.&lt;br/&gt;For this purpose, Spring Integration Kafka introduces the &lt;code&gt;Acknowledgment&lt;/code&gt; interface. When &lt;code&gt;KafkaMessageDrivenChannelAdapter#autoCommitOffset&lt;/code&gt; is set to &lt;code&gt;false&lt;/code&gt;, a &lt;code&gt;KafkaHeaders.ACKNOWLEDGMENT&lt;/code&gt; header is added to the message, containing an &lt;code&gt;Acknowledgment&lt;/code&gt; object. Having that message header you always can decide to &lt;code&gt;acknowledge()&lt;/code&gt; the Kafka message or not in the downstream flow.&lt;/p&gt;&lt;p&gt;If you are using &lt;code&gt;KafkaMessageListenerContainer&lt;/code&gt; directly, you can now register an &lt;code&gt;AcknowledgingMessageListener&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;public interface AcknowledgingMessageListener {&#xD;
-	void onMessage(KafkaMessage message, Acknowledgment acknowledgment);&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;When doing so, automatic offset updates are disabled, and you can use the &lt;code&gt;acknowledge()&lt;/code&gt; method of the &lt;code&gt;Acknowledgment&lt;/code&gt; argument to trigger an offset update.&lt;/p&gt;&lt;h2&gt;&lt;a href="#what-next" class="anchor" name="what-next"&gt;&lt;/a&gt;What next?&lt;/h2&gt;&lt;p&gt;Our plans are to work on &lt;code&gt;1.2&lt;/code&gt; release. It will be a critical upgrade to &lt;a href="http://kafka.apache.org/downloads.html"&gt;Kafka 0.8.2&lt;/a&gt;, possibly non-backwards compatible. Plus we are going to expose more configurable options for retry support within Kafka Adapters. And much more!&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-kafka"&gt;Project Page&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/INTEXT"&gt;JIRA&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration-kafka/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.md"&gt;Contributions&lt;/a&gt; | &lt;a href="http://stackoverflow.com"&gt;StackOverflow&lt;/a&gt; (&lt;code&gt;spring-integration&lt;/code&gt; tag)&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Framework 4.1.6 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/25/spring-framework-4-1-6-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Juergen Hoeller</name>
-    </author>
-    <id>tag:spring.io,2015-03-25:2039</id>
-    <updated>2015-03-25T18:44:30Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring community,&lt;/p&gt;&lt;p&gt;It’s my pleasure to announce that Spring Framework 4.1.6 is available now. This is almost exclusively a bugfix release and therefore a strongly recommended upgrade for all current 4.x users. In particular, we recommend an upgrade from the superseded 4.0.x line as well.&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10000&amp;version=14863"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SPR"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Spring Framework 4.1.6 is also the first release to be formally compatible with the recently released JDK 8 update 40. Spring 4.1.x supports a wide range of Java runtimes now, from 2010-era JDK 6 variants up until the latest 2015-era JDK 8 offerings from Oracle and IBM.&lt;/p&gt;&lt;p&gt;On a related note, for Spring Framework 4.2, we&amp;rsquo;re even testing on early JDK 9 builds already. If you&amp;rsquo;re interested in how we go about supporting different JDK generations in one and the same Spring Framework generation, stay tuned for our upcoming blog post&amp;hellip;&lt;/p&gt;&lt;p&gt;Cheers,&lt;/p&gt;&lt;p&gt;Juergen&lt;/p&gt;</content>
   </entry>
 </feed>
 

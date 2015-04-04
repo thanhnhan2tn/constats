@@ -309,7 +309,6 @@ public class ServerConfig {
 		String info = "";
 		String timefull = uploadToServer(sv, "cat /proc/uptime");
 		String second = timefull.substring(0, timefull.indexOf(" "));
-
 		float so = Float.parseFloat(second);
 		// System.out.println(so + "");
 		String time = convertStoH(so);
@@ -353,14 +352,11 @@ public class ServerConfig {
 	public String convertStoH(float secs) {
 		String tong = "";
 		int hours = (int) secs / 3600, remainder = (int) secs % 3600, minutes = remainder / 60, seconds = remainder % 60;
-
 		String disHour = (hours < 10 ? "0" : "") + hours, disMinu = (minutes < 10 ? "0"
 				: "")
 				+ minutes, disSec = (seconds < 10 ? "0" : "") + seconds;
-
 		tong = tong + disHour + ":" + disMinu + ":" + disSec;
 		return tong;
 	}
-
 	
 }

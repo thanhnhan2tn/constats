@@ -10,8 +10,7 @@ $(document).ready(
 					return false;
 				}
 				var data = $(listServer[index]).attr('data-id');
-				$.ajax(
-						{
+				$.ajax({
 							url : 'checkstatus/' + data + '/' + cc,
 							type : 'GET',
 							data : {},
@@ -39,4 +38,5 @@ $(document).ready(
 			}
 			// Check status sidebar
 			var listleft = $('.list-server-left');
+			
 		});

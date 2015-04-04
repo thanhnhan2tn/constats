@@ -276,7 +276,7 @@ public class NICController {
 						sv = server; // get server Object
 						NicConfig nicConfig = new NicConfig();
 						try {
-							nicConfig.uploadConfigToServer2(sv, config);
+							nicConfig.saveStringToConfig(sv, config);
 						} catch (IOException e) {
 							return "redirect:/services/" + ip + "/" + cc;
 							// Thong bao khong the upload

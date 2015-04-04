@@ -107,3 +107,8 @@ Apr 01, 2015 22:01:31.35 WARNING: content window passed to PrivateBrowsingUtils.
 Apr 01, 2015 22:01:31.35 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
 Apr 01, 2015 22:01:31.35 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:14328:25
 Apr 01, 2015 23:48:36.45 [Child 6776] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+
+Apr 02, 2015 14:35:50.87 NEW SESSION
+Apr 02, 2015 14:35:50.88 
+Apr 02, 2015 14:35:50.95 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+Apr 02, 2015 14:35:50.96 
