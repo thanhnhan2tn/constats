@@ -14,6 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import model.dhcp.Subnet;
+import model.dns.Dns;
 import model.server.Server;
 
 import com.jcraft.jsch.Channel;
@@ -23,7 +24,7 @@ import com.jcraft.jsch.Session;
 public class NicConfig {
 
 	// Upload cmd / file to server
-	public boolean uploadToServer(Server sv, String cmd) {
+	public boolean sendCommandToServer(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
 			// option -e giup nhan dang ki tu xuong dong
@@ -44,12 +45,7 @@ public class NicConfig {
 				if (channel.isClosed()) {
 					System.out.println("exit-status: "
 							+ channel.getExitStatus());
-					if (channel.getExitStatus() != 1) {
-						System.out.println("Process Success !!!");
-					} else {
-						System.out.println("Process Failed !!!");
 
-					}
 					break;
 				}
 				try {
@@ -58,7 +54,12 @@ public class NicConfig {
 				}
 			}
 			channel.disconnect();
-			return true;
+			if (channel.getExitStatus() == 0) {
+
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
@@ -67,10 +68,12 @@ public class NicConfig {
 	// Start
 	public Boolean Start(Server sv) {
 		String command = "sudo /etc/init.d/networking start";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
+			System.out.println("Started Success....!!!");
 			return true;
 		} else {
+			System.out.println("Start Failed....!!!");
 			return false;
 		}
 	}
@@ -78,10 +81,12 @@ public class NicConfig {
 	// Stop
 	public Boolean Stop(Server sv) {
 		String command = "sudo /etc/init.d/networking stop";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
+			System.out.println("Stoped Success....!!!");
 			return true;
 		} else {
+			System.out.println("Stop Failed....!!!");
 			return false;
 		}
 	}
@@ -89,266 +94,130 @@ public class NicConfig {
 	// Restart
 	public Boolean Restart(Server sv) {
 		String command = "sudo /etc/init.d/networking restart";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
+			System.out.println("Restarted Success....!!!");
 			return true;
 		} else {
+			System.out.println("Restart Failed....!!!");
 			return false;
 		}
 	}
 
 	// Ifdown Eth
-	public Boolean DownCard(Server sv, String iface) {
+	public Boolean downCard(Server sv, String iface) {
 		String command = "sudo ifdown " + iface;
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
+			System.out.println("Down Success....!!!");
 			return true;
 		} else {
+			System.out.println("Down Failed....!!!");
 			return false;
 		}
 	}
 
 	// ifup Eth
-	public Boolean UpCard(Server sv, String iface) {
+	public Boolean upCard(Server sv, String iface) {
 		String command = "sudo ifup " + iface;
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
+			System.out.println("Up Success....!!!");
 			return true;
 		} else {
+			System.out.println("Up Failed....!!!");
 			return false;
 		}
 	}
 
 	// Ifdown and Ifup
-	public Boolean RestartCard(Server sv, String iface) {
-		String command = "sudo ifdown && ifup " + iface;
-		Boolean boo = uploadToServer(sv, command);
-		if (boo == true) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	// Add them 1 dns-nameservers
-	public Boolean createDns(Server sv, String dns) {
-		String config = "echo -e >> /etc/network/interfaces "
-				+ "dns-nameservers " + dns;
-		uploadToServer(sv, config);
-		return null;
-	}
-
-	// Remove 1 dns-nameservers
-	public List<String> removeDns(Server sv, String dns, List<String> list_dns)
-			throws IOException {
-		list_dns = convertXMLToObject(sv).getDns_nameservers();
-		for (String d : new ArrayList<String>(list_dns)) {
-			if (d.equals(dns)) {
-				list_dns.remove(d);
-
-			}
-		}
-
-		return list_dns;
-	}
-
-	// Add them mot eth
-	public Boolean createEth(Server sv, Eth eth) {
-		String config = "";
-
-		if (eth.getIface() != null && !eth.getIface().equals("")) {
-			config = config + "auto " + eth.getIface() + "'\n'" + "iface "
-					+ eth.getIface();
-		}
-
-		if (eth.getInet() != null && !eth.getInet().equals("")) {
-			config = config + " inet " + eth.getInet() + "'\n'";
-		}
-
-		if (eth.getAddress() != null && !eth.getAddress().equals("")) {
-			config = config + "address " + eth.getAddress() + "'\n'";
-		}
-
-		if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
-			config = config + "netmask " + eth.getNetmask() + "'\n'";
-		}
-
-		if (eth.getGateway() != null && !eth.getGateway().equals("")) {
-			config = config + "gateway " + eth.getGateway() + "'\n'";
-		}
-
-		if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
-			config = config + "network " + eth.getNetwork() + "'\n'";
-		}
-
-		if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
-			config = config + "broadcast " + eth.getBroadcast() + "'\n'";
-		}
-
-		config = (config + "'\n'").trim();
-		config = "sudo echo -e >> /etc/network/interfaces " + config;
-		uploadToServer(sv, config);
-		return true;
-	}
-
-	// Xoa Eth
-	public List<Eth> removeEthFromList(List<Eth> eth_list, String iface) {
-
-		for (Eth eth : new ArrayList<>(eth_list)) {
-			if (eth.getIface().equals(iface)) {
-				eth_list.remove(eth);
-			}
-		}
-		return eth_list;
-	}
-
-	// upload Config to Server 1 - Save ALL
-	public boolean uploadConfigToServer(Server sv, Nic n) throws IOException {
-		String config = "";
-		for (Eth eth : n.getEth()) {
-
-			if (eth.getIface() != null && !eth.getIface().equals("")) {
-				config = config + "auto " + eth.getIface() + "'\n'" + "iface "
-						+ eth.getIface();
-			}
-
-			if (eth.getInet() != null && !eth.getInet().equals("")) {
-				config = config + " inet " + eth.getInet() + "'\n'";
-			}
-
-			if (eth.getAddress() != null && !eth.getAddress().equals("")) {
-				config = config + "address " + eth.getAddress() + "'\n'";
-			}
-
-			if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
-				config = config + "netmask " + eth.getNetmask() + "'\n'";
-			}
-
-			if (eth.getGateway() != null && !eth.getGateway().equals("")) {
-				config = config + "gateway " + eth.getGateway() + "'\n'";
-			}
-
-			if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
-				config = config + "network " + eth.getNetwork() + "'\n'";
-			}
-
-			if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
-				config = config + "broadcast " + eth.getBroadcast() + "'\n'";
-			}
-
-			config = (config + "'\n'").trim();
-		}
-		if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0) {
-			// check null and check empty.
-			for (String dns : n.getDns_nameservers()) {
-				config = (config + "dns-nameservers " + dns + "'\n'").trim();
-
-			}
-		}
-		config = config + "'\n'";
-		// thuc hien xoa dong chua ki tu "null"
-		// config = XoaNull(config);
-		System.out.println(config);
-		config = "sudo echo -e > /etc/network/interfaces " + config;
-		if (uploadToServer(sv, config) == true) {
-			System.out.println("Channel close....!!!");
-			return true;
-		} else {
-			System.out.println("Channel can't close....!!!");
-
-			return false;
-		}
-
-	}
-
-	// // upload Config to Server 2
-	// public boolean uploadConfigToServer2(Server sv, String configText)
-	// throws IOException {
-	// String config = configText;
-	// config = "sudo echo -e > /etc/network/interfaces " + config;
-	// if (uploadToServer(sv, config) == true) {
-	// System.out.println("Channel close....!!!");
+	// public Boolean RestartCard(Server sv, String iface) {
+	// String command = "sudo ifdown && ifup " + iface;
+	// Boolean boo = sendCommandToServer(sv, command);
+	// if (boo == true) {
 	// return true;
 	// } else {
-	// System.out.println("Channel can't close....!!!");
-	//
 	// return false;
 	// }
-	//
 	// }
 
-	// upload Config to Server 1 - day la ham xoa iface/dns nhanh nhat
-	public boolean uploadConfigToServerAfterRemove(Server sv, Nic n, String d,
-			String iface) throws IOException {
+	// Add them 1 dns-nameservers
+	// public Boolean createDns(Server sv, String dns) {
+	// String config = "echo -e >> /etc/network/interfaces "
+	// + "dns-nameservers " + dns;
+	// uploadToServer(sv, config);
+	// return null;
+	// }
+
+	// Remove 1 dns-nameservers
+	// public List<String> removeDns(Server sv, String dns, List<String>
+	// list_dns)
+	// throws IOException {
+	// list_dns = convertXMLToObject(sv).getDns_nameservers();
+	// for (String d : new ArrayList<String>(list_dns)) {
+	// if (d.equals(dns)) {
+	// list_dns.remove(d);
+	//
+	// }
+	// }
+	//
+	// return list_dns;
+	// }
+
+	// Add them mot eth
+	// public Boolean createEth(Server sv, Eth eth) {
+	// String config = "";
+	//
+	// if (eth.getIface() != null && !eth.getIface().equals("")) {
+	// config = config + "auto " + eth.getIface() + "'\n'" + "iface "
+	// + eth.getIface();
+	// }
+	//
+	// if (eth.getInet() != null && !eth.getInet().equals("")) {
+	// config = config + " inet " + eth.getInet() + "'\n'";
+	// }
+	//
+	// if (eth.getAddress() != null && !eth.getAddress().equals("")) {
+	// config = config + "address " + eth.getAddress() + "'\n'";
+	// }
+	//
+	// if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
+	// config = config + "netmask " + eth.getNetmask() + "'\n'";
+	// }
+	//
+	// if (eth.getGateway() != null && !eth.getGateway().equals("")) {
+	// config = config + "gateway " + eth.getGateway() + "'\n'";
+	// }
+	//
+	// if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
+	// config = config + "network " + eth.getNetwork() + "'\n'";
+	// }
+	//
+	// if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
+	// config = config + "broadcast " + eth.getBroadcast() + "'\n'";
+	// }
+	//
+	// config = (config + "'\n'").trim();
+	// config = "sudo echo -e >> /etc/network/interfaces " + config;
+	// uploadToServer(sv, config);
+	// return true;
+	// }
+
+	// // Xoa Eth from List
+	// public List<Eth> removeEthFromList(List<Eth> eth_list, String iface) {
+	//
+	// for (Eth eth : new ArrayList<>(eth_list)) {
+	// if (eth.getIface().equals(iface)) {
+	// eth_list.remove(eth);
+	// }
+	// }
+	// return eth_list;
+	// }
+
+	// upload Config to Server 1 - Save ALL
+	public void uploadConfigToServer(Server sv, Nic n) throws IOException {
 		String config = "";
 		for (Eth eth : n.getEth()) {
-
-			if (eth.getIface().equals(iface)) {
-				continue;
-			}
-
-			if (eth.getIface() != null && !eth.getIface().equals("")) {
-				config = config + "auto " + eth.getIface() + "'\n'" + "iface "
-						+ eth.getIface();
-			}
-
-			if (eth.getInet() != null && !eth.getInet().equals("")) {
-				config = config + " inet " + eth.getInet() + "'\n'";
-			}
-
-			if (eth.getAddress() != null && !eth.getAddress().equals("")) {
-				config = config + "address " + eth.getAddress() + "'\n'";
-			}
-
-			if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
-				config = config + "netmask " + eth.getNetmask() + "'\n'";
-			}
-
-			if (eth.getGateway() != null && !eth.getGateway().equals("")) {
-				config = config + "gateway " + eth.getGateway() + "'\n'";
-			}
-
-			if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
-				config = config + "network " + eth.getNetwork() + "'\n'";
-			}
-
-			if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
-				config = config + "broadcast " + eth.getBroadcast() + "'\n'";
-			}
-
-			config = (config + "'\n'").trim();
-		}
-		if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0) {
-			// check null and check empty.
-			for (String dns : n.getDns_nameservers()) {
-				if (dns.equals(d)) {
-					continue;
-				}
-				config = (config + "dns-nameservers " + dns + "'\n'").trim();
-
-			}
-		}
-		config = config + "'\n'";
-		// thuc hien xoa dong chua ki tu "null"
-		// config = XoaNull(config);
-		System.out.println(config);
-		config = "sudo echo -e > /etc/network/interfaces " + config;
-		if (uploadToServer(sv, config) == true) {
-			System.out.println("Channel close....!!!");
-			return true;
-		} else {
-			System.out.println("Channel can't close....!!!");
-
-			return false;
-		}
-
-	}
-
-	// upload Config to Server 1- sau khi xoa
-	public boolean uploadConfigAfterRemoveEth(Server sv, List<Eth> list_eth,
-			Nic n) throws IOException {
-		String config = "";
-		for (Eth eth : list_eth) {
 
 			if (eth.getIface() != null && !eth.getIface().equals("")) {
 				config = config + "auto " + eth.getIface() + "'\n'" + "iface "
@@ -393,36 +262,178 @@ public class NicConfig {
 		// config = XoaNull(config);
 		// System.out.println(config);
 		config = "sudo echo -e > /etc/network/interfaces " + config;
-		if (uploadToServer(sv, config) == true) {
-			System.out.println("Channel close....!!!");
-			return true;
+		if (sendCommandToServer(sv, config) == true) {
+			System.out.println("3.Uploaded Config to Server Success....!!!");
 		} else {
-			System.out.println("Channel can't close....!!!");
+			System.out.println("Upload Failed....!!!");
 
-			return false;
 		}
 
 	}
+
+	// upload Config to Server 2 - Save theo String truyen vao - GUI PlainText
+	public void uploadStringConfigToServer(Server sv, String configText)
+			throws IOException {
+		String config = configText;
+		config = "sudo echo -e > /etc/network/interfaces " + config;
+		if (sendCommandToServer(sv, config) == true) {
+			System.out.println("Uploaded Success....!!!");
+		} else {
+			System.out.println("Upload Failed....!!!");
+
+		}
+
+	}
+
+	// // upload Config to Server 1 - day la ham xoa iface/dns nhanh nhat
+	// public boolean uploadConfigToServerAfterRemove(Server sv, Nic n, String
+	// d,
+	// String iface) throws IOException {
+	// String config = "";
+	// for (Eth eth : n.getEth()) {
+	//
+	// if (eth.getIface().equals(iface)) {
+	// continue;
+	// }
+	//
+	// if (eth.getIface() != null && !eth.getIface().equals("")) {
+	// config = config + "auto " + eth.getIface() + "'\n'" + "iface "
+	// + eth.getIface();
+	// }
+	//
+	// if (eth.getInet() != null && !eth.getInet().equals("")) {
+	// config = config + " inet " + eth.getInet() + "'\n'";
+	// }
+	//
+	// if (eth.getAddress() != null && !eth.getAddress().equals("")) {
+	// config = config + "address " + eth.getAddress() + "'\n'";
+	// }
+	//
+	// if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
+	// config = config + "netmask " + eth.getNetmask() + "'\n'";
+	// }
+	//
+	// if (eth.getGateway() != null && !eth.getGateway().equals("")) {
+	// config = config + "gateway " + eth.getGateway() + "'\n'";
+	// }
+	//
+	// if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
+	// config = config + "network " + eth.getNetwork() + "'\n'";
+	// }
+	//
+	// if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
+	// config = config + "broadcast " + eth.getBroadcast() + "'\n'";
+	// }
+	//
+	// config = (config + "'\n'").trim();
+	// }
+	// if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0)
+	// {
+	// // check null and check empty.
+	// for (String dns : n.getDns_nameservers()) {
+	// if (dns.equals(d)) {
+	// continue;
+	// }
+	// config = (config + "dns-nameservers " + dns + "'\n'").trim();
+	//
+	// }
+	// }
+	// config = config + "'\n'";
+	// // thuc hien xoa dong chua ki tu "null"
+	// // config = XoaNull(config);
+	// System.out.println(config);
+	// config = "sudo echo -e > /etc/network/interfaces " + config;
+	// if (uploadToServer(sv, config) == true) {
+	// System.out.println("Channel close....!!!");
+	// return true;
+	// } else {
+	// System.out.println("Channel can't close....!!!");
+	//
+	// return false;
+	// }
+	//
+	// }
+
+	// upload Config to Server 1- sau khi xoa
+	// public boolean uploadConfigAfterRemoveEth(Server sv, List<Eth> list_eth,
+	// Nic n) throws IOException {
+	// String config = "";
+	// for (Eth eth : list_eth) {
+	//
+	// if (eth.getIface() != null && !eth.getIface().equals("")) {
+	// config = config + "auto " + eth.getIface() + "'\n'" + "iface "
+	// + eth.getIface();
+	// }
+	//
+	// if (eth.getInet() != null && !eth.getInet().equals("")) {
+	// config = config + " inet " + eth.getInet() + "'\n'";
+	// }
+	//
+	// if (eth.getAddress() != null && !eth.getAddress().equals("")) {
+	// config = config + "address " + eth.getAddress() + "'\n'";
+	// }
+	//
+	// if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
+	// config = config + "netmask " + eth.getNetmask() + "'\n'";
+	// }
+	//
+	// if (eth.getGateway() != null && !eth.getGateway().equals("")) {
+	// config = config + "gateway " + eth.getGateway() + "'\n'";
+	// }
+	//
+	// if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
+	// config = config + "network " + eth.getNetwork() + "'\n'";
+	// }
+	//
+	// if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
+	// config = config + "broadcast " + eth.getBroadcast() + "'\n'";
+	// }
+	//
+	// config = (config + "'\n'").trim();
+	// }
+	// if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0)
+	// {
+	// // check null and check empty.
+	// for (String dns : n.getDns_nameservers()) {
+	// config = (config + "dns-nameservers " + dns + "'\n'").trim();
+	//
+	// }
+	// }
+	// config = config + "'\n'";
+	// // thuc hien xoa dong chua ki tu "null"
+	// // config = XoaNull(config);
+	// // System.out.println(config);
+	// config = "sudo echo -e > /etc/network/interfaces " + config;
+	// if (uploadToServer(sv, config) == true) {
+	// System.out.println("Channel close....!!!");
+	// return true;
+	// } else {
+	// System.out.println("Channel can't close....!!!");
+	//
+	// return false;
+	// }
+	//
+	// }
 
 	// Xoa null truoc khi upload to Config (co 2 cach, dung cach nay hay hon,
 	// nhung de loi hon)
-	public String XoaNull(String chuoi) throws IOException {
-		StringReader strRead = new StringReader(chuoi);
-		BufferedReader br = new BufferedReader(strRead);
-		String kq = "";
-		String line = "";
-		while ((line = br.readLine()) != null) {
-			if (line.indexOf("null") != -1) {
-				line = "";
-			} else {
-				kq = kq + line + "\n";
-			}
-		}
-		return kq;
-	}
+	// public String XoaNull(String chuoi) throws IOException {
+	// StringReader strRead = new StringReader(chuoi);
+	// BufferedReader br = new BufferedReader(strRead);
+	// String kq = "";
+	// String line = "";
+	// while ((line = br.readLine()) != null) {
+	// if (line.indexOf("null") != -1) {
+	// line = "";
+	// } else {
+	// kq = kq + line + "\n";
+	// }
+	// }
+	// return kq;
+	// }
 
 	// load file config tu server thanh plaintext
-	public String loadConfigToPlainText(Server sv) {
+	public String loadConfigToChuoiChuanHoa(Server sv) {
 
 		Session ss = sv.getSession(sv);
 		String chuoilay = "";
@@ -449,6 +460,13 @@ public class NicConfig {
 				if (channel.isClosed()) {
 					System.out.println("exit-status: "
 							+ channel.getExitStatus());
+					if (channel.getExitStatus() == 0) {
+						System.out.println("1.Loading Config Text Success...");
+						System.out.println("2.Chuan hoa chuoi thanh cong");
+					} else {
+						System.out.println("Load Failed!!!..");
+
+					}
 					break;
 				}
 				try {
@@ -457,7 +475,7 @@ public class NicConfig {
 				}
 			}
 			channel.disconnect();
-			return chuoilay;
+			return ChuanHoaChuoi(chuoilay);
 
 		} catch (Exception e) {
 			return null;
@@ -466,10 +484,10 @@ public class NicConfig {
 	}
 
 	// Chuan hoa PlainText tra ve Chuoi
-	public String ChuanHoaChuoi(Server sv) {
+	public String ChuanHoaChuoi(String plaintext) {
 		try {
 
-			StringReader str = new StringReader(loadConfigToPlainText(sv));
+			StringReader str = new StringReader(plaintext);
 			BufferedReader bufferedReader = new BufferedReader(str);
 			String line;
 			String chuoilay = "";
@@ -498,12 +516,10 @@ public class NicConfig {
 	}
 
 	// convert Chuoi da Chuan Hoa sang XML String
-	public String convertTextToXMl(Server sv) {
+	public String convertTextToXML(Server sv) {
 
-		// HashMap<String, String> hm1 = new HashMap<String, String>();
-
-		String[] mang = ChuanHoaChuoi(sv).split("\\s+");
-		System.out.println(Arrays.asList(mang));
+		String[] mang = loadConfigToChuoiChuanHoa(sv).split("\\s+");
+		// System.out.println(Arrays.asList(mang));
 		String lay = "";
 		String lay_dns = "";
 		try {
@@ -516,8 +532,6 @@ public class NicConfig {
 						|| mang[i].equals("gateway")
 						|| mang[i].equals("network")
 						|| mang[i].equals("broadcast")) {
-
-					// hm1.put(mang[i], mang[i + 1]);
 
 					if (mang[i].equals("iface") && i > 2) {
 						lay = lay + "\n</eth>\n<eth>\n" + "<" + mang[i] + ">"
@@ -548,9 +562,9 @@ public class NicConfig {
 				+ "</nic>";// String
 	}
 
-	// convert XML to Object
+	// convert XML to Object, ham nay ko truyen tham so
 	public Nic convertXMLToObject(Server sv) throws IOException {
-		StringReader strRead = new StringReader(convertTextToXMl(sv));
+		StringReader strRead = new StringReader(convertTextToXML(sv));
 
 		try {
 			// Khoi tao Context
@@ -569,33 +583,94 @@ public class NicConfig {
 		return null;
 	}
 
-	public Eth getEthFromAdd(String index, Server sv) throws IOException,
-			IndexOutOfBoundsException {
-		Nic nic = convertXMLToObject(sv);
-		System.out.println("------Khoi tao doi tuong, in ra man hinh-------");
-		for (Eth eth : nic.getEth()) {
-			if (eth.getAddress().equals(index)) {
-
-				System.out.println("iface : " + eth.getIface());
-				System.out.println("inet" + eth.getInet());
-				System.out.println("address:" + eth.getAddress());
-				System.out.println("netmask:" + eth.getNetmask());
-				System.out.println("gateway:" + eth.getGateway());
-				System.out.println("network:" + eth.getNetwork());
-				System.out.println("broadcast:" + eth.getBroadcast());
-
-				System.out.println("---------------");
-
-				return eth;
-
+	// convert Object to Xml
+	public String convertObjectToXML(Nic n) throws IOException {
+		List<Eth> eth_list = n.getEth();
+		List<String> dns_list = n.getDns_nameservers();
+		String config = "";
+		for (Eth eth : eth_list) {
+			config = config + "<eth>" + "\n";
+			if (eth.getIface() != null && !eth.getIface().equals("")) {
+				config = config + "<iface>" + eth.getIface() + "</iface>"
+						+ "\n";
 			}
 
+			if (eth.getInet() != null && !eth.getInet().equals("")) {
+				config = config + "<inet>" + eth.getInet() + "</inet>" + "\n";
+			}
+
+			if (eth.getAddress() != null && !eth.getAddress().equals("")) {
+				config = config + "<address>" + eth.getAddress() + "</address>"
+						+ "\n";
+			}
+
+			if (eth.getNetmask() != null && !eth.getNetmask().equals("")) {
+				config = config + "<netmask> " + eth.getNetmask()
+						+ "</netmask>" + "\n";
+			}
+
+			if (eth.getGateway() != null && !eth.getGateway().equals("")) {
+				config = config + "<gateway> " + eth.getGateway()
+						+ "</gateway>" + "\n";
+			}
+
+			if (eth.getNetwork() != null && !eth.getNetwork().equals("")) {
+				config = config + "<network> " + eth.getNetwork()
+						+ "</network>" + "\n";
+			}
+
+			if (eth.getBroadcast() != null && !eth.getBroadcast().equals("")) {
+				config = config + "<broadcast>" + eth.getBroadcast()
+						+ "</broadcast>" + "\n";
+			}
+			config = config + "</eth>";
+			config = config + "\n";
+			config = config + "\n";
+
 		}
-		return null;
+
+		String config2 = "";
+		if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0) {
+			// check null and check empty.
+			for (String dns : n.getDns_nameservers()) {
+				if (dns != null && !dns.equals("")) {
+					config2 = (config2 + "<dns_nameservers>" + dns
+							+ "</dns_nameservers>" + "\n");
+				}
+				config2 = (config2 + "\n");
+
+			}
+		}
+		return "<nic>" + config + config2 + "</nic>";
 	}
 
+	// public Eth getEthFromAdd(String index, Server sv) throws IOException,
+	// IndexOutOfBoundsException {
+	// Nic nic = convertXMLToObject(sv);
+	// System.out.println("------Khoi tao doi tuong, in ra man hinh-------");
+	// for (Eth eth : nic.getEth()) {
+	// if (eth.getAddress().equals(index)) {
+	//
+	// System.out.println("iface : " + eth.getIface());
+	// System.out.println("inet" + eth.getInet());
+	// System.out.println("address:" + eth.getAddress());
+	// System.out.println("netmask:" + eth.getNetmask());
+	// System.out.println("gateway:" + eth.getGateway());
+	// System.out.println("network:" + eth.getNetwork());
+	// System.out.println("broadcast:" + eth.getBroadcast());
+	//
+	// System.out.println("---------------");
+	//
+	// return eth;
+	//
+	// }
+	//
+	// }
+	// return null;
+	// }
+
 	// In ra Nic
-	public void inNic(Server sv, Nic n) {
+	public void inNic(Nic n) {
 		System.out.println("----------Create Object---------");
 
 		for (Eth eth : n.getEth()) {
@@ -610,42 +685,21 @@ public class NicConfig {
 			System.out.println("-----------------");
 
 		}
-		System.out.println("Dns-nameservers " + n.getDns_nameservers());
+		for (String dns : n.getDns_nameservers()) {
+			System.out.println("dns-nameservers " + dns);
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
 
 		NicConfig nic_c = new NicConfig();
-		Server sv = new Server(1, "192.168.0.105", 22, "mayb", "root", "root");
-
-		 Eth eth_new = new Eth("eth9", "static", "172.16.56.47",
-		 "255.255.0.0",
-		 "172.16.56.1", null, null);
-		 nic_c.createEth(sv, eth_new);
-
-		// them 1 dns-nameservers
-		// nic_c.createDns(sv, "173.16.50.9");
-		// nic_c.inNic(sv, nic_c.convertXMLToObject(sv));
-		// Ham xoa iface/dns nhanh nhat
-//		nic_c.uploadConfigToServerAfterRemove(sv, nic_c.convertXMLToObject(sv),
-//				"192.168.1.5", null);
-		/*
-		 * List<Eth> eth_multi = nic_c.removeEthFromList(
-		 * nic_c.convertXMLToObject(sv).getEth(), "eth9");
-		 * 
-		 * for (Eth eth : eth_multi) { System.out.println(eth.getIface()); }
-		 */
-
-		// Upload sau khi xoa
-		/*
-		 * nic_c.uploadConfigAfterRemoveEth(sv, nic_c.removeEthFromList(nic_c
-		 * .convertXMLToObject(sv).getEth(), "eth9"), nic_c
-		 * .convertXMLToObject(sv)); // nic_c.inNic(sv,
-		 */
-		// System.out.println(nic_c.convertTextToXMl(sv));
-		for (Eth eth : nic_c.convertXMLToObject(sv).getEth()) {
-			System.out.println(eth.getAddress());
-		}
+		Server sv = new Server(1, "192.168.0.104", 22, "mayb", "root", "root");
+		// ------------Kich ban--------------
+		// Nic n = nic_c.convertXMLToObject(sv);
+		// System.out.println(n.getDns_nameservers());
+		// System.out.println(n.getEth());
+		// nic_c.inNic(n);
+		System.out.print(nic_c.convertTextToXML(sv));
 
 	}
 }

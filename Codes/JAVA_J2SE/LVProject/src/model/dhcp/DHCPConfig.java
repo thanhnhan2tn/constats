@@ -18,8 +18,122 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
 
 public class DHCPConfig {
+	// Phuc vu cho start/stop/restart
+	public boolean sendCommandToServer(Server sv, String cmd) {
+		Session ss = sv.getSession(sv);
+		try {
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(cmd);
+			((ChannelExec) channel).setErrStream(System.err);
 
-	// Upload cmd / file to server
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
+						break;
+					System.out.print(new String(tmp, 0, i));
+				}
+				if (channel.isClosed()) {
+					System.out.println("exit-status: "
+							+ channel.getExitStatus());
+
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
+			}
+			channel.disconnect();
+			if (channel.getExitStatus() == 0) {
+
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// Start
+	public Boolean Start(Server sv) {
+		String command = "sudo service isc-dhcp-server start";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	// Stop
+	public Boolean Stop(Server sv) {
+		String command = "sudo service isc-dhcp-server stop";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	// Restart
+	public Boolean Restart(Server sv) {
+		String command = "sudo service isc-dhcp-server restart";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	// State
+	public Boolean getState(Server sv) {
+		String command = "sudo service isc-dhcp-server status";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Install
+	public Boolean Install(Server sv) {
+		String command = "sudo apt-get -y install isc-dhcp-server";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	// Remove Service
+	public Boolean Remove(Server sv) {
+		String command = "sudo apt-get -y --purge remove isc-dhcp-server";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Upload cmd / file to server phuc vu cho viec loadConfigToPlainText
 	public String uploadToServer(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
@@ -267,13 +381,22 @@ public class DHCPConfig {
 		return null;
 	}
 
-	// Upload Subnet Config to Server
-	public String uploadConfigToDHCPServer(Server sv) throws IOException {
+	public DHCP convertConfigToObjectDHCP(Server sv) throws IOException {
+		DHCP dhcp = new DHCP(convertTextToConfigChung(sv),
+				convertTextToListSubnet(sv), convertTextToListHost(sv));
+		return dhcp;
+	}
 
-		List<Subnet> list_sn = new ArrayList<Subnet>();
-		list_sn = convertTextToListSubnet(sv);
-		List<HostFixIP> list_host = new ArrayList<HostFixIP>();
-		list_host = convertTextToListHost(sv);
+	// Upload Subnet Config to Server Them/Sua/Xoa, co the truyen vao 1 DHCP
+	// hoac tung thanh phan con cua no
+	public String uploadConfigToDHCPServer(Server sv, List<Subnet> list_sn,
+			List<HostFixIP> list_host, ConfigChung cfg) throws IOException {
+
+		// List<Subnet> list_sn = new ArrayList<Subnet>();
+		// list_sn = convertTextToListSubnet(sv);
+		// List<HostFixIP> list_host = new ArrayList<HostFixIP>();
+		// list_host = convertTextToListHost(sv);
+		// ConfigChung cfg = convertTextToConfigChung(sv);
 
 		String config = "";
 		String config2 = "";
@@ -364,7 +487,6 @@ public class DHCPConfig {
 			config2 = config2 + "}" + "'\n'";
 
 		}
-		ConfigChung cfg = convertTextToConfigChung(sv);
 		if (cfg.getDns_update_style() != null
 				&& !cfg.getDns_update_style().equals("")) {
 			config3 = config3 + "ddns-update-style " + "'"
@@ -391,134 +513,134 @@ public class DHCPConfig {
 	}
 
 	// Xoa subnet, host
-	public String XoaSubnetorHost(Server sv, String subnet, String hostFixed)
-			throws IOException {
-
-		List<Subnet> list_sn = new ArrayList<Subnet>();
-		list_sn = convertTextToListSubnet(sv);
-		List<HostFixIP> list_host = new ArrayList<HostFixIP>();
-		list_host = convertTextToListHost(sv);
-
-		String config = "";
-		String config2 = "";
-		String config3 = "";
-
-		for (Subnet sn : list_sn) {
-			if (sn.getSubnet().equals(subnet)) {
-				continue;
-			}
-			if (sn.getSubnet() != null && !sn.getSubnet().equals("")) {
-				config = config + "subnet " + sn.getSubnet().trim();
-
-			}
-			if (sn.getNetmask() != null && !sn.getNetmask().equals("")) {
-
-				config = config + " netmask " + sn.getNetmask().trim() + "'\n'";
-			}
-
-			config = config + "{" + "'\n'";
-			if (sn.getRange() != null && !sn.getRange().equals("")) {
-
-				config = config + "range " + "'" + sn.getRange().trim() + "'"
-						+ "'\n'";
-			}
-			if (sn.getRouter_gateway() != null
-					&& !sn.getRouter_gateway().equals("")) {
-
-				config = config + "option routers " + "'"
-						+ sn.getRouter_gateway().trim() + "'" + "'\n'";
-			}
-			if (sn.getDomain_name_server() != null
-					&& !sn.getDomain_name_server().equals("")) {
-
-				config = config + "option domain-name-servers " + "'"
-						+ sn.getDomain_name_server().trim() + "'" + "'\n'";
-			}
-			if (sn.getDomain_name() != null && !sn.getDomain_name().equals("")) {
-
-				config = config + "option domain-name " + "'"
-						+ sn.getDomain_name().trim() + "'" + "'\n'";
-			}
-			if (sn.getBroadcast_address() != null
-					&& !sn.getBroadcast_address().equals("")) {
-
-				config = config + "option broadcast-address " + "'"
-						+ sn.getBroadcast_address().trim() + "'" + "'\n'";
-			}
-			if (sn.getDefault_lease_time() != null
-					&& !sn.getDefault_lease_time().equals("")) {
-
-				config = config + "default-lease-time " + "'"
-						+ sn.getDefault_lease_time().trim() + "'" + "'\n'";
-			}
-			if (sn.getMax_lease_time() != null
-					&& !sn.getMax_lease_time().equals("")) {
-
-				config = config + "max-lease-time " + "'"
-						+ sn.getMax_lease_time().trim() + "'" + "'\n'";
-			}
-			config = config + "}" + "'\n'";
-
-		}
-
-		for (HostFixIP host : list_host) {
-			if (host.getHostname().equals(hostFixed)) {
-				continue;
-			}
-			if (host.getHostname() != null && !host.getHostname().equals("")) {
-				config2 = config2 + "host " + host.getHostname() + "'\n'";
-			}
-			config2 = config2 + "{" + "'\n'";
-			if (host.getHardware_internet() != null
-					&& !host.getHardware_internet().equals("")) {
-				config2 = config2 + "hardware ethernet " + "'"
-						+ host.getHardware_internet() + "'" + "'\n'";
-			}
-
-			if (host.getFilename() != null && !host.getFilename().equals("")) {
-				config2 = config2 + "filename " + "'" + host.getFilename()
-						+ "'" + "'\n'";
-			}
-
-			if (host.getServername() != null
-					&& !host.getServername().equals("")) {
-				config2 = config2 + "server-name " + "'" + host.getServername()
-						+ "'" + "'\n'";
-			}
-
-			if (host.getFixed_address() != null
-					&& !host.getFixed_address().equals("")) {
-				config2 = config2 + "fixed-address " + "'"
-						+ host.getFixed_address() + "'" + "'\n'";
-			}
-			config2 = config2 + "}" + "'\n'";
-
-		}
-		ConfigChung cfg = convertTextToConfigChung(sv);
-		if (cfg.getDns_update_style() != null
-				&& !cfg.getDns_update_style().equals("")) {
-			config3 = config3 + "ddns-update-style " + "'"
-					+ cfg.getDns_update_style() + "'" + "'\n'";
-		}
-
-		if (cfg.getAuthorative() != null && !cfg.getAuthorative().equals("")) {
-			config3 = config3 + "authoritative" + "'" + cfg.getAuthorative()
-					+ "'" + "'\n'";
-		}
-
-		if (cfg.getLog_facitily() != null && !cfg.getLog_facitily().equals("")) {
-			config3 = config3 + "log-facility " + "'" + cfg.getLog_facitily()
-					+ "'" + "'\n'";
-		}
-
-		String tong = "echo -e > /etc/dhcp/dhcpd.conf " + config3 + "'\n'"
-				+ config + "'\n'" + config2 + "'\n'";
-		System.out.println(config3 + config + config2);
-
-		System.out.println(".....Uploading to server.....");
-		uploadToServer(sv, tong);
-		return config3 + config + config2;
-	}
+	// public String XoaSubnetorHost(Server sv, String subnet, String hostFixed)
+	// throws IOException {
+	//
+	// List<Subnet> list_sn = new ArrayList<Subnet>();
+	// list_sn = convertTextToListSubnet(sv);
+	// List<HostFixIP> list_host = new ArrayList<HostFixIP>();
+	// list_host = convertTextToListHost(sv);
+	//
+	// String config = "";
+	// String config2 = "";
+	// String config3 = "";
+	//
+	// for (Subnet sn : list_sn) {
+	// if (sn.getSubnet().equals(subnet)) {
+	// continue;
+	// }
+	// if (sn.getSubnet() != null && !sn.getSubnet().equals("")) {
+	// config = config + "subnet " + sn.getSubnet().trim();
+	//
+	// }
+	// if (sn.getNetmask() != null && !sn.getNetmask().equals("")) {
+	//
+	// config = config + " netmask " + sn.getNetmask().trim() + "'\n'";
+	// }
+	//
+	// config = config + "{" + "'\n'";
+	// if (sn.getRange() != null && !sn.getRange().equals("")) {
+	//
+	// config = config + "range " + "'" + sn.getRange().trim() + "'"
+	// + "'\n'";
+	// }
+	// if (sn.getRouter_gateway() != null
+	// && !sn.getRouter_gateway().equals("")) {
+	//
+	// config = config + "option routers " + "'"
+	// + sn.getRouter_gateway().trim() + "'" + "'\n'";
+	// }
+	// if (sn.getDomain_name_server() != null
+	// && !sn.getDomain_name_server().equals("")) {
+	//
+	// config = config + "option domain-name-servers " + "'"
+	// + sn.getDomain_name_server().trim() + "'" + "'\n'";
+	// }
+	// if (sn.getDomain_name() != null && !sn.getDomain_name().equals("")) {
+	//
+	// config = config + "option domain-name " + "'"
+	// + sn.getDomain_name().trim() + "'" + "'\n'";
+	// }
+	// if (sn.getBroadcast_address() != null
+	// && !sn.getBroadcast_address().equals("")) {
+	//
+	// config = config + "option broadcast-address " + "'"
+	// + sn.getBroadcast_address().trim() + "'" + "'\n'";
+	// }
+	// if (sn.getDefault_lease_time() != null
+	// && !sn.getDefault_lease_time().equals("")) {
+	//
+	// config = config + "default-lease-time " + "'"
+	// + sn.getDefault_lease_time().trim() + "'" + "'\n'";
+	// }
+	// if (sn.getMax_lease_time() != null
+	// && !sn.getMax_lease_time().equals("")) {
+	//
+	// config = config + "max-lease-time " + "'"
+	// + sn.getMax_lease_time().trim() + "'" + "'\n'";
+	// }
+	// config = config + "}" + "'\n'";
+	//
+	// }
+	//
+	// for (HostFixIP host : list_host) {
+	// if (host.getHostname().equals(hostFixed)) {
+	// continue;
+	// }
+	// if (host.getHostname() != null && !host.getHostname().equals("")) {
+	// config2 = config2 + "host " + host.getHostname() + "'\n'";
+	// }
+	// config2 = config2 + "{" + "'\n'";
+	// if (host.getHardware_internet() != null
+	// && !host.getHardware_internet().equals("")) {
+	// config2 = config2 + "hardware ethernet " + "'"
+	// + host.getHardware_internet() + "'" + "'\n'";
+	// }
+	//
+	// if (host.getFilename() != null && !host.getFilename().equals("")) {
+	// config2 = config2 + "filename " + "'" + host.getFilename()
+	// + "'" + "'\n'";
+	// }
+	//
+	// if (host.getServername() != null
+	// && !host.getServername().equals("")) {
+	// config2 = config2 + "server-name " + "'" + host.getServername()
+	// + "'" + "'\n'";
+	// }
+	//
+	// if (host.getFixed_address() != null
+	// && !host.getFixed_address().equals("")) {
+	// config2 = config2 + "fixed-address " + "'"
+	// + host.getFixed_address() + "'" + "'\n'";
+	// }
+	// config2 = config2 + "}" + "'\n'";
+	//
+	// }
+	// ConfigChung cfg = convertTextToConfigChung(sv);
+	// if (cfg.getDns_update_style() != null
+	// && !cfg.getDns_update_style().equals("")) {
+	// config3 = config3 + "ddns-update-style " + "'"
+	// + cfg.getDns_update_style() + "'" + "'\n'";
+	// }
+	//
+	// if (cfg.getAuthorative() != null && !cfg.getAuthorative().equals("")) {
+	// config3 = config3 + "authoritative" + "'" + cfg.getAuthorative()
+	// + "'" + "'\n'";
+	// }
+	//
+	// if (cfg.getLog_facitily() != null && !cfg.getLog_facitily().equals("")) {
+	// config3 = config3 + "log-facility " + "'" + cfg.getLog_facitily()
+	// + "'" + "'\n'";
+	// }
+	//
+	// String tong = "echo -e > /etc/dhcp/dhcpd.conf " + config3 + "'\n'"
+	// + config + "'\n'" + config2 + "'\n'";
+	// System.out.println(config3 + config + config2);
+	//
+	// System.out.println(".....Uploading to server.....");
+	// uploadToServer(sv, tong);
+	// return config3 + config + config2;
+	// }
 
 	// public List<Subnet> removeNullElementFromListSubnet(List<Subnet> sn) {
 	//
@@ -564,7 +686,7 @@ public class DHCPConfig {
 
 	}
 
-	// Remove null character
+	// Remove null character phuc vu cho ham in Subnet neu ko dung if-else
 	public String removeNullCharater(String lay) throws IOException {
 
 		String chuoilay = "";
@@ -688,104 +810,108 @@ public class DHCPConfig {
 	}
 
 	// Them vao 1 subnet
-	public String addSubnet(Server sv, Subnet sn) {
-
-		String config = "";
-		if (sn.getSubnet() != null && !sn.getSubnet().equals("")) {
-			config = config + "subnet " + sn.getSubnet().trim();
-
-		}
-		if (sn.getNetmask() != null && !sn.getNetmask().equals("")) {
-
-			config = config + " netmask " + sn.getNetmask().trim() + "'\n'";
-		}
-
-		config = config + "{" + "'\n'";
-		if (sn.getRange() != null && !sn.getRange().equals("")) {
-
-			config = config + "range " + "'" + sn.getRange().trim() + ";" + "'"
-					+ "'\n'";
-		}
-		if (sn.getRouter_gateway() != null
-				&& !sn.getRouter_gateway().equals("")) {
-
-			config = config + "option routers " + "'"
-					+ sn.getRouter_gateway().trim() + ";" + "'" + "'\n'";
-		}
-		if (sn.getDomain_name_server() != null
-				&& !sn.getDomain_name_server().equals("")) {
-
-			config = config + "option domain-name-servers " + "'"
-					+ sn.getDomain_name_server().trim() + ";" + "'" + "'\n'";
-		}
-		if (sn.getDomain_name() != null && !sn.getDomain_name().equals("")) {
-
-			config = config + "option domain-name " + "'" + "\""
-					+ sn.getDomain_name().trim() + "\"" + ";" + "'" + "'\n'";
-		}
-		if (sn.getBroadcast_address() != null
-				&& !sn.getBroadcast_address().equals("")) {
-
-			config = config + "option broadcast-address " + "'"
-					+ sn.getBroadcast_address().trim() + ";" + "'" + "'\n'";
-		}
-		if (sn.getDefault_lease_time() != null
-				&& !sn.getDefault_lease_time().equals("")) {
-
-			config = config + "default-lease-time " + "'"
-					+ sn.getDefault_lease_time().trim() + ";" + "'" + "'\n'";
-		}
-		if (sn.getMax_lease_time() != null
-				&& !sn.getMax_lease_time().equals("")) {
-
-			config = config + "max-lease-time " + "'"
-					+ sn.getMax_lease_time().trim() + ";" + "'" + "'\n'";
-		}
-		config = config + "}" + "'\n'";
-		config = "echo >> /etc/dhcp/dhcpd.conf " + config;
-		uploadToServer(sv, config);
-		return config;
-	}
+	// public String addSubnet(Server sv, Subnet sn) {
+	//
+	// String config = "";
+	// if (sn.getSubnet() != null && !sn.getSubnet().equals("")) {
+	// config = config + "subnet " + sn.getSubnet().trim();
+	//
+	// }
+	// if (sn.getNetmask() != null && !sn.getNetmask().equals("")) {
+	//
+	// config = config + " netmask " + sn.getNetmask().trim() + "'\n'";
+	// }
+	//
+	// config = config + "{" + "'\n'";
+	// if (sn.getRange() != null && !sn.getRange().equals("")) {
+	//
+	// config = config + "range " + "'" + sn.getRange().trim() + ";" + "'"
+	// + "'\n'";
+	// }
+	// if (sn.getRouter_gateway() != null
+	// && !sn.getRouter_gateway().equals("")) {
+	//
+	// config = config + "option routers " + "'"
+	// + sn.getRouter_gateway().trim() + ";" + "'" + "'\n'";
+	// }
+	// if (sn.getDomain_name_server() != null
+	// && !sn.getDomain_name_server().equals("")) {
+	//
+	// config = config + "option domain-name-servers " + "'"
+	// + sn.getDomain_name_server().trim() + ";" + "'" + "'\n'";
+	// }
+	// if (sn.getDomain_name() != null && !sn.getDomain_name().equals("")) {
+	//
+	// config = config + "option domain-name " + "'" + "\""
+	// + sn.getDomain_name().trim() + "\"" + ";" + "'" + "'\n'";
+	// }
+	// if (sn.getBroadcast_address() != null
+	// && !sn.getBroadcast_address().equals("")) {
+	//
+	// config = config + "option broadcast-address " + "'"
+	// + sn.getBroadcast_address().trim() + ";" + "'" + "'\n'";
+	// }
+	// if (sn.getDefault_lease_time() != null
+	// && !sn.getDefault_lease_time().equals("")) {
+	//
+	// config = config + "default-lease-time " + "'"
+	// + sn.getDefault_lease_time().trim() + ";" + "'" + "'\n'";
+	// }
+	// if (sn.getMax_lease_time() != null
+	// && !sn.getMax_lease_time().equals("")) {
+	//
+	// config = config + "max-lease-time " + "'"
+	// + sn.getMax_lease_time().trim() + ";" + "'" + "'\n'";
+	// }
+	// config = config + "}" + "'\n'";
+	// config = "echo >> /etc/dhcp/dhcpd.conf " + config;
+	// uploadToServer(sv, config);
+	// return config;
+	// }
 
 	// Add Host fixed IP
-	public String addHost(Server sv, HostFixIP host) {
-		String config2 = "";
-		if (host.getHostname() != null && !host.getHostname().equals("")) {
-			config2 = config2 + "host " + host.getHostname() + "'\n'";
-		}
-		config2 = config2 + "{" + "'\n'";
-		if (host.getHardware_internet() != null
-				&& !host.getHardware_internet().equals("")) {
-			config2 = config2 + "hardware ethernet " + "'"
-					+ host.getHardware_internet() + ";" + "'" + "'\n'";
-		}
-		// Luu y nhung ky tu dac biet se dan den viec ko chay ham, in ko ra,
-		// hoac in loi
-		if (host.getFilename() != null && !host.getFilename().equals("")) {
-			config2 = config2 + "filename " + "'" + "\"" + host.getFilename()
-					+ "\"" + ";" + "'" + "'\n'";
-		}
+	// public String addHost(Server sv, HostFixIP host) {
+	// String config2 = "";
+	// if (host.getHostname() != null && !host.getHostname().equals("")) {
+	// config2 = config2 + "host " + host.getHostname() + "'\n'";
+	// }
+	// config2 = config2 + "{" + "'\n'";
+	// if (host.getHardware_internet() != null
+	// && !host.getHardware_internet().equals("")) {
+	// config2 = config2 + "hardware ethernet " + "'"
+	// + host.getHardware_internet() + ";" + "'" + "'\n'";
+	// }
+	// // Luu y nhung ky tu dac biet se dan den viec ko chay ham, in ko ra,
+	// // hoac in loi
+	// if (host.getFilename() != null && !host.getFilename().equals("")) {
+	// config2 = config2 + "filename " + "'" + "\"" + host.getFilename()
+	// + "\"" + ";" + "'" + "'\n'";
+	// }
+	//
+	// if (host.getServername() != null && !host.getServername().equals("")) {
+	// config2 = config2 + "server-name " + "'" + "\""
+	// + host.getServername() + "\"" + ";" + "'" + "'\n'";
+	// }
+	//
+	// if (host.getFixed_address() != null
+	// && !host.getFixed_address().equals("")) {
+	// config2 = config2 + "fixed-address " + "'"
+	// + host.getFixed_address() + ";" + "'" + "'\n'";
+	// }
+	// config2 = config2 + "}" + "'\n'";
+	// config2 = "echo >> /etc/dhcp/dhcpd.conf " + config2;
+	// uploadToServer(sv, config2);
+	// return config2;
+	//
+	// }
 
-		if (host.getServername() != null && !host.getServername().equals("")) {
-			config2 = config2 + "server-name " + "'" + "\""
-					+ host.getServername() + "\"" + ";" + "'" + "'\n'";
-		}
+	// Convert mot so Object to XML
 
-		if (host.getFixed_address() != null
-				&& !host.getFixed_address().equals("")) {
-			config2 = config2 + "fixed-address " + "'"
-					+ host.getFixed_address() + ";" + "'" + "'\n'";
-		}
-		config2 = config2 + "}" + "'\n'";
-		config2 = "echo >> /etc/dhcp/dhcpd.conf " + config2;
-		uploadToServer(sv, config2);
-		return config2;
-
-	}
+	// Convert mot so XML to Object
 
 	public static void main(String[] args) throws IOException {
 		DHCPConfig dhcp_c = new DHCPConfig();
-		Server sv = new Server(1, "192.168.0.124", 22, "mayb", "root", "root");
+		Server sv = new Server(1, "192.168.0.104", 22, "mayb", "root", "root");
 		// Subnet sn = new Subnet("172.16.0.0", "255.255.0.0",
 		// "172.16.0.100 172.16.0.150", "199.99.9.33",
 		// "www.thietkeweb.org", "172.16.0.105", null, "2600", null);
@@ -796,7 +922,9 @@ public class DHCPConfig {
 		// Xoa phan tu subnet co get subnet == null trong list
 		// System.out.println(dhcp_c.inSubnet(sv));
 		// dhcp_c.inHost(sv);
-		dhcp_c.uploadConfigToDHCPServer(sv);
+		dhcp_c.uploadConfigToDHCPServer(sv, dhcp_c.convertTextToListSubnet(sv),
+				dhcp_c.convertTextToListHost(sv),
+				dhcp_c.convertTextToConfigChung(sv));
 		// System.out.println(dhcp_c.inConfigChung(sv));
 		// System.out.println(dhcp_c.convertTextToConfigChung(sv));
 		// dhcp_c.addSubnet(sv, sn);

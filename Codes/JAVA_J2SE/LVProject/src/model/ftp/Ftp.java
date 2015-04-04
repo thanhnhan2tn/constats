@@ -1,5 +1,14 @@
 package model.ftp;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "ftp")
+@XmlType(propOrder = { "listen", "anonymous_enable", "local_enable",
+		"write_enable", "anon_upload_enable", "anon_mkdir_write_enable",
+		"connect_from_port_20", "deny_email_enable", "chroot_local_user",
+		"chroot_list_enable", "chroot_list_file" })
 public class Ftp {
 	String listen;
 	String anonymous_enable;
@@ -36,6 +45,7 @@ public class Ftp {
 		this.chroot_list_file = chroot_list_file;
 	}
 
+	@XmlElement
 	public String getListen() {
 		return listen;
 	}
@@ -44,6 +54,7 @@ public class Ftp {
 		this.listen = listen;
 	}
 
+	@XmlElement
 	public String getAnonymous_enable() {
 		return anonymous_enable;
 	}
@@ -52,6 +63,7 @@ public class Ftp {
 		this.anonymous_enable = anonymous_enable;
 	}
 
+	@XmlElement
 	public String getLocal_enable() {
 		return local_enable;
 	}
@@ -60,6 +72,7 @@ public class Ftp {
 		this.local_enable = local_enable;
 	}
 
+	@XmlElement
 	public String getWrite_enable() {
 		return write_enable;
 	}
@@ -68,6 +81,7 @@ public class Ftp {
 		this.write_enable = write_enable;
 	}
 
+	@XmlElement
 	public String getAnon_upload_enable() {
 		return anon_upload_enable;
 	}
@@ -76,6 +90,7 @@ public class Ftp {
 		this.anon_upload_enable = anon_upload_enable;
 	}
 
+	@XmlElement
 	public String getAnon_mkdir_write_enable() {
 		return anon_mkdir_write_enable;
 	}
@@ -84,6 +99,7 @@ public class Ftp {
 		this.anon_mkdir_write_enable = anon_mkdir_write_enable;
 	}
 
+	@XmlElement
 	public String getConnect_from_port_20() {
 		return connect_from_port_20;
 	}
@@ -92,6 +108,7 @@ public class Ftp {
 		this.connect_from_port_20 = connect_from_port_20;
 	}
 
+	@XmlElement
 	public String getDeny_email_enable() {
 		return deny_email_enable;
 	}
@@ -100,6 +117,7 @@ public class Ftp {
 		this.deny_email_enable = deny_email_enable;
 	}
 
+	@XmlElement
 	public String getChroot_local_user() {
 		return chroot_local_user;
 	}
@@ -108,6 +126,7 @@ public class Ftp {
 		this.chroot_local_user = chroot_local_user;
 	}
 
+	@XmlElement
 	public String getChroot_list_enable() {
 		return chroot_list_enable;
 	}
@@ -116,6 +135,7 @@ public class Ftp {
 		this.chroot_list_enable = chroot_list_enable;
 	}
 
+	@XmlElement
 	public String getChroot_list_file() {
 		return chroot_list_file;
 	}
@@ -123,7 +143,5 @@ public class Ftp {
 	public void setChroot_list_file(String chroot_list_file) {
 		this.chroot_list_file = chroot_list_file;
 	}
-	
-	
 
 }

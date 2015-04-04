@@ -272,7 +272,7 @@ public class ServerConfig {
 	}
 
 	// in theo dinh ki
-	public ServerStatus hienthiStatusDinhKy(Server sv)
+	public ServerStatus hienthiStatusDinhKy(Server sv, int sleep)
 			throws InterruptedException {
 		ServerStatus svtt = getServerStatus(sv);
 		System.out.println("-----Create Onject-------");
@@ -285,14 +285,14 @@ public class ServerConfig {
 		System.out.println("Time On Sys: " + svtt.getTimeonsys());
 		System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
 		System.out.println("Mem Total: " + svtt.getMemtotal());
-		System.out.println("Mem Free: " + svtt.getMemused());
+		System.out.println("Mem Free: " + svtt.getMemfree());
 
-		System.out.println("Mem Used: " + svtt.getMemfree());
+		System.out.println("Mem Used: " + svtt.getMemused());
 		System.out.println("Mem Cached: " + svtt.getMemcached());
 		System.out.println("Local Disk: " + svtt.getLocal_disk());
 
-		Thread.sleep(2000);
-		hienthiStatusDinhKy(sv);
+		Thread.sleep(sleep);
+		hienthiStatusDinhKy(sv, sleep);
 		return svtt;
 	}
 
@@ -322,51 +322,6 @@ public class ServerConfig {
 		return services;
 	}
 
-	// // Show Server Information
-	// public String ServerInformation(Server sv) {
-	// String info = "";
-	// String timefull = uploadToServer(sv, "cat /proc/uptime");
-	// String second = timefull.substring(0, timefull.indexOf(" "));
-	//
-	// float so = Float.parseFloat(second);
-	// // System.out.println(so + "");
-	// String time = convertStoH(so);
-	//
-	// info = info
-	// + "*Hostname:"
-	// + uploadToServer(sv, "hostname")
-	// + "\n"
-	// + "*OS Version:"
-	// + checkVersion(sv)
-	// + "\n"
-	// + "*Kernel: "
-	// + uploadToServer(sv, "uname -a")
-	// + "\n"
-	// + "*Webmin Version:"
-	// + uploadToServer(sv, "cat /etc/webmin/version")
-	// + "\n"
-	// + "*Time on System:"
-	// + uploadToServer(sv, "date")
-	// + "\n"
-	// + "*Processor information:"
-	// + uploadToServer(sv, "cat /proc/cpuinfo | grep 'model name'")
-	// .trim()
-	// + "\n"
-	// + "*Uptime "
-	// + time
-	// + "\n"
-	// + "*MemTotal/MemFree/Cached: \n"
-	// + uploadToServer(sv,
-	// "cat /proc/meminfo | egrep '^(MemTotal|MemFree|Cached)' ")
-	// + "CPU LoadAverage: "
-	// + uploadToServer(sv, "cat /proc/loadavg")
-	// + "*Local Disk Space:"
-	// + uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root")
-	// + "\n";
-	//
-	// return info;
-	// }
-
 	// Convert h to s
 	public String convertStoH(float secs) {
 		String tong = "";
@@ -384,13 +339,13 @@ public class ServerConfig {
 			InterruptedException {
 
 		ServerConfig svc = new ServerConfig();
-		Server sv = new Server(1, "192.168.0.19", 22, "mayb", "mayb", "mayb");
+		Server sv = new Server(1, "192.168.0.104", 22, "mayb", "mayb", "mayb");
 		// svc.checkAllPS(sv);
 
 		// System.out.println("----------------------------");
 		// System.out.println(svc.ServerInformation(sv));
 		// svc.checkAllPS(sv);
-		svc.hienthiStatusDinhKy(sv);
+		svc.hienthiStatusDinhKy(sv,3000);
 		// svc.showAllService(sv);
 	}
 }

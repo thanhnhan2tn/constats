@@ -2,6 +2,7 @@ package model.ftp;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,15 +27,14 @@ import com.jcraft.jsch.Session;
 public class FtpConfig {
 
 	// Upload cmd / file to server
-	public boolean uploadToServer(Server sv, String cmd) {
+	public boolean sendCommandToServer(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
 			// option -e giup nhan dang ki tu xuong dong
 			Channel channel = ss.openChannel("exec");
 			((ChannelExec) channel).setCommand(cmd);
 			((ChannelExec) channel).setErrStream(System.err);
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
+
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];
@@ -48,12 +48,7 @@ public class FtpConfig {
 				if (channel.isClosed()) {
 					System.out.println("exit-status: "
 							+ channel.getExitStatus());
-					if (channel.getExitStatus() != 1) {
-						System.out.println("Process Success !!!");
-					} else {
-						System.out.println("Process Failed !!!");
 
-					}
 					break;
 				}
 				try {
@@ -62,7 +57,12 @@ public class FtpConfig {
 				}
 			}
 			channel.disconnect();
-			return true;
+			if (channel.getExitStatus() == 0) {
+
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			return false;
 		}
@@ -71,7 +71,7 @@ public class FtpConfig {
 	// Start
 	public Boolean Start(Server sv) {
 		String command = "sudo service vsftpd start";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
 
 			return true;
@@ -84,7 +84,7 @@ public class FtpConfig {
 	// Stop
 	public Boolean Stop(Server sv) {
 		String command = "sudo service vsftpd stop";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
 
 			return true;
@@ -97,7 +97,7 @@ public class FtpConfig {
 	// Restart
 	public Boolean Restart(Server sv) {
 		String command = "sudo service vsftpd restart";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
 			return true;
 		} else {
@@ -109,7 +109,7 @@ public class FtpConfig {
 	// State
 	public Boolean getState(Server sv) {
 		String command = "sudo service vsftpd status";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
 			return true;
 		} else {
@@ -120,13 +120,11 @@ public class FtpConfig {
 	// Install
 	public Boolean Install(Server sv) {
 		String command = "sudo apt-get -y install vsftpd";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
-			System.out.println("Channel closed!!!");
 
 			return true;
 		} else {
-			System.out.println("Channel can't close!!!");
 
 			return false;
 		}
@@ -135,13 +133,11 @@ public class FtpConfig {
 	// Remove Service
 	public Boolean Remove(Server sv) {
 		String command = "sudo apt-get -y --purge remove vsftpd";
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
-			System.out.println("Channel closed!!!");
 
 			return true;
 		} else {
-			System.out.println("Channel can't close!!!");
 
 			return false;
 		}
@@ -150,7 +146,7 @@ public class FtpConfig {
 	// Create folder for FTP Directory
 	public Boolean createFolder(Server sv, String pathString) {
 		String command = "mkdir " + pathString;
-		Boolean boo = uploadToServer(sv, command);
+		Boolean boo = sendCommandToServer(sv, command);
 		if (boo == true) {
 			return true;
 		} else {
@@ -160,23 +156,23 @@ public class FtpConfig {
 
 	// Xoa null truoc khi upload to Config (co 2 cach, dung cach nay hay hon,
 	// nhung de loi hon)
-	public String XoaNull(String chuoi) throws IOException {
-		StringReader strRead = new StringReader(chuoi);
-		BufferedReader br = new BufferedReader(strRead);
-		String kq = "";
-		String line = "";
-		while ((line = br.readLine()) != null) {
-			if (line.indexOf("null") != -1 || line.endsWith(" ")) {
-				line = "";
-			} else {
-				kq = kq + line + "\n";
-			}
-		}
-		return kq;
-	}
+	// public String XoaNull(String chuoi) throws IOException {
+	// StringReader strRead = new StringReader(chuoi);
+	// BufferedReader br = new BufferedReader(strRead);
+	// String kq = "";
+	// String line = "";
+	// while ((line = br.readLine()) != null) {
+	// if (line.indexOf("null") != -1 || line.endsWith(" ")) {
+	// line = "";
+	// } else {
+	// kq = kq + line + "\n";
+	// }
+	// }
+	// return kq;
+	// }
 
 	// upload Config to Server
-	public boolean uploadConfigToServer(Server sv, Ftp ftp) throws IOException {
+	public void uploadConfigToServer(Server sv, Ftp ftp) throws IOException {
 		String kq = "";
 		if (ftp.getListen() != null && !ftp.getListen().equals(null)) {
 			kq = kq + "listen=" + ftp.getListen() + "'\n'";
@@ -242,21 +238,33 @@ public class FtpConfig {
 		// Xoa line chua null, do da dung cach khac
 		// kq = XoaNull(kq);
 		String command = "echo -e >  /etc/vsftpd.conf " + kq;
-		if (uploadToServer(sv, command) == true) {
-			System.out.println("Chanel Closed!!!");
-			return true;
+		if (sendCommandToServer(sv, command) == true) {
+			System.out.println("Uploaded Success");
 
 		}
 
 		else {
-			System.out.println("Channel can't close!!!");
-			return false;
+			System.out.println("Upload Failed!!!");
 
 		}
 	}
 
+	// upload Config to Server 2 - Save theo String truyen vao - GUI PlainText
+	public void uploadStringConfigToServer(Server sv, String configText)
+			throws IOException {
+		String config = configText;
+		config = "sudo echo -e > /etc/vsftpd.conf " + config;
+		if (sendCommandToServer(sv, config) == true) {
+			System.out.println("Uploaded Success....!!!");
+		} else {
+			System.out.println("Upload Failed....!!!");
+
+		}
+
+	}
+
 	// load file config tu server thanh plaintext
-	public String loadConfigToPlainText(Server sv) {
+	public String loadConfigToChuanHoaChuoi(Server sv) {
 
 		Session ss = sv.getSession(sv);
 		String chuoilay = "";
@@ -298,15 +306,15 @@ public class FtpConfig {
 		} catch (Exception e) {
 			return null;
 		}
-		return tong;
+		return ChuanHoaChuoi(tong);
 
 	}
 
 	// Chuan hoa PlainText tra ve Chuoi
-	public String ChuanHoaChuoi(Server sv) {
+	public String ChuanHoaChuoi(String plaintext) {
 		try {
 
-			StringReader str = new StringReader(loadConfigToPlainText(sv));
+			StringReader str = new StringReader(plaintext);
 			BufferedReader bufferedReader = new BufferedReader(str);
 			// StringBuffer stringBuffer = new StringBuffer();
 			String line;
@@ -318,17 +326,11 @@ public class FtpConfig {
 					line = "";
 					line = line.trim();
 					line = line.replaceAll("\\s+", null);
-					// chuoilay = chuoilay + line;
 
 				}
 				// Chi lay nhung chuoi nao co dau = sau do thay the dau "=" ->
 				// " "
 				if (line.indexOf("=") != -1) {
-					/*
-					 * chuoilay = chuoilay + line.substring(0,
-					 * line.indexOf("=")) + " " +
-					 * line.substring(line.indexOf("=") + 1) + "\n";
-					 */
 
 					line = line.replaceAll("=", " ");
 					chuoilay = chuoilay + line + "\n";
@@ -349,8 +351,8 @@ public class FtpConfig {
 
 		HashMap<String, String> hm1 = new HashMap<String, String>();
 		// Xu ly khoang trang quan trong
-		String[] mang = ChuanHoaChuoi(sv).split("\\s+");
-		System.out.println(Arrays.asList(mang));
+		String[] mang = loadConfigToChuanHoaChuoi(sv).split("\\s+");
+		// System.out.println(Arrays.asList(mang));
 		try {
 			int i = 0;
 			while (!mang[i].equals(null)) {
@@ -391,7 +393,7 @@ public class FtpConfig {
 		return ftp;
 	}
 
-	public void inFTPObject(Server sv, Ftp ftp) throws IOException {
+	public void inFTPObject(Ftp ftp) throws IOException {
 		System.out.println("--------In ra doi tuong FTP:---------------");
 		System.out.println("listen " + ftp.getListen());
 		System.out.println("anonymous_enable " + ftp.getAnonymous_enable());
@@ -408,14 +410,110 @@ public class FtpConfig {
 		System.out.println("chroot_list_file " + ftp.getChroot_list_file());
 	}
 
+	// Convert Object to XML
+	public String convertObjectToXML(Ftp ftp) {
+
+		String kq = "";
+		if (ftp.getListen() != null && !ftp.getListen().equals(null)) {
+			kq = kq + "<listen>" + ftp.getListen() + "</listen>" + "\n";
+		}
+
+		if (ftp.getAnonymous_enable() != null
+				&& !ftp.getAnonymous_enable().equals(null)) {
+			kq = kq + "<anonymous_enable>" + ftp.getAnonymous_enable()
+					+ "</anonymous_enable>" + "\n";
+		}
+
+		if (ftp.getLocal_enable() != null
+				&& !ftp.getLocal_enable().equals(null)) {
+			kq = kq + "<local_enable>" + ftp.getLocal_enable()
+					+ "</local_enable>" + "\n";
+		}
+
+		if (ftp.getWrite_enable() != null
+				&& !ftp.getWrite_enable().equals(null)) {
+			kq = kq + "<write_enable>" + ftp.getWrite_enable()
+					+ "</write_enable>" + "\n";
+		}
+
+		if (ftp.getAnon_upload_enable() != null
+				&& !ftp.getAnon_upload_enable().equals(null)) {
+			kq = kq + "<anon_upload_enable>" + ftp.getAnon_upload_enable()
+					+ "</anon_upload_enable>" + "\n";
+		}
+
+		if (ftp.getAnon_mkdir_write_enable() != null
+				&& !ftp.getAnon_mkdir_write_enable().equals(null)) {
+			kq = kq + "<anon_mkdir_write_enable>"
+					+ ftp.getAnon_mkdir_write_enable()
+					+ "</anon_mkdir_write_enable>" + "\n";
+		}
+
+		if (ftp.getConnect_from_port_20() != null
+				&& !ftp.getConnect_from_port_20().equals(null)) {
+			kq = kq + "<connect_from_port_20>" + ftp.getConnect_from_port_20()
+					+ "</connect_from_port_20>" + "\n";
+		}
+
+		if (ftp.getDeny_email_enable() != null
+				&& !ftp.getDeny_email_enable().equals(null)) {
+			kq = kq + "<deny_email_enable>" + ftp.getDeny_email_enable()
+					+ "</deny_email_enable>" + "\n";
+		}
+
+		if (ftp.getChroot_local_user() != null
+				&& !ftp.getChroot_local_user().equals(null)) {
+			kq = kq + "<chroot_local_user>" + ftp.getChroot_local_user()
+					+ "</chroot_local_user>" + "\n";
+		}
+
+		if (ftp.getChroot_list_enable() != null
+				&& !ftp.getChroot_list_enable().equals(null)) {
+			kq = kq + "<chroot_list_enable>" + ftp.getChroot_list_enable()
+					+ "</chroot_list_enable>" + "\n";
+		}
+
+		if (ftp.getChroot_list_file() != null
+				&& !ftp.getChroot_list_file().equals(null)) {
+			kq = kq + "<chroot_list_file>" + ftp.getChroot_list_file()
+					+ "</chroot_list_file>" + "\n";
+		}
+		return "<ftp>" + "\n" + kq + "</ftp>";
+
+	}
+
+	// Convert XML to Object
+	public Ftp convertXMLToObject(String xmlString)
+			throws FileNotFoundException {
+
+		StringReader strRead = new StringReader(xmlString);
+		// FileReader fr = new FileReader(new File("E:\\tuine.txt"));
+		try {
+			// Khoi tao Context
+			JAXBContext context = JAXBContext.newInstance(Ftp.class);
+			// Tao Unmarshaller tu Context
+			Unmarshaller un = context.createUnmarshaller();
+			// File xml phu thuoc vao doi tuong + duong duong path
+			Ftp ftp = (Ftp) un.unmarshal(strRead);
+			// System.out.println(ftp.getListen());
+			return ftp;
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (NullPointerException nu) {
+		}
+		return null;
+
+	}
+
 	public static void main(String[] args) throws IOException {
 
 		FtpConfig ftp_c = new FtpConfig();
-		Server sv = new Server(1, "192.168.0.105", 22, "mayb", "root", "root"); // ftp_c.Install(sv);
+		Server sv = new Server(1, "192.168.0.104", 22, "mayb", "root", "root"); // ftp_c.Install(sv);
 		// In ra chuoi chuan hoa
-		System.out.println(ftp_c.ChuanHoaChuoi(sv));
+		// System.out.println(ftp_c.ChuanHoaChuoi(sv));
 		// In ra FTP
-		ftp_c.inFTPObject(sv, ftp_c.convertTextToObject(sv));
+		ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
 
 		System.out.println("--------Uploading.....to Server---------------");
 
@@ -424,5 +522,11 @@ public class FtpConfig {
 
 		ftp_c.Restart(sv);
 
+		System.out.println(ftp_c.convertObjectToXML(ftp_c
+				.convertTextToObject(sv)));
+
+		// Ftp ftp = ftp_c.convertXMLToObject(ftp_c.convertObjectToXML(ftp_c
+		// .convertTextToObject(sv)));
+		// System.out.println(ftp.getAnonymous_enable());
 	}
 }

@@ -1,21 +1,20 @@
 package model.dns;
 
-
-public class record {
+public class Record {
 	// maya. IN NS maya.
 	// maya. IN A 192.168.0.109
 	String domain_name;
 	String type_record; // A or NS or CNAME or PTR
-	String nameserver;
+	String name_server;// Name of server quan ly domain_name
 
-	public record() {
+	public Record() {
 	}
 
-	public record(String domain_name, String type_record, String nameserver) {
+	public Record(String domain_name, String type_record, String name_server) {
 		super();
 		this.domain_name = domain_name;
 		this.type_record = type_record;
-		this.nameserver = nameserver;
+		this.name_server = name_server;
 	}
 
 	public String getDomain_name() {
@@ -34,12 +33,12 @@ public class record {
 		this.type_record = type_record;
 	}
 
-	public String getNameserver() {
-		return nameserver;
+	public String getName_server() {
+		return name_server;
 	}
 
-	public void setNameserver(String nameserver) {
-		this.nameserver = nameserver;
+	public void setName_server(String name_server) {
+		this.name_server = name_server;
 	}
 
 }

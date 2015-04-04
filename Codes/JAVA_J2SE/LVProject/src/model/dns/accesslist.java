@@ -2,14 +2,14 @@ package model.dns;
 
 import java.util.List;
 
-public class accesslist {
+public class Accesslist {
 	String access_name;
 	List<String> ip;
 
-	public accesslist() {
+	public Accesslist() {
 	}
 
-	public accesslist(String access_name, List<String> ip) {
+	public Accesslist(String access_name, List<String> ip) {
 		super();
 		this.access_name = access_name;
 		this.ip = ip;

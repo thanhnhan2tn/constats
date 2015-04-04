@@ -23,7 +23,7 @@ public class ApacheConfig {
 	// Start
 	public Boolean Start(Server sv) {
 		String command = "sudo service vsftpd start";
-		String boo = LoadOrUpConfigFromServer(sv, command);
+		String boo = sendCommandToServer(sv, command);
 		if (!boo.equals(null)) {
 			System.out.println("Start Suscess!!!\n");
 			System.out.println(boo);
@@ -39,7 +39,7 @@ public class ApacheConfig {
 	// Stop
 	public Boolean Stop(Server sv) {
 		String command = "sudo service vsftpd stop";
-		String boo = LoadOrUpConfigFromServer(sv, command);
+		String boo = sendCommandToServer(sv, command);
 		if (!boo.equals(null)) {
 			System.out.println("Stop Suscess!!!\n");
 			System.out.println(boo);
@@ -55,7 +55,7 @@ public class ApacheConfig {
 	// Restart
 	public Boolean Restart(Server sv) {
 		String command = "sudo service vsftpd restart";
-		String boo = LoadOrUpConfigFromServer(sv, command);
+		String boo = sendCommandToServer(sv, command);
 		if (!boo.equals(null)) {
 			System.out.println("Restart Suscess!!!\n");
 			System.out.println(boo);
@@ -71,7 +71,7 @@ public class ApacheConfig {
 	// State
 	public Boolean getState(Server sv) {
 		String command = "sudo service vsftpd status";
-		String boo = LoadOrUpConfigFromServer(sv, command);
+		String boo = sendCommandToServer(sv, command);
 		if (!boo.equals(null)) {
 			System.out.println(boo);
 			return true;
@@ -86,104 +86,105 @@ public class ApacheConfig {
 	// a2ensite to enable VitualHost
 	public boolean enableVirtualHost(Server sv, String fileNameVitual) {
 		String command = "sudo a2ensite " + fileNameVitual;
-		LoadOrUpConfigFromServer(sv, command);
+		sendCommandToServer(sv, command);
 
 		return true;
 	}
 
-	// Tao thu muc chua file web moi khi them vao 1 document root
-	public boolean createDirectory(Server sv, Directory direc) {
-		String config_direc = "";
-		if (direc.getPathFile() != null && !direc.getPathFile().equals("")) {
-			config_direc = config_direc + "'<Directory '" + direc.getPathFile()
-					+ "'>'" + "'\n'";
-		}
-
-		if (direc.getOptions() != null && !direc.getOptions().equals("")) {
-			config_direc = config_direc + "Options " + direc.getOptions()
-					+ "'\n'";
-		}
-
-		if (direc.getAllowOverride() != null
-				&& !direc.getAllowOverride().equals("")) {
-			config_direc = config_direc + "AllowOverride "
-					+ direc.getAllowOverride() + "'\n'";
-		}
-
-		if (direc.getRequireAll() != null && !direc.getRequireAll().equals("")) {
-			config_direc = config_direc + "Require " + direc.getRequireAll()
-					+ "'\n'";
-		}
-
-		if (direc.getOrder() != null && !direc.getOrder().equals("")) {
-			config_direc = config_direc + "Order " + direc.getOrder() + "'\n'";
-		}
-
-		if (direc.getAllow() != null && !direc.getAllow().equals("")) {
-			config_direc = config_direc + "Allow " + direc.getAllow() + "'\n'";
-		}
-
-		if (direc.getDeny() != null && !direc.getDeny().equals("")) {
-			config_direc = config_direc + "Deny " + direc.getDeny() + "'\n'";
-		}
-		config_direc = config_direc + "'</Directory>'" + "'\n'";
-		config_direc = config_direc + "'\n'";
-
-		String command = "sudo echo -e >> /etc/apache2/apache2.conf  "
-				+ config_direc;
-		LoadOrUpConfigFromServer(sv, command);
-
-		return true;
-	}
+	// // Tao thu muc chua file web moi khi them vao 1 document root
+	// public boolean createDirectory(Server sv, Directory direc) {
+	// String config_direc = "";
+	// if (direc.getPathFile() != null && !direc.getPathFile().equals("")) {
+	// config_direc = config_direc + "'<Directory '" + direc.getPathFile()
+	// + "'>'" + "'\n'";
+	// }
+	//
+	// if (direc.getOptions() != null && !direc.getOptions().equals("")) {
+	// config_direc = config_direc + "Options " + direc.getOptions()
+	// + "'\n'";
+	// }
+	//
+	// if (direc.getAllowOverride() != null
+	// && !direc.getAllowOverride().equals("")) {
+	// config_direc = config_direc + "AllowOverride "
+	// + direc.getAllowOverride() + "'\n'";
+	// }
+	//
+	// if (direc.getRequireAll() != null && !direc.getRequireAll().equals("")) {
+	// config_direc = config_direc + "Require " + direc.getRequireAll()
+	// + "'\n'";
+	// }
+	//
+	// if (direc.getOrder() != null && !direc.getOrder().equals("")) {
+	// config_direc = config_direc + "Order " + direc.getOrder() + "'\n'";
+	// }
+	//
+	// if (direc.getAllow() != null && !direc.getAllow().equals("")) {
+	// config_direc = config_direc + "Allow " + direc.getAllow() + "'\n'";
+	// }
+	//
+	// if (direc.getDeny() != null && !direc.getDeny().equals("")) {
+	// config_direc = config_direc + "Deny " + direc.getDeny() + "'\n'";
+	// }
+	// config_direc = config_direc + "'</Directory>'" + "'\n'";
+	// config_direc = config_direc + "'\n'";
+	//
+	// String command = "sudo echo -e >> /etc/apache2/apache2.conf  "
+	// + config_direc;
+	// LoadOrUpConfigFromServer(sv, command);
+	//
+	// return true;
+	// }
 
 	// Create VirtualHost
-	public Boolean createVirtualHost(Server sv, VirtualHost vth) {
-		String config_vth = "";
-
-		if (vth.getVitualhost() != null && !vth.getVitualhost().equals("")) {
-			config_vth = config_vth + "'<VirtualHost '" + vth.getVitualhost()
-					+ "'>'" + "'\n'";
-		}
-		if (vth.getServername() != null && !vth.getServername().equals("")) {
-
-			config_vth = config_vth + "ServerName " + vth.getServername()
-					+ "'\n'";
-		}
-		if (vth.getServeradmin() != null && !vth.getServeradmin().equals("")) {
-
-			config_vth = config_vth + "ServerAdmin " + vth.getServeradmin()
-					+ "'\n'";
-		}
-		if (vth.getDocumentRoot() != null && !vth.getDocumentRoot().equals("")) {
-
-			config_vth = config_vth + "DocumentRoot " + vth.getDocumentRoot()
-					+ "'\n'";
-		}
-
-		if (vth.getAlias() != null && !vth.getAlias().equals("")) {
-			config_vth = config_vth + "Alias " + vth.getAlias() + "'\n'";
-		}
-		if (vth.getErrorLog() != null && !vth.getErrorLog().equals("")) {
-
-			config_vth = config_vth + "ErrorLog " + vth.getErrorLog() + "'\n'";
-		}
-		if (vth.getCustomLog() != null && !vth.getCustomLog().equals("")) {
-
-			config_vth = config_vth + "CustomLog " + vth.getCustomLog()
-					+ "'\n'";
-		}
-
-		config_vth = config_vth + "'</VirtualHost>'" + "'\n'";
-		System.out.println(config_vth);
-		String cmd = "sudo echo -e >> /etc/apache2/sites-available/000-default.conf "
-				+ config_vth;
-		LoadOrUpConfigFromServer(sv, cmd);
-		return true;
-
-	}
+	// public Boolean createVirtualHost(Server sv, VirtualHost vth) {
+	// String config_vth = "";
+	//
+	// if (vth.getVitualhost() != null && !vth.getVitualhost().equals("")) {
+	// config_vth = config_vth + "'<VirtualHost '" + vth.getVitualhost()
+	// + "'>'" + "'\n'";
+	// }
+	// if (vth.getServername() != null && !vth.getServername().equals("")) {
+	//
+	// config_vth = config_vth + "ServerName " + vth.getServername()
+	// + "'\n'";
+	// }
+	// if (vth.getServeradmin() != null && !vth.getServeradmin().equals("")) {
+	//
+	// config_vth = config_vth + "ServerAdmin " + vth.getServeradmin()
+	// + "'\n'";
+	// }
+	// if (vth.getDocumentRoot() != null && !vth.getDocumentRoot().equals("")) {
+	//
+	// config_vth = config_vth + "DocumentRoot " + vth.getDocumentRoot()
+	// + "'\n'";
+	// }
+	//
+	// if (vth.getAlias() != null && !vth.getAlias().equals("")) {
+	// config_vth = config_vth + "Alias " + vth.getAlias() + "'\n'";
+	// }
+	// if (vth.getErrorLog() != null && !vth.getErrorLog().equals("")) {
+	//
+	// config_vth = config_vth + "ErrorLog " + vth.getErrorLog() + "'\n'";
+	// }
+	// if (vth.getCustomLog() != null && !vth.getCustomLog().equals("")) {
+	//
+	// config_vth = config_vth + "CustomLog " + vth.getCustomLog()
+	// + "'\n'";
+	// }
+	//
+	// config_vth = config_vth + "'</VirtualHost>'" + "'\n'";
+	// System.out.println(config_vth);
+	// String cmd =
+	// "sudo echo -e >> /etc/apache2/sites-available/000-default.conf "
+	// + config_vth;
+	// LoadOrUpConfigFromServer(sv, cmd);
+	// return true;
+	//
+	// }
 
 	// Upload cmd / file to server
-	public String LoadOrUpConfigFromServer(Server sv, String cmd) {
+	public String sendCommandToServer(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
 			String chuoilay = "";
@@ -210,9 +211,9 @@ public class ApacheConfig {
 					System.out.println("exit-status: "
 							+ channel.getExitStatus());
 					if (channel.getExitStatus() != 1) {
-						System.out.println("Process Success !!!");
+						System.out.println("PROCESS SUSSCESS !!!");
 					} else {
-						System.out.println("Process Failed !!!");
+						System.out.println("PROCESS FAILED !!!");
 
 					}
 					break;
@@ -229,25 +230,24 @@ public class ApacheConfig {
 		}
 	}
 
-	// load Config from /etc/apache2/apache2.conf to plainText
+	// load Config from /etc/apache2/apache2.conf to plainText, sau do chuan hoa
+	// chuoi tao ham nay
 	public String loadConfigToPlainText(Server sv) {
-		String kq = LoadOrUpConfigFromServer(sv,
-				"cat /etc/apache2/apache2.conf");
-		return kq;
+		String kq = sendCommandToServer(sv, "cat /etc/apache2/apache2.conf");
+		return ChuanHoaChuoi(kq);
 	}
 
 	// load config VitualHost to text
 	public String loadConfigVirtualHostToPlainText(Server sv) {
-		String kq = LoadOrUpConfigFromServer(sv,
+		String kq = sendCommandToServer(sv,
 				"cat /etc/apache2/sites-available/000-default.conf");
-		return kq;
+		return chuanhoaChuoiVitualHost(kq);
 	}
 
 	public List<VirtualHost> convertTextToVirtualHostObject(Server sv) {
 		HashMap<String, String> hm1 = new HashMap<String, String>();
 		List<VirtualHost> vitual_multi = new ArrayList<VirtualHost>();
 		String chuoi = loadConfigVirtualHostToPlainText(sv);
-		chuoi = chuanhoaChuoiVitualHost(chuoi);
 		// System.out.println("In ra Chuoi da chuan hoa: \n" + chuoi);
 		StringReader str = new StringReader(chuoi);
 		BufferedReader br = new BufferedReader(str);
@@ -340,10 +340,10 @@ public class ApacheConfig {
 	}
 
 	// Chuan hoa PlainText tra ve Chuoi
-	public String ChuanHoaChuoi(Server sv) {
+	public String ChuanHoaChuoi(String plaintext) {
 		try {
 
-			StringReader str = new StringReader(loadConfigToPlainText(sv));
+			StringReader str = new StringReader(plaintext);
 			BufferedReader bufferedReader = new BufferedReader(str);
 			String line;
 			String chuoilay = "";
@@ -388,7 +388,7 @@ public class ApacheConfig {
 		HashMap<String, String> hm1 = new HashMap<String, String>();
 		try {
 
-			StringReader str = new StringReader(ChuanHoaChuoi(sv));
+			StringReader str = new StringReader(loadConfigToPlainText(sv));
 			BufferedReader bufferedReader = new BufferedReader(str);
 			String line = "";
 			while ((line = bufferedReader.readLine()) != null) {
@@ -439,7 +439,7 @@ public class ApacheConfig {
 	public ConfigChung convertTextToObjectConfigChung(Server sv) {
 
 		try {
-			StringReader str = new StringReader(ChuanHoaChuoi(sv));
+			StringReader str = new StringReader(loadConfigToPlainText(sv));
 			BufferedReader br = new BufferedReader(str);
 			String line = "";
 			HashMap<String, String> hm1 = new HashMap<String, String>();
@@ -474,7 +474,7 @@ public class ApacheConfig {
 	// Upload and Xoa config to /etc/apache2/apache2.conf - upload/xoa pathFile
 	// Directory
 	public Boolean uploadConfigToApacheConfig(Server sv, ConfigChung cfchung,
-			List<Directory> list_direc, String pathFile) {
+			List<Directory> list_direc) {
 		String config_tong = "";
 		String config = "";
 		String config_direc = "";
@@ -516,9 +516,9 @@ public class ApacheConfig {
 		}
 
 		for (Directory direc : list_direc) {
-			if (direc.getPathFile().equals(pathFile)) {
-				continue;
-			}
+			// if (direc.getPathFile().equals(pathFile)) {
+			// continue;
+			// }
 			if (direc.getPathFile() != null && !direc.getPathFile().equals("")) {
 				config_direc = config_direc + "'<Directory '"
 						+ direc.getPathFile() + "'>'" + "'\n'";
@@ -569,7 +569,7 @@ public class ApacheConfig {
 		config_tong = "sudo echo -e  > /etc/apache2/apache2.conf "
 				+ config_include + config + config_direc;
 		// System.out.println("Config tong" + config_tong);
-		LoadOrUpConfigFromServer(sv, config_tong);
+		sendCommandToServer(sv, config_tong);
 
 		return true;
 	}
@@ -625,76 +625,77 @@ public class ApacheConfig {
 				+ config_vth;
 
 		// config_vth = "sudo echo -e  > /home/mayb/vitul.txt " + config_vth;
-		LoadOrUpConfigFromServer(sv, config_vth);
+		sendCommandToServer(sv, config_vth);
 
 		return true;
 	}
 
 	// Xoa vitual host
 	// Upload config to /etc/apache2/sites-available/000-default.conf
-	public Boolean XoaVitulHost(Server sv, List<VirtualHost> list_vitul,
-			String serverName) {
-		System.out
-				.println("------------------Uploading Vitualhost--------------- ");
-
-		String config_vth = "";
-		for (VirtualHost vth : list_vitul) {
-			System.out.println(vth.getServername());
-			if (vth.getServername() == null) {
-			} else {
-				if (vth.getServername().equals(serverName)) {
-					continue;
-				}
-			}
-
-			if (vth.getVitualhost() != null && !vth.getVitualhost().equals("")) {
-				config_vth = config_vth + "'<VirtualHost '"
-						+ vth.getVitualhost() + "'>'" + "'\n'";
-			}
-			if (vth.getServername() != null && !vth.getServername().equals("")) {
-
-				config_vth = config_vth + "ServerName " + vth.getServername()
-						+ "'\n'";
-			}
-			if (vth.getServeradmin() != null
-					&& !vth.getServeradmin().equals("")) {
-
-				config_vth = config_vth + "ServerAdmin " + vth.getServeradmin()
-						+ "'\n'";
-			}
-			if (vth.getDocumentRoot() != null
-					&& !vth.getDocumentRoot().equals("")) {
-
-				config_vth = config_vth + "DocumentRoot "
-						+ vth.getDocumentRoot() + "'\n'";
-			}
-
-			if (vth.getAlias() != null && !vth.getAlias().equals("")) {
-				config_vth = config_vth + "Alias " + vth.getAlias() + "'\n'";
-			}
-			if (vth.getErrorLog() != null && !vth.getErrorLog().equals("")) {
-
-				config_vth = config_vth + "ErrorLog " + vth.getErrorLog()
-						+ "'\n'";
-			}
-			if (vth.getCustomLog() != null && !vth.getCustomLog().equals("")) {
-
-				config_vth = config_vth + "CustomLog " + vth.getCustomLog()
-						+ "'\n'";
-			}
-
-			config_vth = config_vth + "'</VirtualHost>'" + "'\n'";
-
-		}
-
-		config_vth = "sudo echo -e  > /etc/apache2/sites-available/000-default.conf "
-				+ config_vth;
-
-		// config_vth = "sudo echo -e  > /home/mayb/vitul.txt " + config_vth;
-		LoadOrUpConfigFromServer(sv, config_vth);
-
-		return true;
-	}
+	// public Boolean XoaVitulHost(Server sv, List<VirtualHost> list_vitul,
+	// String serverName) {
+	// System.out
+	// .println("------------------Uploading Vitualhost--------------- ");
+	//
+	// String config_vth = "";
+	// for (VirtualHost vth : list_vitul) {
+	// System.out.println(vth.getServername());
+	// if (vth.getServername() == null) {
+	// } else {
+	// if (vth.getServername().equals(serverName)) {
+	// continue;
+	// }
+	// }
+	//
+	// if (vth.getVitualhost() != null && !vth.getVitualhost().equals("")) {
+	// config_vth = config_vth + "'<VirtualHost '"
+	// + vth.getVitualhost() + "'>'" + "'\n'";
+	// }
+	// if (vth.getServername() != null && !vth.getServername().equals("")) {
+	//
+	// config_vth = config_vth + "ServerName " + vth.getServername()
+	// + "'\n'";
+	// }
+	// if (vth.getServeradmin() != null
+	// && !vth.getServeradmin().equals("")) {
+	//
+	// config_vth = config_vth + "ServerAdmin " + vth.getServeradmin()
+	// + "'\n'";
+	// }
+	// if (vth.getDocumentRoot() != null
+	// && !vth.getDocumentRoot().equals("")) {
+	//
+	// config_vth = config_vth + "DocumentRoot "
+	// + vth.getDocumentRoot() + "'\n'";
+	// }
+	//
+	// if (vth.getAlias() != null && !vth.getAlias().equals("")) {
+	// config_vth = config_vth + "Alias " + vth.getAlias() + "'\n'";
+	// }
+	// if (vth.getErrorLog() != null && !vth.getErrorLog().equals("")) {
+	//
+	// config_vth = config_vth + "ErrorLog " + vth.getErrorLog()
+	// + "'\n'";
+	// }
+	// if (vth.getCustomLog() != null && !vth.getCustomLog().equals("")) {
+	//
+	// config_vth = config_vth + "CustomLog " + vth.getCustomLog()
+	// + "'\n'";
+	// }
+	//
+	// config_vth = config_vth + "'</VirtualHost>'" + "'\n'";
+	//
+	// }
+	//
+	// config_vth =
+	// "sudo echo -e  > /etc/apache2/sites-available/000-default.conf "
+	// + config_vth;
+	//
+	// // config_vth = "sudo echo -e  > /home/mayb/vitul.txt " + config_vth;
+	// LoadOrUpConfigFromServer(sv, config_vth);
+	//
+	// return true;
+	// }
 
 	public void inApache(Server sv) {
 		ConfigChung configChung = convertTextToObjectConfigChung(sv);
@@ -751,10 +752,31 @@ public class ApacheConfig {
 		}
 	}
 
+	// convertObjectToXML
+	public void convertObjectConfigToXML(ConfigChung cfg,
+			List<Directory> list_direct) {
+
+	}
+
+	// convertXMLTOObject
+	public void convertXMLtoObjectConfig(String xmlString) {
+
+	}
+
+	// convertObjectToXML
+	public void convertObjectVitualHostToXML() {
+
+	}
+
+	// convertXMLTOObject
+	public void convertXMLtoObjectVitualHost() {
+
+	}
+
 	public static void main(String[] args) {
 		ApacheConfig apache_c = new ApacheConfig();
 
-		Server sv = new Server(1, "192.168.0.105", 22, "mayb", "root", "root");
+		Server sv = new Server(1, "192.168.0.104", 22, "mayb", "root", "root");
 
 		// VirtualHost vth = new VirtualHost("192.168.0.105:80",
 		// "www.hoclamgiau.com", "hieuminh@yahoo.com", "/var/www/html",
@@ -783,6 +805,8 @@ public class ApacheConfig {
 		// "www.hoclamgiau.com");
 		apache_c.uploadConfigToApacheConfig(sv,
 				apache_c.convertTextToObjectConfigChung(sv),
-				apache_c.convertTextToDirectoryObject(sv), null);
+				apache_c.convertTextToDirectoryObject(sv));
+		apache_c.uploadConfigToVirtualHostConfig(sv,
+				apache_c.convertTextToVirtualHostObject(sv));
 	}
 }
