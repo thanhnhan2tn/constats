@@ -112,3 +112,44 @@ Apr 02, 2015 14:35:50.87 NEW SESSION
 Apr 02, 2015 14:35:50.88 
 Apr 02, 2015 14:35:50.95 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
 Apr 02, 2015 14:35:50.96 
+
+Apr 06, 2015 11:23:33.31 NEW SESSION
+Apr 06, 2015 11:23:33.31 [Child 4364] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 11:23:33.36 [Child 4364] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 12:52:10.54 [Child 8100] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 12:52:10.54 [Child 8100] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 13:19:17.75 [Child 5572] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 13:19:17.75 [Child 5572] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 13:42:29.59 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 06, 2015 13:42:29.59 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 06, 2015 13:42:29.59 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15197:21
+Apr 06, 2015 13:44:55.33 [NPAPI 7276] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+
+Apr 06, 2015 23:03:01.84 NEW SESSION
+Apr 06, 2015 23:03:01.84 [Child 6572] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 06, 2015 23:03:01.85 [Child 6572] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 24:16:48.76 SystemMessageCache: init
+
+Apr 07, 2015 09:41:54.52 NEW SESSION
+Apr 07, 2015 09:41:54.52 [Child 6260] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 09:41:54.57 [Child 6260] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 09:58:00.33 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 07, 2015 09:58:00.33 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 07, 2015 09:58:00.34 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15197:21
+Apr 07, 2015 09:58:13.48 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 07, 2015 09:58:13.49 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 07, 2015 09:58:13.49 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15197:21
+Apr 07, 2015 09:58:15.75 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 07, 2015 09:58:15.75 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 07, 2015 09:58:15.75 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15197:21
+Apr 07, 2015 10:14:21.96 1428376461968	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Apr 07, 2015 10:14:22.25 1428376462257	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+Apr 07, 2015 10:14:32.21 Exception trying to format object for log message: [Exception... "Component returned failure code: 0x80004001 (NS_ERROR_NOT_IMPLEMENTED) [nsIIncrementalDownload.loadGroup]"  nsresult: "0x80004001 (NS_ERROR_NOT_IMPLEMENTED)"  location: "JS frame :: resource://gre/modules/Log.jsm :: ParameterFormatter.prototype.format :: line 668"  data: no] Stack trace: ParameterFormatter.prototype.format()@resource://gre/modules/Log.jsm:668 < BasicFormatter.prototype.formatText()@resource://gre/modules/Log.jsm:569 < BF_format()@resource://gre/modules/Log.jsm:582 < App_append()@resource://gre/modules/Log.jsm:747 < Logger.prototype.log()@resource://gre/modules/Log.jsm:386 < LoggerRepository.prototype.getLoggerWithMessagePrefix/proxy.log()@resource://gre/modules/Log.jsm:501 < Logger.prototype.error()@resource://gre/modules/Log.jsm:394 < GMPProvider_updateTask()@resource://gre/modules/addons/GMPProvider.jsm:277 < throw()@self-hosted:637 < TaskImpl_run()@resource://gre/modules/Task.jsm:315 < Handler.prototype.process()@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:870 < this.PromiseWalker.walkerLoop()@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746 < this.PromiseWalker.scheduleWalkerLoop/<()@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688 < <file:unknown>
+Apr 07, 2015 12:07:13.29 [Child 8548] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 12:07:13.32 [Child 8548] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 12:12:41.56 [Child 7984] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 12:12:41.57 [Child 7984] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 12:43:00.67 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: init
+Apr 07, 2015 12:57:55.18 [Child 9596] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 12:57:55.18 [Child 9596] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 07, 2015 13:47:17.49 SystemMessageCache: init

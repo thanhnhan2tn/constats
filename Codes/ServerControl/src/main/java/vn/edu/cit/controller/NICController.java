@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import vn.edu.cit.dao.ServerDAO;
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
@@ -43,10 +43,13 @@ public class NICController {
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
 					sv = server;
+					
 					break;
 				}
 			}
-
+			sv.setServerUsername((String)session.getAttribute("sudouser"));
+			sv.setServerPassword((String)session.getAttribute("sudopass"));
+			System.out.println(sv.getServerUsername());
 			NicConfig nicConfig = new NicConfig();
 			Nic nic = nicConfig.convertXMLToObject(sv); // Call function
 			mm.put("cc", c);
@@ -96,6 +99,8 @@ public class NICController {
 			}
 
 			NicConfig nicConfig = new NicConfig();
+			sv.setServerName((String)session.getAttribute("sudouser"));
+			sv.setServerPassword((String)session.getAttribute("sudopass"));
 			Nic nic = nicConfig.convertXMLToObject(sv);
 			// Call function
 			mm.put("cc", c);
@@ -140,6 +145,8 @@ public class NICController {
 			// Khoi tao doi tuong Server
 			Server sv = user.getServerByIp(ip);
 			if (sv != null) {
+				sv.setServerName((String)session.getAttribute("sudouser"));
+				sv.setServerPassword((String)session.getAttribute("sudopass"));
 				NicConfig nicConfig = new NicConfig();
 				if (action.equals("stop")) {
 					nicConfig.Stop(sv);
@@ -172,6 +179,7 @@ public class NICController {
 		if (user != null) { // check user login
 			if (c.equals(cc)) {
 				Nic nicToConfig = (Nic) session.getAttribute("nics");
+				
 				List<Eth> eths = nic.getEth();
 				// Save Network Interface
 				if (eths != null && eths.size() > 0) {
@@ -192,6 +200,8 @@ public class NICController {
 				}
 				NicConfig nicConfig = new NicConfig();
 				try {
+					sv.setServerName((String)session.getAttribute("sudouser"));
+					sv.setServerPassword((String)session.getAttribute("sudopass"));
 					nicConfig.uploadConfigToServer(sv, nicToConfig);
 				} catch (IOException e) {
 					return "redirect:/services/" + ip + "/" + cc;
@@ -220,24 +230,26 @@ public class NICController {
 	public String editConfigFile(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
 		User user = (User) session.getAttribute("user");
+		
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
 		// Khoi tao doi tuong Server
-		Server sv = new Server();
+		//Server sv = new Server();
 		// Xet user dang nhap va token
 		if (user != null && c.equals(cc)) {
 			// duyet danh sach server cua user
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
-					sv = server;
 					NicConfig nicConfig = new NicConfig();
-					String config = nicConfig.loadConfigToPlainText(sv);
+					server.setServerName((String)session.getAttribute("sudouser"));
+					server.setServerPassword((String)session.getAttribute("sudopass"));
+					String config = nicConfig.loadConfigToPlainText(server);
 					// Call function
 					mm.put("cc", c);
 					mm.put("title", "Home - Server Control");
 					mm.put("user", user);
 					// mm.put("nics", nic);
-					mm.put("server", sv);
+					mm.put("server", server);
 					session.setAttribute("config", config);
 					return "nic-edit-config-file";
 				}
@@ -247,6 +259,20 @@ public class NICController {
 			return "redirect:/login";
 		}
 		return "redirect:/services/" + ip + "/" + cc;
+	}
+
+	@RequestMapping(value = "/serviceconfig/user/{user}/{pass}/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String replaceUser(HttpSession session, @PathVariable(value = "user") String u,
+			@PathVariable(value = "pass") String pass, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			session.setAttribute("sudouser", u);
+			session.setAttribute("sudopass", pass);
+		}
+		return cc;
 	}
 
 	/**

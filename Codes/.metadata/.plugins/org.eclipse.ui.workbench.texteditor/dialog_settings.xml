@@ -13,18 +13,19 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="template.default" key="selection"/>
+		<item value="num" key="selection"/>
 		<list key="findhistory">
+			<item value="listeth.length"/>
+			<item value="m-status"/>
 			<item value="home-default"/>
 			<item value=".server-item"/>
 			<item value="list-server"/>
 			<item value="server-off"/>
 			<item value="services-nic-default"/>
 			<item value="convertXMLToObject"/>
-			<item value="convertXMLToObject\"/>
-			<item value="iface"/>
 		</list>
 		<list key="replacehistory">
+			<item value="num"/>
 			<item value="template.default"/>
 			<item value=""/>
 		</list>

@@ -75,7 +75,7 @@ public class NicConfig {
 
 	// Stop
 	public Boolean Stop(Server sv) {
-		String command = "sudo /etc/init.d/networking stop";
+		String command = "echo "+sv.getServerPassword()+"|sudo -S /etc/init.d/networking stop";
 		Boolean boo = uploadToServer(sv, command);
 		if (boo == true) {
 			return true;
@@ -247,7 +247,7 @@ public class NicConfig {
 		// thuc hien xoa dong chua ki tu "null"
 		// config = XoaNull(config);
 		System.out.println(config);
-		config = "sudo echo -e > /etc/network/interfaces " + config;
+		config = "echo "+sv.getServerPassword()+"| sudo -S bash -c \"echo -e "+config+"> /etc/network/interfaces \"";
 		if (uploadToServer(sv, config) == true) {
 			System.out.println("Channel close....!!!");
 			return true;

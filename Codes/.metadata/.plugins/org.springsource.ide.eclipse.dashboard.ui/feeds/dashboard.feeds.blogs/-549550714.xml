@@ -5,7 +5,98 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-04-02T20:43:00Z</updated>
+  <updated>2015-04-06T20:39:57Z</updated>
+  <entry>
+    <title>Lattice and Spring Cloud: Resilient Sub-structure for Your Cloud-Native Spring Applications</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/06/lattice-and-spring-cloud-resilient-sub-structure-for-your-cloud-native-spring-applications" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Matt Stine</name>
+    </author>
+    <id>tag:spring.io,2015-04-06:2066</id>
+    <updated>2015-04-06T20:39:57Z</updated>
+    <content type="html">&lt;p&gt;We believe that the development of &lt;a href="http://pivotal.io/platform-as-a-service/migrating-to-cloud-native-application-architectures-ebook"&gt;cloud-native application architectures&lt;/a&gt; is the next great evolutionary phase of enterprise application development. These architectures combine elements like &lt;a href="http://12factor.net"&gt;twelve-factor applications&lt;/a&gt;, &lt;a href="http://martinfowler.com/articles/microservices.html"&gt;microservices&lt;/a&gt;, &lt;a href="http://pivotal.io/platform-as-a-service/pivotal-cloud-foundry"&gt;self-service agile infrastructure&lt;/a&gt;, &lt;a href="http://www.mattstine.com/2014/06/30/microservices-are-solid"&gt;API-based collaboration&lt;/a&gt;, and &lt;a href="http://www.infoq.com/articles/russ-miles-antifragility-microservices"&gt;antifragility&lt;/a&gt;. All of these elements enable us to simultaneously move quickly and safely as we continuously deliver business value to our customers.&lt;/p&gt;&lt;p&gt;The Spring team&amp;rsquo;s goal has always been to &lt;a href="https://twitter.com/mstine/status/559141270715924481"&gt;win the war on Java complexity&lt;/a&gt;, and now we&amp;rsquo;re teaming up with our colleagues on the &lt;a href="http://cloudfoundry.org"&gt;Cloud Foundry&lt;/a&gt; team to eliminate complexity from the development and operation of cloud-native applications. &lt;/p&gt;&lt;p&gt;We began this effort with &lt;a href="http://cloud.spring.io"&gt;Spring Cloud&lt;/a&gt;, an umbrella project that brings to the composition of cloud-native application architectures the same simplicity and productivity you&amp;rsquo;ve come to depend on in &lt;a href="http://projects.spring.io/spring-boot"&gt;Spring Boot&lt;/a&gt;. Coordination of distributed systems can be accomplished by applying many well-characterized boiler plate patterns. Using Spring Cloud, developers can quickly stand up services and applications that implement those patterns. Many of these patterns are provided via wrapping the battle-tested components found at &lt;a href="http://netflix.github.io/"&gt;NetflixOSS&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;You can develop and run Spring Cloud applications anywhere, including your laptop, bare-metal data center infrastructure, or cloud infrastructure like AWS or Google Cloud. But for maximum effectiveness, cloud-native applications need a cloud-native application platform. We believe that Cloud Foundry is the platform that, combined with Spring Cloud, provides the optimal necessary sub-structure for building and operating cloud-native applications.&lt;/p&gt;&lt;p&gt;Historically it&amp;rsquo;s been challenging to run Cloud Foundry on your laptop. That&amp;rsquo;s why we&amp;rsquo;re excited to tell you about &lt;a href="http://lattice.cf"&gt;Lattice&lt;/a&gt;. Lattice is a cloud-native application platform that enables you to run your applications in containers using solutions like &lt;a href="http://docker.com"&gt;Docker&lt;/a&gt;. Lattice includes features like:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cluster scheduling&lt;/li&gt;
+  &lt;li&gt;HTTP load balancing&lt;/li&gt;
+  &lt;li&gt;Log aggregation&lt;/li&gt;
+  &lt;li&gt;Health management&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Lattice does this by packaging a subset of the components found in the Cloud Foundry elastic runtime. The result is an open, single-tenant environment suitable for rapid application development. Applications developed using Lattice should migrate unchanged to full Cloud Foundry deployments.&lt;/p&gt;&lt;p&gt;To help you get started with Lattice, we&amp;rsquo;ve published two getting started guides:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/guides/gs/spring-boot-docker"&gt;Spring Boot with Docker&lt;/a&gt;: Lattice currently supports running applications packaged as Docker images, so this guide helps you to build Docker images from your Spring Boot application using either Maven or Gradle.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/guides/gs/spring-cloud-and-lattice/"&gt;Spring Cloud + Lattice&lt;/a&gt;: this guide walks you through setting up Lattice and then deploying a Spring Boot application to it. Applications you package following the Docker guide should run on Lattice with ease.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The second guide highlights our first direct integration between Spring Cloud and Lattice, &lt;a href="https://github.com/spring-cloud/spring-cloud-lattice"&gt;spring-cloud-lattice&lt;/a&gt;, which is an implementation of Spring Cloud&amp;rsquo;s &lt;code&gt;DiscoveryClient&lt;/code&gt; backed by Lattice&amp;rsquo;s &lt;a href="http://lattice.cf/docs/lattice-api"&gt;API&lt;/a&gt;. This implementation allows us to perform &lt;a href="http://microservices.io/patterns/client-side-discovery.html"&gt;service discovery&lt;/a&gt; directly from Lattice without any additional dependencies. If you&amp;rsquo;ve already started leveraging Netflix Ribbon or Zuul via Spring Cloud, you&amp;rsquo;ll now be able to use both without deploying a Eureka server! Spring Cloud Lattice is currently an alpha-quality preview release.&lt;/p&gt;&lt;p&gt;This integration is only the first of many you&amp;rsquo;ll be seeing from the ever deepening collaboration between the Cloud Foundry and Spring teams. For example, the Spring XD team has been hard at work building a service-provider interface that allows XD to treat Lattice as a runtime layer, deploying stream modules as containers. &lt;/p&gt;&lt;p&gt;Our goal is to provide you, the enterprise Java developer, with the ideal local development and cloud operation environments that you need to harness the power of cloud-native applications. We look forward to showing you even more great things at &lt;a href="http://springone2gx.com"&gt;SpringOne 2GX&lt;/a&gt; in September, 2015. Stay tuned!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring for Apache Hadoop 2.1.2 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/03/spring-for-apache-hadoop-2-1-2-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Thomas Risberg</name>
+    </author>
+    <id>tag:spring.io,2015-04-03:2065</id>
+    <updated>2015-04-03T18:50:00Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce that Spring for Apache Hadoop 2.1.2 has just been released and is now available from Maven Central and the Spring Repository. This release includes version upgrades of some Spring projects as well as the most recent versions for all supported distros. &lt;/p&gt;&lt;p&gt;We have added support for the newly released Pivotal HD 3.0. In addition to that new release, we have updated Cloudera CDH to version 5.3.2 and Hortonworks HDP 2.2 to use version 2.2.4.0. More details can be found in the &lt;a href="http://docs.spring.io/spring-hadoop/docs/2.1.2.RELEASE/changelog.txt"&gt;changelog&lt;/a&gt; or in the &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10801&amp;version=14952"&gt;JIRA release notes&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Here is a complete list of the latest version designation to use for the various distro &amp;ldquo;flavors&amp;rdquo; published. The Apache Hadoop releases are available in Maven Central and all other releases are available in the &lt;a href="http://repo.spring.io/libs-release/"&gt;Spring Repository&lt;/a&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Apache Hadoop 2.4.1 (2.1.2.RELEASE-hadoop24)&lt;/li&gt;
+  &lt;li&gt;Apache Hadoop 2.5.2 (2.1.2.RELEASE-hadoop25)&lt;/li&gt;
+  &lt;li&gt;Apache Hadoop 2.6.0 (2.1.2.RELEASE)&lt;/li&gt;
+  &lt;li&gt;Pivotal HD 2.1 (2.1.2.RELEASE-phd21)&lt;/li&gt;
+  &lt;li&gt;Pivotal HD 3.0 (2.1.2.RELEASE-phd30)&lt;/li&gt;
+  &lt;li&gt;Cloudera CDH5 5.3.0 (2.1.2.RELEASE-cdh5)&lt;/li&gt;
+  &lt;li&gt;Hortonworks HDP 2.2 (2.1.2.RELEASE-hdp22)&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The project page is at - &lt;a href="http://projects.spring.io/spring-hadoop/"&gt;http://projects.spring.io/spring-hadoop/&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>How Spring achieves compatibility with Java 6, 7 and 8</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/04/03/how-spring-achieves-compatibility-with-java-6-7-and-8" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Stéphane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2015-04-03:2063</id>
+    <updated>2015-04-03T13:58:52Z</updated>
+    <content type="html">&lt;p&gt;As of Spring Framework 4.0, Java 8 is supported as a first-class citizen and we&amp;rsquo;ve seen some confusion in the Spring community since then. How do we manage to support Java 8 and remain compatible with Java 6 and Java 7 after all? This blog post provides some insight into how we&amp;rsquo;re handling this within the framework codebase.&lt;/p&gt;&lt;h2&gt;&lt;a href="#java-8-language-features-vs-java-8-apis" class="anchor" name="java-8-language-features-vs-java-8-apis"&gt;&lt;/a&gt;Java 8 language features vs. Java 8 APIs&lt;/h2&gt;&lt;p&gt;First, a distinction must be made between using new language features and new APIs in a given Java generation such as Java 8. If a class uses a Java 8 language feature such as a lambda expression, it has to be compiled with &lt;code&gt;-source 1.8 -target 1.8&lt;/code&gt; and therefore the whole compilation unit will only work on Java 8+. However, if a particular class in a library optionally uses a new Java 8 interface such as &lt;code&gt;java.util.stream.Stream&lt;/code&gt;, the library can still run on a previous Java generation as long as it is being compiled with e.g. &lt;code&gt;-source 1.6 -target 1.6&lt;/code&gt; - and as long as the use of that particular &lt;code&gt;Stream&lt;/code&gt;-based class is guarded to only kick in when actually running on Java 8+. As you may have guessed, we&amp;rsquo;re making extensive use of such arrangements within the Spring Framework codebase!&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ve advertised how Spring Framework 4.0 naturally fits with Java 8 lambdas. For instance, retrieving the catalog of a given JDBC connection with a &lt;a href="https://github.com/spring-projects/spring-framework/blob/8472a2b2/spring-jdbc/src/main/java/org/springframework/jdbc/core/ConnectionCallback.java"&gt;&lt;code&gt;ConnectionCallback&lt;/code&gt;&lt;/a&gt; can be written as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;jdbcTemplate.execute(connection -&amp;gt; connection.getCatalog())
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In fact, Spring Framework had now-so-called functional interfaces for years and we did not have to change any of those APIs to be compliant with Java 8&amp;rsquo;s compiler rules for functional interfaces. Lambda-based code such as the above, calling into Spring APIs, can be used in any Spring application - which then requires a Java 8 runtime, obviously. However, if you choose to write such code with a traditional inner class approach, against the very same Spring APIs in the very same Spring version, you can do so as well with a Java 6+ runtime:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint"&gt;jdbcTemplate.execute(new ConnectionCallback&amp;lt;String&amp;gt;() {&#xD;
+    @Override&#xD;
+    public String doInConnection(Connection con) throws SQLException {&#xD;
+        return con.getCatalog();&#xD;
+    }&#xD;
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The bottom line is that the choice is yours: We carefully designed Spring Framework 4.x to be naturally compatible with Java 6, 7 and 8, with the same Spring jars and no special setup steps. We don&amp;rsquo;t use any Java 8 language features in our own code, so we can compile our framework codebase with &lt;code&gt;-source 1.6 -target 1.6&lt;/code&gt;, and we autodetect and automatically activate many Java 8 API features (if available at runtime) within that codebase arrangement. Your application code may then choose to use Java 6, 7 or 8 language level itself, interacting with our framework arrangement and naturally getting the most out of the JDK that you happen to be using - without any extra setup, just through combining Spring with your JDK at runtime.&lt;/p&gt;&lt;h2&gt;&lt;a href="#which-java-8-api-features-do-we-support" class="anchor" name="which-java-8-api-features-do-we-support"&gt;&lt;/a&gt;Which Java 8 API features do we support?&lt;/h2&gt;&lt;p&gt;We have dedicated support for a number of Java 8 specific API features such as &lt;code&gt;java.util.Optional&lt;/code&gt;, &lt;code&gt;java.util.stream.Stream&lt;/code&gt;, &lt;code&gt;java.time&lt;/code&gt; (JSR-310), repeatable annotations, method/constructor parameter names, and even the &lt;code&gt;java.util.Base64&lt;/code&gt; utility class. Those features get reflectively detected when you choose to use them in your own application classes, with the Spring Framework conditionally activating its support for those Java 8 features, e.g. registering default converters for &lt;code&gt;Optional&lt;/code&gt; and &lt;code&gt;Stream&lt;/code&gt; when Java 8 is present at runtime.&lt;/p&gt;&lt;p&gt;Let&amp;rsquo;s have a look at an example. In the upcoming Spring Framework 4.2, if you define a value of type &lt;code&gt;Collection&lt;/code&gt; or array, you can inject it as a &lt;code&gt;Stream&lt;/code&gt; and we will convert that for you. You can find the full code of &lt;a href="https://github.com/spring-projects/spring-framework/blob/228d9db4/spring-core/src/main/java/org/springframework/core/convert/support/StreamConverter.java"&gt;&lt;code&gt;StreamConverter&lt;/code&gt; on github&lt;/a&gt; but here&amp;rsquo;s an excerpt:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;import java.util.*;&#xD;
+import java.util.stream.Collectors;&#xD;
+import java.util.stream.Stream;&#xD;
+&#xD;
+import org.springframework.core.convert.*;&#xD;
+import org.springframework.lang.UsesJava8;&#xD;
+&#xD;
+@UsesJava8&#xD;
+public class StreamConverter implements ConditionalGenericConverter {&#xD;
+    ....&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;StreamConverter&lt;/code&gt; is an isolated class using Java 8 specific APIs, so what we need to do now is to conditionally add &lt;code&gt;StreamConverter&lt;/code&gt; to &lt;a href="https://github.com/spring-projects/spring-framework/blob/018adb04/spring-core/src/main/java/org/springframework/core/convert/support/DefaultConversionService.java"&gt;&lt;code&gt;DefaultConverterService&lt;/code&gt;&lt;/a&gt; if Java 8 is present at runtime.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;public class DefaultConversionService extends GenericConversionService {&#xD;
+&#xD;
+    /** Java 8&amp;#39;s java.util.stream.Stream class available? */&#xD;
+    private static final boolean streamAvailable = ClassUtils.isPresent(&#xD;
+            &amp;quot;java.util.stream.Stream&amp;quot;, &#xD;
+            DefaultConversionService.class.getClassLoader());&#xD;
+&#xD;
+    private static void addCollectionConverters(&#xD;
+            ConverterRegistry converterRegistry) {&#xD;
+        ...&#xD;
+&#xD;
+        if (streamAvailable) {&#xD;
+            converterRegistry.addConverter(&#xD;
+                    new StreamConverter(conversionService));&#xD;
+        }&#xD;
+    }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;We conditionally check if the API is present at runtime and make a decision based on that, with you as a user simply experiencing fully Java 8 adapted setup by default. This is somewhat similar to the &lt;a href="https://github.com/spring-projects/spring-boot/tree/master/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/condition"&gt;conditions infrastructure&lt;/a&gt; in Spring Boot except it is more low-level and internal. &lt;/p&gt;&lt;h2&gt;&lt;a href="#checking-java-6-compatibility" class="anchor" name="checking-java-6-compatibility"&gt;&lt;/a&gt;Checking Java 6 compatibility&lt;/h2&gt;&lt;p&gt;Since we are using Java 8 specific APIs in several isolated places, we need JDK 8 to compile the framework codebase overall. As a result, there is a risk that we accidentally introduce Java 8 specific API calls in places where we need to remain Java 6 compatible.&lt;/p&gt;&lt;p&gt;Fortunately, our CI build plan is configured to execute &lt;a href="http://mojo.codehaus.org/animal-sniffer/"&gt;Animal Sniffer&lt;/a&gt; with each build. This checks our code against a given Java API &lt;em&gt;signature&lt;/em&gt; (in our case Java 6 update 18) and fails the build if some incorrect usage happens to be found. So what about legitimate use cases then where we do need to call Java 7 or 8 APIs? You can configure the sniffer to exclude a list of classes or, better yet, provide a set of annotations that &lt;em&gt;flag&lt;/em&gt; such exceptional cases. &lt;/p&gt;&lt;p&gt;That&amp;rsquo;s exactly what the &lt;a href="https://github.com/spring-projects/spring-framework/blob/f7b46539/spring-core/src/main/java/org/springframework/lang/UsesJava8.java"&gt;&lt;code&gt;@UsesJava8&lt;/code&gt;&lt;/a&gt; annotation on &lt;code&gt;StreamConverter&lt;/code&gt; (see above) indicates: It demarcates the whole class as an exception to the Java 6 API compatibility rule. You can flag an inner class or even a method in a similar manner. By looking at our usage of that annotation, we know all the places where Java 7/8 specific APIs are used in our codebase.&lt;/p&gt;&lt;p&gt;The Animal Sniffer configuration is pretty straightforward: check out &lt;a href="https://github.com/spring-projects/spring-framework/blob/f926f6cb3e95affdd87ed5c06ac0450d0ada2aec/build.gradle#L143"&gt;our build&lt;/a&gt; or &lt;a href="http://mojo.codehaus.org/animal-sniffer/"&gt;the official documentation&lt;/a&gt; for more details. &lt;/p&gt;&lt;h2&gt;&lt;a href="#wrapping-up" class="anchor" name="wrapping-up"&gt;&lt;/a&gt;Wrapping Up&lt;/h2&gt;&lt;p&gt;We chose not to use any Java 7 or Java 8 language features in our own codebase in order to give you the flexibility to write your Spring 4 applications for Java 6, 7 or 8. At the same time, we allow you to experience a very natural approach if you decide to use Java 8, with the Spring Framework essentially appearing as Java 8 based to you in such a scenario. &lt;/p&gt;&lt;p&gt;Fortunately, Java 8&amp;rsquo;s functional interface convention isn&amp;rsquo;t new for us. Many existing Spring APIs can be seamlessly used with Java 8 lambdas since they are naturally following the same convention. New Java 8 APIs such as &lt;code&gt;java.time&lt;/code&gt; (JSR-310), &lt;code&gt;Optional&lt;/code&gt; and &lt;code&gt;Stream&lt;/code&gt; are automatically supported by the framework if you choose to use them in your own code. &lt;/p&gt;&lt;p&gt;On a forward-looking note, as of 4.2, our codebase is even being checked with early JDK 9 builds already! This will lead to a unique situation in the framework once JDK 9 becomes generally available next year: supporting &lt;em&gt;four&lt;/em&gt; Java generations in the same release line - your choice of JDK 6, 7, 8 or 9 in combination with the same Spring Framework generation!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Check out Dave Syer's "Spring Security and AngularJS" blog series converted to tutorial</title>
     <link rel="alternate" href="https://spring.io/blog/2015/04/02/check-out-dave-syer-s-spring-security-and-angularjs-blog-series-converted-to-tutorial" />
@@ -338,233 +429,6 @@
     <id>tag:spring.io,2015-03-25:2040</id>
     <updated>2015-03-26T17:10:00Z</updated>
     <content type="html">&lt;p&gt;Greetings Spring community,&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-ws/"&gt;Spring WS&lt;/a&gt; has just released version 2.2.1.RELEASE. This is a patch upgrade with no breaking API or behavior changes. I recommend upgrading to ensure you have the latest fixes. For a listing of completed issues see the report below:&lt;/p&gt;&lt;p&gt;&lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10060&amp;version=14639"&gt;Release Notes&lt;/a&gt; | &lt;a href="http://projects.spring.io/spring-ws/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-ws"&gt;GitHub&lt;/a&gt; | &lt;a href="https://jira.spring.io/browse/SWS"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-ws/docs/2.2.1.RELEASE/reference/htmlsingle/"&gt;Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The artifacts are staged on maven central, &lt;a href="http://repo.spring.io/release"&gt;http://repo.spring.io/release&lt;/a&gt;, and bintray.&lt;/p&gt;&lt;p&gt;Cheers!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security 4.0.0 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-security-4-0-0-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2015-03-26:2041</id>
-    <updated>2015-03-26T14:26:24Z</updated>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 4.0.0.RELEASE which closes over &lt;a href="http://goo.gl/ui9GCl"&gt;175+ tickets&lt;/a&gt;. You can find the highlights below:&lt;/p&gt;&lt;h3&gt;&lt;a href="#websocket-support" class="anchor" name="websocket-support"&gt;&lt;/a&gt;WebSocket Support&lt;/h3&gt;&lt;p&gt;Spring Security 4 added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#websocket"&gt;WebSocket Support&lt;/a&gt;. It is now possible to use Spring Security with &lt;a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/websocket.html"&gt;Spring&amp;rsquo;s WebSocket&lt;/a&gt; support.&lt;/p&gt;&lt;h3&gt;&lt;a href="#spring-data-integration" class="anchor" name="spring-data-integration"&gt;&lt;/a&gt;Spring Data Integration&lt;/h3&gt;&lt;p&gt;Spring Security 4 added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#data"&gt;Spring Data Integration&lt;/a&gt;. It is now possible to refer to Spring Security&amp;rsquo;s user within Spring Data queries using SpEL.&lt;/p&gt;&lt;h3&gt;&lt;a href="#test-support" class="anchor" name="test-support"&gt;&lt;/a&gt;Test Support&lt;/h3&gt;&lt;p&gt;Spring Security 4 has added &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#test"&gt;Test Support&lt;/a&gt;. It is now much easier to write tests with Spring Security applications.&lt;/p&gt;&lt;h3&gt;&lt;a href="#more-secure-by-default" class="anchor" name="more-secure-by-default"&gt;&lt;/a&gt;More Secure by Default&lt;/h3&gt;&lt;p&gt;As exploits against applications evolve, so must Spring Security. As a major release version, the Spring Security team took the opportunity to make some non-passive changes which focus on:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Ensuring Spring Security is more &lt;a href="https://www.owasp.org/index.php/Establish_secure_defaults"&gt;secure by default&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Minimizing &lt;a href="https://www.owasp.org/index.php/Information_Leakage"&gt;Information Leakage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Removing deprecated APIs&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;For complete details on &lt;strong&gt;migrating from Spring Security 3 to Spring Security 4&lt;/strong&gt; refer &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#m3to4"&gt;Migrating from 3.x to 4.x&lt;/a&gt; section of the reference.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.0.RELEASE/guides/html5/"&gt;Guides&lt;/a&gt; | &lt;a href="http://goo.gl/ui9GCl"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>What's new in Spring Data Fowler?</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/26/what-s-new-in-spring-data-fowler" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Thomas Darimont</name>
-    </author>
-    <id>tag:spring.io,2015-03-26:2043</id>
-    <updated>2015-03-26T13:53:00Z</updated>
-    <content type="html">&lt;p&gt;The GA release of Spring Data release train Fowler marks the finishing line of 6 month of development. It&amp;rsquo;s time to give you an impression of the content of this release and a brief overview about individual features. The major themes of the Fowler release train were performance improvements and enhanced Java 8 support that are mainly reflected in the Spring Data JPA and MongoDB modules but a lot of other ones have seen significant improvements, too.&lt;/p&gt;&lt;p&gt;The easiest way to upgrade to the Spring Data Fowler release train is by using Spring Boot and configuring the &lt;code&gt;spring-data-releasetrain.version&lt;/code&gt; property to &lt;code&gt;Fowler-RELEASE&lt;/code&gt;. If you&amp;rsquo;re not using Spring Boot yet, add the &lt;a href="http://search.maven.org/#artifactdetails%7Corg.springframework.data%7Cspring-data-releasetrain%7CFowler-RELEASE%7Cpom"&gt;Spring Data BOM&lt;/a&gt; to your &lt;code&gt;&amp;lt;dependencyManagement /&amp;gt;&lt;/code&gt; section of your Maven POM.&lt;/p&gt;&lt;h2&gt;&lt;a href="#general-themes" class="anchor" name="general-themes"&gt;&lt;/a&gt;General themes&lt;/h2&gt;&lt;h3&gt;&lt;a href="#java-8-streams-in-repository-methods" class="anchor" name="java-8-streams-in-repository-methods"&gt;&lt;/a&gt;Java 8 streams in repository methods&lt;/h3&gt;&lt;p&gt;One of Java 8&amp;rsquo;s great new features is the &lt;code&gt;Stream&lt;/code&gt; API, which allows Java developers to define a pipeline of operations to be executed on a stream of objects but only the final operation actually triggering the consumption of elements from the &lt;code&gt;Stream&lt;/code&gt;.&lt;/p&gt;&lt;p&gt;In the context of data access providing the result of a query execution as &lt;code&gt;Stream&lt;/code&gt; is an extremely useful use case as it prevents the caller of the query method from blocking until all items were read. Not even mentioning the more efficient memory usage here.&lt;/p&gt;&lt;p&gt;With the Fowler release we introduce support for Java 8 Streams as return types of finder methods in repositories. In both the MongoDB and the JPA module you can now go ahead and declare finder methods like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface CustomerRepository extends Repository&amp;lt;Customer, Long&amp;gt; {&#xD;
-&#xD;
-  Stream&amp;lt;Customer&amp;gt; findByLastname(String lastname);&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Calling this method will execute the query backing the repository method and immediately return once the first result is available. To achieve this with JPA, we use persistence provider specific API as JPA itself only provides means to obtain query results as &lt;code&gt;List&lt;/code&gt;s. Repository clients can now go ahead and use the result of the method call in a try-with-resources block. This will make sure the resources held open to be able to traverse the stream will be closed eventually:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;try (Stream&amp;lt;Customer&amp;gt; customers = repository.findByLastname(&amp;quot;Matthews&amp;quot;)) {&#xD;
-  customers.filter(…).map(…).collect(…);&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#jsr-310-and-threeten-backport-support" class="anchor" name="jsr-310-and-threeten-backport-support"&gt;&lt;/a&gt;JSR-310 and ThreeTen Backport support&lt;/h3&gt;&lt;p&gt;To easily persist JSR-310 types - the date/time API newly introduced in JDK 8 - from within domain objects we added converters for the relevant types in the MongoDB and JPA module. For developers not able to upgrade to Java 8 yet, we added a similar set of converters for the &lt;a href="https://github.com/ThreeTen/threetenbp"&gt;ThreeTen Backport project&lt;/a&gt; so that you can start using the types in your code even if you&amp;rsquo;re still on Java 7. A switch to Java 8 will be a simple switch in the package names going forward.&lt;/p&gt;&lt;p&gt;In the MongoDB module, the corresponding &lt;code&gt;Converter&lt;/code&gt; implementations are available automatically. For JPA you can simply register either &lt;code&gt;Jsr310JpaConverters&lt;/code&gt; or &lt;code&gt;ThreeTenBackPortJpaConverters&lt;/code&gt; with your persistence provider. If you&amp;rsquo;re using a &lt;code&gt;LocalContainerEntityManagerFactoryBean&lt;/code&gt; to set up your JPA environment in Spring simply add &lt;code&gt;org.springframework.data.jpa.convert.threeten&lt;/code&gt; or &lt;code&gt;….threetenbp&lt;/code&gt; to the packages to scan. With Spring Boot, it&amp;rsquo;s just a matter of adding the aforementioned classes to the &lt;code&gt;@EntityScan&lt;/code&gt; declaration:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@EntityScan(&#xD;
-  basePackageClasses = { Application.class, Jsr310JpaConverters.class }&#xD;
-)&#xD;
-@SpringBootApplication&#xD;
-class Application { … }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This setup will make sure that both your application package and the Spring Data JPA one for the JSR-310 converters will be scanned and handed to the persistence provider. Find a complete example for that in our &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/jpa/java8"&gt;Spring Data Examples repository&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;&lt;a href="#mongodb" class="anchor" name="mongodb"&gt;&lt;/a&gt;MongoDB&lt;/h2&gt;&lt;h3&gt;&lt;a href="#3-0-server-and-driver-support" class="anchor" name="3-0-server-and-driver-support"&gt;&lt;/a&gt;3.0 server and driver support&lt;/h3&gt;&lt;p&gt;Spring Data Fowler ships support for the latest and greatest MongoDB 3.0 server generation. While that generation can already be used with the MongoDB Java driver in version 2.13.0 we also made sure Spring Data MongoDB will work flawlessly with the upcoming 3.0 version of the Java driver. Thus, developers are free to choose which version they&amp;rsquo;re going to work with or rather when they would like to upgrade to the new driver. For general information on compatibility between driver and server versions be sure to check out the &lt;a href="http://docs.mongodb.org/ecosystem/drivers/java/"&gt;MongoDB documentation&lt;/a&gt; Be aware though that subsequent development will clearly focus on the 3.0 line of both the server and the driver.&lt;/p&gt;&lt;p&gt;In general we encourage everyone to favour &lt;code&gt;MongoClient&lt;/code&gt; over &lt;code&gt;Mongo&lt;/code&gt; within JavaConfig or use the newly introduced XML elements for &lt;code&gt;&amp;lt;mongo:mongo-client /&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;mongo:client-options /&amp;gt;&lt;/code&gt;. For more information please refer to the &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.7.0.RELEASE/reference/html/#mongo.mongo-3"&gt;reference documentation&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#geojson-support" class="anchor" name="geojson-support"&gt;&lt;/a&gt;GeoJSON support&lt;/h3&gt;&lt;p&gt;It’s been awhile since MongoDB had introduced &lt;a href="http://geosjon.org"&gt;GeoJSON&lt;/a&gt; as format for dealing with geo structures. These data structures operate on an earth like sphere and therefore cannot be used along with a 2D index. Having said that, the usage is pretty much straight forward since we provide dedicated types to support GeoJSON. Those can be used in both your domain types as well as query parameters.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Document&#xD;
-class Store {&#xD;
-&#xD;
-  @Id String id;&#xD;
-&#xD;
-  /**&#xD;
-   * The location is stored in GeoJSON format:&#xD;
-   * { &amp;quot;type&amp;quot; : &amp;quot;Point&amp;quot;, &amp;quot;coordinates&amp;quot; : [ x, y ] }&#xD;
-   */&#xD;
-  GeoJsonPoint location;&#xD;
-}&#xD;
-&#xD;
-interface StoreRepository extends CrudRepository&amp;lt;Store, String&amp;gt; {&#xD;
-&#xD;
-  List&amp;lt;Store&amp;gt; findByLocationWithin(Polygon polygon);&#xD;
-}&#xD;
-&#xD;
-repo.findByLocationWithin(&#xD;
-  new GeoJsonPolygon(&#xD;
-    new Point(-73.992514, 40.758934),&#xD;
-    new Point(-73.961138, 40.760348),&#xD;
-    new Point(-73.991658, 40.730006),&#xD;
-    new Point(-73.992514, 40.758934)));
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This creates the following query to be executed in MongoDB:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint json"&gt;{&#xD;
-  &amp;quot;location&amp;quot;: {&#xD;
-    &amp;quot;$geoWithin&amp;quot;: {&#xD;
-      &amp;quot;$geometry&amp;quot;: {&#xD;
-        &amp;quot;type&amp;quot;: &amp;quot;Polygon&amp;quot;,&#xD;
-        &amp;quot;coordinates&amp;quot;: [[&#xD;
-           [-73.992514,40.758934],&#xD;
-           [-73.961138,40.760348],&#xD;
-           [-73.991658,40.730006],&#xD;
-           [-73.992514,40.758934]&#xD;
-        ]]&#xD;
-      }&#xD;
-    }&#xD;
-  }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note that the &lt;code&gt;StoreRepository.findByLocationWithin(…)&lt;/code&gt; still takes a &lt;code&gt;Polygon&lt;/code&gt;. Using &lt;code&gt;GeoJsonPolygon&lt;/code&gt; with &lt;code&gt;findByLocationWithin(…)&lt;/code&gt; will create the query using the &lt;code&gt;$geometry&lt;/code&gt; operator alongside the GeoJSON representation. More Details on usage and restrictions can be found in the &lt;a href="http://docs.mongodb.org/manual/core/2dsphere/#geospatial-indexes-store-geojson/"&gt;MongoDB manual&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#execution-of-mongodb-stored-scripts" class="anchor" name="execution-of-mongodb-stored-scripts"&gt;&lt;/a&gt;Execution of MongoDB stored scripts&lt;/h3&gt;&lt;p&gt;MongoDB allows to execute JavaScript functions on the server by either directly sending the raw source script or calling one previously stored. We expose this functionality through the newly introduced &lt;code&gt;ScriptOperations&lt;/code&gt; interface which can be obtained from &lt;code&gt;MongoOperations&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;ScriptOperations ops = mongoOperations.scriptOps();&#xD;
-ExecutableMongoScript script = new ExecutableMongoScript(&amp;quot;function(x) { return x; }&amp;quot;);&#xD;
-Object r1 = ops.execute(script, &amp;quot;Direct function execution.&amp;quot;)&#xD;
-&#xD;
-ops.register(new NamedMongoScript(&amp;quot;echo&amp;quot;, script));&#xD;
-Object r2 = ops.call(&amp;quot;echo&amp;quot;, &amp;quot;Call stored function.&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The server-side script support will be enhanced in follow-up releases where we will add return type conversion, annotations for calling procedures from repository methods as well as support for the &lt;code&gt;$where&lt;/code&gt; operator.&lt;/p&gt;&lt;h3&gt;&lt;a href="#performance-improvements-in-object-to-store-conversion" class="anchor" name="performance-improvements-in-object-to-store-conversion"&gt;&lt;/a&gt;Performance improvements in object-to-store conversion&lt;/h3&gt;&lt;p&gt;The object-to-store mapping subsystem has undergone a significant overhaul in terms of performance improvements. We profiled the Commons and store modules, introduced some caching here and there and could actually gain quite an impressive increase of operations per second compared to the Evans release train (although most of the improvements were ported back to the service releases of Evans, too).&lt;/p&gt;&lt;p&gt;&lt;img src="https://gist.githubusercontent.com/olivergierke/1d4239b59c57e05760c3/raw/fowler-bar-chart-read-write.png" alt="Performance improvements in Spring Data Fowler""/&gt;&lt;/p&gt;&lt;p&gt;As you can see, we more than doubled the number of operations per second for read access and are a close to that in write operations, too.&lt;/p&gt;&lt;p&gt;When reading a lot of objects from the data store, a significant amount of time is spent creating the object instances via reflection. With the Fowler release train we introduce a new default &lt;code&gt;EntityInstantiator&lt;/code&gt; that solves that bottleneck by creating a factory class for the domain object at runtime using ASM. This factory class calls the constructor of the domain class directly, which is significantly faster than doing so by reflection. If you&amp;rsquo;re interested in the nifty details, &lt;a href="https://github.com/spring-projects/spring-data-commons/blob/1.10.0.RELEASE/src/main/java/org/springframework/data/convert/BytecodeGeneratingEntityInstantiator.java#L54"&gt;here&lt;/a&gt;&amp;rsquo;s the class that does the trick for us.&lt;/p&gt;&lt;h2&gt;&lt;a href="#redis" class="anchor" name="redis"&gt;&lt;/a&gt;Redis&lt;/h2&gt;&lt;h3&gt;&lt;a href="#hyperloglog" class="anchor" name="hyperloglog"&gt;&lt;/a&gt;HyperLogLog&lt;/h3&gt;&lt;p&gt;Redis &lt;a href="http://redis.io/commands#hyperloglog"&gt;HyperLogLog commands&lt;/a&gt; provide an efficient solution to counting unique things without the need to remember elements already encountered. This applies for instance to counting unique page visits by IP.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;HyperLogLogOperations hll = redisTemplate.opsForHyperLogLog();&#xD;
-&#xD;
-hll.add(today(), &amp;quot;8.8.8.8&amp;quot;, &amp;quot;8.8.4.4&amp;quot;);&#xD;
-hll.size(today()); // Unique page visits today = 2&#xD;
-&#xD;
-hll.add(today(), &amp;quot;198.153.192.40&amp;quot;, &amp;quot;8.8.8.8&amp;quot;);&#xD;
-hll.size(today()); // Unique page visits today = 3&#xD;
-hll.size(today(), yesterday()); // Unique page visits today and yesterday
-&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#gemfire" class="anchor" name="gemfire"&gt;&lt;/a&gt;Gemfire&lt;/h2&gt;&lt;p&gt;By far, the most significant change to the GemFire module is full support for GemFire 8. GemFire 8 introduced &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#relnotes/release_notes.html#topic_5mbwjl"&gt;several new changes&lt;/a&gt; since 7.0.2 including a new &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#relnotes/release_notes.html#topic_5mbwjl__section_zk2_p35_v4"&gt;cluster-based configuration service&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;With that service enabled, developers can record their actions and schema-like changes in Gfsh as they perform actions, like adding regions, creating indexes, configuring disk stores, etc. When a developer spins up a new GemFire peer in the cluster, the member will automatically pick up its configuration from the new cluster-based configuration service, hosted in a locator.&lt;/p&gt;&lt;p&gt;While Spring Data GemFire&amp;rsquo;s &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/current/reference/html/#bootstrap"&gt;XML-namespace-based configuration&lt;/a&gt; remains a popular choice, especially during development with highly iterative, short feedback cycles, Spring Data GemFire adds support for the new &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/1.6.0.RC1/reference/html/#bootstrap:cache:cluster-configuration"&gt;cluster-based configuration&lt;/a&gt;, which behaves similarly to Spring Data Gemfire&amp;rsquo;s support for GemFire&amp;rsquo;s &lt;a href="http://docs.spring.io/spring-data-gemfire/docs/1.6.0.RC1/reference/html/#bootstrap:cache"&gt;native `cache.xml&lt;/a&gt; format.&lt;/p&gt;&lt;p&gt;To enable cluster-based configuration in Spring-configured GemFire node, a developer only needs to set the &lt;code&gt;use-cluster-configuration&lt;/code&gt; attribute on the &lt;code&gt;&amp;lt;gfe:cache /&amp;gt;&lt;/code&gt; element, like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;gfe:cache id=&amp;quot;?gemfireCache&amp;quot;? use-cluster-configuration=&amp;quot;?true&amp;quot;? … /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Spring Data GemFire will first request and apply the cluster-wide configuration before applying the XML namespace-specific configuration. You can think of the XML configuration meta-data as augmenting the cluster config sent by the cluster configuration service.&lt;/p&gt;&lt;p&gt;For more information on GemFire&amp;rsquo;s new cluster configuration service, see the &lt;a href="http://gemfire80.docs.pivotal.io/8.0.0/userguide/index.html#deploying/gfsh/gfsh_persist.html"&gt;GemFire user guide&lt;/a&gt; and &lt;a href="https://jira.spring.io/browse/SGF-226"&gt;SGF-226&lt;/a&gt; for more details.&lt;/p&gt;&lt;h2&gt;&lt;a href="#spring-data-rest" class="anchor" name="spring-data-rest"&gt;&lt;/a&gt;Spring Data REST&lt;/h2&gt;&lt;p&gt;Spring Data REST has seen a wide range of improvements in the Fowler release, too. One of the most notable improvements is more entity metadata inspected and used to populate response headers. For example, stores supporting optimistic locking through an &lt;code&gt;@Version&lt;/code&gt; annotation will now get the entity version used as &lt;code&gt;ETag&lt;/code&gt; header, so that clients can leverage them to trigger conditional &lt;code&gt;GET&lt;/code&gt; requests.&lt;/p&gt;&lt;p&gt;Quite related, entities that use Spring Data auditing support will automatically get their last modification date be propagated into the &lt;code&gt;LastModified&lt;/code&gt; header of the response of item resources:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;class Customer {&#xD;
-&#xD;
-  @Version Long version;&#xD;
-  @LastModifiedDate LocalDate lastModifiedDate;&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;curl -v http://…/customers/1&#xD;
-&#xD;
-Etag: 1&#xD;
-Last-Modified: Tue, 24 Mar 2015 12:34:56 GMT
-&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;a href="#json-schema" class="anchor" name="json-schema"&gt;&lt;/a&gt;JSON Schema&lt;/h3&gt;&lt;p&gt;The Fowler release of Spring Data REST also ships with revamped support for JSON Schema. By default, the schema is pointed to by the representation descriptor in the ALPS document exposed for a domain type. In the &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/rest/starbucks"&gt;Starbucks example&lt;/a&gt; you can see the link rendered like this:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;curl http://…/alps/stores&#xD;
-&#xD;
-{&#xD;
-  &amp;quot;version&amp;quot;: &amp;quot;1.0&amp;quot;,&#xD;
-  &amp;quot;descriptors&amp;quot;: [ {&#xD;
-    &amp;quot;id&amp;quot;: &amp;quot;store-representation&amp;quot;,&#xD;
-    &amp;quot;href&amp;quot;: &amp;quot;http://localhost:8080/stores/schema&amp;quot;,&#xD;
-    &amp;quot;descriptors&amp;quot;: [ … ]&#xD;
-  }],&#xD;
-  …&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Following the link will reveal the JSON Schema document for a store:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;{&#xD;
-  &amp;quot;title&amp;quot;: &amp;quot;example.stores.Store&amp;quot;,&#xD;
-  &amp;quot;properties&amp;quot;: {&#xD;
-    &amp;quot;address&amp;quot;: {&#xD;
-      &amp;quot;$ref&amp;quot;: &amp;quot;#/descriptors/address&amp;quot;&#xD;
-    },&#xD;
-    &amp;quot;name&amp;quot;: {&#xD;
-      &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
-    }&#xD;
-  },&#xD;
-  &amp;quot;descriptors&amp;quot;: {&#xD;
-    &amp;quot;address&amp;quot;: {&#xD;
-      &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
-      &amp;quot;properties&amp;quot;: {&#xD;
-        &amp;quot;zip&amp;quot;: {&#xD;
-          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
-        },&#xD;
-        &amp;quot;city&amp;quot;: {&#xD;
-          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
-        },&#xD;
-        &amp;quot;street&amp;quot;: {&#xD;
-          &amp;quot;type&amp;quot;: &amp;quot;string&amp;quot;&#xD;
-        },&#xD;
-        &amp;quot;location&amp;quot;: {&#xD;
-          &amp;quot;$ref&amp;quot;: &amp;quot;#/descriptors/point&amp;quot;&#xD;
-        }&#xD;
-      }&#xD;
-    },&#xD;
-    &amp;quot;point&amp;quot;: {&#xD;
-      &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
-      &amp;quot;properties&amp;quot;: {&#xD;
-        &amp;quot;x&amp;quot;: {&#xD;
-          &amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;&#xD;
-        },&#xD;
-        &amp;quot;y&amp;quot;: {&#xD;
-          &amp;quot;type&amp;quot;: &amp;quot;number&amp;quot;&#xD;
-        }&#xD;
-      }&#xD;
-    }&#xD;
-  },&#xD;
-  &amp;quot;type&amp;quot;: &amp;quot;object&amp;quot;,&#xD;
-  &amp;quot;$schema&amp;quot;: &amp;quot;http://json-schema.org/draft-04/schema#&amp;quot;&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Note how we derive basic traits of the schema from the domain type and its Jackson mappings. Required properties can be determined by using &lt;code&gt;@JsonProperty(required = true)&lt;/code&gt;, date/time types are correctly discovered and advertised. You can register a custom JSON Schema format or pattern on &lt;code&gt;RepositoryRestConfiguration.metadataConfiguration()&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Configuration&#xD;
-static class SampleConfiguration extends RepositoryRestMvcConfiguration {&#xD;
-&#xD;
-  @Override&#xD;
-  protected void configureRepositoryRestConfiguration(&#xD;
-    RepositoryRestConfiguration config) {&#xD;
-    config.metadataConfiguration().&#xD;
-      registerJsonSchemaFormat(JsonSchemaFormat.EMAIL, EmailAddress.class);&#xD;
-  }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Assuming &lt;code&gt;EmailAddress&lt;/code&gt; is a value object that you have tweaked Jackson into rendering as plain &lt;code&gt;String&lt;/code&gt;, this configuration will cause all properties of type &lt;code&gt;EmailAddress&lt;/code&gt; to appear with the &lt;code&gt;format&lt;/code&gt;set to &lt;code&gt;email&lt;/code&gt; in the JSON schema document.&lt;/p&gt;&lt;h2&gt;&lt;a href="#solr" class="anchor" name="solr"&gt;&lt;/a&gt;Solr&lt;/h2&gt;&lt;h3&gt;&lt;a href="#document-score-improvements" class="anchor" name="document-score-improvements"&gt;&lt;/a&gt;Document score improvements&lt;/h3&gt;&lt;p&gt;The Fowler release added support for realtime-get allowing to read uncommitted changes from the index. &lt;code&gt;getById&lt;/code&gt; is available on &lt;code&gt;SolrTemplate&lt;/code&gt;. Also noteworthy is the addition of &lt;code&gt;@Score&lt;/code&gt; which was inspired by &lt;code&gt;@TextScore&lt;/code&gt; available for Spring Data MongoDB. The annotation allows retrieving document score and will implicitly add required parameters so that one no longer has to explicitly add &lt;code&gt;@Query(fields={&amp;quot;*&amp;quot;, &amp;quot;score&amp;quot;}&lt;/code&gt; when retrieving document query match score.&lt;/p&gt;&lt;h2&gt;&lt;a href="#miscellaneous" class="anchor" name="miscellaneous"&gt;&lt;/a&gt;Miscellaneous&lt;/h2&gt;&lt;h3&gt;&lt;a href="#elevating-projections" class="anchor" name="elevating-projections"&gt;&lt;/a&gt;Elevating projections&lt;/h3&gt;&lt;p&gt;Spring Data REST shipped a feature called projections with the Evans release train. In Fowler we moved the infrastructure backing that into Spring Data Commons and tweaked it a bit, so that other projects can use it without further dependencies. The very heart of the feature is a &lt;code&gt;ProjectionFactory&lt;/code&gt; that allows you to create object instances for interfaces that are backed some other object, e.g. a &lt;code&gt;Map&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface Customer {&#xD;
-&#xD;
-  String getFirstname();&#xD;
-&#xD;
-  String getLastname();&#xD;
-&#xD;
-  @Value(&amp;quot;#{target.firstname + &amp;#39; &amp;#39; + target.lastname}&amp;quot;)&#xD;
-  String getFullName();&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;This interface can now be turned into an object using a &lt;code&gt;ProjectionFactory&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;Map&amp;lt;String, Object&amp;gt; map = new HashMap&amp;lt;&amp;gt;();&#xD;
-map.put(&amp;quot;firstname&amp;quot;, &amp;quot;Dave&amp;quot;);&#xD;
-map.put(&amp;quot;lastname&amp;quot;, &amp;quot;Matthews&amp;quot;);&#xD;
-&#xD;
-ProjectionFactory factory = new SpelAwareProjectionFactory();&#xD;
-Customer customer = factory.createProjection(Customer.class, map)&#xD;
-&#xD;
-assertThat(customer.getFirstname(), is(&amp;quot;Dave&amp;quot;));&#xD;
-assertThat(customer.getLastname(), is(&amp;quot;Matthews&amp;quot;));&#xD;
-assertThat(customer.getFullName(), is(&amp;quot;Dave Matthews&amp;quot;));
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;As you can see, we chose a &lt;code&gt;Map&lt;/code&gt; to back the created projection instance. Under the hood a JDK proxy is created equipped with method interceptors that - in case of a &lt;code&gt;Map&lt;/code&gt; backing the proxy - delegating calls to accessors to property lookups within the &lt;code&gt;Map&lt;/code&gt;. Methods annotated with &lt;code&gt;@Value&lt;/code&gt; will get the annotated SpEL expression evaluated. In case you configure a &lt;code&gt;BeanFactory&lt;/code&gt; on the &lt;code&gt;SpelAwareProjectionFactory&lt;/code&gt; you can even refer to Spring beans from within these expressions and thus trigger more complex calculations.&lt;/p&gt;&lt;p&gt;In case the backing lookup does not return a value assignable to the return type declared, a standard &lt;code&gt;ConversionService&lt;/code&gt; is used for simple conversions followed by a recursive projection step.&lt;/p&gt;&lt;p&gt;For an example of how to use projections within a Spring MVC controller, see &lt;a href="http://stackoverflow.com/a/29386907/18122"&gt;this answer on StackOverflow&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#projections-in-spring-mvc" class="anchor" name="projections-in-spring-mvc"&gt;&lt;/a&gt;Projections in Spring MVC&lt;/h3&gt;&lt;p&gt;The projection mechanism can now be used by Spring MVC controller implementations to create form backing objects solely using interfaces. Using &lt;code&gt;@EnableSpringDataWebSupport&lt;/code&gt; in your Spring configuration (automatically activated in Boot) a &lt;code&gt;ProxyingHandlerMethodArgumentResolver&lt;/code&gt; is resolved that will automatically create a proxy instance for the interface and bind the according request parameters to it:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;interface Form {&#xD;
-&#xD;
-  @NotBlank String getName();&#xD;
-  @NotBlank String getText();&#xD;
-}&#xD;
-&#xD;
-@Controller&#xD;
-@RequestMapping(value = &amp;quot;/guestbook&amp;quot;)&#xD;
-class GuestbookController {&#xD;
-&#xD;
-  @RequestMapping(method = RequestMethod.GET)&#xD;
-  String guestbook(Form form, Model model) { … }&#xD;
-&#xD;
-  @RequestMapping(method = RequestMethod.POST)&#xD;
-  String guestbook(@Valid Form form, Errors errors, Model model) { … }&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;See how the interface is used in the method accepting a &lt;code&gt;GET&lt;/code&gt; request to provide an empty form-backing object to the view about to be rendered. The method receiving the &lt;code&gt;POST&lt;/code&gt; request uses the &lt;code&gt;Form&lt;/code&gt; to indicate it wants to get form data bound to the proxy instance and validation applied.&lt;/p&gt;&lt;h2&gt;&lt;a href="#summary" class="anchor" name="summary"&gt;&lt;/a&gt;Summary&lt;/h2&gt;&lt;p&gt;Despite the length of the post, we barely scratched the surface of all the new features Spring Data Fowler ships. You might want to explore the &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Fowler"&gt;release train wiki&lt;/a&gt; for further gems, and traverse the links to the tickets and related commits in turn as they contain test cases that usually demonstrate a the individual features nicely.&lt;/p&gt;&lt;p&gt;Also, the already mentioned &lt;a href="https://github.com/spring-projects/spring-data-examples"&gt;Spring Data examples repository&lt;/a&gt; has a lot of stuff to play with and explore.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security 3.2.7 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/03/26/spring-security-3-2-7-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2015-03-26:2044</id>
-    <updated>2015-03-26T08:28:00Z</updated>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 3.2.7.RELEASE. This release brings a number of &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;bug fixes&lt;/a&gt; including a fix for a regression in the Active Directory support.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/3.2.7.RELEASE/guides/"&gt;Guides&lt;/a&gt; | &lt;a href="https://jira.spring.io/issues/?jql=project%20%3D%20SEC%20AND%20fixVersion%20%3D%203.2.7"&gt;Issues&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
 

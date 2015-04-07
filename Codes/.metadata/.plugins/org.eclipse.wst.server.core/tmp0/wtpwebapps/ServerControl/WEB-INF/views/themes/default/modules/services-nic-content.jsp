@@ -14,6 +14,38 @@
 
 
 	</section>
+	<script>
+	$(document).ready(function(){
+		//var listeth[] = $('#listeth');
+		$("#add-nic").click(function(){
+			var listeth = $('.listeth');
+			var num = listeth.length+1;
+			$("#add-nic").remove();
+			$(".nic").append("<div class=\"panel panel-default\">"
+											+"<div class=\"panel-heading\">"
+											+"New Eth:</div>"
+											+"<div class=\"panel-body\"><div class=\"form-group\"><label for=\"iface\" class=\"col-md-2\">iFace:</label><div class=\"col-md-9\"><input class=\"form-control\" type=\"text\" name=\"eth["+num+"].iface\" placeholder=\"IFace Name\" required=\"required\" /></div></div>"
+											+"<div class=\"form-group\"><label for=\"inet\" class=\"col-md-2\">Inet:</label><div class=\"col-md-9\"><input class=\"form-control\" type=\"text\" name=\"eth["+num+"].inet\" placeholder=\"Inet Name\" required=\"required\" /></div></div>"
+											+"<div class=\"form-group\">"
+											+"<label for=\"address\" class=\"col-md-2\">Address: </label><div class=\"col-md-9\">"
+											+"<input class=\"form-control\" type=\"text\" name=\"eth["+num+"].address\" placeholder=\"IP Address\" />"
+											+"</div></div>"
+											+"<div class=\"form-group\">"
+											+"<label for=\"\" class=\"col-md-2\">NetMask:</label> <div class=\"col-md-9\">"
+											+"<input class=\"form-control\" type=\"text\" name=\"eth["+num+"].netmask\" placeholder=\"NetMask Address\" />"
+											+"</div></div>"
+											+"<div class=\"form-group\">"
+											+"<label for=\"\" class=\"col-md-2\">GateWay:</label><div class=\"col-md-9\">"
+											+"<input class=\"form-control\" type=\"text\" name=\"eth["+num+"].gateway\"	placeholder=\"Gateway name\" />"
+											+"</div></div>"
+											+"<div class=\"form-group\">"
+											+"<label for=\"iface\" class=\"col-md-2\">Broadcast:</label><div class=\"col-md-9\">"
+											+"<input class=\"form-control\" type=\"text\" name=\"eth["+num+"].broadcast\" placeholder=\"Broadcast Address\" /></div></div>"
+											);
+		});
+	});
+	
+	</script>
 	<!--  End Content Header -->
 	<!--  Main Content -->
 	<section class="content">
@@ -21,12 +53,14 @@
 			<form:form id="nic-config-form1" modelAttribute="nicForm"
 				action="${pageContext.request.contextPath }/serviceconfig/nic/save/${server.serverAddress}/${cc }" class="form-horizontal" method="POST">
 				<input type="hidden" name="cc" value="${cc }"> 
+				<div class="nic">
 				<c:forEach items="${nicForm.eth }" var="e" varStatus="status">
 					<c:if test="${e.iface!=null}">
 						<c:if test="${!e.address.equals(server.serverAddress)}">
 						<!--  check null fir ifaces -->
+						
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading listeth">
 								iFace: <b>${e.iface}</b>
 								<div class="btn-group pull-right" role="group">
 									<button type="button" class="btn btn-danger"
@@ -104,8 +138,10 @@
 								<!--  // check loopback -->
 							</div>
 						</div>
+						
 					</c:if>
 					<c:if test="${e.address.equals(server.serverAddress)}">
+						<div class="panel panel-default">
 						<div class="panel-body">
 								<input
 									type="hidden" name="eth[${status.index}].iface"
@@ -149,15 +185,19 @@
 												value="${e.broadcast }" disabled />
 										</div>
 									</div>
-
+							
 								</c:if>
 								<!--  // check loopback -->
 							</div>
+							</div>
+							
 					</c:if>
 					</c:if>
 					
 				</c:forEach>
-				<form:button type="submit" class="btn btn-default">Save</form:button>
+				</div>
+				<button type="button" class="btn btn-default" id="add-nic">Add</button>
+				<form:button type="submit" class="btn btn-primary">Save</form:button>
 			</form:form>
 		</div>
 	</section>

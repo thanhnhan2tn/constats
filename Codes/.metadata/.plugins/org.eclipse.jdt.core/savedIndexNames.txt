@@ -64,7 +64,6 @@ INDEX VERSION 1.127+D:\Github\lv-nhan\contats\Codes\.metadata\.plugins\org.eclip
 2057468484.index
 554005969.index
 1684611709.index
-280566409.index
 489441668.index
 2707677843.index
 3357105990.index

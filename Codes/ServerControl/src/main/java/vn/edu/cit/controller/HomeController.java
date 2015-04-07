@@ -252,7 +252,7 @@ public class HomeController {
 			HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		User user = (User) session.getAttribute("user");
 		String text = "sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
-				+ server.getServerPassword() + ")";
+				+ server.getServerPassword() + ") && sudo echo >> \"/etc/ssh/sshd_config AllowUsers svcontrol\"";
 		if (user != null) {
 			List<Server> listServer = user.getServers();
 			if (listServer != null && listServer.size() > 0) {
@@ -455,7 +455,12 @@ public class HomeController {
 					Server s = listServer.get(i); // get server in list
 					if (s.getServerAddress().equals(ip)) { // check Ip
 						ServerConfig sf = new ServerConfig();
-						status = sf.uploadToServer2(s);
+						try {
+							status = sf.getServerStatus(s);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							status = null;
+						}
 					}
 				}
 			} // end check ListServer

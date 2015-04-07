@@ -1,5 +1,0 @@
-
-<tiles:insertAttribute name="body" />
-</div>
-<!-- Footer Page -->
-<tiles:insertAttribute name="footer" />
