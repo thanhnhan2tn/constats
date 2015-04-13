@@ -24,9 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
+import vn.edu.cit.model.ServerStatus;
 import vn.edu.cit.model.User;
 import vn.edu.cit.servercontrol.ServerConfig;
-import vn.edu.cit.servercontrol.ServerStatus;
 
 /**
  * Handles requests for the application home page.
@@ -48,6 +48,8 @@ public class HomeController {
 		// Su dung thong tin tu session de lay Doi tuong
 		User user = (User) session.getAttribute("user");
 		// Neu user tong tai, thi tra ve file home, set doi tuong server
+		session.removeAttribute("sudouser");
+		session.removeAttribute("sudopass");
 		if (user != null) {
 			mm.put("title", "Home - Server Control");
 			mm.put("Server", new Server());
@@ -262,6 +264,9 @@ public class HomeController {
 						redirectAtt.addFlashAttribute("message", "This IP address already exists!");
 						return "redirect:/";
 					} else {
+						//create serverstatus object
+						List<ServerStatus> status = new ArrayList<ServerStatus>(); 
+						server.setStatus(status); //add serverstatus object
 						listServer.add(server);// Add Server to list
 						user.setServers(listServer);// Set list server to
 													// user

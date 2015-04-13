@@ -1,0 +1,45 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Netword Interface Cards Config :<small>
+				(${server.serverAddress})</small>
+		</h1>
+
+
+	</section>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+			<form:form id="ftp-config-form1" modelAttribute="ftpForm"
+				action="${pageContext.request.contextPath }/serviceconfig/ftp/save/${server.serverAddress}/${cc }" class="form-horizontal" method="POST">
+				<input type="hidden" name="cc" value="${cc }"> 
+				<c:forEach items="${ftpForm.eth }" var="e" varStatus="status">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								FTP Config								
+							</div>
+
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="listen" class="col-md-2">Listen: *</label>
+									<div class="col-md-3">
+										<input class="form-control" type="radio"
+											name="listen" required="required" />
+									</div>
+								</div>
+													
+				</c:forEach>
+				<form:button type="submit" class="btn btn-default">Save</form:button>
+			</form:form>
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>

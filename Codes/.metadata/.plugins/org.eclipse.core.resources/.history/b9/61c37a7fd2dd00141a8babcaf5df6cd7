@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dns>
+	<zone>
+		<zone_name>luanvan.com</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/luanvan.com.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>hieuminh.com</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/hieuminh.com.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>tkweb.org</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/tkweb.org.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>hocnhanh.net</zone_name>
+		<zone_type>forward</zone_type>
+		<forwarders>
+			192.168.0.104; 10.0.0.5;
+		</forwarders>
+	</zone>
+
+	<zone>
+		<zone_name>tienganh.com</zone_name>
+		<zone_type>forward</zone_type>
+		<forwarders>
+			10.0.0.1; 172.16.0.192;
+		</forwarders>
+	</zone>
+
+	<zone>
+		<zone_name>hocgioi.vn</zone_name>
+		<zone_type>slave</zone_type>
+		<masters>
+			192.168.0.104;
+		</masters>
+		<zone_file>/var/lib/bind/hocgioi.vn.hosts</zone_file>
+	</zone>
+
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>luanvan.com.</domain_name>
+		<admin_domain>root.luanvan.com.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>30</min_ttl>
+		<record>
+			<domain_name>luanvan.com.</domain_name>
+			<type_record>NS</type_record>
+			<name_server>luanvan.com.</name_server>
+		</record>
+		<record>
+			<domain_name>luanvan.com.</domain_name>
+			<type_record>A</type_record>
+			<name_server>192.168.3.5</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.5</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.6</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.7</name_server>
+		</record>
+		<record>
+			<domain_name>ns</domain_name>
+			<type_record>A</type_record>
+			<name_server>192.168.1.2</name_server>
+		</record>
+		<record>
+			<domain_name>ldap</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.5</name_server>
+		</record>
+		<record>
+			<domain_name>mail</domain_name>
+			<priority>10</priority>
+			<type_record>MX</type_record>
+			<name_server>mail.luanvan.com.</name_server>
+		</record>
+		<record>
+			<domain_name>mail.luanvan.com.</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.100.109</name_server>
+		</record>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>localhost.</domain_name>
+		<admin_domain>root.localhost.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>localhost.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>127.0.0.1</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>CNAME</type_record>
+			<name_server>ns1.</name_server>
+		</record>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>tkweb.org</domain_name>
+		<admin_domain>root.tkweb.org.</admin_domain>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>tkweb.org.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>10.10.10.56</name_server>
+		</record>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>hocgioi.vn.</domain_name>
+		<admin_domain>root.hocgioi.vn.</admin_domain>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>hocgioi.vn.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.101.87</name_server>
+		</record>
+	</soa>
+
+
+	<acl>
+		<access_name>group1</access_name>
+		<ip>10.0.0.5</ip>
+		<ip>172.16.189.23</ip>
+		<ip>192.168.199.32</ip>
+	</acl>
+
+	<acl>
+		<access_name>user_allow</access_name>
+		<ip>192.168.0.104</ip>
+		<ip>10.2.2.5</ip>
+	</acl>
+
+	<option>
+		<directory>/var/cache/bind</directory>
+		<multiple_cnames>yes</multiple_cnames>
+		<recursion>yes</recursion>
+		<forward>only</forward>
+
+		<allow_transfer>
+			user_allow;
+			172.16.100.102;
+			192.168.160.203;
+		</allow_transfer>
+
+		<forwarders>
+			8.8.8.8;
+			8.8.4.4;
+			10.0.0.2;
+		</forwarders>
+
+		<allow_query>
+			10.5.5.4;
+		</allow_query>
+
+		<allow_recursion>
+			10.0.0.18;
+		</allow_recursion>
+
+		<allow_notify>
+			192.168.150.178;
+		</allow_notify>
+	</option>
+</dns>

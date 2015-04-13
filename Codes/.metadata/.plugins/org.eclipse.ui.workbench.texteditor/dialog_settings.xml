@@ -13,18 +13,19 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="num" key="selection"/>
+		<item value="echo" key="selection"/>
 		<list key="findhistory">
-			<item value="listeth.length"/>
-			<item value="m-status"/>
-			<item value="home-default"/>
-			<item value=".server-item"/>
-			<item value="list-server"/>
-			<item value="server-off"/>
-			<item value="services-nic-default"/>
-			<item value="convertXMLToObject"/>
+			<item value="echo"/>
+			<item value="batch"/>
+			<item value="bath"/>
+			<item value="NIC"/>
+			<item value="nicForm"/>
+			<item value="ftp-config"/>
+			<item value="Object"/>
+			<item value="loadConfigToPlainText"/>
 		</list>
 		<list key="replacehistory">
+			<item value="setServerUsername"/>
 			<item value="num"/>
 			<item value="template.default"/>
 			<item value=""/>

@@ -1,8 +1,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@page import="vn.edu.cit.servercontrol.nic.Eth"%>
-<%@page import="vn.edu.cit.servercontrol.nic.Nic"%>
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -26,15 +26,7 @@
 								name="ip" value="${server.serverAddress}" title="You can not edit IP Address"/>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="username" class="col-md-3 control-label">Root
-							Username: *</label>
-						<div class="col-md-9">
-							<spring:input path="serverUsername" class="username form-control"
-								name="username" value="${server.serverUsername}"
-								required="required" />
-						</div>
-					</div>
+					 
 					<div class="form-group">
 						<label for="password" class="col-md-3 control-label">Password:
 							*</label>

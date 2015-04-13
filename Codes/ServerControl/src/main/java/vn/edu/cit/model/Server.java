@@ -1,8 +1,8 @@
 package vn.edu.cit.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
-import vn.edu.cit.servercontrol.ServerStatus;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
@@ -20,18 +20,18 @@ public class Server {
 	private String serverName;
 	private String serverUsername;
 	private String serverPassword;
-	private ServerStatus status;
-	
+	private List<ServerStatus> status;
+
 	public Server() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ServerStatus getStatus() {
+	public List<ServerStatus> getStatus() {
 		return status;
 	}
 
-	public void setStatus(ServerStatus status) {
+	public void setStatus(List<ServerStatus> status) {
 		this.status = status;
 	}
 

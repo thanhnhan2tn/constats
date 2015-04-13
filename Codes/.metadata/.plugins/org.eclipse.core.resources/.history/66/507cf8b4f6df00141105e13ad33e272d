@@ -1,0 +1,15 @@
+package vn.edu.cit.dao;
+
+import vn.edu.cit.model.User;
+
+public class ServerDAO {
+
+	public ServerDAO() {
+		// TODO Auto-generated constructor stub
+	}
+	public void createServer(User user);
+
+	public User getUser(String email);
+
+	public void updateUser(User user);
+}

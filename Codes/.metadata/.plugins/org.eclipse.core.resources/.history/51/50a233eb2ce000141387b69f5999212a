@@ -1,0 +1,5 @@
+package vn.edu.cit.dao;
+
+public class ServerStatusDAOImpl {
+
+}

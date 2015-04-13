@@ -6,6 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.nic.Eth;
+import model.nic.Nic;
+import model.nic.NicConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,15 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
-import vn.edu.cit.servercontrol.nic.Eth;
-import vn.edu.cit.servercontrol.nic.Nic;
-import vn.edu.cit.servercontrol.nic.NicConfig;
 
 @Controller
 public class NICController {
 	@Autowired
 	private UserDAO userDAO;
-
+	
+	/**
+	 * NetworkInterfaces 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/serviceconfig/nic/interfaces/{ip}/{cc}", method = RequestMethod.GET)
 	public String networkInterfaces(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm)
@@ -43,12 +54,12 @@ public class NICController {
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
 					sv = server;
-					
+
 					break;
 				}
 			}
-			sv.setServerUsername((String)session.getAttribute("sudouser"));
-			sv.setServerPassword((String)session.getAttribute("sudopass"));
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
 			System.out.println(sv.getServerUsername());
 			NicConfig nicConfig = new NicConfig();
 			Nic nic = nicConfig.convertXMLToObject(sv); // Call function
@@ -97,10 +108,11 @@ public class NICController {
 					break;
 				}
 			}
-
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			System.out.println(sv.getServerUsername());
 			NicConfig nicConfig = new NicConfig();
-			sv.setServerName((String)session.getAttribute("sudouser"));
-			sv.setServerPassword((String)session.getAttribute("sudopass"));
+			
 			Nic nic = nicConfig.convertXMLToObject(sv);
 			// Call function
 			mm.put("cc", c);
@@ -145,8 +157,8 @@ public class NICController {
 			// Khoi tao doi tuong Server
 			Server sv = user.getServerByIp(ip);
 			if (sv != null) {
-				sv.setServerName((String)session.getAttribute("sudouser"));
-				sv.setServerPassword((String)session.getAttribute("sudopass"));
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
 				NicConfig nicConfig = new NicConfig();
 				if (action.equals("stop")) {
 					nicConfig.Stop(sv);
@@ -161,6 +173,15 @@ public class NICController {
 					nicConfig.Start(sv);
 					// Log
 					System.out.println("Restart : " + ip + ",iface: " + iface);
+				} else if (action.equals("remove")) {
+					try {
+						nicConfig.removeEthOrDNS(sv, nicConfig.convertXMLToObject(sv), null, iface);
+						System.out.println("Delete : " + ip + ",iface: " + iface);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println("Delete : " + ip + ",iface: " + iface);
 				} else {
 					return "redirect:/serviceconfig/nic/" + ip + "/" + c;
 				}
@@ -179,7 +200,7 @@ public class NICController {
 		if (user != null) { // check user login
 			if (c.equals(cc)) {
 				Nic nicToConfig = (Nic) session.getAttribute("nics");
-				
+
 				List<Eth> eths = nic.getEth();
 				// Save Network Interface
 				if (eths != null && eths.size() > 0) {
@@ -200,8 +221,8 @@ public class NICController {
 				}
 				NicConfig nicConfig = new NicConfig();
 				try {
-					sv.setServerName((String)session.getAttribute("sudouser"));
-					sv.setServerPassword((String)session.getAttribute("sudopass"));
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
 					nicConfig.uploadConfigToServer(sv, nicToConfig);
 				} catch (IOException e) {
 					return "redirect:/services/" + ip + "/" + cc;
@@ -230,35 +251,39 @@ public class NICController {
 	public String editConfigFile(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
 		User user = (User) session.getAttribute("user");
-		
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
 		// Khoi tao doi tuong Server
-		//Server sv = new Server();
+		// Server sv = new Server();
 		// Xet user dang nhap va token
 		if (user != null && c.equals(cc)) {
 			// duyet danh sach server cua user
+			Server sv = new Server();
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
-					NicConfig nicConfig = new NicConfig();
-					server.setServerName((String)session.getAttribute("sudouser"));
-					server.setServerPassword((String)session.getAttribute("sudopass"));
-					String config = nicConfig.loadConfigToPlainText(server);
-					// Call function
-					mm.put("cc", c);
-					mm.put("title", "Home - Server Control");
-					mm.put("user", user);
-					// mm.put("nics", nic);
-					mm.put("server", server);
-					session.setAttribute("config", config);
-					return "nic-edit-config-file";
+					sv = server;
+					break;
 				}
 			}
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			NicConfig nicConfig = new NicConfig();
+			System.out.println(sv.getServerUsername());
+			String config = nicConfig.loadConfigToPlainText(sv);
+			// Call function
+			mm.put("cc", c);
+			mm.put("title", "Home - Server Control");
+			mm.put("user", user);
+			// mm.put("nics", nic);
+			mm.put("server", sv);
+			System.out.println(config);
+			mm.put("config", config);
+			return "nic-edit-config-file";
+
 		} else {
 			session.invalidate();
 			return "redirect:/login";
 		}
-		return "redirect:/services/" + ip + "/" + cc;
 	}
 
 	@RequestMapping(value = "/serviceconfig/user/{user}/{pass}/{ip}/{cc}", method = RequestMethod.GET)
@@ -292,15 +317,15 @@ public class NICController {
 		if (user != null) { // check user login
 			if (c.equals(cc)) {
 				Nic nicToConfig = (Nic) session.getAttribute("nics");
-				String config = (String) request.getAttribute("config");
-				//
+				String config = (String) request.getParameter("config");
 				Server sv = new Server(); // khoi tao server
 				// duyet danh sach server cua user
-
 				for (Server server : user.getServers()) {
 					if (server.getServerAddress().equals(ip)) {
 						sv = server; // get server Object
 						NicConfig nicConfig = new NicConfig();
+						sv.setServerUsername((String) session.getAttribute("sudouser"));
+						sv.setServerPassword((String) session.getAttribute("sudopass"));
 						try {
 							nicConfig.saveStringToConfig(sv, config);
 						} catch (IOException e) {

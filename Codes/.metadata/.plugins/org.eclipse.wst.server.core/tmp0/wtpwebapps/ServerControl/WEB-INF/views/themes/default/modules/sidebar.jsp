@@ -1,7 +1,9 @@
 <%@page import="vn.edu.cit.model.Server"%>
 <%@page import="vn.edu.cit.model.User"%>
 <%
-	User user = (User) request.getAttribute("user");
+	User user = (User) session.getAttribute("user");
+	if(user!=null){
+		 
 %>
 <aside class="left-side sidebar-offcanvas">
 	<!-- sidebar -->
@@ -29,3 +31,6 @@
 	</section>
 	<!-- end sidebar -->
 </aside>
+<%
+}
+%>

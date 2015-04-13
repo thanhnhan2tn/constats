@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="admin.home" template="/WEB-INF/views/admincp/themes/admin-default/main.jsp">
+		<put-attribute name="head"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/head.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/header.jsp" />
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/sidebar.jsp" />
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/left-content.jsp" />
+		<put-attribute name="right-content"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/right-content.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/footer.jsp" />
+	</definition>
+	<definition name="admincp" extends="admin.home" />
+	<definition name="usermanager" extends="admin.home">
+		<put-attribute name="right-content"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/usermanager-content.jsp" />
+	</definition>
+</tiles-definitions>	

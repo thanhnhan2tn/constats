@@ -1,0 +1,49 @@
+package vn.edu.cit.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import vn.edu.cit.model.Server;
+import vn.edu.cit.model.User;
+
+public class ServerDAOImpl implements ServerDAO {
+	public static final String COLLECTION = "users";
+
+	public ServerDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+	public void createServer(Server sv) {
+		mongoTemplate.save(sv);
+	}
+
+	@Override
+	public Server getServer(User user, String ip) {
+		// query to search user
+		Query searchQuery = new Query(Criteria.where("email").is(user.getEmail()));
+		User u = mongoTemplate.findOne(searchQuery, User.class);
+		if (u.getServers() != null) {
+			for (Server server : u.getServers())
+				if (server.getServerAddress().equals(ip)) {
+					return server;
+				}
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void updateServer(Server sv) {
+		mongoTemplate.save(sv);
+	}
+
+}

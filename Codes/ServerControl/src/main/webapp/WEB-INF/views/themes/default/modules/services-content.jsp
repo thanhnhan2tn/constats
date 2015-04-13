@@ -8,57 +8,95 @@
 	});
 	//loading ServerInfomation
 	var ip = "${server.serverAddress}";
-	$(document).ready(function() {
-		$.ajax({
-			url : '${pageContext.request.contextPath}/getserverinfo/' + ip + '/' + cc,
-			type : 'GET',
-			data : {},
-			//timeout : 60000,
-			success : function(data, status){
-				//if(data != null){
-				var html = '<table class="table table-bordered">';
-					html+='<tr><td>Hostname:</td><td>'+data.hostname+'</td></tr>';
-					html+='<tr><td>OS Version:</td><td>'+data.osversion+'</td></tr>';
-					html+='<tr><td>Kernel:</td><td>'+data.kernel+'</td></tr>';
-					html+='<tr><td>Processor Info:</td><td>'+data.processor_info+'</td></tr>';
-					html+='<tr><td>Uptime:</td><td>'+data.uptime+'</td></tr>';
-					html+='<tr><td>Memory:</td><td>'+data.memmory+'</td></tr>';
-					html+='<tr><td>Cpu Loadaverage:</td><td>'+data.cpu_loadaverage+'</td></tr></table>';
-				//	alert(html);
-				$(".serverinfomation").html(html);
-				$(".wait").css("display", "none");
-				//}
-			}
-		});
-		$("#m-status").on("click",function(){
-			//var id=""
-			if($(this).is(":checked")){
-				$.ajax({
-					url : '${pageContext.request.contextPath}/monitor/start/' + ip + '/' + cc,
-					type : 'GET',
-					datastatus : {}
-				})
-			}else{
-				$.ajax({
-					url : '${pageContext.request.contextPath}/monitor/stop/' + ip + '/' + cc,
-					type : 'GET',
-					datastatus : {}
-			})
-			}
-		});
-		$(".active-sudo").on("click",function(){
-			var user = $(".username").val();
-			var pass = $(".password").val();
-		$.ajax({
-			url : '${pageContext.request.contextPath}/serviceconfig/user/'+user+'/'+pass+'/' + ip + '/' + cc,
-			type : 'GET',
-			datastatus : {},
-			success : function(datastatus, status) {
-				location.reload();
-			}
-		});
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/getserverinfo/'
+											+ ip + '/' + cc,
+									type : 'GET',
+									data : {},
+									//timeout : 60000,
+									success : function(data, status) {
+										//if(data != null){
+										var html = '<table class="table table-bordered">';
+										html += '<tr><td>Hostname:</td><td>'
+												+ data.hostname + '</td></tr>';
+										html += '<tr><td>OS Version:</td><td>'
+												+ data.osversion + '</td></tr>';
+										html += '<tr><td>Kernel:</td><td>'
+												+ data.kernel + '</td></tr>';
+										html += '<tr><td>Processor Info:</td><td>'
+												+ data.processor_info
+												+ '</td></tr>';
+										html += '<tr><td>Uptime:</td><td>'
+												+ data.uptime + '</td></tr>';
+										html += '<tr><td>Memory:</td><td>Used: '
+												+ parseInt(parseInt(data.memused) / 1024)
+												+ ' MB - Total: '
+												+ parseInt(parseInt(data.memtotal) / 1024)
+												+ ' MB</td></tr>';
+										html += '<tr><td>Cpu Loadaverage:</td><td>'
+												+ data.cpu_loadaverage
+												+ '</td></tr></table>';
+										//	alert(html);
+										$(".serverinfomation").html(html);
+										$(".wait").css("display", "none");
+										//}
+									}
+								});
+						$("#m-status")
+								.on(
+										"click",
+										function() {
+											//var id=""
+											if ($(this).is(":checked")) {
+												$
+														.ajax({
+															url : '${pageContext.request.contextPath}/monitor/start/'
+																	+ ip
+																	+ '/'
+																	+ cc,
+															type : 'GET',
+															datastatus : {}
+														})
+											} else {
+												$
+														.ajax({
+															url : '${pageContext.request.contextPath}/monitor/stop/'
+																	+ ip
+																	+ '/'
+																	+ cc,
+															type : 'GET',
+															datastatus : {}
+														})
+											}
+										});
+						$(".active-sudo")
+								.on(
+										"click",
+										function() {
+											var user = $(".username").val();
+											var pass = $(".password").val();
+											$
+													.ajax({
+														url : '${pageContext.request.contextPath}/serviceconfig/user/'
+																+ user
+																+ '/'
+																+ pass
+																+ '/'
+																+ ip + '/' + cc,
+														type : 'GET',
+														datastatus : {},
+														success : function(
+																datastatus,
+																status) {
+															location.reload();
+														}
+													});
+										});
+					});
 </script>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
@@ -115,9 +153,9 @@
 						<div id="monitoring" class="monitoring panel-collapse collapse">
 							<div class="panel-body">
 								<div id="">
-									<div id="ram-monitor"></div>
-									<div id="cpu-monitor"></div>
-									<div id="disk-monitor"></div>
+									<a
+										href="${pageContext.request.contextPath }/monitor/${server.serverAddress}/${cc}">Go
+										to Monitoring</a>
 								</div>
 
 							</div>
@@ -128,10 +166,11 @@
 
 				<!-- Tabs Service Config -->
 				<div class="tab-pane" id="services">
-					<c:if test="<%=(session.getAttribute(\"sudouser\")==null)%>">
+					<c:if test="<%=(session.getAttribute(\"sudouser\") == null)%>">
 						<div class="panel panel-default">
 							<div style="padding-top: 30px" class="panel-body">
 								<form action="#" class="form-horizontal" method="POST">
+									<div class="form-group"><label>Please input your server SUDOER user, it will not save!</label></div>
 									<div class="form-group ">
 										<div class="col-md-9">
 											<input class="form-control username" name="username" type="text"
@@ -149,7 +188,7 @@
 							</div>
 						</div>
 					</c:if>
-					<c:if test="<%=(session.getAttribute(\"sudouser\")!=null)%>">
+					<c:if test="<%=(session.getAttribute(\"sudouser\") != null)%>">
 
 						<!-- Network Card -->
 						<div class="panel panel-default">
@@ -177,72 +216,50 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a href="#" data-toggle="collapse" data-target="#ftp-config">FTP
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/ftp/${server.serverAddress}/${cc}">FTP
 										Server Configuration <i
 										class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>
 							</div>
-							<div id="ftp-config" class="panel-collapse collapse">
-								<div class="panel-body">
-									<a class="col-md-4"
-										href="${pageContext.request.contextPath }/serviceconfig/nic/interfaces/${server.serverAddress}/${cc}">
-										FTP.. </a>
-								</div>
-							</div>
+
 						</div>
 
 						<!-- Apache Service -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a href="#" data-toggle="collapse" data-target="#apache-config">Apache
-										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/apache/${server.serverAddress}/${cc}">Apache
+										Server Configuration <i
+										class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>
-							</div>
-							<div id="apache-config" class="panel-collapse collapse">
-								<div class="panel-body">
-									<a class="col-md-4"
-										href="${pageContext.request.contextPath }/serviceconfig/nic/interfaces/${server.serverAddress}/${cc}">
-										Apache/... </a>
-								</div>
 							</div>
 						</div>
 						<!-- DHCP Service -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a href="#" data-toggle="collapse" data-target="#dhcp-config">DHCP
-										Service Configuration <i
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/dhcp/${server.serverAddress}/${cc}">DHCP
+										Server Configuration <i
 										class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>
-							</div>
-							<div id="dhcp-config" class="panel-collapse collapse">
-								<div class="panel-body">
-									<a class="col-md-4"
-										href="${pageContext.request.contextPath }/serviceconfig/nic/interfaces/${server.serverAddress}/${cc}">
-										DHCP ... </a>
-								</div>
 							</div>
 						</div>
 						<!-- DNS Bind 9 -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a href="#" data-toggle="collapse" data-target="#dns-config">DNS
-										Bind9 Configuration <i
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/bind9/${server.serverAddress}/${cc}">DNS
+										Bind9 Server Configuration <i
 										class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>
-							</div>
-							<div id="dns-config" class="panel-collapse collapse">
-								<div class="panel-body">
-									<a class="col-md-4"
-										href="${pageContext.request.contextPath }/serviceconfig/nic/interfaces/${server.serverAddress}/${cc}">
-										DNS .. </a>
-								</div>
 							</div>
 						</div>
 					</c:if>

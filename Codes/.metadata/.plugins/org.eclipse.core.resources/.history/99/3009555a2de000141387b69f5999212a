@@ -1,0 +1,38 @@
+package vn.edu.cit.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import vn.edu.cit.model.ServerStatus;
+import vn.edu.cit.model.User;
+
+public class ServerStatusDAOImpl {
+	public static final String COLLECTION = "users";
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+	public void createServerStatus(ServerStatus status) {
+
+	}
+
+	public ServerStatus getServerStatus(String ip) {
+		Query searchQuery = new Query(Criteria.where("serverAddress").is(ip));
+		Server sv = mongoTemplate.findOne(searchQuery, Server.class);
+		if (user != null) {
+			return user;
+		} else {
+			return null;
+		}
+	}
+
+	public void updateServerStatus(ServerStatus status) {
+	}
+
+}

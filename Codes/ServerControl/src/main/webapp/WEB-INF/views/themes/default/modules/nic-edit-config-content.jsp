@@ -2,8 +2,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@page import="vn.edu.cit.servercontrol.nic.Eth"%>
-<%@page import="vn.edu.cit.servercontrol.nic.Nic"%>
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -28,7 +28,7 @@
 						<input type="hidden" name="cc" value="${cc }">
 							<div class="form-group">
 								<div class="col-md-9">
-									<textarea class="form-control" rows="30" name="config" ></textarea>
+									<textarea class="form-control" rows="30" name="config" >${config }</textarea>
 								</div>
 							</div>
 					</div>

@@ -1,9 +1,16 @@
 package vn.edu.cit.servercontrol;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import vn.edu.cit.dao.ServerDAO;
+import vn.edu.cit.dao.ServerStatusDAO;
 import vn.edu.cit.model.Server;
+import vn.edu.cit.model.ServerStatus;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
@@ -11,7 +18,10 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
 public class ServerConfig {
-
+	@Autowired
+	ServerStatusDAO svttDAO;
+	@Autowired
+	ServerDAO serverDAO;
 	// Get Session
 	public Session connect(Server sv) {
 
@@ -159,8 +169,8 @@ public class ServerConfig {
 			HashMap<String, String> hm1 = new HashMap<String, String>();
 			String multi_cmd[] = { "hostname", "cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='", "uname -a",
 					"cat /etc/webmin/version", "date", "cat /proc/cpuinfo | grep 'model name'", "cat /proc/uptime",
-					"cat /proc/meminfo | grep MemTotal ", "free | grep Mem | awk '{print $3/$2 * 100.0}'",
-					"free | grep Mem | awk '{print $4/$2 * 100.0}'", "cat /proc/meminfo | grep Cached ",
+					"cat /proc/meminfo | grep MemTotal ", "free | grep Mem | awk '{print $3}'",
+					"free | grep Mem | awk '{print $4}'", "cat /proc/meminfo | grep Cached ",
 					"cat /proc/loadavg", "df -h | grep /dev/mapper/ubuntu--vg-root" };
 			String index_cmd[] = { "hostname", "osversion", "kernel", "webmin_version", "timeonsys", "processor_info",
 					"uptime", "memtotal", "memused", "memfree", "memcached", "cpu_loadaverage", "local_disk" };
@@ -234,9 +244,9 @@ public class ServerConfig {
 				j++;
 			}
 			// System.out.print(hm1);
-			ServerStatus svst = new ServerStatus(hm1.get("hostname"), hm1.get("osversion"), hm1.get("kernel"),
+			ServerStatus svst = new ServerStatus(new Date(),hm1.get("hostname"), hm1.get("osversion"), hm1.get("kernel"),
 					hm1.get("webmin_version"), hm1.get("timeonsys"), hm1.get("processor_info"), hm1.get("uptime"),
-					hm1.get("memtotal"), hm1.get("memused"), hm1.get("memfree"), hm1.get("memcached"),
+					hm1.get("memtotal").replaceAll("[kbKBKb]",""), hm1.get("memused"), hm1.get("memfree"), hm1.get("memcached"),
 					hm1.get("cpu_loadaverage"), hm1.get("local_disk"));
 
 			return svst;
@@ -251,28 +261,21 @@ public class ServerConfig {
 	// StartMonitor
 	public ServerStatus startMonitor(Server sv, int sleep) throws InterruptedException {
 		ServerStatus svtt = getServerStatus(sv);
-		/*System.out.println("-----Create Object-------");
-		System.out.println("Host name: " + svtt.getHostname());
-		System.out.println("Kernel: " + svtt.getKernel());
-		System.out.println("OSVersion: " + svtt.getOsversion());
-		System.out.println("Processor Info: " + svtt.getProcessor_info());
-		System.out.println("Uptime: " + svtt.getUptime());
-		System.out.println("Time On Sys: " + svtt.getTimeonsys());
-		System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
-		System.out.println("Mem Total: " + svtt.getMemtotal());
-		System.out.println("Mem Free: " + svtt.getMemfree());
-		System.out.println("Mem Used: " + svtt.getMemused());
-		System.out.println("Mem Cached: " + svtt.getMemcached());
-		System.out.println("Local Disk: " + svtt.getLocal_disk());*/
-
 		Thread.sleep(sleep);
 		startMonitor(sv, sleep);
+		//Server server = serverDAO.getServer(sv,sv.getServerAddress());
+//		List<ServerStatus> listStatus = server.getStatus();
+//		listStatus.add(svtt);
+//		serverDAO.updateServer(server);
+		//svttDAO.createServerStatus(svtt);
+		System.out.println("Host name: " + svtt.getHostname());
 		return svtt;
 	}
 
 	// StopMonitor
 	public ServerStatus stopMonitor(Server sv) throws InterruptedException {
 		ServerStatus svtt = getServerStatus(sv);
+		System.out.println("Host name: " + svtt.getHostname());
 		/*System.out.println("-----Create Onject-------");
 		System.out.println("Host name: " + svtt.getHostname());
 		System.out.println("Kernel: " + svtt.getKernel());

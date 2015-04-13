@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
+import vn.edu.cit.model.ServerStatus;
 import vn.edu.cit.model.User;
 import vn.edu.cit.servercontrol.ServerConfig;
-import vn.edu.cit.servercontrol.ServerStatus;
 import vn.edu.cit.services.MongoDBService;
 import vn.edu.cit.services.UserService;
 
@@ -32,8 +32,9 @@ public class MonitorController {
 	private UserDAO userDAO;
 
 	@RequestMapping(value = "/monitor/{action}/{ip}/{cc}", method = RequestMethod.GET)
-	public void monitor(HttpServletRequest request, HttpSession session, @PathVariable(value = "action") String action,
-			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
+	public String monitorAction(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm) {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 
@@ -59,6 +60,17 @@ public class MonitorController {
 			}
 		} else {
 			session.invalidate();
+		}
+		return "/monitor/" + ip + "/" + cc;
+	}
+
+	@RequestMapping(value = "/monitor/{ip}/{cc}", method = RequestMethod.GET)
+	public void monitor(HttpServletRequest request, HttpSession session, @PathVariable(value = "action") String action,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && cc.equals(c)) {
+
 		}
 	}
 

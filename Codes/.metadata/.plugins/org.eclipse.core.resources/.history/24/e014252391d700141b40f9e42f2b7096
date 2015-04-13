@@ -1,8 +1,0 @@
-package vn.edu.cit.servercontrol;
-
-public class Snippet {
-	public static void main(String[] args) {
-		639794
-	}
-}
-

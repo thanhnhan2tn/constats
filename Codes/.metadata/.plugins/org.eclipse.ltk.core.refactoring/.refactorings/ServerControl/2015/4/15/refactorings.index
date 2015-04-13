@@ -1,2 +1,11 @@
 1428337292727	Copy compilation units
 1428337450953	Delete element
+1428485430170	Rename package 'vn.edu.cit.servercontrol.apache'
+1428485458922	Rename package 'vn.edu.cit.servercontrol.dhcp'
+1428485476466	Rename package 'vn.edu.cit.servercontrol.dns'
+1428485494831	Rename package 'vn.edu.cit.servercontrol.ftp'
+1428485513213	Rename package 'vn.edu.cit.servercontrol.nic'
+1428485524343	Rename package 'vn.edu.cit.servercontrol.ssh'
+1428485687989	Delete element
+1428640111633	Move 'services-ftp-content.jsp' to 'modules'
+1428744243987	Move compilation unit

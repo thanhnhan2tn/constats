@@ -73,5 +73,10 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/after-add-server.jsp" />
 	</definition>
+	<definition name="ftp-config" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-ftp-content.jsp" />
+	</definition>
+	
 
 </tiles-definitions>	

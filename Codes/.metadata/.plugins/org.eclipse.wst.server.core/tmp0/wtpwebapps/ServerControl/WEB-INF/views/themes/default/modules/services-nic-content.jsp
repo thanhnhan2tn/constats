@@ -2,8 +2,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@page import="vn.edu.cit.servercontrol.nic.Eth"%>
-<%@page import="vn.edu.cit.servercontrol.nic.Nic"%>
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -17,7 +17,7 @@
 	<script>
 	$(document).ready(function(){
 		//var listeth[] = $('#listeth');
-		$("#add-nic").click(function(){
+			$("#add-nic").click(function(){
 			var listeth = $('.listeth');
 			var num = listeth.length+1;
 			$("#add-nic").remove();
@@ -43,6 +43,9 @@
 											+"<input class=\"form-control\" type=\"text\" name=\"eth["+num+"].broadcast\" placeholder=\"Broadcast Address\" /></div></div>"
 											);
 		});
+		$(".remove-iface").click(function(){
+			$(this).parent().parent().parent().remove();
+		});
 	});
 	
 	</script>
@@ -59,7 +62,7 @@
 						<c:if test="${!e.address.equals(server.serverAddress)}">
 						<!--  check null fir ifaces -->
 						
-						<div class="panel panel-default">
+						<div class="panel panel-default eth">
 							<div class="panel-heading listeth">
 								iFace: <b>${e.iface}</b>
 								<div class="btn-group pull-right" role="group">
@@ -78,9 +81,7 @@
 										title="Restart Service">
 										<i class="glyphicon glyphicon-repeat"></i>
 									</button>
-									<button type="button" class="btn btn-warning"
-										onclick="location.href='${pageContext.request.contextPath }/serviceconfig/nic/remove/${server.serverAddress}/${e.iface}/${cc }'"
-										title="Remove Service">
+									<button type="button" class="btn btn-warning remove-iface" title="Remove Service">
 										<i class="glyphicon glyphicon-remove"></i>
 									</button>
 								</div>
@@ -142,6 +143,9 @@
 					</c:if>
 					<c:if test="${e.address.equals(server.serverAddress)}">
 						<div class="panel panel-default">
+						<div class="panel-heading">
+						iFace: <b>${e.iface}</b>
+						</div>
 						<div class="panel-body">
 								<input
 									type="hidden" name="eth[${status.index}].iface"
@@ -150,31 +154,31 @@
 									<label for="inet" class="col-md-2">iNet: *</label>
 									<div class="col-md-3">
 										<input class="form-control" type="text"
-											name="eth[${status.index}].inet" value="${e.inet}" disabled/>
+											name="eth[${status.index}].inet" value="${e.inet}"/>
 									</div>
 								</div>
 								<c:if test='${!e.inet.equals("loopback")}'>
 									<!--  check loopback -->
-
+									
 									<div class="form-group">
 										<label for="iface" class="col-md-2">Address: </label>
 										<div class="col-md-9">
 											<input class="form-control" type="text"
-												name="eth[${status.index }].address" value="${e.address }" disabled />
+												name="eth[${status.index }].address" value="${e.address }" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="iface" class="col-md-2">NetMask:</label>
 										<div class="col-md-9">
 											<input class="form-control" type="text"
-												name="eth[${status.index }].netmask" value="${e.netmask }" disabled/>
+												name="eth[${status.index }].netmask" value="${e.netmask }"  />
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="iface" class="col-md-2">GateWay:</label>
 										<div class="col-md-9">
 											<input class="form-control" type="text"
-												name="eth[${status.index }].gateway" value="${e.gateway }" disabled/>
+												name="eth[${status.index }].gateway" value="${e.gateway }"  />
 										</div>
 									</div>
 									<div class="form-group">
@@ -182,7 +186,7 @@
 										<div class="col-md-9">
 											<input class="form-control" type="text"
 												name="eth[${status.index }].broadcast"
-												value="${e.broadcast }" disabled />
+												value="${e.broadcast }"   />
 										</div>
 									</div>
 							

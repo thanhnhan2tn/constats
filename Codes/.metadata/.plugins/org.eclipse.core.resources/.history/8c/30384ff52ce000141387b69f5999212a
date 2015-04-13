@@ -1,0 +1,19 @@
+package vn.edu.cit.dao;
+
+import vn.edu.cit.model.ServerStatus;
+import vn.edu.cit.model.User;
+
+public class ServerStatusDAOImpl {
+
+	public void createServerStatus(ServerStatus status){
+		
+	}
+
+	public User getServerStatus(String ip){
+		
+	}
+
+	public void updateServerStatus(ServerStatus status){
+
+
+}

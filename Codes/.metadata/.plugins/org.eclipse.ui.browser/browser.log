@@ -153,3 +153,44 @@ Apr 07, 2015 12:43:00.67 SystemMessageCache: initSystemMessageCache: initSystemM
 Apr 07, 2015 12:57:55.18 [Child 9596] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
 Apr 07, 2015 12:57:55.18 [Child 9596] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
 Apr 07, 2015 13:47:17.49 SystemMessageCache: init
+
+Apr 08, 2015 16:36:09.35 NEW SESSION
+Apr 08, 2015 16:36:09.35 SystemMessageCache: init
+
+Apr 10, 2015 23:08:15.28 NEW SESSION
+Apr 10, 2015 23:08:15.28 1428682095278	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Apr 10, 2015 23:08:15.64 1428682095644	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+Apr 11, 2015 01:22:57.04 SystemMessageCache: init
+
+Apr 11, 2015 19:16:27.88 NEW SESSION
+Apr 11, 2015 19:16:27.88 SystemMessageCache: init
+
+Apr 12, 2015 23:49:41.21 NEW SESSION
+Apr 12, 2015 23:49:41.21 1428857381209	addons.repository	WARN	Search failed when repopulating cache
+Apr 12, 2015 23:49:50.59 1428857390590	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:49:56.91 1428857396915	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:03.16 1428857403166	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:09.43 1428857409436	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:15.71 1428857415712	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:21.97 1428857421971	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:28.24 1428857428243	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 12, 2015 23:50:34.59 1428857434596	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 13, 2015 24:23:57.88 [Child 468] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 13, 2015 24:23:57.88 [Child 468] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+
+Apr 13, 2015 10:01:49.09 NEW SESSION
+Apr 13, 2015 10:01:49.09 SystemMessageCache: init1428894109094	FirefoxAccounts	ERROR	FxA rejecting with error NO_ACCOUNT, details: undefined
+Apr 13, 2015 10:01:49.11 1428894109094	FirefoxAccounts	ERROR	FxA rejecting with error NO_ACCOUNT, details: undefined
+Apr 13, 2015 10:02:42.73 [Child 4736] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+
+Apr 13, 2015 23:42:45.33 NEW SESSION
+Apr 13, 2015 23:42:45.33 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+Apr 13, 2015 23:44:34.00 [Child 2256] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 13, 2015 23:44:34.00 [Child 2256] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 13, 2015 23:49:40.54 SystemMessageCache: init1428943780543	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Apr 13, 2015 23:49:41.04 1428943781041	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+Apr 14, 2015 24:01:46.97 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+Apr 14, 2015 24:01:49.85 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+Apr 14, 2015 24:02:02.57 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+Apr 14, 2015 24:14:11.32 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+Apr 14, 2015 24:25:03.63 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p

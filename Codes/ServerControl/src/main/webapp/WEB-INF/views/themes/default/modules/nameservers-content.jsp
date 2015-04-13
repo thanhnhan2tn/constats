@@ -2,17 +2,14 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@page import="vn.edu.cit.servercontrol.nic.Eth"%>
-<%@page import="vn.edu.cit.servercontrol.nic.Nic"%>
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Netword Interface Cards Config :<small>
-				(${server.serverAddress})</small>
+			Netword Interface Cards Config :<small> (${server.serverAddress})</small>
 		</h1>
-
-
 	</section>
 	<!--  End Content Header -->
 	<!--  Main Content -->
@@ -27,34 +24,59 @@
 					</div>
 					<div class="panel-body">
 						<input type="hidden" name="cc" value="${cc }">
+						<div class="dns">
 						<c:forEach items="${nicForm.dns_nameservers }" var="dns"
 							varStatus="status">
 
-							<div class="form-group">
-								<div class="col-md-9">
-									<input class="form-control" type="text"
-										name="dns_nameservers[${status.index }]" value="${dns}" />
+							<div class="form-group listdns">
+								<div class="input-group col-md-9">
+									<input class=" form-control" type="text"
+										name="dns_nameservers[${status.index }]" value="${dns}" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-warning remove-dns"
+											title="Remove DNS">
+											<i class="glyphicon glyphicon-remove"></i>
+									</span>
+									</button>
 								</div>
 							</div>
 
 						</c:forEach>
+						
 						<c:if test="${nicForm.dns_nameservers==null }">
-
 							<div class="form-group">
-								<div class="col-md-9">
-									<input class="form-control" type="text" name="dns_nameservers1" />
+								<div class="col-md-9 ">
+									<input class="form-control" type="text" name="dns_nameservers[0]" />
 								</div>
 							</div>
 
 						</c:if>
-
+						</div>
 					</div>
 				</div>
 				<!--  End Panel -->
-
+				<button type="button" class="btn btn-default" id="add-dns">Add</button>
 				<form:button type="submit" class="btn btn-default">Save</form:button>
 			</form:form>
 		</div>
 	</section>
 	<!--  End Main Content -->
 </aside>
+<script>
+	$(document).ready(function() {
+		$(".remove-dns").click(function() {
+			$(this).parent().parent().parent().remove();
+		});
+		$("#add-dns").click(function(){
+			var listdns = $('.listdns');
+			 
+			$("#add-dns").remove();
+			$(".dns").append("<div class=\"form-group\">"
+							+"<div class=\"input-group col-md-9\">"
+							+"<input class=\"form-control\" type=\"text\" name=\"dns_nameservers["+listdns.length+"]\"/> <span class=\"input-group-btn\">"
+							+"<button type=\"button\" class=\"btn btn-warning remove-dns\"	title=\"Remove DNS\">"
+							+"<i class=\"glyphicon glyphicon-remove\"></i></span></button></div></div>"
+							);
+		});
+	});
+</script>
