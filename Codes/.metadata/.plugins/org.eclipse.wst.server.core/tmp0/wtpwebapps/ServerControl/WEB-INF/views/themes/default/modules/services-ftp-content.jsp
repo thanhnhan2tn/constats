@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@page import="vn.edu.cit.model.Server"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -148,7 +149,7 @@
 					</div>
 				</div>
 				<form:button type="submit" class="btn btn-primary">Save</form:button>
-				<button class="btn btn-default">Back</button>
+				<button class="btn btn-default" onclick="return history:back()">Back</button>
 			</form:form>
 			
 			<%

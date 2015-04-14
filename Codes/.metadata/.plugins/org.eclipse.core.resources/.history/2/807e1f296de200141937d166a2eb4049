@@ -1,0 +1,179 @@
+<%@page import="vn.edu.cit.model.Server"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="model.ssh.*"%>
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Ssh Service Config :<small> (${server.serverAddress})</small>
+		</h1>
+	</section>
+
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+			<%
+				SSH Ssh = (SSH) request.getAttribute("Ssh");
+				if (Ssh != null) {
+			%>
+
+			<form:form id="ssh-config-form1" modelAttribute="SSH"
+				action="${pageContext.request.contextPath }/serviceconfig/ssh/save/${server.serverAddress}/${cc }"
+				class="form-horizontal" method="POST">
+				<input type="hidden" name="cc" value="${cc }">
+				<div class="panel panel-default eth">
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-md-4">Port: *</label>
+							<div class="col-md-3 form-groups">
+								<form:input path="port" required="required" placeholder="Input SSH Port"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Listen Address: *</label>
+							<div class="col-md-3 form-groups">
+								<form:input path="listenAdd" required="required" placeholder="Input Listen Address"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Login Grace Time: *</label>
+							<div class="col-md-3 form-groups">
+								<form:input path="loginGraceTime" required="required" placeholder="Input Login Grace Time"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Permit Root Login: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="rootlogin-yes"> Yes</label>
+								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
+									id="rootlogin-yes" value="yes" required="required" />
+								<label for="rootlogin-no"> No</label>
+								<form:radiobutton path="permitRootLogin" name="permitRootLogin" id="rootlogin-no"
+									value="no" required="required" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4">Password Authentication: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="password-yes"> Enable</label>
+								<form:radiobutton path="passwordAu" name="password-yes" id="password-yes-yes"
+									value="yes" required="required" />
+								<label for="password-no"> Disable</label>
+								<form:radiobutton path="passwordAu" name="password-no" id="password-no"
+									value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Permit empty password: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="emptypass-yes"> Enable</label>
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword" id="emptypass-yes"
+									value="yes" required="required" />
+								<label for="emptypass-no"> Disable</label>
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword" id="emptypass-no"
+									value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Anonymous Upload: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Enable</label>
+								<form:radiobutton path="anon_upload_enable" name="anon_upload_enable"
+									id="local-yes" value="yes" required="required" />
+								<label for="local-no"> Disable</label>
+								<form:radiobutton path="anon_upload_enable" name="anon_upload_enable"
+									id="local-no" value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Anonymous Make Dir Write: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Enable</label>
+								<form:radiobutton path="anon_mkdir_write_enable"
+									name="anon_mkdir_write_enable" id="local-yes" value="yes"
+									required="required" />
+								<label for="local-no"> Disable</label>
+								<form:radiobutton path="anon_mkdir_write_enable"
+									name="anon_mkdir_write_enable" id="local-no" value="no"
+									required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Connect from port 20?: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Yes</label>
+								<form:radiobutton path="connect_from_port_20"
+									name="connect_from_port_20" id="local-yes" value="yes"
+									required="required" />
+								<label for="local-no"> No</label>
+								<form:radiobutton path="connect_from_port_20"
+									name="connect_from_port_20" id="local-no" value="no"
+									required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Deny email: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Enable</label>
+								<form:radiobutton path="deny_email_enable" name="deny_email_enable"
+									id="local-yes" value="yes" required="required" />
+								<label for="local-no"> Disable</label>
+								<form:radiobutton path="deny_email_enable" name="deny_email_enable"
+									id="local-no" value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Chroot Local user: *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Enable</label>
+								<form:radiobutton path="chroot_local_user" name="chroot_local_user"
+									id="local-yes" value="yes" required="required" />
+								<label for="local-no"> Disable</label>
+								<form:radiobutton path="chroot_local_user" name="chroot_local_user"
+									id="local-no" value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Chroot List : *</label>
+							<div class="col-md-3 form-groups">
+								<label for="local-yes"> Enable</label>
+								<form:radiobutton path="chroot_list_enable" name="chroot_list_enable"
+									id="local-yes" value="yes" required="required" />
+								<label for="local-no"> Disable</label>
+								<form:radiobutton path="chroot_list_enable" name="chroot_list_enable"
+									id="local-no" value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Chroot List File: *</label>
+							<div class="col-md-3 form-groups">
+								<form:input path="chroot_list_file" required="required" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<form:button type="submit" class="btn btn-primary">Save</form:button>
+				<button class="btn btn-default">Back</button>
+			</form:form>
+
+			<%
+				} else {
+			%>
+			<div class="panel-body">
+				<a class="col-md-4"
+					href="${pageContext.request.contextPath }/serviceconfig/ssh/install/${server.serverAddress}/${cc}">
+					Click here to Install SSHD Service..</a>
+			</div>
+			<%
+				}
+			%>
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>

@@ -1,21 +1,21 @@
 package model.ssh;
 
 public class SSH {
-	String port;
-	String listenAdd;
-	String loginGraceTime;
-	String permitRootLogin;
-	String passwordAu;
-	String permitEmptyPassword;
-	String allowUsers;
+	private String port;
+	private String listenAdd;
+	private String loginGraceTime;
+	private Boolean permitRootLogin;
+	private Boolean passwordAu;
+	private Boolean permitEmptyPassword;
+	private String allowUsers;
 
 	public SSH() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public SSH(String port, String listenAdd, String loginGraceTime,
-			String permitRootLogin, String passwordAu,
-			String permitEmptyPassword, String allowUsers) {
+			Boolean permitRootLogin, Boolean passwordAu,
+			Boolean permitEmptyPassword, String allowUsers) {
 		super();
 		this.port = port;
 		this.listenAdd = listenAdd;
@@ -50,27 +50,27 @@ public class SSH {
 		this.loginGraceTime = loginGraceTime;
 	}
 
-	public String getPermitRootLogin() {
+	public Boolean getPermitRootLogin() {
 		return permitRootLogin;
 	}
 
-	public void setPermitRootLogin(String permitRootLogin) {
+	public void setPermitRootLogin(Boolean permitRootLogin) {
 		this.permitRootLogin = permitRootLogin;
 	}
 
-	public String getPasswordAu() {
+	public Boolean getPasswordAu() {
 		return passwordAu;
 	}
 
-	public void setPasswordAu(String passwordAu) {
+	public void setPasswordAu(Boolean passwordAu) {
 		this.passwordAu = passwordAu;
 	}
 
-	public String getPermitEmptyPassword() {
+	public Boolean getPermitEmptyPassword() {
 		return permitEmptyPassword;
 	}
 
-	public void setPermitEmptyPassword(String permitEmptyPassword) {
+	public void setPermitEmptyPassword(Boolean permitEmptyPassword) {
 		this.permitEmptyPassword = permitEmptyPassword;
 	}
 

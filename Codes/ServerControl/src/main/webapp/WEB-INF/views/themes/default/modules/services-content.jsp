@@ -116,6 +116,9 @@
 			</ul>
 			<hr>
 			<div class="tab-content">
+			<div style="display: none ${display}" id="login-alert" class="alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}" id="login-alert" class="alert alert-success col-sm-12">${message}</div>
+			
 				<!-- Tabs Monitor Config -->
 				<div class="tab-pane active" id="monitor">
 					<div class="panel panel-default">
@@ -219,7 +222,21 @@
 									<a
 										href="${pageContext.request.contextPath }/serviceconfig/ftp/${server.serverAddress}/${cc}">FTP
 										Server Configuration <i
-										class="glyphicon glyphicon-chevron-down pull-right"></i>
+										class="glyphicon glyphicon-chevron-right pull-right"></i>
+									</a>
+								</h3>
+							</div>
+
+						</div>
+						
+						<!-- SSH Service -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/ssh/${server.serverAddress}/${cc}">SSH
+										Server Configuration <i
+										class="glyphicon glyphicon-chevron-right pull-right"></i>
 									</a>
 								</h3>
 							</div>

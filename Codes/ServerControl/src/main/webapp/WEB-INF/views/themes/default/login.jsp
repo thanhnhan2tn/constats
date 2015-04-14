@@ -89,13 +89,13 @@
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span>
 							<spring:input path="email" class="form-control"
-								placeholder="Input your email" />
+								placeholder="Input your email" required="required"/>
 						</div>
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span>
 							<spring:password path="passWord" id="login-username"
-								class="form-control" placeholder="Your password" />
+								class="form-control" placeholder="Your password" required="required"/>
 						</div>
 						<div class="input-group">
 							<div class="checkbox">
@@ -228,7 +228,7 @@
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
 								class="glyphicon glyphicon-user"></i></span> <input type="email"
-								class="form-control" placeholder="Input your email" />
+								class="form-control" placeholder="Input your email" required="required"/>
 						</div>
 						<div style="margin-top: 10px" class="form-group">
 							<!-- Button -->

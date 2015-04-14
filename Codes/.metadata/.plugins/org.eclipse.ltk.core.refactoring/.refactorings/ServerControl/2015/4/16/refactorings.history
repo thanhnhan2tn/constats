@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;services-ftp-content.jsp&apos; to &apos;modules&apos;&#x0D;&#x0A;- Original project: &apos;ServerControl&apos;&#x0D;&#x0A;- Destination element: &apos;modules&apos;&#x0D;&#x0A;- Original element: &apos;services-ftp-content.jsp&apos;" description="Copy file" element1="src/main/webapp/WEB-INF/views/themes/default/modules/services-ftp-content.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1428980189932" target="/ServerControl/src/main/webapp/WEB-INF/views/themes/default/modules" units="0" version="1.0"/>
+</session>
