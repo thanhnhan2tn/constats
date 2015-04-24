@@ -194,3 +194,46 @@ Apr 14, 2015 24:01:49.85 E/MPEG4Extractor( 5576): No width or height, assuming w
 Apr 14, 2015 24:02:02.57 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
 Apr 14, 2015 24:14:11.32 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
 Apr 14, 2015 24:25:03.63 E/MPEG4Extractor( 5576): No width or height, assuming worst case 1080p
+
+Apr 14, 2015 20:05:25.72 NEW SESSION
+Apr 14, 2015 20:05:25.72 E/MPEG4Extractor( 4904): No width or height, assuming worst case 1080p
+Apr 14, 2015 20:05:47.52 E/MPEG4Extractor( 4904): No width or height, assuming worst case 1080p
+Apr 14, 2015 20:07:57.02 [Child 7964] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 14, 2015 20:15:32.13 SystemMessageCache: init
+
+Apr 15, 2015 10:03:31.82 NEW SESSION
+Apr 15, 2015 10:03:31.82 1429067011827	addons.repository	WARN	Search failed when repopulating cache
+Apr 15, 2015 10:03:31.90 1429067011901	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011901	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011902	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011902	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011902	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011903	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.90 1429067011903	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 15, 2015 10:03:31.95 1429067011950	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+
+Apr 15, 2015 13:53:46.71 NEW SESSION
+Apr 15, 2015 13:53:46.71 SystemMessageCache: init
+Apr 15, 2015 14:12:13.21 [Child 7872] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 15, 2015 14:12:13.21 [Child 7872] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 15, 2015 14:18:49.16 [Child 7420] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 15, 2015 14:18:49.16 [Child 7420] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 15, 2015 14:53:08.01 SystemMessageCache: initSystemMessageCache: init
+Apr 15, 2015 16:24:53.99 E/MPEG4Extractor( 7748): No width or height, assuming worst case 1080p
+Apr 15, 2015 16:29:30.84 E/MPEG4Extractor( 7748): No width or height, assuming worst case 1080p
+Apr 15, 2015 16:53:12.30 SystemMessageCache: init
+
+Apr 20, 2015 10:07:15.09 NEW SESSION
+Apr 20, 2015 10:07:15.09 1429499235091	addons.repository	WARN	Search failed when repopulating cache
+Apr 20, 2015 10:07:24.57 1429499244578	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:07:30.87 1429499250873	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:07:37.16 1429499257164	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:07:43.42 1429499263423	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:07:49.68 1429499269689	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:07:55.96 1429499275967	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:08:02.28 1429499282282	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+Apr 20, 2015 10:08:08.54 1429499288545	addons.update-checker	WARN	HTTP Request failed for an unknown reason
+
+Apr 24, 2015 13:42:48.70 NEW SESSION
+Apr 24, 2015 13:42:48.70 1429857768707	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+Apr 24, 2015 13:42:49.47 1429857769477	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property

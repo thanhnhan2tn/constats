@@ -19,7 +19,7 @@
 							for (Server server : user.getServers()) {
 			%>
 			<li class="list-item list-server-left"  data-id="<%=server.getServerAddress()%>">
-			    <a href="${pageContext.request.contextPath }/services/<%=server.getServerAddress()%>/${cc}" title="#">
+			    <a href="#" title="<%=server.getServerName()%>">
 			        <i class="fa fa-desktop server-icon"></i> <%=server.getServerAddress()%>
 			    </a>
 			</li>

@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<form:button type="submit" class="btn btn-primary">Save</form:button>
-				<button class="btn btn-default" onclick="return window.history.back();">Back</button>
+				<button class="btn btn-default" onclick="window.history.back();">Back</button>
 			</form:form>
 
 			<%

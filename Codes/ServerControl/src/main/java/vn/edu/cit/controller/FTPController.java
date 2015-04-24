@@ -43,13 +43,25 @@ public class FTPController {
 	 */
 	@RequestMapping(value = "/serviceconfig/ftpinstall/{ip}/{cc}", method = RequestMethod.GET)
 	public String ftpSetup(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, ModelMap mm) {
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
 			for (Server server : user.getServers()) {
 				if (server.getServerAddress().equals(ip)) {
 					FtpConfig fconfig = new FtpConfig();
-					fconfig.Install(server); // return true
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					if (fconfig.Install(sv)) {
+						_log.info("Upload FTP Config to server");
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Setup VSFTPD Success!");
+					} else {
+						_log.info("Cai dat VSFTPD khong thanh cong");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message",
+								"Cai dat VSFTPD khong thanh cong, vui long kiem tra lai");
+					}
 				}
 			}
 			return "redirect:/services/" + ip + "/" + c;
@@ -65,19 +77,21 @@ public class FTPController {
 	 */
 	@RequestMapping(value = "/serviceconfig/ftp/{ip}/{cc}", method = RequestMethod.GET)
 	public String ftpConfig(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, ModelMap mm) {
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Kiem tra user va token
 		if (user != null && cc.equals(c)) {
 			Server server = serverDAO.getServer(user, ip);
-			server.setServerUsername((String) session.getAttribute("sudouser"));
-			server.setServerPassword((String) session.getAttribute("sudopass"));
-			System.out.println(server.getServerUsername());
+			Server sv = new Server(server);
+
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			System.out.println(sv.getServerUsername());
 			FtpConfig ftp = new FtpConfig();
-			if (ftp.checkInstall(server) == true) {
+			if (ftp.checkInstall(sv) == true) {
 				// Neu server da cai dat FTP
-				mm.put("Ftp", ftp.convertTextToObject(server));
+				mm.put("Ftp", ftp.convertTextToObject(sv));
 			}
 			mm.put("server", server);
 			return "ftp-config";
@@ -100,39 +114,43 @@ public class FTPController {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// lay thong tin server cua user
-		Server server = serverDAO.getServer(user, ip);
-		// doi thong tin server sang sudoer user
-		server.setServerUsername((String) session.getAttribute("sudouser"));
-		server.setServerPassword((String) session.getAttribute("sudopass"));
-		_log.info("Set new Sudoer password");
 		// kiem tra thong tin user dang nhap
 		if (user != null && cc.equals(c)) {
-			FtpConfig ftpconfig = new FtpConfig();
-			// kiem tra dich vu ftp
-			if (ftpconfig.checkInstall(server) == true) {
-				// Neu server da cai dat FTP
-				mm.put("server", server);
-				//
-				try {
-					ftpconfig.uploadConfigToServer(server, ftp);
-					_log.info("Upload Config to server ");
-					redirectAtt.addFlashAttribute("displaysuccess", "block");
-					redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");
-				} catch (IOException e) {
-					_log.info("Fail upload Config to server ");
-					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Khong the cap nhat len server (Cannot update to server)!");
-				}
-				return "redirect:/services/" + ip + "/" + c;
-			} else {
-				mm.put("server", server);
-				// neu chua cai dat, chuyen ve trang install
-				return "ftp-config";
-			}
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					FtpConfig ftpconfig = new FtpConfig();
+					// kiem tra dich vu ftp
+					if (ftpconfig.checkInstall(sv) == true) {
+						// Neu server da cai dat FTP
+						mm.put("server", server);
+						//
+						try {
+							ftpconfig.uploadConfigToServer(sv, ftp);
+							_log.info("Upload Config to server ");
+							redirectAtt.addFlashAttribute("displaysuccess", "block");
+							redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");
+						} catch (IOException e) {
+							_log.info("Fail upload Config to server ");
+							redirectAtt.addFlashAttribute("display", "block");
+							redirectAtt.addFlashAttribute("message",
+									"Khong the cap nhat len server (Cannot update to server)!");
+						}
+
+					} else { // check install
+						mm.put("server", server);
+						// neu chua cai dat, chuyen ve trang install
+						return "ftp-config";
+					}
+				}//end fi check ip
+			} // end for
 
 		} else {
 			return "redirect:/login";
 		}
+		return "ftp-config";
 	}
 
 	private static final Logger _log = Logger.getLogger(FTPController.class);

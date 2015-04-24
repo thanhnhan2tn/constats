@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//src/main/java/model/nic/NicConfig.java=UTF-8
 encoding//src/main/java/vn/edu/cit/controller/FTPController.java=UTF-8
 encoding//src/main/java/vn/edu/cit/controller/SSHController.java=UTF-8
+encoding//src/main/java/vn/edu/cit/model/Server.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/themes/default/modules/mainContent.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/themes/default/modules/services-ssh-content.jsp=UTF-8

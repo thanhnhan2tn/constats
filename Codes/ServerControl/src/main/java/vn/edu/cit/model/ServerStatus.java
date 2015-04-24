@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ServerStatus {
 	private Date date;
+	private int status; 
 	String hostname;
 	String osversion;
 	String kernel;
@@ -40,6 +41,14 @@ public class ServerStatus {
 		this.memcached = memcached;
 		this.cpu_loadaverage = cpu_loadaverage;
 		this.local_disk = local_disk;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public Date getDate() {

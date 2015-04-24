@@ -53,13 +53,13 @@ public class SSHController {
 			// Kiem tra thong tin Server
 			if (server != null) {
 				// Set sudo user cho server
-				server.setServerUsername((String) session.getAttribute("sudouser"));
-				server.setServerPassword((String) session.getAttribute("sudopass"));
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
 				SSHConfig sshconfig = new SSHConfig();
 				_log.info("Lay thong tin SSH config");
-				_log.info("Doi user:" + server.getServerUsername());
-				SSH ssh = sshconfig.convertTextToObjectSSH(server);
-
+				_log.info("Doi user:" + sv.getServerUsername());
+				SSH ssh = sshconfig.convertTextToObjectSSH(sv);
 				mm.put("SSH", ssh);
 
 				mm.put("server", server);
@@ -86,16 +86,17 @@ public class SSHController {
 		// lay thong tin server cua user
 		Server server = serverDAO.getServer(user, ip);
 		// doi thong tin server sang sudoer user
-		server.setServerUsername((String) session.getAttribute("sudouser"));
-		server.setServerPassword((String) session.getAttribute("sudopass"));
+		Server sv = new Server(server);
+		sv.setServerUsername((String) session.getAttribute("sudouser"));
+		sv.setServerPassword((String) session.getAttribute("sudopass"));
 		_log.info("Set new Sudoer password");
 		// kiem tra thong tin user dang nhap
 		if (user != null && cc.equals(c)) {
 			SSHConfig sshconfig = new SSHConfig();
 			// kiem tra dich vu ftp
-
+			sshconfig.uploadConfigToServer(sv, ssh);
 			mm.put("server", server);
-			sshconfig.uploadConfigToServer(server, ssh);
+			
 			_log.info("Upload SSH Config to server ");
 			redirectAtt.addFlashAttribute("displaysuccess", "block");
 			redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");

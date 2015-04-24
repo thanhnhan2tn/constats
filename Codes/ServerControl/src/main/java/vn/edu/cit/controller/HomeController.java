@@ -6,6 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.server.ServerConfig;
+import model.server.ServerStatus;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,9 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
-import vn.edu.cit.model.ServerStatus;
 import vn.edu.cit.model.User;
-import vn.edu.cit.servercontrol.ServerConfig;
+
 
 /**
  * Handles requests for the application home page.
@@ -48,12 +50,13 @@ public class HomeController {
 		// Su dung thong tin tu session de lay Doi tuong
 		User user = (User) session.getAttribute("user");
 		// Neu user tong tai, thi tra ve file home, set doi tuong server
-		session.removeAttribute("sudouser");
-		session.removeAttribute("sudopass");
+		//session.removeAttribute("sudouser");
+		//session.removeAttribute("sudopass");
 		if (user != null) {
 			mm.put("title", "Home - Server Control");
 			mm.put("Server", new Server());
 			mm.put("user", user);
+
 			return "home";
 		} else {
 			// Neu user khong ton tai, xoa het session dang co, va redirect ve
@@ -75,16 +78,19 @@ public class HomeController {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 		String check = "false";
-		if (user != null && c.equals(cc)) {
+		if (user != null) {
 			for (Server server : user.getServers()) {
+				_log.info("Check status: Get server: " +server.getServerUsername()+"/"+server.getServerAddress());
 				if (server.getServerAddress().equals(ip)) {
 					server.setServerUsername("svcontrol"); // a user vs SSH
-															// permision
 					if (server.checkStatus()) {
+						_log.info("Check status:" +server.getServerUsername()+"/"+server.getServerPassword());
 						check = "true";
 					}
 				}
 			}
+		}else{
+			return "Khong the load duoc status";
 		}
 		return check;
 	}
@@ -264,9 +270,9 @@ public class HomeController {
 						redirectAtt.addFlashAttribute("message", "This IP address already exists!");
 						return "redirect:/";
 					} else {
-						//create serverstatus object
-						List<ServerStatus> status = new ArrayList<ServerStatus>(); 
-						server.setStatus(status); //add serverstatus object
+						// create serverstatus object
+						List<ServerStatus> status = new ArrayList<ServerStatus>();
+						server.setStatus(status); // add serverstatus object
 						listServer.add(server);// Add Server to list
 						user.setServers(listServer);// Set list server to
 													// user
@@ -463,7 +469,6 @@ public class HomeController {
 						try {
 							status = sf.getServerStatus(s);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							status = null;
 						}
 					}

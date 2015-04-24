@@ -1,0 +1,26 @@
+package model.server;
+
+import vn.edu.cit.model.Server;
+import model.server.*;
+
+public class ServerThread extends Thread {
+	ServerConfig svC;
+	Server sv;
+
+	// Code trong hàm run() sẽ được thực thi khi
+	// thread được chạy (start)
+	@Override
+	public void run() {
+		sv = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
+		try {
+			//svC.startMonitor(sv, 1030);
+			// Ngủ 1030 milli giây.
+			// Thread.sleep(1030);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		System.out.println("  - ==> HelloThread stopped");
+	}
+}

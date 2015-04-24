@@ -262,7 +262,7 @@
 									<a
 										href="${pageContext.request.contextPath }/serviceconfig/dhcp/${server.serverAddress}/${cc}">DHCP
 										Server Configuration <i
-										class="glyphicon glyphicon-chevron-down pull-right"></i>
+										class="glyphicon glyphicon-chevron-right pull-right"></i>
 									</a>
 								</h3>
 							</div>

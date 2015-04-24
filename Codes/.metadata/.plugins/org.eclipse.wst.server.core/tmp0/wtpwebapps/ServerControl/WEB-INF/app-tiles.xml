@@ -81,5 +81,9 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/services-ssh-content.jsp" />
 	</definition>
+	<definition name="dhcp-config" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-dhcp-content.jsp" />
+	</definition>
 
 </tiles-definitions>	

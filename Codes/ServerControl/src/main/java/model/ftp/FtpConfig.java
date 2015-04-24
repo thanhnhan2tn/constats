@@ -137,12 +137,16 @@ public class FtpConfig {
 	 * @return true, false, stop
 	 */
 	// check Install
-	public Boolean checkInstall(Server sv) {
-		String command = "echo " + sv.getServerPassword() + " |sudo -S "
-				+ " service vsftpd status";
-		return sendCommandToServer(sv, command);
-
-	}
+		public Boolean checkInstall(Server sv) {
+			String command = "echo " + sv.getServerPassword() + " |sudo -S "
+					+ "dpkg --get-selections | grep 'vsftpd' | awk '{print $2}'";
+			String kq = uploadToServer(sv, command);
+			if (kq.startsWith("install")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 	// checkRunning
 	public Boolean checkRunning(Server sv) {
@@ -165,8 +169,8 @@ public class FtpConfig {
 
 	// Install
 	public Boolean Install(Server sv) {
-		String command = "echo " + sv.getServerPassword() + " |sudo -S "
-				+ " apt-get install -y vsftpd";
+		String command = "echo " + sv.getServerPassword() + "|sudo -S "
+				+ "apt-get install -y vsftpd";
 		return sendCommandToServer(sv, command);
 
 	}
@@ -583,15 +587,15 @@ public class FtpConfig {
 	public static void main(String[] args) throws IOException {
 
 		FtpConfig ftp_c = new FtpConfig();
-		Server sv = new Server("192.168.0.17", 22, "ubuntu", "ubuntu", "ubuntu");
+		Server sv = new Server("192.168.1.176", 22, "ubuntu", "tt", "tt");
 		// In ra chuoi chuan hoa
 		// System.out.println(ftp_c.ChuanHoaChuoi(sv));
 		// In ra FTP
-		// ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
+		ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
 		//
 		// System.out.println("--------Uploading.....to Server---------------");
 		//
-		 System.out.println(ftp_c.checkInstall(sv));
+		 //System.out.println(ftp_c.checkInstall(sv));
 		// System.out.println("--------Restarting.....to Server---------------");
 		//
 		// ftp_c.Restart(sv);

@@ -21,7 +21,8 @@
 				Ftp ftp = (Ftp) request.getAttribute("Ftp");
 				if (ftp != null) {
 			%>
-			
+			<div style="display: none ${display}" id="login-alert" class="alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}" id="login-alert" class="alert alert-success col-sm-12">${message}</div>
 			<form:form id="ftp-config-form1" modelAttribute="Ftp"
 				action="${pageContext.request.contextPath }/serviceconfig/ftp/save/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
@@ -149,14 +150,14 @@
 					</div>
 				</div>
 				<form:button type="submit" class="btn btn-primary">Save</form:button>
-				<button class="btn btn-default" onclick="return history:back()">Back</button>
+				<button class="btn btn-default" onclick="services/${server.serverAddress}/${cc}">Back</button>
 			</form:form>
 			
 			<%
 				} else {
 			%>
 			<div class="panel-body">
-				<a class="col-md-4"
+				<a class="col-md-9"
 					href="${pageContext.request.contextPath }/serviceconfig/ftpinstall/${server.serverAddress}/${cc}">
 					Click here to Install VSFTPD Service..</a>
 			</div>

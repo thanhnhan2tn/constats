@@ -1,0 +1,13 @@
+package vn.edu.cit.dao;
+
+import model.server.ServerStatus;
+
+public interface ServerStatusDAO {
+	public void createServerStatus(ServerStatus status);
+
+	public boolean checkEnable(User user, String ip);
+
+	public ServerStatus getServerStatus(String ip);
+
+	public void updateServerStatus(ServerStatus status);
+}
