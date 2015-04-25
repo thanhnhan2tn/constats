@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
@@ -284,20 +283,6 @@ public class NICController {
 			session.invalidate();
 			return "redirect:/login";
 		}
-	}
-
-	@RequestMapping(value = "/serviceconfig/user/{user}/{pass}/{ip}/{cc}", method = RequestMethod.GET)
-	@ResponseBody
-	public String replaceUser(HttpSession session, @PathVariable(value = "user") String u,
-			@PathVariable(value = "pass") String pass, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c) {
-		String cc = (String) session.getAttribute("cc");
-		User user = (User) session.getAttribute("user");
-		if (user != null && c.equals(cc)) { // check user login
-			session.setAttribute("sudouser", u);
-			session.setAttribute("sudopass", pass);
-		}
-		return cc;
 	}
 
 	/**

@@ -19,6 +19,7 @@ public class AdminController {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
 			if (user.getRole() == 2) {
+				m.put("overview", "active");
 				return "admincp";
 			} else {
 				return "redirect:/login";
@@ -35,6 +36,7 @@ public class AdminController {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
+			m.put(action, "active");
 			return action;
 		} else {
 			return "redirect:/login";

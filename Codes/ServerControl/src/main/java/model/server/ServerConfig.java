@@ -312,7 +312,6 @@ public class ServerConfig {
 	}
 
 	public Boolean checkSudoer(Server sv) {
-
 		String kq = uploadToServer(sv, "echo " + sv.getServerPassword()
 				+ " | sudo -S bash -c ' echo -e hello '");
 		if (kq.indexOf("hello") != -1) {
@@ -323,31 +322,31 @@ public class ServerConfig {
 
 	}
 
-	public static void main(String[] args) throws IOException,
-			InterruptedException {
-		ServerConfig svc = new ServerConfig();
-		Server sv = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
-		Server sv2 = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
-		Server sv3 = new Server("192.168.1.129", 22, "mayb", "svcontrol", "12345");
-		// System.out.println(svc.checkSudoer(sv));
-		// svc.checkAllPS(sv);
-		// System.out.println("----------------------------");
-		// System.out.println(svc.ServerInformation(sv));
-		// svc.checkAllPS(sv);
-		svc.startMonitor(sv, 2);
-		svc.startMonitor(sv3, 2);
-		svc.startMonitor(sv2, 2);
-		// svc.showAllService(sv);
-
-		// Server sv1 = new Server(1, "192.168.0.178", 22, "ubuntu", "maya",
-		// "maya");
-		// svc.stopMonitor(sv1);
-		//
-		// Server sv2 = new Server(1, "192.168.0.176", 22, "ubuntu1", "ubuntu1",
-		// "ubuntu1");
-		// svc.startMonitor(sv, 3000);
-		// svc.Restart(sv);
-		// System.out.println(svc.showAllService(sv));
-		// System.out.println(svc.showAllService(sv));
-	}
+//	public static void main(String[] args) throws IOException,
+//			InterruptedException {
+//		ServerConfig svc = new ServerConfig();
+//		Server sv = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
+//		Server sv2 = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
+//		Server sv3 = new Server("192.168.1.129", 22, "mayb", "svcontrol", "12345");
+//		// System.out.println(svc.checkSudoer(sv));
+//		// svc.checkAllPS(sv);
+//		// System.out.println("----------------------------");
+//		// System.out.println(svc.ServerInformation(sv));
+//		// svc.checkAllPS(sv);
+//		svc.startMonitor(sv, 2);
+//		svc.startMonitor(sv3, 2);
+//		svc.startMonitor(sv2, 2);
+//		// svc.showAllService(sv);
+//
+//		// Server sv1 = new Server(1, "192.168.0.178", 22, "ubuntu", "maya",
+//		// "maya");
+//		// svc.stopMonitor(sv1);
+//		//
+//		// Server sv2 = new Server(1, "192.168.0.176", 22, "ubuntu1", "ubuntu1",
+//		// "ubuntu1");
+//		// svc.startMonitor(sv, 3000);
+//		// svc.Restart(sv);
+//		// System.out.println(svc.showAllService(sv));
+//		// System.out.println(svc.showAllService(sv));
+//	}
 }

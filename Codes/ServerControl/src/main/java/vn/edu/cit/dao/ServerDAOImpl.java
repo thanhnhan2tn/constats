@@ -38,19 +38,19 @@ public class ServerDAOImpl implements ServerDAO {
 		return null;
 	}
 
-	@Override
-	public Server getServerSudo(User user, String ip, String sudousername, String sudopass) {
-		// query to search user
-		if (user.getServers() != null) {
-			for (Server server : user.getServers())
-				if (server.getServerAddress().equals(ip)) {
-					return server;
-				}
-		} else {
-			return null;
-		}
-		return null;
-	}
+//	@Override
+//	public Server getServerSudo(User user, String ip, String sudousername, String sudopass) {
+//		// query to search user
+//		if (user.getServers() != null) {
+//			for (Server server : user.getServers())
+//				if (server.getServerAddress().equals(ip)) {
+//					return server;
+//				}
+//		} else {
+//			return null;
+//		}
+//		return null;
+//	}
 
 	@Override
 	public void updateServer(Server sv) {

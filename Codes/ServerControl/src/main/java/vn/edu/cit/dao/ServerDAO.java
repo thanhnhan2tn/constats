@@ -11,5 +11,5 @@ public interface ServerDAO {
 
 	public void updateServer(Server sv);
 
-	public Server getServerSudo(User user, String ip, String sudousername, String sudopass);
+	//public Server getServerSudo(User user, String ip, String sudousername, String sudopass);
 }
