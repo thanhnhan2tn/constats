@@ -314,7 +314,7 @@ public class ServerConfig {
 	public Boolean checkSudoer(Server sv) {
 		String kq = uploadToServer(sv, "echo " + sv.getServerPassword()
 				+ " | sudo -S bash -c ' echo -e hello '");
-		if (kq.indexOf("hello") != -1) {
+		if (kq!=null && kq.indexOf("hello") != -1) {
 			return true;
 		} else {
 			return false;

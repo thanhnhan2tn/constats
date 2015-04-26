@@ -123,7 +123,7 @@ public class DHCPConfig {
 		String command = "echo " + sv.getServerPassword() + " |sudo -S "
 				+ "dpkg --get-selections | grep 'isc-dhcp-server\\s' | awk '{print $2}'";
 		String kq = uploadToServer(sv, command);
-		if (kq.startsWith("deinstall") || kq.length() == 0) {
+		if (kq == null || kq.startsWith("deinstall") || kq.length() == 0) {
 			return false;// not install
 		} else {
 			return true; // installed
@@ -988,7 +988,7 @@ public class DHCPConfig {
 		config = config + "}" + "\n";
 		String tong = "echo " + sv.getServerPassword() + " | sudo -S bash -c ' echo -e " + "\"" + config + "\n" + "\""
 				+ "   >> /etc/dhcp/dhcpd.conf '";
-
+		System.out.println(tong);
 		Boolean boo = sendCommandToServer(sv, tong);
 		if (boo == true) {
 			System.out.println("Created SUBNET ...OK");
@@ -1043,7 +1043,7 @@ public class DHCPConfig {
 
 	public static void main(String[] args) throws IOException {
 		DHCPConfig dhcp_c = new DHCPConfig();
-		Server sv = new Server("192.168.1.136", 22, "ubuntu", "ubuntu", "ubuntu");
+		Server sv = new Server("192.168.56.101", 22, "ubuntu", "ubuntu", "ubuntu");
 		Subnet sn = new Subnet("172.16.0.0", "255.255.0.0", "172.16.0.100 172.16.0.150", "199.99.9.33",
 				"www.thietkeweb.org", "172.16.0.105", null, "2600", null);
 
@@ -1056,20 +1056,20 @@ public class DHCPConfig {
 		dhcp_c.inHost(sv);
 		// ---Upload---
 
-		System.out.println(dhcp_c.checkInstall(sv));
-		dhcp_c.uploadConfigToDHCPServer(sv, dhcp_c.convertTextToListSubnet(sv), dhcp_c.convertTextToListHost(sv),
-				dhcp_c.convertTextToConfigChung(sv));
+//		System.out.println(dhcp_c.checkInstall(sv));
+//		dhcp_c.uploadConfigToDHCPServer(sv, dhcp_c.convertTextToListSubnet(sv), dhcp_c.convertTextToListHost(sv),
+//				dhcp_c.convertTextToConfigChung(sv));
 
 		// -----------
-		dhcp_c.uploadStringConfigToDHCPServer(sv, " \" hieuminh \" ");
-		System.out.println(dhcp_c.inConfigChung(sv));
-		System.out.println(dhcp_c.convertTextToConfigChung(sv));
+		//dhcp_c.uploadStringConfigToDHCPServer(sv, " \" hieuminh \" ");
+		//System.out.println(dhcp_c.inConfigChung(sv));
+		//System.out.println(dhcp_c.convertTextToConfigChung(sv));
 		// dhcp_c.addSubnet(sv, sn);
 		// dhcp_c.addHost(sv, host);
-		dhcp_c.XoaSubnetorHost(sv, null, "fantasia");
-		System.out.println(dhcp_c.loadConfigChungToPlainText(sv));
-		System.out.println(dhcp_c.inConfigChung(sv));
-		System.out.println(dhcp_c.loadConfigToPlainText(sv));
+		//dhcp_c.XoaSubnetorHost(sv, null, "fantasia");
+		//System.out.println(dhcp_c.loadConfigChungToPlainText(sv));
+		//System.out.println(dhcp_c.inConfigChung(sv));
+		//System.out.println(dhcp_c.loadConfigToPlainText(sv));
 
 	}
 }

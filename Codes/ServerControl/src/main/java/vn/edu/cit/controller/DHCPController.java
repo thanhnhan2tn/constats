@@ -1,7 +1,7 @@
 package vn.edu.cit.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,10 +9,9 @@ import javax.servlet.http.HttpSession;
 import model.dhcp.ConfigChung;
 import model.dhcp.DHCP;
 import model.dhcp.DHCPConfig;
-import model.dhcp.Subnet;
 import model.dhcp.HostFixIP;
-import model.nic.Nic;
-import model.nic.NicConfig;
+import model.dhcp.Subnet;
+import model.server.ServerConfig;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +45,26 @@ public class DHCPController {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
-			for (Server server : user.getServers()) {
-				if (server.getServerAddress().equals(ip)) {
-					DHCPConfig dhcpconfig = new DHCPConfig();
-					if (dhcpconfig.Install(server)) { // return true
-						_log.info("Install DHCP service ");
-						redirectAtt.addFlashAttribute("displaysuccess", "block");
-						redirectAtt.addFlashAttribute("message", "(Install DHCP Success!)");
-					} else {
-						_log.info("Install DHCP service Failed");
-						redirectAtt.addFlashAttribute("display", "block");
-						redirectAtt.addFlashAttribute("message", "(Install DHCP failed!)");
-					}
-
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server);
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			DHCPConfig dhcpconfig = new DHCPConfig();
+			ServerConfig serverConf = new ServerConfig();
+			if (serverConf.checkSudoer(sv)) {
+				if (dhcpconfig.Install(server)) { // return true
+					_log.info("Install DHCP service ");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", "(Install DHCP Success!)");
+				} else {
+					_log.info("Install DHCP service Failed");
+					redirectAtt.addFlashAttribute("display", "block");
+					redirectAtt.addFlashAttribute("message", "(Install DHCP failed!)");
 				}
+				return "redirect:/services/" + ip + "/" + c;
+			} else {// check sudoer user
+				return "redirect:/";
 			}
-			return "redirect:/services/" + ip + "/" + c;
 		} else {
 			return "redirect:/login";
 		}
@@ -72,36 +75,42 @@ public class DHCPController {
 	 */
 
 	@RequestMapping(value = "/serviceconfig/dhcp/{ip}/{cc}", method = RequestMethod.GET)
-	public String ftpSetup(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+	public String dhctSetup(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
-			Server server = serverDAO.getServer(user, ip);
-			Server sv = new Server(server);
-			sv.setServerUsername((String) session.getAttribute("sudouser"));
-			sv.setServerPassword((String) session.getAttribute("sudopass"));
-			_log.info(sv.getServerAddress() + sv.getServerPassword());
-			DHCPConfig dhcp = new DHCPConfig();
+			if (session.getAttribute("sudouser") != null) {
+				Server server = serverDAO.getServer(user, ip);
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				_log.info(sv.getServerAddress() + sv.getServerPassword());
+				// ServerConfig serverConf = new ServerConfig();
+				DHCPConfig dhcp = new DHCPConfig();
 
-			if (dhcp.checkInstall(sv) == true) {
-				// Neu server da cai dat FTP
-				try {
-					DHCP d = dhcp.convertConfigToObjectDHCP(sv);
-					mm.put("dhcp", d);
-					mm.put("configchung", d.getConfigchung());
-					session.setAttribute("dhcp", d);
-				} catch (IOException e) {
-					_log.info("Fail load Config from server ");
+				if (dhcp.checkInstall(sv) == true) {
+					// Neu server da cai dat dhct
+					try {
+						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
+						mm.put("dhcp", d);
+						mm.put("configchung", d.getConfigchung());
+						session.setAttribute("dhcp", d);
+					} catch (IOException e) {
+						_log.info("Fail load Config from server ");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+					}
+				} else {
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+					redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
 				}
-			} else {
-				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+				mm.put("server", server);
+				return "dhcp-config";
+			}// test user sudoer
+			else {
+				return "redirect:/";
 			}
-			mm.put("server", server);
-			return "dhcp-config";
 		} else {
 			return "redirect:/login";
 		}
@@ -111,7 +120,7 @@ public class DHCPController {
 	 * Cau hinh Subnet cua DHCP
 	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/subnets/{ip}/{cc}", method = RequestMethod.GET)
-	public String ftpSetupSubnets(HttpServletRequest request, HttpSession session,
+	public String dhctSetupSubnets(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
 			RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
@@ -119,29 +128,38 @@ public class DHCPController {
 		if (user != null && cc.equals(c)) {
 			Server server = serverDAO.getServer(user, ip);
 			Server sv = new Server(server);
-			sv.setServerUsername((String) session.getAttribute("sudouser"));
-			sv.setServerPassword((String) session.getAttribute("sudopass"));
-			_log.info(sv.getServerAddress() + sv.getServerPassword());
-			DHCPConfig dhcp = new DHCPConfig();
+			if (session.getAttribute("sudouser") != null) {
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				_log.info(sv.getServerAddress() + sv.getServerPassword());
+				DHCPConfig dhcp = new DHCPConfig();
 
-			if (dhcp.checkInstall(sv) == true) {
-				// Neu server da cai dat FTP
-				try {
-					DHCP d = dhcp.convertConfigToObjectDHCP(sv);
-					mm.put("dhcp", d);
-					mm.put("subnets", d.getSubnets());
-					session.setAttribute("dhcp", d);
-				} catch (IOException e) {
-					_log.info("Fail load Config from server ");
+				if (dhcp.checkInstall(sv) == true) {
+					// Neu server da cai dat dhct
+					try {
+						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
+						mm.put("dhcp", d);
+						mm.put("subnets", d.getSubnets());
+						session.setAttribute("dhcp", d);
+						// Create Object to add subnet
+						mm.put("subnetNew", new Subnet());
+
+					} catch (IOException e) {
+						_log.info("Fail load Config from server ");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+						return "dhcp-config";
+					}
+				} else {
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+					redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
 				}
-			} else {
-				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+				mm.put("server", server);
+				return "dhcp-subnets-config";
+			}// check Sudoer server user
+			else {
+				return "redirect:/";
 			}
-			mm.put("server", server);
-			return "dhcp-subnets-config";
 		} else {
 			return "redirect:/login";
 		}
@@ -151,7 +169,7 @@ public class DHCPController {
 	 * Cau hinh Subnet cua DHCP
 	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/hostfixs/{ip}/{cc}", method = RequestMethod.GET)
-	public String ftpSetupHostfixs(HttpServletRequest request, HttpSession session,
+	public String dhctSetupHostfixs(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
 			RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
@@ -165,20 +183,23 @@ public class DHCPController {
 			DHCPConfig dhcp = new DHCPConfig();
 
 			if (dhcp.checkInstall(sv) == true) {
-				// Neu server da cai dat FTP
+				// Neu server da cai dat dhct
 				try {
 					DHCP d = dhcp.convertConfigToObjectDHCP(sv);
 					mm.put("dhcp", d);
+					mm.put("hostNew", new HostFixIP());
 					mm.put("hostfixs", d.getHosts());
 					session.setAttribute("dhcp", d);
 				} catch (IOException e) {
 					_log.info("Fail load Config from server ");
 					redirectAtt.addFlashAttribute("display", "block");
 					redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+					return "dhcp-config";
 				}
 			} else {
 				redirectAtt.addFlashAttribute("display", "block");
 				redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+				return "dhcp-config";
 			}
 			mm.put("server", server);
 			return "dhcp-hostfixs-config";
@@ -192,7 +213,7 @@ public class DHCPController {
 	 * 
 	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/save/{ip}/{cc}", method = RequestMethod.POST)
-	public String ftpSaveConfigChung(
+	public String dhctSaveConfigChung(
 			@ModelAttribute(value = "configchung") ConfigChung configchung,
 			// @ModelAttribute(value = "subnets") List<Subnet> subnets,
 			// @ModelAttribute(value = "hostfixs") List<HostFixIP> hostfixs,
@@ -210,14 +231,6 @@ public class DHCPController {
 			if (configchung != null) {
 				dhcpToConfig.setConfigchung(configchung);
 			}
-			// Save ListSN
-			// if(subnets!=null){
-			// dhcpToConfig.setSubnets(subnets);
-			// }
-			// Save ListSN
-			// if(hostfixs!=null){
-			// dhcpToConfig.setHosts(hostfixs);
-			// }
 
 			Server server = serverDAO.getServer(user, ip);
 			Server sv = new Server(server);
@@ -253,9 +266,9 @@ public class DHCPController {
 	 * 
 	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/subnets/save/{ip}/{cc}", method = RequestMethod.POST)
-	public String ftpSaveSubnets(
+	public String dhctSaveSubnets(
 			// @ModelAttribute(value = "configchung") ConfigChung configchung,
-			@ModelAttribute(value = "subnets") List<Subnet> subnets,
+			@ModelAttribute(value = "dhcp") DHCP dhcp,
 			// @ModelAttribute(value = "hostfixs") List<HostFixIP> hostfixs,
 			HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
@@ -265,12 +278,12 @@ public class DHCPController {
 			// Get dhcp in Session
 			DHCP dhcpToConfig = (DHCP) session.getAttribute("dhcp");
 			// Xoa ss sau khi tao doi tuong
-			session.removeAttribute("dhcp");
-			DHCPConfig dConfig = new DHCPConfig();
+			// session.removeAttribute("dhcp");
 
+			DHCPConfig dConfig = new DHCPConfig();
 			// Save ListSN
-			if (subnets != null) {
-				dhcpToConfig.setSubnets(subnets);
+			if (dhcp.getSubnets() != null) {
+				dhcpToConfig.setSubnets(dhcp.getSubnets());
 			}
 
 			Server server = serverDAO.getServer(user, ip);
@@ -303,16 +316,58 @@ public class DHCPController {
 	}
 
 	/**
+	 * add DHCP Subnet and upload tu Server controller
+	 * 
+	 */
+	@RequestMapping(value = "/serviceconfig/dhcp/subnets/addsubnet/{ip}/{cc}", method = RequestMethod.POST)
+	public String dhctAddSubnet(@ModelAttribute(value = "subnetNew") Subnet subnet, HttpServletRequest request,
+			HttpSession session, @PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			ModelMap mm, RedirectAttributes redirectAtt) {
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		if (user != null && cc.equals(c)) {
+			// Get dhcp in Session
+			// DHCP dhcpToConfig = (DHCP) session.getAttribute("dhcp");
+			// Xoa ss sau khi tao doi tuong
+			session.removeAttribute("dhcp");
+			DHCPConfig dConfig = new DHCPConfig();
+
+			// Save ListSN
+			if (subnet != null) {
+				Server server = serverDAO.getServer(user, ip);
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				if (dConfig.createSubnet(sv, subnet)) {
+					_log.info("Upload DHCP Config to server");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", "Save and Tranfer Subnets Config Success!");
+				} else {
+					_log.info("Fail upload DHCP Config to server ");
+					redirectAtt.addFlashAttribute("display", "block");
+					redirectAtt.addFlashAttribute("message",
+							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
+				}
+				mm.put("server", server);
+				return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+			}// subnet null
+			return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
 	 * Save DHCP Hostfixs and upload tu Server controller
 	 * 
 	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/hostfixs/save/{ip}/{cc}", method = RequestMethod.POST)
-	public String ftpSaveHostfixs(
+	public String dhctSaveHostfixs(
 			// @ModelAttribute(value = "configchung") ConfigChung configchung,
 			// @ModelAttribute(value = "subnets") List<Subnet> subnets,
-			@ModelAttribute(value = "hostfixs") List<HostFixIP> hostfixs, HttpServletRequest request,
-			HttpSession session, @PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
-			ModelMap mm, RedirectAttributes redirectAtt) {
+			@ModelAttribute(value = "dhcp") DHCP dhcp, HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
@@ -323,8 +378,8 @@ public class DHCPController {
 			DHCPConfig dConfig = new DHCPConfig();
 
 			// Save ListSN
-			if (hostfixs != null) {
-				dhcpToConfig.setHosts(hostfixs);
+			if (dhcp.getHosts() != null) {
+				dhcpToConfig.setHosts(dhcp.getHosts());
 			}
 
 			Server server = serverDAO.getServer(user, ip);
@@ -350,6 +405,48 @@ public class DHCPController {
 						"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 			}
 			mm.put("server", server);
+			return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
+	 * add DHCP Subnet and upload tu Server controller
+	 * 
+	 */
+	@RequestMapping(value = "/serviceconfig/dhcp/hostfixs/addhostfix/{ip}/{cc}", method = RequestMethod.POST)
+	public String dhctAddHostfix(@ModelAttribute(value = "hostfixNew") HostFixIP hostfix, HttpServletRequest request,
+			HttpSession session, @PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			ModelMap mm, RedirectAttributes redirectAtt) {
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		if (user != null && cc.equals(c)) {
+			// Get dhcp in Session
+			// DHCP dhcpToConfig = (DHCP) session.getAttribute("dhcp");
+			// Xoa ss sau khi tao doi tuong
+			session.removeAttribute("dhcp");
+			DHCPConfig dConfig = new DHCPConfig();
+
+			// Save ListSN
+			if (hostfix != null) {
+				Server server = serverDAO.getServer(user, ip);
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				if (dConfig.createHost(sv, hostfix)) {
+					_log.info("Upload DHCP Config to server");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", "Save and Tranfer Subnets Config Success!");
+				} else {
+					_log.info("Fail upload DHCP Config to server ");
+					redirectAtt.addFlashAttribute("display", "block");
+					redirectAtt.addFlashAttribute("message",
+							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
+				}
+				mm.put("server", server);
+				return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+			}// hostfix null
 			return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
 		} else {
 			return "redirect:/login";
@@ -439,7 +536,7 @@ public class DHCPController {
 			session.invalidate();
 			return "redirect:/login";
 		} // end check user
-		return "redirect:/services/" + ip + "/" + cc;
+		return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
 	}
 
 	private static final Logger _log = Logger.getLogger(DHCPController.class);

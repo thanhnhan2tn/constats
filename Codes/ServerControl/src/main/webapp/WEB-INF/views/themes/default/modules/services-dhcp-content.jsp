@@ -144,8 +144,8 @@
 								</h3>
 							</div>
 				</div>
-				<form:button type="submit" value="Save" id="savedhcp" >Save</form:button>
-				<button type="button" onclick="windows.history.back()">Back</button>
+				<form:button type="submit" class="btn btn-primary" value="Save" id="savedhcp" >Save</form:button>
+				<button type="button" class="btn btn-default"  onclick="history.go(-1);">Back</button>
 			</form:form>
 			<%
 				} else {

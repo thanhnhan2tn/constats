@@ -6,30 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=":form" key="selection"/>
+		<item value="checkInstall" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="command"/>
-			<item value="subnets"/>
-			<item value="checkStatus"/>
 			<item value="checkInstall"/>
-			<item value="dhcp"/>
-			<item value="async"/>
-			<item value="ServerConfigxxxxxxxxx"/>
-			<item value="subnet"/>
+			<item value="addhostfix"/>
+			<item value="/serviceconfig/dhcp/subnets/addsubnet/"/>
+			<item value="subnets/addsubnet"/>
+			<item value="serviceconfig/dhcp/hostfixs/"/>
+			<item value="hostfixNew"/>
+			<item value="hostfixed"/>
+			<item value="DHCPController"/>
 		</list>
 		<list key="replacehistory">
+			<item value="hostfixes"/>
+			<item value="dhct"/>
 			<item value="ServerConfig"/>
 			<item value="Subnet[0]"/>
 			<item value="ServerConfig.sendCommandToServer"/>
 			<item value="Ssh"/>
 			<item value="setServerUsername"/>
 			<item value="num"/>
-			<item value="template.default"/>
-			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -243,18 +243,6 @@
 
 						</div>
 
-						<!-- Apache Service -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/apache/${server.serverAddress}/${cc}">Apache
-										Server Configuration <i
-										class="glyphicon glyphicon-chevron-down pull-right"></i>
-									</a>
-								</h3>
-							</div>
-						</div>
 						<!-- DHCP Service -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -271,9 +259,23 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/bind9/${server.serverAddress}/${cc}">DNS
+									<a 
+										<%-- ${pageContext.request.contextPath }/serviceconfig/bind9/${server.serverAddress}/${cc} --%>
+										href="#" onclick="return alert('Under Construction');">DNS
 										Bind9 Server Configuration <i
+										class="glyphicon glyphicon-chevron-down pull-right"></i>
+									</a>
+								</h3>
+							</div>
+						</div>
+						<!-- Apache Service -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<a
+<%-- ${pageContext.request.contextPath }/serviceconfig/apache/${server.serverAddress}/${cc} --%>
+										href="#" onclick="return alert('Under Construction');">Apache
+										Server Configuration <i
 										class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>

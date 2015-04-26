@@ -496,14 +496,17 @@ public class HomeController {
 				sv.setServerPassword(pass);
 				System.out.println(sv.getServerUsername());
 				ServerConfig serverConf = new ServerConfig();
-				if (serverConf.checkSudoer(sv) == true) {
-					session.setAttribute("sudouser", u);
-					session.setAttribute("sudopass", pass);
-				}// check SUDOer USER
-				else {
+				//System.out.println("check...: "+serverConf.checkSudoer(sv));
+				if (serverConf.checkSudoer(sv) == null || serverConf.checkSudoer(sv) == false) {
 					_log.info("This user " + u + " is not Sudoer Permission");
 					redirectAtt.addFlashAttribute("display", "block");
 					redirectAtt.addFlashAttribute("message", "This user is not Sudoer Permission!");
+					
+				}// check SUDOer USER
+				else if(serverConf.checkSudoer(sv) == true){
+
+					session.setAttribute("sudouser", u);
+					session.setAttribute("sudopass", pass);
 				}
 			}// check thong tin server ton tai
 			else {
