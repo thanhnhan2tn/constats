@@ -12,23 +12,14 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
-
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
-<!-- 	<beans:bean -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-<!-- 		<beans:property name="prefix" value="/WEB-INF/views/" /> -->
-<!-- 		<beans:property name="suffix" value=".jsp" /> -->
-<!-- 	</beans:bean> -->
-
 	<context:component-scan base-package="vn.edu.cit" />
+	<context:component-scan base-package="model" />
 	<context:annotation-config />
 	<!-- config mongodb connection -->
 	<mongo:mongo host="localhost" port="27017" />
@@ -36,12 +27,10 @@
 		id="mongoDbFactory" />
 	<beans:bean id="mongoTemplate"
 		class="org.springframework.data.mongodb.core.MongoTemplate">
-		<beans:constructor-arg name="mongoDbFactory"
-			ref="mongoDbFactory" />
+		<beans:constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 	</beans:bean>
 	<beans:bean id="userDAO" class="vn.edu.cit.dao.UserDAOImpl" />
 	<beans:bean id="serverDAO" class="vn.edu.cit.dao.ServerDAOImpl" />
-	<beans:bean id="svttDAO" class="vn.edu.cit.dao.ServerStatusDAOImpl" />
 	<!-- Tiles -->
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

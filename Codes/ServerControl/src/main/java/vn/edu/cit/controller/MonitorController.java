@@ -30,45 +30,48 @@ public class MonitorController {
 	@Autowired
 	private UserDAO userDAO;
 
-//	@RequestMapping(value = "/monitor/{action}/{ip}/{cc}", method = RequestMethod.GET)
-//	public String monitorAction(HttpServletRequest request, HttpSession session,
-//			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
-//			@PathVariable(value = "cc") String c, ModelMap mm) {
-//		String cc = (String) session.getAttribute("cc");
-//		User user = (
-//				User) session.getAttribute("user");
-//
-//		// Server sv = new Server();
-//		if (user != null && c.equals(cc)) {
-//			for (Server server : user.getServers()) {
-//				if (server.getServerAddress().equals(ip)) {
-//					ServerConfig sf = new ServerConfig();
-//					if (action.equals("start")) {
-//						sf.startMonitor(server, 5);
-//					} else {
-//						try {
-//							sf.stopMonitor(server);
-//						} catch (InterruptedException e) {
-//							// TODO Auto-generated catch block
-//						}
-//					}
-//				}
-//			}
-//		} else {
-//			session.invalidate();
-//		}
-//		return "/monitor/" + ip + "/" + cc;
-//	}
-//
-//	@RequestMapping(value = "/monitor/{ip}/{cc}", method = RequestMethod.GET)
-//	public void monitor(HttpServletRequest request, HttpSession session, @PathVariable(value = "action") String action,
-//			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
-//		String cc = (String) session.getAttribute("cc");
-//		User user = (User) session.getAttribute("user");
-//		if (user != null && cc.equals(c)) {
-//
-//		}
-//	}
+	@RequestMapping(value = "/monitor/{action}/{ip}/{cc}", method = RequestMethod.GET)
+	public String monitorAction(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (
+				User) session.getAttribute("user");
+
+		// Server sv = new Server();
+		if (user != null && c.equals(cc)) {
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					ServerConfig sf = new ServerConfig();
+					if (action.equals("start")) {
+						sf.startMonitor(server, 5);
+					} else {
+						try {
+							sf.stopMonitor(server);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+						}
+					}
+				}
+			}
+		} else {
+			session.invalidate();
+		}
+		return "/monitor/" + ip + "/" + cc;
+	}
+
+	@RequestMapping(value = "/monitor/{ip}/{cc}", method = RequestMethod.GET)
+	public String monitor(HttpServletRequest request, HttpSession session, 
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && cc.equals(c)) {
+			mm.put("ip",ip);
+			return "monitor";
+		}else{
+			return "redirect:/login";
+		}
+	}
 
 	private static final Logger _log = Logger.getLogger(MonitorController.class);
 }

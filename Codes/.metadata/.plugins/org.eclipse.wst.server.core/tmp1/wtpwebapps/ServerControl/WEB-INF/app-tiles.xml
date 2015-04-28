@@ -30,7 +30,7 @@
 			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
 	</definition>
 	<definition name="home" extends="template.default" />
-	<definition name="monitor-default" extends="template.default">
+	<definition name="monitor" extends="template.default">
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/monitor-content.jsp" />
 	</definition>
@@ -97,7 +97,4 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/services-dhcp-file-content.jsp" />
 	</definition>
-	
-	
-
 </tiles-definitions>	

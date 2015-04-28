@@ -25,8 +25,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.jcraft.jsch.Session;
-
 import vn.edu.cit.dao.ServerDAO;
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
@@ -450,7 +448,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/getserverinfo/{ip}/{cc}", method = RequestMethod.GET)
 	@ResponseBody
-	public ServerStatus getServerInfoController(@PathVariable(value = "ip") String ip,
+	public ServerStatus getServerInfo(@PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, HttpServletRequest request, HttpSession session,
 			RedirectAttributes redirectAtt) {
 		// Lay thong tin username trong session;

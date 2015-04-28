@@ -1,9 +1,6 @@
 package vn.edu.cit.model;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.List;
 
 import model.server.ServerStatus;
@@ -22,7 +19,7 @@ import com.jcraft.jsch.Session;
  *
  */
 @Document(collection = "servers")
-public class Server extends Thread {
+public class Server {
 	private String serverAddress;
 	private int port = 22;
 	private String serverName;
@@ -32,7 +29,6 @@ public class Server extends Thread {
 
 	public Server() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Server(Server another) {
@@ -137,158 +133,169 @@ public class Server extends Thread {
 	}
 
 	// StopMonitor
-//	public ServerStatus stopMonitor(Server sv) throws InterruptedException {
-//		ServerStatus svtt = getServerStatus(sv);
-//		System.out.println("-----Create Onject-------");
-//		System.out.println("Host name: " + svtt.getHostname());
-//		System.out.println("Kernel: " + svtt.getKernel());
-//		System.out.println("OSVersion: " + svtt.getOsversion());
-//		System.out.println("Processor Info: " + svtt.getProcessor_info());
-//		System.out.println("Uptime: " + svtt.getUptime());
-//		System.out.println("Time On Sys: " + svtt.getTimeonsys());
-//		System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
-//		System.out.println("Mem Total: " + svtt.getMemtotal());
-//		System.out.println("Mem Free: " + svtt.getMemfree());
-//		System.out.println("Mem Used: " + svtt.getMemused());
-//		System.out.println("Mem Cached: " + svtt.getMemcached());
-//		System.out.println("Local Disk: " + svtt.getLocal_disk());
-//
-//		return svtt;
-//	}
+	// public ServerStatus stopMonitor(Server sv) throws InterruptedException {
+	// ServerStatus svtt = getServerStatus(sv);
+	// System.out.println("-----Create Onject-------");
+	// System.out.println("Host name: " + svtt.getHostname());
+	// System.out.println("Kernel: " + svtt.getKernel());
+	// System.out.println("OSVersion: " + svtt.getOsversion());
+	// System.out.println("Processor Info: " + svtt.getProcessor_info());
+	// System.out.println("Uptime: " + svtt.getUptime());
+	// System.out.println("Time On Sys: " + svtt.getTimeonsys());
+	// System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
+	// System.out.println("Mem Total: " + svtt.getMemtotal());
+	// System.out.println("Mem Free: " + svtt.getMemfree());
+	// System.out.println("Mem Used: " + svtt.getMemused());
+	// System.out.println("Mem Cached: " + svtt.getMemcached());
+	// System.out.println("Local Disk: " + svtt.getLocal_disk());
+	//
+	// return svtt;
+	// }
 
-//	@Override
-//	public void run() {
-//		try {
-//			// Ngủ 1030 milli giây.
-//			startMonitor(this, 1000);
-//		} catch (InterruptedException e1) {
-//			// 
-//			e1.printStackTrace();
-//		}
-//
-//	}
-//
-//	// StartMonitor
-//	public ServerStatus startMonitor(Server sv, int sleep) throws InterruptedException, NullPointerException {
-//		ServerStatus svtt = getServerStatus(sv);
-//		System.out.println("-----Create Object-------");
-//		System.out.println("Host name: " + svtt.getHostname());
-//		System.out.println("Kernel: " + svtt.getKernel());
-//		System.out.println("OSVersion: " + svtt.getOsversion());
-//		System.out.println("Processor Info: " + svtt.getProcessor_info());
-//		System.out.println("Uptime: " + svtt.getUptime());
-//		System.out.println("Time On Sys: " + svtt.getTimeonsys());
-//		System.out.println("Cpu Usage: " + svtt.getCpu_usage());
-//
-//		System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
-//		System.out.println("Mem Total: " + svtt.getMemtotal());
-//		System.out.println("Mem Free: " + svtt.getMemfree());
-//		System.out.println("Mem Used: " + svtt.getMemused());
-//		System.out.println("Mem Cached: " + svtt.getMemcached());
-//		System.out.println("Local Disk: " + svtt.getLocal_disk());
-//
-//		Thread.sleep(sleep);
-//		startMonitor(sv, sleep);
-//		return svtt;
-//	}
-//
-//	// getServer Status
-//	public ServerStatus getServerStatus(Server sv) throws InterruptedException {
-//		Session ss = sv.getSession(sv);
-//
-//		try {
-//
-//			HashMap<String, String> hm1 = new HashMap<String, String>();
-//			String multi_cmd[] = { "hostname", "cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='", "uname -a",
-//					"date", "cat /proc/cpuinfo | grep 'model name'", "cat /proc/uptime",
-//					"cat /proc/meminfo | grep MemTotal ", "free | grep Mem | awk '{print $3/$2 * 100.0}'",
-//					"free | grep Mem | awk '{print $4/$2 * 100.0}'", "cat /proc/meminfo | grep Cached ",
-//					"top -b -n1 | grep 'Cpu(s)'|awk '{print $2$3}'", "cat /proc/loadavg", "df -h | grep /dev/mapper/" };
-//			String index_cmd[] = { "hostname", "osversion", "kernel", "timeonsys", "processor_info", "uptime",
-//					"memtotal", "memused", "memfree", "memcached", "cpu_usage", "cpu_loadaverage", "local_disk" };
-//
-//			String chuoilay = "";
-//			// option -e giup nhan dang ki tu xuong dong
-//			int j = 0;
-//
-//			while (j < multi_cmd.length) {
-//				String tong = "";
-//
-//				Channel channel = ss.openChannel("exec");
-//
-//				String cmd = multi_cmd[j];
-//
-//				((ChannelExec) channel).setCommand(cmd);
-//
-//				((ChannelExec) channel).setErrStream(System.err);
-//				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//				InputStream in = channel.getInputStream();
-//
-//				channel.connect();
-//				byte[] tmp = new byte[1024];
-//				while (true) {
-//					while (in.available() > 0) {
-//						int i = in.read(tmp, 0, 1024);
-//						if (i < 0)
-//							break;
-//						chuoilay = new String(tmp, 0, i).trim();
-//						chuoilay = chuoilay.replaceAll("\\s+", " ");
-//						chuoilay = chuoilay.replace(":", "");
-//						chuoilay = chuoilay.replace("model name", "");
-//						chuoilay = chuoilay.replace("DISTRIB_DESCRIPTION=", "");
-//						chuoilay = chuoilay.replace("\"", "");
-//						chuoilay = chuoilay.trim().replaceAll("/dev/mapper/\\w+--vg-root", "");
-//						chuoilay = chuoilay.replace("MemTotal", "");
-//						chuoilay = chuoilay.replace("MemFree", "");
-//						chuoilay = chuoilay.replace("Cached", "");
-//
-//						chuoilay = chuoilay.trim();
-//						// chuoilay = chuoilay + "\n";
-//
-//						// System.out.print(chuoilay);
-//						tong = tong + chuoilay + "\n";
-//						if (index_cmd[j].equals("uptime")) {
-//							tong = tong.substring(0, tong.indexOf(" "));
-//							hm1.put(index_cmd[j], convertStoH(Float.parseFloat(tong)));
-//
-//						} else {
-//							hm1.put(index_cmd[j], tong);
-//						}
-//					}
-//					if (channel.isClosed()) {
-//						// System.out.println("\nexit-status: "
-//						// + channel.getExitStatus());
-//						if (channel.getExitStatus() == 0) {
-//							System.out.println("Loading...OK");
-//						} else {
-//
-//							System.out.println("Loading Failed!!!...");
-//
-//						}
-//						break;
-//					}
-//					try {
-//						Thread.sleep(1000);
-//					} catch (Exception ee) {
-//					}
-//				}
-//				channel.disconnect();
-//				j++;
-//			}
-//			// System.out.print(hm1);
-//			ServerStatus svst = new ServerStatus(hm1.get("hostname"), hm1.get("osversion"), hm1.get("kernel"),
-//					hm1.get("timeonsys"), hm1.get("processor_info"), hm1.get("uptime"), hm1.get("memtotal"),
-//					hm1.get("memused"), hm1.get("memfree"), hm1.get("memcached"), hm1.get("cpu_usage"),
-//					hm1.get("cpu_loadaverage"), hm1.get("local_disk"));
-//
-//			return svst;
-//
-//		} catch (Exception e) {
-//
-//			return null;
-//		}
-//
-//	}
+	// @Override
+	// public void run() {
+	// try {
+	// // Ngủ 1030 milli giây.
+	// startMonitor(this, 1000);
+	// } catch (InterruptedException e1) {
+	// //
+	// e1.printStackTrace();
+	// }
+	//
+	// }
+	//
+	// // StartMonitor
+	// public ServerStatus startMonitor(Server sv, int sleep) throws
+	// InterruptedException, NullPointerException {
+	// ServerStatus svtt = getServerStatus(sv);
+	// System.out.println("-----Create Object-------");
+	// System.out.println("Host name: " + svtt.getHostname());
+	// System.out.println("Kernel: " + svtt.getKernel());
+	// System.out.println("OSVersion: " + svtt.getOsversion());
+	// System.out.println("Processor Info: " + svtt.getProcessor_info());
+	// System.out.println("Uptime: " + svtt.getUptime());
+	// System.out.println("Time On Sys: " + svtt.getTimeonsys());
+	// System.out.println("Cpu Usage: " + svtt.getCpu_usage());
+	//
+	// System.out.println("Cpu Loadaverage: " + svtt.getCpu_loadaverage());
+	// System.out.println("Mem Total: " + svtt.getMemtotal());
+	// System.out.println("Mem Free: " + svtt.getMemfree());
+	// System.out.println("Mem Used: " + svtt.getMemused());
+	// System.out.println("Mem Cached: " + svtt.getMemcached());
+	// System.out.println("Local Disk: " + svtt.getLocal_disk());
+	//
+	// Thread.sleep(sleep);
+	// startMonitor(sv, sleep);
+	// return svtt;
+	// }
+	//
+	// // getServer Status
+	// public ServerStatus getServerStatus(Server sv) throws
+	// InterruptedException {
+	// Session ss = sv.getSession(sv);
+	//
+	// try {
+	//
+	// HashMap<String, String> hm1 = new HashMap<String, String>();
+	// String multi_cmd[] = { "hostname",
+	// "cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='", "uname -a",
+	// "date", "cat /proc/cpuinfo | grep 'model name'", "cat /proc/uptime",
+	// "cat /proc/meminfo | grep MemTotal ",
+	// "free | grep Mem | awk '{print $3/$2 * 100.0}'",
+	// "free | grep Mem | awk '{print $4/$2 * 100.0}'",
+	// "cat /proc/meminfo | grep Cached ",
+	// "top -b -n1 | grep 'Cpu(s)'|awk '{print $2$3}'", "cat /proc/loadavg",
+	// "df -h | grep /dev/mapper/" };
+	// String index_cmd[] = { "hostname", "osversion", "kernel", "timeonsys",
+	// "processor_info", "uptime",
+	// "memtotal", "memused", "memfree", "memcached", "cpu_usage",
+	// "cpu_loadaverage", "local_disk" };
+	//
+	// String chuoilay = "";
+	// // option -e giup nhan dang ki tu xuong dong
+	// int j = 0;
+	//
+	// while (j < multi_cmd.length) {
+	// String tong = "";
+	//
+	// Channel channel = ss.openChannel("exec");
+	//
+	// String cmd = multi_cmd[j];
+	//
+	// ((ChannelExec) channel).setCommand(cmd);
+	//
+	// ((ChannelExec) channel).setErrStream(System.err);
+	// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	// InputStream in = channel.getInputStream();
+	//
+	// channel.connect();
+	// byte[] tmp = new byte[1024];
+	// while (true) {
+	// while (in.available() > 0) {
+	// int i = in.read(tmp, 0, 1024);
+	// if (i < 0)
+	// break;
+	// chuoilay = new String(tmp, 0, i).trim();
+	// chuoilay = chuoilay.replaceAll("\\s+", " ");
+	// chuoilay = chuoilay.replace(":", "");
+	// chuoilay = chuoilay.replace("model name", "");
+	// chuoilay = chuoilay.replace("DISTRIB_DESCRIPTION=", "");
+	// chuoilay = chuoilay.replace("\"", "");
+	// chuoilay = chuoilay.trim().replaceAll("/dev/mapper/\\w+--vg-root", "");
+	// chuoilay = chuoilay.replace("MemTotal", "");
+	// chuoilay = chuoilay.replace("MemFree", "");
+	// chuoilay = chuoilay.replace("Cached", "");
+	//
+	// chuoilay = chuoilay.trim();
+	// // chuoilay = chuoilay + "\n";
+	//
+	// // System.out.print(chuoilay);
+	// tong = tong + chuoilay + "\n";
+	// if (index_cmd[j].equals("uptime")) {
+	// tong = tong.substring(0, tong.indexOf(" "));
+	// hm1.put(index_cmd[j], convertStoH(Float.parseFloat(tong)));
+	//
+	// } else {
+	// hm1.put(index_cmd[j], tong);
+	// }
+	// }
+	// if (channel.isClosed()) {
+	// // System.out.println("\nexit-status: "
+	// // + channel.getExitStatus());
+	// if (channel.getExitStatus() == 0) {
+	// System.out.println("Loading...OK");
+	// } else {
+	//
+	// System.out.println("Loading Failed!!!...");
+	//
+	// }
+	// break;
+	// }
+	// try {
+	// Thread.sleep(1000);
+	// } catch (Exception ee) {
+	// }
+	// }
+	// channel.disconnect();
+	// j++;
+	// }
+	// // System.out.print(hm1);
+	// ServerStatus svst = new ServerStatus(hm1.get("hostname"),
+	// hm1.get("osversion"), hm1.get("kernel"),
+	// hm1.get("timeonsys"), hm1.get("processor_info"), hm1.get("uptime"),
+	// hm1.get("memtotal"),
+	// hm1.get("memused"), hm1.get("memfree"), hm1.get("memcached"),
+	// hm1.get("cpu_usage"),
+	// hm1.get("cpu_loadaverage"), hm1.get("local_disk"));
+	//
+	// return svst;
+	//
+	// } catch (Exception e) {
+	//
+	// return null;
+	// }
+	//
+	// }
 
 	// Convert h to s
 	public String convertStoH(float secs) {
@@ -402,7 +409,7 @@ public class Server extends Thread {
 
 			((ChannelExec) channel).setCommand(cmd);
 			((ChannelExec) channel).setErrStream(System.err);
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];
@@ -416,7 +423,7 @@ public class Server extends Thread {
 					tong = tong + chuoilay;
 				}
 				if (channel.isClosed()) {
-					// System.out.println("exit-status: "
+					// System.out.println("exit-status: "	
 					// + channel.getExitStatus());
 					if (channel.getExitStatus() == 0) {
 						System.out.println("Loading...OK");

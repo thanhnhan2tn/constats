@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<context:component-scan base-package="vn.edu.cit" />
+	<context:component-scan base-package="model" />
+	<context:annotation-config />
+	<!-- config mongodb connection -->
+	<mongo:mongo host="localhost" port="27017" />
+	<mongo:db-factory dbname="serverControl" mongo-ref="mongo"
+		id="mongoDbFactory" />
+	<beans:bean id="mongoTemplate"
+		class="org.springframework.data.mongodb.core.MongoTemplate">
+		<beans:constructor-arg name="mongoDbFactory"
+			ref="mongoDbFactory" />
+	</beans:bean>
+	<beans:bean id="userDAO" class="vn.edu.cit.dao.UserDAOImpl" />
+	<beans:bean id="serverDAO" class="vn.edu.cit.dao.ServerDAOImpl" />
+	<beans:bean id="svttDAO" class="vn.edu.cit.dao.ServerStatusDAOImpl" />
+	<!-- Tiles -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass">
+			<beans:value>
+				org.springframework.web.servlet.view.tiles3.TilesView
+			</beans:value>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/*-tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+</beans:beans>

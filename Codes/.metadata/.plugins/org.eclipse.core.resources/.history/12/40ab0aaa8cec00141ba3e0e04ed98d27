@@ -1,0 +1,20 @@
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Monitor Server<small> (${server.serverAddress})</small>
+		</h1>
+		
+	</section>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+			<div class="panel panel-default">
+				<div class="panel-headding">CPU</div>
+				<div class="panel-body">CPU</div>
+			</div>
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>
