@@ -362,3 +362,109 @@ Apr 28, 2015 16:16:10.17 1430212570178	addons.update-checker	WARN	Update manifes
 Apr 28, 2015 16:16:11.40 1430212571406	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
 Apr 28, 2015 16:33:52.51 [Child 5512] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
 Apr 28, 2015 16:47:57.08 SystemMessageCache: init
+
+Apr 28, 2015 23:44:09.61 NEW SESSION
+Apr 28, 2015 23:44:09.61 console.warn: Asynchronous operation was aborted as selection changed.
+
+Apr 30, 2015 10:16:50.63 NEW SESSION
+Apr 30, 2015 10:16:50.63 console.warn: Asynchronous operation was aborted as selection changed.
+
+Apr 30, 2015 11:25:17.16 NEW SESSION
+Apr 30, 2015 11:25:17.16 [Child 1680] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 30, 2015 11:26:37.30 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+Apr 30, 2015 11:26:37.30 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+Apr 30, 2015 11:26:37.31 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+Apr 30, 2015 11:27:15.60 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+Apr 30, 2015 11:30:56.96 [Child 1692] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+Apr 30, 2015 12:15:45.07 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+Apr 30, 2015 12:18:09.88 console.error: 
+Apr 30, 2015 12:18:09.88   Message: TypeError: can't access dead object
+Apr 30, 2015 12:18:09.89   Stack:
+Apr 30, 2015 12:18:09.89     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+Apr 30, 2015 12:18:09.90 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+Apr 30, 2015 12:18:09.90 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+Apr 30, 2015 12:18:09.91 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+Apr 30, 2015 12:18:09.91 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+Apr 30, 2015 12:18:09.91 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+Apr 30, 2015 12:18:09.92 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+Apr 30, 2015 12:18:09.92 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+Apr 30, 2015 12:18:09.92 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+Apr 30, 2015 12:18:09.93 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+Apr 30, 2015 12:18:09.93 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+Apr 30, 2015 12:18:09.93 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+Apr 30, 2015 12:18:09.94 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+Apr 30, 2015 12:18:09.94 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Apr 30, 2015 12:18:09.94 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+Apr 30, 2015 12:18:09.95 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+Apr 30, 2015 12:18:09.95 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+Apr 30, 2015 12:18:09.95 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+Apr 30, 2015 12:18:09.95 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Apr 30, 2015 12:18:09.96 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+Apr 30, 2015 12:18:09.96 
+
+May 01, 2015 10:55:32.42 NEW SESSION
+May 01, 2015 10:55:32.42 console.warn: Asynchronous operation was aborted as selection changed.
+May 01, 2015 10:57:31.08 console.error: 
+May 01, 2015 10:57:31.08   Message: TypeError: can't access dead object
+May 01, 2015 10:57:31.08   Stack:
+May 01, 2015 10:57:31.09     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 01, 2015 10:57:31.09 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 01, 2015 10:57:31.09 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 01, 2015 10:57:31.10 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 01, 2015 10:57:31.10 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 01, 2015 10:57:31.10 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 01, 2015 10:57:31.10 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 01, 2015 10:57:31.11 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 01, 2015 10:57:31.11 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 01, 2015 10:57:31.11 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 01, 2015 10:57:31.12 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 01, 2015 10:57:31.12 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 01, 2015 10:57:31.12 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 01, 2015 10:57:31.13 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 10:57:31.13 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 01, 2015 10:57:31.13 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 01, 2015 10:57:31.14 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 01, 2015 10:57:31.14 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 01, 2015 10:57:31.14 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 10:57:31.14 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 10:57:31.15 
+May 01, 2015 11:01:32.42 [Child 4688] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+May 01, 2015 11:09:21.59 [Child 5248] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 305
+May 01, 2015 12:31:20.21 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 01, 2015 12:31:20.25 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 01, 2015 12:31:20.25 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 01, 2015 12:32:10.12 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 01, 2015 12:32:10.12 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 01, 2015 12:32:10.12 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 01, 2015 12:32:55.14 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 01, 2015 12:32:55.14 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 01, 2015 12:32:55.15 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 01, 2015 13:30:18.56 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 01, 2015 13:35:13.76 console.error: 
+May 01, 2015 13:35:13.76   Message: TypeError: can't access dead object
+May 01, 2015 13:35:13.76   Stack:
+May 01, 2015 13:35:13.77     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 01, 2015 13:35:13.77 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 01, 2015 13:35:13.78 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 01, 2015 13:35:13.78 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 01, 2015 13:35:13.79 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 01, 2015 13:35:13.79 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 01, 2015 13:35:13.80 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 01, 2015 13:35:13.80 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 01, 2015 13:35:13.81 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 01, 2015 13:35:13.81 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 01, 2015 13:35:13.81 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 01, 2015 13:35:13.82 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 01, 2015 13:35:13.82 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 01, 2015 13:35:13.82 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 13:35:13.83 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 01, 2015 13:35:13.83 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 01, 2015 13:35:13.83 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 01, 2015 13:35:13.84 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 01, 2015 13:35:13.84 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 13:35:13.84 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 01, 2015 13:35:13.85 
+
+May 02, 2015 02:16:14.66 NEW SESSION
+May 02, 2015 02:16:14.66 [Child 7244] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 02:23:28.71 SystemMessageCache: init

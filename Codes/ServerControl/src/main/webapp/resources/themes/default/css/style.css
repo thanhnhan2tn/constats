@@ -62,13 +62,13 @@ body>.header {
 /*left side - contains sidebar*/
 .left-side {
 	position: absolute;
-	width: 220px;
+	width: 230px;
 	top: 0;
 }
 
 @media screen and (min-width: 992px) {
 	.left-side {
-		top: 50px;
+		top: 0px;
 		border-right: 1px #ccc solid;
 	}
 	.sidebar {
@@ -393,14 +393,16 @@ body>.header {
 body>.header .navbar {
 	height: 50px;
 	margin-bottom: 0;
-	margin-left: 220px;
+	margin-left: 230px;
 	background: #3C8DBC;
 }
 
 body .navbar .nav a {
 	color: rgba(255, 255, 255, 0.8);
 }
-
+.left-side{
+	padding-top: 0px;
+}
 body>.header .navbar .sidebar-toggle {
 	float: left;
 	padding: 9px 5px;
@@ -468,7 +470,7 @@ body>.header .logo {
 	line-height: 50px;
 	text-align: center;
 	padding: 0 10px;
-	width: 220px;
+	width: 230px;
 	_font-family: 'Kaushan Script', cursive;
 	font-weight: 500;
 	height: 50px;

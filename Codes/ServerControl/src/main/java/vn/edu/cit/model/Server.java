@@ -123,7 +123,7 @@ public class Server {
 			Session session = jsch.getSession(sv.getServerUsername(), sv.getServerAddress(), sv.getPort());
 			session.setPassword(sv.getServerPassword());
 			session.setConfig(config);
-			// session.setTimeout(10000);
+			//
 			session.connect();
 			// System.out.println("Connected to Server Success !!!!");
 			return session;

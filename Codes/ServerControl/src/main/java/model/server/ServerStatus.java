@@ -16,13 +16,11 @@ public class ServerStatus {
 	String local_disk;
 
 	public ServerStatus() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public ServerStatus(String hostname, String osversion, String kernel,
-			String timeonsys, String processor_info, String uptime,
-			String memtotal, String memused, String memfree, String memcached,
-			String cpu_usage, String cpu_loadaverage, String local_disk) {
+	public ServerStatus(String hostname, String osversion, String kernel, String timeonsys, String processor_info,
+			String uptime, String memtotal, String memused, String memfree, String memcached, String cpu_usage,
+			String cpu_loadaverage, String local_disk) {
 		super();
 		this.hostname = hostname;
 		this.osversion = osversion;

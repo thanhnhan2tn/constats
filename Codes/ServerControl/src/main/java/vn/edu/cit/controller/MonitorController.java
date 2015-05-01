@@ -1,9 +1,12 @@
 package vn.edu.cit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.server.ServerConfig;
+import model.server.ServerStatus;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import vn.edu.cit.dao.ServerDAO;
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
@@ -29,14 +35,15 @@ public class MonitorController {
 	public MongoOperations mongo = MongoDBService.getMongoService();
 	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private ServerDAO serverDAO;
 
 	@RequestMapping(value = "/monitor/{action}/{ip}/{cc}", method = RequestMethod.GET)
 	public String monitorAction(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
 			@PathVariable(value = "cc") String c, ModelMap mm) {
 		String cc = (String) session.getAttribute("cc");
-		User user = (
-				User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 
 		// Server sv = new Server();
 		if (user != null && c.equals(cc)) {
@@ -61,16 +68,116 @@ public class MonitorController {
 	}
 
 	@RequestMapping(value = "/monitor/{ip}/{cc}", method = RequestMethod.GET)
-	public String monitor(HttpServletRequest request, HttpSession session, 
-			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm) {
+	public String monitor(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm) {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 		if (user != null && cc.equals(c)) {
-			mm.put("ip",ip);
+			mm.put("ip", ip);
 			return "monitor";
-		}else{
+		} else {
 			return "redirect:/login";
 		}
+	}
+
+	/**
+	 * Lay thong tin Server day du
+	 * 
+	 * @param ip
+	 * @param c
+	 * @param request
+	 * @param session
+	 * @param redirectAtt
+	 * @return
+	 */
+
+	@RequestMapping(value = "/getserverinfo/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public ServerStatus getServerInfo(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
+		// Lay thong tin username trong session;
+		// Lay thong tin token
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// Chuoi return mac dinh
+		ServerStatus status = null;
+		if (user != null && cc.equals(c)) {
+			List<Server> listServer = user.getServers();
+			if (!listServer.isEmpty()) {
+				for (int i = 0; i < listServer.size(); i++) {
+					Server s = listServer.get(i); // get server in list
+					if (s.getServerAddress().equals(ip)) { // check Ip
+						ServerConfig sf = new ServerConfig();
+						try {
+							status = sf.getServerStatus(s);
+						} catch (InterruptedException e) {
+							status = null;
+						}
+					}
+				}
+			} // end check ListServer
+
+		}// end if User
+		return status;
+	}
+
+	/**
+	 * Lay thong tin RAM
+	 */
+	@RequestMapping(value = "/getram/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String[] getRAMInfo(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
+		// Lay thong tin username trong session;
+		// Lay thong tin token
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// Chuoi return mac dinh
+		String[] info = new String[4];
+		if (user != null && cc.equals(c)) {
+			System.out.println(user.getEmail());
+			//lay thong tin server
+			Server server = serverDAO.getServer(user, ip);
+				
+			// a user vs SSH
+			server.setServerUsername("svcontrol"); 
+				
+			ServerConfig config = new ServerConfig();
+			info[0] = config.getMemUsage(server);
+			info[1] = null;//config.getMemFree(server);
+			info[2] = config.getMemTotal(server);
+			info[3] = config.getCpuUsage(server);
+		}// end if User
+		return info;
+	}
+
+	/**
+	 * Check Server Status, tra ve true false
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/checkstatus/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String checkStatus(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		String check = "false";
+		if (user != null) {
+			for (Server server : user.getServers()) {
+				_log.info("Check status: Get server: " + server.getServerUsername() + "/" + server.getServerAddress());
+				if (server.getServerAddress().equals(ip)) {
+					server.setServerUsername("svcontrol"); // a user vs SSH
+					if (server.checkStatus()) {
+						_log.info("Check status:" + server.getServerUsername() + "/" + server.getServerPassword());
+						check = "true";
+					}
+				}
+			}
+		} else {
+			return "Khong the load duoc status";
+		}
+		return check;
 	}
 
 	private static final Logger _log = Logger.getLogger(MonitorController.class);

@@ -8,7 +8,7 @@ $(document).ready(function() {
 		compress : true
 	});
 
-	context.attach('.content', [ {
+	context.attach('.main-content', [ {
 		header : 'MENU'
 	}, {
 		text : 'Add Server',

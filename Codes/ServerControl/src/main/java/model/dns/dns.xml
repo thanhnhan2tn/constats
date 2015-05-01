@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dns>
+	<zone>
+		<zone_name>luanvan.com</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/luanvan.com.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>hieu.org</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/hieu.org.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>concung.com</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/concung.com.hosts</zone_file>
+	</zone>
+
+	<zone>
+		<zone_name>fullhd.org</zone_name>
+		<zone_type>master</zone_type>
+		<zone_file>/var/lib/bind/fullhd.org.hosts</zone_file>
+	</zone>
+
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>luanvan.com.</domain_name>
+		<admin_domain>root.luanvan.com.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>30</min_ttl>
+		<record>
+			<domain_name>luanvan.com.</domain_name>
+			<type_record>NS</type_record>
+			<name_server>luanvan.com.</name_server>
+		</record>
+		<record>
+			<domain_name>luanvan.com.</domain_name>
+			<type_record>A</type_record>
+			<name_server>192.168.3.5</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.5</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.6</name_server>
+		</record>
+		<record>
+			<domain_name>ftp</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.7</name_server>
+		</record>
+		<record>
+			<domain_name>ns</domain_name>
+			<type_record>A</type_record>
+			<name_server>192.168.1.2</name_server>
+		</record>
+		<record>
+			<domain_name>ldap</domain_name>
+			<type_record>A</type_record>
+			<name_server>172.16.1.5</name_server>
+		</record>
+		<pathfile>/var/lib/bind/luanvan.com.hosts</pathfile>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>hieu.org.</domain_name>
+		<admin_domain>root.hieu.org.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>hieu.org.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>10.0.0.5</name_server>
+		</record>
+		<pathfile>/var/lib/bind/hieu.org.hosts</pathfile>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>concung.com.</domain_name>
+		<admin_domain>root.concung.com.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>localhost.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>127.0.0.1</name_server>
+		</record>
+		<pathfile>/var/lib/bind/concung.com.hosts</pathfile>
+	</soa>
+
+	<soa>
+		<ttl>604800</ttl>
+		<domain_name>fullhd.org.</domain_name>
+		<admin_domain>root.fullhd.org.</admin_domain>
+		<serial>2</serial>
+		<refresh>604800</refresh>
+		<retry>86400</retry>
+		<expire>2419200</expire>
+		<min_ttl>604800</min_ttl>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>NS</type_record>
+			<name_server>localhost.</name_server>
+		</record>
+		<record>
+			<domain_name>@</domain_name>
+			<type_record>A</type_record>
+			<name_server>127.0.0.1</name_server>
+		</record>
+		<pathfile>/var/lib/bind/fullhd.org.hosts</pathfile>
+	</soa>
+
+
+	<acl>
+		<access_name>user_allow</access_name>
+		<ip>192.168.0.104</ip>
+		<ip>10.2.2.5</ip>
+	</acl>
+
+
+	<option>
+		<directory>/var/cache/bind</directory>
+
+		<forwarders>
+			8.8.8.8;
+			8.8.4.4;
+		</forwarders>
+
+		<allow_transfer>
+			user_allow;
+		</allow_transfer>
+
+	</option>
+</dns>

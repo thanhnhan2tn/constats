@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <script type="text/javascript"
 	src="<c:url value='/resources/themes/default/plugins/bootstrap/js/bootstrap.min.js'/>"></script>
+	
 <!-- bootstrap css framwork -->
 <link
 	href='<c:url value="/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css"/>'
@@ -22,10 +23,12 @@
 <!-- ContextMenu -->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/resources/themes/default/plugins/contextmenu/context.standalone.css'/>">
-
+<link href='<c:url value="/resources/themes/default/plugins/AdminLTE.min.css"/>'
+	rel="stylesheet" media="screen" type="text/css">
 <!-- Constats Theme Style Sheet file -->
 <link href='<c:url value="/resources/themes/default/css/style.css"/>'
 	rel="stylesheet" media="screen" type="text/css">
+
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

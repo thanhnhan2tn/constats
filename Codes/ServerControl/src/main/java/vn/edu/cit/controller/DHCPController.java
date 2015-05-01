@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.ServerDAO;
@@ -536,6 +537,66 @@ public class DHCPController {
 			return "redirect:/login";
 		} // end check user
 		return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
+	}
+	
+	@RequestMapping(value = "/serviceconfig/dhcp/logs/{ip}/{cc}", method = RequestMethod.GET)
+	public String dhcpLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm){
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			DHCPConfig dhcpConf = new DHCPConfig();
+			String logs = dhcpConf.getLog(sv);
+			
+			if (logs != null) {
+				mm.put("logs",logs);
+				return "dhcp-logs";
+			} else {
+				mm.put("logs","Khong lay duoc thong tin");
+				return "dhcp-logs";
+			}
+		} else {
+			session.invalidate();
+			return "redirect:/login";
+		} // end check user
+		
+	}
+	
+	/**
+	 * Lay log DHCP
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/dhcp/getlogs/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getDhcpLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			DHCPConfig dhcpConf = new DHCPConfig();
+			String logs = dhcpConf.getLog(sv);
+			if (logs != null) {
+				return logs;
+			} else {
+				return "Khong lay duoc thong tin";
+			}
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
 	}
 
 	private static final Logger _log = Logger.getLogger(DHCPController.class);

@@ -2435,7 +2435,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="RkBuhVms0Uuho8hPPoHd4gAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="G+i6GJ4Lp0miqCFv/vZ2aQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Cau Hinh Firewall</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Cau Hinh Service</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="/mytOW3lH0SG6RIbLxM4FgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -2698,13 +2698,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">568</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">340</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">205</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">240</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">45</XPD:ATTR>
 <XPD:REF name="Model">l1TwVvDbX0CsaeQF++kpvAAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="ClY/8uzshkuDcEy9lUrM2AAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="URdl/AiT8UGfLIbhW6McxQAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Cau hinh dich vu Web</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Cau hinh Network Interfaces</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="yfsXlpIITkeQ/zo7lIuSRAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -2972,7 +2972,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="YUXy4l4jtE2vBfFgQ2lkrAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="UVFWRQOeE0ySmPwaJkauygAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Cau hinh dich vu DNS</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Cau hinh dich vu SSH</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="LbGmcizIoUCX7TP3zFjT+gAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -3049,7 +3049,7 @@
 <XPD:OBJ name="OwnedViews[26]" type="UMLGeneralizationView" guid="lNLibgW40UqW6xAo9sPsywAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">596,340;435,292</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">609,340;435,291</XPD:ATTR>
 <XPD:REF name="Model">HTADCd2eaUq1oJVXSFlBWgAA</XPD:REF>
 <XPD:REF name="Head">SykrOKJrqEG1AvdPrLkN+QAA</XPD:REF>
 <XPD:REF name="Tail">Ll8w7XKkDk+AcbYIveGW3wAA</XPD:REF>
@@ -4534,7 +4534,7 @@
 <XPD:REF name="Views[3]">5eZB3aYe6E20zDFAMMkjSAAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[40]" type="UMLUseCase" guid="cH2hIG8jCEqPH8Vp53IabwAA">
-<XPD:ATTR name="Name" type="string">Cau Hinh Firewall</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Cau Hinh Service</XPD:ATTR>
 <XPD:REF name="Namespace">dy+QweK23UCshl5tQlBz/AAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">SykrOKJrqEG1AvdPrLkN+QAA</XPD:REF>
@@ -4684,7 +4684,7 @@
 <XPD:REF name="Views[3]">zCvDcTfrGkue/S2jwqsGJwAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[55]" type="UMLUseCase" guid="l1TwVvDbX0CsaeQF++kpvAAA">
-<XPD:ATTR name="Name" type="string">Cau hinh dich vu Web</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Cau hinh Network Interfaces</XPD:ATTR>
 <XPD:REF name="Namespace">dy+QweK23UCshl5tQlBz/AAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">Ll8w7XKkDk+AcbYIveGW3wAA</XPD:REF>
@@ -4706,7 +4706,7 @@
 <XPD:REF name="Generalizations[0]">QFDptlpuJkuBX4y+htIjFgAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[57]" type="UMLUseCase" guid="5PU2aQEGUkOV98jzbi5k8wAA">
-<XPD:ATTR name="Name" type="string">Cau hinh dich vu DNS</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Cau hinh dich vu SSH</XPD:ATTR>
 <XPD:REF name="Namespace">dy+QweK23UCshl5tQlBz/AAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">Qi3yktCzakWcHMabRDklLQAA</XPD:REF>

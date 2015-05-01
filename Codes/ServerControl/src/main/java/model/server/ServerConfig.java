@@ -1,12 +1,8 @@
 package model.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 
-import vn.edu.cit.dao.ServerDAOImpl;
 import vn.edu.cit.model.Server;
 
 import com.jcraft.jsch.Channel;
@@ -26,6 +22,7 @@ public class ServerConfig {
 		try {
 			Channel channel = ss.openChannel("exec");
 			((ChannelExec) channel).setCommand(cmd);
+			
 			((ChannelExec) channel).setErrStream(System.err);
 			InputStream in = channel.getInputStream();
 			channel.connect();
@@ -35,17 +32,14 @@ public class ServerConfig {
 					int i = in.read(tmp, 0, 1024);
 					if (i < 0)
 						break;
-					System.out.print(new String(tmp, 0, i));
+					//System.out.print(new String(tmp, 0, i));
 				}
 				if (channel.isClosed()) {
-					System.out.println("exit-status: "
-							+ channel.getExitStatus());
+					if(in.available()>0) continue; 
+					System.out.println("exit-status: " + channel.getExitStatus());
 					break;
 				}
-				try {
-					Thread.sleep(1000);
-				} catch (Exception ee) {
-				}
+				try{Thread.sleep(1000);}catch(Exception ee){}
 			}
 			channel.disconnect();
 			if (channel.getExitStatus() == 0) {
@@ -60,8 +54,7 @@ public class ServerConfig {
 
 	// Restart
 	public boolean Restart(Server sv) {
-		String cmd = "echo " + sv.getServerPassword() + " |sudo -S "
-				+ " reboot ";
+		String cmd = "echo " + sv.getServerPassword() + " |sudo -S " + " reboot ";
 		sendCMDToServer(sv, cmd);
 		return true;
 	}
@@ -75,8 +68,7 @@ public class ServerConfig {
 
 	// WakeOnSleep
 	public boolean WakeUp(Server sv) {
-		String cmd = "echo " + sv.getServerPassword() + " |sudo -S "
-				+ " start ";
+		String cmd = "echo " + sv.getServerPassword() + " |sudo -S " + " start ";
 		sendCMDToServer(sv, cmd);
 		return true;
 	}
@@ -92,8 +84,8 @@ public class ServerConfig {
 
 			((ChannelExec) channel).setCommand(cmd);
 			((ChannelExec) channel).setErrStream(System.err);
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
+			// BufferedReader br = new BufferedReader(new
+			// InputStreamReader(System.in));
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];
@@ -107,26 +99,23 @@ public class ServerConfig {
 					tong = tong + chuoilay;
 				}
 				if (channel.isClosed()) {
-					// System.out.println("exit-status: "
-					// + channel.getExitStatus());
-					if (channel.getExitStatus() == 0) {
-						System.out.println("Loading...OK");
-					} else {
-
-						System.out.println("Loading Failed!!!...");
-
-					}
+					if(in.available()>0) continue; 
+//					if (channel.getExitStatus() == 0) {
+//						System.out.println("Loading...OK");
+//					} else {
+//
+//						System.out.println("Loading Failed!!!...");
+//
+//					}
 					break;
 				}
-				try {
-					Thread.sleep(1000);
-				} catch (Exception ee) {
-				}
+				try{Thread.sleep(1000);}catch(Exception ee){}
 			}
 			channel.disconnect();
+			ss.disconnect();
 			return tong;
 		} catch (Exception e) {
-			return null;
+			return "";
 		}
 	}
 
@@ -136,27 +125,134 @@ public class ServerConfig {
 	}
 
 	// getServer Status
+	// public ServerStatus getServerStatus(Server sv) throws
+	// InterruptedException {
+	// Session ss = sv.getSession(sv);
+	//
+	// try {
+	//
+	// HashMap<String, String> hm1 = new HashMap<String, String>();
+	// String multi_cmd[] = { "hostname",
+	// "cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='",
+	// "uname -a", "cat /etc/webmin/version", "date",
+	// "cat /proc/cpuinfo | grep 'model name'",
+	// "cat /proc/uptime", "cat /proc/meminfo | grep MemTotal ",
+	// "free | grep Mem | awk '{print $3/$2 * 100.0}'",
+	// "free | grep Mem | awk '{print $4/$2 * 100.0}'",
+	// "cat /proc/meminfo | grep Cached ",
+	// "top -b -n1 | grep 'Cpu(s)'|awk '{print $2$3}'",
+	// "cat /proc/loadavg",
+	// "df -h | grep /dev/mapper/ubuntu--vg-root" };
+	// String index_cmd[] = { "hostname", "osversion", "kernel",
+	// "webmin_version", "timeonsys", "processor_info", "uptime",
+	// "memtotal", "memused", "memfree", "memcached", "cpu_usage",
+	// "cpu_loadaverage", "local_disk" };
+	//
+	// String chuoilay = "";
+	// // option -e giup nhan dang ki tu xuong dong
+	// int j = 0;
+	//
+	// while (j < multi_cmd.length) {
+	// String tong = "";
+	//
+	// Channel channel = ss.openChannel("exec");
+	//
+	// String cmd = multi_cmd[j];
+	//
+	// ((ChannelExec) channel).setCommand(cmd);
+	//
+	// ((ChannelExec) channel).setErrStream(System.err);
+	// BufferedReader br = new BufferedReader(new InputStreamReader(
+	// System.in));
+	// InputStream in = channel.getInputStream();
+	//
+	// channel.connect();
+	// byte[] tmp = new byte[1024];
+	// while (true) {
+	// while (in.available() > 0) {
+	// int i = in.read(tmp, 0, 1024);
+	// if (i < 0)
+	// break;
+	// chuoilay = new String(tmp, 0, i).trim();
+	// chuoilay = chuoilay.replaceAll("\\s+", " ");
+	// chuoilay = chuoilay.replace(":", "");
+	// chuoilay = chuoilay.replace("model name", "");
+	// chuoilay = chuoilay.replace("DISTRIB_DESCRIPTION=", "");
+	// chuoilay = chuoilay.replace("\"", "");
+	// chuoilay = chuoilay.replace(
+	// "/dev/mapper/ubuntu--vg-root", "");
+	// chuoilay = chuoilay.replace("MemTotal", "");
+	// chuoilay = chuoilay.replace("MemFree", "");
+	// chuoilay = chuoilay.replace("Cached", "");
+	//
+	// chuoilay = chuoilay.trim();
+	// // chuoilay = chuoilay + "\n";
+	//
+	// // System.out.print(chuoilay);
+	// tong = tong + chuoilay + "\n";
+	// if (index_cmd[j].equals("uptime")) {
+	// tong = tong.substring(0, tong.indexOf(" "));
+	// hm1.put(index_cmd[j],
+	// convertStoH(Float.parseFloat(tong)));
+	//
+	// } else {
+	// hm1.put(index_cmd[j], tong);
+	// }
+	// }
+	// if (channel.isClosed()) {
+	// // System.out.println("\nexit-status: "
+	// // + channel.getExitStatus());
+	// if (channel.getExitStatus() == 0) {
+	// System.out.println("Loading...OK");
+	// } else {
+	//
+	// System.out.println("Loading Failed!!!...");
+	//
+	// }
+	// break;
+	// }
+	// try {
+	// Thread.sleep(1000);
+	// } catch (Exception ee) {
+	// }
+	// }
+	// channel.disconnect();
+	// j++;
+	// }
+	// // System.out.print(hm1);
+	// ServerStatus svst = new ServerStatus(hm1.get("hostname"),
+	// hm1.get("osversion"), hm1.get("kernel"), hm1.get("timeonsys"),
+	// hm1.get("processor_info"), hm1.get("uptime"),
+	// hm1.get("memtotal"), hm1.get("memused"),
+	// hm1.get("memfree"), hm1.get("memcached"),
+	// hm1.get("cpu_usage"), hm1.get("cpu_loadaverage"),
+	// hm1.get("local_disk"));
+	//
+	// return svst;
+	//
+	// } catch (Exception e) {
+	//
+	// return null;
+	// }
+	//
+	// }
+
+	// getServer Status
 	public ServerStatus getServerStatus(Server sv) throws InterruptedException {
 		Session ss = sv.getSession(sv);
 
 		try {
 
 			HashMap<String, String> hm1 = new HashMap<String, String>();
-			String multi_cmd[] = { "hostname",
-					"cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='",
-					"uname -a", "cat /etc/webmin/version", "date",
-					"cat /proc/cpuinfo | grep 'model name'",
-					"cat /proc/uptime", "cat /proc/meminfo | grep MemTotal ",
-					"free | grep Mem | awk '{print $3/$2 * 100.0}'",
-					"free | grep Mem | awk '{print $4/$2 * 100.0}'",
-					"cat /proc/meminfo | grep Cached ",
-					"top -b -n1 | grep 'Cpu(s)'|awk '{print $2$3}'",
-					"cat /proc/loadavg",
+			String multi_cmd[] = { "hostname", "cat /etc/lsb-release | grep 'DISTRIB_DESCRIPTION='", "uname -a",
+					"cat /etc/webmin/version", "date", "cat /proc/cpuinfo | grep 'model name'", "cat /proc/uptime",
+					"cat /proc/meminfo | grep MemTotal ", "free | grep Mem | awk '{print $3/$2 * 100.0}'",
+					"free | grep Mem | awk '{print $4/$2 * 100.0}'", "cat /proc/meminfo | grep Cached ",
+					"top -b -n1 | grep 'Cpu(s)'|awk '{print $2}'", "cat /proc/loadavg",
 					"df -h | grep /dev/mapper/ubuntu--vg-root" };
-			String index_cmd[] = { "hostname", "osversion", "kernel",
-					"webmin_version", "timeonsys", "processor_info", "uptime",
-					"memtotal", "memused", "memfree", "memcached", "cpu_usage",
-					"cpu_loadaverage", "local_disk" };
+			String index_cmd[] = { "hostname", "osversion", "kernel", "webmin_version", "timeonsys", "processor_info",
+					"uptime", "memtotal", "memused", "memfree", "memcached", "cpu_usage", "cpu_loadaverage",
+					"local_disk" };
 
 			String chuoilay = "";
 			// option -e giup nhan dang ki tu xuong dong
@@ -172,8 +268,8 @@ public class ServerConfig {
 				((ChannelExec) channel).setCommand(cmd);
 
 				((ChannelExec) channel).setErrStream(System.err);
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						System.in));
+				// BufferedReader br = new BufferedReader(new
+				// InputStreamReader(System.in));
 				InputStream in = channel.getInputStream();
 
 				channel.connect();
@@ -189,8 +285,7 @@ public class ServerConfig {
 						chuoilay = chuoilay.replace("model name", "");
 						chuoilay = chuoilay.replace("DISTRIB_DESCRIPTION=", "");
 						chuoilay = chuoilay.replace("\"", "");
-						chuoilay = chuoilay.replace(
-								"/dev/mapper/ubuntu--vg-root", "");
+						chuoilay = chuoilay.replace("/dev/mapper/ubuntu--vg-root", "");
 						chuoilay = chuoilay.replace("MemTotal", "");
 						chuoilay = chuoilay.replace("MemFree", "");
 						chuoilay = chuoilay.replace("Cached", "");
@@ -202,8 +297,7 @@ public class ServerConfig {
 						tong = tong + chuoilay + "\n";
 						if (index_cmd[j].equals("uptime")) {
 							tong = tong.substring(0, tong.indexOf(" "));
-							hm1.put(index_cmd[j],
-									convertStoH(Float.parseFloat(tong)));
+							hm1.put(index_cmd[j], convertStoH(Float.parseFloat(tong)));
 
 						} else {
 							hm1.put(index_cmd[j], tong);
@@ -230,13 +324,10 @@ public class ServerConfig {
 				j++;
 			}
 			// System.out.print(hm1);
-			ServerStatus svst = new ServerStatus(hm1.get("hostname"),
-					hm1.get("osversion"), hm1.get("kernel"), hm1.get("timeonsys"),
-					hm1.get("processor_info"), hm1.get("uptime"),
-					hm1.get("memtotal"), hm1.get("memused"),
-					hm1.get("memfree"), hm1.get("memcached"),
-					hm1.get("cpu_usage"), hm1.get("cpu_loadaverage"),
-					hm1.get("local_disk"));
+			ServerStatus svst = new ServerStatus(hm1.get("hostname"), hm1.get("osversion"), hm1.get("kernel"),
+					hm1.get("timeonsys"), hm1.get("processor_info"), hm1.get("uptime"), hm1.get("memtotal"),
+					hm1.get("memused"), hm1.get("memfree"), hm1.get("memcached"), hm1.get("cpu_usage"),
+					hm1.get("cpu_loadaverage"), hm1.get("local_disk"));
 
 			return svst;
 
@@ -248,8 +339,8 @@ public class ServerConfig {
 	}
 
 	// StartMonitor
-	public void startMonitor(Server sv, int i){
-		
+	public void startMonitor(Server sv, int i) {
+
 	}
 
 	// StopMonitor
@@ -286,13 +377,10 @@ public class ServerConfig {
 	// Show Service run or stop
 	public String showAllService(Server sv) {
 		String services = "";
-		String mang[] = { "ssh", "apache2", "vsftpd", "isc-dhcp-server",
-				"bind9", "squid3" };
+		String mang[] = { "ssh", "apache2", "vsftpd", "isc-dhcp-server", "bind9", "squid3" };
 		int i = 0;
 		while (i < mang.length) {
-			services = services
-					+ uploadToServer(sv, "service " + mang[i] + " status")
-					+ "\n";
+			services = services + uploadToServer(sv, "service " + mang[i] + " status") + "\n";
 			i++;
 		}
 		return services;
@@ -303,18 +391,17 @@ public class ServerConfig {
 		String tong = "";
 		int hours = (int) secs / 3600, remainder = (int) secs % 3600, minutes = remainder / 60, seconds = remainder % 60;
 
-		String disHour = (hours < 10 ? "0" : "") + hours, disMinu = (minutes < 10 ? "0"
+		String disHour = (hours < 10 ? "0" : "") + hours, disMinu = (minutes < 10 ? "0" : "") + minutes, disSec = (seconds < 10 ? "0"
 				: "")
-				+ minutes, disSec = (seconds < 10 ? "0" : "") + seconds;
+				+ seconds;
 
 		tong = tong + disHour + ":" + disMinu + ":" + disSec;
 		return tong;
 	}
 
 	public Boolean checkSudoer(Server sv) {
-		String kq = uploadToServer(sv, "echo " + sv.getServerPassword()
-				+ " | sudo -S bash -c ' echo -e hello '");
-		if (kq!=null && kq.indexOf("hello") != -1) {
+		String kq = uploadToServer(sv, "echo " + sv.getServerPassword() + " | sudo -S bash -c ' echo -e hello '");
+		if (kq != null && kq.indexOf("hello") != -1) {
 			return true;
 		} else {
 			return false;
@@ -322,31 +409,69 @@ public class ServerConfig {
 
 	}
 
-//	public static void main(String[] args) throws IOException,
-//			InterruptedException {
-//		ServerConfig svc = new ServerConfig();
-//		Server sv = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
-//		Server sv2 = new Server("192.168.1.129", 22, "mayb", "ubuntu", "ubuntu");
-//		Server sv3 = new Server("192.168.1.129", 22, "mayb", "svcontrol", "12345");
-//		// System.out.println(svc.checkSudoer(sv));
-//		// svc.checkAllPS(sv);
-//		// System.out.println("----------------------------");
-//		// System.out.println(svc.ServerInformation(sv));
-//		// svc.checkAllPS(sv);
-//		svc.startMonitor(sv, 2);
-//		svc.startMonitor(sv3, 2);
-//		svc.startMonitor(sv2, 2);
-//		// svc.showAllService(sv);
-//
-//		// Server sv1 = new Server(1, "192.168.0.178", 22, "ubuntu", "maya",
-//		// "maya");
-//		// svc.stopMonitor(sv1);
-//		//
-//		// Server sv2 = new Server(1, "192.168.0.176", 22, "ubuntu1", "ubuntu1",
-//		// "ubuntu1");
-//		// svc.startMonitor(sv, 3000);
-//		// svc.Restart(sv);
-//		// System.out.println(svc.showAllService(sv));
-//		// System.out.println(svc.showAllService(sv));
-//	}
+	// get CPU Usage
+	public String getCpuUsage(Server sv) {
+		return uploadToServer(sv, "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'");
+
+	}
+
+	// get Mem Total
+	public String getMemTotal(Server sv) {
+
+		return uploadToServer(sv, "cat /proc/meminfo | grep MemTotal ").replace("MemTotal: ", "").replace("kB", "")
+				.replaceAll("\\s+", "");
+
+	}
+
+	// get Mem Free
+	public String getMemFree(Server sv) {
+
+		return uploadToServer(sv, "free | grep Mem | awk '{print $3}'").replace("MemTotal: ", "")
+				.replaceAll("\\s+", "");
+
+	}
+
+	// get Mem Usage
+	public String getMemUsage(Server sv) {
+
+		return uploadToServer(sv, "free | grep Mem | awk '{print $4}'").replace("MemTotal: ", "")
+				.replaceAll("\\s+", "");
+
+	}
+
+	// get Total Local Disk
+
+	public String getTotalLocalDisk(Server sv) {
+
+		return uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root |awk '{print $2}'").replace("MemTotal: ",
+				"").replaceAll("\\s+", "");
+
+	}
+
+	// get Used Local Disk
+
+	public String getUsedLocalDisk(Server sv) {
+
+		return uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root|awk '{print $3}'")
+				.replace("MemTotal: ", "").replaceAll("\\s+", "");
+
+	}
+
+	// get Free Local Disk
+
+	public String getFreeLocalDisk(Server sv) {
+
+		return uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root|awk '{print $4}'")
+				.replace("MemTotal: ", "").replaceAll("\\s+", "");
+
+	}
+
+	// get Free Local Disk
+
+	public String getUsePercentLocalDisk(Server sv) {
+
+		return uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root|awk '{print $5}'")
+				.replace("MemTotal: ", "").replaceAll("\\s+", "");
+
+	}
 }

@@ -14,26 +14,27 @@
 			DHCP Server Config :<small> (${server.serverAddress})</small>
 		</h1>
 		<div class="btn-group pull-right" role="group">
-									<button type="button" class="btn btn-danger"
-										onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }'"
-										title="Stop service">
-										<i class="glyphicon glyphicon-arrow-down"></i>
-									</button>
-									<button type="button" class="btn btn-success"
-										onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
-										title="Start service">
-										<i class="glyphicon glyphicon-arrow-up"></i>
-									</button>
-									<button type="button" class="btn btn-warning"
-										onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'"
-										title="Restart Service">
-										<i class="glyphicon glyphicon-repeat"></i>
-									</button>
-									<button type="button" class="btn btn-warning remove-iface" onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }'"
-										title="Restart Service">
-										<i class="glyphicon glyphicon-remove"></i>
-									</button>
-								</div>
+			<button type="button" class="btn btn-danger"
+				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }'"
+				title="Stop service">
+				<i class="glyphicon glyphicon-arrow-down"></i>
+			</button>
+			<button type="button" class="btn btn-success"
+				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
+				title="Start service">
+				<i class="glyphicon glyphicon-arrow-up"></i>
+			</button>
+			<button type="button" class="btn btn-warning"
+				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'"
+				title="Restart Service">
+				<i class="glyphicon glyphicon-repeat"></i>
+			</button>
+			<button type="button" class="btn btn-warning remove-iface"
+				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }'"
+				title="Restart Service">
+				<i class="glyphicon glyphicon-remove"></i>
+			</button>
+		</div>
 
 	</section>
 	<script>
@@ -45,7 +46,7 @@
 		<div class="main-content">
 			<%
 				DHCP dhcp = (DHCP) request.getAttribute("dhcp");
-						if (dhcp != null) {
+				if (dhcp != null) {
 			%>
 			<div style="display: none ${display}" id="login-alert"
 				class="alert alert-danger col-sm-12">${message}</div>
@@ -76,15 +77,13 @@
 						<div class="form-group">
 							<label for="log_facitily" class="col-md-2">Log facility:</label>
 							<div class="col-md-9">
-								<form:input class="form-control" path="log_facitily"
-									placeholder="" />
+								<form:input class="form-control" path="log_facitily" placeholder="" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="domain_name" class="col-md-2">Domain Name:</label>
 							<div class="col-md-9">
-								<form:input class="form-control" path="domain_name"
-									placeholder="" />
+								<form:input class="form-control" path="domain_name" placeholder="" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -106,46 +105,55 @@
 						<div class="form-group">
 							<label for="max_lease_time" class="col-md-2">Max Lease Time:</label>
 							<div class="col-md-9">
-								<form:input class="form-control" path="max_lease_time"
-									placeholder="" />
+								<form:input class="form-control" path="max_lease_time" placeholder="" />
 							</div>
 						</div>
 
 					</div>
 				</div>
 				<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/dhcp/subnets/${server.serverAddress}/${cc}">
-										Subnets Configuration <i
-										class="glyphicon glyphicon-chevron-right pull-right"></i>
-									</a>
-								</h3>
-							</div>
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/subnets/${server.serverAddress}/${cc}">
+								Subnets Configuration <i
+								class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
 				</div>
 				<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/dhcp/hostfixs/${server.serverAddress}/${cc}">HostFixs Configuration <i
-										class="glyphicon glyphicon-chevron-right pull-right"></i>
-									</a>
-								</h3>
-							</div>
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/hostfixs/${server.serverAddress}/${cc}">HostFixs
+								Configuration <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
 				</div>
 				<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/dhcp/file/${server.serverAddress}/${cc}">Edit config file... <i
-										class="glyphicon glyphicon-chevron-right pull-right"></i>
-									</a>
-								</h3>
-							</div>
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/file/${server.serverAddress}/${cc}">Edit
+								config file... <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
 				</div>
-				<form:button type="submit" class="btn btn-primary" value="Save" id="savedhcp" >Save</form:button>
-				<button type="button" class="btn btn-default"  onclick="history.go(-1);">Back</button>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/logs/${server.serverAddress}/${cc}">Logs... <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<form:button type="submit" class="btn btn-primary" value="Save"
+					id="savedhcp">Save</form:button>
+				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
 			</form:form>
 			<%
 				} else {

@@ -12,7 +12,7 @@
 	<%
 		if (user.getServers() != null && !user.getServers().isEmpty()) {
 			for (Server server : user.getServers()) {
-				//	Boolean check = false;
+				//	Boolean check = false;	
 				//check Server status
 				//if(server.checkStatus()){
 	%>
@@ -54,22 +54,12 @@
 							</a>
 						</div>
 						<div class="control-action" style="display: block; margin: 0 auto">
-							<div class="btn-group" role="group" aria-label="...">
-								<button type="button" class="btn btn-danger disabled"
-									onclick="location.href='${pageContext.request.contextPath }/shutdown/<%=server.getServerAddress()%>/${cc }'"
-									title="shutdown">
-									<i class="glyphicon glyphicon-off"></i>
-								</button>
-								<button type="button" class="btn btn-warning disabled"
-									onclick="location.href='${pageContext.request.contextPath }/restart/<%=server.getServerAddress()%>/${cc }'"
-									title="restart">
-									<i class="glyphicon glyphicon-repeat"></i>
-								</button>
+							<div class="" role="" aria-label="...">
 
-								<button type="button" class="btn btn-default disabled"
+								<button type="button" class="btn btn-default btn-block disabled"
 									onclick="location.href='${pageContext.request.contextPath }/services/<%=server.getServerAddress()%>/${cc}'"
 									id="services-config">
-									<i class="glyphicon glyphicon-cog"></i>
+									<i class="glyphicon glyphicon-cog"></i> Configuration...
 								</button>
 							</div>
 						</div>
@@ -77,22 +67,21 @@
 					</div>
 					<!-- //Showw server  -->
 				</div>
-				<div class="panel-footer" style="font-size: 10pt">
+				<div class="panel-footer hidden" style="font-size: 10pt">
 
 					<!-- Progress bars -->
 					<div class="clearfix">
-						<span class="pull-left">CPU</span> <small class="pull-right">70%</small>
+						<span class="pull-left">CPU</span> <small class="pull-right cpu"></small>
 					</div>
 					<div class="progress xs">
-						<div class="progress-bar progress-bar-green" style="width: 70%;"></div>
+						<div class="progress-bar progress-bar-green cpu-bar" style="width: 0%;"></div>
 					</div>
 
 					<div class="clearfix">
-						<span class="pull-left">RAM</span> <small class="pull-right">45% (0.45/1
-							GB)</small>
+						<span class="pull-left">RAM</span> <small class="pull-right ram"></small>
 					</div>
 					<div class="progress xs">
-						<div class="progress-bar progress-bar-red" style="width: 45%;"></div>
+						<div class="progress-bar progress-bar-red ram-bar" style="width: 0%;"></div>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package vn.edu.cit.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -27,30 +29,35 @@ public class ServerDAOImpl implements ServerDAO {
 	@Override
 	public Server getServer(User user, String ip) {
 		// query to search user
-		if (user.getServers() != null) {
-			for (Server server : user.getServers())
+		//System.out.println(ip);
+		List<Server> svs = user.getServers();
+		if (svs != null && svs.size() > 0) {
+			for (Server server : svs) {
 				if (server.getServerAddress().equals(ip)) {
+			//		System.out.println("ip2:" + server.getServerAddress());
 					return server;
 				}
+			}
 		} else {
 			return null;
 		}
 		return null;
 	}
 
-//	@Override
-//	public Server getServerSudo(User user, String ip, String sudousername, String sudopass) {
-//		// query to search user
-//		if (user.getServers() != null) {
-//			for (Server server : user.getServers())
-//				if (server.getServerAddress().equals(ip)) {
-//					return server;
-//				}
-//		} else {
-//			return null;
-//		}
-//		return null;
-//	}
+	// @Override
+	// public Server getServerSudo(User user, String ip, String sudousername,
+	// String sudopass) {
+	// // query to search user
+	// if (user.getServers() != null) {
+	// for (Server server : user.getServers())
+	// if (server.getServerAddress().equals(ip)) {
+	// return server;
+	// }
+	// } else {
+	// return null;
+	// }
+	// return null;
+	// }
 
 	@Override
 	public void updateServer(Server sv) {

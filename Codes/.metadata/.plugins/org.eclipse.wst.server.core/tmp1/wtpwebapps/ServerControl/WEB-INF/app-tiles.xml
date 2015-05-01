@@ -97,4 +97,8 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/services-dhcp-file-content.jsp" />
 	</definition>
+	<definition name="dhcp-logs" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-dhcp-logs.jsp" />
+	</definition>
 </tiles-definitions>	

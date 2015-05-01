@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="serverD" key="selection"/>
+		<item value="Loading...OK" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="ServerD"/>
-			<item value="monitor"/>
-			<item value="checkInstall"/>
-			<item value="addhostfix"/>
-			<item value="/serviceconfig/dhcp/subnets/addsubnet/"/>
-			<item value="subnets/addsubnet"/>
-			<item value="serviceconfig/dhcp/hostfixs/"/>
-			<item value="hostfixNew"/>
+			<item value="Loading...OK"/>
+			<item value="getram"/>
+			<item value="wait"/>
+			<item value="time "/>
+			<item value="btn-block"/>
+			<item value="btn btn-success"/>
+			<item value=".left-side"/>
+			<item value="navbar "/>
 		</list>
 		<list key="replacehistory">
 			<item value="hostfixes"/>

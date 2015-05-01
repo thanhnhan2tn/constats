@@ -64,35 +64,6 @@ public class HomeController {
 	}
 
 	/**
-	 * Check Server Status
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/checkstatus/{ip}/{cc}", method = RequestMethod.GET)
-	@ResponseBody
-	public String checkStatus(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c) {
-		String cc = (String) session.getAttribute("cc");
-		User user = (User) session.getAttribute("user");
-		String check = "false";
-		if (user != null) {
-			for (Server server : user.getServers()) {
-				_log.info("Check status: Get server: " + server.getServerUsername() + "/" + server.getServerAddress());
-				if (server.getServerAddress().equals(ip)) {
-					server.setServerUsername("svcontrol"); // a user vs SSH
-					if (server.checkStatus()) {
-						_log.info("Check status:" + server.getServerUsername() + "/" + server.getServerPassword());
-						check = "true";
-					}
-				}
-			}
-		} else {
-			return "Khong the load duoc status";
-		}
-		return check;
-	}
-
-	/**
 	 * Get ListServer from User
 	 * 
 	 * @return ListServer
@@ -257,8 +228,9 @@ public class HomeController {
 	public String addServer(@ModelAttribute(value = "Server") Server server, HttpServletRequest request,
 			HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		User user = (User) session.getAttribute("user");
-		String text = "sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
-				+ server.getServerPassword() + ") && sudo echo >> \"/etc/ssh/sshd_config AllowUsers svcontrol\"";
+		String text = "sudo apt-get update && sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
+				+ server.getServerPassword()
+				+ ") && sudo echo >> \"/etc/ssh/sshd_config AllowUsers svcontrol\" &&  sudo service ssh restart";
 		if (user != null) {
 			List<Server> listServer = user.getServers();
 			if (listServer != null && listServer.size() > 0) {
@@ -420,61 +392,26 @@ public class HomeController {
 		if (user != null && cc.equals(c)) {
 			List<Server> listServer = user.getServers();
 			if (!listServer.isEmpty()) {
-				for (int i = 0; i < listServer.size(); i++) {
-					Server s = listServer.get(i); // get server in list
-					if (s.getServerAddress().equals(ip)) { // check Ip
-						// ServerConfig sf = new ServerConfig();
-						mm.put("user", user);
-						// s.setStatus(sf.uploadToServer2(s));
-						if (s.checkStatus()) {
-							mm.put("server", s);
-							str = "services-control";
-						} else {
-							str = "redirect:/";
-							// Add a message to page
-							redirectAtt.addFlashAttribute("display", "block");
-							redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
-						}
-					}
+				Server s = serverDAO.getServer(user, ip);
+				// ServerConfig sf = new ServerConfig();
+				mm.put("user", user);
+				// s.setStatus(sf.uploadToServer2(s));
+				if (s.checkStatus()) {
+					mm.put("server", s);
+					session.setAttribute("server", s);
+					str = "services-control";
+				} else {
+					str = "redirect:/";
+					// Add a message to page
+					redirectAtt.addFlashAttribute("display", "block");
+					redirectAtt.addFlashAttribute("message", "Can not connect to Server!");
 				}
-			} else {
-				str = "redirect:/";
-			}// end check user, if user not signin, or ending session
+			}
 		} else {
+			session.invalidate();
 			str = "redirect:/login";
 		}
 		return str;
-	}
-
-	@RequestMapping(value = "/getserverinfo/{ip}/{cc}", method = RequestMethod.GET)
-	@ResponseBody
-	public ServerStatus getServerInfo(@PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, HttpServletRequest request, HttpSession session,
-			RedirectAttributes redirectAtt) {
-		// Lay thong tin username trong session;
-		// Lay thong tin token
-		User user = (User) session.getAttribute("user");
-		String cc = (String) session.getAttribute("cc");
-		// Chuoi return mac dinh
-		ServerStatus status = null;
-		if (user != null && cc.equals(c)) {
-			List<Server> listServer = user.getServers();
-			if (!listServer.isEmpty()) {
-				for (int i = 0; i < listServer.size(); i++) {
-					Server s = listServer.get(i); // get server in list
-					if (s.getServerAddress().equals(ip)) { // check Ip
-						ServerConfig sf = new ServerConfig();
-						try {
-							status = sf.getServerStatus(s);
-						} catch (InterruptedException e) {
-							status = null;
-						}
-					}
-				}
-			} // end check ListServer
-
-		}// end if User
-		return status;
 	}
 
 	@RequestMapping(value = "/serviceconfig/user/{ip}/{cc}", method = RequestMethod.POST)
@@ -494,14 +431,14 @@ public class HomeController {
 				sv.setServerPassword(pass);
 				System.out.println(sv.getServerUsername());
 				ServerConfig serverConf = new ServerConfig();
-				//System.out.println("check...: "+serverConf.checkSudoer(sv));
+				// System.out.println("check...: "+serverConf.checkSudoer(sv));
 				if (serverConf.checkSudoer(sv) == null || serverConf.checkSudoer(sv) == false) {
 					_log.info("This user " + u + " is not Sudoer Permission");
 					redirectAtt.addFlashAttribute("display", "block");
 					redirectAtt.addFlashAttribute("message", "This user is not Sudoer Permission!");
-					
+
 				}// check SUDOer USER
-				else if(serverConf.checkSudoer(sv) == true){
+				else if (serverConf.checkSudoer(sv) == true) {
 
 					session.setAttribute("sudouser", u);
 					session.setAttribute("sudopass", pass);

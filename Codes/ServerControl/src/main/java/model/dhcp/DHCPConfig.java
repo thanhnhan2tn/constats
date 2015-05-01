@@ -206,7 +206,7 @@ public class DHCPConfig {
 			channel.disconnect();
 			return tong;
 		} catch (Exception e) {
-			return null;
+			return "Server not found!";
 		}
 	}
 
@@ -1037,39 +1037,16 @@ public class DHCPConfig {
 
 	}
 
-	// Convert mot so Object to XML
-
-	// Convert mot so XML to Object
-
-	public static void main(String[] args) throws IOException {
-		DHCPConfig dhcp_c = new DHCPConfig();
-		Server sv = new Server("192.168.56.101", 22, "ubuntu", "ubuntu", "ubuntu");
-		Subnet sn = new Subnet("172.16.0.0", "255.255.0.0", "172.16.0.100 172.16.0.150", "199.99.9.33",
-				"www.thietkeweb.org", "172.16.0.105", null, "2600", null);
-
-		dhcp_c.createSubnet(sv, sn);
-		HostFixIP host = new HostFixIP("hieu1", "5C:0A:5B:22:D2:92", "hieu.txt", "ns1.mayb.com", "192.168.0.109");
-		dhcp_c.createHost(sv, host);
-		System.out.println(dhcp_c.loadConfigToPlainText(sv));
-		// Xoa phan tu subnet co get subnet == null trong list
-		System.out.println(dhcp_c.inSubnet(sv));
-		dhcp_c.inHost(sv);
-		// ---Upload---
-
-//		System.out.println(dhcp_c.checkInstall(sv));
-//		dhcp_c.uploadConfigToDHCPServer(sv, dhcp_c.convertTextToListSubnet(sv), dhcp_c.convertTextToListHost(sv),
-//				dhcp_c.convertTextToConfigChung(sv));
-
-		// -----------
-		//dhcp_c.uploadStringConfigToDHCPServer(sv, " \" hieuminh \" ");
-		//System.out.println(dhcp_c.inConfigChung(sv));
-		//System.out.println(dhcp_c.convertTextToConfigChung(sv));
-		// dhcp_c.addSubnet(sv, sn);
-		// dhcp_c.addHost(sv, host);
-		//dhcp_c.XoaSubnetorHost(sv, null, "fantasia");
-		//System.out.println(dhcp_c.loadConfigChungToPlainText(sv));
-		//System.out.println(dhcp_c.inConfigChung(sv));
-		//System.out.println(dhcp_c.loadConfigToPlainText(sv));
-
+	/**
+	 * GetLog - Lay thong tin Logs cua DHCP
+	 * 
+	 * @param sv
+	 * @return
+	 */
+	public String getLog(Server sv) {
+		//Restart(sv);
+		String kq = uploadToServer(sv, "echo " + sv.getServerPassword() + "| sudo -S "
+				+ " cat /var/lib/dhcp/dhcpd.leases");
+		return kq;
 	}
 }
