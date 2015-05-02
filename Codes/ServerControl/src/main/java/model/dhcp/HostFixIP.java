@@ -8,7 +8,8 @@ public class HostFixIP {
 	String fixed_address;
 
 	public HostFixIP() {
-		}
+		// TODO Auto-generated constructor stub
+	}
 
 	public HostFixIP(String hostname, String hardware_internet,
 			String filename, String servername, String fixed_address) {

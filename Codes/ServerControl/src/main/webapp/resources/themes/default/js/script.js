@@ -6,32 +6,30 @@ $(document)
 $(document)
   .ready(function () {
     var listServer = $('.server-listed');
-    setInterval(function () {
+    //setInterval(function () {
       function check_server(index) {
         if (!listServer[index]) {
           return false;
         }
-        var data = $(listServer[index])
+        var serverip = $(listServer[index])
           .attr('data-id');
         $.ajax({
-            url: 'getram/' + data + '/' + cc
+            url: 'checkstatus/' + serverip + '/' + cc
             , type: 'GET'
             , data: {}
-            , timeout: '10000'
+            , timeout: '30000'
             , error: function () {
               $(listServer[index])
                 .find(".wait")
                 .css("display", "none");
               $(listServer[index])
-                .find(".i-server-icon").remove();
+                .find(".i-server-icon").css({"display": "none"});
               $(listServer[index])
                 .find(".i-server-icon-off")
                 .css({
                   "display": "block"
                 });
-              $(listServer[index]).find(".show")
-              .removeClass("show")
-              .addClass("hidden");
+             // $(listServer[index]).find(".show").removeClass("show").addClass("hidden");
             }
             , // neu load thnh cong
             success: function (data, status) {
@@ -39,54 +37,62 @@ $(document)
               $(listServer[index])
                 .find(".wait")
                 .css("display", "none");
-              if ((data[0] == "null") || (data[0] == "")) {
-                $(listServer[index])
-                  .find(".i-server-icon")
-                  .remove;
-                $(listServer[index])
-                  .find(".i-server-icon-off")
-                  .css({
-                    "display": "block"
-                  })
-                  .find(".i-server-icon-on")
-                  .remove;
+              if (data == "false") {
+                $(listServer[index]).find(".i-server-icon").css({"display": "none"});
+                $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
+                $(listServer[index]).find(".disabled").addClass("disabled");
+                //$(listServer[index]).find(".info").removeClass("show").addClass("hidden")
               } else {
                 $(listServer[index])
-                  .find(".i-server-icon-off")
-                  .remove;
-                $(listServer[index])
-                  .find(".i-server-icon")
-                  .css({
-                    "display": "block"
-                  });
-                $(listServer[index])
-                  .find(".disabled")
-                  .removeClass("disabled");
-                var ramuse = parseFloat(data[1]) / 1024;
-                var ramtotal = parseFloat(data[2]) / 1024;
-                var ram = (ramuse / ramtotal) * 100;
-                var cpu = parseFloat(data[3])
-                  .toFixed(2);
-                $(listServer[index])
-                  .find(".hidden")
-                  .removeClass("hidden")
-                  .addClass("show");
-                $(listServer[index])
-                  .find(".ram")
-                  .html(ram.toFixed(2) + "% (" + ramuse.toFixed(2) + "/" + ramtotal.toFixed(2) + " MB)");
-                $(listServer[index])
-                  .find(".ram-bar")
-                  .css({
-                    "width": ram + "%"
-                  });
-                $(listServer[index])
-                  .find(".cpu")
-                  .html(cpu + " %");
-                $(listServer[index])
-                  .find(".cpu-bar")
-                  .css({
-                    "width": cpu + "%"
-                  });
+                  .find(".i-server-icon-off").css({"display": "none"});
+                $(listServer[index]).find(".i-server-icon").css({"display": "block"});
+                $(listServer[index]).find(".disabled").removeClass("disabled");
+                //$(listServer[index]).find(".info").removeClass("hidden").addClass("show");
+                //load ram
+//                $.ajax({
+//                    url: 'getram/' + serverip + '/' + cc
+//                    , type: 'GET'
+//                    , data: {}
+//                    , timeout: '10000'
+//                    , error: function () {
+//                    	$("info_"+serverip).find(".ram")
+//                         .html("Can not get RAM info of this server...");
+//                    }, // neu load thnh cong
+//                    success: function (data, status) {
+//                     
+//                     if ((data[0] == "null") || (data[0] == "")) {
+//                    	 $(".info_"+serverip).find(".ram")
+//                         .html("Can not get RAM info of this server...");
+//                      }else{
+//                    	  var ramuse = parseFloat(data[0]) / 1024;
+//                          var ramtotal = parseFloat(data[1]) / 1024;
+//                          var ram = (ramuse / ramtotal) * 100;
+//                         
+//                          $(".info_"+serverip).html(ram.toFixed(2) + "% (" + ramuse.toFixed(2) + "/" + ramtotal.toFixed(2) + " MB)");
+//                          $(".info_"+serverip).find(".ram-bar").css({"width": ram + "%"});
+//                      }
+//                      }});
+//                //load CPU
+//                $.ajax({
+//                    url: 'getcpu/' + serverip + '/' + cc
+//                    , type: 'GET'
+//                    , cpu: {}
+//                    , timeout: '10000'
+//                    , error: function () {
+//                    	 $(".info_"+serverip)
+//                         .find(".cpu")
+//                         .html("Can not get CPU info of this server...");
+//                      }
+//                    , // neu load thnh cong
+//                    success: function (cpu, status) {
+//                      //data = $.trim(data);
+//                     if ((data == "null") || (cpu == "")) {
+//                    	 $(".info_"+serverip).find(".cpu")
+//                         .html("Can not get CPU info of this server...");
+//                      }else{
+//                    	  $("small.info_"+serverip).html(cpu + " %");
+//                    	  $(".info_"+serverip).find(".cpu-bar").css({"width": cpu + "%"});
+//                      }}});
               }
             }
           })
@@ -97,7 +103,7 @@ $(document)
       if (listServer.length > 0) {
         check_server(0);
       }
-    }, 10000);
+   // }, 5000);
     // Check status sidebar
     var listleft = $('.list-server-left');
   });

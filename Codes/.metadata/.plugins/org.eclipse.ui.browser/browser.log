@@ -468,3 +468,239 @@ May 01, 2015 13:35:13.85
 May 02, 2015 02:16:14.66 NEW SESSION
 May 02, 2015 02:16:14.66 [Child 7244] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
 May 02, 2015 02:23:28.71 SystemMessageCache: init
+
+May 02, 2015 10:28:12.75 NEW SESSION
+May 02, 2015 10:28:12.75 [Child 4316] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 10:29:53.60 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 10:35:05.87 console.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 10:37:36.79 [Child 5348] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 10:52:10.64 [Child 852] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 11:08:49.50 [Child 4932] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 11:09:34.95 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:09:34.96 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:09:34.96 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 11:09:34.97 openTabPrompt@resource://gre/components/nsPrompter.js:423:13
+May 02, 2015 11:09:34.97 ModalPrompter.prototype.openPrompt@resource://gre/components/nsPrompter.js:535:17
+May 02, 2015 11:09:34.97 ModalPrompter.prototype.alert@resource://gre/components/nsPrompter.js:605:9
+May 02, 2015 11:09:34.98 check_server/<.success/<.success@http://localhost:8080/cit/resources/themes/default/js/script.js:96:24
+May 02, 2015 11:09:34.98 n.Callbacks/j@http://localhost:8080/cit/resources/themes/default/js/jquery-2.1.1.min.js:2:26855
+May 02, 2015 11:09:34.98 n.Callbacks/k.fireWith@http://localhost:8080/cit/resources/themes/default/js/jquery-2.1.1.min.js:2:27673
+May 02, 2015 11:09:34.99 x@http://localhost:8080/cit/resources/themes/default/js/jquery-2.1.1.min.js:4:11118
+May 02, 2015 11:09:34.99 .send/b/<@http://localhost:8080/cit/resources/themes/default/js/jquery-2.1.1.min.js:4:14767
+May 02, 2015 11:24:16.13 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:24:19.12 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:24:31.67 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:24:52.93 [Child 4252] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 11:27:32.75 SystemMessageCache: initSystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:27:32.75 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:27:32.75 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 11:28:16.61 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:28:16.62 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:28:16.62 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 11:28:16.62 il@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:730:139
+May 02, 2015 11:28:16.63 Kbb.prototype.openWindow@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1735:108
+May 02, 2015 11:28:16.63 Lbb@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:247
+May 02, 2015 11:28:16.64 nw@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:57
+May 02, 2015 11:28:16.65 f.kK@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:2502:66
+May 02, 2015 11:28:16.65 AL.prototype.Kg@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy444,sy172,sy423,sy427,sy434,sy347,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:864:378
+May 02, 2015 11:28:16.66 AL.prototype.RXa@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy444,sy172,sy423,sy427,sy434,sy347,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:861:346
+May 02, 2015 11:28:16.66 xda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:92:412
+May 02, 2015 11:28:16.67 sda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:93:422
+May 02, 2015 11:28:16.67 ofa/<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:157:256
+May 02, 2015 11:28:16.68 ee.prototype.ha/c@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:154:134
+May 02, 2015 11:28:16.69 qda/b<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:90:30
+May 02, 2015 11:28:36.74 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 11:30:07.81 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:32:38.77 [Child 4184] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 11:33:49.80 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:33:49.81 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:33:49.81 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 11:34:00.42 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 11:36:58.78 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:40:40.77 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 11:41:52.13 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:46:09.57 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 11:47:57.61 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 11:50:23.07 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 11:52:22.47 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:52:22.53 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:52:22.53 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 11:53:25.83 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 11:53:25.84 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 11:53:25.84 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:02:18.65 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 12:05:05.79 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 12:09:09.86 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:09:09.92 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:09:09.92 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:13:20.97 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 12:14:15.64 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 12:18:44.64 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 12:18:51.49 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:18:51.53 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:18:51.53 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:18:51.54 il@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:730:139
+May 02, 2015 12:18:51.54 Kbb.prototype.openWindow@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1735:108
+May 02, 2015 12:18:51.54 Lbb@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:247
+May 02, 2015 12:18:51.55 nw@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:57
+May 02, 2015 12:18:51.55 f.kK@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:2502:66
+May 02, 2015 12:18:51.56 AL.prototype.Kg@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy171,sy393,sy444,sy172,sy423,sy427,sy434,sy347,sy412,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy413,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy411,sy415,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:947:378
+May 02, 2015 12:18:51.56 AL.prototype.RXa@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy171,sy393,sy444,sy172,sy423,sy427,sy434,sy347,sy412,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy413,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy411,sy415,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:944:346
+May 02, 2015 12:18:51.56 xda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:92:412
+May 02, 2015 12:18:51.57 sda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:93:422
+May 02, 2015 12:18:51.57 ofa/<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:157:256
+May 02, 2015 12:18:51.58 ee.prototype.ha/c@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:154:134
+May 02, 2015 12:18:51.58 qda/b<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:90:30
+May 02, 2015 12:29:05.19 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 12:33:49.56 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:33:49.56 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:33:49.57 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:34:34.47 [Child 5248] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 12:50:53.25 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:50:53.26 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:50:53.26 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:51:40.61 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:51:40.61 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:51:40.61 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:58:33.08 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:58:33.09 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:58:33.09 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 12:59:55.79 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 12:59:55.80 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 12:59:55.80 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 13:00:09.37 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:02:01.86 [NPAPI 8308] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 13:02:23.57 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 13:02:23.58 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 13:02:23.58 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 13:02:33.46 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:02:49.96 [Child 8208] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 13:05:45.01 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 13:05:45.06 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 13:05:45.06 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 13:06:28.37 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:06:34.55 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 13:06:34.55 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 13:06:34.56 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 13:06:46.38 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 13:06:46.47 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 13:06:46.48 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 13:06:46.48 il@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:730:139
+May 02, 2015 13:06:46.49 Kbb.prototype.openWindow@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1735:108
+May 02, 2015 13:06:46.49 Lbb@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:247
+May 02, 2015 13:06:46.49 nw@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:1736:57
+May 02, 2015 13:06:46.50 f.kK@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:2502:66
+May 02, 2015 13:06:46.50 AL.prototype.Kg@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy444,sy172,sy423,sy427,sy434,sy347,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:864:378
+May 02, 2015 13:06:46.50 AL.prototype.RXa@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy444,sy172,sy423,sy427,sy434,sy347,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy419,sy422,sy432,sy439,sy447,sy456,sy452,sy196,sy186,sy228,sy405,sy418,sy420,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=j/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:861:346
+May 02, 2015 13:06:46.51 xda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:92:412
+May 02, 2015 13:06:46.51 sda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:93:422
+May 02, 2015 13:06:46.52 ofa/<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:157:256
+May 02, 2015 13:06:46.52 ee.prototype.ha/c@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:154:134
+May 02, 2015 13:06:46.53 qda/b<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiNaY_7v_UGMM-SXPlLZv_8e90mxs8_DvXsTQLIzAP5v9v8A_g_soy8k/rt=h/d=1/t=zcms/rs=AHGWq9BVtrqUmgF4WHEyCWhewej_5rmULA:90:30
+May 02, 2015 13:06:49.34 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:17:04.18 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:26:42.83 [GFX1-]: [D2D1.1] 4CreateBitmap failure Size(28,25287) Code: 0x80070057
+May 02, 2015 13:39:02.91 [Child 4012] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 13:42:47.56 E/MPEG4Extractor( 8036): No width or height, assuming worst case 1080p
+May 02, 2015 13:47:11.12 SystemMessageCache: init[GFX1-]: Failed to allocate a surface due to invalid size Size(683,0)
+
+May 02, 2015 21:29:06.83 NEW SESSION
+May 02, 2015 21:29:06.83 
+May 02, 2015 21:29:07.02 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 02, 2015 21:29:07.02 
+May 02, 2015 21:46:53.87 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 21:48:34.37 console.error: 
+May 02, 2015 21:48:34.37   Message: TypeError: can't access dead object
+May 02, 2015 21:48:34.37   Stack:
+May 02, 2015 21:48:34.38     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 02, 2015 21:48:34.38 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 02, 2015 21:48:34.38 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 02, 2015 21:48:34.39 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 02, 2015 21:48:34.39 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 02, 2015 21:48:34.39 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 02, 2015 21:48:34.40 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 02, 2015 21:48:34.40 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 02, 2015 21:48:34.41 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 02, 2015 21:48:34.41 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 02, 2015 21:48:34.41 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 02, 2015 21:48:34.41 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 02, 2015 21:48:34.42 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 02, 2015 21:48:34.42 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 02, 2015 21:48:34.42 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 02, 2015 21:48:34.43 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 02, 2015 21:48:34.43 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 02, 2015 21:48:34.43 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 02, 2015 21:48:34.44 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 02, 2015 21:48:34.44 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 02, 2015 21:48:34.44 
+May 02, 2015 21:59:24.64 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 22:07:08.82 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 22:07:09.64 *************************
+May 02, 2015 22:07:09.64 A coding exception was thrown and uncaught in a Task.
+May 02, 2015 22:07:09.65 
+May 02, 2015 22:07:09.65 Full message: TypeError: gInspector is null
+May 02, 2015 22:07:09.65 Full stack: AnimationsController.startListeners@chrome://browser/content/devtools/animationinspector/animation-controller.js:140:5
+May 02, 2015 22:07:09.66 AnimationsController.initialize<@chrome://browser/content/devtools/animationinspector/animation-controller.js:108:5
+May 02, 2015 22:07:09.66 TaskImpl_run@resource://gre/modules/Task.jsm:314:40
+May 02, 2015 22:07:09.66 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 02, 2015 22:07:09.67 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 02, 2015 22:07:09.67 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 02, 2015 22:07:09.68 
+May 02, 2015 22:07:09.68 *************************
+May 02, 2015 22:07:09.69 *************************
+May 02, 2015 22:07:09.69 A coding exception was thrown and uncaught in a Task.
+May 02, 2015 22:07:09.69 
+May 02, 2015 22:07:09.70 Full message: TypeError: gInspector is null
+May 02, 2015 22:07:09.70 Full stack: AnimationsController.startListeners@chrome://browser/content/devtools/animationinspector/animation-controller.js:140:5
+May 02, 2015 22:07:09.70 AnimationsController.initialize<@chrome://browser/content/devtools/animationinspector/animation-controller.js:108:5
+May 02, 2015 22:07:09.71 TaskImpl_run@resource://gre/modules/Task.jsm:314:40
+May 02, 2015 22:07:09.71 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 02, 2015 22:07:09.71 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 02, 2015 22:07:09.72 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 02, 2015 22:07:09.72 
+May 02, 2015 22:07:09.72 *************************
+May 02, 2015 22:07:56.42 [Child 608] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 22:07:56.44 [Child 608] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 02, 2015 22:08:57.54 console.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 22:16:40.27 console.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 22:50:23.09 console.warn: Asynchronous operation was aborted as selection changed.
+May 02, 2015 23:13:55.08 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 23:13:55.19 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 23:13:55.19 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 23:14:40.76 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 02, 2015 23:14:40.76 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 02, 2015 23:14:40.77 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 02, 2015 23:17:18.34 [Child 9748] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 03, 2015 24:03:47.50 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 03, 2015 24:03:47.61 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 03, 2015 24:03:47.62 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 03, 2015 24:03:47.62 il@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:734:372
+May 03, 2015 24:03:47.62 Kbb.prototype.openWindow@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1690:108
+May 03, 2015 24:03:47.62 Lbb@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1691:247
+May 03, 2015 24:03:47.63 sp@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1691:123
+May 03, 2015 24:03:47.63 pBa@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1062:199
+May 03, 2015 24:03:47.63 ENe.prototype.ia@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy493,sy504,sy549,sy227,sy484,sy494,sy527,sy548,sy555,sy556,sy557,sy481,sy547,sy559,sy560,sy492,sy562,sy488,sy553,sy64,sy67,sy519,sy526,sy551,sy558,sy566,sy567,sy568,sy569,sy570,sy57,sy346,sy308,sy499,sy564,sy58,sy348,sy220,sy307,sy491,sy550,sy571,sy578,sy581,atv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1822:546
+May 03, 2015 24:03:47.64 ejc@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy171,sy419,sy393,sy444,sy172,sy420,sy423,sy427,sy434,sy347,sy412,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy413,sy61,sy422,sy432,sy439,sy447,sy456,sy452,sy56,sy228,sy405,sy411,sy415,sy418,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:341:421
+May 03, 2015 24:03:47.64 f.$d@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy171,sy419,sy393,sy444,sy172,sy420,sy423,sy427,sy434,sy347,sy412,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy413,sy61,sy422,sy432,sy439,sy447,sy456,sy452,sy56,sy228,sy405,sy411,sy415,sy418,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:342:217
+May 03, 2015 24:03:47.65 f.$d@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy171,sy419,sy393,sy444,sy172,sy420,sy423,sy427,sy434,sy347,sy412,sy317,sy425,sy431,sy436,sy435,sy433,sy448,sy413,sy61,sy422,sy432,sy439,sy447,sy456,sy452,sy56,sy228,sy405,sy411,sy415,sy418,sy421,sy424,sy426,sy428,sy437,sy440,sy446,sy450,sy451,sy457,sy453,sy454,sy455,sy460,cv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:345:142
+May 03, 2015 24:03:47.65 f.mpc@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy493,sy504,sy549,sy227,sy484,sy494,sy527,sy548,sy555,sy556,sy557,sy481,sy547,sy559,sy560,sy492,sy562,sy488,sy553,sy64,sy67,sy519,sy526,sy551,sy558,sy566,sy567,sy568,sy569,sy570,sy57,sy346,sy308,sy499,sy564,sy58,sy348,sy220,sy307,sy491,sy550,sy571,sy578,sy581,atv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1816:373
+May 03, 2015 24:03:47.65 uda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:99:204
+May 03, 2015 24:03:47.65 f.dispatchEvent@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:97:368
+May 03, 2015 24:03:47.66 f.FWb@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy493,sy504,sy549,sy227,sy484,sy494,sy527,sy548,sy555,sy556,sy557,sy481,sy547,sy559,sy560,sy492,sy562,sy488,sy553,sy64,sy67,sy519,sy526,sy551,sy558,sy566,sy567,sy568,sy569,sy570,sy57,sy346,sy308,sy499,sy564,sy58,sy348,sy220,sy307,sy491,sy550,sy571,sy578,sy581,atv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1808:62
+May 03, 2015 24:03:47.66 uda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:99:204
+May 03, 2015 24:03:47.66 f.dispatchEvent@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:97:447
+May 03, 2015 24:03:47.67 f.DYb@/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=sy493,sy504,sy549,sy227,sy484,sy494,sy527,sy548,sy555,sy556,sy557,sy481,sy547,sy559,sy560,sy492,sy562,sy488,sy553,sy64,sy67,sy519,sy526,sy551,sy558,sy566,sy567,sy568,sy569,sy570,sy57,sy346,sy308,sy499,sy564,sy58,sy348,sy220,sy307,sy491,sy550,sy571,sy578,sy581,atv/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=j/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:1717:195
+May 03, 2015 24:03:47.67 uda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:99:204
+May 03, 2015 24:03:47.67 f.dispatchEvent@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:97:368
+May 03, 2015 24:03:47.68 f.Nn@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:481:401
+May 03, 2015 24:03:47.68 f.Ik@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:481:72
+May 03, 2015 24:03:47.68 xda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:94:412
+May 03, 2015 24:03:47.69 sda@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:95:422
+May 03, 2015 24:03:47.69 ofa/<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:157:256
+May 03, 2015 24:03:47.69 ee.prototype.ha/c@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:154:134
+May 03, 2015 24:03:47.70 qda/b<@https://mail.google.com/_/scs/mail-static/_/js/k=gmail.main.vi.FTovCQjuiTk.O/m=m_i,t,it/am=PiMa4E7G_UGMMWeXvkLZvz8-dkmzm8-DuAkTQLo3AP7___8gfg_o4y1g/rt=h/d=1/t=zcms/rs=AHGWq9BRkCJl4-HNcD1z5v0snH1wFFp34Q:92:30
+
+May 03, 2015 24:28:12.84 NEW SESSION
+May 03, 2015 24:28:12.84 SystemMessageCache: init1430587692840	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+May 03, 2015 24:28:13.41 1430587693416	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+May 03, 2015 24:44:20.22 [Child 10120] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333

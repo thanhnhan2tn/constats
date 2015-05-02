@@ -49,10 +49,12 @@ public class DHCPController {
 			Server sv = new Server(server);
 			sv.setServerUsername((String) session.getAttribute("sudouser"));
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			
 			DHCPConfig dhcpconfig = new DHCPConfig();
 			ServerConfig serverConf = new ServerConfig();
 			if (serverConf.checkSudoer(sv)) {
-				if (dhcpconfig.Install(server)) { // return true
+				Boolean check = dhcpconfig.Install(sv);
+				if (check) { // return true
 					_log.info("Install DHCP service ");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "(Install DHCP Success!)");
@@ -568,6 +570,39 @@ public class DHCPController {
 	
 	/**
 	 * Lay log DHCP
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/dhcp/geterrors/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getDhcpErrors(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			DHCPConfig dhcpConf = new DHCPConfig();
+			String errors = dhcpConf.getError(sv);
+			if (errors != null) {
+				return errors;
+			} else {
+				return "Khong lay duoc thong tin";
+			}
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
+	}
+	
+	/**
+	 * Lay log ERROR
 	 * 
 	 * @param request
 	 * @param session

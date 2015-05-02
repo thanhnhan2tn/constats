@@ -13,24 +13,22 @@
 <nav class="navbar navbar-static-top" role="navigation">
 	<!-- toggle button -->
 	<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas"
-		role="button"> <span class="sr-only">Sidebar</span> <span
-		class="icon-bar"></span>
+		role="button"> <span class="sr-only">Sidebar</span> <span class="icon-bar"></span>
 	</a>
 	<div class="navbar-right">
 		<ul class="nav navbar-nav">
-			<!-- li message -->
-			<li class="dropdown messages-menu"><a href="#"
-				class="dropdown-toggle" data-toggle="dropdown"> <i
-					class="fa fa-envelope"></i> <span class="label label-success">4</span>
-			</a> <!-- ul message -->
+			<!-- li message 
+			<li class="dropdown messages-menu"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown"> <i class="fa fa-envelope"></i> <span
+					class="label label-success">4</span>
+			</a>
 				<ul class="dropdown-menu">
 					<li class="header">You have 4 Message</li>
 					<li>
 						<div
 							style="position: relative; overflow: hidden; width: auto; height: 200px;"
 							class="slimScrollDiv">
-							<ul style="overflow: hidden; width: 100%; height: 200px;"
-								class="menu">
+							<ul style="overflow: hidden; width: 100%; height: 200px;" class="menu">
 
 							</ul>
 							<div
@@ -43,15 +41,15 @@
 					</li>
 					<li class="footer"><a href="#">View all</a></li>
 
-				</ul> <!-- end ul message --></li>
-			<!-- end li message -->
-			
+				</ul></li>
+			end li message -->
+
 			<!-- li user menu -->
 			<li class="dropdown user user-menu">
 				<!--  Da dang nhap --> <a href="#" class="dropdown-toggle"
-				data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i>
-					<span>${user.getFirstName()} ${user.getLastName()}<i
-						class="caret"></i></span>
+				data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> <span>${user.getFirstName()}
+						${user.getLastName()}<i class="caret"></i>
+				</span>
 			</a>
 				<ul class="dropdown-menu">
 					<!-- User image -->
@@ -59,13 +57,14 @@
 						src="<c:url value='/resources/themes/default/images/avatar.png'/>"
 						class="img-circle" alt="User Image" />
 						<p>${user.getFirstName()}${user.getLastName()}
-<!-- 							<small>User </small> -->
+							<!-- 							<small>User </small> -->
 						</p></li>
 
 					<!-- Menu Footer-->
 					<li class="user-footer">
 						<div class="pull-left">
-							<a href="${pageContext.request.contextPath}/profile/${cc}" class="btn btn-default btn-flat">Profile</a>
+							<a href="${pageContext.request.contextPath}/profile/${cc}"
+								class="btn btn-default btn-flat">Profile</a>
 						</div>
 						<div class="pull-right">
 							<a href="${pageContext.request.contextPath}/signout"

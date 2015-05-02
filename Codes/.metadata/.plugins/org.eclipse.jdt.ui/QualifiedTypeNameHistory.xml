@@ -39,14 +39,14 @@
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
-<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
 <fullyQualifiedTypeName name="model.dhcp.Subnet"/>
 <fullyQualifiedTypeName name="vn.edu.cit.controller.HomeController"/>
 <fullyQualifiedTypeName name="model.dhcp.HostFixIP"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="model.dhcp.DHCP"/>
 <fullyQualifiedTypeName name="vn.edu.cit.dao.ServerDAO"/>
-<fullyQualifiedTypeName name="model.server.ServerConfig"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="model.server.ServerConfig"/>
+<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
 </qualifiedTypeNameHistroy>

@@ -14,7 +14,11 @@
 		<h1>
 			DHCP Server Config :<small> (${server.serverAddress})</small>
 		</h1>
-		<h2>Logs</h2>
+		<h2>Logs <small>(Autoload after 5s)</small></h2>
+<!-- 		<button type="button"  class="btn btn-warning pull-right" -->
+<!-- 				title="Refresh"> -->
+<!-- 				<i class="glyphicon glyphicon-refresh"></i> -->
+<!-- 		</button> -->
 		</section>
 	<script>
 	$(document)
@@ -24,9 +28,9 @@
 	  });
 	//loading ServerInfomation
 	var ip = "${server.serverAddress}";
-	$(document)
-	  .ready(function () {
-	    $.ajax({
+	$(document).ready(function () {
+		setInterval(function () {
+		$.ajax({
 	      url: '${pageContext.request.contextPath}/serviceconfig/dhcp/getlogs/' + ip + '/' + cc
 	      , type: 'GET'
 	      , data: {}, //timeout : 60000,
@@ -35,14 +39,30 @@
 	       
 	        //	alert(html);
 	        $(".dhcp-logs")
-	          .html("Finish");
+	          .html("<pre>"+data+"</pre>");
 	        $(".wait")
 	          .css("display", "none");
 	        //}
 	      }
 	    });
+		$.ajax({
+		      url: '${pageContext.request.contextPath}/serviceconfig/dhcp/geterrors/' + ip + '/' + cc
+		      , type: 'GET'
+		      , data1: {}, //timeout : 60000,
+		      success: function (data1, status) {
+		        //if(data != null){
+		       
+		        //	alert(html);
+		        $(".dhcp-errors")
+		          .html("<pre>"+data1+"</pre>");
+		        $(".dhcp-errors.wait")
+		          .css("display", "none");
+		        //}
+		      }
+		    });
+		},5000);
 	   });
-
+	
 	</script>
 	<!--  End Content Header -->
 	<!--  Main Content -->
@@ -54,13 +74,24 @@
 			<div style="display: none ${displaysuccess}" id="login-alert"
 				class="alert alert-success col-sm-12">${message}</div>
 			<div class="box box-default">
-				<div class="box-body dhcp-logs">
+				<div class="box-header">Logs</div>
+				<div class="box-body dhcp-logs" style="max-height:450px; overflow:scroll;">
 					<span class="wait"
-								style="display: none: text-align:center; margin: auto;"> <img
+								style="display: none: text-align:center; margin:0 50%;"> <img
 								src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
 					</span> 
 				</div>
 			</div>
+			<div class="box box-default">
+				<div class="box-header">Errors</div>
+				<div class="box-body dhcp-errors" style="max-height:450px; overflow:scroll;">
+					<span class="wait"
+								style="display: none: text-align:center; margin:0 50%;"> <img
+								src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
+					</span> 
+				</div>
+			</div>
+			<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
 		</div>
 	</section>
 	<!--  End Main Content -->

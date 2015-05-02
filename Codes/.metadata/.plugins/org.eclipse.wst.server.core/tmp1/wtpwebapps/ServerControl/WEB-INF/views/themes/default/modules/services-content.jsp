@@ -10,9 +10,8 @@ $(document)
 });
 //loading ServerInfomation
 var ip = "${server.serverAddress}";
-$(document)
-.ready(function () {
-  $.ajax({
+$(document).ready(function () {
+	$.ajax({
     url: '${pageContext.request.contextPath}/getserverinfo/' + ip + '/' + cc
     , type: 'GET'
     , data: {}, //timeout : 60000,
@@ -24,17 +23,61 @@ $(document)
       html += '<tr><td>Kernel:</td><td>' + data.kernel + '</td></tr>';
       html += '<tr><td>Processor Info:</td><td>' + data.processor_info + '</td></tr>';
       html += '<tr><td>Uptime:</td><td>' + data.uptime + '</td></tr>';
-      html += '<tr><td>Memory:</td><td>Used: ' + parseInt(parseInt(data.memused) / 1024) + ' MB - Total: ' + parseInt(parseInt(data.memtotal) / 1024) + ' MB</td></tr>';
-      html += '<tr><td>CPU Usage:</td><td><div class="progress xs"><div class="progress-bar progress-bar-green" style="width: ' + data.cpu_usage + '%;"></div></div>' + data.cpu_usage + '%</td></tr>';
-      html += '<tr><td>Cpu Loadaverage:</td><td>' + data.cpu_loadaverage + '</td></tr></table>';
+      html += '<tr><td>Memory:</td><td class="ram">Loading...</td></tr>';
+      html += '<tr><td>CPU Usage:</td><td class="cpu"><span class="textcpu"></span><div class="progress"><div class="progress-bar progress-bar-green cpu-value" style="width: ' + parseFloat(data.cpu_usage) +'%;"><span class="cpu-value">'+data.cpu_usage + '%</span></div></div></td></tr>';
+      html += '<tr><td>Cpu Loadaverage:</td><td class="cpu-load">' + data.cpu_loadaverage + '</td></tr></table>';
       //	alert(html);
       $(".serverinfomation")
         .html(html);
       $(".wait")
         .css("display", "none");
       //}
+      setInterval(function () {
+    	  $.ajax({
+              url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
+              , type: 'GET'
+              , data1: {}
+              , timeout: '10000'
+              , error: function () {
+            	 // $("td.ram").html("Can not get RAM info of this server...");
+              }, // neu load thnh cong
+              success: function (data1, status) {
+               
+               if ((data1[0] == "null") || (data1[0] == "")) {
+            	   //$("td.ram").html("Can not get RAM info of this server...");
+                }else{
+              	  	var ramuse = parseFloat(data1[0]) / 1024;
+                    var ramtotal = parseFloat(data1[1]) / 1024;
+                    var ramfree = ramtotal-ramuse;
+                    var ram = (ramuse/ramtotal)*100;
+                   	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");
+                }
+                }});
+          //load CPU
+          $.ajax({
+              url: '${pageContext.request.contextPath}/getcpu/' + ip + '/' + cc
+              , type: 'GET'
+              , cpu: {}
+              , async: true
+              , timeout: '10000'
+              , error: function () {
+              	 // $("span.textcpu").text("Can not get CPU info of this server...");
+                }
+              , // neu load thnh cong
+              success: function (cpu, status) {
+                //data = $.trim(data);
+               if ((data == "null") || (cpu == "")) {
+            	  //
+                }else{
+                	$("span.textcpu").text("");
+                	$("span.cpu-value").removeClass("hidden");
+              	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
+                }}});
+      },10000); //10s
     }
   });
+	//end set time load
+	
   $("#m-status")
     .on("click", function () {
       //var id=""
@@ -104,7 +147,7 @@ $(document)
 							<div class="panel-body">
 								<div id="serverinfomation" class="serverinfomation">
 									<span class="wait"
-										style="display: none: text-align:center; displar: block; margin: 100px auto;">
+										style="display: none: text-align:center; displar: block; margin:10px 50%;">
 										<img
 										src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
 									</span>

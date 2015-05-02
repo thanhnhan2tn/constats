@@ -67,21 +67,21 @@
 					</div>
 					<!-- //Showw server  -->
 				</div>
-				<div class="panel-footer hidden" style="font-size: 10pt">
+				<div class="panel-footer info info_<%=server.getServerAddress()%> hidden" style="font-size: 10pt">
 
 					<!-- Progress bars -->
 					<div class="clearfix">
-						<span class="pull-left">CPU</span> <small class="pull-right cpu"></small>
+						<span class="pull-left">CPU</span> <small class="pull-right info_<%=server.getServerAddress()%> cpu"></small>
 					</div>
 					<div class="progress xs">
-						<div class="progress-bar progress-bar-green cpu-bar" style="width: 0%;"></div>
+						<div class="progress-bar progress-bar-green info_<%=server.getServerAddress()%> cpu-bar" style="width: 0%;"></div>
 					</div>
 
 					<div class="clearfix">
-						<span class="pull-left">RAM</span> <small class="pull-right ram"></small>
+						<span class="pull-left">RAM</span> <small class="pull-right info_<%=server.getServerAddress()%> ram"></small>
 					</div>
 					<div class="progress xs">
-						<div class="progress-bar progress-bar-red ram-bar" style="width: 0%;"></div>
+						<div class="progress-bar progress-bar-red info_<%=server.getServerAddress()%> ram-bar" style="width: 0%;"></div>
 					</div>
 				</div>
 			</div>

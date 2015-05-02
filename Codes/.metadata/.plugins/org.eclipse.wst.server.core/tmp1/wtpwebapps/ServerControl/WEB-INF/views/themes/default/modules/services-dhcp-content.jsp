@@ -146,7 +146,8 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							<a
-								href="${pageContext.request.contextPath }/serviceconfig/dhcp/logs/${server.serverAddress}/${cc}">Logs... <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/logs/${server.serverAddress}/${cc}">Logs...
+								<i class="glyphicon glyphicon-chevron-right pull-right"></i>
 							</a>
 						</h3>
 					</div>
@@ -158,10 +159,21 @@
 			<%
 				} else {
 			%>
+			<script>
+				$('.install-btn').click(function() {
+					var btn = $(this)
+					btn.button('Installing isc-dhcp-server...')
+					setTimeout(function() {
+						btn.button('reset')
+					}, 3000)
+				});
+			</script>
 			<div class="panel-body">
-				<a class="col-md-4"
-					href="${pageContext.request.contextPath }/serviceconfig/dhcpinstall/${server.serverAddress}/${cc}">
-					Click here to Install ISC-DHCP-SERVER Service..</a>
+				<button class="btn btn-primary btn-block install-btn"
+					onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcpinstall/${server.serverAddress}/${cc}'">
+					<i class="glyphicon glyphicon-download-alt"></i> Click here to Install
+					ISC-DHCP-SERVER
+				</button>
 			</div>
 			<%
 				}

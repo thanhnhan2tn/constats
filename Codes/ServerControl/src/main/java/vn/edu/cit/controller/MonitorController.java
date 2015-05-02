@@ -133,7 +133,7 @@ public class MonitorController {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Chuoi return mac dinh
-		String[] info = new String[4];
+		String[] info = new String[2];
 		if (user != null && cc.equals(c)) {
 			System.out.println(user.getEmail());
 			//lay thong tin server
@@ -144,9 +144,34 @@ public class MonitorController {
 				
 			ServerConfig config = new ServerConfig();
 			info[0] = config.getMemUsage(server);
-			info[1] = null;//config.getMemFree(server);
-			info[2] = config.getMemTotal(server);
-			info[3] = config.getCpuUsage(server);
+			info[1] = config.getMemTotal(server);
+		}// end if User
+		return info;
+	}
+	
+	/**
+	 * Lay thong tin RAM
+	 */
+	@RequestMapping(value = "/getcpu/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getCPUInfo(@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, HttpSession session, RedirectAttributes redirectAtt) {
+		// Lay thong tin username trong session;
+		// Lay thong tin token
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// Chuoi return mac dinh
+		String info = "";
+		if (user != null && cc.equals(c)) {
+			System.out.println(user.getEmail());
+			//lay thong tin server
+			Server server = serverDAO.getServer(user, ip);
+				
+			// a user vs SSH
+			server.setServerUsername("svcontrol"); 
+				
+			ServerConfig config = new ServerConfig();
+			info = config.getCpuUsage(server);
 		}// end if User
 		return info;
 	}
@@ -163,15 +188,15 @@ public class MonitorController {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 		String check = "false";
-		if (user != null) {
+		if (user != null && c.equals(cc)) {
 			for (Server server : user.getServers()) {
-				_log.info("Check status: Get server: " + server.getServerUsername() + "/" + server.getServerAddress());
 				if (server.getServerAddress().equals(ip)) {
 					server.setServerUsername("svcontrol"); // a user vs SSH
 					if (server.checkStatus()) {
 						_log.info("Check status:" + server.getServerUsername() + "/" + server.getServerPassword());
 						check = "true";
 					}
+					break;
 				}
 			}
 		} else {

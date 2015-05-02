@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Loading...OK" key="selection"/>
+		<item value="checkstatus" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="checkstatus"/>
 			<item value="Loading...OK"/>
 			<item value="getram"/>
 			<item value="wait"/>
@@ -19,7 +20,6 @@
 			<item value="btn-block"/>
 			<item value="btn btn-success"/>
 			<item value=".left-side"/>
-			<item value="navbar "/>
 		</list>
 		<list key="replacehistory">
 			<item value="hostfixes"/>
