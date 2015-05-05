@@ -14,6 +14,7 @@
             	</div>
         -->
 		<ul class="sidebar-menu">
+			<li class="header">LIST SERVERS</li>
 			<%
 				if (user.getServers() != null && !user.getServers().isEmpty()) {
 							for (Server server : user.getServers()) {

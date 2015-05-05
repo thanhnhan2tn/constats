@@ -28,8 +28,8 @@
 						<c:forEach items="${nicForm.dns_nameservers }" var="dns"
 							varStatus="status">
 
-							<div class="form-group listdns">
-								<div class="input-group col-md-9">
+							<div class="listdns">
+								<div class="input-group">
 									<input class=" form-control" type="text"
 										name="dns_nameservers[${status.index }]" value="${dns}" /> <span
 										class="input-group-btn">
@@ -55,7 +55,8 @@
 					</div>
 				</div>
 				<!--  End Panel -->
-				<button type="button" class="btn btn-default" id="add-dns">Add</button>
+				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+				<button type="button" class="btn btn-success" id="add-dns">Add...</button>
 				<form:button type="submit" class="btn btn-default">Save</form:button>
 			</form:form>
 		</div>
@@ -71,8 +72,8 @@
 			var listdns = $('.listdns');
 			 
 			$("#add-dns").remove();
-			$(".dns").append("<div class=\"form-group\">"
-							+"<div class=\"input-group col-md-9\">"
+			$(".dns").append("<div class=\"\">"
+							+"<div class=\"input-group\">"
 							+"<input class=\"form-control\" type=\"text\" name=\"dns_nameservers["+listdns.length+"]\"/> <span class=\"input-group-btn\">"
 							+"<button type=\"button\" class=\"btn btn-warning remove-dns\"	title=\"Remove DNS\">"
 							+"<i class=\"glyphicon glyphicon-remove\"></i></span></button></div></div>"

@@ -202,7 +202,8 @@
 
 					</c:forEach>
 				</div>
-				<button type="button" class="btn btn-default" id="add-nic">Add</button>
+				<button type="button" class="btn btn-default" onclick="history.back(-1)">Back</button>
+				<button type="button" class="btn btn-success" id="add-nic">Add...</button>
 				<form:button type="submit" class="btn btn-primary">Save</form:button>
 			</form:form>
 		</div>

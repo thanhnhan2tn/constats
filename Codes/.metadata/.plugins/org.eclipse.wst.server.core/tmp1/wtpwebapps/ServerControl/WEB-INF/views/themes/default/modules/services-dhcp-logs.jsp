@@ -21,8 +21,7 @@
 <!-- 		</button> -->
 		</section>
 	<script>
-	$(document)
-	  .ajaxStart(function () {
+	$(document).ajaxStart(function () {
 	    $(".wait")
 	      .css("display", "block");
 	  });

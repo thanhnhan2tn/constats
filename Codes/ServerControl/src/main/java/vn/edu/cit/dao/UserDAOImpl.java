@@ -1,5 +1,7 @@
 package vn.edu.cit.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -30,16 +32,16 @@ public class UserDAOImpl implements UserDAO {
 	public User getUser(String username) {
 		// query to search user
 		Query searchQuery = new Query(Criteria.where("email").is(username));
-		User user = mongoTemplate.findOne(searchQuery, User.class);
-		if (user != null) {
-			return user;
-		} else {
-			return null;
-		}
+		return mongoTemplate.findOne(searchQuery, User.class);
 	}
 
 	@Override
 	public void updateUser(User user) {
 		mongoTemplate.save(user);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return mongoTemplate.findAll(User.class);
 	}
 }

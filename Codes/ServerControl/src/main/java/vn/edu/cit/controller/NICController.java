@@ -10,6 +10,7 @@ import model.nic.Eth;
 import model.nic.Nic;
 import model.nic.NicConfig;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.UserDAO;
 import vn.edu.cit.model.Server;
@@ -194,7 +196,7 @@ public class NICController {
 
 	@RequestMapping(value = "/serviceconfig/nic/save/{ip}/{cc}", method = RequestMethod.POST)
 	public String saveNIC(@ModelAttribute(value = "nicForm") Nic nic, HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c) {
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c,RedirectAttributes redirectAtt) {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 		if (user != null) { // check user login
@@ -219,7 +221,15 @@ public class NICController {
 							sv.setServerUsername((String) session.getAttribute("sudouser"));
 							sv.setServerPassword((String) session.getAttribute("sudopass"));
 							nicConfig.uploadConfigToServer(sv, nicToConfig);
+							_log.info("NIC Config save to server ");
+							redirectAtt.addFlashAttribute("displaysuccess", "block");
+							redirectAtt.addFlashAttribute("message",
+									"Save File and Upload network/interfaces to Server Success!");
 						} catch (IOException e) {
+							_log.info("NIC Config save to server ");
+							redirectAtt.addFlashAttribute("display", "block");
+							redirectAtt.addFlashAttribute("message",
+									"Fail to Upload network/interfaces to Server!");
 							return "redirect:/services/" + ip + "/" + cc;
 							// Thong bao khong the upload
 						}
@@ -262,21 +272,20 @@ public class NICController {
 					sv.setServerUsername((String) session.getAttribute("sudouser"));
 					sv.setServerPassword((String) session.getAttribute("sudopass"));
 					NicConfig nicConfig = new NicConfig();
-					System.out.println(sv.getServerUsername());
+					//System.out.println(sv.getServerUsername());
 					String config = nicConfig.loadConfigToPlainText(sv);
 					mm.put("config", config);
 					break;
 				}
 			}
-			
+
 			// Call function
 			mm.put("cc", c);
 			mm.put("title", "Home - Server Control");
 			mm.put("user", user);
 			// mm.put("nics", nic);
 			mm.put("server", sv);
-			
-			
+
 			return "nic-edit-config-file";
 
 		} else {
@@ -296,35 +305,42 @@ public class NICController {
 	 */
 	@RequestMapping(value = "/serviceconfig/nic/edit-file-nic/{ip}/{cc}", method = RequestMethod.POST)
 	public String saveConfigFile(HttpServletRequest request, HttpSession session,
-			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c) {
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
-		if (user != null) { // check user login
-			if (c.equals(cc)) {
-				Nic nicToConfig = (Nic) session.getAttribute("nics");
-				String config = (String) request.getParameter("config");
-				Server sv = new Server(); // khoi tao server
-				// duyet danh sach server cua user
-				for (Server server : user.getServers()) {
-					if (server.getServerAddress().equals(ip)) {
-						sv = new Server(server); // get server Object
-						NicConfig nicConfig = new NicConfig();
-						sv.setServerUsername((String) session.getAttribute("sudouser"));
-						sv.setServerPassword((String) session.getAttribute("sudopass"));
-						try {
-							nicConfig.saveStringToConfig(sv, config);
-						} catch (IOException e) {
-							return "redirect:/services/" + ip + "/" + cc;
-							// Thong bao khong the upload
-						}
+		if (user != null && c.equals(cc)) {
+			// Nic nicToConfig = (Nic) session.getAttribute("nics");
+			String config = (String) request.getParameter("config");
+
+			// duyet danh sach server cua user
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server); // get server Object
+					NicConfig nicConfig = new NicConfig();
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					try {
+						nicConfig.uploadStringConfigToServer(sv, config);
+						_log.info("NIC Config save to server ");
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message",
+								"Save File and Upload network/interfaces to Server Success!");
+					} catch (IOException e) {
+						_log.info("Fail load Config from server ");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+						return "redirect:/services/" + ip + "/" + cc;
+						// Thong bao khong the upload
 					}
 				}
-				session.removeAttribute("nics"); // remove session for nics
-			} else {
-				session.invalidate();
-				return "redirect:/login";
-			} // end check token
-		} // end check user
+			}
+			session.removeAttribute("nics"); // remove session for nics
+		} else {
+			session.invalidate();
+			return "redirect:/login";
+		} // end check token
 		return "redirect:/services/" + ip + "/" + cc;
 	}
+
+	private static final Logger _log = Logger.getLogger(NICController.class);
 }

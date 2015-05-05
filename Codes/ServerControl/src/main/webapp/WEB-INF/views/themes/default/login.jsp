@@ -93,7 +93,7 @@
 						</div>
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i
-								class="glyphicon glyphicon-user"></i></span>
+								class="glyphicon glyphicon-lock"></i></span>
 							<spring:password path="passWord" id="login-username"
 								class="form-control" placeholder="Your password" required="required"/>
 						</div>

@@ -2,14 +2,161 @@
 <%@page import="vn.edu.cit.model.*"%>
 <%@page import="org.springframework.data.mongodb.core.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <script type="text/javascript" src="<c:url value='/resources/themes/default/js/Queue.js'/>"></script> --%>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
 <script>
+var ip = "${server.serverAddress}";
+var ramArray=[0];
+var cpuArray=[0];
+
+/* JS load chart*/
+$(function () {
+
+    Highcharts.setOptions({
+        global : {
+            useUTC : false
+        }
+    });
+
+    // Create the chart
+    $('#cpu').highcharts({
+        chart : {
+        	type: 'spline',
+            events : {
+                load : function () {
+
+                    // set up the updating of the chart each second
+                    var series = this.series[0];
+                    setInterval(function () {
+                        var x = (new Date()).getTime(), // current time
+                            y = cpuArray[cpuArray.length-1];
+                        series.addPoint([x, y], true, true);
+                    }, 2000);
+                }
+            }
+        },
+
+        xAxis: {
+        	title: {
+                text: 'Time'
+            },
+        	type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Used (%)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+
+        title : {
+            text : 'CPU data'
+        },
+
+        exporting: {
+            enabled: false
+        },
+
+        series : [{
+            name : '% CPU',
+            data : (function () {
+                // generate an array of random data
+                var data = [], time = (new Date()).getTime(), i;
+
+                for (i = -19; i <= 0; i ++) {
+                    data.push([time + i * 1000, Math.round(0)]);
+                }
+                return data;
+            }())
+        }]
+    });
+// draw chart for RAMs
+      $('#ram').highcharts({
+                chart: {
+                    type: 'spline',
+                    //animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    events: {
+                        load: function () {
+
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            setInterval(function () {
+                                var x = (new Date()).getTime(), // current time
+                                    y = ramArray[ramArray.length-1]
+                                series.addPoint([x, y], true, true);
+                            }, 2000);
+                        }
+                    }
+                },
+                title: {
+                    text: 'RAM data'
+                },
+                xAxis: {
+                	title: {
+                        text: 'Time'
+                    },
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Used (%)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' +this.y +" "+ this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '%<br/>' +
+                            Highcharts.numberFormat(this.y, 0);
+                    }
+                },
+                legend: {
+                    enabled: true
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [{
+                    name: '% RAM Used',
+                    data: (function () {
+                        // generate an array of random data
+                        var data = [],
+                            time = (new Date()).getTime(),
+                            i;
+
+                        for (i = -19; i <= 0; i += 1) {
+                            data.push({
+                                x: time + i * 1000,
+                                y: Math.round(0)
+                            });
+                        }
+                        return data;
+                    }())
+                }]
+            });
+});
+
+/* JS Load infomation of Server*/
 $(document)
 .ajaxStart(function () {
   $(".wait")
     .css("display", "block");
 });
 //loading ServerInfomation
-var ip = "${server.serverAddress}";
+
 $(document).ready(function () {
 	$.ajax({
     url: '${pageContext.request.contextPath}/getserverinfo/' + ip + '/' + cc
@@ -25,7 +172,7 @@ $(document).ready(function () {
       html += '<tr><td>Uptime:</td><td>' + data.uptime + '</td></tr>';
       html += '<tr><td>Memory:</td><td class="ram">Loading...</td></tr>';
       html += '<tr><td>CPU Usage:</td><td class="cpu"><span class="textcpu"></span><div class="progress"><div class="progress-bar progress-bar-green cpu-value" style="width: ' + parseFloat(data.cpu_usage) +'%;"><span class="cpu-value">'+data.cpu_usage + '%</span></div></div></td></tr>';
-      html += '<tr><td>Cpu Loadaverage:</td><td class="cpu-load">' + data.cpu_loadaverage + '</td></tr></table>';
+      html += '<tr><td>Cpu Loadaverage:</td><td class="cpu-load"><div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">' + data.cpu_loadaverage + '</div></td></tr></table>';
       //	alert(html);
       $(".serverinfomation")
         .html(html);
@@ -33,6 +180,7 @@ $(document).ready(function () {
         .css("display", "none");
       //}
       setInterval(function () {
+    	 // getram
     	  $.ajax({
               url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
               , type: 'GET'
@@ -44,13 +192,21 @@ $(document).ready(function () {
               success: function (data1, status) {
                
                if ((data1[0] == "null") || (data1[0] == "")) {
+            	   if(ramArray.length>10){
+           	   		ramArray.shift();
+           	   		}
+               		ramArray.push(0);
             	   //$("td.ram").html("Can not get RAM info of this server...");
                 }else{
-              	  	var ramuse = parseFloat(data1[0]) / 1024;
+              	  	var ramfree = parseFloat(data1[0]) / 1024;
                     var ramtotal = parseFloat(data1[1]) / 1024;
-                    var ramfree = ramtotal-ramuse;
+                    var ramuse = ramtotal-ramfree;
                     var ram = (ramuse/ramtotal)*100;
-                   	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");
+                    if(ramArray.length>10){
+            	   		ramArray.shift();
+            	   	}
+                	ramArray.push(parseInt(ram));
+                   	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");	
                 }
                 }});
           //load CPU
@@ -66,14 +222,21 @@ $(document).ready(function () {
               , // neu load thnh cong
               success: function (cpu, status) {
                 //data = $.trim(data);
-               if ((data == "null") || (cpu == "")) {
-            	  //
+               if ((cpu == "null") || (cpu == "")) {
+            	   	if(cpuArray.length>10){
+            	   		cpuArray.shift();
+            	   	}
+               		cpuArray.push(0);
                 }else{
+                	if(cpuArray.length>10){
+            	   		cpuArray.shift();
+            	   	}
+                	cpuArray.push(parseInt(cpu));
                 	$("span.textcpu").text("");
                 	$("span.cpu-value").removeClass("hidden");
               	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
                 }}});
-      },10000); //10s
+      },2000); //10s
     }
   });
 	//end set time load
@@ -171,13 +334,7 @@ $(document).ready(function () {
 									</div>
 									<div class="box-body">
 										<div class="box-body text-center">
-											<div class="sparkline" data-type="line" data-spot-Radius="3"
-												data-highlight-Spot-Color="#f39c12" data-highlight-Line-Color="#222"
-												data-min-Spot-Color="#f56954" data-max-Spot-Color="#00a65a"
-												data-spot-Color="#39CCCC" data-offset="90" data-width="100%"
-												data-height="100px" data-line-Width='2' data-line-Color='#39CCCC'
-												data-fill-Color='rgba(57, 204, 204, 0.08)'>
-												0.01,0.03,0.05,0.01,0.03,0.05,0.01,0.03,0.05,0.01,0.03,0.05</div>
+											<div id="cpu" style="height: 400px; min-width: 310px"></div>
 										</div>
 										<!-- /.box-body -->
 									</div>
@@ -188,29 +345,12 @@ $(document).ready(function () {
 									</div>
 									<div class="box-body">
 										<div class="box-body text-center">
-											<div class="sparkline" data-type="line" data-spot-Radius="3"
-												data-highlight-Spot-Color="#f39c12" data-highlight-Line-Color="#222"
-												data-min-Spot-Color="#f56954" data-max-Spot-Color="#00a65a"
-												data-spot-Color="#39CCCC" data-offset="90" data-width="100%"
-												data-height="100px" data-line-Width='2' data-line-Color='#39CCCC'
-												data-fill-Color='rgba(57, 204, 204, 0.08)'>
-												6,4,7,2,5,6,7,4,5,7,2,2,5,2,2,5,6,7,4,6,7,4,8,4,3,1,5,7,8,4,3,2,2,5,6,7,4,1,5,7,9,9,8,7,6</div>
+											<div id="ram" style="height: 400px; min-width: 310px"></div>
 										</div>
 										<!-- /.box-body -->
 									</div>
 								</div>
-								<div class="box box-default">
-									<div class="box-header">
-										<h3 class="box-title">DISK Space</h3>
-									</div>
-									<div class="box-body">
-										<div class="box-body text-center">
-											<div class="sparkline" data-type="pie" data-offset="90"
-												data-width="100px" data-height="100px">6,4,8</div>
-										</div>
-										<!-- /.box-body -->
-									</div>
-								</div>
+								
 
 							</div>
 							<!-- // Panel Body -->
@@ -257,24 +397,26 @@ $(document).ready(function () {
 								<h3 class="panel-title">Power Control</h3>
 							</div>
 							<div class="panel-body">
+							<center>
 								<button type="button" class="btn btn-lg btn-danger "
-									onclick="location.href='${pageContext.request.contextPath }/shutdown/${server.serverAddress}/${cc }'"
-									title="shutdown">
+									onclick="location.href='${pageContext.request.contextPath }/services/shutdown/${server.serverAddress}/${cc }'"
+									title="Stop Server">
 									<i class="glyphicon glyphicon-off"></i>
 								</button>
 								<button type="button" class="btn btn-lg btn-warning"
-									onclick="location.href='${pageContext.request.contextPath }/restart/${server.serverAddress}/${cc }'"
-									title="restart">
+									onclick="location.href='${pageContext.request.contextPath }/services/restart/${server.serverAddress}/${cc }'"
+									title="ReBoot Server">
 									<i class="glyphicon glyphicon-repeat"></i>
 								</button>
+								</center>
 							</div>
 						</div>
 
 						<!-- Network Card -->
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="network-card">
 							<div class="panel-heading">
 								<h3 class="panel-title">
-									<a href="#" data-toggle="collapse" data-target="#network-card-config">Network
+									<a href="#network-card" data-toggle="collapse" data-target="#network-card-config">Network
 										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i>
 									</a>
 								</h3>

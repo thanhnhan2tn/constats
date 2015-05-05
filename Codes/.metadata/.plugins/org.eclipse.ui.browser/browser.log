@@ -704,3 +704,32 @@ May 03, 2015 24:28:12.84 NEW SESSION
 May 03, 2015 24:28:12.84 SystemMessageCache: init1430587692840	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
 May 03, 2015 24:28:13.41 1430587693416	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
 May 03, 2015 24:44:20.22 [Child 10120] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-beta-w32_bld-00000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+
+May 05, 2015 10:20:57.97 NEW SESSION
+May 05, 2015 10:20:57.97 1430796057977	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+May 05, 2015 10:20:58.62 1430796058623	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+
+May 05, 2015 21:48:32.22 NEW SESSION
+May 05, 2015 21:48:32.22 SystemMessageCache: initWARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 05, 2015 21:48:32.33 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 05, 2015 21:48:32.34 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15228:21
+May 05, 2015 21:53:51.44 [Child 2712] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 05, 2015 21:56:49.29 
+May 05, 2015 21:56:49.29 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 05, 2015 21:56:49.30 
+May 05, 2015 21:56:49.30 
+May 05, 2015 21:56:49.30 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 05, 2015 21:56:49.31 
+May 05, 2015 22:02:46.86 
+May 05, 2015 22:02:46.87 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 05, 2015 22:02:46.87 
+May 05, 2015 22:02:46.87 [Child 5340] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 05, 2015 22:14:50.27 
+May 05, 2015 22:14:50.28 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 05, 2015 22:14:50.28 
+May 05, 2015 22:14:50.29 [Child 7484] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 05, 2015 22:30:51.16 [Child 10560] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 05, 2015 23:25:01.29 
+May 05, 2015 23:25:01.51 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 05, 2015 23:25:01.51 
+May 05, 2015 23:25:02.40 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: init

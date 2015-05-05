@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ServerControl/src/main/webapp/WEB-INF/views/themes/default/modules/nic-edit-config-content.jsp&apos; to &apos;services-nic-file-content.jsp&apos;" description="Rename resource &apos;nic-edit-config-content.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/views/themes/default/modules/nic-edit-config-content.jsp" name="services-nic-file-content.jsp" stamp="1430817495177" updateReferences="true"/>
+</session>

@@ -6,7 +6,7 @@ $(document)
 $(document)
   .ready(function () {
     var listServer = $('.server-listed');
-    //setInterval(function () {
+    setInterval(function () {
       function check_server(index) {
         if (!listServer[index]) {
           return false;
@@ -17,7 +17,7 @@ $(document)
             url: 'checkstatus/' + serverip + '/' + cc
             , type: 'GET'
             , data: {}
-            , timeout: '30000'
+            , timeout: '3000'
             , error: function () {
               $(listServer[index])
                 .find(".wait")
@@ -103,7 +103,7 @@ $(document)
       if (listServer.length > 0) {
         check_server(0);
       }
-   // }, 5000);
+    }, 3000);	
     // Check status sidebar
     var listleft = $('.list-server-left');
   });

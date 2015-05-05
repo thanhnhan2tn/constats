@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="org.springframework.http.HttpRequest"/>
 <fullyQualifiedTypeName name="org.springframework.ui.ModelMap"/>
-<fullyQualifiedTypeName name="vn.edu.cit.controller.Calculator"/>
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.Power"/>
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.nic.Nic"/>
 <fullyQualifiedTypeName name="org.json.JSONArray"/>
@@ -25,7 +24,6 @@
 <fullyQualifiedTypeName name="vn.edu.cit.servercontrol.nic.NicConfig"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="model.ftp.FtpConfig"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ModelAttribute"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 <fullyQualifiedTypeName name="model.ssh.SSHConfig"/>
@@ -45,8 +43,11 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="model.dhcp.DHCP"/>
 <fullyQualifiedTypeName name="vn.edu.cit.dao.ServerDAO"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="model.server.ServerConfig"/>
 <fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="model.server.ServerConfig"/>
+<fullyQualifiedTypeName name="vn.edu.cit.controller.Calculator"/>
 </qualifiedTypeNameHistroy>

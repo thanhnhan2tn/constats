@@ -64,7 +64,8 @@ public class DHCPController {
 					redirectAtt.addFlashAttribute("message", "(Install DHCP failed!)");
 				}
 				return "redirect:/services/" + ip + "/" + c;
-			} else {// check sudoer user
+			} else {
+				// check sudoer user
 				return "redirect:/";
 			}
 		} else {

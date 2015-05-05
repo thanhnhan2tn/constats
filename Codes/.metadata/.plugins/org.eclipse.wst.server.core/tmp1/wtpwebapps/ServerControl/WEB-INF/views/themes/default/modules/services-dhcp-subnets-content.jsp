@@ -120,7 +120,7 @@
 				</c:if>
 				<!--  // Foreach Subnet -->
 				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
-				<button type="button" class="btn btn-primary" data-toggle="modal"
+				<button type="button" class="btn btn-success" data-toggle="modal"
 					data-target="#addSubnet">New...</button>
 			
 				<c:if test="${subnets.size()>0}">

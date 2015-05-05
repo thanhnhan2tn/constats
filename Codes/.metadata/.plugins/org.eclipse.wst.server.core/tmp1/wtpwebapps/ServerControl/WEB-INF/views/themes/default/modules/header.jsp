@@ -1,3 +1,4 @@
+<%@page import="vn.edu.cit.controller.Calculator"%>
 <%@page import="vn.edu.cit.dao.UserDAOImpl"%>
 <%@page import="vn.edu.cit.dao.UserDAO"%>
 <%@page import="vn.edu.cit.model.*"%>
@@ -7,14 +8,17 @@
 	//UserService userService = new UserService();
 	// 	UserDAOImpl userDAO = new UserDAOImpl();
 	// 	String username = (String) session.getAttribute("username");
+	User user = (User) session.getAttribute("user");
 %>
 <a href="${pageContext.request.contextPath}/" class="logo">ConStats</a>
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
-	<!-- toggle button -->
-	<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas"
-		role="button"> <span class="sr-only">Sidebar</span> <span class="icon-bar"></span>
-	</a>
+	<!-- 	<div class="navbar-left"> -->
+	<!-- 		<ul class="nav navbar-nav"> -->
+	<%-- 			<li><a href="${pageContext.request.contextPath}/"><span>Server</span></a></li> --%>
+
+	<!-- 		</ul> -->
+	<!-- 	</div> -->
 	<div class="navbar-right">
 		<ul class="nav navbar-nav">
 			<!-- li message 
@@ -54,7 +58,7 @@
 				<ul class="dropdown-menu">
 					<!-- User image -->
 					<li class="user-header bg-light-blue"><img
-						src="<c:url value='/resources/themes/default/images/avatar.png'/>"
+						src="http://www.gravatar.com/avatar/<%=Calculator.md5Hex(user.getEmail())%>"
 						class="img-circle" alt="User Image" />
 						<p>${user.getFirstName()}${user.getLastName()}
 							<!-- 							<small>User </small> -->
@@ -65,10 +69,15 @@
 						<div class="pull-left">
 							<a href="${pageContext.request.contextPath}/profile/${cc}"
 								class="btn btn-default btn-flat">Profile</a>
-						</div>
+						</div> <c:if test="${user.role==2 }">
+							<div class="pull-right ">
+								<a href="${pageContext.request.contextPath}/admincp/"
+									class="btn btn-primary btn-flat">Admin</a>
+							</div>
+						</c:if>
 						<div class="pull-right">
 							<a href="${pageContext.request.contextPath}/signout"
-								class="btn btn-default btn-flat">Sign out</a>
+								class="btn btn-danger btn-flat">Sign out</a>
 						</div>
 					</li>
 				</ul> <!-- Da dang nhap -->

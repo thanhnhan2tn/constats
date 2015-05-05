@@ -22,10 +22,12 @@ public class NicConfig {
 
 	/**
 	 * Upload cmd / file to server
+	 * 
 	 * @param sv
 	 * @param cmd
 	 * @return
 	 */
+
 	public boolean uploadToServer(Server sv, String cmd) {
 		Session ss = sv.getSession(sv);
 		try {
@@ -310,8 +312,8 @@ public class NicConfig {
 		if (n.getDns_nameservers() != null && n.getDns_nameservers().size() > 0) {
 			// check null and check empty.
 			for (String dns : n.getDns_nameservers()) {
-				if(!dns.equals("null") && dns!=null){
-				config = (config + "dns-nameservers " + dns + "'\n'").trim();
+				if (!dns.equals("null") && dns != null) {
+					config = (config + "dns-nameservers " + dns + "'\n'").trim();
 				}
 			}
 		}
@@ -331,10 +333,24 @@ public class NicConfig {
 
 	}
 
+	// upload Config to Server 2 - Save theo String truyen vao - GUI PlainText
+	public void uploadStringConfigToServer(Server sv, String configText) throws IOException {
+		String config = configText;
+		config = "echo "+sv.getServerPassword()+"| sudo -S bash -c " + "' echo -e \"" + config + "\" > /etc/network/interfaces'";
+		if (uploadToServer(sv, config) == true) {
+			System.out.println("Uploaded Success....!!!");
+		} else {
+			System.out.println("Upload Failed....!!!");
+
+		}
+
+	}
+
 	// upload Config to Server 2
 	public boolean saveStringToConfig(Server sv, String configText) throws IOException {
 		String config = "";
-		config = "sudo echo -e > /etc/network/interfaces '" + configText + "'";
+		config = "echo " + sv.getServerPassword() + "| sudo -S bash -c 'echo -e \"" + configText
+				+ ">\" /etc/network/interfaces '";
 		if (uploadToServer(sv, config) == true) {
 			System.out.println("Channel close....!!!");
 			return true;

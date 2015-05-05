@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.ServerDAO;
@@ -109,7 +108,7 @@ public class HomeController {
 		String lastName = request.getParameter("lastname");
 		String passWord = request.getParameter("passwd");
 		// Ma hoa MD5 cho password
-		String hashPassWord = Calculator.MD5(passWord);
+		String hashPassWord = Calculator.md5Hex(passWord);
 		int role = 1; // role mac dinh khi dang ki là 1 (member)
 		List<Server> servers = new ArrayList<Server>();
 		// Tim kim va khoi tao User neu co san trong DB
@@ -156,10 +155,10 @@ public class HomeController {
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message", "An email is not registered!");
 			return "redirect:/login";
-		} else if (Calculator.MD5(user.getPassWord()).equals(avaiable.getPassWord())) {
+		} else if (Calculator.md5Hex(user.getPassWord()).equals(avaiable.getPassWord())) {
 			// kiem tra so sanh password neu dung
 			session.setAttribute("user", avaiable);
-			session.setAttribute("cc", Calculator.MD5(avaiable.getEmail() + remoteAddress));
+			session.setAttribute("cc", Calculator.md5Hex(avaiable.getEmail() + avaiable.getPassWord() + remoteAddress));
 			_log.info("user login success. userEmail = " + user.getEmail());
 			return "redirect:/";
 		} else {
@@ -179,16 +178,47 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/profile/{cc}", method = RequestMethod.GET)
-	public ModelAndView profile(HttpSession session, @PathVariable(value = "cc") String c, HttpServletRequest request,
-			RedirectAttributes redirectAtt) {
+	public String profile(ModelMap mm, HttpSession session, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		if (user != null && cc.equals(c)) {
-			return new ModelAndView("profile");
+			mm.put("profileuser", user);
+			return "profile";
 		} else {
 			// Neu khong co user nao co email dang nhap
 			session.invalidate();
-			return new ModelAndView("redirect:/login");
+			return "redirect:/login";
+		}
+	}
+
+	@RequestMapping(value = "/edit-profile/{cc}", method = RequestMethod.POST)
+	public String editProfile(ModelMap mm, HttpSession session, @PathVariable(value = "cc") String c,
+			HttpServletRequest request, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User sessionUser = (User) session.getAttribute("user");
+		String fName = (String) request.getParameter("firstName");
+		String lName = (String) request.getParameter("lastName");
+		String sdt = (String) request.getParameter("sdt");
+		String password = (String) request.getParameter("passWord");
+
+		if (sessionUser != null && cc.equals(c)) {
+			User user = userDAO.getUser(sessionUser.getEmail());
+			user.setFirstName(fName);
+			user.setLastName(lName);
+			user.setSdt(sdt);
+			if (password != null && !password.isEmpty()) {
+				user.setPassWord(Calculator.md5Hex(password));
+			}
+			session.setAttribute("user", user);
+			userDAO.updateUser(user);
+			redirectAtt.addFlashAttribute("displaysuccess", "block");
+			redirectAtt.addFlashAttribute("message", "Update Profile success!");
+			return "profile";
+		} else {
+			// Neu khong co user nao co email dang nhap
+			session.invalidate();
+			return "redirect:/login";
 		}
 	}
 
