@@ -733,3 +733,8 @@ May 05, 2015 23:25:01.29
 May 05, 2015 23:25:01.51 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
 May 05, 2015 23:25:01.51 
 May 05, 2015 23:25:02.40 SystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: initSystemMessageCache: init
+
+May 06, 2015 12:21:19.71 NEW SESSION
+May 06, 2015 12:21:19.71 SystemMessageCache: init1430889679716	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+May 06, 2015 12:21:19.85 1430889679760	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+May 06, 2015 12:24:45.74 [Child 12240] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333

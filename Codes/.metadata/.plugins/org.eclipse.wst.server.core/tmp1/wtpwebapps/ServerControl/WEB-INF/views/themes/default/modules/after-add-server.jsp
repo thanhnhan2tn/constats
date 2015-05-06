@@ -10,10 +10,10 @@
 		<div class="main-content">
 			<div class="">
 				You should Enable Root login to server with SSH
-				sudo apt-get install nano && sudo nano /etc/ssh/sshd_config
+				sudo apt-get install nano && sudo nano /etc/ssh/sshd_config<br/>
 				
-				Find "PermitRootLogin without-password. " change to "PermitRootLogin yes"
-				Find "PasswordAuthentication no" change to "PasswordAuthentication yes"
+				Find "PermitRootLogin without-password. " change to "PermitRootLogin yes"<br/>
+				Find "PasswordAuthentication no" change to "PasswordAuthentication yes"<br/>
 				
 				sudo service ssh restart
 			</div>

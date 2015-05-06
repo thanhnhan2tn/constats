@@ -260,13 +260,13 @@ public class HomeController {
 		User user = (User) session.getAttribute("user");
 		String text = "sudo apt-get update && sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
 				+ server.getServerPassword()
-				+ ") && sudo echo >> \"/etc/ssh/sshd_config AllowUsers svcontrol\" &&  sudo service ssh restart";
+				+ ") && sudo echo >> /etc/ssh/sshd_config AllowUsers svcontrol &&  sudo service ssh restart";
 		if (user != null) {
 			List<Server> listServer = user.getServers();
 			if (listServer != null && listServer.size() > 0) {
 				for (Server sv1 : listServer) { // kiem tra server ip co bi
 												// trung
-					if (sv1.getServerAddress().equals(server.getServerAddress())) {
+					if (sv1.getServerAddress() != null && sv1.getServerAddress().equals(server.getServerAddress())) {
 						redirectAtt.addFlashAttribute("message", "This IP address already exists!");
 						return "redirect:/";
 					} else {
@@ -313,9 +313,9 @@ public class HomeController {
 
 		if (user != null && cc.equals(c)) {
 			List<Server> listServer = user.getServers();
-			if (!listServer.isEmpty()) {
+			if (!listServer.isEmpty() && listServer != null) {
 				for (int i = 0; i < listServer.size(); i++) {
-					if (listServer.get(i).getServerAddress().equals(ip)) {
+					if (listServer.get(i).getServerAddress() != null && listServer.get(i).getServerAddress().equals(ip)) {
 						// Xoa mot server trong list
 						listServer.remove(i);
 					}
@@ -342,9 +342,9 @@ public class HomeController {
 
 		if (user != null && cc.equals(c)) {
 			List<Server> listServer = user.getServers();
-			if (!listServer.isEmpty()) {
+			if (!listServer.isEmpty() && listServer != null) {
 				for (int i = 0; i < listServer.size(); i++) {
-					if (listServer.get(i).getServerAddress().equals(ip)) {
+					if (listServer.get(i).getServerAddress() != null && listServer.get(i).getServerAddress().equals(ip)) {
 						// put server object to page
 						mm.put("user", user);
 						mm.put("server", listServer.get(i));

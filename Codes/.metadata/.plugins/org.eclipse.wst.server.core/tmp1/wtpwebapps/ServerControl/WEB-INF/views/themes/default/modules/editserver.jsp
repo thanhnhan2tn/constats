@@ -22,7 +22,7 @@
 					<div class="form-group">
 						<label for="ip" class="col-md-3 control-label">IP: *</label>
 						<div class="col-md-9">
-							<spring:input path="serverAddress" class="ip form-control"  disabled="true"
+							<spring:input path="serverAddress" class="ip form-control" readonly="true"
 								name="ip" value="${server.serverAddress}" title="You can not edit IP Address"/>
 						</div>
 					</div>

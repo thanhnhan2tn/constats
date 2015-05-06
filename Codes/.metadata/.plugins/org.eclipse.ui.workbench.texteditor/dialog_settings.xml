@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="useUTC" key="selection"/>
+		<item value="wait" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="wait"/>
+			<item value="listServer.get(i).getServerAddress()"/>
 			<item value="useUTC"/>
 			<item value="pro"/>
 			<item value="http://localhost:8080/cit/serviceconfig/nic/nameservers/192.16"/>
 			<item value="checkstatus"/>
 			<item value="Loading...OK"/>
 			<item value="getram"/>
-			<item value="wait"/>
-			<item value="time "/>
 		</list>
 		<list key="replacehistory">
 			<item value="hostfixes"/>

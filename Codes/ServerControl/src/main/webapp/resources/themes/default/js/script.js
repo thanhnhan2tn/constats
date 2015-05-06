@@ -38,15 +38,15 @@ $(document)
                 .find(".wait")
                 .css("display", "none");
               if (data == "false") {
+            	$(listServer[index]).find(".control-action>div>button").addClass("hidden");
                 $(listServer[index]).find(".i-server-icon").css({"display": "none"});
                 $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
-                $(listServer[index]).find(".disabled").addClass("disabled");
                 //$(listServer[index]).find(".info").removeClass("show").addClass("hidden")
               } else {
                 $(listServer[index])
                   .find(".i-server-icon-off").css({"display": "none"});
                 $(listServer[index]).find(".i-server-icon").css({"display": "block"});
-                $(listServer[index]).find(".disabled").removeClass("disabled");
+                $(listServer[index]).find(".control-action>div>button").removeClass("hidden");
                 //$(listServer[index]).find(".info").removeClass("hidden").addClass("show");
                 //load ram
 //                $.ajax({

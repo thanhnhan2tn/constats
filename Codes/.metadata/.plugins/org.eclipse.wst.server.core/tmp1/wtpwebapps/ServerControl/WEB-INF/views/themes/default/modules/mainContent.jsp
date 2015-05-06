@@ -45,18 +45,18 @@
 						<div class="server-icon">
 							<span class="wait"
 								style="display: none: text-align:center; margin: auto;"> <img
-								src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
-							</span> <a class="server-monitor-url" href="" title="#"> <i
+								src="<c:url value='/resources/themes/default/images/loading-min.gif'/>" />
+							</span> <a class="server-monitor-url" title="#"> <i
 								class="fa fa-desktop i-server-icon" title="Server is on"
 								style="display: none"></i> <i
 								class="fa fa-desktop server-off i-server-icon-off" title="Server is off"
-								style="display: none"></i>
+								style="display: none"><div class="alert alert-danger" role="alert" style="font-size: 10pt">Server is off!!</div></i>
+								
 							</a>
 						</div>
 						<div class="control-action" style="display: block; margin: 0 auto">
 							<div class="" role="" aria-label="...">
-
-								<button type="button" class="btn btn-default btn-block disabled"
+								<button type="button" class="btn btn-default btn-block hidden"
 									onclick="location.href='${pageContext.request.contextPath }/services/<%=server.getServerAddress()%>/${cc}'"
 									id="services-config">
 									<i class="glyphicon glyphicon-cog"></i> Configuration...
