@@ -119,7 +119,7 @@
 				</c:forEach>
 				</c:if>
 				<!--  // Foreach Subnet -->
-				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 				<button type="button" class="btn btn-success" data-toggle="modal"
 					data-target="#addSubnet">New...</button>
 			

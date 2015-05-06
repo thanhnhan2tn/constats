@@ -14,11 +14,10 @@
 			DHCP Server Config :<small> (${server.serverAddress})</small>
 		</h1>
 		<div class="btn-group pull-right" role="group">
-			<button type="button" class="btn btn-danger"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }'"
+			<a class="btn btn-danger" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }"
 				title="Stop service">
 				<i class="glyphicon glyphicon-arrow-down"></i>
-			</button>
+			</a>
 			<button type="button" class="btn btn-success"
 				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
 				title="Start service">
@@ -29,11 +28,10 @@
 				title="Restart Service">
 				<i class="glyphicon glyphicon-repeat"></i>
 			</button>
-			<button type="button" class="btn btn-warning remove-iface"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }'"
+			<a type="button" class="btn btn-warning remove-iface" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }"
 				title="Restart Service">
 				<i class="glyphicon glyphicon-remove"></i>
-			</button>
+			</a>
 		</div>
 
 	</section>
@@ -154,7 +152,7 @@
 				</div>
 				<form:button type="submit" class="btn btn-primary" value="Save"
 					id="savedhcp">Save</form:button>
-				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 			</form:form>
 			<%
 				} else {

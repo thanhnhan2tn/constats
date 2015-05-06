@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<!--  End Panel -->
-				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 				<button type="button" class="btn btn-success" id="add-dns">Add...</button>
 				<form:button type="submit" class="btn btn-default">Save</form:button>
 			</form:form>

@@ -1,3 +1,6 @@
+function confirmAction(){
+	return confirm	("Are you sure?");
+}
 $(document)
   .ajaxStart(function () {
     $(".wait")

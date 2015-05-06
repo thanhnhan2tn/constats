@@ -90,7 +90,7 @@
 					</span> 
 				</div>
 			</div>
-			<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+			<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 		</div>
 	</section>
 	<!--  End Main Content -->

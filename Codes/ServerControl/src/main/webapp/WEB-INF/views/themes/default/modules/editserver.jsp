@@ -52,7 +52,7 @@
 				</div>
 				<div class="form-group">
 					<button type="button" class="btn btn-default"
-						onclick="history.back()">Back</button>
+						onclick="window.history.back();">Back</button>
 					<button type="submit" class="btn btn-primary">Save changes</button>
 				</div>
 			</spring:form>

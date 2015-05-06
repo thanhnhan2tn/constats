@@ -49,7 +49,7 @@ public class DHCPController {
 			Server sv = new Server(server);
 			sv.setServerUsername((String) session.getAttribute("sudouser"));
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
-			
+
 			DHCPConfig dhcpconfig = new DHCPConfig();
 			ServerConfig serverConf = new ServerConfig();
 			if (serverConf.checkSudoer(sv)) {
@@ -92,7 +92,7 @@ public class DHCPController {
 				// ServerConfig serverConf = new ServerConfig();
 				DHCPConfig dhcp = new DHCPConfig();
 
-				if (dhcp.checkInstall(sv) == true) {
+				if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
 					// Neu server da cai dat dhct
 					try {
 						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
@@ -137,7 +137,7 @@ public class DHCPController {
 				_log.info(sv.getServerAddress() + sv.getServerPassword());
 				DHCPConfig dhcp = new DHCPConfig();
 
-				if (dhcp.checkInstall(sv) == true) {
+				if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
 					// Neu server da cai dat dhct
 					try {
 						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
@@ -185,7 +185,7 @@ public class DHCPController {
 			_log.info(sv.getServerAddress() + sv.getServerPassword());
 			DHCPConfig dhcp = new DHCPConfig();
 
-			if (dhcp.checkInstall(sv) == true) {
+			if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
 				// Neu server da cai dat dhct
 				try {
 					DHCP d = dhcp.convertConfigToObjectDHCP(sv);
@@ -541,10 +541,74 @@ public class DHCPController {
 		} // end check user
 		return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
 	}
-	
+
+	@RequestMapping(value = "/serviceconfig/dhcp/{action}/{ip}/{cc}", method = RequestMethod.GET)
+	public String dhcpAction(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (c != null && c.equals(cc) && user.getServers() != null && user.getServers().size() > 0) {
+			for (Server server : user.getServers()) {
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				DHCPConfig dconfig = new DHCPConfig();
+				String str;
+				if (action.equals("start")) {
+					str = dconfig.Start(sv);
+					_log.info("Start DHCP !");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", str);
+					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
+				} else if (action.equals("stop")) {
+					str = dconfig.Stop(sv);
+					_log.info("Stop DHCP Success !");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", str);
+					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
+				} else if (action.equals("restart")) {
+					str = dconfig.Restart(sv);
+					_log.info("Restart DHCP Success !");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", str);
+					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
+				} else if (action.equals("remove")) {
+					if(dconfig.Remove(sv)){
+						_log.info("Remove DHCP Success !");
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Remove DHCP Success !");
+					}
+					else{
+						_log.info("Remove DHCP Success !");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message", "Remove DHCP Fail !");
+					}
+					return "redirect:/services/" + ip + "/" + cc;
+				} else {
+					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
+				}
+			}
+		} else {
+			session.invalidate();
+			return "redirect:/login";
+		}
+		return "redirect:/service/" + ip + "/" + cc;
+	}
+
+	/**
+	 * Lay log cua dhcp
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @return
+	 */
 	@RequestMapping(value = "/serviceconfig/dhcp/logs/{ip}/{cc}", method = RequestMethod.GET)
 	public String dhcpLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, ModelMap mm){
+			@PathVariable(value = "cc") String c, ModelMap mm) {
 		String cc = (String) session.getAttribute("cc");
 		User user = (User) session.getAttribute("user");
 		if (user != null && c.equals(cc)) { // check user login
@@ -554,21 +618,21 @@ public class DHCPController {
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
 			DHCPConfig dhcpConf = new DHCPConfig();
 			String logs = dhcpConf.getLog(sv);
-			
+
 			if (logs != null) {
-				mm.put("logs",logs);
+				mm.put("logs", logs);
 				return "dhcp-logs";
 			} else {
-				mm.put("logs","Khong lay duoc thong tin");
+				mm.put("logs", "Khong lay duoc thong tin");
 				return "dhcp-logs";
 			}
 		} else {
 			session.invalidate();
 			return "redirect:/login";
 		} // end check user
-		
+
 	}
-	
+
 	/**
 	 * Lay log DHCP
 	 * 
@@ -601,7 +665,7 @@ public class DHCPController {
 			return "Khong lay duoc thong tin";
 		} // end check user
 	}
-	
+
 	/**
 	 * Lay log ERROR
 	 * 

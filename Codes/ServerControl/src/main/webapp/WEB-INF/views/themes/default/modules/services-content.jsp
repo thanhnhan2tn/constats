@@ -234,6 +234,7 @@ $(document).ready(function () {
                 	cpuArray.push(parseInt(cpu));
                 	$("span.textcpu").text("");
                 	$("span.cpu-value").removeClass("hidden");
+                	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
               	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
                 }}});
       },2000); //10s
@@ -475,7 +476,7 @@ $(document).ready(function () {
 							</div>
 						</div>
 						<!-- DNS Bind 9 -->
-						<div class="panel panel-default">
+						<div class="panel panel-default disabled">
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									<a
@@ -488,7 +489,7 @@ $(document).ready(function () {
 							</div>
 						</div>
 						<!-- Apache Service -->
-						<div class="panel panel-default">
+						<div class="panel panel-default disabled">
 							<div class="panel-heading">
 								<h3 class="panel-title">
 									<a

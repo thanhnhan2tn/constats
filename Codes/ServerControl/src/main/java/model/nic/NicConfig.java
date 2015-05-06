@@ -318,9 +318,13 @@ public class NicConfig {
 			}
 		}
 		config = config + "'\n'";
+		config = config + "# Source interfaces '\n'"
+				+ "# Please check /etc/network/interfaces.d before changing this file '\n'"
+				+ "# as interfaces may have been defined in /etc/network/interfaces.d '\n'"
+				+ "source /etc/network/interfaces.d/*.cfg";
 		// thuc hien xoa dong chua ki tu "null"
 		// config = XoaNull(config);
-		System.out.println(config);
+		//System.out.println(config);
 		config = "echo " + sv.getServerPassword() + "| sudo -S bash -c \"echo -e " + config
 				+ "> /etc/network/interfaces \"";
 		if (uploadToServer(sv, config) == true) {

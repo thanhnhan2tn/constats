@@ -108,7 +108,7 @@
 					</div>
 				</c:forEach>
 				<!--  // Foreach Subnet -->
-				<button type="button" class="btn btn-default" onclick="history.go(-1);">Back</button>
+				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 				<button type="button" class="btn btn-primary" data-toggle="modal"
 					data-target="#addHostfix">New...</button>
 

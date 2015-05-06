@@ -43,11 +43,11 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="model.dhcp.DHCP"/>
 <fullyQualifiedTypeName name="vn.edu.cit.dao.ServerDAO"/>
-<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
-<fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="model.server.ServerConfig"/>
 <fullyQualifiedTypeName name="vn.edu.cit.controller.Calculator"/>
+<fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
+<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
 </qualifiedTypeNameHistroy>

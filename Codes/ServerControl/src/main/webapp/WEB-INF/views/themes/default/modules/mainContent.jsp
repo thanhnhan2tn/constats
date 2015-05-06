@@ -51,7 +51,7 @@
 								style="display: none"></i> <i
 								class="fa fa-desktop server-off i-server-icon-off" title="Server is off"
 								style="display: none">
-								<button type="button" class="btn btn-warning btn-block disabled btn-server-off" style="font-size: 10pt">Server is off!!</button></i>
+								<button type="button" class="btn btn-danger btn-block disabled btn-server-off" style="font-size: 10pt">Server is off!!</button></i>
 							</a>
 						</div>
 						<div class="control-action" style="display: block; margin: 0 auto">

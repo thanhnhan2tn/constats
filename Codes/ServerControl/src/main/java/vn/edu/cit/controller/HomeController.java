@@ -260,7 +260,7 @@ public class HomeController {
 		User user = (User) session.getAttribute("user");
 		String text = "sudo apt-get update && sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
 				+ server.getServerPassword()
-				+ ") && sudo echo >> /etc/ssh/sshd_config AllowUsers svcontrol &&  sudo service ssh restart";
+				+ ")"; //&& sudo echo >> /etc/ssh/sshd_config AllowUsers svcontrol &&  sudo service ssh restart
 		if (user != null) {
 			List<Server> listServer = user.getServers();
 			if (listServer != null && listServer.size() > 0) {
