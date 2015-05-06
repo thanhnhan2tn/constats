@@ -50,13 +50,13 @@
 								class="fa fa-desktop i-server-icon" title="Server is on"
 								style="display: none"></i> <i
 								class="fa fa-desktop server-off i-server-icon-off" title="Server is off"
-								style="display: none"><div class="alert alert-danger" role="alert" style="font-size: 10pt">Server is off!!</div></i>
-								
+								style="display: none">
+								<button type="button" class="btn btn-warning btn-block disabled btn-server-off" style="font-size: 10pt">Server is off!!</button></i>
 							</a>
 						</div>
 						<div class="control-action" style="display: block; margin: 0 auto">
 							<div class="" role="" aria-label="...">
-								<button type="button" class="btn btn-default btn-block hidden"
+								<button type="button" class="btn-control-action btn btn-default btn-block hidden"
 									onclick="location.href='${pageContext.request.contextPath }/services/<%=server.getServerAddress()%>/${cc}'"
 									id="services-config">
 									<i class="glyphicon glyphicon-cog"></i> Configuration...

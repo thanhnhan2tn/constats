@@ -17,37 +17,29 @@ $(document)
             url: 'checkstatus/' + serverip + '/' + cc
             , type: 'GET'
             , data: {}
-            , timeout: '3000'
+            , timeout: '5000'
             , error: function () {
-              $(listServer[index])
-                .find(".wait")
-                .css("display", "none");
-              $(listServer[index])
-                .find(".i-server-icon").css({"display": "none"});
-              $(listServer[index])
-                .find(".i-server-icon-off")
-                .css({
-                  "display": "block"
-                });
+              $(listServer[index]).find(".wait").css("display", "none");
+              $(listServer[index]).find(".i-server-icon").css({"display": "none"});
+              $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
+              $(listServer[index]).find(".btn-control-action").addClass("hidden");
              // $(listServer[index]).find(".show").removeClass("show").addClass("hidden");
             }
             , // neu load thnh cong
             success: function (data, status) {
               //data = $.trim(data);
-              $(listServer[index])
-                .find(".wait")
-                .css("display", "none");
+            	$(listServer[index]).find(".wait").css("display", "none");
               if (data == "false") {
-            	$(listServer[index]).find(".control-action>div>button").addClass("hidden");
+            	//$(listServer[index]).find(".btn-server-off").removeClass("hidden");
                 $(listServer[index]).find(".i-server-icon").css({"display": "none"});
+                $(listServer[index]).find(".btn-control-action").addClass("hidden");
                 $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
-                //$(listServer[index]).find(".info").removeClass("show").addClass("hidden")
+                
               } else {
                 $(listServer[index])
                   .find(".i-server-icon-off").css({"display": "none"});
                 $(listServer[index]).find(".i-server-icon").css({"display": "block"});
-                $(listServer[index]).find(".control-action>div>button").removeClass("hidden");
-                //$(listServer[index]).find(".info").removeClass("hidden").addClass("show");
+                $(listServer[index]).find(".btn-control-action").removeClass("hidden");
                 //load ram
 //                $.ajax({
 //                    url: 'getram/' + serverip + '/' + cc
@@ -103,7 +95,7 @@ $(document)
       if (listServer.length > 0) {
         check_server(0);
       }
-    }, 3000);	
+    },5000);	
     // Check status sidebar
     var listleft = $('.list-server-left');
   });
