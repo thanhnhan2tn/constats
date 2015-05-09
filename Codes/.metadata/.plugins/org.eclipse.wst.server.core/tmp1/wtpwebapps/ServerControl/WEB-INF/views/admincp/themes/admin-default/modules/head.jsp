@@ -22,7 +22,8 @@
 
 <!-- ContextMenu -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/admin-theme/admin-default/plugins/contextmenu/context.standalone.css'/>">
-
+<link href='<c:url value="/resources/admin-theme/admin-default/plugins/AdminLTE.min.css"/>'
+	rel="stylesheet" media="screen" type="text/css">
 <!-- Constats Theme Style Sheet file -->
 <link href='<c:url value="/resources/admin-theme/admin-default/css/style.css"/>'
 	rel="stylesheet" media="screen" type="text/css">

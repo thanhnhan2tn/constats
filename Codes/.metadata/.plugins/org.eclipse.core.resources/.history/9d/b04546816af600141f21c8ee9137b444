@@ -1,0 +1,45 @@
+package vn.edu.cit.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+
+import vn.edu.cit.model.Server;
+import vn.edu.cit.model.User;
+
+public class LogDAOImpl {
+	public static final String COLLECTION = "logs";
+
+	public LogDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+	public void createLogog);
+	}
+
+	@Override
+	public Server getLog(String date) {
+		// query to search user
+		//System.out.println(ip);
+		List<Server> svs = user.getServers();
+		if (svs != null && svs.size() > 0) {
+			for (Server server : svs) {
+				if (server.getServerAddress().equals(ip)) {
+			//		System.out.println("ip2:" + server.getServerAddress());
+					return server;
+				}
+			}
+		} else {
+			return null;
+		}
+		return null;
+	}
+}

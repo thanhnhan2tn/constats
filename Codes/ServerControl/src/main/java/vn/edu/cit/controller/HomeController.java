@@ -1,6 +1,9 @@
 package vn.edu.cit.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +27,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import vn.edu.cit.dao.LogDAO;
 import vn.edu.cit.dao.ServerDAO;
 import vn.edu.cit.dao.UserDAO;
+import vn.edu.cit.model.Log;
 import vn.edu.cit.model.Server;
 import vn.edu.cit.model.User;
 
@@ -38,7 +43,12 @@ public class HomeController {
 	private UserDAO userDAO;
 	@Autowired
 	private ServerDAO serverDAO;
-
+	@Autowired
+	private LogDAO logDAO;
+	
+	Date today = Calendar.getInstance().getTime();
+	SimpleDateFormat formatter = new SimpleDateFormat("hh:mm dd-MM-yyyy");
+	String date = formatter.format(today);
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -107,6 +117,7 @@ public class HomeController {
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		String passWord = request.getParameter("passwd");
+		
 		// Ma hoa MD5 cho password
 		String hashPassWord = Calculator.md5Hex(passWord);
 		int role = 1; // role mac dinh khi dang ki là 1 (member)
@@ -115,6 +126,7 @@ public class HomeController {
 		User avaiable = userDAO.getUser(email);
 		// Neu tim thay thong tin, tra ve thong bao tai khoan da co
 		if (avaiable != null) {
+			logDAO.createLog(new Log(date,"User register fail with duplicate"));
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message", "Email is already exist, Are you "
 					+ "	<a href=\"#\" onClick=\"$('#loginbox').hide();"
@@ -123,12 +135,13 @@ public class HomeController {
 			return "redirect:/login";
 		} else {
 			// Khoi tao Doi tuong User voi thong tin dang ki moi
-			User user = new User(email, hashPassWord, role, firstName, lastName, servers);
+			User user = new User(email, hashPassWord, role, firstName, lastName, servers, date);
 			// Chen vao DB
 			// mongoOperation.insert(user, "users");
 			userDAO.createUser(user);
+			logDAO.createLog(new Log(date,"new user "+user.getEmail()+" create success!"));
 			// Tra ve thong bao dang ki thanh cong, yeu cau dang nhap
-			redirectAtt.addFlashAttribute("display", "block");
+			redirectAtt.addFlashAttribute("displaysuccess", "block");
 			redirectAtt.addFlashAttribute("message", "Account created successfully!");
 			// Kiem tra, tra ve login neu user da ton tai
 			return "redirect:/login";
@@ -152,6 +165,7 @@ public class HomeController {
 		User avaiable = userDAO.getUser(user.getEmail());
 		if (avaiable == null) {// doan nay chek user co ton tai hay khong ne.
 			// Neu khong co user nao co email dang nhap
+			logDAO.createLog(new Log(date,"User "+user.getEmail()+" login failed"));
 			redirectAtt.addFlashAttribute("display", "block");
 			redirectAtt.addFlashAttribute("message", "An email is not registered!");
 			return "redirect:/login";
@@ -212,6 +226,7 @@ public class HomeController {
 			}
 			session.setAttribute("user", user);
 			userDAO.updateUser(user);
+			logDAO.createLog(new Log(date,"user "+user.getEmail()+" update profile!"));
 			redirectAtt.addFlashAttribute("displaysuccess", "block");
 			redirectAtt.addFlashAttribute("message", "Update Profile success!");
 			return "profile";
@@ -259,8 +274,10 @@ public class HomeController {
 			HttpSession session, RedirectAttributes redirectAtt, ModelMap mm) {
 		User user = (User) session.getAttribute("user");
 		String text = "sudo apt-get update && sudo apt-get install whois -y && sudo useradd svcontrol -p $(mkpasswd -m SHA-512 "
-				+ server.getServerPassword()
-				+ ")"; //&& sudo echo >> /etc/ssh/sshd_config AllowUsers svcontrol &&  sudo service ssh restart
+				+ server.getServerPassword() + ")"; // && sudo echo >>
+													// /etc/ssh/sshd_config
+													// AllowUsers svcontrol &&
+													// sudo service ssh restart
 		if (user != null) {
 			List<Server> listServer = user.getServers();
 			if (listServer != null && listServer.size() > 0) {
@@ -280,6 +297,7 @@ public class HomeController {
 						userDAO.updateUser(user);
 						mm.put("user", user);
 						mm.put("text", text);
+						logDAO.createLog(new Log(date,"user "+user.getEmail()+" add new Server success!"));
 						redirectAtt.addFlashAttribute("message", "Add Success!");
 						return "after-add-server";
 					}
@@ -318,6 +336,7 @@ public class HomeController {
 					if (listServer.get(i).getServerAddress() != null && listServer.get(i).getServerAddress().equals(ip)) {
 						// Xoa mot server trong list
 						listServer.remove(i);
+						logDAO.createLog(new Log(date,"user "+user.getEmail()+" was removed a server!"));
 					}
 				}
 			}
@@ -459,7 +478,7 @@ public class HomeController {
 				// doi thong tin user va pas de kiem tra
 				sv.setServerUsername(u);
 				sv.setServerPassword(pass);
-				System.out.println(sv.getServerUsername());
+				//System.out.println(sv.getServerUsername());
 				ServerConfig serverConf = new ServerConfig();
 				// System.out.println("check...: "+serverConf.checkSudoer(sv));
 				if (serverConf.checkSudoer(sv) == null || serverConf.checkSudoer(sv) == false) {

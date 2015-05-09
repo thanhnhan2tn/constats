@@ -21,8 +21,10 @@
 				Ftp ftp = (Ftp) request.getAttribute("Ftp");
 				if (ftp != null) {
 			%>
-			<div style="display: none ${display}" id="login-alert" class="alert alert-danger col-sm-12">${message}</div>
-			<div style="display: none ${displaysuccess}" id="login-alert" class="alert alert-success col-sm-12">${message}</div>
+			<div style="display: none ${display}" id="login-alert"
+				class="alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}" id="login-alert"
+				class="alert alert-success col-sm-12">${message}</div>
 			<form:form id="ftp-config-form1" modelAttribute="Ftp"
 				action="${pageContext.request.contextPath }/serviceconfig/ftp/save/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
@@ -56,22 +58,22 @@
 							<label class="col-md-4">Local: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
-								<form:radiobutton path="local_enable" name="local_enable"
-									id="local-yes" value="yes" required="required" />
+								<form:radiobutton path="local_enable" name="local_enable" id="local-yes"
+									value="yes" required="required" />
 								<label for="local-no"> Disable</label>
-								<form:radiobutton path="local_enable" name="local_enable"
-									id="local-no" value="no" required="required" />
+								<form:radiobutton path="local_enable" name="local_enable" id="local-no"
+									value="no" required="required" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Write: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
-								<form:radiobutton path="write_enable" name="write_enable"
-									id="local-yes" value="yes" required="required" />
+								<form:radiobutton path="write_enable" name="write_enable" id="local-yes"
+									value="yes" required="required" />
 								<label for="local-no"> Disable</label>
-								<form:radiobutton path="write_enable" name="write_enable"
-									id="local-no" value="no" required="required" />
+								<form:radiobutton path="write_enable" name="write_enable" id="local-no"
+									value="no" required="required" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -89,22 +91,26 @@
 							<label class="col-md-4">Anonymous Make Dir Write: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
-								<form:radiobutton path="anon_mkdir_write_enable" name="anon_mkdir_write_enable"
-									id="local-yes" value="yes" required="required" />
+								<form:radiobutton path="anon_mkdir_write_enable"
+									name="anon_mkdir_write_enable" id="local-yes" value="yes"
+									required="required" />
 								<label for="local-no"> Disable</label>
-								<form:radiobutton path="anon_mkdir_write_enable" name="anon_mkdir_write_enable"
-									id="local-no" value="no" required="required" />
+								<form:radiobutton path="anon_mkdir_write_enable"
+									name="anon_mkdir_write_enable" id="local-no" value="no"
+									required="required" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Connect from port 20?: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Yes</label>
-								<form:radiobutton path="connect_from_port_20" name="connect_from_port_20"
-									id="local-yes" value="yes" required="required" />
+								<form:radiobutton path="connect_from_port_20"
+									name="connect_from_port_20" id="local-yes" value="yes"
+									required="required" />
 								<label for="local-no"> No</label>
-								<form:radiobutton path="connect_from_port_20" name="connect_from_port_20"
-									id="local-no" value="no" required="required" />
+								<form:radiobutton path="connect_from_port_20"
+									name="connect_from_port_20" id="local-no" value="no"
+									required="required" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -143,16 +149,43 @@
 						<div class="form-group">
 							<label class="col-md-4">Chroot List File: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="chroot_list_file"  required="required" />
+								<form:input path="chroot_list_file" required="required" />
 							</div>
 						</div>
 
 					</div>
-				</div>
-				<form:button type="submit" class="btn btn-primary">Save</form:button>
-				<button class="btn btn-default" onclick="services/${server.serverAddress}/${cc}">Back</button>
+					<div class="panel panel-footer">
+						<form:button type="submit" class="btn btn-primary">Save</form:button>
+						<button type="button" class="btn btn-default"
+							onclick="window.history.back();">Back</button>
+					</div>
+				</div><!--  End Panel -->
 			</form:form>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/ftp/editfile/${server.serverAddress}/${cc}">
+								Edit Config file...<i
+								class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/ftp/getlog/${server.serverAddress}/${cc}">
+								Logs file...<i
+								class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
 			
+
 			<%
 				} else {
 			%>

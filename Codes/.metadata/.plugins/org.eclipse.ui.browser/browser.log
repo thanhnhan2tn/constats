@@ -738,3 +738,125 @@ May 06, 2015 12:21:19.71 NEW SESSION
 May 06, 2015 12:21:19.71 SystemMessageCache: init1430889679716	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
 May 06, 2015 12:21:19.85 1430889679760	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
 May 06, 2015 12:24:45.74 [Child 12240] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+
+May 09, 2015 14:30:24.69 NEW SESSION
+May 09, 2015 14:30:24.70 1431156624694	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
+May 09, 2015 14:30:25.57 1431156625578	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+May 09, 2015 14:34:14.41 
+May 09, 2015 14:34:14.42 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.43 
+May 09, 2015 14:34:14.45 
+May 09, 2015 14:34:14.46 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.47 
+May 09, 2015 14:34:14.48 
+May 09, 2015 14:34:14.50 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.52 
+May 09, 2015 14:34:14.53 
+May 09, 2015 14:34:14.55 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.56 
+May 09, 2015 14:34:14.57 
+May 09, 2015 14:34:14.58 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.59 
+May 09, 2015 14:34:14.61 
+May 09, 2015 14:34:14.62 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.63 
+May 09, 2015 14:34:14.64 
+May 09, 2015 14:34:14.65 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.66 
+May 09, 2015 14:34:14.68 
+May 09, 2015 14:34:14.70 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.72 
+May 09, 2015 14:34:14.74 
+May 09, 2015 14:34:14.76 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.78 
+May 09, 2015 14:34:14.80 
+May 09, 2015 14:34:14.82 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.84 
+May 09, 2015 14:34:14.85 
+May 09, 2015 14:34:14.87 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.88 
+May 09, 2015 14:34:14.90 
+May 09, 2015 14:34:14.92 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:14.93 SystemMessageCache: init
+May 09, 2015 14:34:14.95 
+May 09, 2015 14:34:14.97 
+May 09, 2015 14:34:14.98 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.01 
+May 09, 2015 14:34:15.02 
+May 09, 2015 14:34:15.03 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.04 
+May 09, 2015 14:34:15.06 
+May 09, 2015 14:34:15.07 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.09 
+May 09, 2015 14:34:15.10 
+May 09, 2015 14:34:15.12 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.13 
+May 09, 2015 14:34:15.15 
+May 09, 2015 14:34:15.16 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.17 
+May 09, 2015 14:34:15.19 
+May 09, 2015 14:34:15.20 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.21 
+May 09, 2015 14:34:15.22 
+May 09, 2015 14:34:15.23 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.24 
+May 09, 2015 14:34:15.25 
+May 09, 2015 14:34:15.26 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.27 
+May 09, 2015 14:34:15.28 
+May 09, 2015 14:34:15.29 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.31 
+May 09, 2015 14:34:15.32 
+May 09, 2015 14:34:15.32 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.33 
+May 09, 2015 14:34:15.34 
+May 09, 2015 14:34:15.35 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.36 
+May 09, 2015 14:34:15.37 
+May 09, 2015 14:34:15.38 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.39 
+May 09, 2015 14:34:15.40 
+May 09, 2015 14:34:15.41 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.42 
+May 09, 2015 14:34:15.43 
+May 09, 2015 14:34:15.44 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.45 
+May 09, 2015 14:34:15.46 
+May 09, 2015 14:34:15.46 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.47 
+May 09, 2015 14:34:15.48 
+May 09, 2015 14:34:15.49 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.50 
+May 09, 2015 14:34:15.51 
+May 09, 2015 14:34:15.52 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.53 
+May 09, 2015 14:34:15.54 
+May 09, 2015 14:34:15.55 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.56 
+May 09, 2015 14:34:15.57 
+May 09, 2015 14:34:15.58 ###!!! [Child][MessageChannel] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.59 
+May 09, 2015 14:34:15.60 
+May 09, 2015 14:34:15.61 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.62 
+May 09, 2015 14:34:15.62 
+May 09, 2015 14:34:15.63 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.64 
+May 09, 2015 14:34:15.65 
+May 09, 2015 14:34:15.66 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.67 
+May 09, 2015 14:34:15.68 
+May 09, 2015 14:34:15.69 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.70 
+May 09, 2015 14:34:15.71 
+May 09, 2015 14:34:15.72 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.73 
+May 09, 2015 14:34:15.74 
+May 09, 2015 14:34:15.75 ###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+May 09, 2015 14:34:15.76 
+
+May 09, 2015 21:16:37.69 NEW SESSION
+May 09, 2015 21:16:37.69 [Child 1044] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 09, 2015 21:16:37.75 [Child 1044] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 09, 2015 21:36:57.61 [Child 5916] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 10, 2015 02:49:24.40 SystemMessageCache: initSystemMessageCache: init

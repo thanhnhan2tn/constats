@@ -22,4 +22,14 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/admincp/themes/admin-default/modules/usermanager-content.jsp" />
 	</definition>
+	<definition name="edituser" extends="admin.home">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/edit-user.jsp" />
+			
+	</definition>
+	<definition name="view-logs" extends="admin.home">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/admincp/themes/admin-default/modules/view-logs.jsp" />
+			
+	</definition>
 </tiles-definitions>	

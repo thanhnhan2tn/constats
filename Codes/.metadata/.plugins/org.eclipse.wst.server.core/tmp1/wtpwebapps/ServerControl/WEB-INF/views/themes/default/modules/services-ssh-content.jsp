@@ -30,19 +30,19 @@
 						<div class="form-group">
 							<label class="col-md-4">Port: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="port" required="required" placeholder="Input SSH Port"/>
+								<form:input path="port" required="required" placeholder="Input SSH Port" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Listen Address: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="listenAdd" placeholder="Input Listen Address"/>
+								<form:input path="listenAdd" placeholder="Input Listen Address" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Login Grace Time: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="loginGraceTime"  placeholder="Input Login Grace Time"/>
+								<form:input path="loginGraceTime" placeholder="Input Login Grace Time" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -52,8 +52,8 @@
 								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
 									id="rootlogin-yes" value="yes" required="required" />
 								<label for="rootlogin-no"> No</label>
-								<form:radiobutton path="permitRootLogin" name="permitRootLogin" id="rootlogin-no"
-									value="no" required="required" />
+								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
+									id="rootlogin-no" value="no" required="required" />
 							</div>
 						</div>
 
@@ -61,8 +61,8 @@
 							<label class="col-md-4">Password Authentication: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="password-yes"> Enable</label>
-								<form:radiobutton path="passwordAu" name="password-yes" id="password-yes-yes"
-									value="yes" required="required" />
+								<form:radiobutton path="passwordAu" name="password-yes"
+									id="password-yes-yes" value="yes" required="required" />
 								<label for="password-no"> Disable</label>
 								<form:radiobutton path="passwordAu" name="password-no" id="password-no"
 									value="no" required="required" />
@@ -72,14 +72,14 @@
 							<label class="col-md-4">Permit empty password: *</label>
 							<div class="col-md-3 form-groups">
 								<label for="emptypass-yes"> Enable</label>
-								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword" id="emptypass-yes"
-									value="yes" required="required" />
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword"
+									id="emptypass-yes" value="yes" required="required" />
 								<label for="emptypass-no"> Disable</label>
-								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword" id="emptypass-no"
-									value="no" required="required" />
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword"
+									id="emptypass-no" value="no" required="required" />
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label class="col-md-4">Allow User:</label>
 							<div class="col-md-3 form-groups">
@@ -88,17 +88,40 @@
 						</div>
 
 					</div>
+					<div class="panel panel-footer">
+					<button class="btn btn-primary" type="button" onclick="windows.history.back();">Back</button>
+					<input class="btn btn-primary" type="submit" value="Save">
 				</div>
-				<form:button type="submit" class="btn btn-primary">Save</form:button>
-				<button class="btn btn-default" onclick="window.history.back();">Back</button>
+				</div>
+				
 			</form:form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ssh/editfile/${server.serverAddress}/${cc}">
+							Edit Config file...<i
+							class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ssh/getlog/${server.serverAddress}/${cc}">
+							Logs file...<i class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
+				</div>
+			</div>
 
 			<%
 				} else {
 			%>
-			<div class="panel-body">
-				Không thể truy cập SSHD Services, vui lòng cài đặt dịch vụ SSHD cho server trước!
-			</div>
+			<div class="panel-body">Không thể truy cập SSHD Services, vui lòng cài
+				đặt dịch vụ SSHD cho server trước!</div>
 			<%
 				}
 			%>

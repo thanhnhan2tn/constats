@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.dhcp.DHCPConfig;
 import model.ftp.Ftp;
 import model.ftp.FtpConfig;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.ServerDAO;
@@ -144,13 +146,197 @@ public class FTPController {
 						// neu chua cai dat, chuyen ve trang install
 						return "ftp-config";
 					}
-				}//end fi check ip
+				}// end fi check ip
 			} // end for
 
 		} else {
 			return "redirect:/login";
 		}
 		return "ftp-config";
+	}
+
+	/**
+	 * Sua file config ftp
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ftp/editfile/{ip}/{cc}", method = RequestMethod.GET)
+	public String ftpGetConfFile(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					FtpConfig ftpconfig = new FtpConfig();
+					// kiem tra dich vu ftp
+					String str = ftpconfig.loadConfigToPlainText(sv);
+					mm.put("ftpconfig", str);
+					return "ftp-file-content";
+				}
+
+			}
+		} else {
+			return "redirect:/login";
+		}
+		return "redirect:/";
+	}
+
+	/**
+	 * Luu file FTp config
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param ftp
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ftp/editfile/{ip}/{cc}", method = RequestMethod.POST)
+	public String ftpSaveConfFile(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		String configText = request.getParameter("ftpconfig");
+		//System.out.println(configText);
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					FtpConfig ftpconfig = new FtpConfig();
+					// kiem tra dich vu ftp
+					try {
+						ftpconfig.uploadStringConfigToServer(sv, configText);
+						_log.info("Upload FTP Config to server");
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Upload file Success!");
+					} catch (IOException e) {
+						_log.info("Upload FTP Config to server");
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("message", "Upload file fail, please try again!");
+					}
+					return "ftp-config";
+				}
+
+			}
+		} else {
+			return "redirect:/login";
+		}
+		return "redirect:/";
+	}
+
+	/**
+	 * Sang Trang Lay thong tin logfile
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ftp/getlog/{ip}/{cc}", method = RequestMethod.GET)
+	public String ftpGetLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			return "ftp-logs";
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
+	 * Lay log
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ftp/getlogs/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getFtpLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			FtpConfig ftpConf = new FtpConfig();
+			String logs = ftpConf.getLog(sv);
+			if (logs != null) {
+				return logs;
+			} else {
+				return "Khong lay duoc thong tin";
+			}
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
+	}
+
+	/**
+	 * Lay ERR
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ftp/geterrors/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getFtpErrors(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			FtpConfig fconfig = new FtpConfig();
+			String errors;
+			try {
+				errors = fconfig.getError(sv);
+				return errors;
+			} catch (InterruptedException e) {
+				return "Khong lay duoc thong tin";
+			}
+
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
 	}
 
 	private static final Logger _log = Logger.getLogger(FTPController.class);

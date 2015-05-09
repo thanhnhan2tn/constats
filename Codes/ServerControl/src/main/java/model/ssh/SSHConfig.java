@@ -368,10 +368,91 @@ public class SSHConfig {
 	public String loadConfigToPlainText(Server sv) throws IOException {
 		String cmd = "cat /etc/ssh/sshd_config";
 		String kq = uploadToServer(sv, cmd);
-		kq = chuanhoaChuoi1(kq);
-		kq = chuanhoaChuoi2(kq);
-		kq = chuanhoaChuoi3(kq);
+//		kq = chuanhoaChuoi1(kq);
+//		kq = chuanhoaChuoi2(kq);
+//		kq = chuanhoaChuoi3(kq);
 		return kq;
+	}
+
+	// getLog
+	public String getLog(Server sv) {
+		Restart(sv);
+		String kq = uploadToServer(sv, "echo " + sv.getServerPassword() + "| sudo -S " + " tail -10 /var/log/auth.log");
+
+		return kq;
+	}
+
+	// getError
+	public String getError(Server sv) throws InterruptedException {
+		Session ss = sv.getSession(sv);
+
+		try {
+
+			HashMap<String, String> hm1 = new HashMap<String, String>();
+			String multi_cmd[] = {
+					"echo " + sv.getServerPassword() + " |sudo -S " + " chmod 771 /home/" + sv.getServerUsername(),
+					"echo " + sv.getServerPassword() + "| sudo -S "
+							+ "  echo -e 'var=$(sshd -t 2>&1) \n echo $var > /etc/sshd.txt '> /home/"
+							+ sv.getServerUsername() + "/sshd.sh ",
+					"echo " + sv.getServerPassword() + "| sudo -S " + " bash /home/" + sv.getServerUsername()
+							+ "/sshd.sh ", "echo " + sv.getServerPassword() + " |sudo -S " + " cat /etc/sshd.txt",
+					"echo " + sv.getServerPassword() + " |sudo -S " + " rm /etc/sshd.txt" };
+
+			String chuoilay = "";
+			// option -e giup nhan dang ki tu xuong dong
+			int j = 0;
+			String tong = "";
+
+			while (j < multi_cmd.length) {
+				Channel channel = ss.openChannel("exec");
+				String cmd = multi_cmd[j];
+				((ChannelExec) channel).setCommand(cmd);
+				((ChannelExec) channel).setErrStream(System.err);
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				InputStream in = channel.getInputStream();
+				channel.connect();
+				byte[] tmp = new byte[1024];
+				while (true) {
+					while (in.available() > 0) {
+						int i = in.read(tmp, 0, 1024);
+						if (i < 0)
+							break;
+
+						if (j == multi_cmd.length - 2) {
+							chuoilay = new String(tmp, 0, i);
+
+							tong = tong + chuoilay + "\n";
+						}
+					}
+					if (channel.isClosed()) {
+						// System.out.println("\nexit-status: "
+						// + channel.getExitStatus());
+						if (channel.getExitStatus() == 0) {
+							System.out.println("Loading...OK");
+						} else {
+
+							System.out.println("Loading Failed!!!...");
+
+						}
+						break;
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception ee) {
+					}
+				}
+				channel.disconnect();
+				j++;
+			}
+			return tong;
+
+			// return
+
+		} catch (Exception e) {
+
+			return null;
+		}
+
 	}
 
 	// Convert Text sang Object SSH
@@ -440,13 +521,13 @@ public class SSHConfig {
 	}
 
 	public static void main(String[] args) throws IOException {
-//		SSHConfig ssh_c = new SSHConfig();
-//		Server sv = new Server(1, "192.168.0.105", 22, "mayb", "mayb", "mayb");
-//		// ssh_c.uploadConfigToServer(sv, ssh_c.convertTextToObjectSSH(sv));
-//		// ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
-//		// System.out.println(ssh_c.checkRunning(sv));
-//		// ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
-//		// System.out.println(ssh_c.loadConfigToPlainText(sv));
-//		ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
+		//SSHConfig ssh_c = new SSHConfig();
+		//Server sv = new Server("192.168.0.19", 22, "ubuntu", "ubuntu","ubuntu");
+		// // ssh_c.uploadConfigToServer(sv, ssh_c.convertTextToObjectSSH(sv));
+		// // ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
+		// // System.out.println(ssh_c.checkRunning(sv));
+		// // ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
+		//System.out.println(ssh_c.loadConfigToPlainText(sv));
+		// ssh_c.inSSH(sv, ssh_c.convertTextToObjectSSH(sv));
 	}
 }

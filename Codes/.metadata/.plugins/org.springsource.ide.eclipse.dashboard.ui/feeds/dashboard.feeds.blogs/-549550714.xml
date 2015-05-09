@@ -5,7 +5,70 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-05-05T15:16:52Z</updated>
+  <updated>2015-05-08T08:02:00Z</updated>
+  <entry>
+    <title>Spring AMQP 1.4.5.RELEASE and 1.5.0.M1 Available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/05/08/spring-amqp-1-4-5-release-and-1-5-0-m1-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Gary Russell</name>
+    </author>
+    <id>tag:spring.io,2015-05-07:2114</id>
+    <updated>2015-05-08T08:02:00Z</updated>
+    <content type="html">&lt;p&gt;We are pleased to announce that the latest maintenance release for Spring AMQP (1.4.5.RELEASE) is now available. This contains just a &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10450&amp;version=14993"&gt;few bug fixes since 1.4.4&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;In addition, the first milestone release for the 1.5 release is also available (1.5.0.M1). A release candidate will be available in a month or so, with the GA expected later in the summer.&lt;/p&gt;&lt;p&gt;The main features of this release are highlighted below:&lt;/p&gt;&lt;h2&gt;&lt;a href="#class-level-code-rabbitlistener-code" class="anchor" name="class-level-code-rabbitlistener-code"&gt;&lt;/a&gt;Class-level &lt;code&gt;@RabbitListener&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;It is now possible to define the &lt;code&gt;@RabbitListener&lt;/code&gt; annotation at the class level. Together with method-level &lt;code&gt;@RabbitHandler&lt;/code&gt; annotations, this allows a single listener to invoke different methods in the class, depending on the payload type. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@RabbitListener(queues=&amp;quot;orders, shipments&amp;quot;)&#xD;
+public class MultiListenerBean {&#xD;
+&#xD;
+    @RabbitHandler&#xD;
+    public OrderConfirmation handleOrder(Order order) {&#xD;
+        ...    &#xD;
+    }&#xD;
+&#xD;
+    @RabbitHandler&#xD;
+    public Invoice ship(Shipment shipment) {&#xD;
+        ...&#xD;
+    }&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2&gt;&lt;a href="#auto-declare-queues-and-bindings-for-code-rabbitlistener-code" class="anchor" name="auto-declare-queues-and-bindings-for-code-rabbitlistener-code"&gt;&lt;/a&gt;Auto-Declare Queues and Bindings for &lt;code&gt;@RabbitListener&lt;/code&gt;&lt;/h2&gt;&lt;p&gt;It is now possible to automatically declare queues, exchanges and bindings when using the &lt;code&gt;@RabbitListener&lt;/code&gt; annotation.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@RabbitListener(bindings = @QueueBinding(&#xD;
+	value = @Queue(value = &amp;quot;auto.declare&amp;quot;, autoDelete = &amp;quot;true&amp;quot;),&#xD;
+	exchange = @Exchange(value = &amp;quot;auto.exch&amp;quot;, autoDelete = &amp;quot;true&amp;quot;),&#xD;
+	key = &amp;quot;auto.rk&amp;quot;))&#xD;
+public String handleWithDeclare(String foo) {&#xD;
+	return foo.toUpperCase();&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this example, the queue &lt;code&gt;auto.declare&lt;/code&gt; is declared and bound to exchange &lt;code&gt;auto.exch&lt;/code&gt; with routing key &lt;code&gt;auto.rk&lt;/code&gt;. The exchange is declared too.&lt;/p&gt;&lt;p&gt;Previously, the &lt;code&gt;Queue&lt;/code&gt;, &lt;code&gt;Exchange&lt;/code&gt; and &lt;code&gt;Binding&lt;/code&gt; had to be declared as separate &lt;code&gt;@Bean&lt;/code&gt;s.&lt;/p&gt;&lt;h2&gt;&lt;a href="#configurable-exchange-routing-key-for-replies" class="anchor" name="configurable-exchange-routing-key-for-replies"&gt;&lt;/a&gt;Configurable Exchange/Routing Key for Replies&lt;/h2&gt;&lt;p&gt;Previously, when using request/reply messaging with the &lt;code&gt;RabbitTemplate&lt;/code&gt;, replies were routed to the default exchange and routed with the queue name. It is now possible to supply a &lt;code&gt;reply-address&lt;/code&gt; with the form &lt;code&gt;exchange/routingKey&lt;/code&gt; to route using a specific exchange and routing key.&lt;/p&gt;&lt;h2&gt;&lt;a href="#rabbitmanagementtemplate" class="anchor" name="rabbitmanagementtemplate"&gt;&lt;/a&gt;RabbitManagementTemplate&lt;/h2&gt;&lt;p&gt;The &lt;code&gt;spring-erlang&lt;/code&gt; jar is no longer provided. Users are encouraged to use the RabbitMQ REST API instead. The RabbitMQ team are working on a Java binding for the REST API and Spring AMQP now provides a lightweight wrapper for that API using the familiar &lt;code&gt;Queue&lt;/code&gt;, &lt;code&gt;Exchange&lt;/code&gt; and &lt;code&gt;Binding&lt;/code&gt; domain objects.&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;Complete details of the new features can be found in the &lt;a href="http://docs.spring.io/spring-amqp/docs/1.5.0.M1/reference/html/_introduction.html#_changes_in_1_5_since_1_4"&gt;What&amp;rsquo;s New section of the reference manual&lt;/a&gt; and the &lt;a href="https://jira.spring.io/secure/ReleaseNote.jspa?projectId=10450&amp;version=14837"&gt;JIRA release notes&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Users are encouraged to try the new features before the GA release and provide feedback using the normal channels (&lt;code&gt;spring-amqp&lt;/code&gt; tag on Stack Overflow, and JIRA).&lt;/p&gt;&lt;p&gt;See &lt;a href="http://projects.spring.io/spring-amqp/"&gt;the project page&lt;/a&gt; for links to documentation and downloads.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Webinar Replay:  Smarter Service-to-Service Invocations with Spring Cloud</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/05/07/webinar-replay-smarter-service-to-service-invocations-with-spring-cloud" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-05-07:2115</id>
+    <updated>2015-05-07T13:42:00Z</updated>
+    <content type="html">&lt;p&gt;Speaker: Josh Long &lt;/p&gt;
+&lt;p&gt;Slides:&lt;a href="https://speakerdeck.com/joshlong/smarter-service-to-service-invocation-with-spring-cloud"&gt; https://speakerdeck.com/joshlong/smarter-service-to-service-invocation-with-spring-cloud &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Spring Cloud 1.0 is here! It offers a powerful way to create and consume microservices. As you introduce new services, you introduce integration problems: services can be shaky, they can disappear and - as they're often exposed over HTTP - they require a bit more footwork than in-process method invocations. In this webinar, we'll focus specifically on how Spring Cloud integrates service registration (e.g.: Eureka, Consul, or Zookeeper), declarative REST clients (with Netflix's Feign), reactive programming and the circuit breaker pattern with Hystrix to support easy, robust service-to-service invocations.&lt;/p&gt;
+&lt;p&gt;Learn about about Spring Cloud at &lt;a href="http://projects.spring.io/spring-cloud"&gt;http://projects.spring.io/spring-cloud&lt;/a&gt;&lt;a href="http://projects.spring.io/spring-cloud"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Learn about about Spring Boot at &lt;a href="http://projects.spring.io/spring-security"&gt;http://projects.spring.io/spring-boot&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt; &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/my3yr8Arq2g" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt; &lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Webinar: A Comprehensive Spring Showcase: Personal Cloud Storage Application</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/05/06/webinar-a-comprehensive-spring-showcase-personal-cloud-storage-application" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Pieter Humphrey</name>
+    </author>
+    <id>tag:spring.io,2015-05-05:2110</id>
+    <updated>2015-05-06T07:06:00Z</updated>
+    <content type="html">&lt;p&gt;Speaker: Erdem Gunay, Turkcell&lt;/p&gt;
+&lt;p&gt;Turkcell launched a personal cloud storage service few years ago. Adding new business features was costly in terms of time and budget on the legacy solution. The user experience needed to be improved. Finally, it was decided to build a new solution where Spring Boot and Spring Framework projects play crucial role as the backbone.&#xD;
+The project was completed just in 6 months starting from scratch. The solution was built on top of Spring Boot and many Spring IO Platform projects, allowing the development team focus on business logic instead of configuration &amp; integration details. The project has been divided into deployable modules (API, backend, migration, test automation) accessing micro services that are responsible for one task only. Join Erdem for a review of the migration effort and new architecture - all enabled by Spring Boot.&lt;/p&gt;&lt;p&gt;Tuesday, June 9th, 2015 2:00PM GMT (London GMT) &lt;a href="http://connect.pivotal.io/OSS_Webinar_7AMComprehensiveSpringShowcasePersonalCloudStorageApplication_Register.html"&gt;Register&lt;/a&gt;&lt;br/&gt;&lt;p&gt;Tuesday, June 9th, 2015 10:00AM PDT (San Francisco GMT-07:00) &lt;a href="http://connect.pivotal.io/OSS_Webinar_10AMComprehensiveSpringShowcasePersonalCloudStorageApp_Register.html"&gt;Register&lt;/a&gt;&lt;/p&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>This Week in Spring - May 5th, 2015</title>
     <link rel="alternate" href="https://spring.io/blog/2015/05/05/this-week-in-spring-may-5th-2015" />
@@ -534,74 +597,6 @@ public DataSourceProperties dataSourceProperties() {&#xD;
     <id>tag:spring.io,2015-04-23:2092</id>
     <updated>2015-04-23T14:27:44Z</updated>
     <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of Spring Security 4.0.1.RELEASE. This release is the first maintenance release of the 4.0 line and focusses on fixing any major issues that were found in the new release. For complete details on the release, refer to the &lt;a href="https://jira.spring.io/issues/?jql=fixVersion%20%3D%204.0.1%20AND%20project%20%3D%20SEC"&gt;Change Log&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-security/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.1.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-security/site/docs/4.0.1.RELEASE/guides/html5/"&gt;Guides&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Security Kerberos 1.0.0 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/04/23/spring-security-kerberos-1-0-0-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Janne Valkealahti</name>
-    </author>
-    <id>tag:spring.io,2015-04-23:2094</id>
-    <updated>2015-04-23T10:21:37Z</updated>
-    <content type="html">&lt;p&gt;We are pleased to announce the release of &lt;a href="http://projects.spring.io/spring-security-kerberos/"&gt;Spring Security Kerberos&lt;/a&gt; 1.0.0.RELEASE. I would like to start by saying thank you for all community members who helped us by either creating PR&amp;rsquo;s for new features or simply providing feedback.&lt;/p&gt;&lt;p&gt;Here is a guick summary of changes what went through with two release candidates and a GA release:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;We did a lot of housekeeping to put a whole project up-to-date due to a long overdue from a first milestone.&lt;/li&gt;
-  &lt;li&gt;Spring team added &lt;em&gt;KerberosRestTemplate&lt;/em&gt; while all other new features came from a community.&lt;/li&gt;
-  &lt;li&gt;Community contributions are:
-  &lt;ul&gt;
-    &lt;li&gt;&lt;em&gt;KerberosLdapContextSource&lt;/em&gt; which allows to authenticate against Windows AD with existing Kerberos credentials to get more info about a logged-in user.&lt;/li&gt;
-    &lt;li&gt;Tweaks to Kerberos negotiation which allows better interoperability with WinRM.&lt;/li&gt;
-    &lt;li&gt;Changes how &lt;em&gt;SpnegoEntryPoint&lt;/em&gt; is used which allows to fallback to other authentication methods if Kerberos negotiation fails.&lt;/li&gt;
-  &lt;/ul&gt;&lt;/li&gt;
-  &lt;li&gt;Samples has been re-written from scratch and are now Bootified to give better user exprerience.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Now that we completed this long journey and got first GA release out it&amp;rsquo;s time to think where we are going from here. New features are driven by demand from a community so keep those PR&amp;rsquo;s coming(we already have something lined up which didn&amp;rsquo;t get into this release). Some of the new planned features will be done on a lower level where Kerberos is traditionally used(Web, Spnego, AD) due to demand of adding better security features to &lt;em&gt;Spring for Apache Hadoop&lt;/em&gt; for example. Hadoop is already a heavy user of Kerberos so it makes sense to support same concepts in our own Spring libraries. &lt;/p&gt;&lt;p&gt;We&amp;rsquo;d love to hear back what people think by participating in a project or simply creating issues or feature requests at &lt;a href="https://github.com/spring-projects/spring-security-kerberos"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - April 21, 2015</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/04/21/this-week-in-spring-april-21-2015" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2015-04-21:2088</id>
-    <updated>2015-04-21T10:50:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;m in Bangalore, India, at the &lt;a href="http://www.developermarch.com/developersummit/"&gt;Great Indian Developer Summit&lt;/a&gt;. Lots of the Spring Team are at &lt;a href="http://spring.io/blog/2015/04/17/spring-at-jax-germany-2015"&gt;JAXConf in Germany this week&lt;/a&gt; as well.&lt;/p&gt;&lt;p&gt;A friendly reminder, if you&amp;rsquo;re in the south west region of Europe, and Barcelona, Spain, specifically, and looking for fun in the sun, I can think of no better option than &lt;a href="http://www.springio.net/"&gt;Spring I/O Conference&lt;/a&gt;, which &lt;a href="http://spring.io/blog/2015/04/17/pivotal-at-spring-i-o-conference-april-29-30-in-barcelona"&gt;is next week&lt;/a&gt;. Don&amp;rsquo;t miss the &lt;em&gt;many&lt;/em&gt; great talks from many amazing Spring team and Spring community members. I&amp;rsquo;ll be there and looking forward to meeting and seeing you all! &lt;/p&gt;&lt;p&gt;Without further ado, let&amp;rsquo;s get to it!&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Integration ninja Artem Bilan just announced &lt;a href="http://spring.io/blog/2015/04/20/spring-integration-hazelcast-support-1-0-milestone-1-is-available"&gt;the Spring Integration Hazelcast adapter&lt;/a&gt;. Hazelcast is an open-source distributed data grid that supports &lt;code&gt;java.util.Map&amp;lt;K,V&amp;gt;&lt;/code&gt;, &lt;code&gt;java.util.Queue&amp;lt;T&amp;gt;&lt;/code&gt;, and &lt;code&gt;java.util.Set&amp;lt;T&amp;gt;&lt;/code&gt; semantics, among other things, across a cluster of nodes.&lt;/li&gt;
-  &lt;li&gt;Spring Security and Spring Session lead Rob Winch &lt;a href="http://spring.io/blog/2015/04/16/spring-session-1-0-1-released"&gt;just announced Spring Session 1.0.1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Social lead Craig Walls just announced &lt;a href="http://spring.io/blog/2015/04/15/spring-social-facebook-2-0-0-release-released"&gt;Spring Social Facebook 2.0.0.RELEASE which&lt;/a&gt; which includes all the numerous breaking changes in the Facebook Graph API.&lt;/li&gt;
-  &lt;li&gt;&amp;laquo;&amp;nbsp;Kafka!&amp;nbsp;&amp;raquo; Marius Bogoevici and Mark Pollack are teaming up for a webinar on Tues April 28th about &lt;a href="http://spring.io/blog/2015/03/17/webinar-reactive-data-pipelines-with-spring-xd-and-kafka"&gt;Reactive data-pipelines with Spring XD and Kafka&lt;/a&gt;, a must for any big / fast data enthusiasts.&lt;/li&gt;
-  &lt;li&gt;Spring Integration ninja just put together a &lt;em&gt;really&lt;/em&gt; nice writeup of the &lt;a href="http://spring.io/blog/2015/04/15/spring-integration-java-dsl-1-1-m1-is-available"&gt;Spring Integration Java DSL 1.1.M1&lt;/a&gt; release, complete with lots of new features including POJO-based EIP components, the &lt;code&gt;IntegrationFlowAdapter&lt;/code&gt;, dynamic language support, and Apache Kafka support..&lt;/li&gt;
-  &lt;li&gt;.. which I wrote about this week. Apache Kafka is a distributed message queue that &lt;a href="http://spring.io/blog/2015/04/15/using-apache-kafka-for-integration-and-data-processing-pipelines-with-spring"&gt;makes shoveling &lt;em&gt;huge&lt;/em&gt; amounts of data around easy to do&lt;/a&gt;. It&amp;rsquo;s a natural fit for integration-based code and for big-data processing with support in Spring Integration and Spring XD.&lt;/li&gt;
-  &lt;li&gt;This week&amp;rsquo;s SpringOne2GX replays are out! Ryan Gardner from Dealer.com talks about getting configuration out of your apps, and into a distributed store in &lt;a href="http://spring.io/blog/2015/04/21/springone2gx-2014-replay-centralized-application-configuration-with-spring-and-apache-zookeeper"&gt;Centralized Application Configuration with Spring and Apache ZooKeeper&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Our pal Xavier Padró put together a nice &lt;a href="http://xpadro.blogspot.in/2015/04/configure-spring-jms-application-with.html"&gt;post on using Spring Boot with JMS&lt;/a&gt;, specifically taking advantage of the programming model in Spring framework 4.1.&lt;/li&gt;
-  &lt;li&gt;I love this post on &lt;a href="http://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-returning-git-commit-information-as-json/"&gt;exposing Git commit information from a Spring Boot &lt;code&gt;/info&lt;/code&gt; actuator endpoint&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Did you know that Spring Boot supports declarative, &lt;a href="http://www.drissamri.be/blog/java/enable-https-in-spring-boot/"&gt;easy-to-use support for HTTPs&lt;/a&gt; in the embedded containers?&lt;/li&gt;
-  &lt;li&gt;Are you using Vaadin and Spring? Did you know there&amp;rsquo;s a powerful Spring Boot and Vaadin-based integration that is now featured on &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Are you using IntelliJ? Have you tried out all the new features in IntelliJ supporting Spring Boot? Check out Spring ninja Stephan Nicoll&amp;rsquo;s joint talk with the IntelliJ team &lt;a href="http://blog.jetbrains.com/idea/2015/04/webinar-recording-spring-boot-and-intellij-idea-14-1/"&gt;on using IntelliJ with Spring Boot&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;I have been playing a lot with ways to safely coordinate cluster state in a distributed system. In this space, tools like Redis, Hazelcast, and Apache Zookeeper are very powerful options &lt;a href="https://github.com/spring-cloud/spring-cloud-cluster"&gt;and Spring Cloud already has some &lt;em&gt;very&lt;/em&gt; preliminary support&lt;/a&gt;. Check them out! I&amp;rsquo;d love to hear about your use cases for coordination, if you&amp;rsquo;ve got &amp;rsquo;em. There are some obvious scenarios. How would you elect a node handling message queuing as the master? How would you handle master-worker topologies?&lt;/li&gt;
-  &lt;li&gt;I&amp;rsquo;ve discovered a wealth of (Japanese-language) &lt;a href="http://qiita.com/tags/spring-boot"&gt;posts on Qiita on Spring Boot&lt;/a&gt;, among other things. This post on &lt;a href="http://qiita.com/uzresk/items/31a4585f7828c4a9334f"&gt;Spring Boot and Thymeleaf&lt;/a&gt; is interesting. Here&amp;rsquo;s one [on using Spring Boot (Spring MVC) and Swagger](Spring MVC integration for Swagger). This post on &lt;a href="http://qiita.com/NetPenguin/items/0e06779ecdd48d24a5db"&gt;unit testing Spring MVC services looks pretty detailed&lt;/a&gt;. I&amp;rsquo;ll be checking back every now and then! Great resources, it seems, even from the Google Translate results!&lt;/li&gt;
-&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Centralized Application Configuration with Spring and Apache ZooKeeper</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/04/21/springone2gx-2014-replay-centralized-application-configuration-with-spring-and-apache-zookeeper" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-04-21:2091</id>
-    <updated>2015-04-21T10:49:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Ryan Gardner, Dealer.com &lt;/p&gt;
-&lt;p&gt;Core Spring Track&lt;/p&gt;
-&lt;p&gt; Slides: &lt;a href="http://www.slideshare.net/SpringCentral/zookeeper-config2014-2c-41123708"&gt;http://www.slideshare.net/SpringCentral/zookeeper-config2014-2c-41123708&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Application configuration is an evolution. It starts as a hard-coded strings in your application and hopefully progresses to something external, such as a file or system property that can be changed without deployment. But what happens when other enterprise concerns enter the mix, such as audit requirements or access control around who can make changes? How do you maintain the consistency of values across too many application servers to manage at one time from a terminal window? The next step in the application configuration evolution is centralized configuration that can be accessed by your applications as they move through your various environments on their way to production. Such a service transfers the ownership of configuration from the last developer who touched the code to a well-versed application owner who is responsible for the configuration of the application across all environments. At Dealer.com, we have created one such solution that relies on Apache ZooKeeper to handle the storage and coordination of the configuration data and Spring to handle to the retrieval, creation and registration of configured objects in each application. The end result is a transparent framework that provides the same configured objects that could have been created using a Spring configuration, configuration file and property value wiring. This talk will cover both the why and how of our solution, with a focus on how we leveraged the powerful attributes of both Apache ZooKeeper and Spring to rid our application of local configuration files and provide a consistent mechanism for application configuration in our enterprise.&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/XgNIGjFnPQE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
   </entry>
 </feed>
 

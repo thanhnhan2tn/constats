@@ -78,9 +78,25 @@
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/services-ftp-content.jsp" />
 	</definition>
+	<definition name="ftp-file-content" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-ftp-file-content.jsp" />
+	</definition>
+	<definition name="ftp-logs" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-ftp-logs.jsp" />
+	</definition>
 	<definition name="ssh-config" extends="template.default">
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/services-ssh-content.jsp" />
+	</definition>
+	<definition name="ssh-file-content" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-ssh-file-content.jsp" />
+	</definition>
+	<definition name="ssh-logs" extends="template.default">
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/services-ssh-logs.jsp" />
 	</definition>
 	<definition name="dhcp-config" extends="template.default">
 		<put-attribute name="left-content"

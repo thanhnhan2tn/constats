@@ -20,19 +20,40 @@ public class User {
 	private String lastName;
 	private String sdt;
 	List<Server> servers;
+	private String date;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public User() {
 
 	}
 
-	public User(String email, String passWord, int role, String firstName, String lastName, List<Server> servers) {
+	
+
+	public User(String email, String passWord, int role, String firstName, String lastName, 
+			List<Server> servers, String date) {
 		super();
+		this.email = email;
 		this.passWord = passWord;
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 		this.servers = servers;
+		this.date = date;
 	}
 
 	public String getPassWord() {

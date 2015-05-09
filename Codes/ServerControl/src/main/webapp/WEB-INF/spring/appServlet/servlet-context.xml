@@ -31,6 +31,7 @@
 	</beans:bean>
 	<beans:bean id="userDAO" class="vn.edu.cit.dao.UserDAOImpl" />
 	<beans:bean id="serverDAO" class="vn.edu.cit.dao.ServerDAOImpl" />
+	<beans:bean id="logDAO" class="vn.edu.cit.dao.LogDAOImpl" />
 	<!-- Tiles -->
 	<beans:bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

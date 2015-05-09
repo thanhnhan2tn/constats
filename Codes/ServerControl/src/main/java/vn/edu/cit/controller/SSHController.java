@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.ftp.FtpConfig;
 import model.ssh.SSH;
 import model.ssh.SSHConfig;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import vn.edu.cit.dao.ServerDAO;
@@ -96,7 +98,7 @@ public class SSHController {
 			// kiem tra dich vu ftp
 			sshconfig.uploadConfigToServer(sv, ssh);
 			mm.put("server", server);
-			
+
 			_log.info("Upload SSH Config to server ");
 			redirectAtt.addFlashAttribute("displaysuccess", "block");
 			redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");
@@ -106,6 +108,194 @@ public class SSHController {
 		} else {
 			return "redirect:/login";
 		}
+	}
+
+	/**
+	 * Sua file config SSH
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ssh/editfile/{ip}/{cc}", method = RequestMethod.GET)
+	public String sshGetConfFile(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					SSHConfig sshConf = new SSHConfig();
+					// kiem tra dich vu ftp
+					if (sv != null) {
+						String str;
+						try {
+							str = sshConf.loadConfigToPlainText(sv);
+							mm.put("sshconfig", str);
+							return "ssh-file-content";
+						} catch (IOException e) {
+							_log.info("Can not load SSH Config");
+							redirectAtt.addFlashAttribute("display", "block");
+							redirectAtt.addFlashAttribute("message", "Can not load SSH Config!");
+							return "ssh-config";
+						}
+					}
+				}
+
+			}
+		} else {
+			return "redirect:/login";
+		}
+		return "redirect:/";
+	}
+
+	/**
+	 * Luu file SSH config
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param ftp
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ssh/editfile/{ip}/{cc}", method = RequestMethod.POST)
+	public String sshSaveConfFile(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) throws IOException {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		String configText = request.getParameter("sshconfig");
+		// System.out.println(configText);
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			for (Server server : user.getServers()) {
+				if (server.getServerAddress().equals(ip)) {
+					Server sv = new Server(server);
+					sv.setServerUsername((String) session.getAttribute("sudouser"));
+					sv.setServerPassword((String) session.getAttribute("sudopass"));
+					SSHConfig sshConf = new SSHConfig();
+					sshConf.uploadStringToServer(sv, configText);
+					_log.info("Upload SSH Config to server");
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", "Upload file Success!");
+					return "ssh-config";
+				}
+
+			}
+		} else {
+			return "redirect:/login";
+		}
+		return "redirect:/";
+	}
+
+	/**
+	 * Sang Trang Lay thong tin logfile
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param mm
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ssh/getlog/{ip}/{cc}", method = RequestMethod.GET)
+	public String sshGetLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
+		// Lay thong tin user và token tren session
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// lay thong tin server cua user
+		// kiem tra thong tin user dang nhap
+		if (user != null && cc.equals(c)) {
+			return "ssh-logs";
+		} else {
+			return "redirect:/login";
+		}
+	}
+
+	/**
+	 * Lay log
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ssh/getlogs/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getSSHLogs(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			SSHConfig sshConf = new SSHConfig();
+			String logs = sshConf.getLog(sv);
+			if (logs != null) {
+				return logs;
+			} else {
+				return "Khong lay duoc thong tin";
+			}
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
+	}
+
+	/**
+	 * Lay ERR
+	 * 
+	 * @param request
+	 * @param session
+	 * @param ip
+	 * @param c
+	 * @param redirectAtt
+	 * @return
+	 */
+	@RequestMapping(value = "/serviceconfig/ssh/geterrors/{ip}/{cc}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getSSHErrors(HttpServletRequest request, HttpSession session, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, RedirectAttributes redirectAtt) {
+		String cc = (String) session.getAttribute("cc");
+		User user = (User) session.getAttribute("user");
+		if (user != null && c.equals(cc)) { // check user login
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server); // khoi tao server
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			SSHConfig sshConf = new SSHConfig();
+			String errors;
+			try {
+				errors = sshConf.getError(sv);
+				return errors;
+			} catch (InterruptedException e) {
+				return "Khong lay duoc thong tin";
+			}
+
+		} else {
+			return "Khong lay duoc thong tin";
+		} // end check user
 	}
 
 	private static final Logger _log = Logger.getLogger(SSHController.class);

@@ -82,6 +82,8 @@
 
 					<div style="display: none ${display}" id="login-alert"
 						class="alert alert-danger col-sm-12">${message }</div>
+					<div style="display: none ${displaysuccess}" id="login-alert"
+						class="alert alert-success col-sm-12">${message }</div>
 					<div class="clearfix"></div>
 					<spring:form commandName="User" method="post"
 						class="form-horizontal" action="login">
@@ -198,19 +200,19 @@
 								<button id="btn-signup" type="submit" class="btn btn-info">
 									<i class="icon-hand-right"></i>Sign Up
 								</button>
-								<span style="margin-left: 8px;">or</span>
+<!-- 								<span style="margin-left: 8px;">or</span> -->
 							</div>
 						</div>
 
-						<div style="border-top: 1px solid #999; padding-top: 20px"
-							class="form-group">
+<!-- 						<div style="border-top: 1px solid #999; padding-top: 20px" -->
+<!-- 							class="form-group"> -->
 
-							<div class="col-md-offset-3 col-md-9">
-								<button id="btn-fbsignup" type="button" class="btn btn-primary">
-									<i class="icon-facebook"></i>   Sign Up with Facebook
-								</button>
-							</div>
-						</div>
+<!-- 							<div class="col-md-offset-3 col-md-9"> -->
+<!-- 								<button id="btn-fbsignup" type="button" class="btn btn-primary"> -->
+<!-- 									<i class="icon-facebook"></i>   Sign Up with Facebook -->
+<!-- 								</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</form>
 				</div>
 			</div>

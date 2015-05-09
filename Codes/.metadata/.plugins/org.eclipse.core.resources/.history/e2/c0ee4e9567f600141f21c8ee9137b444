@@ -1,0 +1,63 @@
+<%@page import="vn.edu.cit.controller.Calculator"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<h1 class="page-header">Admin Dashboard</h1>
+<h2 class="sub-header">User Manager</h2>
+<div class="">
+	<form:form modelAttribute="userEdit"
+		action="${pageContext.request.contextPath}/edituser/save/"
+		class="form-horizontal" method="POST">
+		<input type="hidden" name="cc" value="${cc }">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			Edit user
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-md-4">First Name:</label>
+					<div class="col-md-3 form-groups">
+						<form:input class="form-control" path="firstName" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">Last Name:</label>
+					<div class="col-md-3 form-groups">
+						<form:input class="form-control" path="lastName" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">Member type:</label>
+					<div class="col-md-3 form-groups">
+						<form:select class="form-control" path="role" items="${roleList}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">Email:</label>
+					<div class="col-md-3 form-groups">
+						<form:input class="form-control" path="email" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">Password:</label>
+					<div class="col-md-3 form-groups">
+						<input class="form-control" name="password" type="password" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4">Phone:</label>
+					<div class="col-md-3 form-groups">
+						<form:input class="form-control" path="sdt" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+			<div class="pull-right">
+				<button class="btn btn-default" type="button"
+					onclick="windows.history.back()">Back</button>
+				<button class="btn btn-primary" type="submit">Save</button>
+			 </div>
+		</div>
+		</div>
+		
+	</form:form>
+</div>

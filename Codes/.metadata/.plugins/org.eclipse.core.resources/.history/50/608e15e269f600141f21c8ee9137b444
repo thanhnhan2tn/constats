@@ -1,0 +1,10 @@
+package vn.edu.cit.model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "userlogs")
+public class UserLog {
+	private String dateTime;
+	private String logContent;
+
+}

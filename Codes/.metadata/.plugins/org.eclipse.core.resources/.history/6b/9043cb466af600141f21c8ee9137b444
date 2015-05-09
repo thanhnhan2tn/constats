@@ -1,0 +1,9 @@
+package vn.edu.cit.dao;
+
+import vn.edu.cit.model.Log;
+
+public interface LogDAO {
+
+	public void createLog(Log log);
+	public void getLog(String date)
+}

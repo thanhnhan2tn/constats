@@ -13,7 +13,6 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/">Homepage</a></li>
-				<li><a href="#" onclick="alert('Under Construction')">Settings</a></li>
 				<li><a href="#" onclick="alert('Under Construction')">Help</a></li>
 			</ul>
 

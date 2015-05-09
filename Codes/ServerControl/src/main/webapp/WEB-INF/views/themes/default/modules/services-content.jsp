@@ -475,32 +475,32 @@ $(document).ready(function () {
 								</h3>
 							</div>
 						</div>
-						<!-- DNS Bind 9 -->
-						<div class="panel panel-default disabled">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										<%-- ${pageContext.request.contextPath }/serviceconfig/bind9/${server.serverAddress}/${cc} --%>
-										href="#"
-										onclick="return alert('Under Construction');">DNS Bind9 Server
-										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-									</a>
-								</h3>
-							</div>
-						</div>
-						<!-- Apache Service -->
-						<div class="panel panel-default disabled">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										<%-- ${pageContext.request.contextPath }/serviceconfig/apache/${server.serverAddress}/${cc} --%>
-										href="#"
-										onclick="return alert('Under Construction');">Apache Server
-										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i>
-									</a>
-								</h3>
-							</div>
-						</div>
+<!-- 						DNS Bind 9 -->
+<!-- 						<div class="panel panel-default disabled"> -->
+<!-- 							<div class="panel-heading"> -->
+<!-- 								<h3 class="panel-title"> -->
+<!-- 									<a -->
+<%-- 										${pageContext.request.contextPath }/serviceconfig/bind9/${server.serverAddress}/${cc} --%>
+<!-- 										href="#" -->
+<!-- 										onclick="return alert('Under Construction');">DNS Bind9 Server -->
+<!-- 										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i> -->
+<!-- 									</a> -->
+<!-- 								</h3> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						Apache Service -->
+<!-- 						<div class="panel panel-default disabled"> -->
+<!-- 							<div class="panel-heading"> -->
+<!-- 								<h3 class="panel-title"> -->
+<!-- 									<a -->
+<%-- 										${pageContext.request.contextPath }/serviceconfig/apache/${server.serverAddress}/${cc} --%>
+<!-- 										href="#" -->
+<!-- 										onclick="return alert('Under Construction');">Apache Server -->
+<!-- 										Configuration <i class="glyphicon glyphicon-chevron-down pull-right"></i> -->
+<!-- 									</a> -->
+<!-- 								</h3> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</c:if>
 				</div>
 				<!-- End Service -->

@@ -1,0 +1,11 @@
+package vn.edu.cit.dao;
+
+import vn.edu.cit.model.Log;
+import vn.edu.cit.model.Server;
+import vn.edu.cit.model.User;
+
+public interface LogDAO {
+
+	public void createLog(Log log);
+	public void getLog()
+}

@@ -34,8 +34,10 @@
 					</div>
 				</div>
 				<!--  End Panel -->
-				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<div class="form-group">
+						<button type="button" onclick="window.history.back();">Back</button>
+						<button class="btn btn-primary" type="submit" >Save</button>
+				</div>
 			</form>
 		</div>
 	</section>

@@ -1,0 +1,37 @@
+package vn.edu.cit.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
+import vn.edu.cit.model.Log;
+import vn.edu.cit.model.Server;
+
+public class LogDAOImpl {
+	public static final String COLLECTION = "logs";
+
+	public LogDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
+
+	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+		this.mongoTemplate = mongoTemplate;
+	}
+
+	public void createLog(Log log) {
+		mongoTemplate.save(log);
+	}
+
+	@Override
+	public Log getLog(String date) {
+		Query searchQuery = new Query(Criteria.where("date").is(date));
+		Log log = mongoTemplate.
+		return log;
+	}
+}
