@@ -32,11 +32,12 @@
 								</div>
 							</div>
 					</div>
-				</div>
+				
 				<!--  End Panel -->
-				<div class="form-group">
-						<button type="button" onclick="window.history.back();">Back</button>
+				<div class="panel panel-footer">
+						<button class="btn btn-default" type="button" onclick="window.history.back();">Back</button>
 						<button class="btn btn-primary" type="submit" >Save</button>
+				</div>
 				</div>
 			</form>
 		</div>

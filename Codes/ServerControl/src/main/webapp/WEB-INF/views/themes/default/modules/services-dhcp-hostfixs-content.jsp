@@ -14,29 +14,8 @@
 		<h1>
 			DHCP Server Config :<small> (${server.serverAddress})</small>
 		</h1>
-		<h2>Config Subnets</h2>
-		<div class="btn-group pull-right" role="group">
-			<button type="button" class="btn btn-danger"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }'"
-				title="Stop service">
-				<i class="glyphicon glyphicon-arrow-down"></i>
-			</button>
-			<button type="button" class="btn btn-success"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
-				title="Start service">
-				<i class="glyphicon glyphicon-arrow-up"></i>
-			</button>
-			<button type="button" class="btn btn-warning"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'"
-				title="Restart Service">
-				<i class="glyphicon glyphicon-repeat"></i>
-			</button>
-			<button type="button" class="btn btn-warning remove-iface"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }'"
-				title="Restart Service">
-				<i class="glyphicon glyphicon-remove"></i>
-			</button>
-		</div>
+		<h2>Config Hostfixs</h2>
+		
 
 	</section>
 	<script>

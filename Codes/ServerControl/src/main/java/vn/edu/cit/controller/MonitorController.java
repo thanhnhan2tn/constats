@@ -136,19 +136,20 @@ public class MonitorController {
 		String[] info = new String[2];
 		if (user != null && cc.equals(c)) {
 			System.out.println(user.getEmail());
-			//lay thong tin server
+			// lay thong tin server
 			Server server = serverDAO.getServer(user, ip);
-				
+
 			// a user vs SSH
-			server.setServerUsername("svcontrol"); 
-				
+			server.setServerUsername("svcontrol");
+
 			ServerConfig config = new ServerConfig();
 			info[0] = config.getMemUsage(server);
 			info[1] = config.getMemTotal(server);
+			//info[2] = config.getCpuUsage(server);
 		}// end if User
 		return info;
 	}
-	
+
 	/**
 	 * Lay thong tin RAM
 	 */
@@ -164,12 +165,12 @@ public class MonitorController {
 		String info = "";
 		if (user != null && cc.equals(c)) {
 			System.out.println(user.getEmail());
-			//lay thong tin server
+			// lay thong tin server
 			Server server = serverDAO.getServer(user, ip);
-				
+
 			// a user vs SSH
-			server.setServerUsername("svcontrol"); 
-				
+			server.setServerUsername("svcontrol");
+
 			ServerConfig config = new ServerConfig();
 			info = config.getCpuUsage(server);
 		}// end if User

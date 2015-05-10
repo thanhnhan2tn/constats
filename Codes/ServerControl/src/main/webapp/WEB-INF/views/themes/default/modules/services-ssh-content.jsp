@@ -16,6 +16,12 @@
 	<!--  Main Content -->
 	<section class="content">
 		<div class="main-content">
+		<div class="clear-fix">
+				<div style="display: none ${display}" id="login-alert"
+					class="alert alert-danger col-sm-12">${message}</div>
+				<div style="display: none ${displaysuccess}" id="login-alert"
+					class="alert alert-success col-sm-12">${message}</div>
+			</div>
 			<%
 				SSH Ssh = (SSH) request.getAttribute("SSH");
 				if (Ssh != null) {
@@ -89,7 +95,7 @@
 
 					</div>
 					<div class="panel panel-footer">
-					<button class="btn btn-primary" type="button" onclick="windows.history.back();">Back</button>
+					<button class="btn btn-default" type="button" onclick="windows.history.back();">Back</button>
 					<input class="btn btn-primary" type="submit" value="Save">
 				</div>
 				</div>

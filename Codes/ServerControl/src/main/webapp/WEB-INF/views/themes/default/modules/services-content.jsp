@@ -11,6 +11,72 @@ var ip = "${server.serverAddress}";
 var ramArray=[0];
 var cpuArray=[0];
 
+$("#monitoring").ready(function () {
+loadRamCpu();
+function loadRamCpu() {
+	 // getram
+	  $.ajax({
+         url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
+         , type: 'GET'
+         , data1: {}
+         //, timeout: '10000'
+         , error: function () {
+       	 // $("td.ram").html("Can not get RAM info of this server...");
+         }, // neu load thnh cong
+         success: function (data1, status) {
+          
+          if ((data1[0] == "null") || (data1[0] == "")) {
+        	
+       	   if(ramArray.length>10){
+      	   		ramArray.shift();
+      	   		}
+          		ramArray.push(0);
+       	   //$("td.ram").html("Can not get RAM info of this server...");
+           }else{
+         	  var ramfree = parseFloat(data1[0]) / 1024;
+               var ramtotal = parseFloat(data1[1]) / 1024;
+               var ramuse = ramtotal-ramfree;
+               var ram = (ramuse/ramtotal)*100;
+               if(ramArray.length>10){
+       	   		ramArray.shift();
+       	   	}
+           	ramArray.push(parseInt(ram));
+            $("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");
+           
+          	setInterval(loadRamCpu(),5000); //10s
+           }
+           }});
+     //load CPU
+     $.ajax({
+         url: '${pageContext.request.contextPath}/getcpu/' + ip + '/' + cc
+         , type: 'GET'
+         , cpu: {}
+         , async: true
+         , timeout: '7000'
+         , error: function () {
+         	 // $("span.textcpu").text("Can not get CPU info of this server...");
+           }
+         , // neu load thnh cong
+         success: function (cpu, status) {
+           //data = $.trim(data);
+          if ((cpu == "null") || (cpu == "")) {
+       	   	if(cpuArray.length>10){
+       	   		cpuArray.shift();
+       	   	}
+          		cpuArray.push(0);
+           }else{
+           	if(cpuArray.length>10){
+       	   		cpuArray.shift();
+       	   	}
+           	cpuArray.push(parseInt(cpu));
+           	$("span.textcpu").text("");
+           	$("span.cpu-value").removeClass("hidden");
+           	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
+         	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
+           }}});
+}	  
+});
+
 /* JS load chart*/
 $(function () {
 
@@ -33,7 +99,7 @@ $(function () {
                         var x = (new Date()).getTime(), // current time
                             y = cpuArray[cpuArray.length-1];
                         series.addPoint([x, y], true, true);
-                    }, 2000);
+                    }, 5000);
                 }
             }
         },
@@ -71,7 +137,7 @@ $(function () {
                 var data = [], time = (new Date()).getTime(), i;
 
                 for (i = -19; i <= 0; i ++) {
-                    data.push([time + i * 1000, Math.round(0)]);
+                    data.push([time + i * 5000, Math.round(0)]);
                 }
                 return data;
             }())
@@ -92,7 +158,7 @@ $(function () {
                                 var x = (new Date()).getTime(), // current time
                                     y = ramArray[ramArray.length-1]
                                 series.addPoint([x, y], true, true);
-                            }, 2000);
+                            }, 5000);
                         }
                     }
                 },
@@ -139,7 +205,7 @@ $(function () {
 
                         for (i = -19; i <= 0; i += 1) {
                             data.push({
-                                x: time + i * 1000,
+                                x: time + i * 5000,
                                 y: Math.round(0)
                             });
                         }
@@ -157,7 +223,7 @@ $(document)
 });
 //loading ServerInfomation
 
-$(document).ready(function () {
+$("#serverinfomation").ready(function () {
 	$.ajax({
     url: '${pageContext.request.contextPath}/getserverinfo/' + ip + '/' + cc
     , type: 'GET'
@@ -179,65 +245,65 @@ $(document).ready(function () {
       $(".wait")
         .css("display", "none");
       //}
-      setInterval(function () {
-    	 // getram
-    	  $.ajax({
-              url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
-              , type: 'GET'
-              , data1: {}
-              , timeout: '10000'
-              , error: function () {
-            	 // $("td.ram").html("Can not get RAM info of this server...");
-              }, // neu load thnh cong
-              success: function (data1, status) {
+//       setInterval(function () {
+//     	 // getram
+//     	  $.ajax({
+//               url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
+//               , type: 'GET'
+//               , data1: {}
+//               , timeout: '10000'
+//               , error: function () {
+//             	 // $("td.ram").html("Can not get RAM info of this server...");
+//               }, // neu load thnh cong
+//               success: function (data1, status) {
                
-               if ((data1[0] == "null") || (data1[0] == "")) {
-            	   if(ramArray.length>10){
-           	   		ramArray.shift();
-           	   		}
-               		ramArray.push(0);
-            	   //$("td.ram").html("Can not get RAM info of this server...");
-                }else{
-              	  	var ramfree = parseFloat(data1[0]) / 1024;
-                    var ramtotal = parseFloat(data1[1]) / 1024;
-                    var ramuse = ramtotal-ramfree;
-                    var ram = (ramuse/ramtotal)*100;
-                    if(ramArray.length>10){
-            	   		ramArray.shift();
-            	   	}
-                	ramArray.push(parseInt(ram));
-                   	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");	
-                }
-                }});
-          //load CPU
-          $.ajax({
-              url: '${pageContext.request.contextPath}/getcpu/' + ip + '/' + cc
-              , type: 'GET'
-              , cpu: {}
-              , async: true
-              , timeout: '10000'
-              , error: function () {
-              	 // $("span.textcpu").text("Can not get CPU info of this server...");
-                }
-              , // neu load thnh cong
-              success: function (cpu, status) {
-                //data = $.trim(data);
-               if ((cpu == "null") || (cpu == "")) {
-            	   	if(cpuArray.length>10){
-            	   		cpuArray.shift();
-            	   	}
-               		cpuArray.push(0);
-                }else{
-                	if(cpuArray.length>10){
-            	   		cpuArray.shift();
-            	   	}
-                	cpuArray.push(parseInt(cpu));
-                	$("span.textcpu").text("");
-                	$("span.cpu-value").removeClass("hidden");
-                	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
-              	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
-                }}});
-      },2000); //10s
+//                if ((data1[0] == "null") || (data1[0] == "")) {
+//             	   if(ramArray.length>10){
+//            	   		ramArray.shift();
+//            	   		}
+//                		ramArray.push(0);
+//             	   //$("td.ram").html("Can not get RAM info of this server...");
+//                 }else{
+//               	  	var ramfree = parseFloat(data1[0]) / 1024;
+//                     var ramtotal = parseFloat(data1[1]) / 1024;
+//                     var ramuse = ramtotal-ramfree;
+//                     var ram = (ramuse/ramtotal)*100;
+//                     if(ramArray.length>10){
+//             	   		ramArray.shift();
+//             	   	}
+//                 	ramArray.push(parseInt(ram));
+//                    	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");	
+//                 }
+//                 }});
+//           //load CPU
+//           $.ajax({
+//               url: '${pageContext.request.contextPath}/getcpu/' + ip + '/' + cc
+//               , type: 'GET'
+//               , cpu: {}
+//               , async: true
+//               , timeout: '2000'
+//               , error: function () {
+//               	 // $("span.textcpu").text("Can not get CPU info of this server...");
+//                 }
+//               , // neu load thnh cong
+//               success: function (cpu, status) {
+//                 //data = $.trim(data);
+//                if ((cpu == "null") || (cpu == "")) {
+//             	   	if(cpuArray.length>10){
+//             	   		cpuArray.shift();
+//             	   	}
+//                		cpuArray.push(0);
+//                 }else{
+//                 	if(cpuArray.length>10){
+//             	   		cpuArray.shift();
+//             	   	}
+//                 	cpuArray.push(parseInt(cpu));
+//                 	$("span.textcpu").text("");
+//                 	$("span.cpu-value").removeClass("hidden");
+//                 	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
+//               	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
+//                 }}});
+//       },2000); //10s
     }
   });
 	//end set time load
@@ -280,7 +346,7 @@ $(document).ready(function () {
 </script>
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<section class="content-header" id="serverinfo">
 		<h1>
 			Control Services Server<small> (${server.serverAddress})</small>
 		</h1>
@@ -290,19 +356,21 @@ $(document).ready(function () {
 	<section class="content">
 		<div class="main-content panel-group" id="accordion">
 			<ul class="nav nav-tabs" id="serverTab">
-				<li class="active"><a data-toggle="tab" href="#monitor">System
+				<li class="active"><a data-toggle="tab" href="#sysinfo">System
 						Infomation</a></li>
+				<li><a data-toggle="tab" href="#monitor">Ram - CPU using</a></li>
 				<li><a data-toggle="tab" href="#services">Service Configuation</a></li>
 			</ul>
 			<hr>
 			<div class="tab-content">
+				<div class="clear-fix">
 				<div style="display: none ${display}" id="login-alert"
 					class="alert alert-danger col-sm-12">${message}</div>
 				<div style="display: none ${displaysuccess}" id="login-alert"
 					class="alert alert-success col-sm-12">${message}</div>
-
+				</div>
 				<!-- Tabs Monitor Config -->
-				<div class="tab-pane active" id="monitor">
+				<div class="tab-pane active" id="sysinfo">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">System Infomation</h3>
@@ -322,7 +390,12 @@ $(document).ready(function () {
 						</div>
 					</div>
 
-					<div class="panel panel-default">
+					
+				</div>
+				
+				<!--  tab monitor -->
+				<div class="tab-pane" id="monitor">
+					<div class="panel panel-default" id="info-monitor">
 						<div class="panel-heading">
 							<h3 class="panel-title">Monitoring</h3>
 
@@ -335,7 +408,7 @@ $(document).ready(function () {
 									</div>
 									<div class="box-body">
 										<div class="box-body text-center">
-											<div id="cpu" style="height: 400px; min-width: 310px"></div>
+											<div id="cpu" style="height: 400px; min-width: 710px"></div>
 										</div>
 										<!-- /.box-body -->
 									</div>
@@ -346,7 +419,7 @@ $(document).ready(function () {
 									</div>
 									<div class="box-body">
 										<div class="box-body text-center">
-											<div id="ram" style="height: 400px; min-width: 310px"></div>
+											<div id="ram" style="height: 400px; min-width: 710px"></div>
 										</div>
 										<!-- /.box-body -->
 									</div>
@@ -358,15 +431,16 @@ $(document).ready(function () {
 						</div>
 					</div>
 				</div>
-
 				<!-- Tabs Service Config -->
+				
 				<div class="tab-pane" id="services">
+				
 					<c:if test="<%=(session.getAttribute(\"sudouser\") == null)%>">
-						<div class="box box-default">
-							<div class="box-header">
+						<div class="panel panel-default">
+							<div class="panel-heading">
 								Please input your server SUDOER user, it will not save!
 							</div>
-							<div class="box-body">
+							<div class="panel-body">
 								<form
 									action="${pageContext.request.contextPath }/serviceconfig/user/${server.serverAddress}/${cc}"
 									class="form-horizontal" method="POST">
@@ -399,16 +473,16 @@ $(document).ready(function () {
 							</div>
 							<div class="panel-body">
 							<center>
-								<button type="button" class="btn btn-lg btn-danger "
-									onclick="location.href='${pageContext.request.contextPath }/services/shutdown/${server.serverAddress}/${cc }'"
+								<a type="button" class="btn btn-lg btn-danger "
+									onclick="return confirmAction()" href='${pageContext.request.contextPath }/services/shutdown/${server.serverAddress}/${cc }'
 									title="Stop Server">
 									<i class="glyphicon glyphicon-off"></i>
-								</button>
-								<button type="button" class="btn btn-lg btn-warning"
-									onclick="location.href='${pageContext.request.contextPath }/services/restart/${server.serverAddress}/${cc }'"
+								</a>
+								<a type="button" class="btn btn-lg btn-warning"
+									onclick="return confirmAction()" href='${pageContext.request.contextPath }/services/restart/${server.serverAddress}/${cc }'
 									title="ReBoot Server">
 									<i class="glyphicon glyphicon-repeat"></i>
-								</button>
+								</a>
 								</center>
 							</div>
 						</div>
@@ -435,6 +509,19 @@ $(document).ready(function () {
 								</div>
 							</div>
 						</div>
+						<!-- SSH Service -->
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">
+									<a
+										href="${pageContext.request.contextPath }/serviceconfig/ssh/${server.serverAddress}/${cc}">SSH
+										Server Configuration <i
+										class="glyphicon glyphicon-chevron-right pull-right"></i>
+									</a>
+								</h3>
+							</div>
+
+						</div>
 						<!-- FTP Service -->
 						<div class="panel panel-default">
 							<div class="panel-heading">
@@ -449,19 +536,7 @@ $(document).ready(function () {
 
 						</div>
 
-						<!-- SSH Service -->
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">
-									<a
-										href="${pageContext.request.contextPath }/serviceconfig/ssh/${server.serverAddress}/${cc}">SSH
-										Server Configuration <i
-										class="glyphicon glyphicon-chevron-right pull-right"></i>
-									</a>
-								</h3>
-							</div>
-
-						</div>
+						
 
 						<!-- DHCP Service -->
 						<div class="panel panel-default">

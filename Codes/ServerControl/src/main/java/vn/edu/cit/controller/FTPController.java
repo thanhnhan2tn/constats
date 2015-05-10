@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import model.dhcp.DHCPConfig;
 import model.ftp.Ftp;
 import model.ftp.FtpConfig;
+import model.nic.NicConfig;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,6 +158,7 @@ public class FTPController {
 
 	/**
 	 * Sua file config ftp
+	 * 
 	 * @param request
 	 * @param session
 	 * @param ip
@@ -215,7 +217,7 @@ public class FTPController {
 		String cc = (String) session.getAttribute("cc");
 		// lay thong tin server cua user
 		String configText = request.getParameter("ftpconfig");
-		//System.out.println(configText);
+		// System.out.println(configText);
 		// kiem tra thong tin user dang nhap
 		if (user != null && cc.equals(c)) {
 			for (Server server : user.getServers()) {
@@ -235,7 +237,7 @@ public class FTPController {
 						redirectAtt.addFlashAttribute("display", "block");
 						redirectAtt.addFlashAttribute("message", "Upload file fail, please try again!");
 					}
-					return "ftp-config";
+					return "redirect:/serviceconfig/ftp/" + ip + "/" + cc;
 				}
 
 			}
@@ -337,6 +339,47 @@ public class FTPController {
 		} else {
 			return "Khong lay duoc thong tin";
 		} // end check user
+	}
+
+	@RequestMapping(value = "/serviceconfig/ftp/{action}/{ip}/{cc}", method = RequestMethod.GET)
+	public String ftpAction(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
+			@PathVariable(value = "cc") String c, ModelMap mm) {
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		// Lay doi tuong server trong CSDL
+		// check User and token
+		if (user != null && c.equals(cc)) {
+			// Khoi tao doi tuong Server
+			Server server = user.getServerByIp(ip);
+			if (server != null) {
+				Server sv = new Server(server);
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				FtpConfig fconfig = new FtpConfig();
+				if (action.equals("stop")) {
+					fconfig.Stop(sv);
+					// Log
+					System.out.println("Stop : " + ip + " Ftp service");
+				} else if (action.equals("start")) {
+					fconfig.Start(sv);
+					// Log
+					System.out.println("Start : " + ip + " Ftp service");
+				} else if (action.equals("restart")) {
+					fconfig.Restart(sv);
+					// Log
+					System.out.println("Restart : " + ip + " Ftp service");
+				} else if (action.equals("remove")) {
+					fconfig.Remove(sv);
+					System.out.println("Delete : " + ip + ",Ftp service");
+				} else {
+					return "redirect:/serviceconfig/ftp/" + ip + "/" + c;
+				}
+				return "redirect:/serviceconfig/ftp/" + ip + "/" + c;
+			}
+			return "redirect:/serviceconfig/ftp/" + ip + "/" + c;
+		}
+		return "redirect:/login";
 	}
 
 	private static final Logger _log = Logger.getLogger(FTPController.class);

@@ -20,13 +20,13 @@ $(document)
             url: 'checkstatus/' + serverip + '/' + cc
             , type: 'GET'
             , data: {}
-            , timeout: '5000'
+            , timeout: '10000'
             , error: function () {
-//              $(listServer[index]).find(".wait").css("display", "none");
-//              $(listServer[index]).find(".i-server-icon").css({"display": "none"});
-//              $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
-//              $(listServer[index]).find(".btn-control-action").addClass("hidden");
-             // $(listServer[index]).find(".show").removeClass("show").addClass("hidden");
+              $(listServer[index]).find(".wait").css("display", "none");
+              $(listServer[index]).find(".i-server-icon").css({"display": "none"});
+              $(listServer[index]).find(".i-server-icon-off").css({"display": "block"});
+              $(listServer[index]).find(".btn-control-action").addClass("hidden");
+              $(listServer[index]).find(".show").removeClass("show").addClass("hidden");
             }
             , // neu load thnh cong
             success: function (data, status) {
@@ -98,7 +98,7 @@ $(document)
       if (listServer.length > 0) {
         check_server(0);
       }
-    },10000);	
+    },15000);	
     // Check status sidebar
     var listleft = $('.list-server-left');
   });

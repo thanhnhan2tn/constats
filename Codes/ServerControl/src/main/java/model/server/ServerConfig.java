@@ -410,8 +410,12 @@ public class ServerConfig {
 	}
 
 	// get CPU Usage
+//	public String getCpuUsage(Server sv) {
+//		return uploadToServer(sv, "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'");
+//
+//	}
 	public String getCpuUsage(Server sv) {
-		return uploadToServer(sv, "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'");
+		return uploadToServer(sv, "top -bn1 | grep \"Cpu(s)\" | sed \"s/.*, *\\([0-9.]*\\)%* id.*/\\1/\" |  awk '{print 100 - $1}'");
 
 	}
 
@@ -473,5 +477,10 @@ public class ServerConfig {
 		return uploadToServer(sv, "df -h | grep /dev/mapper/ubuntu--vg-root|awk '{print $5}'")
 				.replace("MemTotal: ", "").replaceAll("\\s+", "");
 
+	}
+	public static void main(String args[]){
+		ServerConfig sc= new ServerConfig();
+		Server sv = new Server("192.168.0.13", 22,"a", "ubuntu", "ubuntu");
+		System.out.println(sc.getCpuUsage(sv));
 	}
 }

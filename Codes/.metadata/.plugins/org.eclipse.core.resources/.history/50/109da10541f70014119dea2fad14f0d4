@@ -1,0 +1,192 @@
+<%@page import="java.util.List"%>
+<%@page import="model.dhcp.Subnet"%>
+<%@page import="model.dhcp.DHCP"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="model.nic.Eth"%>
+<%@page import="model.nic.Nic"%>
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			DHCP Server Config :<small> (${server.serverAddress})</small>
+		</h1>
+		<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Install/Remove service</h3>
+				</div>
+				<div class="panel-body">
+					<center>
+						<div class="btn-group">
+			 <a class="btn btn-danger" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }"
+				title="Stop service">
+				<i class="glyphicon glyphicon-arrow-down"></i>
+			</a>
+			<a type="button" class="btn btn-success"
+				 onclick="return confirmAction()" href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'
+				title="Start service">
+				<i class="glyphicon glyphicon-arrow-up"></i>
+			</a>
+			<a type="button" class="btn btn-warning"
+				 onclick="return confirmAction()" href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'
+				title="Restart Service">
+				<i class="glyphicon glyphicon-repeat"></i>
+			</a>
+			<a type="button" class="btn btn-warning remove-iface" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }"
+				title="Restart Service">
+				<i class="glyphicon glyphicon-remove"></i>
+			</a>
+						</div>
+					</center>
+				</div>
+			</div>
+		
+
+	</section>
+	<script>
+		
+	</script>
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+			<%
+				DHCP dhcp = (DHCP) request.getAttribute("dhcp");
+				if (dhcp != null) {
+			%>
+			<div style="display: none ${display}" id="login-alert"
+				class="alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}" id="login-alert"
+				class="alert alert-success col-sm-12">${message}</div>
+
+			<form:form id="dhcp-config-form" modelAttribute="configchung"
+				action="${pageContext.request.contextPath }/serviceconfig/dhcp/save/${server.serverAddress}/${cc }"
+				class="form-horizontal" method="POST">
+				<input type="hidden" name="cc" value="${cc }">
+				<div class="panel panel-default">
+					<div class="panel-heading">General</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label for="updatestyle" class="col-md-2">DNS update style:</label>
+							<div class="col-md-9">
+								<label for="dns_update_none">Default/Null </label>
+								<form:checkbox path="dns_update_style" id="dns_update_none" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="updatestyle" class="col-md-2">Authoritative:</label>
+							<div class="col-md-9">
+								<label for="authoritative_yes">Visible/Null </label>
+								<form:checkbox path="authorative" id="authoritative_yes" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="log_facitily" class="col-md-2">Log facility:</label>
+							<div class="col-md-9">
+								<form:input class="form-control" path="log_facitily" placeholder="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="domain_name" class="col-md-2">Domain Name:</label>
+							<div class="col-md-9">
+								<form:input class="form-control" path="domain_name" placeholder="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="domain_name_servers" class="col-md-2">Domain Name
+								Servers:</label>
+							<div class="col-md-9">
+								<form:input class="form-control" path="domain_name_servers"
+									placeholder="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="default_lease_time" class="col-md-2">Default Lease
+								Time:</label>
+							<div class="col-md-9">
+								<form:input class="form-control" path="default_lease_time"
+									placeholder="" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="max_lease_time" class="col-md-2">Max Lease Time:</label>
+							<div class="col-md-9">
+								<form:input class="form-control" path="max_lease_time" placeholder="" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/subnets/${server.serverAddress}/${cc}">
+								Subnets Configuration <i
+								class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/hostfixs/${server.serverAddress}/${cc}">HostFixs
+								Configuration <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/file/${server.serverAddress}/${cc}">Edit
+								config file... <i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<a
+								href="${pageContext.request.contextPath }/serviceconfig/dhcp/logs/${server.serverAddress}/${cc}">Logs...
+								<i class="glyphicon glyphicon-chevron-right pull-right"></i>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<form:button type="submit" class="btn btn-primary" value="Save"
+					id="savedhcp">Save</form:button>
+				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
+			</form:form>
+			<%
+				} else {
+			%>
+			<script>
+				$('.install-btn').click(function() {
+					var btn = $(this)
+					btn.button('Installing isc-dhcp-server...')
+					setTimeout(function() {
+						btn.button('reset')
+					}, 3000)
+				});
+			</script>
+			<div class="panel-body">
+				<button class="btn btn-primary btn-block install-btn"
+					onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcpinstall/${server.serverAddress}/${cc}'">
+					<i class="glyphicon glyphicon-download-alt"></i> Click here to Install
+					ISC-DHCP-SERVER
+				</button>
+			</div>
+			<%
+				}
+			%>
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>

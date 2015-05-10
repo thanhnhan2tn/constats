@@ -6,22 +6,23 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ssh" key="selection"/>
+		<item value="required=&quot;required&quot;" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="required=&quot;required&quot;"/>
+			<item value="monitor"/>
+			<item value="monitoring"/>
 			<item value="ssh"/>
 			<item value="log"/>
 			<item value="or "/>
 			<item value="or"/>
 			<item value="message"/>
-			<item value="uploadNicCOnfigToServe"/>
-			<item value="success"/>
-			<item value="@"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="hostfixes"/>
 			<item value="dhct"/>
 			<item value="ServerConfig"/>
@@ -29,14 +30,13 @@
 			<item value="ServerConfig.sendCommandToServer"/>
 			<item value="Ssh"/>
 			<item value="setServerUsername"/>
-			<item value="num"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="381" key="DIALOG_HEIGHT"/>
-		<item value="365" key="DIALOG_Y_ORIGIN"/>
-		<item value="1004" key="DIALOG_X_ORIGIN"/>
+		<item value="225" key="DIALOG_Y_ORIGIN"/>
+		<item value="1018" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

@@ -17,6 +17,12 @@
 	<!--  Main Content -->
 	<section class="content">
 		<div class="main-content">
+		<div class="clear-fix">
+				<div style="display: none ${display}" id="login-alert"
+					class="alert alert-danger col-sm-12">${message}</div>
+				<div style="display: none ${displaysuccess}" id="login-alert"
+					class="alert alert-success col-sm-12">${message}</div>
+			</div>
 			<form
 				action="${pageContext.request.contextPath }/serviceconfig/ssh/editfile/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
@@ -35,7 +41,7 @@
 				
 				<!--  End Panel -->
 				<div class="panel-footer">
-						<button class="btn btn-primary" type="button" onclick="window.history.back();">Back</button>
+						<button class="btn btn-default" type="button" onclick="window.history.back();">Back</button>
 						<button class="btn btn-primary" type="submit" >Save</button>
 				</div>
 				</div>

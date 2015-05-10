@@ -860,3 +860,230 @@ May 09, 2015 21:16:37.69 [Child 1044] WARNING: pipe error: 109: file c:/builds/m
 May 09, 2015 21:16:37.75 [Child 1044] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
 May 09, 2015 21:36:57.61 [Child 5916] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
 May 10, 2015 02:49:24.40 SystemMessageCache: initSystemMessageCache: init
+
+May 10, 2015 13:54:50.38 NEW SESSION
+May 10, 2015 13:54:50.38 console.warn: Asynchronous operation was aborted as selection changed.
+May 10, 2015 13:55:04.70 console.error: 
+May 10, 2015 13:55:04.71   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 10, 2015 13:55:04.71   Stack:
+May 10, 2015 13:55:04.71     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.72 
+May 10, 2015 13:55:04.72 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.73 console.error: 
+May 10, 2015 13:55:04.73   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 10, 2015 13:55:04.73   Stack:
+May 10, 2015 13:55:04.74     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.74 
+May 10, 2015 13:55:04.75 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.75 console.error: 
+May 10, 2015 13:55:04.75   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:04.76   Stack:
+May 10, 2015 13:55:04.76     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.76 
+May 10, 2015 13:55:04.77 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.77 console.error: 
+May 10, 2015 13:55:04.77   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:04.78   Stack:
+May 10, 2015 13:55:04.78     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.78 
+May 10, 2015 13:55:04.79 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.79 console.error: 
+May 10, 2015 13:55:04.79   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:04.79   Stack:
+May 10, 2015 13:55:04.80     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.80 
+May 10, 2015 13:55:04.80 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 10, 2015 13:55:04.81 console.error: 
+May 10, 2015 13:55:04.81   Message: TypeError: node is null
+May 10, 2015 13:55:04.81   Stack:
+May 10, 2015 13:55:04.82     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 10, 2015 13:55:04.82 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:04.82 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:04.83 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:04.83 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.83 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.84 
+May 10, 2015 13:55:04.84 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 10, 2015 13:55:04.84 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:04.85 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:04.85 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:04.85 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.86 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.86 console.error: 
+May 10, 2015 13:55:04.86   Message: TypeError: node is null
+May 10, 2015 13:55:04.87   Stack:
+May 10, 2015 13:55:04.87     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 10, 2015 13:55:04.87 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:04.88 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:04.88 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:04.88 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.88 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.89 
+May 10, 2015 13:55:04.89 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 10, 2015 13:55:04.89 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:04.90 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:04.90 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:04.90 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.91 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:04.91 console.error: 
+May 10, 2015 13:55:04.91   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 10, 2015 13:55:04.92 console.error: 
+May 10, 2015 13:55:04.92   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 10, 2015 13:55:04.92 *************************
+May 10, 2015 13:55:04.93 A coding exception was thrown in a Promise resolution callback.
+May 10, 2015 13:55:04.93 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 10, 2015 13:55:04.94 
+May 10, 2015 13:55:04.94 Full message: TypeError: strings is undefined
+May 10, 2015 13:55:04.94 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 10, 2015 13:55:04.95 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 10, 2015 13:55:04.95 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 10, 2015 13:55:04.95 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 10, 2015 13:55:04.96 
+May 10, 2015 13:55:04.96 *************************
+May 10, 2015 13:55:04.96 console.error: 
+May 10, 2015 13:55:04.97   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 10, 2015 13:55:04.97 console.error: 
+May 10, 2015 13:55:04.97   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 10, 2015 13:55:04.97 *************************
+May 10, 2015 13:55:04.98 A coding exception was thrown in a Promise resolution callback.
+May 10, 2015 13:55:04.98 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 10, 2015 13:55:04.98 
+May 10, 2015 13:55:04.99 Full message: TypeError: strings is undefined
+May 10, 2015 13:55:04.99 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 10, 2015 13:55:04.99 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 10, 2015 13:55:05.00 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 10, 2015 13:55:05.00 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 10, 2015 13:55:05.00 
+May 10, 2015 13:55:05.01 *************************
+May 10, 2015 13:55:05.01 console.error: 
+May 10, 2015 13:55:05.01   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.02 console.error: 
+May 10, 2015 13:55:05.02   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.02 *************************
+May 10, 2015 13:55:05.03 A coding exception was thrown in a Promise resolution callback.
+May 10, 2015 13:55:05.03 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 10, 2015 13:55:05.03 
+May 10, 2015 13:55:05.04 Full message: TypeError: strings is undefined
+May 10, 2015 13:55:05.04 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 10, 2015 13:55:05.04 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 10, 2015 13:55:05.05 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 10, 2015 13:55:05.05 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 10, 2015 13:55:05.05 
+May 10, 2015 13:55:05.06 *************************
+May 10, 2015 13:55:05.06 console.error: 
+May 10, 2015 13:55:05.06   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.07 console.error: 
+May 10, 2015 13:55:05.07   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.07 *************************
+May 10, 2015 13:55:05.08 A coding exception was thrown in a Promise resolution callback.
+May 10, 2015 13:55:05.08 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 10, 2015 13:55:05.08 
+May 10, 2015 13:55:05.09 Full message: TypeError: strings is undefined
+May 10, 2015 13:55:05.09 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 10, 2015 13:55:05.09 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 10, 2015 13:55:05.10 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 10, 2015 13:55:05.10 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 10, 2015 13:55:05.11 
+May 10, 2015 13:55:05.11 *************************
+May 10, 2015 13:55:05.11 console.error: 
+May 10, 2015 13:55:05.12   Message: TypeError: tabActor.window.document.documentElement is null
+May 10, 2015 13:55:05.12   Stack:
+May 10, 2015 13:55:05.13     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 10, 2015 13:55:05.14 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 10, 2015 13:55:05.14 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 10, 2015 13:55:05.14 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 10, 2015 13:55:05.15 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 10, 2015 13:55:05.15 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 10, 2015 13:55:05.16 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.16 BrowserStop@chrome://browser/content/browser.js:12491:3
+May 10, 2015 13:55:05.16 oncommand@chrome://browser/content/browser.xul:1:1
+May 10, 2015 13:55:05.22 
+May 10, 2015 13:55:05.22 console.error: 
+May 10, 2015 13:55:05.22   Message: TypeError: tabActor.window.document.documentElement is null
+May 10, 2015 13:55:05.23   Stack:
+May 10, 2015 13:55:05.23     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 10, 2015 13:55:05.23 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 10, 2015 13:55:05.24 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 10, 2015 13:55:05.24 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 10, 2015 13:55:05.24 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 10, 2015 13:55:05.25 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.25 BrowserStop@chrome://browser/content/browser.js:12491:3
+May 10, 2015 13:55:05.25 oncommand@chrome://browser/content/browser.xul:1:1
+May 10, 2015 13:55:05.26 
+May 10, 2015 13:55:05.26 console.error: 
+May 10, 2015 13:55:05.26   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.27 console.error: 
+May 10, 2015 13:55:05.27   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 10, 2015 13:55:05.27 *************************
+May 10, 2015 13:55:05.28 A coding exception was thrown in a Promise resolution callback.
+May 10, 2015 13:55:05.28 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 10, 2015 13:55:05.28 
+May 10, 2015 13:55:05.29 Full message: TypeError: strings is undefined
+May 10, 2015 13:55:05.29 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 10, 2015 13:55:05.29 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 10, 2015 13:55:05.29 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 10, 2015 13:55:05.30 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 10, 2015 13:55:05.30 
+May 10, 2015 13:55:05.30 *************************
+May 10, 2015 13:55:05.31 console.error: 
+May 10, 2015 13:55:05.31   Protocol error (unknownError): TypeError: node is null
+May 10, 2015 13:55:05.32 console.error: 
+May 10, 2015 13:55:05.32   Protocol error (unknownError): TypeError: node is null
+May 10, 2015 13:55:05.32 console.warn: Could not show the node, the markup-view was destroyed while waiting for children
+May 10, 2015 13:55:05.32 console.warn: Could not mark node as selected, the markup-view was destroyed while showing the node.
+May 10, 2015 13:55:05.33 console.error: 
+May 10, 2015 13:55:05.33   Protocol error (unknownError): TypeError: node is null
+May 10, 2015 13:55:05.33 console.error: 
+May 10, 2015 13:55:05.34   Protocol error (unknownError): TypeError: node is null
+May 10, 2015 13:55:05.34 console.error: 
+May 10, 2015 13:55:05.34   Message: TypeError: this.rawNode is null
+May 10, 2015 13:55:05.35   Stack:
+May 10, 2015 13:55:05.35     exports.NodeActor<.isDisplayed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:328:1
+May 10, 2015 13:55:05.35 exports.NodeActor<.initialize@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:205:5
+May 10, 2015 13:55:05.36 constructor@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/core/heritage.js:146:23
+May 10, 2015 13:55:05.36 WalkerActor<._ref@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1241:13
+May 10, 2015 13:55:05.36 WalkerActor<.documentElement<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1379:12
+May 10, 2015 13:55:05.37 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:05.37 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:05.37 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:05.38 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.38 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.38 
+May 10, 2015 13:55:05.39 exports.NodeActor<.isDisplayed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:328:1
+May 10, 2015 13:55:05.39 exports.NodeActor<.initialize@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:205:5
+May 10, 2015 13:55:05.39 constructor@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/core/heritage.js:146:23
+May 10, 2015 13:55:05.40 WalkerActor<._ref@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1241:13
+May 10, 2015 13:55:05.40 WalkerActor<.documentElement<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1379:12
+May 10, 2015 13:55:05.40 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 10, 2015 13:55:05.41 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 10, 2015 13:55:05.41 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:05.41 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.42 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:05.42 console.error: 
+May 10, 2015 13:55:05.42   Protocol error (unknownError): TypeError: this.rawNode is null
+May 10, 2015 13:55:05.43 console.error: 
+May 10, 2015 13:55:05.43   Protocol error (unknownError): TypeError: this.rawNode is null
+May 10, 2015 13:55:19.68 console.error: 
+May 10, 2015 13:55:19.69   Message: TypeError: can't access dead object
+May 10, 2015 13:55:19.69   Stack:
+May 10, 2015 13:55:19.70     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 10, 2015 13:55:19.70 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 10, 2015 13:55:19.70 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 10, 2015 13:55:19.71 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 10, 2015 13:55:19.71 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 10, 2015 13:55:19.71 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 10, 2015 13:55:19.72 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 10, 2015 13:55:19.72 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 10, 2015 13:55:19.72 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 10, 2015 13:55:19.72 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 10, 2015 13:55:19.73 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 10, 2015 13:55:19.73 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 10, 2015 13:55:19.74 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 10, 2015 13:55:19.74 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:19.74 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 10, 2015 13:55:19.75 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 10, 2015 13:55:19.75 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 10, 2015 13:55:19.75 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 10, 2015 13:55:19.76 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:19.76 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 10, 2015 13:55:19.76 

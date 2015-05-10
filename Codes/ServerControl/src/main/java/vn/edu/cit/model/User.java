@@ -41,9 +41,7 @@ public class User {
 	public User() {
 
 	}
-
 	
-
 	public User(String email, String passWord, int role, String firstName, String lastName, 
 			List<Server> servers, String date) {
 		super();

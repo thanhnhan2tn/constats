@@ -103,8 +103,8 @@ public class SSHController {
 			redirectAtt.addFlashAttribute("displaysuccess", "block");
 			redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");
 			// chuyen ve trang
-			return "redirect:/services/" + ip + "/" + c;
-
+			return "redirect:/serviceconfig/ssh/" + ip + "/" + c;
+			
 		} else {
 			return "redirect:/login";
 		}
@@ -194,7 +194,9 @@ public class SSHController {
 					_log.info("Upload SSH Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Upload file Success!");
-					return "ssh-config";
+					// restart service
+					sshConf.Restart(sv);
+					return "redirect:/serviceconfig/ssh/editfile/" + ip + "/" + cc;
 				}
 
 			}

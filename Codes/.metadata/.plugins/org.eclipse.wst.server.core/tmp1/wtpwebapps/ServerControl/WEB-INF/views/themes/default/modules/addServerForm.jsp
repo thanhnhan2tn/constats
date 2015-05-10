@@ -43,7 +43,7 @@
 				<div class="form-group">
 					<label for="password-svuser" class="col-md-3 control-label">Password for "svcontrol"</label>
 					<div class="col-md-9">
-						<spring:input path="serverPassword" class="port form-control"
+						<spring:input path="serverPassword" class="port form-control" type="password"
 							placeholder="Choose a password for the SSH/Monitor user 'svcontrol'" required="required" />
 					</div>
 				</div>

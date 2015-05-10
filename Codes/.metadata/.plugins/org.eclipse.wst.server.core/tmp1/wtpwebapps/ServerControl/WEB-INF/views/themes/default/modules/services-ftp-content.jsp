@@ -16,20 +16,55 @@
 	<!--  End Content Header -->
 	<!--  Main Content -->
 	<section class="content">
+		
 		<div class="main-content">
 			<%
 				Ftp ftp = (Ftp) request.getAttribute("Ftp");
 				if (ftp != null) {
 			%>
-			<div style="display: none ${display}" id="login-alert"
-				class="alert alert-danger col-sm-12">${message}</div>
-			<div style="display: none ${displaysuccess}" id="login-alert"
-				class="alert alert-success col-sm-12">${message}</div>
+			<div style="display: none ${display}"  
+			class="box alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}"  
+				class="box alert alert-success col-sm-12">${message}</div>
+			<div class=""></div>
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Install/Remove service</h3>
+				</div>
+				<div class="panel-body">
+					<center>
+						<div class="btn-group">
+							<a title="Stop service" onclick="return confirmAction()"
+								href='${pageContext.request.contextPath }/serviceconfig/ftp/stop/${server.serverAddress}/${cc }'
+								class="btn-lg btn-danger" type="button"> <i
+								class="glyphicon glyphicon-arrow-down"></i>
+							</a> <a title="Start service" onclick="return confirmAction()"
+								href='${pageContext.request.contextPath }/serviceconfig/ftp/start/${server.serverAddress}/${cc }'
+								class="btn-lg btn-success" type="button"> <i
+								class="glyphicon glyphicon-arrow-up"></i>
+							</a> <a title="Restart Service" onclick="return confirmAction()"
+								href='${pageContext.request.contextPath }/serviceconfig/ftp/restart/${server.serverAddress}/${cc }'
+								class="btn-lg btn-warning" type="button"> <i
+								class="glyphicon glyphicon-repeat"></i>
+							</a> <a title="Remove Service" class="btn-lg btn-warning"
+								onclick="return confirmAction()"
+								href='${pageContext.request.contextPath }/serviceconfig/ftp/remove/${server.serverAddress}/${cc }'
+								type="button"> <i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</div>
+					</center>
+				</div>
+			</div>
+
 			<form:form id="ftp-config-form1" modelAttribute="Ftp"
 				action="${pageContext.request.contextPath }/serviceconfig/ftp/save/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
 				<input type="hidden" name="cc" value="${cc }">
-				<div class="panel panel-default eth">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						FTP Config
+					</div>
 					<div class="panel-body">
 						<div class="form-group">
 							<label class="col-md-4">Listen: *</label>
@@ -47,10 +82,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="anony-yes"> Enable</label>
 								<form:radiobutton path="anonymous_enable" name="anonymous"
-									id="anony-yes" value="yes" required="required" />
+									id="anony-yes" value="yes" />
 								<label for="anony-no"> Disable</label>
 								<form:radiobutton path="anonymous_enable" name="anonymous" id="anony-no"
-									value="no" required="required" />
+									value="no" />
 							</div>
 						</div>
 
@@ -59,10 +94,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="local_enable" name="local_enable" id="local-yes"
-									value="yes" required="required" />
+									value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="local_enable" name="local_enable" id="local-no"
-									value="no" required="required" />
+									value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -70,10 +105,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="write_enable" name="write_enable" id="local-yes"
-									value="yes" required="required" />
+									value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="write_enable" name="write_enable" id="local-no"
-									value="no" required="required" />
+									value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -81,10 +116,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="anon_upload_enable" name="anon_upload_enable"
-									id="local-yes" value="yes" required="required" />
+									id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="anon_upload_enable" name="anon_upload_enable"
-									id="local-no" value="no" required="required" />
+									id="local-no" value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -92,12 +127,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="anon_mkdir_write_enable"
-									name="anon_mkdir_write_enable" id="local-yes" value="yes"
-									required="required" />
+									name="anon_mkdir_write_enable" id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="anon_mkdir_write_enable"
-									name="anon_mkdir_write_enable" id="local-no" value="no"
-									required="required" />
+									name="anon_mkdir_write_enable" id="local-no" value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -105,12 +138,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Yes</label>
 								<form:radiobutton path="connect_from_port_20"
-									name="connect_from_port_20" id="local-yes" value="yes"
-									required="required" />
+									name="connect_from_port_20" id="local-yes" value="yes" />
 								<label for="local-no"> No</label>
 								<form:radiobutton path="connect_from_port_20"
-									name="connect_from_port_20" id="local-no" value="no"
-									required="required" />
+									name="connect_from_port_20" id="local-no" value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -118,10 +149,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="deny_email_enable" name="deny_email_enable"
-									id="local-yes" value="yes" required="required" />
+									id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="deny_email_enable" name="deny_email_enable"
-									id="local-no" value="no" required="required" />
+									id="local-no" value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -129,10 +160,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="chroot_local_user" name="chroot_local_user"
-									id="local-yes" value="yes" required="required" />
+									id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="chroot_local_user" name="chroot_local_user"
-									id="local-no" value="no" required="required" />
+									id="local-no" value="no" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -140,7 +171,7 @@
 							<div class="col-md-3 form-groups">
 								<label for="local-yes"> Enable</label>
 								<form:radiobutton path="chroot_list_enable" name="chroot_list_enable"
-									id="local-yes" value="yes" required="required" />
+									id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="chroot_list_enable" name="chroot_list_enable"
 									id="local-no" value="no" required="required" />
@@ -159,38 +190,38 @@
 						<button type="button" class="btn btn-default"
 							onclick="window.history.back();">Back</button>
 					</div>
-				</div><!--  End Panel -->
+				</div>
+				<!--  End Panel -->
 			</form:form>
-				
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<a
-								href="${pageContext.request.contextPath }/serviceconfig/ftp/editfile/${server.serverAddress}/${cc}">
-								Edit Config file...<i
-								class="glyphicon glyphicon-chevron-right pull-right"></i>
-							</a>
-						</h3>
-					</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ftp/editfile/${server.serverAddress}/${cc}">
+							Edit Config file...<i
+							class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<a
-								href="${pageContext.request.contextPath }/serviceconfig/ftp/getlog/${server.serverAddress}/${cc}">
-								Logs file...<i
-								class="glyphicon glyphicon-chevron-right pull-right"></i>
-							</a>
-						</h3>
-					</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ftp/getlog/${server.serverAddress}/${cc}">
+							Logs file...<i class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
 				</div>
-			
+			</div>
+
 
 			<%
 				} else {
 			%>
 			<div class="panel-body">
-				<a class="col-md-9"
+				<a class="btn btn-primary btn-block install-btn"
 					href="${pageContext.request.contextPath }/serviceconfig/ftpinstall/${server.serverAddress}/${cc}">
 					Click here to Install VSFTPD Service..</a>
 			</div>

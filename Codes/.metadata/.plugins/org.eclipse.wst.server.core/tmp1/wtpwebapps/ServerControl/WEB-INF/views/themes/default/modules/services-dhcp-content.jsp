@@ -12,44 +12,52 @@
 	<section class="content-header">
 		<h1>
 			DHCP Server Config :<small> (${server.serverAddress})</small>
+			<hr />
 		</h1>
-		<div class="btn-group pull-right" role="group">
-			<a class="btn btn-danger" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }"
+	</section>
+	<section class="content">
+		<div class="main-content">
+		<div style="display: none ${display}"  
+			class="box alert alert-danger col-sm-12">${message}</div>
+			<div style="display: none ${displaysuccess}"  
+				class="box alert alert-success col-sm-12">${message}</div>
+			<div class=""></div>
+		<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Install/Remove service</h3>
+				</div>
+				<div class="panel-body">
+					<center>
+						<div class="btn-group">
+			 <a class="btn-lg btn-danger" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }"
 				title="Stop service">
 				<i class="glyphicon glyphicon-arrow-down"></i>
 			</a>
-			<button type="button" class="btn btn-success"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
+			<a type="button" class="btn-lg btn-success"
+				 onclick="return confirmAction()" href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'
 				title="Start service">
 				<i class="glyphicon glyphicon-arrow-up"></i>
-			</button>
-			<button type="button" class="btn btn-warning"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'"
+			</a>
+			<a type="button" class="btn-lg btn-warning"
+				 onclick="return confirmAction()" href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'
 				title="Restart Service">
 				<i class="glyphicon glyphicon-repeat"></i>
-			</button>
-			<a type="button" class="btn btn-warning remove-iface" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }"
+			</a>
+			<a type="button" class="btn-lg btn-warning remove-iface" onclick="return confirmAction()" href="${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }"
 				title="Restart Service">
 				<i class="glyphicon glyphicon-remove"></i>
 			</a>
-		</div>
-
-	</section>
-	<script>
+						</div>
+					</center>
+				</div>
+			</div>
 		
-	</script>
-	<!--  End Content Header -->
-	<!--  Main Content -->
-	<section class="content">
-		<div class="main-content">
+
 			<%
 				DHCP dhcp = (DHCP) request.getAttribute("dhcp");
 				if (dhcp != null) {
 			%>
-			<div style="display: none ${display}" id="login-alert"
-				class="alert alert-danger col-sm-12">${message}</div>
-			<div style="display: none ${displaysuccess}" id="login-alert"
-				class="alert alert-success col-sm-12">${message}</div>
+			
 
 			<form:form id="dhcp-config-form" modelAttribute="configchung"
 				action="${pageContext.request.contextPath }/serviceconfig/dhcp/save/${server.serverAddress}/${cc }"

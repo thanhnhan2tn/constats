@@ -15,28 +15,7 @@
 			DHCP Server Config :<small> (${server.serverAddress})</small>
 		</h1>
 		<h2>Edit dhcp config file</h2>
-		<div class="btn-group pull-right" role="group">
-			<button type="button" class="btn btn-danger"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/stop/${server.serverAddress}/${cc }'"
-				title="Stop service">
-				<i class="glyphicon glyphicon-arrow-down"></i>
-			</button>
-			<button type="button" class="btn btn-success"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/start/${server.serverAddress}/${cc }'"
-				title="Start service">
-				<i class="glyphicon glyphicon-arrow-up"></i>
-			</button>
-			<button type="button" class="btn btn-warning"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/restart/${server.serverAddress}/${cc }'"
-				title="Restart Service">
-				<i class="glyphicon glyphicon-repeat"></i>
-			</button>
-			<button type="button" class="btn btn-warning remove-iface"
-				onclick="location.href='${pageContext.request.contextPath }/serviceconfig/dhcp/remove/${server.serverAddress}/${cc }'"
-				title="Restart Service">
-				<i class="glyphicon glyphicon-remove"></i>
-			</button>
-		</div>
+		
 
 	</section>
 	<script>
@@ -47,9 +26,9 @@
 	<section class="content">
 		<div class="main-content">
 
-			<div style="display: none ${display}" id="login-alert"
+			<div style="display: none ${display}" 
 				class="alert alert-danger col-sm-12">${message}</div>
-			<div style="display: none ${displaysuccess}" id="login-alert"
+			<div style="display: none ${displaysuccess}"  
 				class="alert alert-success col-sm-12">${message}</div>
 
 			<form id="dhcp-config-form"
@@ -60,6 +39,7 @@
 					<div class="panel-heading">
 						<b>Edit Network Interface Config File</b>
 					</div>
+					
 					<div class="panel-body">
 						<div class="form-group">
 							<div class="col-md-9">
@@ -67,10 +47,13 @@
 							</div>
 						</div>
 					</div>
+				<div class="panel-footer">
+				<button class="btn btn-default" type="button" onclick="window.history.back();">Back</button>
+				<button class="btn btn-primary" type="submit" value="Save" id="savedhcp">Save</button>
+				</div>
 				</div>
 				<!--  // Foreach Subnet -->
-				<button type="submit" value="Save" id="savedhcp">Save</button>
-				<button type="button" onclick="windows.history.back()">Back</button>
+				
 			</form>
 
 		</div>
