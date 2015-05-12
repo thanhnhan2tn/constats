@@ -478,9 +478,6 @@ public class ServerConfig {
 				.replace("MemTotal: ", "").replaceAll("\\s+", "");
 
 	}
-	public static void main(String args[]){
-		ServerConfig sc= new ServerConfig();
-		Server sv = new Server("192.168.0.13", 22,"a", "ubuntu", "ubuntu");
-		System.out.println(sc.getCpuUsage(sv));
-	}
+	
+	
 }

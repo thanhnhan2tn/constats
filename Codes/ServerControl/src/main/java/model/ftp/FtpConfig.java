@@ -271,14 +271,14 @@ public class FtpConfig {
 			}
 		}
 
-		if (ftp.getChroot_list_file() != null && !ftp.getChroot_list_file().equals(null)) {
+		if (ftp.getChroot_list_file() != null && !ftp.getChroot_list_file().equals("")) {
 			kq = kq + "chroot_list_file=" + ftp.getChroot_list_file() + "\n";
 		}
 
 		kq = kq + "\n";
 		System.out.println(kq);
-
-		String command = "echo " + sv.getServerPassword() + " | sudo -S bash -c " + "' echo -e \"" + kq
+		String log = "xferlog_enable=YES" + "\n" + "xferlog_file=/var/log/vsftpd.log";
+		String command = "echo " + sv.getServerPassword() + " | sudo -S bash -c " + "' echo -e \"" + kq + "\n" + log
 				+ "\" > /etc/vsftpd.conf'";
 		// String command = "echo -e > /etc/vsftpd.conf " + kq;
 		if (sendCommandToServer(sv, command) == true) {
@@ -369,52 +369,52 @@ public class FtpConfig {
 		return ChuanHoaChuoi(tong);
 
 	}
-	
+
 	// load file config tu server thanh plain text
-		public String loadConfigToPlainText(Server sv) {
+	public String loadConfigToPlainText(Server sv) {
 
-			Session ss = sv.getSession(sv);
-			String chuoilay = "";
-			String tong = "";
+		Session ss = sv.getSession(sv);
+		String chuoilay = "";
+		String tong = "";
 
-			try {
+		try {
 
-				// option -e giup nhan dang ki tu xuong dong
-				Channel channel = ss.openChannel("exec");
-				((ChannelExec) channel).setCommand(" cat /etc/vsftpd.conf");
-				((ChannelExec) channel).setErrStream(System.err);
-				// BufferedReader br = new BufferedReader(new InputStreamReader(
-				// System.in));
-				InputStream in = channel.getInputStream();
-				channel.connect();
-				byte[] tmp = new byte[1024];
-				while (true) {
-					while (in.available() > 0) {
-						int i = in.read(tmp, 0, 1024);
-						if (i < 0)
-							break;
-						chuoilay = new String(tmp, 0, i);
-						tong = tong + chuoilay;
-						// System.out.print(chuoilay);
-
-					}
-					if (channel.isClosed()) {
-						System.out.println("exit-status: " + channel.getExitStatus());
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(" cat /etc/vsftpd.conf");
+			((ChannelExec) channel).setErrStream(System.err);
+			// BufferedReader br = new BufferedReader(new InputStreamReader(
+			// System.in));
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
 						break;
-					}
-					try {
-						Thread.sleep(1000);
-					} catch (Exception ee) {
-					}
+					chuoilay = new String(tmp, 0, i);
+					tong = tong + chuoilay;
+					// System.out.print(chuoilay);
+
 				}
-				channel.disconnect();
-
-			} catch (Exception e) {
-				return null;
+				if (channel.isClosed()) {
+					System.out.println("exit-status: " + channel.getExitStatus());
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
 			}
-			return tong;
+			channel.disconnect();
 
+		} catch (Exception e) {
+			return null;
 		}
+		return tong;
+
+	}
 
 	// getLog
 	public String getLog(Server sv) {
@@ -426,7 +426,7 @@ public class FtpConfig {
 
 	// ---------------------------------------------------
 	// getError
-	public String getError(Server sv) throws InterruptedException {
+	public String getError(Server sv){
 		Session ss = sv.getSession(sv);
 
 		try {
@@ -488,7 +488,13 @@ public class FtpConfig {
 				channel.disconnect();
 				j++;
 			}
-			return tong;
+			if (tong.indexOf("unrecognised variable") != -1) {
+				return tong;
+			} else {
+				return "nonerror";
+			}
+			//return tong;
+			
 
 			// return
 
@@ -679,11 +685,11 @@ public class FtpConfig {
 	public static void main(String[] args) throws IOException {
 
 		FtpConfig ftp_c = new FtpConfig();
-		Server sv = new Server("192.168.0.19", 22, "ubuntu", "ubuntu", "ubuntu");
+		Server sv = new Server("192.168.0.22", 22, "ubuntu", "mayb", "mayb");
 		// In ra chuoi chuan hoa
 		// System.out.println(ftp_c.ChuanHoaChuoi(sv));
 		// In ra FTP
-		//ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
+		// ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
 		//
 		// System.out.println("--------Uploading.....to Server---------------");
 		//
@@ -700,13 +706,17 @@ public class FtpConfig {
 		// System.out.println(ftp.getAnonymous_enable());
 		// System.out.println(ftp_c.checkRunning(sv));
 		// System.out.println(ftp_c.Install(sv));
-		// System.out.println(ftp_c.Remove(sv));
-		
-		String configText = "listen=YES"
-				+ "anonymous_enable=NO"
-				+ "local_enable=YES";
-		//ftp_c.uploadStringConfigToServer(sv, configText);
+		//System.out.println(ftp_c.Restart(sv));
+
+		//String configText = "listen=YES" + "anonymous_enable=NO" + "local_enable=YES";
+		// ftp_c.uploadStringConfigToServer(sv, configText);
 		//
-		System.out.println(ftp_c.loadConfigToChuanHoaChuoi(sv));
+//		try {
+//			System.out.println(ftp_c.getError(sv));
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		System.out.println(ftp_c.getError(sv));
 	}
 }

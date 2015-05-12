@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.ftp.FtpConfig;
 import model.ssh.SSH;
 import model.ssh.SSHConfig;
 
@@ -143,12 +142,12 @@ public class SSHController {
 						try {
 							str = sshConf.loadConfigToPlainText(sv);
 							mm.put("sshconfig", str);
-							return "ssh-file-content";
+							return "redirect:/serviceconfig/ssh/editfile/"+ip+"/"+cc;
 						} catch (IOException e) {
 							_log.info("Can not load SSH Config");
 							redirectAtt.addFlashAttribute("display", "block");
 							redirectAtt.addFlashAttribute("message", "Can not load SSH Config!");
-							return "ssh-config";
+							return "redirect:/serviceconfig/ssh/"+ip+"/"+cc;
 						}
 					}
 				}

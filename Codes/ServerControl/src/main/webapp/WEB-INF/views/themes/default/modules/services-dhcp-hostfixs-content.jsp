@@ -37,17 +37,27 @@
 			<form:form id="dhcp-config-form" modelAttribute="dhcp"
 				action="${pageContext.request.contextPath }/serviceconfig/dhcp/hostfixs/save/${server.serverAddress}/${cc }"
 				class="form-horizontal" method="POST">
-				<input type="hidden" name="cc" value="${cc }">
-				<c:forEach items="${hostfixs }" var="s" varStatus="status">
+				<input type="hidden" name="cc" value="${cc}">
+				<c:forEach items="${hostfixs}" var="s" varStatus="status">
 					<div class="panel panel-default">
-						<div class="panel-heading">hostfixesName : ${s.hostname }</div>
+						<div class="panel-heading">hostfixesName : ${s.hostname}
+						<div class="pull-right" role="">
+									<a type="button" class="btn btn-danger remove-iface"
+										onclick="return confirmAction()"
+										href="${pageContext.request.contextPath }/serviceconfig/dhcp/rmhostname/${server.serverAddress}/${s.hostname }/${cc}"
+										title="Remove Service"> <i class="glyphicon glyphicon-remove"></i>
+									</a>
+
+								</div>
+						</div>
 						<div class="panel-body">
 							<div class="form-group">
 								<label for="hostname" class="col-md-2">HostName: *</label>
 								<div class="col-md-9">
 									<input class="form-control" type="text"
-										name="hostfixes[${status.index}].hostname" value="${s.hostname}"
+										name="hosts[${status.index}].hostname" value="${s.hostname}"
 										placeholder="Hostname.." required="required" />
+									<i>(Ex: domain.com)</i>	
 								</div>
 							</div>
 							<div class="form-group">
@@ -55,32 +65,34 @@
 									Internet:</label>
 								<div class="col-md-9">
 									<input class="form-control" type="text"
-										name="hostfixes[${status.index}].hardware_internet"
+										name="hosts[${status.index}].hardware_internet"
 										value="${s.hardware_internet}" placeholder="Hardware Internet.." />
+										<i>(Format: XX:XX:XX:XX:XX:XX Ex: 08:87:C5:7F:5a:6d)</i>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="filename" class="col-md-2">FileName :</label>
-								<div class="col-md-9">
-									<input class="form-control" type="text"
-										name="hostfixes[${status.index}].filename" value="${s.filename}"
-										placeholder="Filename ..." />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="servername" class="col-md-2">Server Name :</label>
-								<div class="col-md-9">
-									<input class="form-control" type="text"
-										name="hostfixes[${status.index}].servername" value="${s.servername}"
-										placeholder="Server name ...." />
-								</div>
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="filename" class="col-md-2">FileName :</label> -->
+<!-- 								<div class="col-md-9"> -->
+<!-- 									<input class="form-control" type="text" -->
+<%-- 										name="hosts[${status.index}].filename" value="${s.filename}" --%>
+<!-- 										placeholder="Filename ..." /> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="servername" class="col-md-2">Server Name :</label> -->
+<!-- 								<div class="col-md-9"> -->
+<!-- 									<input class="form-control" type="text" -->
+<%-- 										name="hosts[${status.index}].servername" value="${s.servername}" --%>
+<!-- 										placeholder="Server name ...." /> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<div class="form-group">
 								<label for="fixed_address" class="col-md-2">Fixed Address:</label>
 								<div class="col-md-9">
 									<input class="form-control" type="text"
-										name="hostfixes[${status.index}].fixed_address"
+										name="hosts[${status.index}].fixed_address"
 										value="${s.fixed_address}" placeholder="Fixed Address ..." />
+										<i>(Format: xxx.xxx.xxx.xxx Ex: 192.168.0.165)</i>
 								</div>
 							</div>
 						</div>
@@ -120,9 +132,9 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="addSubnet">Add Subnet</h4>
+				<h4 class="modal-title" id="addSubnet">Add Hostfix</h4>
 			</div>
-			<form:form commandName="hostNew" 
+			<form:form modelAttribute="hostNew" 
 				action="${pageContext.request.contextPath }/serviceconfig/dhcp/hostfixs/addhostfix/${server.serverAddress}/${cc}"
 				method="POST" role="hostfix" class="form-horizontal">
 				<div class="modal-body">
@@ -141,22 +153,22 @@
 								path="hardware_internet" placeholder="Hardware Internet.." />
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="filename" class="col-md-2">FileName :</label>
-						<div class="col-md-9">
-							<form:input class="form-control" type="text"
-								path="filename"
-								placeholder="Filename ..." />
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="servername" class="col-md-2">Server Name :</label>
-						<div class="col-md-9">
-							<form:input class="form-control" type="text"
-								path="servername"
-								placeholder="Server name ...." />
-						</div>
-					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="filename" class="col-md-2">FileName :</label> -->
+<!-- 						<div class="col-md-9"> -->
+<%-- 							<form:input class="form-control" type="text" --%>
+<%-- 								path="filename" --%>
+<%-- 								placeholder="Filename ..." /> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="servername" class="col-md-2">Server Name :</label> -->
+<!-- 						<div class="col-md-9"> -->
+<%-- 							<form:input class="form-control" type="text" --%>
+<%-- 								path="servername" --%>
+<%-- 								placeholder="Server name ...." /> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="form-group">
 						<label for="fixed_address" class="col-md-2">Fixed Address:</label>
 						<div class="col-md-9">

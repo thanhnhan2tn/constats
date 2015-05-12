@@ -57,11 +57,11 @@ public class DHCPController {
 				if (check) { // return true
 					_log.info("Install DHCP service ");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
-					redirectAtt.addFlashAttribute("message", "(Install DHCP Success!)");
+					redirectAtt.addFlashAttribute("message", "Install DHCP Success! </br>");
 				} else {
 					_log.info("Install DHCP service Failed");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "(Install DHCP failed!)");
+					redirectAtt.addFlashAttribute("message", "Install DHCP failed, please try again!");
 				}
 				return "redirect:/services/" + ip + "/" + c;
 			} else {
@@ -74,7 +74,7 @@ public class DHCPController {
 	}
 
 	/**
-	 * Transfer to DHCP Controller screen page
+	 * Transfer to DHCP Controller screen page Lay thong tin dhcp controller
 	 */
 
 	@RequestMapping(value = "/serviceconfig/dhcp/{ip}/{cc}", method = RequestMethod.GET)
@@ -92,21 +92,39 @@ public class DHCPController {
 				// ServerConfig serverConf = new ServerConfig();
 				DHCPConfig dhcp = new DHCPConfig();
 
-				if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
+				if (dhcp.checkInstall(sv) != null && dhcp.checkInstall(sv) == true) {
 					// Neu server da cai dat dhct
 					try {
 						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
 						mm.put("dhcp", d);
 						mm.put("configchung", d.getConfigchung());
+						DHCPConfig dconfig = new DHCPConfig();
+						
+						
+						String status="";
+						if (dconfig.checkRunning(sv) == false) {
+							status = "DHCP Service is not running!";
+						}else{
+							status = "DHCP Service is running..";
+						}
+						
+						String str = dconfig.getError(sv);
+						
+						if(!str.equals("nonerror")){
+							mm.put("display", "block");
+							mm.put("messageErr",
+								"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+						}
+						
 						session.setAttribute("dhcp", d);
 					} catch (IOException e) {
 						_log.info("Fail load Config from server ");
 						redirectAtt.addFlashAttribute("display", "block");
-						redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+						redirectAtt.addFlashAttribute("messageErr", "Khong the lay thong tin tu server!");
 					}
 				} else {
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+					redirectAtt.addFlashAttribute("messageErr", "Chua cai dat dich vu ISC-DHCP-SERVER!");
 				}
 				mm.put("server", server);
 				return "dhcp-config";
@@ -137,25 +155,37 @@ public class DHCPController {
 				_log.info(sv.getServerAddress() + sv.getServerPassword());
 				DHCPConfig dhcp = new DHCPConfig();
 
-				if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
+				if (dhcp.checkInstall(sv) != null && dhcp.checkInstall(sv) == true) {
 					// Neu server da cai dat dhct
 					try {
 						DHCP d = dhcp.convertConfigToObjectDHCP(sv);
+						//DHCPConfig dconfig = new DHCPConfig();
 						mm.put("dhcp", d);
 						mm.put("subnets", d.getSubnets());
 						session.setAttribute("dhcp", d);
 						// Create Object to add subnet
 						mm.put("subnetNew", new Subnet());
-
+						
+						String status="";
+						if (dhcp.checkRunning(sv) == false) {
+							status = "DHCP Service is not running!";
+						}
+						
+						String str = dhcp.getError(sv);
+						if(!str.equals("nonerror")){
+							redirectAtt.addFlashAttribute("messageErr",
+								"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+						}
+						
 					} catch (IOException e) {
 						_log.info("Fail load Config from server ");
 						redirectAtt.addFlashAttribute("display", "block");
-						redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+						redirectAtt.addFlashAttribute("messageErr", "Khong the lay thong tin tu server!");
 						return "dhcp-config";
 					}
 				} else {
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+					redirectAtt.addFlashAttribute("messageErr", "Chua cai dat dich vu ISC-DHCP-SERVER!");
 				}
 				mm.put("server", server);
 				return "dhcp-subnets-config";
@@ -167,7 +197,72 @@ public class DHCPController {
 			return "redirect:/login";
 		}
 	}
+	
+	
+	@RequestMapping(value = "/serviceconfig/dhcp/removesubnet/{ip}/{subnet}/{cc}", method = RequestMethod.GET)
+	public String removeSubnet(HttpServletRequest request, HttpSession session,
+			@PathVariable(value = "ip") String ip,@PathVariable(value = "subnet") String subnet, @PathVariable(value = "cc") String c, ModelMap mm,
+			RedirectAttributes redirectAtt) {
+		User user = (User) session.getAttribute("user");
+		String cc = (String) session.getAttribute("cc");
+		if (user != null && cc.equals(c)) {
+			Server server = serverDAO.getServer(user, ip);
+			Server sv = new Server(server);
+			if (session.getAttribute("sudouser") != null) {
+				sv.setServerUsername((String) session.getAttribute("sudouser"));
+				sv.setServerPassword((String) session.getAttribute("sudopass"));
+				_log.info(sv.getServerAddress() + sv.getServerPassword());
+				DHCPConfig dhcp = new DHCPConfig();
 
+				if (dhcp.checkInstall(sv) != null && dhcp.checkInstall(sv) == true) {
+					// Neu server da cai dat dhct
+					try {
+						dhcp.XoaSubnetorHost(sv, subnet, null);
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Removed subnet "+subnet);
+					} catch (IOException e) {
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("messageErr", "Cannot remove Subnet");
+					}
+				}
+			}
+			
+		}
+		return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+	}
+	
+@RequestMapping(value = "/serviceconfig/dhcp/rmhostname/{ip}/{hostname}/{cc}", method = RequestMethod.GET)
+public String removeHost(HttpServletRequest request, HttpSession session,
+		@PathVariable(value = "ip") String ip,@PathVariable(value = "hostname") String hostname, @PathVariable(value = "cc") String c, ModelMap mm,
+		RedirectAttributes redirectAtt) {
+	User user = (User) session.getAttribute("user");
+	String cc = (String) session.getAttribute("cc");
+	if (user != null && cc.equals(c)) {
+		Server server = serverDAO.getServer(user, ip);
+		Server sv = new Server(server);
+		if (session.getAttribute("sudouser") != null) {
+			sv.setServerUsername((String) session.getAttribute("sudouser"));
+			sv.setServerPassword((String) session.getAttribute("sudopass"));
+			_log.info(sv.getServerAddress() + sv.getServerPassword());
+			DHCPConfig dhcp = new DHCPConfig();
+
+			if (dhcp.checkInstall(sv) != null && dhcp.checkInstall(sv) == true) {
+				// Neu server da cai dat dhct
+				try {
+					dhcp.XoaSubnetorHost(sv, null, hostname);
+					redirectAtt.addFlashAttribute("displaysuccess", "block");
+					redirectAtt.addFlashAttribute("message", "Removed hostname "+hostname);
+				} catch (IOException e) {
+					redirectAtt.addFlashAttribute("display", "block");
+					redirectAtt.addFlashAttribute("messageErr", "Cannot remove hostname");
+				}
+			}
+		}
+		
+	}
+	return "redirect:/serviceconfig/dhcp/" + ip + "/" + c;
+}
+	
 	/**
 	 * Cau hinh Subnet cua DHCP
 	 */
@@ -185,23 +280,38 @@ public class DHCPController {
 			_log.info(sv.getServerAddress() + sv.getServerPassword());
 			DHCPConfig dhcp = new DHCPConfig();
 
-			if (dhcp.checkInstall(sv)!=null && dhcp.checkInstall(sv) == true) {
+			if (dhcp.checkInstall(sv) != null && dhcp.checkInstall(sv) == true) {
 				// Neu server da cai dat dhct
 				try {
 					DHCP d = dhcp.convertConfigToObjectDHCP(sv);
 					mm.put("dhcp", d);
+					session.removeAttribute("dhcp");
 					mm.put("hostNew", new HostFixIP());
 					mm.put("hostfixs", d.getHosts());
 					session.setAttribute("dhcp", d);
+					//DHCPConfig dconfig = new DHCPConfig();
+					String status="";
+					if (dhcp.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str = dhcp.getError(sv);
+					if(!str.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+					}
 				} catch (IOException e) {
 					_log.info("Fail load Config from server ");
+					//DHCPConfig dconfig = new DHCPConfig();
+
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message", "Khong the lay thong tin tu server!");
+					redirectAtt.addFlashAttribute("messageErr",
+							"Khong the lay thong tin tu server!<br >error: " + dhcp.getError(sv));
 					return "dhcp-config";
 				}
 			} else {
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message", "Chua cai dat dich vu ISC-DHCP-SERVER!");
+				redirectAtt.addFlashAttribute("messageErr", "Chua cai dat dich vu ISC-DHCP-SERVER!");
 				return "dhcp-config";
 			}
 			mm.put("server", server);
@@ -245,16 +355,31 @@ public class DHCPController {
 					_log.info("Upload DHCP Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Save and Tranfer DHCP Config Success!");
+					// khoi dong dich vu
+					dConfig.Restart(sv);
+
+					String status="";
+					if (dConfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+//					String str = dConfig.getError(sv);
+//					if(!str.equals("nonerror")){
+//						redirectAtt.addFlashAttribute("messageErr",
+//							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+//					}
 				} else {
 					_log.info("Fail upload DHCP Config to server ");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message",
-							"Khong the cap nhat len server (Cannot update DHCP to server)!");
+					redirectAtt.addFlashAttribute(
+							"messageErr",
+							"Khong the cap nhat len server (Cannot update DHCP to server)! <br>error: <pre>"
+									+ dConfig.getError(sv) + "</pre>");
 				}
 			} catch (IOException e) {
 				_log.info("Fail upload DHCP Config to server ");
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message",
+				redirectAtt.addFlashAttribute("messageErr",
 						"Khong the cap nhat len server (Cannot update DHCP to server)!");
 			}
 			mm.put("server", server);
@@ -299,16 +424,29 @@ public class DHCPController {
 					_log.info("Upload DHCP Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Save and Tranfer Subnets Config Success!");
+					// khoi dong dich vu
+					dConfig.Restart(sv);
+
+					String status="";
+					if (dConfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str = dConfig.getError(sv);
+					if(!str.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+					}
 				} else {
 					_log.info("Fail upload DHCP Config to server ");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message",
+					redirectAtt.addFlashAttribute("messageErr",
 							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 				}
 			} catch (IOException e) {
 				_log.info("Fail upload DHCP Config to server ");
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message",
+				redirectAtt.addFlashAttribute("messageErr",
 						"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 			}
 			mm.put("server", server);
@@ -345,10 +483,23 @@ public class DHCPController {
 					_log.info("Upload DHCP Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Save and Tranfer Subnets Config Success!");
+
+					dConfig.Restart(sv);
+					
+					String status="";
+					if (dConfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str = dConfig.getError(sv);
+					if(!str.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+					}
 				} else {
 					_log.info("Fail upload DHCP Config to server ");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message",
+					redirectAtt.addFlashAttribute("messageErr",
 							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 				}
 				mm.put("server", server);
@@ -395,16 +546,28 @@ public class DHCPController {
 					_log.info("Upload DHCP Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Save and Tranfer DHCP Hostfixs Config Success!");
+					dConfig.Restart(sv);
+					
+					String status="";
+					if (dConfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str = dConfig.getError(sv);
+					if(!str.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+					}
 				} else {
 					_log.info("Fail upload DHCP Config to server ");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message",
+					redirectAtt.addFlashAttribute("messageErr",
 							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 				}
 			} catch (IOException e) {
 				_log.info("Fail upload DHCP Config to server ");
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message",
+				redirectAtt.addFlashAttribute("messageErr",
 						"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 			}
 			mm.put("server", server);
@@ -441,10 +604,23 @@ public class DHCPController {
 					_log.info("Upload DHCP Config to server");
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", "Save and Tranfer Subnets Config Success!");
+					//
+					dConfig.Restart(sv);
+					
+					String status="";
+					if (dConfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str = dConfig.getError(sv);
+					if(!str.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+					}
 				} else {
 					_log.info("Fail upload DHCP Config to server ");
 					redirectAtt.addFlashAttribute("display", "block");
-					redirectAtt.addFlashAttribute("message",
+					redirectAtt.addFlashAttribute("messageErr",
 							"Khong the cap nhat len server (Cannot update DHCP Config to server)!");
 				}
 				mm.put("server", server);
@@ -489,7 +665,7 @@ public class DHCPController {
 			} catch (IOException e) {
 				_log.info("Fail get DHCP Config from server ");
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message", "Khong the lay thong tin Config tu Server!");
+				redirectAtt.addFlashAttribute("messageErr", "Khong the lay thong tin Config tu Server!");
 			}
 			// Call function
 			mm.put("cc", c);
@@ -525,15 +701,28 @@ public class DHCPController {
 			Server sv = new Server(server); // khoi tao server
 			sv.setServerUsername((String) session.getAttribute("sudouser"));
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
-			DHCPConfig dhcpConf = new DHCPConfig();
-			if (dhcpConf.uploadStringConfigToDHCPServer(sv, config)) {
+			DHCPConfig dConfig = new DHCPConfig();
+			if (dConfig.uploadStringConfigToDHCPServer(sv, config)) {
 				_log.info("Edit file DHCP service ");
 				redirectAtt.addFlashAttribute("displaysuccess", "block");
 				redirectAtt.addFlashAttribute("message", "Save File and Upload to Server Success!");
+				
+				dConfig.Restart(sv);
+				
+				String status="";
+				if (dConfig.checkRunning(sv) == false) {
+					status = "DHCP Service is not running!";
+				}
+				
+				String str = dConfig.getError(sv);
+				if(!str.equals("nonerror")){
+					redirectAtt.addFlashAttribute("messageErr",
+						"<br>" + status + "<br>Notice:<br><pre>" + str + "</pre>");
+				}
 			} else {
 				_log.info("Fail upload DHCP Config to server ");
 				redirectAtt.addFlashAttribute("display", "block");
-				redirectAtt.addFlashAttribute("message", "Fail upload DHCP Config to server!");
+				redirectAtt.addFlashAttribute("messageErr", "Fail upload DHCP Config to server!");
 			}
 		} else {
 			session.invalidate();
@@ -558,8 +747,24 @@ public class DHCPController {
 				if (action.equals("start")) {
 					str = dconfig.Start(sv);
 					_log.info("Start DHCP !");
+					if(str.isEmpty()){
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("messageErr", str +"Service restart failed!");
+					}else{
 					redirectAtt.addFlashAttribute("displaysuccess", "block");
 					redirectAtt.addFlashAttribute("message", str);
+					}
+					String status="";
+					if (dconfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					String str2 = dconfig.getError(sv);
+					if(str2.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str2 + "</pre>");
+					}
+
 					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
 				} else if (action.equals("stop")) {
 					str = dconfig.Stop(sv);
@@ -570,16 +775,34 @@ public class DHCPController {
 				} else if (action.equals("restart")) {
 					str = dconfig.Restart(sv);
 					_log.info("Restart DHCP Success !");
-					redirectAtt.addFlashAttribute("displaysuccess", "block");
-					redirectAtt.addFlashAttribute("message", str);
+					if(str.isEmpty()){
+						redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("messageErr", str +"Service restart failed!");
+					}else{
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", str);
+					}
+					dconfig.Restart(sv);
+					
+					String status="";
+					if (dconfig.checkRunning(sv) == false) {
+						status = "DHCP Service is not running!";
+					}
+					
+					System.out.println(dconfig.getError(sv));
+					String str2 = dconfig.getError(sv);
+					if(str2.equals("nonerror")){
+						redirectAtt.addFlashAttribute("messageErr",
+							"<br>" + status + "<br>Notice:<br><pre>" + str2 + "</pre>");
+					}
+
 					return "redirect:/serviceconfig/dhcp/" + ip + "/" + cc;
 				} else if (action.equals("remove")) {
-					if(dconfig.Remove(sv)){
+					if (dconfig.Remove(sv)) {
 						_log.info("Remove DHCP Success !");
 						redirectAtt.addFlashAttribute("displaysuccess", "block");
 						redirectAtt.addFlashAttribute("message", "Remove DHCP Success !");
-					}
-					else{
+					} else {
 						_log.info("Remove DHCP Success !");
 						redirectAtt.addFlashAttribute("display", "block");
 						redirectAtt.addFlashAttribute("message", "Remove DHCP Fail !");

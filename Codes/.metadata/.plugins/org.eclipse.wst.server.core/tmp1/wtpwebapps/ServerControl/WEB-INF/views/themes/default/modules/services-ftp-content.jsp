@@ -23,7 +23,7 @@
 				if (ftp != null) {
 			%>
 			<div style="display: none ${display}"  
-			class="box alert alert-danger col-sm-12">${message}</div>
+			class="box alert alert-danger col-sm-12">${message}<br/>${messageErr}</div>
 			<div style="display: none ${displaysuccess}"  
 				class="box alert alert-success col-sm-12">${message}</div>
 			<div class=""></div>
@@ -71,10 +71,10 @@
 							<div class="col-md-3 form-groups">
 								<label for="yes"> Yes</label>
 								<form:radiobutton path="listen" class="" name="listen" id="yes"
-									value="yes" required="required" />
+									value="yes"  />
 								<label for="no"> No</label>
 								<form:radiobutton path="listen" class="" name="listen" id="no"
-									value="no" required="required" />
+									value="no"  />
 							</div>
 						</div>
 						<div class="form-group">
@@ -174,13 +174,13 @@
 									id="local-yes" value="yes" />
 								<label for="local-no"> Disable</label>
 								<form:radiobutton path="chroot_list_enable" name="chroot_list_enable"
-									id="local-no" value="no" required="required" />
+									id="local-no" value="no"  />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Chroot List File: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="chroot_list_file" required="required" />
+								<form:input path="chroot_list_file"  />
 							</div>
 						</div>
 

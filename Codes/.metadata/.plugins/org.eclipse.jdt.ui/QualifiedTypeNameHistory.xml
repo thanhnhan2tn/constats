@@ -42,7 +42,6 @@
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="vn.edu.cit.controller.Calculator"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.Server"/>
-<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
@@ -51,8 +50,9 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="vn.edu.cit.model.Log"/>
 <fullyQualifiedTypeName name="model.ssh.SSHConfig"/>
-<fullyQualifiedTypeName name="model.server.ServerConfig"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="vn.edu.cit.controller.FTPController"/>
 <fullyQualifiedTypeName name="model.ftp.FtpConfig"/>
+<fullyQualifiedTypeName name="model.dhcp.DHCPConfig"/>
+<fullyQualifiedTypeName name="model.server.ServerConfig"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

@@ -148,7 +148,10 @@ public class AdminController {
 				userTemp.setFirstName(userEdit.getFirstName());
 				userTemp.setRole(userEdit.getRole());
 				userTemp.setLastName(userEdit.getLastName());
-				userTemp.setPassWord(userEdit.getPassWord());
+				if (userEdit.getPassWord() != "" && userEdit.getPassWord() != null
+						&& !userEdit.getPassWord().equals("")){
+					userTemp.setPassWord(userEdit.getPassWord());
+				}
 				userTemp.setSdt(userEdit.getSdt());
 				userDAO.updateUser(userTemp);
 			}

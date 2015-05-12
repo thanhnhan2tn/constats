@@ -30,6 +30,12 @@
 			value="/WEB-INF/views/themes/default/modules/footer.jsp" />
 	</definition>
 	<definition name="home" extends="template.default" />
+	<definition name="help" extends="template.default">
+		<put-attribute name="sidebar"
+			value="/WEB-INF/views/themes/default/modules/help-sidebar.jsp" />
+		<put-attribute name="left-content"
+			value="/WEB-INF/views/themes/default/modules/help.jsp" />
+	</definition>
 	<definition name="monitor" extends="template.default">
 		<put-attribute name="left-content"
 			value="/WEB-INF/views/themes/default/modules/monitor-content.jsp" />

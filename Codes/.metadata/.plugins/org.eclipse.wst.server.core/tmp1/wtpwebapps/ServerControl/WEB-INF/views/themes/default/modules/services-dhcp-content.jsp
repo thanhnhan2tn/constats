@@ -7,6 +7,7 @@
 
 <%@page import="model.nic.Eth"%>
 <%@page import="model.nic.Nic"%>
+
 <aside class="right-side">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -18,7 +19,7 @@
 	<section class="content">
 		<div class="main-content">
 		<div style="display: none ${display}"  
-			class="box alert alert-danger col-sm-12">${message}</div>
+			class="box alert alert-danger col-sm-12">${messageErr}</div>
 			<div style="display: none ${displaysuccess}"  
 				class="box alert alert-success col-sm-12">${message}</div>
 			<div class=""></div>
@@ -80,38 +81,52 @@
 								<form:checkbox path="authorative" id="authoritative_yes" />
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group log_facitily">
 							<label for="log_facitily" class="col-md-2">Log facility:</label>
 							<div class="col-md-9">
 								<form:input class="form-control" path="log_facitily" placeholder="" />
+								 <span class="err" style="color:red"></span>
+									<br>
+									<i>(Ex: local2)</i>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="domain_name" class="col-md-2">Domain Name:</label>
-							<div class="col-md-9">
-								<form:input class="form-control" path="domain_name" placeholder="" />
+							<div class="col-md-9 domain_name">
+								<form:input class="form-control" path="domain_name" placeholder="" /> 
+								</i>(Format: xxx.xxx, Ex: domain.com)</i>
+									<br>
+									<span class="err" style="color:red"></span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="domain_name_servers" class="col-md-2">Domain Name
 								Servers:</label>
-							<div class="col-md-9">
+							<div class="col-md-9 domain_name_servers">
 								<form:input class="form-control" path="domain_name_servers"
 									placeholder="" />
+									 <span class="err" style="color:red"></span>
+									<br>
+									<i>(Format: xxx.xxx, Ex: domain.com)</i>
+									
 							</div>
+							
 						</div>
-						<div class="form-group">
+						<div class="form-group default_lease_time">
 							<label for="default_lease_time" class="col-md-2">Default Lease
 								Time:</label>
 							<div class="col-md-9">
-								<form:input class="form-control" path="default_lease_time"
+								<form:input class="form-control" path="default_lease_time" type="number"
 									placeholder="" />
+									 <span class="err" style="color:red"></span>
+									<br>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group max_lease_time">
 							<label for="max_lease_time" class="col-md-2">Max Lease Time:</label>
 							<div class="col-md-9">
-								<form:input class="form-control" path="max_lease_time" placeholder="" />
+								<form:input class="form-control" type="number" path="max_lease_time" placeholder="" />
+								 <span class="err" style="color:red"></span>
 							</div>
 						</div>
 
@@ -158,7 +173,7 @@
 						</h3>
 					</div>
 				</div>
-				<form:button type="submit" class="btn btn-primary" value="Save"
+				<form:button type="submit" class="btn btn-primary" value="Save" onclick="return dhcpValid()"
 					id="savedhcp">Save</form:button>
 				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
 			</form:form>
@@ -188,3 +203,34 @@
 	</section>
 	<!--  End Main Content -->
 </aside>
+<script type="text/javascript">
+function dhcpValid(){
+	var domainName = $("#domain_name").val();
+	var domainNameReg = /[\w+.]+/;
+	var logfac= $("#log_facitily").val();
+	var logfacReg = /\w+/;
+	var dnserver = $("#domain_name_servers").val();
+	var dnserverReg = /^(\w+.\w+.\w+.\w+|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})/;
+	//alert("check");
+	var test = false;
+	if(logfacReg.test(logfac)){
+		test=true;
+	}else{
+		$(".log_facitily").find(".err").text("* log facitily is not correct format");
+		$("#log_facitily").focus();
+	}
+	if(domainNameReg.test(domainName)){
+		test=true;
+	}else{
+		$(".domain_name").find(".err").text("* Domain name is not correct format");
+		$("#domain_name").focus();
+	}
+	if(dnserverReg.test(dnserver)){
+		test=true;
+	}else{
+		$(".domain_name_servers").find(".err").text("* Domain name server is not correct format");
+		$("#domain_name_servers").focus();
+	}
+	return test;
+}
+</script>

@@ -8,7 +8,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Netword Interface Cards Config :<small> (${server.serverAddress})</small>
+			FTP Service Config :<small> (${server.serverAddress})</small>
 		</h1>
 
 

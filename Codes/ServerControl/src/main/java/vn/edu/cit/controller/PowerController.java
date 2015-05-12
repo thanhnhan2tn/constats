@@ -82,6 +82,6 @@ public class PowerController {
 				}
 			}
 		}
-		return "redirect:/";
+		return "redirect:/services/"+ip+"/"+cc;
 	}
 }

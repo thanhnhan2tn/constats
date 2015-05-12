@@ -4,7 +4,6 @@
 		<h1>
 			Monitor Server<small> (${ip})</small>
 		</h1>
-
 	</section>
 	<!--  End Content Header -->
 	<!--  Main Content -->

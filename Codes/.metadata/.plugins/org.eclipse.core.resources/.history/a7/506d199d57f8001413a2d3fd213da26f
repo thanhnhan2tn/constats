@@ -1,0 +1,722 @@
+package model.ftp;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.util.HashMap;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import vn.edu.cit.model.Server;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.Session;
+
+public class FtpConfig {
+
+	// Upload cmd / file to server phuc vu start/stop and upload
+	public boolean sendCommandToServer(Server sv, String cmd) {
+		Session ss = sv.getSession(sv);
+		try {
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(cmd);
+			((ChannelExec) channel).setErrStream(System.err);
+
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
+						break;
+					// System.out.print(new String(tmp, 0, i));
+				}
+				if (channel.isClosed()) {
+					System.out.println("exit-status: " + channel.getExitStatus());
+
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
+			}
+			channel.disconnect();
+			if (channel.getExitStatus() == 0) {
+
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	// Upload cmd / file to server phuc vu start/stop and upload
+	public String uploadToServer(Server sv, String cmd) {
+		Session ss = sv.getSession(sv);
+		try {
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(cmd);
+			((ChannelExec) channel).setErrStream(System.err);
+
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			String tong = "";
+			String lay = "";
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
+						break;
+					lay = new String(tmp, 0, i);
+					tong = tong + lay;
+				}
+				if (channel.isClosed()) {
+					System.out.println("exit-status: " + channel.getExitStatus());
+
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
+			}
+			channel.disconnect();
+			return tong;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Start
+	public Boolean Start(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S " + " service vsftpd start";
+		return sendCommandToServer(sv, command);
+
+	}
+
+	// Stop
+	public Boolean Stop(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S " + " service vsftpd stop";
+		return sendCommandToServer(sv, command);
+
+	}
+
+	// Restart
+	public Boolean Restart(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S " + " service vsftpd restart";
+		Boolean boo = sendCommandToServer(sv, command);
+		if (boo == true) {
+			return true;
+		} else {
+
+			return false;
+		}
+	}
+
+	/**
+	 * 
+	 * @param sv
+	 * @return true, false, stop
+	 */
+	// check Install
+	public Boolean checkInstall(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S "
+				+ "dpkg --get-selections | grep 'vsftpd' | awk '{print $2}'";
+		String kq = uploadToServer(sv, command);
+		if (kq.startsWith("install")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// checkRunning
+	public Boolean checkRunning(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S " + " service vsftpd status";
+		String kq = uploadToServer(sv, command);
+		if (kq.indexOf("not running") != -1 || kq.indexOf("stop") != -1 || kq.indexOf("waiting") != -1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 * 
+	 * @param sv
+	 * @return
+	 */
+
+	// Install
+	public Boolean Install(Server sv) {
+		String command = "echo " + sv.getServerPassword() + "|sudo -S " + "apt-get install -y vsftpd";
+		return sendCommandToServer(sv, command);
+
+	}
+
+	// Remove Service
+	public Boolean Remove(Server sv) {
+		String command = "echo " + sv.getServerPassword() + " |sudo -S " + " apt-get --purge remove vsftpd";
+		return sendCommandToServer(sv, command);
+
+	}
+
+	// Create folder for FTP Directory
+	public Boolean createFolder(Server sv, String pathString) {
+		String command = "mkdir " + pathString;
+		return sendCommandToServer(sv, command);
+
+	}
+
+	// upload Config to Server
+	public void uploadConfigToServer(Server sv, Ftp ftp) throws IOException {
+		String kq = "";
+		if (ftp.getListen() != null && !ftp.getListen().equals(null)) {
+			if (ftp.getListen() == true) {
+				kq = kq + "listen=" + "YES" + "\n";
+			} else {
+				kq = kq + "listen=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getAnonymous_enable() != null && !ftp.getAnonymous_enable().equals(null)) {
+			if (ftp.getAnonymous_enable() == true) {
+				kq = kq + "anonymous_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "anonymous_enable=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getLocal_enable() != null && !ftp.getLocal_enable().equals(null)) {
+			if (ftp.getLocal_enable() == true) {
+				kq = kq + "local_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "local_enable=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getWrite_enable() != null && !ftp.getWrite_enable().equals(null)) {
+			if (ftp.getWrite_enable() == true) {
+				kq = kq + "write_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "write_enable=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getAnon_upload_enable() != null && !ftp.getAnon_upload_enable().equals(null)) {
+			if (ftp.getAnon_upload_enable() == true) {
+				kq = kq + "anon_upload_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "anon_upload_enable=" + "NO" + "\n";
+			}
+		}
+
+		if (ftp.getAnon_mkdir_write_enable() != null && !ftp.getAnon_mkdir_write_enable().equals(null)) {
+			if (ftp.getAnon_mkdir_write_enable() == true) {
+				kq = kq + "anon_mkdir_write_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "anon_mkdir_write_enable=" + "NO" + "\n";
+			}
+		}
+
+		if (ftp.getConnect_from_port_20() != null && !ftp.getConnect_from_port_20().equals(null)) {
+			if (ftp.getConnect_from_port_20() == true) {
+				kq = kq + "connect_from_port_20=" + "YES" + "\n";
+			} else {
+				kq = kq + "connect_from_port_20=" + "NO" + "\n";
+			}
+		}
+
+		if (ftp.getDeny_email_enable() != null && !ftp.getDeny_email_enable().equals(null)) {
+			if (ftp.getDeny_email_enable() == true) {
+				kq = kq + "deny_email_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "deny_email_enable=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getChroot_local_user() != null && !ftp.getChroot_local_user().equals(null)) {
+			if (ftp.getChroot_local_user() == true) {
+				kq = kq + "chroot_local_user=" + "YES" + "\n";
+			} else {
+				kq = kq + "chroot_local_user=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getChroot_list_enable() != null && !ftp.getChroot_list_enable().equals(null)) {
+			if (ftp.getChroot_list_enable() == true) {
+				kq = kq + "chroot_list_enable=" + "YES" + "\n";
+			} else {
+				kq = kq + "chroot_list_enable=" + "NO" + "\n";
+
+			}
+		}
+
+		if (ftp.getChroot_list_file() != null && !ftp.getChroot_list_file().equals("")) {
+			kq = kq + "chroot_list_file=" + ftp.getChroot_list_file() + "\n";
+		}
+
+		kq = kq + "\n";
+		System.out.println(kq);
+		String log = "xferlog_enable=YES" + "\n" + "xferlog_file=/var/log/vsftpd.log";
+		String command = "echo " + sv.getServerPassword() + " | sudo -S bash -c " + "' echo -e \"" + kq + "\n" + log
+				+ "\" > /etc/vsftpd.conf'";
+		// String command = "echo -e > /etc/vsftpd.conf " + kq;
+		if (sendCommandToServer(sv, command) == true) {
+			System.out.println("Uploaded VSFTPD Success");
+
+		}
+
+		else {
+			System.out.println("Upload VSFTPD Failed!!!");
+
+		}
+	}
+
+	// Upload String config to Server
+	// public void uploadStringConfigToServer(Server sv, String configText)
+	// throws IOException {
+	//
+	// String command = "echo " + sv.getServerPassword() + " | sudo -S bash -c "
+	// + "' echo -e \"" + configText
+	// + "\" > /etc/vsftpd.conf'";
+	//
+	// if (sendCommandToServer(sv, command) == true) {
+	// System.out.println("Uploaded Success....!!!");
+	// } else {
+	// System.out.println("Upload Failed....!!!");
+	//
+	// }
+	//
+	// }
+
+	public void uploadStringConfigToServer(Server sv, String configText) throws IOException {
+		String log_default = "xferlog_enable=YES";
+
+		String command = "echo " + sv.getServerPassword() + " | sudo -S bash -c " + "' echo -e \"" + configText + "\n"
+				+ log_default + "\" > /etc/vsftpd.conf'";
+
+		if (sendCommandToServer(sv, command) == true) {
+			System.out.println("Uploaded Success....!!!");
+		} else {
+			System.out.println("Upload Failed....!!!");
+
+		}
+
+	}
+
+	// load file config tu server thanh plain text
+	public String loadConfigToChuanHoaChuoi(Server sv) {
+
+		Session ss = sv.getSession(sv);
+		String chuoilay = "";
+		String tong = "";
+
+		try {
+
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(" cat /etc/vsftpd.conf");
+			((ChannelExec) channel).setErrStream(System.err);
+			// BufferedReader br = new BufferedReader(new InputStreamReader(
+			// System.in));
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
+						break;
+					chuoilay = new String(tmp, 0, i);
+					tong = tong + chuoilay;
+					// System.out.print(chuoilay);
+
+				}
+				if (channel.isClosed()) {
+					System.out.println("exit-status: " + channel.getExitStatus());
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
+			}
+			channel.disconnect();
+
+		} catch (Exception e) {
+			return null;
+		}
+		return ChuanHoaChuoi(tong);
+
+	}
+
+	// load file config tu server thanh plain text
+	public String loadConfigToPlainText(Server sv) {
+
+		Session ss = sv.getSession(sv);
+		String chuoilay = "";
+		String tong = "";
+
+		try {
+
+			// option -e giup nhan dang ki tu xuong dong
+			Channel channel = ss.openChannel("exec");
+			((ChannelExec) channel).setCommand(" cat /etc/vsftpd.conf");
+			((ChannelExec) channel).setErrStream(System.err);
+			// BufferedReader br = new BufferedReader(new InputStreamReader(
+			// System.in));
+			InputStream in = channel.getInputStream();
+			channel.connect();
+			byte[] tmp = new byte[1024];
+			while (true) {
+				while (in.available() > 0) {
+					int i = in.read(tmp, 0, 1024);
+					if (i < 0)
+						break;
+					chuoilay = new String(tmp, 0, i);
+					tong = tong + chuoilay;
+					// System.out.print(chuoilay);
+
+				}
+				if (channel.isClosed()) {
+					System.out.println("exit-status: " + channel.getExitStatus());
+					break;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (Exception ee) {
+				}
+			}
+			channel.disconnect();
+
+		} catch (Exception e) {
+			return null;
+		}
+		return tong;
+
+	}
+
+	// getLog
+	public String getLog(Server sv) {
+		Restart(sv);
+		String kq = uploadToServer(sv, "echo " + sv.getServerPassword() + "| sudo -S " + " cat /var/log/vsftpd.log");
+
+		return kq;
+	}
+
+	// ---------------------------------------------------
+	// getError
+	public String getError(Server sv){
+		Session ss = sv.getSession(sv);
+
+		try {
+
+			HashMap<String, String> hm1 = new HashMap<String, String>();
+			String multi_cmd[] = {
+					"echo " + sv.getServerPassword() + " |sudo -S " + " chmod 777 /home/" + sv.getServerUsername(),
+					"echo " + sv.getServerPassword() + "| sudo -S "
+							+ "  echo -e 'var=$(vsftpd 0>&1) \n echo $var > /etc/vsftpd.txt '> /home/"
+							+ sv.getServerUsername() + "/vsftpd.sh ",
+					"echo " + sv.getServerPassword() + "| sudo -S " + " bash /home/" + sv.getServerUsername()
+							+ "/vsftpd.sh ", "echo " + sv.getServerPassword() + " |sudo -S " + " cat /etc/vsftpd.txt",
+					"echo " + sv.getServerPassword() + " |sudo -S " + " rm /etc/vsftpd.txt" };
+
+			String chuoilay = "";
+			// option -e giup nhan dang ki tu xuong dong
+			int j = 0;
+			String tong = "";
+
+			while (j < multi_cmd.length) {
+				Channel channel = ss.openChannel("exec");
+				String cmd = multi_cmd[j];
+				((ChannelExec) channel).setCommand(cmd);
+				((ChannelExec) channel).setErrStream(System.err);
+				// BufferedReader br = new BufferedReader(new
+				// InputStreamReader(System.in));
+				InputStream in = channel.getInputStream();
+				channel.connect();
+				byte[] tmp = new byte[1024];
+				while (true) {
+					while (in.available() > 0) {
+						int i = in.read(tmp, 0, 1024);
+						if (i < 0)
+							break;
+
+						if (j == multi_cmd.length - 2) {
+							chuoilay = new String(tmp, 0, i);
+
+							tong = tong + chuoilay + "\n";
+						}
+					}
+					if (channel.isClosed()) {
+						// System.out.println("\nexit-status: "
+						// + channel.getExitStatus());
+						if (channel.getExitStatus() == 0) {
+							System.out.println("Loading...OK");
+						} else {
+
+							System.out.println("Loading Failed!!!...");
+
+						}
+						break;
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (Exception ee) {
+					}
+				}
+				channel.disconnect();
+				j++;
+			}
+//			if (tong.indexOf("unrecognised variable") != -1) {
+//				return tong;
+//			} else {
+//				return "nonerror";
+//			}
+			return tong;
+			
+
+			// return
+
+		} catch (Exception e) {
+
+			return null;
+		}
+
+	}
+
+	// Chuan hoa PlainText tra ve Chuoi
+	public String ChuanHoaChuoi(String plaintext) {
+		try {
+
+			StringReader str = new StringReader(plaintext);
+			BufferedReader bufferedReader = new BufferedReader(str);
+			// StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			String chuoilay = "";
+			while ((line = bufferedReader.readLine()) != null) {
+				line = line.trim();
+				// Cat bo line chua "#" dau dong
+				if (line.indexOf("#") != -1) {
+					line = "";
+					line = line.trim();
+					line = line.replaceAll("\\s+", null);
+
+				}
+				// Chi lay nhung chuoi nao co dau = sau do thay the dau "=" ->
+				// " "
+				if (line.indexOf("=") != -1) {
+
+					line = line.replaceAll("=", " ");
+					chuoilay = chuoilay + line + "\n";
+				}
+			}
+			str.close();
+
+			return chuoilay.trim();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// ----------------------------------------
+		return null;
+	}
+
+	// convert Chuoi da Chuan Hoa sang Object
+	public Ftp convertTextToObject(Server sv) {
+
+		HashMap<String, Boolean> hm1 = new HashMap<String, Boolean>();
+		HashMap<String, String> hm2 = new HashMap<String, String>();
+
+		// Xu ly khoang trang quan trong
+		String[] mang = loadConfigToChuanHoaChuoi(sv).split("\\s+");
+		// System.out.println(Arrays.asList(mang));
+		try {
+			int i = 0;
+			while (!mang[i].equals(null)) {
+				// System.out.println("Vong lap thu " + i);
+
+				if (mang[i].equals("listen") || mang[i].equals("anonymous_enable") || mang[i].equals("local_enable")
+						|| mang[i].equals("write_enable") || mang[i].equals("anon_upload_enable")
+						|| mang[i].equals("anon_mkdir_write_enable") || mang[i].equals("chroot_local_user")
+						|| mang[i].equals("chroot_list_enable")
+
+						|| mang[i].equals("connect_from_port_20") || mang[i].equals("deny_email_enable")) {
+
+					if (mang[i + 1].equals("Yes") || mang[i + 1].equals("YES")) {
+						// mang[i + 1]) = true;
+						hm1.put(mang[i], true);
+					} else {
+						hm1.put(mang[i], false);
+
+					}
+
+				}
+
+				if (mang[i].equals("chroot_list_file")) {
+					hm2.put(mang[i], mang[i + 1]);
+				}
+
+				i++;
+
+			}
+
+		} catch (ArrayIndexOutOfBoundsException ar) {
+
+		} catch (NullPointerException nu) {
+		}
+
+		Ftp ftp = new Ftp(hm1.get("listen"), hm1.get("anonymous_enable"), hm1.get("local_enable"),
+				hm1.get("write_enable"), hm1.get("anon_upload_enable"), hm1.get("anon_mkdir_write_enable"),
+				hm1.get("connect_from_port_20"), hm1.get("deny_email_enable"), hm1.get("chroot_local_user"),
+				hm1.get("chroot_list_enable"), hm2.get("chroot_list_file"));
+		return ftp;
+	}
+
+	public void inFTPObject(Ftp ftp) throws IOException {
+		System.out.println("--------In ra doi tuong FTP:---------------");
+		System.out.println("listen " + ftp.getListen());
+		System.out.println("anonymous_enable " + ftp.getAnonymous_enable());
+		System.out.println("local_enable " + ftp.getLocal_enable());
+		System.out.println("write_enable " + ftp.getWrite_enable());
+		System.out.println("anon_upload_enable " + ftp.getAnon_upload_enable());
+		System.out.println("anon_mkdir_write_enable " + ftp.getAnon_mkdir_write_enable());
+		System.out.println("connect_from_port_20 " + ftp.getConnect_from_port_20());
+		System.out.println("deny_email_enable " + ftp.getDeny_email_enable());
+		System.out.println("chroot_local_user " + ftp.getChroot_local_user());
+		System.out.println("chroot_list_enable " + ftp.getChroot_list_enable());
+		System.out.println("chroot_list_file " + ftp.getChroot_list_file());
+	}
+
+	// Convert Object to XML
+	public String convertObjectToXML(Ftp ftp) {
+
+		String kq = "";
+		if (ftp.getListen() != null && !ftp.getListen().equals(null)) {
+			kq = kq + "<listen>" + ftp.getListen() + "</listen>" + "\n";
+		}
+
+		if (ftp.getAnonymous_enable() != null && !ftp.getAnonymous_enable().equals(null)) {
+			kq = kq + "<anonymous_enable>" + ftp.getAnonymous_enable() + "</anonymous_enable>" + "\n";
+		}
+
+		if (ftp.getLocal_enable() != null && !ftp.getLocal_enable().equals(null)) {
+			kq = kq + "<local_enable>" + ftp.getLocal_enable() + "</local_enable>" + "\n";
+		}
+
+		if (ftp.getWrite_enable() != null && !ftp.getWrite_enable().equals(null)) {
+			kq = kq + "<write_enable>" + ftp.getWrite_enable() + "</write_enable>" + "\n";
+		}
+
+		if (ftp.getAnon_upload_enable() != null && !ftp.getAnon_upload_enable().equals(null)) {
+			kq = kq + "<anon_upload_enable>" + ftp.getAnon_upload_enable() + "</anon_upload_enable>" + "\n";
+		}
+
+		if (ftp.getAnon_mkdir_write_enable() != null && !ftp.getAnon_mkdir_write_enable().equals(null)) {
+			kq = kq + "<anon_mkdir_write_enable>" + ftp.getAnon_mkdir_write_enable() + "</anon_mkdir_write_enable>"
+					+ "\n";
+		}
+
+		if (ftp.getConnect_from_port_20() != null && !ftp.getConnect_from_port_20().equals(null)) {
+			kq = kq + "<connect_from_port_20>" + ftp.getConnect_from_port_20() + "</connect_from_port_20>" + "\n";
+		}
+
+		if (ftp.getDeny_email_enable() != null && !ftp.getDeny_email_enable().equals(null)) {
+			kq = kq + "<deny_email_enable>" + ftp.getDeny_email_enable() + "</deny_email_enable>" + "\n";
+		}
+
+		if (ftp.getChroot_local_user() != null && !ftp.getChroot_local_user().equals(null)) {
+			kq = kq + "<chroot_local_user>" + ftp.getChroot_local_user() + "</chroot_local_user>" + "\n";
+		}
+
+		if (ftp.getChroot_list_enable() != null && !ftp.getChroot_list_enable().equals(null)) {
+			kq = kq + "<chroot_list_enable>" + ftp.getChroot_list_enable() + "</chroot_list_enable>" + "\n";
+		}
+
+		if (ftp.getChroot_list_file() != null && !ftp.getChroot_list_file().equals(null)) {
+			kq = kq + "<chroot_list_file>" + ftp.getChroot_list_file() + "</chroot_list_file>" + "\n";
+		}
+		return "<ftp>" + "\n" + kq + "</ftp>";
+
+	}
+
+	// Convert XML to Object
+	public Ftp convertXMLToObject(String xmlString) throws FileNotFoundException {
+
+		StringReader strRead = new StringReader(xmlString);
+		// FileReader fr = new FileReader(new File("E:\\tuine.txt"));
+		try {
+			// Khoi tao Context
+			JAXBContext context = JAXBContext.newInstance(Ftp.class);
+			// Tao Unmarshaller tu Context
+			Unmarshaller un = context.createUnmarshaller();
+			// File xml phu thuoc vao doi tuong + duong duong path
+			Ftp ftp = (Ftp) un.unmarshal(strRead);
+			// System.out.println(ftp.getListen());
+			return ftp;
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		} catch (NullPointerException nu) {
+		}
+		return null;
+
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		FtpConfig ftp_c = new FtpConfig();
+		Server sv = new Server("192.168.0.25", 22, "ubuntu", "ubuntu", "ubuntu");
+		// In ra chuoi chuan hoa
+		// System.out.println(ftp_c.ChuanHoaChuoi(sv));
+		// In ra FTP
+		// ftp_c.inFTPObject(ftp_c.convertTextToObject(sv));
+		//
+		// System.out.println("--------Uploading.....to Server---------------");
+		//
+		// System.out.println(ftp_c.checkInstall(sv));
+		// System.out.println("--------Restarting.....to Server---------------");
+		//
+		// ftp_c.Restart(sv);
+		//
+		// System.out.println(ftp_c.convertObjectToXML(ftp_c
+		// .convertTextToObject(sv)));
+
+		// Ftp ftp = ftp_c.convertXMLToObject(ftp_c.convertObjectToXML(ftp_c
+		// .convertTextToObject(sv)));
+		// System.out.println(ftp.getAnonymous_enable());
+		// System.out.println(ftp_c.checkRunning(sv));
+		// System.out.println(ftp_c.Install(sv));
+		System.out.println(ftp_c.Restart(sv));
+
+		//String configText = "listen=YES" + "anonymous_enable=NO" + "local_enable=YES";
+		// ftp_c.uploadStringConfigToServer(sv, configText);
+		//
+//		try {
+//			System.out.println(ftp_c.getError(sv));
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		System.out.println(ftp_c.getError(sv));
+	}
+}

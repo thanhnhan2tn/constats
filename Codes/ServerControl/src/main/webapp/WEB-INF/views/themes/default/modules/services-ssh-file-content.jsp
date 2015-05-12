@@ -34,7 +34,7 @@
 						<input type="hidden" name="cc" value="${cc }">
 							<div class="form-group">
 								<div class="col-md-9">
-									<textarea class="form-control" rows="30" name="config" >${sshconfig }</textarea>
+									<textarea class="form-control" rows="30" name="sshconfig" >${sshconfig }</textarea>
 								</div>
 							</div>
 					</div>

@@ -90,12 +90,30 @@ public class FTPController {
 
 			sv.setServerUsername((String) session.getAttribute("sudouser"));
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
-			System.out.println(sv.getServerUsername());
+			//System.out.println(sv.getServerUsername());
 			FtpConfig ftp = new FtpConfig();
 			if (ftp.checkInstall(sv) == true) {
 				// Neu server da cai dat FTP
+				String status ="";
+				if (ftp.checkRunning(sv) == false) {
+					status = "DHCP Service is not running!";
+				}else{
+					status = "DHCP Service is running..";
+				}
+				
+				String str = ftp.getError(sv);
+				System.out.println("Loi:::"+str);
+				if(!str.equals("nonerror")){
+					System.out.println(str);
+					mm.put("display", "block");
+					mm.put("messageErr",
+						"<br>" + status + "<br>But error:<br><pre>" + str + "</pre>");
+				}
+				//System.out.println(ftp.getError(sv));
 				mm.put("Ftp", ftp.convertTextToObject(sv));
 			}
+			
+
 			mm.put("server", server);
 			return "ftp-config";
 		} else {
@@ -129,19 +147,23 @@ public class FTPController {
 					if (ftpconfig.checkInstall(sv) == true) {
 						// Neu server da cai dat FTP
 						mm.put("server", server);
-						//
+
 						try {
 							ftpconfig.uploadConfigToServer(sv, ftp);
+							ftpconfig.Restart(sv);
 							_log.info("Upload Config to server ");
 							redirectAtt.addFlashAttribute("displaysuccess", "block");
 							redirectAtt.addFlashAttribute("message", "Cập nhật thành công! (Update Success!)");
+
+//							mm.put("display", "block");
+//							mm.put("messageErr", "error: <pre>" + ftpconfig.getError(sv)+"</pre>");
+
 						} catch (IOException e) {
 							_log.info("Fail upload Config to server ");
 							redirectAtt.addFlashAttribute("display", "block");
 							redirectAtt.addFlashAttribute("message",
 									"Khong the cap nhat len server (Cannot update to server)!");
 						}
-
 					} else { // check install
 						mm.put("server", server);
 						// neu chua cai dat, chuyen ve trang install
@@ -153,7 +175,7 @@ public class FTPController {
 		} else {
 			return "redirect:/login";
 		}
-		return "ftp-config";
+		return "redirect:/serviceconfig/ftp/" + ip + "/" + cc;
 	}
 
 	/**
@@ -229,13 +251,18 @@ public class FTPController {
 					// kiem tra dich vu ftp
 					try {
 						ftpconfig.uploadStringConfigToServer(sv, configText);
+						ftpconfig.Restart(sv);
 						_log.info("Upload FTP Config to server");
 						redirectAtt.addFlashAttribute("displaysuccess", "block");
 						redirectAtt.addFlashAttribute("message", "Upload file Success!");
+//						redirectAtt.addFlashAttribute("display", "block");
+//						redirectAtt.addFlashAttribute("messageErr", "error: " + ftpconfig.getError(sv));
 					} catch (IOException e) {
 						_log.info("Upload FTP Config to server");
 						redirectAtt.addFlashAttribute("display", "block");
 						redirectAtt.addFlashAttribute("message", "Upload file fail, please try again!");
+						// redirectAtt.addFlashAttribute("display", "block");
+						redirectAtt.addFlashAttribute("messageErr", "error: <pre>" + ftpconfig.getError(sv)+"</pre>");
 					}
 					return "redirect:/serviceconfig/ftp/" + ip + "/" + cc;
 				}
@@ -328,13 +355,8 @@ public class FTPController {
 			sv.setServerUsername((String) session.getAttribute("sudouser"));
 			sv.setServerPassword((String) session.getAttribute("sudopass"));
 			FtpConfig fconfig = new FtpConfig();
-			String errors;
-			try {
-				errors = fconfig.getError(sv);
-				return errors;
-			} catch (InterruptedException e) {
-				return "Khong lay duoc thong tin";
-			}
+			// String errors;
+			return fconfig.getError(sv);
 
 		} else {
 			return "Khong lay duoc thong tin";
@@ -344,7 +366,7 @@ public class FTPController {
 	@RequestMapping(value = "/serviceconfig/ftp/{action}/{ip}/{cc}", method = RequestMethod.GET)
 	public String ftpAction(HttpServletRequest request, HttpSession session,
 			@PathVariable(value = "action") String action, @PathVariable(value = "ip") String ip,
-			@PathVariable(value = "cc") String c, ModelMap mm) {
+			@PathVariable(value = "cc") String c, ModelMap mm, RedirectAttributes redirectAtt) {
 		User user = (User) session.getAttribute("user");
 		String cc = (String) session.getAttribute("cc");
 		// Lay doi tuong server trong CSDL
@@ -358,20 +380,41 @@ public class FTPController {
 				sv.setServerPassword((String) session.getAttribute("sudopass"));
 				FtpConfig fconfig = new FtpConfig();
 				if (action.equals("stop")) {
-					fconfig.Stop(sv);
+					if(fconfig.Stop(sv)){
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Stop service success!");
+					}
+						
 					// Log
+//					redirectAtt.addFlashAttribute("display", "block");
+//					redirectAtt.addFlashAttribute("messageErr", "error: " + fconfig.getError(sv));
 					System.out.println("Stop : " + ip + " Ftp service");
 				} else if (action.equals("start")) {
-					fconfig.Start(sv);
-					// Log
+					if(fconfig.Start(sv)){
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Start service success!");
+					}
+					
+					// Log]
+//					redirectAtt.addFlashAttribute("display", "block");
+//					redirectAtt.addFlashAttribute("messageErr", "error: " + fconfig.getError(sv));
 					System.out.println("Start : " + ip + " Ftp service");
 				} else if (action.equals("restart")) {
-					fconfig.Restart(sv);
+					if(fconfig.Restart(sv)){
+						redirectAtt.addFlashAttribute("displaysuccess", "block");
+						redirectAtt.addFlashAttribute("message", "Restart service success!");
+					}
 					// Log
+					
+//					/*redirectAtt.addFlashAttribute("display", "block");
+//					redirectAtt.addFlashAttribute("messageErr", "error: " + fconfig.getError(sv));*/
 					System.out.println("Restart : " + ip + " Ftp service");
 				} else if (action.equals("remove")) {
 					fconfig.Remove(sv);
 					System.out.println("Delete : " + ip + ",Ftp service");
+					redirectAtt.addFlashAttribute("de", "de");
+					redirectAtt.addFlashAttribute("active", "active");
+					return "redirect:/services/" + ip + "/" + c;
 				} else {
 					return "redirect:/serviceconfig/ftp/" + ip + "/" + c;
 				}

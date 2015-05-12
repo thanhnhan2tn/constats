@@ -100,7 +100,7 @@
 											<div class="col-md-3">
 												<input class="form-control" type="text"
 													name="eth[${status.index}].inet" value="${e.inet}"
-													placeholder="iNet name" required="required" />
+													placeholder="iNet name" required="required" /><i>(Ex: static, dhcp or loopback)</i>
 											</div>
 										</div>
 										<c:if test='${!e.inet.equals("loopback")}'>
@@ -111,7 +111,7 @@
 												<div class="col-md-9">
 													<input class="form-control" type="text"
 														name="eth[${status.index }].address" value="${e.address }"
-														placeholder="IP Address" />
+														placeholder="IP Address" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.102)</i>
 												</div>
 											</div>
 											<div class="form-group">
@@ -119,7 +119,7 @@
 												<div class="col-md-9">
 													<input class="form-control" type="text"
 														name="eth[${status.index }].netmask" value="${e.netmask }"
-														placeholder="NetMask Address" />
+														placeholder="NetMask Address" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:255.255.255.0)</i>
 												</div>
 											</div>
 											<div class="form-group">
@@ -127,7 +127,7 @@
 												<div class="col-md-9">
 													<input class="form-control" type="text"
 														name="eth[${status.index }].gateway" value="${e.gateway }"
-														placeholder="Gateway name" />
+														placeholder="Gateway address" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.1)</i>
 												</div>
 											</div>
 											<div class="form-group">
@@ -135,7 +135,7 @@
 												<div class="col-md-9">
 													<input class="form-control" type="text"
 														name="eth[${status.index}].broadcast" value="${e.broadcast}"
-														placeholder="Broadcast Address" />
+														placeholder="Broadcast Address" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.255)</i>
 												</div>
 											</div>
 
@@ -157,7 +157,7 @@
 											<label for="inet" class="col-md-2">iNet: *</label>
 											<div class="col-md-3">
 												<input class="form-control" type="text"
-													name="eth[${status.index}].inet" value="${e.inet}" />
+													name="eth[${status.index}].inet" value="${e.inet}" /><i>(Ex: static, dhcp or loopback)</i>
 											</div>
 										</div>
 										<c:if test='${!e.inet.equals("loopback")}'>
@@ -167,28 +167,28 @@
 												<label for="iface" class="col-md-2">Address: </label>
 												<div class="col-md-9">
 													<input class="form-control" type="text"
-														name="eth[${status.index }].address" value="${e.address }" />
+														name="eth[${status.index }].address" value="${e.address }" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.102)</i>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="iface" class="col-md-2">NetMask:</label>
 												<div class="col-md-9">
 													<input class="form-control" type="text"
-														name="eth[${status.index }].netmask" value="${e.netmask }" />
+														name="eth[${status.index }].netmask" value="${e.netmask }" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:255.255.255.0)</i>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="iface" class="col-md-2">GateWay:</label>
 												<div class="col-md-9">
 													<input class="form-control" type="text"
-														name="eth[${status.index }].gateway" value="${e.gateway }" />
+														name="eth[${status.index }].gateway" value="${e.gateway }" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.1)</i>
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="iface" class="col-md-2">Broadcast:</label>
 												<div class="col-md-9">
 													<input class="form-control" type="text"
-														name="eth[${status.index }].broadcast" value="${e.broadcast }" />
+														name="eth[${status.index }].broadcast" value="${e.broadcast }" /><i>(Format:  xxx.xxx.xxx.xxx, Ex:192.168.10.255)</i>
 												</div>
 											</div>
 

@@ -38,93 +38,107 @@
 				class="form-horizontal" method="POST">
 				<input type="hidden" name="cc" value="${cc }">
 				<c:if test="${subnets.size()>0}">
-				<c:forEach items="${subnets}" var="s" varStatus="status">
+					<c:forEach items="${subnets}" var="s" varStatus="status">
 
-					<div class="panel panel-default">
-						<div class="panel-heading">Subnet: ${subnet }</div>
-						<div class="panel-body">
-							<div class="form-group">
-								<label for="subnet" class="col-md-2">Subnet:</label>
-								<div class="col-md-9">
-									<input class="form-control" name="Subnets[${status.index }].subnet"
-										value="${s.subnet }" placeholder="Subnet name.." />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="netmask" class="col-md-2">Netmask:</label>
-								<div class="col-md-9">
-									<input class="form-control" name="Subnets[${status.index }].netmask"
-										value="${s.netmask}" placeholder="Netmask address.." />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="range" class="col-md-2">Range:</label>
-								<div class="col-md-9">
-									<input class="form-control" name="Subnets[${status.index }].range"
-										value="${s.range}" placeholder="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="dnss" class="col-md-2">Domain name server:</label>
-								<div class="col-md-9">
-									<input class="form-control"
-										name="Subnets[${status.index }].domain_name_server"
-										value="${s.domain_name_server}" placeholder="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="dn" class="col-md-2">Domain Name:</label>
-								<div class="col-md-9">
-									<input class="form-control" name="Subnets[${status.index}].domain_name"
-										value='${s.domain_name}' placeholder="" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="router" class="col-md-2">Router gateway:</label>
-								<div class="col-md-9">
-									<input class="form-control"
-										name="Subnets[${status.index}].router_gateway"
-										value="${s.router_gateway}" placeholder="" />
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Subnet: ${s.subnet }
+								<div class="pull-right" role="">
+									<a type="button" class="btn btn-danger remove-iface"
+										onclick="return confirmAction()"
+										href="${pageContext.request.contextPath }/serviceconfig/dhcp/removesubnet/${server.serverAddress}/${s.subnet }/${cc}"
+										title="Remove Service"> <i class="glyphicon glyphicon-remove"></i>
+									</a>
 
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="broadcast" class="col-md-2">Broadcast Address:</label>
-								<div class="col-md-9">
-									<input class="form-control"
-										name="Subnets[${status.index}].broadcast_address"
-										value="${s.broadcast_address}" placeholder="" />
-
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="subnet" class="col-md-2">Subnet:</label>
+									<div class="col-md-9 subnet">
+										<input id="oldsubnet" class="form-control"
+											name="Subnets[${status.index }].subnet" value="${s.subnet }"
+											placeholder="Subnet name.." /> <i>(Format: xxx.xxx, Ex: 192.168.0.0)</i> <br>
+										<span class="err" style="color: red"></span>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="leasetime" class="col-md-2">Default lease time:</label>
-								<div class="col-md-9">
-									<input class="form-control"
-										name="Subnets[${status.index}].default_lease_time"
-										value="${s.default_lease_time}" placeholder="" />
-
+								<div class="form-group">
+									<label for="netmask" class="col-md-2">Netmask:</label>
+									<div class="col-md-9">
+										<input class="form-control" name="Subnets[${status.index }].netmask"
+											value="${s.netmask}" placeholder="Netmask address.." />
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="maxlease" class="col-md-2">Max lease time:</label>
-								<div class="col-md-9">
-									<input class="form-control"
-										name="Subnets[${status.index}].max_lease_time"
-										value="${s.max_lease_time}" placeholder="" />
+								<div class="form-group">
+									<label for="range" class="col-md-2">Range:</label>
+									<div class="col-md-9">
+										<input class="form-control" name="Subnets[${status.index }].range"
+											value="${s.range}" placeholder="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="dnss" class="col-md-2">Domain name server:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index }].domain_name_server"
+											value="${s.domain_name_server}" placeholder="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="dn" class="col-md-2">Domain Name:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index}].domain_name" value='${s.domain_name}'
+											placeholder="" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="router" class="col-md-2">Router gateway:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index}].router_gateway"
+											value="${s.router_gateway}" placeholder="" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="broadcast" class="col-md-2">Broadcast Address:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index}].broadcast_address"
+											value="${s.broadcast_address}" placeholder="" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="leasetime" class="col-md-2">Default lease time:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index}].default_lease_time"
+											value="${s.default_lease_time}" placeholder="" />
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="maxlease" class="col-md-2">Max lease time:</label>
+									<div class="col-md-9">
+										<input class="form-control"
+											name="Subnets[${status.index}].max_lease_time"
+											value="${s.max_lease_time}" placeholder="" />
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
 				</c:if>
 				<!--  // Foreach Subnet -->
-				<button type="button" class="btn btn-default" onclick="window.history.back();">Back</button>
+				<button type="button" class="btn btn-default"
+					onclick="window.history.back();">Back</button>
 				<button type="button" class="btn btn-success" data-toggle="modal"
 					data-target="#addSubnet">New...</button>
-			
+
 				<c:if test="${subnets.size()>0}">
-					<form:button class="btn btn-primary" type="submit" value="Save"
+					<form:button class="btn btn-primary" type="submit" value="Save" onclick="return subnetValid()"
 						id="savedhcp">Save</form:button>
 				</c:if>
 
@@ -144,6 +158,7 @@
 	</section>
 	<!--  End Main Content -->
 </aside>
+<!-- Add subnet -->
 <div class="modal fade" id="addSubnet" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -160,16 +175,20 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="ip" class="col-md-3 control-label">Subnet: *</label>
-						<div class="col-md-9">
+						<div class="col-md-9 subnet">
 							<form:input path="subnet" class="form-control" placeholder="Subnet"
 								required="required" />
+								<i>(Format: xxx.xxx, Ex: domain.com)</i> <br>
+										<span class="err" style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="ip" class="col-md-3 control-label">Netmask: *</label>
-						<div class="col-md-9">
+						<div class="col-md-9 netmask">
 							<form:input path="netmask" class="form-control" placeholder="Netmask"
 								required="required" />
+								<i>(Format: xxx.xxx, Ex: domain.com)</i> <br>
+										<span class="err" style="color: red"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -231,3 +250,56 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+
+//
+function subnetValid(){
+var test = false;
+var subnet = $("#oldsubnet").val();
+var subnetReg = /^(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})/;
+//alert($("#subnet").val());
+if(subnetReg.test(subnet)){
+		test=true;
+	}else{
+		$(".subnet").find(".err").text("* Subnets is not correct format");
+		$("#oldsubnet").focus();
+	}
+
+
+
+// 	var netmask = $("#log_facitily").val();
+// 	var netmaskReg = /\\w+/;
+// 	var range = $("#domain_name_servers").val();
+// 	var rangeReg = /^(\\w+.\\w+.\\w+.\\w+|\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3})/;
+	
+	
+	
+// 	var domainName = $("#domain_name").val();
+// 	var domainNameReg = /[\\w+.]+/;
+// 	var logfac= $("#log_facitily").val();
+// 	var logfacReg = /\\w+/;
+// 	var dnserver = $("#domain_name_servers").val();
+// 	var dnserverReg = /^(\\w+.\\w+.\\w+.\\w+|\\d{1,3}.\\d{1,3}.\\d{1,3}.\\d{1,3})/;
+// 	//alert("check");
+// 	var test = false;
+// 	if(logfacReg.test(logfac)){
+// 		test=true;
+// 	}else{
+// 		$(".log_facitily").find(".err").text("* log facitily is not correct format");
+// 		$("#log_facitily").focus();
+// 	}
+// 	if(domainNameReg.test(domainName)){
+// 		test=true;
+// 	}else{
+// 		$(".domain_name").find(".err").text("* Domain name is not correct format");
+// 		$("#domain_name").focus();
+// 	}
+// 	if(dnserverReg.test(dnserver)){
+// 		test=true;
+// 	}else{
+// 		$(".domain_name_servers").find(".err").text("* Domain name server is not correct format");
+// 		$("#domain_name_servers").focus();
+// 	}
+	return test;
+}
+</script>

@@ -13,12 +13,12 @@
 <a href="${pageContext.request.contextPath}/" class="logo">ConStats</a>
 <!-- Header Navbar -->
 <nav class="navbar navbar-static-top" role="navigation">
-	<!-- 	<div class="navbar-left"> -->
-	<!-- 		<ul class="nav navbar-nav"> -->
-	<%-- 			<li><a href="${pageContext.request.contextPath}/"><span>Server</span></a></li> --%>
-
-	<!-- 		</ul> -->
-	<!-- 	</div> -->
+		<div class="navbar-left">
+			<ul class="nav navbar-nav" style="font-weight: bold">
+				<li><a href="${pageContext.request.contextPath}/"><span ><i class="fa fa-desktop"></i>  Servers Control</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/help"><span><i class="glyphicon glyphicon-star-empty"></i>  Help</span></a></li>
+			</ul>
+		</div>
 	<div class="navbar-right">
 		<ul class="nav navbar-nav">
 			<!-- li message 

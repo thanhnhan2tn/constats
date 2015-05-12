@@ -20,7 +20,7 @@
 				class="form-horizontal" method="POST">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<b>DNS NameServer</b>
+						<b>DNS NameServer</b>  <i>(Format:  xxx.xxx.xxx.xxx, Ex: 8.8.8.8)</i>
 					</div>
 					<div class="panel-body">
 						<input type="hidden" name="cc" value="${cc }">
@@ -31,13 +31,14 @@
 							<div class="listdns">
 								<div class="input-group">
 									<input class=" form-control" type="text"
-										name="dns_nameservers[${status.index }]" value="${dns}" /> <span
-										class="input-group-btn">
+										name="dns_nameservers[${status.index }]" value="${dns}" /> 
+									<span class="input-group-btn">
 										<button type="button" class="btn btn-warning remove-dns"
 											title="Remove DNS">
 											<i class="glyphicon glyphicon-remove"></i>
+										</button>
 									</span>
-									</button>
+									
 								</div>
 							</div>
 

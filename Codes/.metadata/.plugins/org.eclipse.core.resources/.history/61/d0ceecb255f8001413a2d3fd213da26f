@@ -1,0 +1,10 @@
+/**
+ * validation form for input 
+ */
+
+// DHCP Service
+function dhcpValid(){
+	
+	//check domain  name
+	alert($("#domain_name").val());
+}

@@ -194,8 +194,8 @@ public class MonitorController {
 				if (server.getServerAddress().equals(ip)) {
 					server.setServerUsername("svcontrol"); // a user vs SSH
 					if (server.checkStatus()) {
-						_log.info("Check status:" + server.getServerUsername() + "/" + server.getServerPassword());
-						check = "true";
+					_log.info("Check status:" + server.getServerUsername() + "/" + server.getServerPassword());
+					check = "true";
 					}
 					break;
 				}

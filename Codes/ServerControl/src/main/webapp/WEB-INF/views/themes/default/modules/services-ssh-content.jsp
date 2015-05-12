@@ -18,7 +18,7 @@
 		<div class="main-content">
 		<div class="clear-fix">
 				<div style="display: none ${display}" id="login-alert"
-					class="alert alert-danger col-sm-12">${message}</div>
+					class="alert alert-danger col-sm-12">${message}<br><pre>${messageErr}</pre></div>
 				<div style="display: none ${displaysuccess}" id="login-alert"
 					class="alert alert-success col-sm-12">${message}</div>
 			</div>
@@ -36,13 +36,13 @@
 						<div class="form-group">
 							<label class="col-md-4">Port: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="port" required="required" placeholder="Input SSH Port" />
+								<form:input path="port" required="required" placeholder="Input SSH Port" /><i>(This is port number of SSH, Ex: 22)</i>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">Listen Address: *</label>
 							<div class="col-md-3 form-groups">
-								<form:input path="listenAdd" placeholder="Input Listen Address" />
+								<form:input path="listenAdd" placeholder="Input Listen Address" /><i>(Ex: 0.0.0.0)</i>
 							</div>
 						</div>
 						<div class="form-group">
@@ -95,7 +95,7 @@
 
 					</div>
 					<div class="panel panel-footer">
-					<button class="btn btn-default" type="button" onclick="windows.history.back();">Back</button>
+					<button class="btn btn-default" type="button" onclick="window.history.back();">Back</button>
 					<input class="btn btn-primary" type="submit" value="Save">
 				</div>
 				</div>
@@ -126,7 +126,7 @@
 			<%
 				} else {
 			%>
-			<div class="panel-body">Không thể truy cập SSHD Services, vui lòng cài
+			<div class="panel-body">Không thể truy cập SSH, vui lòng cài
 				đặt dịch vụ SSHD cho server trước!</div>
 			<%
 				}

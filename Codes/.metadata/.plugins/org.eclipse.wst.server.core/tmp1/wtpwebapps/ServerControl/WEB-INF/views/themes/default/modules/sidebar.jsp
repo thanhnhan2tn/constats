@@ -5,7 +5,7 @@
 	if(user!=null){
 		 
 %>
-<aside class="left-side sidebar-offcanvas">
+<aside class="left-side ">
 	<!-- sidebar -->
 	<section class="sidebar">
 		<!-- Sidebar user panel
@@ -20,7 +20,7 @@
 							for (Server server : user.getServers()) {
 			%>
 			<li class="list-item list-server-left"  data-id="<%=server.getServerAddress()%>">
-			    <a href="#" title="<%=server.getServerName()%>">
+			    <a title="<%=server.getServerName()%>">
 			        <i class="fa fa-desktop server-icon"></i> <%=server.getServerAddress()%>
 			    </a>
 			</li>

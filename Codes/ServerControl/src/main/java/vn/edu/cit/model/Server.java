@@ -3,6 +3,7 @@ package vn.edu.cit.model;
 import java.io.InputStream;
 import java.util.List;
 
+import model.server.ServerConfig;
 import model.server.ServerStatus;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -104,7 +105,8 @@ public class Server {
 	 * @return
 	 */
 	public boolean checkStatus() {
-		return (getSession(this) != null);
+		// ServerConfig sconfig = new ServerConfig();
+		return sendCMDToServer(this, "echo true");
 	}
 
 	/**
@@ -125,7 +127,7 @@ public class Server {
 			session.setConfig(config);
 			//
 			session.connect();
-			// System.out.println("Connected to Server Success !!!!");
+			System.out.println("Connected to Server Success !!!!");
 			return session;
 		} catch (Exception e) {
 			return null;
@@ -352,10 +354,10 @@ public class Server {
 					System.out.println("exit-status: " + channel.getExitStatus());
 					break;
 				}
-				try {
-					Thread.sleep(1000);
-				} catch (Exception ee) {
-				}
+				// try {
+				// Thread.sleep(1000);
+				// } catch (Exception ee) {
+				// }
 			}
 			channel.disconnect();
 			if (channel.getExitStatus() == 0) {
@@ -409,7 +411,8 @@ public class Server {
 
 			((ChannelExec) channel).setCommand(cmd);
 			((ChannelExec) channel).setErrStream(System.err);
-//			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			// BufferedReader br = new BufferedReader(new
+			// InputStreamReader(System.in));
 			InputStream in = channel.getInputStream();
 			channel.connect();
 			byte[] tmp = new byte[1024];
@@ -423,7 +426,7 @@ public class Server {
 					tong = tong + chuoilay;
 				}
 				if (channel.isClosed()) {
-					// System.out.println("exit-status: "	
+					// System.out.println("exit-status: "
 					// + channel.getExitStatus());
 					if (channel.getExitStatus() == 0) {
 						System.out.println("Loading...OK");
@@ -445,5 +448,9 @@ public class Server {
 			return null;
 		}
 	}
-
+	// public static void main(String args[]){
+	// //ServerConfig sc= new ServerConfig();
+	// Server sv = new Server("192.168.43.23", 22,"a", "ubuntu", "ubuntu");
+	// System.out.println(sv.sendCMDToServer(sv, "echo hello"));
+	// }
 }

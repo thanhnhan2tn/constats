@@ -44,24 +44,9 @@
 	        //}
 	      }
 	    });
-		$.ajax({
-		      url: '${pageContext.request.contextPath}/serviceconfig/dhcp/geterrors/' + ip + '/' + cc
-		      , type: 'GET'
-		      , data1: {}, //timeout : 60000,
-		      success: function (data1, status) {
-		        //if(data != null){
-		       
-		        //	alert(html);
-		        $(".dhcp-errors")
-		          .html("<pre>"+data1+"</pre>");
-		        $(".dhcp-errors.wait")
-		          .css("display", "none");
-		        //}
-		      }
-		    });
-		},5000);
-	   });
-	
+		
+	   },5000);
+	});
 	</script>
 	<!--  End Content Header -->
 	<!--  Main Content -->
@@ -75,15 +60,6 @@
 			<div class="box box-default">
 				<div class="box-header">Logs</div>
 				<div class="box-body dhcp-logs" style="max-height:450px; overflow:scroll;">
-					<span class="wait"
-								style="display: none: text-align:center; margin:0 50%;"> <img
-								src="<c:url value='/resources/themes/default/images/loading.gif'/>" />
-					</span> 
-				</div>
-			</div>
-			<div class="box box-default">
-				<div class="box-header">Errors</div>
-				<div class="box-body dhcp-errors" style="max-height:450px; overflow:scroll;">
 					<span class="wait"
 								style="display: none: text-align:center; margin:0 50%;"> <img
 								src="<c:url value='/resources/themes/default/images/loading.gif'/>" />

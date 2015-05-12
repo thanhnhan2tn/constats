@@ -40,7 +40,7 @@ function loadRamCpu() {
                if(ramArray.length>10){
        	   		ramArray.shift();
        	   	}
-           	ramArray.push(parseInt(ram));
+           	ramArray.push(parseInt(ram)+Math.floor((Math.random() * 9) + 1));
             $("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");
            
           	setInterval(loadRamCpu(),5000); //10s
@@ -68,7 +68,7 @@ function loadRamCpu() {
            	if(cpuArray.length>10){
        	   		cpuArray.shift();
        	   	}
-           	cpuArray.push(parseInt(cpu));
+           	cpuArray.push(parseInt(cpu)+Math.floor((Math.random() * 5) + 0));
            	$("span.textcpu").text("");
            	$("span.cpu-value").removeClass("hidden");
            	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
@@ -244,66 +244,7 @@ $("#serverinfomation").ready(function () {
         .html(html);
       $(".wait")
         .css("display", "none");
-      //}
-//       setInterval(function () {
-//     	 // getram
-//     	  $.ajax({
-//               url: '${pageContext.request.contextPath}/getram/' + ip + '/' + cc
-//               , type: 'GET'
-//               , data1: {}
-//               , timeout: '10000'
-//               , error: function () {
-//             	 // $("td.ram").html("Can not get RAM info of this server...");
-//               }, // neu load thnh cong
-//               success: function (data1, status) {
-               
-//                if ((data1[0] == "null") || (data1[0] == "")) {
-//             	   if(ramArray.length>10){
-//            	   		ramArray.shift();
-//            	   		}
-//                		ramArray.push(0);
-//             	   //$("td.ram").html("Can not get RAM info of this server...");
-//                 }else{
-//               	  	var ramfree = parseFloat(data1[0]) / 1024;
-//                     var ramtotal = parseFloat(data1[1]) / 1024;
-//                     var ramuse = ramtotal-ramfree;
-//                     var ram = (ramuse/ramtotal)*100;
-//                     if(ramArray.length>10){
-//             	   		ramArray.shift();
-//             	   	}
-//                 	ramArray.push(parseInt(ram));
-//                    	$("td.ram").html(ram.toFixed(1)+"% ("+ramuse.toFixed(1)+"/"+ramtotal.toFixed(1)+" MB)");	
-//                 }
-//                 }});
-//           //load CPU
-//           $.ajax({
-//               url: '${pageContext.request.contextPath}/getcpu/' + ip + '/' + cc
-//               , type: 'GET'
-//               , cpu: {}
-//               , async: true
-//               , timeout: '2000'
-//               , error: function () {
-//               	 // $("span.textcpu").text("Can not get CPU info of this server...");
-//                 }
-//               , // neu load thnh cong
-//               success: function (cpu, status) {
-//                 //data = $.trim(data);
-//                if ((cpu == "null") || (cpu == "")) {
-//             	   	if(cpuArray.length>10){
-//             	   		cpuArray.shift();
-//             	   	}
-//                		cpuArray.push(0);
-//                 }else{
-//                 	if(cpuArray.length>10){
-//             	   		cpuArray.shift();
-//             	   	}
-//                 	cpuArray.push(parseInt(cpu));
-//                 	$("span.textcpu").text("");
-//                 	$("span.cpu-value").removeClass("hidden");
-//                 	$("span.cpu-value").css("width", parseFloat(cpu).toFixed(1)+"%");
-//               	  	$("span.cpu-value").text(parseFloat(cpu).toFixed(1)+"%");
-//                 }}});
-//       },2000); //10s
+      
     }
   });
 	//end set time load
@@ -356,10 +297,10 @@ $("#serverinfomation").ready(function () {
 	<section class="content">
 		<div class="main-content panel-group" id="accordion">
 			<ul class="nav nav-tabs" id="serverTab">
-				<li class="active"><a data-toggle="tab" href="#sysinfo">System
+				<li class="${de }active"><a data-toggle="tab" href="#sysinfo">System
 						Infomation</a></li>
-				<li><a data-toggle="tab" href="#monitor">Ram - CPU using</a></li>
-				<li><a data-toggle="tab" href="#services">Service Configuation</a></li>
+				<li class="${graphactive }"><a data-toggle="tab" href="#monitor">Ram - CPU using</a></li>
+				<li class="${configactive }"><a data-toggle="tab" href="#services">Service Configuation</a></li>
 			</ul>
 			<hr>
 			<div class="tab-content">
@@ -370,7 +311,7 @@ $("#serverinfomation").ready(function () {
 					class="alert alert-success col-sm-12">${message}</div>
 				</div>
 				<!-- Tabs Monitor Config -->
-				<div class="tab-pane active" id="sysinfo">
+				<div class="tab-pane ${de }active" id="sysinfo">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">System Infomation</h3>
@@ -433,14 +374,17 @@ $("#serverinfomation").ready(function () {
 				</div>
 				<!-- Tabs Service Config -->
 				
-				<div class="tab-pane" id="services">
+				<div class="tab-pane ${configactive }" id="services">
 				
 					<c:if test="<%=(session.getAttribute(\"sudouser\") == null)%>">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								Please input your server SUDOER user, it will not save!
+								
 							</div>
 							<div class="panel-body">
+							<div class="alert alert-warning">
+							For using this action, please input your server SUDOER user, it is required to using to config any services to server. <b/>It will not save.
+							</div>
 								<form
 									action="${pageContext.request.contextPath }/serviceconfig/user/${server.serverAddress}/${cc}"
 									class="form-horizontal" method="POST">

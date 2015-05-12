@@ -1,0 +1,12 @@
+<aside class="left-side sidebar-offcanvas">
+	<!-- sidebar -->
+	<section class="sidebar">
+		<ul class="sidebar-menu">
+			<li class="header">Help</li>
+			<li>SSH config guide</li>
+			<li>FTP config guide</li>
+			<li>DHCP config guide</li>
+		</ul>
+	</section>
+	<!-- end sidebar -->
+</aside>

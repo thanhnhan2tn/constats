@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ServerControl/src/main/webapp/WEB-INF/views/themes/default/modules/main-content.jsp&apos; to &apos;help.jsp&apos;" description="Rename resource &apos;main-content.jsp&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/WEB-INF/views/themes/default/modules/main-content.jsp" name="help.jsp" stamp="1431357586730" updateReferences="true"/>
+</session>
