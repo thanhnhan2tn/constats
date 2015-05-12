@@ -1131,3 +1131,751 @@ May 12, 2015 15:16:09.77 [Child 7660] WARNING: pipe error: 109: file c:/builds/m
 May 12, 2015 15:16:09.78 [Child 7660] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
 May 12, 2015 20:21:42.18 SystemMessageCache: initSystemMessageCache: init1431436901825	addons.update-checker	WARN	Update manifest for hotro@fshare.vn did not contain an updates property
 May 12, 2015 20:21:42.39 1431436902394	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+
+May 12, 2015 22:40:22.67 NEW SESSION
+May 12, 2015 22:40:22.67 SystemMessageCache: initconsole.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 22:40:42.46 console.error: 
+May 12, 2015 22:40:42.47   Message: TypeError: can't access dead object
+May 12, 2015 22:40:42.47   Stack:
+May 12, 2015 22:40:42.47     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 22:40:42.48 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 22:40:42.48 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 22:40:42.48 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 22:40:42.49 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 22:40:42.49 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 22:40:42.49 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 22:40:42.49 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 22:40:42.50 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 22:40:42.50 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 22:40:42.50 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 22:40:42.51 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 22:40:42.51 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 22:40:42.51 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 22:40:42.51 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 22:40:42.52 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 22:40:42.52 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 22:40:42.52 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 22:40:42.53 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 22:40:42.53 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 22:40:42.53 
+May 12, 2015 22:41:15.07 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 22:42:23.32 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 22:42:28.74 [Child 6016] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 12, 2015 22:43:49.30 WARNING: content window passed to PrivateBrowsingUtils.isWindowPrivate. Use isContentWindowPrivate instead (but only for frame scripts).
+May 12, 2015 22:43:49.30 pbu_isWindowPrivate@resource://gre/modules/PrivateBrowsingUtils.jsm:25:14
+May 12, 2015 22:43:49.30 nsBrowserAccess.prototype.openURI@chrome://browser/content/browser.js:15229:21
+May 12, 2015 22:44:44.91 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 22:54:59.33 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 22:55:04.19 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:00:39.12 console.error: 
+May 12, 2015 23:00:39.12   Message: TypeError: can't access dead object
+May 12, 2015 23:00:39.12   Stack:
+May 12, 2015 23:00:39.13     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:00:39.13 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:00:39.13 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:00:39.14 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:00:39.14 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:00:39.14 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:00:39.15 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:00:39.15 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:00:39.15 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:00:39.16 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:00:39.16 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:00:39.16 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:00:39.16 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:00:39.17 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:00:39.17 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:00:39.17 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:00:39.18 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:00:39.18 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:00:39.18 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:00:39.19 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:00:39.19 
+May 12, 2015 23:02:34.91 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:03:17.56 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:05:41.19 console.error: 
+May 12, 2015 23:05:41.20   Message: TypeError: can't access dead object
+May 12, 2015 23:05:41.20   Stack:
+May 12, 2015 23:05:41.20     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:05:41.21 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:05:41.21 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:05:41.21 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:05:41.22 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:05:41.22 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:05:41.22 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:05:41.23 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:05:41.23 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:05:41.23 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:05:41.24 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:05:41.24 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:05:41.24 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:05:41.24 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:05:41.25 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:05:41.25 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:05:41.25 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:05:41.26 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:05:41.26 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:05:41.26 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:05:41.27 
+May 12, 2015 23:05:47.60 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:09:12.57 console.error: 
+May 12, 2015 23:09:12.58   Message: TypeError: can't access dead object
+May 12, 2015 23:09:12.58   Stack:
+May 12, 2015 23:09:12.58     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:09:12.59 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:09:12.59 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:09:12.59 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:09:12.60 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:09:12.60 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:09:12.60 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:09:12.61 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:09:12.61 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:09:12.61 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:09:12.61 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:09:12.62 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:09:12.62 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:09:12.62 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:09:12.63 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:09:12.63 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:09:12.63 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:09:12.63 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:09:12.64 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:09:12.64 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:09:12.64 
+May 12, 2015 23:09:57.66 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:13:07.19 console.error: 
+May 12, 2015 23:13:07.19   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:07.46 console.error: 
+May 12, 2015 23:13:07.47   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:07.72 console.error: 
+May 12, 2015 23:13:07.73   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:07.87 console.error: 
+May 12, 2015 23:13:07.87   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:08.02 console.error: 
+May 12, 2015 23:13:08.03   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:08.25 console.error: 
+May 12, 2015 23:13:08.26   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:13:08.26   Stack:
+May 12, 2015 23:13:08.27     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:13:08.27 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:13:08.27 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:13:08.29 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:13:08.29 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:13:08.30 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:13:08.30 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:13:08.30 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:13:08.31 
+May 12, 2015 23:13:08.31 console.error: 
+May 12, 2015 23:13:08.32   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:13:08.32   Stack:
+May 12, 2015 23:13:08.32     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:13:08.33 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:13:08.33 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:13:08.33 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:13:08.34 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:13:08.34 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:13:08.34 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:13:08.35 
+May 12, 2015 23:13:08.35 console.error: 
+May 12, 2015 23:13:08.35   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:08.41 console.error: 
+May 12, 2015 23:13:08.42   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:08.54 console.error: 
+May 12, 2015 23:13:08.55   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:08.72 console.error: 
+May 12, 2015 23:13:08.73   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:17.89 console.error: 
+May 12, 2015 23:13:17.89   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:13:21.66 console.error: 
+May 12, 2015 23:13:21.67   Message: TypeError: can't access dead object
+May 12, 2015 23:13:21.67   Stack:
+May 12, 2015 23:13:21.67     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:13:21.68 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:13:21.68 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:13:21.68 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:13:21.68 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:13:21.69 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:13:21.69 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:13:21.69 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:13:21.70 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:13:21.70 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:13:21.70 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:13:21.70 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:13:21.71 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:13:21.71 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:13:21.71 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:13:21.72 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:13:21.72 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:13:21.72 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:13:21.73 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:13:21.73 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:13:21.73 
+May 12, 2015 23:13:26.81 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:14:15.08 console.error: 
+May 12, 2015 23:14:15.09   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.62 console.error: 
+May 12, 2015 23:14:15.62   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:15.62   Stack:
+May 12, 2015 23:14:15.63     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:15.63 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:14:15.64 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:14:15.64 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:15.65 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:15.66 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:15.66 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:15.67 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:15.67 
+May 12, 2015 23:14:15.67 console.error: 
+May 12, 2015 23:14:15.68   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:15.68   Stack:
+May 12, 2015 23:14:15.69     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:15.69 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:14:15.69 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:15.69 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:15.70 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:15.70 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:15.71 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:15.71 
+May 12, 2015 23:14:15.71 console.error: 
+May 12, 2015 23:14:15.72   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.83 console.error: 
+May 12, 2015 23:14:15.83   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.91 console.error: 
+May 12, 2015 23:14:15.92   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.92 console.error: 
+May 12, 2015 23:14:15.93   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.93 console.error: 
+May 12, 2015 23:14:15.94   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:15.94 console.error: 
+May 12, 2015 23:14:15.95   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.02 console.error: 
+May 12, 2015 23:14:16.03   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.03 console.error: 
+May 12, 2015 23:14:16.03   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.04 console.error: 
+May 12, 2015 23:14:16.04   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.04 console.error: 
+May 12, 2015 23:14:16.05   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.21 console.error: 
+May 12, 2015 23:14:16.22   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.22 console.error: 
+May 12, 2015 23:14:16.22   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.23 console.error: 
+May 12, 2015 23:14:16.24   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.33 console.error: 
+May 12, 2015 23:14:16.33   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.34 console.error: 
+May 12, 2015 23:14:16.34   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.34 console.error: 
+May 12, 2015 23:14:16.35   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.38 console.error: 
+May 12, 2015 23:14:16.38   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.39 console.error: 
+May 12, 2015 23:14:16.39   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.39 console.error: 
+May 12, 2015 23:14:16.40   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.40 console.error: 
+May 12, 2015 23:14:16.40   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.41 console.error: 
+May 12, 2015 23:14:16.41   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.44 console.error: 
+May 12, 2015 23:14:16.44   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:16.44   Stack:
+May 12, 2015 23:14:16.45     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:16.45 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:14:16.45 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:14:16.46 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:16.46 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:16.47 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:16.48 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:16.49 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:16.50 
+May 12, 2015 23:14:16.50 console.error: 
+May 12, 2015 23:14:16.50   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:16.51   Stack:
+May 12, 2015 23:14:16.51     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:16.52 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:14:16.52 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:16.52 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:16.53 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:16.53 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:16.53 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:16.54 
+May 12, 2015 23:14:16.54 console.error: 
+May 12, 2015 23:14:16.55   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.55 console.error: 
+May 12, 2015 23:14:16.56   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.63 console.error: 
+May 12, 2015 23:14:16.63   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.64 console.error: 
+May 12, 2015 23:14:16.64   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.69 console.error: 
+May 12, 2015 23:14:16.69   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.70 console.error: 
+May 12, 2015 23:14:16.70   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.70 console.error: 
+May 12, 2015 23:14:16.71   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.71 console.error: 
+May 12, 2015 23:14:16.72   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.76 console.error: 
+May 12, 2015 23:14:16.77   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.77 console.error: 
+May 12, 2015 23:14:16.77   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.89 console.error: 
+May 12, 2015 23:14:16.89   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.89 console.error: 
+May 12, 2015 23:14:16.90   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.96 console.error: 
+May 12, 2015 23:14:16.96   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:16.97 console.error: 
+May 12, 2015 23:14:16.97   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.02 console.error: 
+May 12, 2015 23:14:17.02   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.03 console.error: 
+May 12, 2015 23:14:17.03   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.03 console.error: 
+May 12, 2015 23:14:17.04   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.07 console.error: 
+May 12, 2015 23:14:17.07   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.08 console.error: 
+May 12, 2015 23:14:17.08   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.09 console.error: 
+May 12, 2015 23:14:17.10   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:17.10   Stack:
+May 12, 2015 23:14:17.10     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:17.11 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:14:17.11 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:14:17.11 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:17.12 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:17.12 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:17.13 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:17.13 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:17.14 
+May 12, 2015 23:14:17.14 console.error: 
+May 12, 2015 23:14:17.15   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:17.15   Stack:
+May 12, 2015 23:14:17.16     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:17.16 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:14:17.16 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:17.17 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:17.17 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:17.17 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:17.18 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:17.18 
+May 12, 2015 23:14:17.25 console.error: 
+May 12, 2015 23:14:17.26   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.26 console.error: 
+May 12, 2015 23:14:17.26   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.32 console.error: 
+May 12, 2015 23:14:17.33   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.33 console.error: 
+May 12, 2015 23:14:17.33   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.34 console.error: 
+May 12, 2015 23:14:17.34   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.40 console.error: 
+May 12, 2015 23:14:17.40   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.41 console.error: 
+May 12, 2015 23:14:17.41   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.42 console.error: 
+May 12, 2015 23:14:17.43   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.49 console.error: 
+May 12, 2015 23:14:17.50   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:17.50   Stack:
+May 12, 2015 23:14:17.50     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:17.51 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:14:17.51 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:14:17.52 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:17.52 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:17.52 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:17.53 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:17.54 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:17.55 
+May 12, 2015 23:14:17.55 console.error: 
+May 12, 2015 23:14:17.55   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:14:17.56   Stack:
+May 12, 2015 23:14:17.56     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:14:17.56 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:14:17.57 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:17.57 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:14:17.57 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:14:17.58 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:17.58 @chrome://browser/content/content.js:96:5
+May 12, 2015 23:14:17.58 
+May 12, 2015 23:14:17.60 console.error: 
+May 12, 2015 23:14:17.60   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.60 console.error: 
+May 12, 2015 23:14:17.61   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.68 console.error: 
+May 12, 2015 23:14:17.69   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.69 console.error: 
+May 12, 2015 23:14:17.69   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:17.70 console.error: 
+May 12, 2015 23:14:17.71   navigated; resolution of _defaultNode aborted
+May 12, 2015 23:14:38.13 console.error: 
+May 12, 2015 23:14:38.13   Message: TypeError: can't access dead object
+May 12, 2015 23:14:38.13   Stack:
+May 12, 2015 23:14:38.14     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:14:38.14 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:14:38.14 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:14:38.15 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:14:38.15 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:14:38.16 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:14:38.16 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:14:38.16 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:14:38.17 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:14:38.17 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:14:38.17 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:14:38.18 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:14:38.18 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:14:38.18 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:38.18 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:14:38.19 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:14:38.19 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:14:38.19 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:14:38.20 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:38.20 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:14:38.21 
+May 12, 2015 23:14:42.46 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:15:28.35 console.error: 
+May 12, 2015 23:15:28.36   Message: TypeError: can't access dead object
+May 12, 2015 23:15:28.36   Stack:
+May 12, 2015 23:15:28.36     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:15:28.37 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:15:28.37 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:15:28.38 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:15:28.38 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:15:28.38 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:15:28.38 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:15:28.39 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:15:28.39 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:15:28.39 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:15:28.39 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:15:28.40 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:15:28.40 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:15:28.40 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:28.41 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:15:28.41 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:15:28.42 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:15:28.42 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:15:28.43 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:28.43 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:28.43 
+May 12, 2015 23:15:45.14 console.error: 
+May 12, 2015 23:15:45.14   Message: TypeError: can't access dead object
+May 12, 2015 23:15:45.15   Stack:
+May 12, 2015 23:15:45.15     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:15:45.15 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:15:45.16 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:15:45.16 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:15:45.16 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:15:45.17 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:15:45.17 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:15:45.17 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:15:45.17 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:15:45.18 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:15:45.18 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:15:45.19 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:15:45.19 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:15:45.20 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:45.20 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:15:45.20 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:15:45.21 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:15:45.21 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:15:45.21 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:45.22 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:15:45.22 
+May 12, 2015 23:15:51.08 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:16:15.02 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:17:14.97 console.warn: Asynchronous operation was aborted as selection changed.
+May 12, 2015 23:18:37.21 console.error: 
+May 12, 2015 23:18:37.21   Protocol error (noSuchActor): No such actor for ID: conn15.domnode181
+May 12, 2015 23:18:37.22 console.error: 
+May 12, 2015 23:18:37.22   Protocol error (noSuchActor): No such actor for ID: conn15.domnode181
+May 12, 2015 23:18:37.90 console.error: 
+May 12, 2015 23:18:37.90   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 12, 2015 23:18:37.90   Stack:
+May 12, 2015 23:18:37.91     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.91 
+May 12, 2015 23:18:37.92 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.92 console.error: 
+May 12, 2015 23:18:37.92   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 12, 2015 23:18:37.92   Stack:
+May 12, 2015 23:18:37.93     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.93 
+May 12, 2015 23:18:37.93 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.93 console.error: 
+May 12, 2015 23:18:37.94   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:37.94   Stack:
+May 12, 2015 23:18:37.95     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.95 
+May 12, 2015 23:18:37.96 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.96 console.error: 
+May 12, 2015 23:18:37.97   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:37.97   Stack:
+May 12, 2015 23:18:37.97     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.98 
+May 12, 2015 23:18:37.98 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:37.99 console.error: 
+May 12, 2015 23:18:37.99   Message: Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:37.99   Stack:
+May 12, 2015 23:18:38.00     fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:38.00 
+May 12, 2015 23:18:38.00 fetch/streamListener.onStopRequest@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/stylesheets.js:1154:29
+May 12, 2015 23:18:38.00 console.error: 
+May 12, 2015 23:18:38.01   Message: TypeError: node is null
+May 12, 2015 23:18:38.01   Stack:
+May 12, 2015 23:18:38.01     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 12, 2015 23:18:38.01 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.02 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.02 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.02 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.03 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.03 
+May 12, 2015 23:18:38.03 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 12, 2015 23:18:38.03 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.04 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.04 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.04 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.04 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.05 console.error: 
+May 12, 2015 23:18:38.05   Message: TypeError: node is null
+May 12, 2015 23:18:38.05   Stack:
+May 12, 2015 23:18:38.05     WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 12, 2015 23:18:38.06 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.06 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.06 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.07 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.07 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.07 
+May 12, 2015 23:18:38.07 WalkerActor<.children<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1560:9
+May 12, 2015 23:18:38.08 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.08 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.08 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.09 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.09 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.09 console.error: 
+May 12, 2015 23:18:38.10   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 12, 2015 23:18:38.10 console.error: 
+May 12, 2015 23:18:38.10   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/css/style.css
+May 12, 2015 23:18:38.11 *************************
+May 12, 2015 23:18:38.11 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:18:38.11 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:18:38.12 
+May 12, 2015 23:18:38.12 Full message: TypeError: strings is undefined
+May 12, 2015 23:18:38.12 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 12, 2015 23:18:38.12 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:18:38.13 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:18:38.13 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:18:38.13 
+May 12, 2015 23:18:38.13 *************************
+May 12, 2015 23:18:38.14 console.error: 
+May 12, 2015 23:18:38.14   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 12, 2015 23:18:38.14 console.error: 
+May 12, 2015 23:18:38.14   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/AdminLTE.min.css
+May 12, 2015 23:18:38.15 *************************
+May 12, 2015 23:18:38.15 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:18:38.15 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:18:38.16 
+May 12, 2015 23:18:38.16 Full message: TypeError: strings is undefined
+May 12, 2015 23:18:38.16 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 12, 2015 23:18:38.16 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:18:38.17 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:18:38.17 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:18:38.17 
+May 12, 2015 23:18:38.17 *************************
+May 12, 2015 23:18:38.18 console.error: 
+May 12, 2015 23:18:38.18   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.18 console.error: 
+May 12, 2015 23:18:38.18   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.19 *************************
+May 12, 2015 23:18:38.19 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:18:38.19 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:18:38.20 
+May 12, 2015 23:18:38.20 Full message: TypeError: strings is undefined
+May 12, 2015 23:18:38.20 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 12, 2015 23:18:38.20 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:18:38.21 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:18:38.21 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:18:38.21 
+May 12, 2015 23:18:38.22 *************************
+May 12, 2015 23:18:38.22 console.error: 
+May 12, 2015 23:18:38.22   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:18:38.23   Stack:
+May 12, 2015 23:18:38.23     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:18:38.23 CanvasFrameAnonymousContentHelper.prototype._insert@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:480:9
+May 12, 2015 23:18:38.23 CanvasFrameAnonymousContentHelper.prototype._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:511:7
+May 12, 2015 23:18:38.24 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:18:38.24 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:18:38.25 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:18:38.25 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.25 BrowserStop@chrome://browser/content/browser.js:12492:3
+May 12, 2015 23:18:38.26 oncommand@chrome://browser/content/browser.xul:1:1
+May 12, 2015 23:18:38.26 
+May 12, 2015 23:18:38.26 console.error: 
+May 12, 2015 23:18:38.27   Message: TypeError: tabActor.window.document.documentElement is null
+May 12, 2015 23:18:38.27   Stack:
+May 12, 2015 23:18:38.27     isXUL@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1916:3
+May 12, 2015 23:18:38.28 exports.HighlighterActor<._onNavigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:164:9
+May 12, 2015 23:18:38.28 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:18:38.28 TabActor.prototype._navigate@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:1459:1
+May 12, 2015 23:18:38.29 DebuggerProgressListener.prototype.onStateChange<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/webbrowser.js:2141:7
+May 12, 2015 23:18:38.29 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.29 BrowserStop@chrome://browser/content/browser.js:12492:3
+May 12, 2015 23:18:38.30 oncommand@chrome://browser/content/browser.xul:1:1
+May 12, 2015 23:18:38.30 
+May 12, 2015 23:18:38.30 console.error: 
+May 12, 2015 23:18:38.30   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.31 console.error: 
+May 12, 2015 23:18:38.31   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.31 *************************
+May 12, 2015 23:18:38.31 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:18:38.32 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:18:38.32 
+May 12, 2015 23:18:38.32 Full message: TypeError: strings is undefined
+May 12, 2015 23:18:38.33 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 12, 2015 23:18:38.33 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:18:38.33 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:18:38.33 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:18:38.34 
+May 12, 2015 23:18:38.34 *************************
+May 12, 2015 23:18:38.34 console.error: 
+May 12, 2015 23:18:38.35   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.35 console.error: 
+May 12, 2015 23:18:38.35   Protocol error (unknownError): Error: Request failed with status code = 2152398850 in onStopRequest handler for url = http://localhost:8080/cit/resources/themes/default/plugins/bootstrap/css/bootstrap.min.css
+May 12, 2015 23:18:38.35 *************************
+May 12, 2015 23:18:38.36 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:18:38.36 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:18:38.36 
+May 12, 2015 23:18:38.36 Full message: TypeError: strings is undefined
+May 12, 2015 23:18:38.37 Full stack: RuleEditor_updateSourceLink/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/styleinspector/rule-view.js:2009:9
+May 12, 2015 23:18:38.37 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:18:38.37 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:18:38.37 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:18:38.38 
+May 12, 2015 23:18:38.38 *************************
+May 12, 2015 23:18:38.38 console.error: 
+May 12, 2015 23:18:38.39   Protocol error (unknownError): TypeError: node is null
+May 12, 2015 23:18:38.39 console.error: 
+May 12, 2015 23:18:38.39   Protocol error (unknownError): TypeError: node is null
+May 12, 2015 23:18:38.40 console.warn: Could not show the node, the markup-view was destroyed while waiting for children
+May 12, 2015 23:18:38.40 console.warn: Could not mark node as selected, the markup-view was destroyed while showing the node.
+May 12, 2015 23:18:38.40 console.error: 
+May 12, 2015 23:18:38.40   Protocol error (unknownError): TypeError: node is null
+May 12, 2015 23:18:38.41 console.error: 
+May 12, 2015 23:18:38.41   Protocol error (unknownError): TypeError: node is null
+May 12, 2015 23:18:38.42 console.error: 
+May 12, 2015 23:18:38.42   Message: TypeError: this.rawNode is null
+May 12, 2015 23:18:38.42   Stack:
+May 12, 2015 23:18:38.43     exports.NodeActor<.isDisplayed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:328:1
+May 12, 2015 23:18:38.43 exports.NodeActor<.initialize@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:205:5
+May 12, 2015 23:18:38.43 constructor@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/core/heritage.js:146:23
+May 12, 2015 23:18:38.44 WalkerActor<._ref@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1241:13
+May 12, 2015 23:18:38.44 WalkerActor<.documentElement<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1379:12
+May 12, 2015 23:18:38.44 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.45 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.45 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.46 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.46 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.47 
+May 12, 2015 23:18:38.47 exports.NodeActor<.isDisplayed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:328:1
+May 12, 2015 23:18:38.48 exports.NodeActor<.initialize@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:205:5
+May 12, 2015 23:18:38.48 constructor@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/core/heritage.js:146:23
+May 12, 2015 23:18:38.49 WalkerActor<._ref@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1241:13
+May 12, 2015 23:18:38.49 WalkerActor<.documentElement<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1379:12
+May 12, 2015 23:18:38.49 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:18:38.49 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:18:38.50 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:18:38.50 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.50 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:18:38.51 console.error: 
+May 12, 2015 23:18:38.51   Protocol error (unknownError): TypeError: this.rawNode is null
+May 12, 2015 23:18:38.52 console.error: 
+May 12, 2015 23:18:38.52   Protocol error (unknownError): TypeError: this.rawNode is null
+May 12, 2015 23:19:55.81 console.error: 
+May 12, 2015 23:19:55.81   Message: TypeError: can't access dead object
+May 12, 2015 23:19:55.82   Stack:
+May 12, 2015 23:19:55.82     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:19:55.82 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:19:55.83 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:19:55.83 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:19:55.83 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:19:55.84 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:19:55.84 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:19:55.84 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:19:55.85 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:19:55.85 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:19:55.85 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:19:55.86 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:19:55.86 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:19:55.86 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:19:55.86 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:19:55.87 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:19:55.87 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:19:55.87 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:19:55.88 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:19:55.88 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:19:55.88 
+May 12, 2015 23:21:49.04 SystemMessageCache: initconsole.error: 
+May 12, 2015 23:21:49.04   Message: TypeError: can't access dead object
+May 12, 2015 23:21:49.04   Stack:
+May 12, 2015 23:21:49.05     WalkerActor<.querySelector<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1744:9
+May 12, 2015 23:21:49.05 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:21:49.05 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:21:49.06 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:21:49.06 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:21:49.06 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:21:49.07 
+May 12, 2015 23:21:49.07 WalkerActor<.querySelector<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1744:9
+May 12, 2015 23:21:49.07 actorProto/</handler@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:1006:19
+May 12, 2015 23:21:49.08 DSC_onPacket@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1450:15
+May 12, 2015 23:21:49.08 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:21:49.08 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:21:49.09 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:21:49.09 console.error: 
+May 12, 2015 23:21:49.09   Protocol error (unknownError): TypeError: can't access dead object
+May 12, 2015 23:21:49.09 console.error: 
+May 12, 2015 23:21:49.10   Protocol error (unknownError): TypeError: can't access dead object
+May 12, 2015 23:22:04.66 console.error: 
+May 12, 2015 23:22:04.67   Message: TypeError: can't access dead object
+May 12, 2015 23:22:04.67   Stack:
+May 12, 2015 23:22:04.67     CanvasFrameAnonymousContentHelper.prototype.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:469:7
+May 12, 2015 23:22:04.68 BoxModelHighlighter.prototype<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:1006:5
+May 12, 2015 23:22:04.68 exports.HighlighterActor<._destroyHighlighter@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:153:7
+May 12, 2015 23:22:04.68 exports.HighlighterActor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/highlighter.js:173:5
+May 12, 2015 23:22:04.69 Pool<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:813:9
+May 12, 2015 23:22:04.69 Actor<.destroy@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:885:5
+May 12, 2015 23:22:04.69 Pool<.cleanup@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/protocol.js:827:5
+May 12, 2015 23:22:04.70 DSC_onClosed/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:40
+May 12, 2015 23:22:04.70 DSC_onClosed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/main.js:1549:5
+May 12, 2015 23:22:04.70 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:658:9
+May 12, 2015 23:22:04.70 LocalDebuggerTransport.prototype.close@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:654:7
+May 12, 2015 23:22:04.71 DebuggerClient.prototype.close/detachClients@resource://gre/modules/devtools/dbg-client.jsm:442:9
+May 12, 2015 23:22:04.71 DebuggerClient.requester/</<@resource://gre/modules/devtools/dbg-client.jsm:352:9
+May 12, 2015 23:22:04.71 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:22:04.72 emit@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/event/core.js:97:9
+May 12, 2015 23:22:04.72 Request.prototype.emit@resource://gre/modules/devtools/dbg-client.jsm:1185:29
+May 12, 2015 23:22:04.72 DebuggerClient.prototype.onPacket@resource://gre/modules/devtools/dbg-client.jsm:1002:7
+May 12, 2015 23:22:04.73 LocalDebuggerTransport.prototype.send/<@resource://gre/modules/devtools/dbg-client.jsm -> resource://gre/modules/devtools/transport/transport.js:561:11
+May 12, 2015 23:22:04.73 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:22:04.74 makeInfallible/<@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/DevToolsUtils.js:82:14
+May 12, 2015 23:22:04.74 
+May 12, 2015 23:22:38.87 [Child 6576] WARNING: pipe error: 109: file c:/builds/moz2_slave/rel-m-rel-w32_bld-000000000000/build/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 333
+May 12, 2015 23:34:02.66 *************************
+May 12, 2015 23:34:02.67 A coding exception was thrown in a Promise resolution callback.
+May 12, 2015 23:34:02.67 See https://developer.mozilla.org/Mozilla/JavaScript_code_modules/Promise.jsm/Promise
+May 12, 2015 23:34:02.68 
+May 12, 2015 23:34:02.68 Full message: TypeError: can't access dead object
+May 12, 2015 23:34:02.68 Full stack: exports.NodeActor<.isDisplayed@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:328:1
+May 12, 2015 23:34:02.69 exports.NodeActor<.initialize@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:205:5
+May 12, 2015 23:34:02.69 constructor@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/commonjs/sdk/core/heritage.js:146:23
+May 12, 2015 23:34:02.69 WalkerActor<._ref@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:1241:13
+May 12, 2015 23:34:02.70 exports.WalkerFront<.frontForRawNode@resource://gre/modules/commonjs/toolkit/loader.js -> resource://gre/modules/devtools/server/actors/inspector.js:3019:21
+May 12, 2015 23:34:02.70 Selection.prototype.setNode@resource://gre/modules/commonjs/toolkit/loader.js -> resource:///modules/devtools/framework/selection.js:136:1
+May 12, 2015 23:34:02.70 CM_inspectNode/<@chrome://browser/content/nsContextMenu.js:531:9
+May 12, 2015 23:34:02.71 Handler.prototype.process@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:867:23
+May 12, 2015 23:34:02.71 this.PromiseWalker.walkerLoop@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:746:7
+May 12, 2015 23:34:02.71 this.PromiseWalker.scheduleWalkerLoop/<@resource://gre/modules/Promise.jsm -> resource://gre/modules/Promise-backend.js:688:37
+May 12, 2015 23:34:02.71 
+May 12, 2015 23:34:02.72 *************************
+May 12, 2015 23:34:27.29 1431448467290	Sync.BrowserIDManager	ERROR	Non-authentication error in _fetchTokenForUser: TokenServerClientNetworkError({"error":{}}) (resource://gre/modules/services-common/tokenserverclient.js:36:35) JS Stack trace: @tokenserverclient.js:36:36 < @browserid_identity.js:14:1 < @status.js:15:1 < SyncServiceObserver.init@sync.js:76:62 < @sync.js:459:1 < require@bootstrap.js:137:7 < @main.js:30:1 < require@bootstrap.js:137:7 < startup@bootstrap.js:21:3 < XPI_callBootstrapMethod@XPIProvider.jsm:4451:9 < XPI_startup@XPIProvider.jsm:2168:13 < callProvider@AddonManager.jsm:208:12 < _startProvider@AddonManager.jsm:669:5 < AMI_startup@AddonManager.jsm:840:9 < AMP_startup@AddonManager.jsm:2471:5 < AMC_observe@addonManager.js:55:7
+May 12, 2015 23:34:27.29 1431448467298	Sync.BrowserIDManager	ERROR	Failed to fetch a token for authentication: TokenServerClientNetworkError({"error":{}}) (resource://gre/modules/services-common/tokenserverclient.js:36:35) JS Stack trace: @tokenserverclient.js:36:36 < @browserid_identity.js:14:1 < @status.js:15:1 < SyncServiceObserver.init@sync.js:76:62 < @sync.js:459:1 < require@bootstrap.js:137:7 < @main.js:30:1 < require@bootstrap.js:137:7 < startup@bootstrap.js:21:3 < XPI_callBootstrapMethod@XPIProvider.jsm:4451:9 < XPI_startup@XPIProvider.jsm:2168:13 < callProvider@AddonManager.jsm:208:12 < _startProvider@AddonManager.jsm:669:5 < AMI_startup@AddonManager.jsm:840:9 < AMP_startup@AddonManager.jsm:2471:5 < AMC_observe@addonManager.js:55:7

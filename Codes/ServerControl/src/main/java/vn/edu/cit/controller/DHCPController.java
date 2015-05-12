@@ -760,7 +760,7 @@ public String removeHost(HttpServletRequest request, HttpSession session,
 					}
 					
 					String str2 = dconfig.getError(sv);
-					if(str2.equals("nonerror")){
+					if(!str2.equals("nonerror")){
 						redirectAtt.addFlashAttribute("messageErr",
 							"<br>" + status + "<br>Notice:<br><pre>" + str2 + "</pre>");
 					}
@@ -789,9 +789,9 @@ public String removeHost(HttpServletRequest request, HttpSession session,
 						status = "DHCP Service is not running!";
 					}
 					
-					System.out.println(dconfig.getError(sv));
+					//System.out.println(dconfig.getError(sv));
 					String str2 = dconfig.getError(sv);
-					if(str2.equals("nonerror")){
+					if(!str2.equals("nonerror")){
 						redirectAtt.addFlashAttribute("messageErr",
 							"<br>" + status + "<br>Notice:<br><pre>" + str2 + "</pre>");
 					}

@@ -34,26 +34,26 @@
 				<div class="panel panel-default eth">
 					<div class="panel-body">
 						<div class="form-group">
-							<label class="col-md-4">Port: *</label>
-							<div class="col-md-3 form-groups">
-								<form:input path="port" required="required" placeholder="Input SSH Port" /><i>(This is port number of SSH, Ex: 22)</i>
+							<label class="col-md-3">Port: *</label>
+							<div class="col-md-9 form-group">
+								<form:input  path="port" required="required" placeholder="Input SSH Port" /><br><i>(This is port number of SSH, Ex: 22)</i>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4">Listen Address: *</label>
-							<div class="col-md-3 form-groups">
-								<form:input path="listenAdd" placeholder="Input Listen Address" /><i>(Ex: 0.0.0.0)</i>
+							<label class="col-md-3">Listen Address: *</label>
+							<div class="col-md-9 form-group">
+								<form:input class="form-control" path="listenAdd" placeholder="Input Listen Address" /><br><i>(Ex: 0.0.0.0)</i>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4">Login Grace Time: *</label>
-							<div class="col-md-3 form-groups">
-								<form:input path="loginGraceTime" placeholder="Input Login Grace Time" />
+							<label class="col-md-3">Login Grace Time: *</label>
+							<div class="col-md-9 form-group">
+								<form:input class="form-control" path="loginGraceTime" placeholder="Input Login Grace Time" />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4">Permit Root Login: *</label>
-							<div class="col-md-3 form-groups">
+							<label class="col-md-3">Permit Root Login: *</label>
+							<div class="col-md-9 form-group">
 								<label for="rootlogin-yes"> Yes</label>
 								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
 									id="rootlogin-yes" value="yes" required="required" />
@@ -64,8 +64,8 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4">Password Authentication: *</label>
-							<div class="col-md-3 form-groups">
+							<label class="col-md-3">Password Authentication: *</label>
+							<div class="col-md-9 form-group">
 								<label for="password-yes"> Enable</label>
 								<form:radiobutton path="passwordAu" name="password-yes"
 									id="password-yes-yes" value="yes" required="required" />
@@ -75,8 +75,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4">Permit empty password: *</label>
-							<div class="col-md-3 form-groups">
+							<label class="col-md-3">Permit empty password: *</label>
+							<div class="col-md-9 form-group">
 								<label for="emptypass-yes"> Enable</label>
 								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword"
 									id="emptypass-yes" value="yes" required="required" />
@@ -87,9 +87,9 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4">Allow User:</label>
-							<div class="col-md-3 form-groups">
-								<form:input path="allowUsers" />
+							<label class="col-md-3">Allow User:</label>
+							<div class="col-md-9 form-group	">
+								<form:input path="allowUsers" class="form-control" placeholder="Input all user for allow access"/>
 							</div>
 						</div>
 

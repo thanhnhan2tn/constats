@@ -1,0 +1,137 @@
+<%@page import="vn.edu.cit.model.Server"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@page import="model.ssh.*"%>
+<aside class="right-side">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+			Ssh Service Config :<small> (${server.serverAddress})</small>
+		</h1>
+	</section>
+
+	<!--  End Content Header -->
+	<!--  Main Content -->
+	<section class="content">
+		<div class="main-content">
+		<div class="clear-fix">
+				<div style="display: none ${display}" id="login-alert"
+					class="alert alert-danger col-sm-12">${message}<br><pre>${messageErr}</pre></div>
+				<div style="display: none ${displaysuccess}" id="login-alert"
+					class="alert alert-success col-sm-12">${message}</div>
+			</div>
+			<%
+				SSH Ssh = (SSH) request.getAttribute("SSH");
+				if (Ssh != null) {
+			%>
+
+			<form:form id="ssh-config-form1" modelAttribute="SSH"
+				action="${pageContext.request.contextPath }/serviceconfig/ssh/save/${server.serverAddress}/${cc }"
+				class="form-horizontal" method="POST">
+				<input type="hidden" name="cc" value="${cc }">
+				<div class="panel panel-default eth">
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-md-3">Port: *</label>
+							<div class="col-md-9 form-groups">
+								<form:input path="port" required="required" placeholder="Input SSH Port" /><br><i>(This is port number of SSH, Ex: 22)</i>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Listen Address: *</label>
+							<div class="col-md-9 form-groups">
+								<form:input path="listenAdd" placeholder="Input Listen Address" /><br><i>(Ex: 0.0.0.0)</i>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Login Grace Time: *</label>
+							<div class="col-md-9 form-groups">
+								<form:input path="loginGraceTime" placeholder="Input Login Grace Time" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Permit Root Login: *</label>
+							<div class="col-md-9 form-group">
+								<label for="rootlogin-yes"> Yes</label>
+								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
+									id="rootlogin-yes" value="yes" required="required" />
+								<label for="rootlogin-no"> No</label>
+								<form:radiobutton path="permitRootLogin" name="permitRootLogin"
+									id="rootlogin-no" value="no" required="required" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4">Password Authentication: *</label>
+							<div class="col-md-9 form-groups">
+								<label for="password-yes"> Enable</label>
+								<form:radiobutton path="passwordAu" name="password-yes"
+									id="password-yes-yes" value="yes" required="required" />
+								<label for="password-no"> Disable</label>
+								<form:radiobutton path="passwordAu" name="password-no" id="password-no"
+									value="no" required="required" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">Permit empty password: *</label>
+							<div class="col-md-9 form-groups">
+								<label for="emptypass-yes"> Enable</label>
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword"
+									id="emptypass-yes" value="yes" required="required" />
+								<label for="emptypass-no"> Disable</label>
+								<form:radiobutton path="permitEmptyPassword" name="permitEmptyPassword"
+									id="emptypass-no" value="no" required="required" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4">Allow User:</label>
+							<div class="col-md-3 form-groups">
+								<form:input path="allowUsers" />
+							</div>
+						</div>
+
+					</div>
+					<div class="panel panel-footer">
+					<button class="btn btn-default" type="button" onclick="window.history.back();">Back</button>
+					<input class="btn btn-primary" type="submit" value="Save">
+				</div>
+				</div>
+				
+			</form:form>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ssh/editfile/${server.serverAddress}/${cc}">
+							Edit Config file...<i
+							class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<a
+							href="${pageContext.request.contextPath }/serviceconfig/ssh/getlog/${server.serverAddress}/${cc}">
+							Logs file...<i class="glyphicon glyphicon-chevron-right pull-right"></i>
+						</a>
+					</h3>
+				</div>
+			</div>
+
+			<%
+				} else {
+			%>
+			<div class="panel-body">Không thể truy cập SSH, vui lòng cài
+				đặt dịch vụ SSHD cho server trước!</div>
+			<%
+				}
+			%>
+		</div>
+	</section>
+	<!--  End Main Content -->
+</aside>

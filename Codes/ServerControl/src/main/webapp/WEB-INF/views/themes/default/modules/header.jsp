@@ -10,9 +10,13 @@
 	// 	String username = (String) session.getAttribute("username");
 	User user = (User) session.getAttribute("user");
 %>
-<a href="${pageContext.request.contextPath}/" class="logo">ConStats</a>
+
+<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+				<span class="sr-only">Menu</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+<a href="${pageContext.request.contextPath}/" class="logo navbar-brand">ConStats</a>
 <!-- Header Navbar -->
-<nav class="navbar navbar-static-top" role="navigation">
+<nav class="navbar navbar-static-top navbar-collapse collapse" role="navigation" id="navbar">
 		<div class="navbar-left">
 			<ul class="nav navbar-nav" style="font-weight: bold">
 				<li><a href="${pageContext.request.contextPath}/"><span ><i class="fa fa-desktop"></i>  Servers Control</span></a></li>

@@ -142,7 +142,7 @@ public class SSHController {
 						try {
 							str = sshConf.loadConfigToPlainText(sv);
 							mm.put("sshconfig", str);
-							return "redirect:/serviceconfig/ssh/editfile/"+ip+"/"+cc;
+							return "ssh-file-content";
 						} catch (IOException e) {
 							_log.info("Can not load SSH Config");
 							redirectAtt.addFlashAttribute("display", "block");
